@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -43,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\TextPositionTestFixture.cs" />
+    <Compile Include="Csv\CsvEmptyNodeTestFixture.cs" />
+    <Compile Include="Csv\CsvProjectTestFixture.cs" />
+    <Compile Include="Csv\CsvTextNodeTestFixture.cs" />
+    <Compile Include="Csv\CsvValueNodeTestFixture.cs" />
     <Compile Include="Json\JsonEmptyNode.cs" />
     <Compile Include="Json\JsonExpressionTestFixture.cs" />
     <Compile Include="Json\JsonIdNodeTestFixture.cs" />
@@ -52,7 +60,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CodeSharper\CodeSharper.csproj">
       <Project>{80AB6A1A-87AF-4439-A0FD-9141C0E2E6B8}</Project>

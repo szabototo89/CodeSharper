@@ -44,6 +44,10 @@
     <Compile Include="Common\NodeHelper.cs" />
     <Compile Include="Common\TextPosition.cs" />
     <Compile Include="Common\TextSpan.cs" />
+    <Compile Include="Csv\CsvCommaNode.cs" />
+    <Compile Include="Csv\CsvTextNode.cs" />
+    <Compile Include="Csv\CsvValueNode.cs" />
+    <Compile Include="Csv\ICsvNode.cs" />
     <Compile Include="Json\Factory\JsonExpressionFactory.cs" />
     <Compile Include="Json\Factory\JsonTokenFactory.cs" />
     <Compile Include="Json\IJsonExpressions.cs" />
