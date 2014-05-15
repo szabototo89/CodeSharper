@@ -1,5 +1,0 @@
-E:\Development\Projects\C#\CodeSharper\CodeSharper\bin\Debug\CodeSharper.dll
-E:\Development\Projects\C#\CodeSharper\CodeSharper\bin\Debug\CodeSharper.pdb
-E:\Development\Projects\C#\CodeSharper\CodeSharper\obj\Debug\CodeSharper.dll
-E:\Development\Projects\C#\CodeSharper\CodeSharper\obj\Debug\CodeSharper.pdb
-E:\Development\Projects\C#\CodeSharper\CodeSharper\obj\Debug\CodeSharper.csprojResolveAssemblyReference.cache
