@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSharper.Core", "CodeSharper.Core\CodeSharper.Core.csproj", "{7E07494F-1CFC-42E1-B550-42B2C616CFD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSharper.Tests.Core", "CodeSharper.Tests.Core\CodeSharper.Tests.Core.csproj", "{9E1A8563-E242-4509-92A1-38DA2FFCBA77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSharper.Languages", "CodeSharper.Languages\CodeSharper.Languages.csproj", "{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9E1A8563-E242-4509-92A1-38DA2FFCBA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E1A8563-E242-4509-92A1-38DA2FFCBA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E1A8563-E242-4509-92A1-38DA2FFCBA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

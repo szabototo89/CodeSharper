@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Csv\CsvLanguageTestFixture.cs" />
+    <Compile Include="Csv\Factories\CsvTreeFactoryTestFixture.cs" />
+    <Compile Include="Csv\Nodes\CsvNodesTestFixture.cs" />
     <Compile Include="MutableNodeTestFixture.cs" />
+    <Compile Include="NodeTypeDescriptorTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

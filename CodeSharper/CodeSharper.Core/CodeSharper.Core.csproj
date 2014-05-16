@@ -41,7 +41,17 @@
   <ItemGroup>
     <Compile Include="Common\Constraints\IConstraint.cs" />
     <Compile Include="Common\IIdentifiable.cs" />
+    <Compile Include="Csv\CsvLanguageDescriptor.cs" />
+    <Compile Include="Csv\CsvNodeType.cs" />
+    <Compile Include="Csv\CsvNodeTypeDescriptor.cs" />
+    <Compile Include="Csv\Factories\CsvTreeFactory.cs" />
+    <Compile Include="Csv\Nodes\CsvMutableNode.cs" />
+    <Compile Include="Csv\Nodes\FieldNode.cs" />
+    <Compile Include="Csv\Nodes\RecordNode.cs" />
+    <Compile Include="LanguageDescriptor.cs" />
     <Compile Include="MutableNode.cs" />
+    <Compile Include="NodeType.cs" />
+    <Compile Include="NodeTypeDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
   </ItemGroup>

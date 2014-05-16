@@ -9,7 +9,7 @@ namespace CodeSharper.Core
 {
     public class MutableNode : IIdentifiable<long>
     {
-        private static long Count; 
+        private static long Count;
 
         long IIdentifiable<long>.Id { get { return _Id; } }
 
@@ -20,6 +20,9 @@ namespace CodeSharper.Core
 
         private void _LinkChildToThis(MutableNode child)
         {
+            if (child == null)
+                throw ThrowHelper.ArgumentNullException("child");
+
             child._Parent = this;
         }
 
@@ -38,7 +41,6 @@ namespace CodeSharper.Core
         {
             return _Children;
         }
-
 
         public MutableNode GetParent()
         {
@@ -71,6 +73,11 @@ namespace CodeSharper.Core
             _Children.Clear();
 
             return this;
+        }
+
+        public virtual NodeTypeDescriptor GetNodeTypeDescriptor()
+        {
+            return new NodeTypeDescriptor();
         }
     }
 }

@@ -4,6 +4,11 @@ namespace CodeSharper.Core.Common
 {
     static internal class ThrowHelper
     {
+        public static Exception ArgumentNullException(string argumentName)
+        {
+            return new ArgumentNullException(argumentName);
+        }
+
         public static void ThrowArgumentNullException(string argumentName)
         {
             throw new ArgumentNullException(argumentName);

@@ -60,6 +60,19 @@ namespace CodeSharper.Tests.Core
         }
 
         [Test]
+        public void MutableNodeShouldGetNodeTypeDescriptorTest()
+        {
+            // GIVEN
+            var underTest = new MutableNode();
+            
+            // WHEN
+            var result = underTest.GetNodeTypeDescriptor();
+
+            // THEN
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
         public void AppendChildShouldAddChildToNodeTest()
         {
             // GIVEN
