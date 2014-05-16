@@ -10,7 +10,7 @@ namespace CodeSharper.Core.Csv.Nodes
     {
         protected override void InitializeNodeTypeDescriptor(CsvNodeTypeDescriptor nodeTypeDescriptor)
         {
-            _NodeTypeDescriptor.Type = CsvNodeType.Field;
+            nodeTypeDescriptor.Type = CsvNodeType.Field;
         }
 
         public string Value { get; set; }

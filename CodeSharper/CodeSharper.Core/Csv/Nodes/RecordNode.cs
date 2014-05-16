@@ -16,7 +16,7 @@ namespace CodeSharper.Core.Csv.Nodes
 
         protected override void InitializeNodeTypeDescriptor(CsvNodeTypeDescriptor nodeTypeDescriptor)
         {
-            _NodeTypeDescriptor.Type = CsvNodeType.Record;
+            nodeTypeDescriptor.Type = CsvNodeType.Record;
         }
     }
 }

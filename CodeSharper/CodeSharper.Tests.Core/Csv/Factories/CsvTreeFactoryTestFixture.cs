@@ -15,6 +15,11 @@ namespace CodeSharper.Tests.Core.Csv.Factories
     {
         private CsvTreeFactory UnderTest;
 
+        private FieldNode[] GenerateFields()
+        {
+            return new[] { UnderTest.Field("one"), UnderTest.Field("two") };
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -48,7 +53,7 @@ namespace CodeSharper.Tests.Core.Csv.Factories
         public void RecordShouldCreateRecordNodeTest()
         {
             // GIVEN in setup
-            var fields = new[] { UnderTest.Field("one"), UnderTest.Field("two") };
+            var fields = GenerateFields();
 
             // WHEN
             var result = UnderTest.Record(fields);
@@ -56,6 +61,19 @@ namespace CodeSharper.Tests.Core.Csv.Factories
             // THEN
             Assert.That(result, Is.InstanceOf<RecordNode>());
             Assert.That(result.GetChildren(), Is.EquivalentTo(fields));
+        }
+
+        [Test]
+        public void CompilationUnitShouldCreateRecordsTest()
+        {
+            // GIVEN in setup
+            var fields = GenerateFields();
+            var records = new[] { UnderTest.Record(fields) };
+            // WHEN
+            var result = UnderTest.CompilationUnit(records);
+            // THEN
+            Assert.That(result, Is.InstanceOf<CsvCompilationUnit>());
+            Assert.That(result.GetChildren(), Is.EquivalentTo(records));
         }
     }
 }

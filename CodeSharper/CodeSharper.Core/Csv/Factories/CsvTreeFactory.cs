@@ -22,5 +22,10 @@ namespace CodeSharper.Core.Csv.Factories
         {
             return new RecordNode(fields);
         }
+
+        public CsvCompilationUnit CompilationUnit(RecordNode[] records)
+        {
+            return new CsvCompilationUnit(records);
+        }
     }
 }
