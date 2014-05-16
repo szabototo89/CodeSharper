@@ -39,7 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Constraints\IConstraint.cs" />
+    <Compile Include="Common\IIdentifiable.cs" />
+    <Compile Include="MutableNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\ThrowHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
