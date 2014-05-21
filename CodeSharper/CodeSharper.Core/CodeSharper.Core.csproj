@@ -45,6 +45,8 @@
     <Compile Include="Csv\CsvNodeType.cs" />
     <Compile Include="Csv\CsvNodeTypeDescriptor.cs" />
     <Compile Include="Csv\Factories\CsvTreeFactory.cs" />
+    <Compile Include="Csv\Nodes\CommaNode.cs" />
+    <Compile Include="Csv\Nodes\DelimiterNode.cs" />
     <Compile Include="Csv\Nodes\CsvCompilationUnit.cs" />
     <Compile Include="Csv\Nodes\CsvMutableNode.cs" />
     <Compile Include="Csv\Nodes\FieldNode.cs" />

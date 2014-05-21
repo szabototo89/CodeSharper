@@ -20,12 +20,20 @@ namespace CodeSharper.Core.Csv.Factories
 
         public RecordNode Record(IEnumerable<FieldNode> fields)
         {
+            if (fields == null)
+                throw ThrowHelper.ArgumentNullException("fields");
+
             return new RecordNode(fields);
         }
 
         public CsvCompilationUnit CompilationUnit(RecordNode[] records)
         {
             return new CsvCompilationUnit(records);
+        }
+
+        public CommaNode Comma()
+        {
+            return new CommaNode();
         }
     }
 }

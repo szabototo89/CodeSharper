@@ -5,11 +5,14 @@ grammar Csv;
  */
 
 compileUnit
-	:	row+
+	:	record+
 	;
 
-row		:	field (COMMA field)*
+record	:	field (delimiter field)*
 		;
+
+delimiter	:	COMMA
+			;
 
 field	:	STRING
 		|	ID
@@ -28,5 +31,5 @@ STRING	:	'"' .*? '"'
 COMMA	:	','
 		;
 WS
-	:	' ' -> channel(HIDDEN)
+	:	[ \t] -> channel(HIDDEN)
 	;

@@ -60,7 +60,28 @@ namespace CodeSharper.Tests.Core.Csv.Factories
 
             // THEN
             Assert.That(result, Is.InstanceOf<RecordNode>());
-            Assert.That(result.GetChildren(), Is.EquivalentTo(fields));
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.GetFields(), Is.EquivalentTo(fields));
+        }
+
+        [Test]
+        public void RecordShouldThrowArgumentNullExceptionTest()
+        {
+            // GIVEN in setup
+            // WHEN
+            TestDelegate result = () => UnderTest.Record(null);
+            // THEN
+            Assert.That(result, Throws.InstanceOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void CommaShouldCreateCommaNodeTest()
+        {
+            // GIVEN in setup
+            // WHEN
+            var result = UnderTest.Comma();
+            // THEN
+            Assert.That(result, Is.InstanceOf<CommaNode>());
         }
 
         [Test]

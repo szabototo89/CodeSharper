@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeSharper.Core.Csv.Nodes
 {
@@ -17,6 +18,11 @@ namespace CodeSharper.Core.Csv.Nodes
         protected override void InitializeNodeTypeDescriptor(CsvNodeTypeDescriptor nodeTypeDescriptor)
         {
             nodeTypeDescriptor.Type = CsvNodeType.Record;
+        }
+
+        public IEnumerable<FieldNode> GetFields()
+        {
+            return GetChildren().OfType<FieldNode>();
         }
     }
 }

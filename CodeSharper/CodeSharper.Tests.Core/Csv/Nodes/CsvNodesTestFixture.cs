@@ -47,5 +47,16 @@ namespace CodeSharper.Tests.Core.Csv.Nodes
             Assert.That(result.Type, Is.EqualTo(CsvNodeType.Record));
         }
 
+        [Test]
+        public void CommaNodeShouldGetNodeTypeDescriptorTest()
+        {
+            // GIVEN in setup
+            // WHEN
+            var result = UnderTest.Comma()
+                                  .GetNodeTypeDescriptor();
+            // THEN
+            Assert.That(result.Language, Is.EqualTo(CsvLanguageDescriptor.Default));
+            Assert.That(result.Type, Is.EqualTo(CsvNodeType.Delimiter));
+        }
     }
 }
