@@ -48,6 +48,19 @@ namespace CodeSharper.Tests.Core.Csv.Nodes
         }
 
         [Test]
+        public void DelimiterOfCommaNodeShouldReturnCommaTest()
+        {
+            // GIVEN
+            var underTest = new CommaNode();
+
+            // WHEN
+            var result = underTest.Delimiter;
+
+            // THEN
+            Assert.That(result, Is.EqualTo(","));
+        }
+
+        [Test]
         public void CommaNodeShouldGetNodeTypeDescriptorTest()
         {
             // GIVEN in setup

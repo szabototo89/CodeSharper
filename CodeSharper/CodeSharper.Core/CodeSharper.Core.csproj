@@ -57,6 +57,11 @@
     <Compile Include="NodeTypeDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
+    <Compile Include="TextInformation.cs" />
+    <Compile Include="TextInformationHelper.cs" />
+    <Compile Include="TextLocation.cs" />
+    <Compile Include="TextLocationHelper.cs" />
+    <Compile Include="TextSpan.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

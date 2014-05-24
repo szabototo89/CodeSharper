@@ -48,6 +48,9 @@
     <Compile Include="MutableNodeTestFixture.cs" />
     <Compile Include="NodeTypeDescriptorTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextInformationTestFixture.cs" />
+    <Compile Include="TextLocationTestFixture.cs" />
+    <Compile Include="TextSpanTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

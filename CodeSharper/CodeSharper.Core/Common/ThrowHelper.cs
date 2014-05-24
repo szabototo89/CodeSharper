@@ -14,9 +14,14 @@ namespace CodeSharper.Core.Common
             throw new ArgumentNullException(argumentName);
         }
 
-        public static void ThrowArgumentException(string argumentName, string message = "")
+        public static void ThrowArgumentException(string argumentName = "", string message = "")
         {
             throw new ArgumentException(message, argumentName);
+        }
+
+        public static Exception ArgumentException(string argumentName = "", string message = "")
+        {
+            return new ArgumentException(message, argumentName);
         }
     }
 }

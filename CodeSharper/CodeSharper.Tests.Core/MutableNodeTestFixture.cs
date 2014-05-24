@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core;
@@ -13,7 +14,7 @@ namespace CodeSharper.Tests.Core
     [TestFixture]
     class MutableNodeTestFixture
     {
-        [Test]
+        [Test(Description = "MutableNode should be initialized")]
         public void MutableNodeShouldBeInitializedTest()
         {
             // GIVEN
@@ -30,7 +31,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result.Parent, Is.Null);
         }
 
-        [Test]
+        [Test(Description = "MutableNode should set parent.")]
         public void MutableNodeShouldSetParentTest()
         {
             // GIVEN
@@ -45,7 +46,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Is.EqualTo(parent));
         }
 
-        [Test]
+        [Test(Description = "MutableNode should clear its children.")]
         public void MutableNodeShouldClearChildrenTest()
         {
             // GIVEN
@@ -59,7 +60,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Is.Empty);
         }
 
-        [Test]
+        [Test(Description = "MutableNode should get NodeTypeDescriptor.")]
         public void MutableNodeShouldGetNodeTypeDescriptorTest()
         {
             // GIVEN
@@ -72,7 +73,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Is.Not.Null);
         }
 
-        [Test]
+        [Test(Description = "AppendChild should add child to node.")]
         public void AppendChildShouldAddChildToNodeTest()
         {
             // GIVEN
@@ -86,8 +87,8 @@ namespace CodeSharper.Tests.Core
             Assert.That(result.GetChildren(), Is.Not.Empty);
         }
 
-        [Test]
-        public void ApppendChildShouldBeChainableTest()
+        [Test(Description = "AppendChild should be chainable.")]
+        public void AppendChildShouldBeChainableTest()
         {
             // GIVEN
             var underTest = new MutableNode();
@@ -100,7 +101,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Is.EqualTo(underTest));
         }
 
-        [Test]
+        [Test(Description = "AppendChild should set parent of child")]
         public void AppendChildShouldSetParentOfChildTest()
         {
             // GIVEN
@@ -114,7 +115,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result.GetParent(), Is.EqualTo(underTest));
         }
 
-        [Test]
+        [Test(Description = "SetParent should not pass itself")]
         public void SetParentShouldNotPassItselfTest()
         {
             // GIVEN
@@ -127,7 +128,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Throws.ArgumentException);
         }
 
-        [Test]
+        [Test(Description = "SetParent should be chainable.")]
         public void SetParentShouldBeChainableTest()
         {
             // GIVEN
@@ -140,7 +141,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Is.EqualTo(underTest));
         }
 
-        [Test]
+        [Test(Description = "SetParent should throw exception when pass null")]
         public void SetParentShouldThrowExceptionWhenPassNullTest()
         {
             // GIVEN
@@ -153,7 +154,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Throws.InstanceOf<ArgumentNullException>());
         }
 
-        [Test]
+        [Test(Description = "ClearChildren should be chainable")]
         public void ClearChildrenShouldBeChainableTest()
         {
             // GIVEN
@@ -164,6 +165,19 @@ namespace CodeSharper.Tests.Core
 
             // THEN
             Assert.That(result, Is.EqualTo(underTest));
+        }
+
+        [Test]
+        public void MutableNodeShouldReturnTextInformationTest()
+        {
+            // GIVEN
+            var underTest = new MutableNode();
+
+            // WHEN
+            var result = TextInformationHelper.GetTextInformation(underTest);
+
+            // THEN
+            Assert.That(result, Is.InstanceOf<TextInformation>());
         }
     }
 }

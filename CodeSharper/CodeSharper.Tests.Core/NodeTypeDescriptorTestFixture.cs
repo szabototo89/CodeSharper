@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core;
@@ -11,7 +12,7 @@ namespace CodeSharper.Tests.Core
     [TestFixture]
     public class NodeTypeDescriptorTestFixture
     {
-        [Test]
+        [Test(Description = "NodeTypeDescriptor should get language descriptor.")]
         public void NodeTypeDescriptorShouldGetLanguageTest()
         {
             // GIVEN
@@ -25,7 +26,7 @@ namespace CodeSharper.Tests.Core
             Assert.That(result, Is.EqualTo(LanguageDescriptor.Any));
         }
 
-        [Test]
+        [Test(Description = "NodeTypeDescriptor should get type.")]
         public void NodeTypeDescriptorShouldGetTypeTest()
         {
             // GIVEN
