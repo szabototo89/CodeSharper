@@ -1,58 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Misc;
 using CodeSharper.Core;
-using CodeSharper.Core.Csv.Factories;
+using CodeSharper.Core.Csv;
 using CodeSharper.Core.Csv.Nodes;
 using CodeSharper.Languages.Grammar;
 
 namespace CodeSharper.Languages.Compilers
 {
-    public class CsvCompiler : CsvBaseVisitor<CsvMutableNode>
+    public class CsvCompiler
     {
-        protected CsvTreeFactory Factory;
-
-        public CsvCompiler()
+        public static CsvAbstractSyntaxTree CompileFromString(string code)
         {
-            Factory = new CsvTreeFactory();
+            return new CsvCompiler().Compile(code);
         }
 
-        public override CsvMutableNode VisitDelimiter(CsvParser.DelimiterContext context)
+        public CsvAbstractSyntaxTree Compile(string code)
         {
-            return Factory.Comma();
-        }
+            var reader = new StringReader(code);
+            var input = new AntlrInputStream(reader);
+            var lexer = new CsvLexer(input);
+            var tokens = new CommonTokenStream(lexer);
+            var parser = new CsvParser(tokens);
 
-        public override CsvMutableNode VisitField(CsvParser.FieldContext context)
-        {
-            string value = string.Empty;
-
-            if (context.STRING() != null)
-                value = context.STRING().GetText();
-            else if (context.ID() != null)
-                value = context.ID().GetText();
-
-            return Factory.Field(value);
-        }
-
-        public override CsvMutableNode VisitRecord(CsvParser.RecordContext context)
-        {
-            var fields = context.field()
-                .Select(field => field.Accept(this))
-                .Cast<FieldNode>();
-
-            return Factory.Record(fields);
-        }
-
-        public override CsvMutableNode VisitCompileUnit(CsvParser.CompileUnitContext context)
-        {
-            var records = context.record()
-                                 .Select(record => record.Accept(this))
-                                 .Cast<RecordNode>()
-                                 .ToArray();
-
-            return Factory.CompilationUnit(records);
+            var visitor = new CsvNodeVisitor();
+            visitor.Visit(parser.compileUnit());
+            return visitor.AbstractSyntaxTree;
         }
     }
 }

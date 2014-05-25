@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CodeSharper.Core.Csv;
 using CodeSharper.Core.Csv.Factories;
 using CodeSharper.Core.Csv.Nodes;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Csv.Nodes
@@ -19,7 +20,7 @@ namespace CodeSharper.Tests.Core.Csv.Nodes
         [SetUp]
         public void Setup()
         {
-            UnderTest = new CsvTreeFactory();
+            UnderTest = new CsvTreeFactory(new CsvAbstractSyntaxTree());
         }
 
         [Test]

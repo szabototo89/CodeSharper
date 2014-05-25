@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.Csv;
 using CodeSharper.Core.Csv.Factories;
 using CodeSharper.Core.Csv.Nodes;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace CodeSharper.Tests.Core.Csv.Factories
 {
     [TestFixture]
-    class CsvTreeFactoryTestFixture
+    class CsvNodeFactoryTestFixture
     {
         private CsvTreeFactory UnderTest;
 
@@ -23,7 +25,7 @@ namespace CodeSharper.Tests.Core.Csv.Factories
         [SetUp]
         public void Setup()
         {
-            UnderTest = new CsvTreeFactory();
+            UnderTest = new CsvTreeFactory(new CsvAbstractSyntaxTree());
         }
 
         [Test]

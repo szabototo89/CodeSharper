@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CodeSharper.Core.Common;
 
-namespace CodeSharper.Core
+namespace CodeSharper.Core.Texts
 {
     public struct TextLocation : IComparable, IComparable<TextLocation>
     {
         private readonly int _column;
         private readonly int _line;
+        private readonly int _index;
         private static readonly TextLocation _zero;
 
         static TextLocation()
@@ -18,7 +15,7 @@ namespace CodeSharper.Core
             _zero = new TextLocation(0, 0);
         }
 
-        public TextLocation(int column = 0, int line = 0)
+        public TextLocation(int column = 0, int line = 0, int index = 0)
         {
             if (column < 0)
                 throw ThrowHelper.ArgumentException("Column must be positive number or zero!", "column");
@@ -27,6 +24,7 @@ namespace CodeSharper.Core
 
             _column = column;
             _line = line;
+            _index = index;
         }
 
         /// <summary>
@@ -51,6 +49,11 @@ namespace CodeSharper.Core
         public static TextLocation Zero
         {
             get { return _zero; }
+        }
+
+        public int Index
+        {
+            get { return _index; }
         }
 
         #region IComparable interface
@@ -109,12 +112,7 @@ namespace CodeSharper.Core
         /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
-            return string.Format("Line {0} - Column {1}", Line, Column);
-        }
-
-        public TextLocation Offset(TextLocation textLocation)
-        {
-            return TextLocationHelper.Offset(this, textLocation.Column, textLocation.Line);
+            return string.Format("Line {0} - Column {1} - Index {2}", Line, Column, Index);
         }
     }
 }

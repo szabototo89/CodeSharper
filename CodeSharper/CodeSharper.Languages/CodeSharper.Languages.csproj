@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compilers\CsvCompiler.cs" />
+    <Compile Include="Compilers\CsvNodeVisitor.cs" />
     <Compile Include="Grammar\Csv.g4.lexer.cs">
       <DependentUpon>Csv.g4</DependentUpon>
     </Compile>

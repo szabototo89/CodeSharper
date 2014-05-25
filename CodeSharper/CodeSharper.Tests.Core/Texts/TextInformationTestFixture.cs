@@ -1,7 +1,8 @@
 ﻿using CodeSharper.Core;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core
+namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
     class TextInformationTestFixture

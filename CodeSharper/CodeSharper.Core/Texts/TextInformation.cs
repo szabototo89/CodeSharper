@@ -1,4 +1,4 @@
-﻿namespace CodeSharper.Core
+﻿namespace CodeSharper.Core.Texts
 {
     public class TextInformation
     {

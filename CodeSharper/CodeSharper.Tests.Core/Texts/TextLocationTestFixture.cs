@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace CodeSharper.Tests.Core
+namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
     public class TextLocationTestFixture
@@ -129,7 +121,7 @@ namespace CodeSharper.Tests.Core
             var result = underTest.Offset(offset);
 
             // THEN
-            var expected = new TextLocation(offset.Column + underTest.Column, offset.Line + underTest.Line);
+            var expected = new TextLocation(offset.Column + underTest.Column, offset.Line + underTest.Line, offset.Index + underTest.Line);
             Assert.That(result, Is.EqualTo(expected));
             Assert.That(result, Is.Not.SameAs(underTest));
         }
@@ -233,6 +225,19 @@ namespace CodeSharper.Tests.Core
             // THEN
             var expected = new TextLocation(columnOffset, lineOffset);
             Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [TestCase(0, 0, 0)]
+        public void TextLocationShouldContainIndexValueTest(int column, int line, int index)
+        {
+            // GIVEN
+            var underTest = new TextLocation(column, line, index);
+
+            // WHEN
+            var result = underTest.Index;
+
+            // THEN
+            Assert.That(result, Is.EqualTo(index));
         }
     }
 }

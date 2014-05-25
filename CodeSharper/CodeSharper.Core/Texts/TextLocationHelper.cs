@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeSharper.Core
+namespace CodeSharper.Core.Texts
 {
     public static class TextLocationHelper
     {
@@ -18,9 +18,9 @@ namespace CodeSharper.Core
         /// <summary>
         /// Returns a new TextLocation object which is offset by column and line.
         /// </summary>
-        public static TextLocation Offset(TextLocation that, int offsetColumn, int offsetLine)
+        public static TextLocation Offset(this TextLocation that, int offsetColumn, int offsetLine, int offsetIndex)
         {
-            return new TextLocation(that.Column + offsetColumn, that.Line + offsetLine);
+            return new TextLocation(that.Column + offsetColumn, that.Line + offsetLine, that.Index + offsetIndex);
         }
     }
 }

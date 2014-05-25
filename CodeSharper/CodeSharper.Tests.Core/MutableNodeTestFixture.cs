@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core
