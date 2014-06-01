@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using CodeSharper.Core.Common;
 
 namespace CodeSharper.Core.Texts
@@ -62,6 +63,11 @@ namespace CodeSharper.Core.Texts
         public int Stop
         {
             get { return _stop; }
+        }
+
+        public int Length
+        {
+            get { return Text.Length; }
         }
 
         #endregion
