@@ -32,7 +32,7 @@ namespace CodeSharper.Tests.Core
             var underTest = CsvCompiler.CompileFromString(source).TextInformationManager;
 
             // WHEN
-            var result = underTest.GetNodesByTextLocation(new TextLocation(4, 1));
+            var result = underTest.GetNodesByTextLocation(4);
 
             // THEN
             Assert.That(result, Is.Not.Null);

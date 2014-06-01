@@ -25,11 +25,11 @@ namespace CodeSharper.Core.Texts
             _NodesByTextSpan.Add(node, span);
         }
 
-        public IEnumerable<MutableNode> GetNodesByTextLocation(TextLocation location)
+        public IEnumerable<MutableNode> GetNodesByTextLocation(int location)
         {
             return _NodesByTextSpan.Select(pair => new { Node = pair.Key, Span = pair.Value })
-                                   .Where(value => value.Span.Start.CompareTo(location) <= 0 &&
-                                                   location.CompareTo(value.Span.Stop) <= 0)
+                                   .Where(value => value.Span.Start <= location &&
+                                                   location <= value.Span.Stop)
                                    .Select(value => value.Node)
                                    .ToArray();
         }

@@ -88,44 +88,6 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(underTest, Is.InstanceOf<IComparable<TextLocation>>());
         }
 
-        [TestCase(10, 3, 0, 0)]
-        [TestCase(1, 5, 3, 40)]
-        [TestCase(10, 5, -4, 40)]
-        [Description("TextLocation should be offset by line and column numbers.")]
-        public void TextLocationShouldBeOffsetByLineAndColumnTest(int column, int line, int offsetColumn, int offsetLine)
-        {
-            // GIVEN
-            var offset = new {
-                Column = offsetColumn,
-                Line = offsetLine
-            };
-            var underTest = new TextLocation(column, line);
-
-            // WHEN
-            var result = TextLocationHelper.Offset(underTest, offset.Column, offset.Line);
-
-            // THEN
-            var expected = new TextLocation(column + offsetColumn, line + offsetLine);
-            Assert.That(result, Is.EqualTo(expected));
-            Assert.That(result, Is.Not.SameAs(underTest));
-        }
-
-        [Test(Description = "TextLocation should be offset by another TextLocation")]
-        public void TextLocationShouldBeOffsetByAnotherTextLocationTest()
-        {
-            // GIVEN
-            var offset = new TextLocation(10, 3);
-            var underTest = new TextLocation();
-
-            // WHEN
-            var result = underTest.Offset(offset);
-
-            // THEN
-            var expected = new TextLocation(offset.Column + underTest.Column, offset.Line + underTest.Line, offset.Index + underTest.Line);
-            Assert.That(result, Is.EqualTo(expected));
-            Assert.That(result, Is.Not.SameAs(underTest));
-        }
-
         [TestCase(10, 3)]
         [TestCase(0, 0)]
         [TestCase(346, 100)]

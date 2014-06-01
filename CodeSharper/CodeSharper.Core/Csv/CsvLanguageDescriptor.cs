@@ -4,6 +4,8 @@ namespace CodeSharper.Core.Csv
     {
         public static LanguageDescriptor Default;
 
+        #region Constructors
+
         static CsvLanguageDescriptor()
         {
             Default = new CsvLanguageDescriptor();
@@ -11,9 +13,15 @@ namespace CodeSharper.Core.Csv
 
         protected CsvLanguageDescriptor() { }
 
+        #endregion
+
+        #region Public properties
+
         public override string Name
         {
             get { return "CSV"; }
         }
+
+        #endregion
     }
 }

@@ -5,10 +5,10 @@ namespace CodeSharper.Core.Texts
 {
     public struct TextLocation : IComparable, IComparable<TextLocation>
     {
-        private readonly int _column;
-        private readonly int _line;
-        private readonly int _index;
         private static readonly TextLocation _zero;
+        private readonly int _column;
+        private readonly int _index;
+        private readonly int _line;
 
         static TextLocation()
         {
@@ -35,6 +35,11 @@ namespace CodeSharper.Core.Texts
             get { return _column; }
         }
 
+        public int Index
+        {
+            get { return _index; }
+        }
+
         /// <summary>
         /// Returns line number of text
         /// </summary>
@@ -49,11 +54,6 @@ namespace CodeSharper.Core.Texts
         public static TextLocation Zero
         {
             get { return _zero; }
-        }
-
-        public int Index
-        {
-            get { return _index; }
         }
 
         #region IComparable interface

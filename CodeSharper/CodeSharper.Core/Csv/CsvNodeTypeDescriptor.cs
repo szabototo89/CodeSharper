@@ -9,9 +9,13 @@ namespace CodeSharper.Core.Csv
 {
     public class CsvNodeTypeDescriptor : NodeTypeDescriptor
     {
+        #region Constructors
+
         public CsvNodeTypeDescriptor()
         {
             Language = CsvLanguageDescriptor.Default;
         }
+
+        #endregion
     }
 }

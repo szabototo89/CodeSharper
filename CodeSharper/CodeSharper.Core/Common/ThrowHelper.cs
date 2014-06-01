@@ -23,5 +23,10 @@ namespace CodeSharper.Core.Common
         {
             return new ArgumentException(message, argumentName);
         }
+
+        public static Exception InvalidOperationException(string message = "")
+        {
+            return new InvalidOperationException(message);
+        }
     }
 }

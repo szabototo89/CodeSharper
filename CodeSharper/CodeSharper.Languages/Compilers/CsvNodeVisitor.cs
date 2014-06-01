@@ -28,7 +28,7 @@ namespace CodeSharper.Languages.Compilers
 
         private TextSpan GenerateTextSpanFromContext(ParserRuleContext context)
         {
-            var start = new TextLocation(context.Start.Column, context.Start.Line, context.Start.StartIndex);
+            var start = context.Start.StartIndex;
             var text = context.GetText();
             /*if (context.ChildCount > 1)
             {

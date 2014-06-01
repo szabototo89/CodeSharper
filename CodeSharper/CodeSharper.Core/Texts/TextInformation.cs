@@ -4,10 +4,14 @@
     {
         private readonly MutableNode _node;
 
+        #region Constructors
+
         public TextInformation(MutableNode node)
         {
             _node = node;
         }
+
+        #endregion
 
         public string FullText
         {

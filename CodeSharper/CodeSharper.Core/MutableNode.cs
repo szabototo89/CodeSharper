@@ -9,14 +9,37 @@ namespace CodeSharper.Core
 {
     public class MutableNode : IIdentifiable<long>
     {
-        private static long Count;
+        private static long _count;
 
-        long IIdentifiable<long>.Id { get { return _Id; } }
+        #region Private fields
+
+        private readonly long _Id;
+        private MutableNode _Parent;
+
+        #endregion
+
+        #region Protected fields
 
         protected readonly List<MutableNode> _Children;
 
-        private MutableNode _Parent;
-        private readonly long _Id;
+        #endregion
+
+        #region Constructors
+
+        static MutableNode()
+        {
+            _count = 0;
+        }
+
+        public MutableNode()
+        {
+            _Id = _count++;
+            _Children = new List<MutableNode>();
+        }
+
+        #endregion
+
+        #region Private methods
 
         private void _LinkChildToThis(MutableNode child)
         {
@@ -26,26 +49,9 @@ namespace CodeSharper.Core
             child._Parent = this;
         }
 
-        static MutableNode()
-        {
-            Count = 0;
-        }
+        #endregion
 
-        public MutableNode()
-        {
-            _Id = Count++;
-            _Children = new List<MutableNode>();
-        }
-
-        public IEnumerable<MutableNode> GetChildren()
-        {
-            return _Children;
-        }
-
-        public MutableNode GetParent()
-        {
-            return _Parent;
-        }
+        #region Public methods
 
         public MutableNode AppendChild(MutableNode child)
         {
@@ -53,6 +59,28 @@ namespace CodeSharper.Core
             _LinkChildToThis(child);
 
             return this;
+        }
+
+        public MutableNode ClearChildren()
+        {
+            _Children.Clear();
+
+            return this;
+        }
+
+        public IEnumerable<MutableNode> GetChildren()
+        {
+            return _Children;
+        }
+
+        public virtual NodeTypeDescriptor GetNodeTypeDescriptor()
+        {
+            return new NodeTypeDescriptor();
+        }
+
+        public MutableNode GetParent()
+        {
+            return _Parent;
         }
 
         public MutableNode SetParent(MutableNode parent)
@@ -68,16 +96,11 @@ namespace CodeSharper.Core
             return this;
         }
 
-        public MutableNode ClearChildren()
-        {
-            _Children.Clear();
+        #endregion
 
-            return this;
-        }
-
-        public virtual NodeTypeDescriptor GetNodeTypeDescriptor()
+        long IIdentifiable<long>.Id
         {
-            return new NodeTypeDescriptor();
+            get { return _Id; }
         }
     }
 }

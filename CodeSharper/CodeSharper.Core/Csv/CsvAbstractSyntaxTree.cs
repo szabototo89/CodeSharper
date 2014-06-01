@@ -9,6 +9,10 @@ namespace CodeSharper.Core.Csv
 {
     public class CsvAbstractSyntaxTree : AbstractSyntaxTree
     {
+        #region Public properties
+
         public CsvCompilationUnit Root { get; set; }
+
+        #endregion
     }
 }

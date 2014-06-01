@@ -10,18 +10,16 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Csv.Factories
 {
-    public interface ICsvNodeFactory
-    {
-        FieldNode Field(string value);
-        RecordNode Record(IEnumerable<FieldNode> fields);
-        CsvCompilationUnit CompilationUnit(RecordNode[] records);
-        CommaNode Comma();
-    }
-
     public class CsvTreeFactory : ICsvNodeFactory
     {
+        #region Private fields
+
         private readonly CsvAbstractSyntaxTree _ast;
         private readonly Stack<TextSpan> _spans;
+
+        #endregion
+
+        #region Constructors
 
         public CsvTreeFactory(CsvAbstractSyntaxTree ast)
         {
@@ -32,6 +30,10 @@ namespace CodeSharper.Core.Csv.Factories
             _spans = new Stack<TextSpan>();
         }
 
+        #endregion
+
+        #region Private methods
+
         private TNode RegisterNodeToTextInformationManager<TNode>(TNode node)
             where TNode : CsvMutableNode
         {
@@ -40,6 +42,24 @@ namespace CodeSharper.Core.Csv.Factories
                 span = _spans.Pop();
 
             _ast.TextInformationManager.RegisterNode(node, span);
+            return node;
+        }
+
+        #endregion
+
+        #region Public methods
+
+        public CommaNode Comma()
+        {
+            var node = new CommaNode();
+            RegisterNodeToTextInformationManager(node);
+            return node;
+        }
+
+        public CsvCompilationUnit CompilationUnit(RecordNode[] records)
+        {
+            var node = new CsvCompilationUnit(records);
+            RegisterNodeToTextInformationManager(node);
             return node;
         }
 
@@ -63,24 +83,12 @@ namespace CodeSharper.Core.Csv.Factories
             return node;
         }
 
-        public CsvCompilationUnit CompilationUnit(RecordNode[] records)
-        {
-            var node = new CsvCompilationUnit(records);
-            RegisterNodeToTextInformationManager(node);
-            return node;
-        }
-
-        public CommaNode Comma()
-        {
-            var node = new CommaNode();
-            RegisterNodeToTextInformationManager(node);
-            return node;
-        }
-
         public ICsvNodeFactory UpdateTextSpan(TextSpan span)
         {
             _spans.Push(span);
             return this;
         }
+
+        #endregion
     }
 }

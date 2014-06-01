@@ -48,6 +48,7 @@
     <Compile Include="Csv\CsvNodeType.cs" />
     <Compile Include="Csv\CsvNodeTypeDescriptor.cs" />
     <Compile Include="Csv\Factories\CsvTreeFactory.cs" />
+    <Compile Include="Csv\Factories\ICsvNodeFactory.cs" />
     <Compile Include="Csv\Nodes\CommaNode.cs" />
     <Compile Include="Csv\Nodes\DelimiterNode.cs" />
     <Compile Include="Csv\Nodes\CsvCompilationUnit.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Texts\TextLocation.cs" />
     <Compile Include="Texts\TextLocationHelper.cs" />
     <Compile Include="Texts\TextSpan.cs" />
+    <Compile Include="Texts\TextSpanHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

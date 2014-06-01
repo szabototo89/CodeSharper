@@ -3,7 +3,7 @@ namespace CodeSharper.Core.Csv
     public class CsvNodeType : NodeType
     {
         public static readonly NodeType Column;
-        
+
         public static readonly NodeType Field;
 
         public static readonly NodeType Record;
