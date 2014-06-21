@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractSyntaxTreeTestFixture.cs" />
+    <Compile Include="Common\OptionalTestFixture.cs" />
     <Compile Include="Common\NumberHelperTestFixture.cs" />
     <Compile Include="Compilers\CsvCompilerTestFixture.cs" />
     <Compile Include="Compilers\CsvNodeVisitorTestFixture.cs" />

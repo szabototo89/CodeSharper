@@ -43,6 +43,8 @@
     <Compile Include="Common\Constraints\IConstraint.cs" />
     <Compile Include="Common\IIdentifiable.cs" />
     <Compile Include="Common\NumberHelper.cs" />
+    <Compile Include="Common\Optional.cs" />
+    <Compile Include="Common\OptionalHelper.cs" />
     <Compile Include="Csv\CsvAbstractSyntaxTree.cs" />
     <Compile Include="Csv\CsvLanguageDescriptor.cs" />
     <Compile Include="Csv\CsvNodeType.cs" />
