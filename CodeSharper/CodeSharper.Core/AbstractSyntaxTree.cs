@@ -11,8 +11,6 @@ namespace CodeSharper.Core
             _textInformationManager = new TextInformationManager();
         }
 
-
-
         public TextInformationManager TextInformationManager
         {
             get { return _textInformationManager; }

@@ -141,7 +141,7 @@ namespace CodeSharper.Tests.Core.Common
         public void OptionalShouldHaveExplicitNoneValueTest()
         {
             // GIVEN
-            var underTest = Optional<Int32>.None;
+            var underTest = Optional<Int32>.None();
 
             // WHEN
             var result = underTest.Equals(new Optional<Int32>());

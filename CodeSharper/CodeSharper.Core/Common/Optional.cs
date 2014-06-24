@@ -23,6 +23,9 @@ namespace CodeSharper.Core.Common
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes the <see cref="Optional{TType}"/> struct.
+        /// </summary>
         static Optional()
         {
             _none = new Optional<TType>();
@@ -32,8 +35,7 @@ namespace CodeSharper.Core.Common
         /// Initializes a new instance of the <see cref="Optional{TType}"/> struct.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Optional(TType value)
-            : this()
+        public Optional(TType value) : this()
         {
             _value = value;
             IsInitalized = true;
@@ -50,11 +52,6 @@ namespace CodeSharper.Core.Common
         ///   <c>true</c> if [is initalized]; otherwise, <c>false</c>.
         /// </value>
         public Boolean IsInitalized { get; private set; }
-
-        public static Optional<TType> None
-        {
-            get { return _none; }
-        }
 
         /// <summary>
         /// Gets or sets the value of optional object.
@@ -91,6 +88,17 @@ namespace CodeSharper.Core.Common
 
         #region Public methods
 
+        /// <summary>
+        /// Represents an uninitialized Option(TType) object
+        /// </summary>
+        public static Optional<TType> None()
+        {
+            return _none;
+        }
+
+        /// <summary>
+        /// Initializes an Optional(TType) instance with some value. 
+        /// </summary>
         public static Optional<TType> Some(TType value)
         {
             return new Optional<TType>(value);
