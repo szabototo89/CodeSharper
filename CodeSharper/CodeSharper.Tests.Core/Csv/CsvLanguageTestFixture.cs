@@ -16,7 +16,7 @@ namespace CodeSharper.Tests.Core.Csv
         public void CsvLanguageDescriptorTest()
         {
             // GIVEN
-            var underTest = CsvLanguageDescriptor.Default;
+            var underTest = LanguageDescriptors.Csv;
             // WHEN
             var result = underTest.Name;
             // THEN
@@ -41,8 +41,8 @@ namespace CodeSharper.Tests.Core.Csv
             // WHEN
             var result = underTest.Language;
             // THEN
-            Assert.That(result, Is.EqualTo(CsvLanguageDescriptor.Default));
-            Assert.That(result, Is.InstanceOf<CsvLanguageDescriptor>());
+            Assert.That(result, Is.EqualTo(LanguageDescriptors.Csv));
+            Assert.That(result, Is.InstanceOf<LanguageDescriptor>());
         }
     }
 }

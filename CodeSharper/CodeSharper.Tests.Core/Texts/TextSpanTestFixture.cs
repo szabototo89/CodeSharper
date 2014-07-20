@@ -31,6 +31,45 @@ namespace CodeSharper.Tests.Core.Texts
         }
 
         [Test]
+        public void TextSpanHasStartTest()
+        {
+            // GIVEN
+            var underTest = new TextSpan();
+
+            // WHEN
+            var result = underTest.Start;
+
+            // THEN
+            Assert.That(result, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TextSpanHasStopTest()
+        {
+            // GIVEN
+            var underTest = new TextSpan();
+
+            // WHEN
+            var result = underTest.Stop;
+
+            // THEN
+            Assert.That(result, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TextSpanHasLengthTest()
+        {
+            // GIVEN
+            var underTest = new TextSpan();
+
+            // WHEN
+            var result = underTest.Length;
+
+            // THEN
+            Assert.That(result, Is.EqualTo(0));
+        }
+
+        [Test]
         public void TextSpanShouldThrowExceptionWhenOffsetTooMuchIntoNegativeDirectionTest()
         {
             // GIVEN

@@ -46,7 +46,6 @@
     <Compile Include="Common\Optional.cs" />
     <Compile Include="Common\OptionalHelper.cs" />
     <Compile Include="Csv\CsvAbstractSyntaxTree.cs" />
-    <Compile Include="Csv\CsvLanguageDescriptor.cs" />
     <Compile Include="Csv\CsvNodeType.cs" />
     <Compile Include="Csv\CsvNodeTypeDescriptor.cs" />
     <Compile Include="Csv\Factories\CsvTreeFactory.cs" />
@@ -58,6 +57,7 @@
     <Compile Include="Csv\Nodes\FieldNode.cs" />
     <Compile Include="Csv\Nodes\RecordNode.cs" />
     <Compile Include="LanguageDescriptor.cs" />
+    <Compile Include="LanguageDescriptors.cs" />
     <Compile Include="MutableNode.cs" />
     <Compile Include="NodeType.cs" />
     <Compile Include="NodeTypeDescriptor.cs" />

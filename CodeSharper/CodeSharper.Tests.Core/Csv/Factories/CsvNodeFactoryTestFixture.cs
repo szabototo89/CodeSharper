@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Csv;
 using CodeSharper.Core.Csv.Factories;
 using CodeSharper.Core.Csv.Nodes;
 using CodeSharper.Core.Texts;
+using Ninject;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -28,14 +30,15 @@ namespace CodeSharper.Tests.Core.Csv.Factories
             UnderTest = new CsvTreeFactory(new CsvAbstractSyntaxTree());
         }
 
-        [Test]
-        public void FieldShouldThrowArgumentExceptionTest()
+        [Test(Description = "Field method throws ArgumentNullException when null value is passed")]
+        public void FieldThrowsArgumentNullExceptionWhenNullParameterPassedTest()
         {
             // GIVEN in setup
             // WHEN
-            TestDelegate result = () => UnderTest.Field(null);
+            TestDelegate result = delegate { UnderTest.Field(null); };
+
             // THEN
-            Assert.That(result, Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(result, Throws.Exception.TypeOf<ArgumentNullException>());
         }
 
         [TestCase("car")]
@@ -58,7 +61,7 @@ namespace CodeSharper.Tests.Core.Csv.Factories
             var fields = GenerateFields();
 
             // WHEN
-            var result = UnderTest.Record(fields);
+            var result = UnderTest.Record(fields, Enumerable.Empty<DelimiterNode>());
 
             // THEN
             Assert.That(result, Is.InstanceOf<RecordNode>());
@@ -71,7 +74,7 @@ namespace CodeSharper.Tests.Core.Csv.Factories
         {
             // GIVEN in setup
             // WHEN
-            TestDelegate result = () => UnderTest.Record(null);
+            TestDelegate result = () => UnderTest.Record(null, Enumerable.Empty<DelimiterNode>());
             // THEN
             Assert.That(result, Throws.InstanceOf<ArgumentNullException>());
         }
@@ -91,9 +94,11 @@ namespace CodeSharper.Tests.Core.Csv.Factories
         {
             // GIVEN in setup
             var fields = GenerateFields();
-            var records = new[] { UnderTest.Record(fields) };
+            var records = new[] { UnderTest.Record(fields, Enumerable.Empty<DelimiterNode>()) };
+
             // WHEN
             var result = UnderTest.CompilationUnit(records);
+            
             // THEN
             Assert.That(result, Is.InstanceOf<CsvCompilationUnit>());
             Assert.That(result.GetChildren(), Is.EquivalentTo(records));

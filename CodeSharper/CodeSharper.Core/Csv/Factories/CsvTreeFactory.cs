@@ -73,12 +73,15 @@ namespace CodeSharper.Core.Csv.Factories
             return node;
         }
 
-        public RecordNode Record(IEnumerable<FieldNode> fields)
+        public RecordNode Record(IEnumerable<FieldNode> fields, IEnumerable<DelimiterNode> delimiters)
         {
             if (fields == null)
                 throw ThrowHelper.ArgumentNullException("fields");
 
-            var node = new RecordNode(fields);
+            if (delimiters == null)
+                throw ThrowHelper.ArgumentNullException("delimiters");
+
+            var node = new RecordNode(fields, delimiters);
             RegisterNodeToTextInformationManager(node);
             return node;
         }

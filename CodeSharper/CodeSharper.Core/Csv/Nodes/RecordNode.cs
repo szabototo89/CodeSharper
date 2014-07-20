@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Csv.Nodes
 {
@@ -7,18 +8,21 @@ namespace CodeSharper.Core.Csv.Nodes
     {
         #region Constructors
 
-        public RecordNode(IEnumerable<FieldNode> fields)
+        public RecordNode(IEnumerable<FieldNode> fields, IEnumerable<DelimiterNode> delimiters)
         {
-            InitializeChildren(fields);
+            InitializeChildren(fields, delimiters);
         }
 
         #endregion
 
         #region Private methods
 
-        private void InitializeChildren(IEnumerable<FieldNode> fields)
+        private void InitializeChildren(IEnumerable<FieldNode> fields, IEnumerable<DelimiterNode> delimiters)
         {
-            _Children.AddRange(fields);
+            _Children.AddRange(fields.Union<MutableNode>(delimiters)
+                                     .OrderBy(node => node.GetTextInformation()
+                                                          .TextSpan
+                                                          .Start));
         }
 
         #endregion
@@ -38,6 +42,11 @@ namespace CodeSharper.Core.Csv.Nodes
         {
             return GetChildren().OfType<FieldNode>();
         }
+
+        public IEnumerable<DelimiterNode> GetDelimiters()
+        {
+            return GetChildren().OfType<DelimiterNode>();
+        } 
 
         #endregion
     }

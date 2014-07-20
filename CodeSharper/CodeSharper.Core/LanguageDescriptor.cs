@@ -1,33 +1,39 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
+using CodeSharper.Core.Csv;
 
 namespace CodeSharper.Core
 {
+    /// <summary>
+    /// Represents programming paradigm
+    /// </summary>
+    public enum ProgrammingParadigm
+    {
+        Functional, Imperative, ObjectOrientated, Declarative, MultiParadigm, None
+    }
+
     /// <summary>
     /// Represents a descriptor of programming language.
     /// </summary>
     public class LanguageDescriptor
     {
         /// <summary>
-        /// Represents all languages
+        /// Gets or sets the supported programming paradigms.
         /// </summary>
-        public static readonly LanguageDescriptor Any;
+        public IEnumerable<ProgrammingParadigm> SupportedProgrammingParadigms { get; protected set; }
 
         /// <summary>
         /// Gets the name of language.
         /// </summary>
-        public virtual string Name { get { return string.Empty; } }
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LanguageDescriptor"/> class.
         /// </summary>
-        protected LanguageDescriptor() { }
-
-        /// <summary>
-        /// Initializes the <see cref="LanguageDescriptor"/> class.
-        /// </summary>
-        static LanguageDescriptor()
+        public LanguageDescriptor(string name, IEnumerable<ProgrammingParadigm> programmingParadigms)
         {
-            Any = new LanguageDescriptor();
+            Name = name;
+            SupportedProgrammingParadigms = programmingParadigms;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace CodeSharper.Core.Csv
 
         public CsvNodeTypeDescriptor()
         {
-            Language = CsvLanguageDescriptor.Default;
+            Language = LanguageDescriptors.Csv;
         }
 
         #endregion

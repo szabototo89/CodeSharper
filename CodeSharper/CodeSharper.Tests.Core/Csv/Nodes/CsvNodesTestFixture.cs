@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core;
 using CodeSharper.Core.Csv;
 using CodeSharper.Core.Csv.Factories;
 using CodeSharper.Core.Csv.Nodes;
@@ -31,7 +32,7 @@ namespace CodeSharper.Tests.Core.Csv.Nodes
             var result = UnderTest.Field(string.Empty)
                                   .GetNodeTypeDescriptor();
             // THEN
-            Assert.That(result.Language, Is.EqualTo(CsvLanguageDescriptor.Default));
+            Assert.That(result.Language, Is.EqualTo(LanguageDescriptors.Csv));
             Assert.That(result.Type, Is.EqualTo(CsvNodeType.Field));
         }
 
@@ -40,11 +41,13 @@ namespace CodeSharper.Tests.Core.Csv.Nodes
         {
             // GIVEN in setup
             var fields = Enumerable.Empty<FieldNode>();
+            var delimiters = Enumerable.Empty<DelimiterNode>();
+
             // WHEN
-            var result = UnderTest.Record(fields)
+            var result = UnderTest.Record(fields, delimiters)
                                   .GetNodeTypeDescriptor();
             // THEN
-            Assert.That(result.Language, Is.EqualTo(CsvLanguageDescriptor.Default));
+            Assert.That(result.Language, Is.EqualTo(LanguageDescriptors.Csv));
             Assert.That(result.Type, Is.EqualTo(CsvNodeType.Record));
         }
 
@@ -69,7 +72,7 @@ namespace CodeSharper.Tests.Core.Csv.Nodes
             var result = UnderTest.Comma()
                                   .GetNodeTypeDescriptor();
             // THEN
-            Assert.That(result.Language, Is.EqualTo(CsvLanguageDescriptor.Default));
+            Assert.That(result.Language, Is.EqualTo(LanguageDescriptors.Csv));
             Assert.That(result.Type, Is.EqualTo(CsvNodeType.Delimiter));
         }
     }

@@ -21,7 +21,7 @@
         /// </summary>
         public NodeTypeDescriptor()
         {
-            Language = LanguageDescriptor.Any;
+            Language = LanguageDescriptors.Any;
             Type = NodeType.Undefined;
         }
     }

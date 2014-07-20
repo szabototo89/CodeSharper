@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core
             
             // THEN
             Assert.That(result, Is.InstanceOf<LanguageDescriptor>());
-            Assert.That(result, Is.EqualTo(LanguageDescriptor.Any));
+            Assert.That(result, Is.EqualTo(LanguageDescriptors.Any));
         }
 
         [Test(Description = "NodeTypeDescriptor should get type.")]

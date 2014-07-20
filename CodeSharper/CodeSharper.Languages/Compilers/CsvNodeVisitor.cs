@@ -64,8 +64,12 @@ namespace CodeSharper.Languages.Compilers
                 .Select(field => field.Accept(this))
                 .Cast<FieldNode>();
 
+            var delimiters = context.delimiter()
+                .Select(delimiter => delimiter.Accept(this))
+                .Cast<DelimiterNode>();
+
             return Factory.UpdateTextSpan(GenerateTextSpanFromContext(context))
-                          .Record(fields);
+                          .Record(fields, delimiters);
         }
 
         public override CsvMutableNode VisitCompileUnit(CsvParser.CompileUnitContext context)

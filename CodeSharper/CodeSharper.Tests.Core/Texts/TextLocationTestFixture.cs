@@ -190,7 +190,9 @@ namespace CodeSharper.Tests.Core.Texts
         }
 
         [TestCase(0, 0, 0)]
-        public void TextLocationShouldContainIndexValueTest(int column, int line, int index)
+        [TestCase(10, 100, 0)]
+        [Description("TextLocation has Index property.")]
+        public void TextLocationHasIndexTest(int column, int line, int index)
         {
             // GIVEN
             var underTest = new TextLocation(column, line, index);
