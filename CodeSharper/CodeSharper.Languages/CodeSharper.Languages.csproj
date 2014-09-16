@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compilers\CsvCompiler.cs" />
-    <Compile Include="Compilers\CsvNodeVisitor.cs" />
     <Compile Include="Grammar\Csv.g4.lexer.cs">
       <DependentUpon>Csv.g4</DependentUpon>
     </Compile>
@@ -60,7 +58,9 @@
     <Compile Include="obj\Debug\CsvVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Compilers\" />
+  </ItemGroup>
   <ItemGroup>
     <Antlr4 Include="Grammar\Csv.g4">
       <Generator>MSBuild:Compile</Generator>

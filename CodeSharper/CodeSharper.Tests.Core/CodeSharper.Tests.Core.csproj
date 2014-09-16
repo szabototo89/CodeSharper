@@ -48,20 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractSyntaxTreeTestFixture.cs" />
     <Compile Include="Common\OptionalTestFixture.cs" />
     <Compile Include="Common\NumberHelperTestFixture.cs" />
-    <Compile Include="Compilers\CsvCompilerTestFixture.cs" />
-    <Compile Include="Compilers\CsvNodeVisitorTestFixture.cs" />
-    <Compile Include="Csv\CsvAbstractSyntaxTreeTestFixture.cs" />
-    <Compile Include="Csv\CsvLanguageTestFixture.cs" />
-    <Compile Include="Csv\Factories\CsvNodeFactoryTestFixture.cs" />
-    <Compile Include="Csv\Nodes\CsvNodesTestFixture.cs" />
-    <Compile Include="MutableNodeTestFixture.cs" />
-    <Compile Include="NodeTypeDescriptorTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Texts\TextInformationTestFixture.cs" />
-    <Compile Include="Texts\TextLocationTestFixture.cs" />
     <Compile Include="Texts\TextSpanTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
