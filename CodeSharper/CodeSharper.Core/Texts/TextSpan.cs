@@ -16,7 +16,6 @@ namespace CodeSharper.Core.Texts
 
         #endregion
 
-
         #region Private methods
 
         private int SpecifyStopIndex(int start, string text)
@@ -71,7 +70,6 @@ namespace CodeSharper.Core.Texts
         }
 
         #endregion
-
 
         #region Public methods
 
