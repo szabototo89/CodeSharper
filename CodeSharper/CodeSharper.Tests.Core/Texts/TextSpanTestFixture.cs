@@ -18,7 +18,7 @@ namespace CodeSharper.Tests.Core.Texts
             // WHEN
             var result = new {
                 Start = underTest.Start,
-                Stop = underTest.Stop,
+                Stop = underTest.End,
                 Length = underTest.Length
             };
 
@@ -50,7 +50,7 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = new TextSpan();
 
             // WHEN
-            var result = underTest.Stop;
+            var result = underTest.End;
 
             // THEN
             Assert.That(result, Is.EqualTo(0));
@@ -69,11 +69,26 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(0));
         }
 
+        [TestCase(6, "b")]
+        public void TextSpanShouldFillEmptyGapsWhenAreConcanated(int start, string text)
+        {
+            // GIVEN
+            var textSpan = new TextSpan(start, text);
+            var underTest = new TextSpan(4, "a");
+
+            // WHEN
+            var result = underTest.Append(textSpan);
+
+            // THEN
+            var expected = new TextSpan(4, "a\0b");
+            Assert.That(expected, Is.EqualTo(result));
+        }
+
         [Test]
         public void TextSpanShouldThrowExceptionWhenOffsetTooMuchIntoNegativeDirectionTest()
         {
             // GIVEN
-            string text = "Hello World!";
+            const string text = "Hello World!";
             var underTest = new TextSpan(text);
 
             // WHEN
@@ -116,7 +131,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.Not.EqualTo(underTest));
             Assert.That(result.Text, Is.EqualTo(underTest.Text + textSpan.Text));
             Assert.That(result.Start, Is.EqualTo(underTest.Start));
-            Assert.That(result.Stop, Is.EqualTo(underTest.Start + result.Text.Length));
+            Assert.That(result.End, Is.EqualTo(underTest.Start + result.Text.Length));
             Assert.That(result.Length, Is.EqualTo(underTest.Length + textSpan.Length));
         }
 
@@ -135,7 +150,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.Not.EqualTo(underTest));
             Assert.That(result.Text, Is.EqualTo(textSpan.Text + underTest.Text));
             Assert.That(result.Start, Is.EqualTo(textSpan.Start));
-            Assert.That(result.Stop, Is.EqualTo(textSpan.Start + result.Text.Length));
+            Assert.That(result.End, Is.EqualTo(textSpan.Start + result.Text.Length));
             Assert.That(result.Length, Is.EqualTo(textSpan.Length + underTest.Length));
         }
 

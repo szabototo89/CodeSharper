@@ -1,3 +1,4 @@
+using System.Net;
 using CodeSharper.Core.Common;
 
 namespace CodeSharper.Core.Texts
@@ -8,7 +9,13 @@ namespace CodeSharper.Core.Texts
 
         public static TextSpan Append(this TextSpan that, TextSpan value)
         {
-            return new TextSpan(that.Start, that.Text + value.Text);
+            var text = that.Text;
+            var distance = value.Start - (that.Start + text.Length);
+            if (distance > 0)
+                text += new string('\0', distance);
+            text += value.Text;
+
+            return new TextSpan(that.Start, text);
         }
 
         public static TextSpan AppendTo(this TextSpan that, TextSpan value)

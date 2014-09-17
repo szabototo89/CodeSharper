@@ -11,7 +11,7 @@ namespace CodeSharper.Core.Texts
         #region Private fields
 
         private readonly int _start;
-        private int _stop;
+        private readonly int _end;
         private readonly string _text;
 
         #endregion
@@ -42,7 +42,7 @@ namespace CodeSharper.Core.Texts
 
             _start = start;
             _text = text;
-            _stop = SpecifyStopIndex(start, text);
+            _end = SpecifyStopIndex(start, text);
         }
 
         #endregion
@@ -59,9 +59,9 @@ namespace CodeSharper.Core.Texts
             get { return _start; }
         }
 
-        public int Stop
+        public int End
         {
-            get { return _stop; }
+            get { return _end; }
         }
 
         public int Length
@@ -75,7 +75,7 @@ namespace CodeSharper.Core.Texts
 
         public override string ToString()
         {
-            return String.Format("Start: {0} Stop: {1}", Start, Stop);
+            return String.Format("Start: {0} End: {1}", Start, End);
         }
 
         #endregion
