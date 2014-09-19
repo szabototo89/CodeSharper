@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommandTestFixture.cs" />
+    <Compile Include="Common\ConstraintsTestFixture.cs" />
     <Compile Include="Common\OptionalTestFixture.cs" />
     <Compile Include="Common\NumberHelperTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

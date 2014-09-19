@@ -1,6 +1,6 @@
-﻿namespace CodeSharper.Core.Common.Values
+﻿using System.Threading;
+
+namespace CodeSharper.Core.Common.Values
 {
-    public abstract class Argument
-    {
-    }
+    public abstract class Argument { }
 }

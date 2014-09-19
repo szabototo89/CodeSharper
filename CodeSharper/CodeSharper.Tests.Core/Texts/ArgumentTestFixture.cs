@@ -76,5 +76,18 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expected));
         }
 
+        [Test]
+        public void ErrorValueShouldBeInitializedViaStaticFactory()
+        {
+            // Given
+            var underTest = Arguments.Error("An error has occured!");
+
+            // When
+            var result = underTest is ErrorArgument;
+
+            // Then
+            Assert.That(result, Is.True);
+        }
+
     }
 }
