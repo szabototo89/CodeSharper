@@ -3,7 +3,7 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common
 {
-    public class WriteToConsoleCommand : Command<ValueArgument<string>>
+    public class WriteToConsoleCommand : ValueCommand<ValueArgument<string>>
     {
         protected override ValueArgument<string> Execute(ValueArgument<string> parameter)
         {
