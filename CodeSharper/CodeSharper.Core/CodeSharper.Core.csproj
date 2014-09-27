@@ -72,6 +72,7 @@
     <Compile Include="Common\WriteToConsoleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
+    <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextNode.cs" />
     <Compile Include="Texts\TextNodeHelper.cs" />
     <Compile Include="Texts\TextSpan.cs" />

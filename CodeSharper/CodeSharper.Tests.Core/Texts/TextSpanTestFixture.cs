@@ -18,7 +18,7 @@ namespace CodeSharper.Tests.Core.Texts
             // WHEN
             var result = new {
                 Start = underTest.Start,
-                Stop = underTest.End,
+                Stop = underTest.Stop,
                 Length = underTest.Length
             };
 
@@ -50,7 +50,7 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = new TextSpan();
 
             // WHEN
-            var result = underTest.End;
+            var result = underTest.Stop;
 
             // THEN
             Assert.That(result, Is.EqualTo(0));
@@ -131,7 +131,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.Not.EqualTo(underTest));
             Assert.That(result.Text, Is.EqualTo(underTest.Text + textSpan.Text));
             Assert.That(result.Start, Is.EqualTo(underTest.Start));
-            Assert.That(result.End, Is.EqualTo(underTest.Start + result.Text.Length));
+            Assert.That(result.Stop, Is.EqualTo(underTest.Start + result.Text.Length));
             Assert.That(result.Length, Is.EqualTo(underTest.Length + textSpan.Length));
         }
 
@@ -150,7 +150,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.Not.EqualTo(underTest));
             Assert.That(result.Text, Is.EqualTo(textSpan.Text + underTest.Text));
             Assert.That(result.Start, Is.EqualTo(textSpan.Start));
-            Assert.That(result.End, Is.EqualTo(textSpan.Start + result.Text.Length));
+            Assert.That(result.Stop, Is.EqualTo(textSpan.Start + result.Text.Length));
             Assert.That(result.Length, Is.EqualTo(textSpan.Length + underTest.Length));
         }
 

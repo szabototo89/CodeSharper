@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Texts
 {
@@ -11,7 +12,7 @@ namespace CodeSharper.Core.Texts
         #region Private fields
 
         private readonly int _start;
-        private readonly int _end;
+        private readonly int _stop;
         private readonly string _text;
 
         #endregion
@@ -37,12 +38,13 @@ namespace CodeSharper.Core.Texts
             if (start < 0)
                 throw ThrowHelper.ArgumentException("start", "Start is negative number");
 
-            if (string.IsNullOrWhiteSpace(text))
-                throw ThrowHelper.ArgumentException("text", "Text is blank");
+            Constraints
+                .Argument(() => text)
+                    .NotBlank();
 
             _start = start;
             _text = text;
-            _end = SpecifyStopIndex(start, text);
+            _stop = SpecifyStopIndex(start, text);
         }
 
         #endregion
@@ -59,9 +61,9 @@ namespace CodeSharper.Core.Texts
             get { return _start; }
         }
 
-        public int End
+        public int Stop
         {
-            get { return _end; }
+            get { return _stop; }
         }
 
         public int Length
@@ -75,7 +77,7 @@ namespace CodeSharper.Core.Texts
 
         public override string ToString()
         {
-            return String.Format("Start: {0} End: {1}", Start, End);
+            return String.Format("Start: {0} Stop: {1}", Start, Stop);
         }
 
         #endregion
