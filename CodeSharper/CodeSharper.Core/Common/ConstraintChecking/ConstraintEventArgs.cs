@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeSharper.Core.Common.ConstraintUtils
+namespace CodeSharper.Core.Common.ConstraintChecking
 {
     public class ConstraintEventArgs : EventArgs
     {

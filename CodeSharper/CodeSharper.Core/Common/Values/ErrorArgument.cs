@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Common.Values
 {
@@ -6,6 +7,9 @@ namespace CodeSharper.Core.Common.Values
     {
         public ErrorArgument(String message = "")
         {
+            Constraints
+                .NotNull(() => message);
+
             Value = message;
         }
 

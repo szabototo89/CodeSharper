@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
-    class ArgumentsTestFixture
+    internal class ArgumentsTestFixture
     {
         [Test]
         public void ArgumentValueShouldBeInitializedByValue()
@@ -52,7 +52,7 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given
             var underTest = Arguments.Value(8);
-                                         
+
             // When
             var result = underTest is ValueArgument<int>;
 

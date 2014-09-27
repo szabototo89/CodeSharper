@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common
@@ -9,6 +10,8 @@ namespace CodeSharper.Core.Common
 
         public DelegateCommand(Func<Argument, Argument> function)
         {
+            Constraints
+                .NotNull(() => function);
             _function = function;
         }
 

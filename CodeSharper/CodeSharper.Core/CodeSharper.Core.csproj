@@ -39,12 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ConstraintUtils\ConstraintBase.cs" />
-    <Compile Include="Common\ConstraintUtils\ConstraintEventArgs.cs" />
-    <Compile Include="Common\ConstraintUtils\ExpressionHelper.cs" />
-    <Compile Include="Common\ConstraintUtils\IConstraint.cs" />
-    <Compile Include="Common\ConstraintUtils\NotBlankConstraint.cs" />
-    <Compile Include="Common\ConstraintUtils\NotNullConstraint.cs" />
+    <Compile Include="Common\ConstraintChecking\ConstraintArgument.cs" />
+    <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />
+    <Compile Include="Common\ConstraintChecking\ConstraintEventArgs.cs" />
+    <Compile Include="Common\ConstraintChecking\Constraints.cs" />
+    <Compile Include="Common\ConstraintChecking\ExpressionHelper.cs" />
+    <Compile Include="Common\ConstraintChecking\IConstraint.cs" />
+    <Compile Include="Common\ConstraintChecking\IConstraintArgument.cs" />
+    <Compile Include="Common\ConstraintChecking\NotBlankConstraint.cs" />
+    <Compile Include="Common\ConstraintChecking\NotEmptyConstraint.cs" />
+    <Compile Include="Common\ConstraintChecking\NotNullConstraint.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\ICommand.cs" />
     <Compile Include="Common\IdentityCommand.cs" />
@@ -63,6 +67,8 @@
     <Compile Include="Common\WriteToConsoleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
+    <Compile Include="Texts\TextNode.cs" />
+    <Compile Include="Texts\TextNodeHelper.cs" />
     <Compile Include="Texts\TextSpan.cs" />
     <Compile Include="Texts\TextSpanHelper.cs" />
   </ItemGroup>

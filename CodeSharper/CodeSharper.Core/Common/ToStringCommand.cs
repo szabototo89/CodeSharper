@@ -1,4 +1,5 @@
-﻿using CodeSharper.Core.Common.Values;
+﻿using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common
 {
@@ -14,6 +15,9 @@ namespace CodeSharper.Core.Common
 
         protected ValueArgument<string> Execute(IValueArgument parameter)
         {
+            Constraints
+                .NotNull(() => parameter);
+
             return Arguments.Value(parameter.Value.ToString());
         }
     }

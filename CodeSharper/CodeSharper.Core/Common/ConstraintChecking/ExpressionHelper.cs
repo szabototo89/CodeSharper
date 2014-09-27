@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace CodeSharper.Core.Common.ConstraintUtils
+namespace CodeSharper.Core.Common.ConstraintChecking
 {
     static internal class ExpressionHelper
     {
