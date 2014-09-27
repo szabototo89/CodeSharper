@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Commands;
 using CodeSharper.Core.Common.Values;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
@@ -54,21 +56,36 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(value, Is.EqualTo(result));                                                            
         }
 
+        [Test(Description = "ToLowerCaseCommand should convert text of TextNode to lower case.")]
+        [TestCase("Hello World!", "hello world!")]
+        public void ToLowerCaseCommandShouldConvertTextOfTextNodeToLowerCase(string parameter, string expected)
+        {
+            // Given
+            var underTest = new ToLowerCaseCommand();
 
-        //[Test]
-        //public void MultiCommandShouldExecuteMultipleInputs()
-        //{
-        //    // Given
-        //    var underTest = new IdentityCommand();
+            // When
+            var value = Arguments.Value(new TextNode(parameter));
+            var result = underTest.Execute(value) as ValueArgument<TextNode>;
 
-        //    // When
-        //    var range = Enumerable.Range(1, 10);
-        //    var result = underTest.ExecuteWith<MultiCommandExecutor>(Arguments.MultiValue(range)) as MultiValueArgument;
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value.Text, Is.EqualTo(expected));
+        } 
 
-        //    // Then
-        //    Assert.That(result, Is.Not.Null);
-        //    Assert.That(result.Source, Is.EqualTo(range.Select(Arguments.Value)));
-        //}
+        [Test(Description = "ToUpperCaseCommand should convert text of TextNode to upper case")]
+        [TestCase("Hello World!", "HELLO WORLD!")]
+        public void ToUpperCaseCommandShouldConvertTextOfTextNodeToUpperCase(string parameter, string expected)
+        {
+            // Given
+            var underTest = new ToUpperCaseCommand();
 
+            // When
+            var value = Arguments.Value(new TextNode(parameter));
+            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value.Text, Is.EqualTo(expected));
+        } 
     }
 }

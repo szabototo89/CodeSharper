@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeSharper.Core.Common.Values
@@ -10,12 +11,12 @@ namespace CodeSharper.Core.Common.Values
             return new ValueArgument<T>(value);
         }
 
-        public static ErrorArgument Error(string message = "")
+        public static ErrorArgument Error(String message = "")
         {
             return new ErrorArgument(message);
         }
 
-        public static TypeErrorArgument<T> TypeError<T>(string message = "")
+        public static TypeErrorArgument<T> TypeError<T>(String message = "")
         {
             throw new System.NotImplementedException();
         }

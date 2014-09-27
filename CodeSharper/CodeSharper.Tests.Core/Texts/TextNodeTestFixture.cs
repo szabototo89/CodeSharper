@@ -29,8 +29,8 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
-        public void ThisTextNodeHaveNotParentBecauseItIsRootNode()
+        [Test(Description = "This text node don't have parent because it is root node.")]
+        public void ThisTextNodeDontHaveParentBecauseItIsRootNode()
         {
             // Given
             var underTest = new TextNode("Hello World!");

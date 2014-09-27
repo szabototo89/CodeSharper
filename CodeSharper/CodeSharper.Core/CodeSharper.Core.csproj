@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Commands\StringTransformationCommand.cs" />
+    <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
+    <Compile Include="Common\Commands\ToUpperCaseCommand.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintArgument.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintEventArgs.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="Common\ConstraintChecking\NotEmptyConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotNullConstraint.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\ICloneable.cs" />
     <Compile Include="Common\ICommand.cs" />
     <Compile Include="Common\IdentityCommand.cs" />
     <Compile Include="Common\IIdentifiable.cs" />

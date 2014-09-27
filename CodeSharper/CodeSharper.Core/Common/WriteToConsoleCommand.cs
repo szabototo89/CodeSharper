@@ -4,9 +4,9 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common
 {
-    public class WriteToConsoleCommand : ValueCommand<ValueArgument<string>>
+    public class WriteToConsoleCommand : ValueCommand<String>
     {
-        protected override ValueArgument<string> Execute(ValueArgument<string> parameter)
+        protected override ValueArgument<String> Execute(ValueArgument<String> parameter)
         {
             Constraints
                 .NotNull(() => parameter);

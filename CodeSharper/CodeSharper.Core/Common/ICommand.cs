@@ -29,8 +29,7 @@ namespace CodeSharper.Core.Common
         protected abstract TOut Execute(TIn parameter);
     }
 
-    public abstract class ValueCommand<T> : Command<T, T>
-        where T : Argument
+    public abstract class ValueCommand<T> : Command<ValueArgument<T>, ValueArgument<T>> 
     {
 
     }

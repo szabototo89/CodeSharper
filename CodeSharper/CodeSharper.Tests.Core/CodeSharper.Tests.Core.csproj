@@ -65,10 +65,6 @@
       <Project>{7e07494f-1cfc-42e1-b550-42b2c616cfd1}</Project>
       <Name>CodeSharper.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CodeSharper.Languages\CodeSharper.Languages.csproj">
-      <Project>{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}</Project>
-      <Name>CodeSharper.Languages</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
