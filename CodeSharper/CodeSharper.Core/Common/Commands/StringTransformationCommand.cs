@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
@@ -15,6 +16,7 @@ namespace CodeSharper.Core.Common.Commands
             _transformation = transformation;
         }
 
+        [DebuggerStepThrough]
         protected override ValueArgument<TextNode> Execute(ValueArgument<TextNode> parameter)
         {
             Constraints

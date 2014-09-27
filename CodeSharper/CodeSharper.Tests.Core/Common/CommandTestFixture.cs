@@ -14,7 +14,7 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     class CommandTestFixture
     {
-        [Test]
+        [Test(Description = "IdentityCommand should return with passed value.")]
         public void IdentityCommandShouldReturnWithPassedValue()
         {
             // Given
@@ -28,7 +28,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.EqualTo(parameter));
         }
 
-        [Test]
+        [Test(Description = "StringCommand should return string of value")]
         public void StringCommandShouldReturnStringOfValue()
         {
             // Given
@@ -42,7 +42,7 @@ namespace CodeSharper.Tests.Core.Common
         }
 
 
-        [Test]
+        [Test(Description = "WriteToConsoleCommand should print value to console output")]
         public void WriteToConsoleCommandShouldPrintValueToConsoleOutput()
         {
             // Given
@@ -86,6 +86,39 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value.Text, Is.EqualTo(expected));
+        }
+
+        [Test(Description = "FillStringCommand should fill with given character in string")]
+        [TestCase("Hello World!", "************")]
+        public void FillStringCommandShouldFillWithGivenCharacterInString(string parameter, string expected)
+        {
+            // Given
+            var underTest = new FillStringCommand('*');
+
+            // When
+            var value = Arguments.Value(new TextNode(parameter));
+            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value.Text, Is.EqualTo(expected));
+        }
+
+        [Test(Description = "FillStringCommand should fill with given character in string")]
+        [TestCase("Hello World!", "hihihihihihi")]
+        public void FillStringCommandShouldFillWithGivenTextPatternInString(string parameter, string expected)
+        {
+            // Given
+            var underTest = new FillStringCommand("hi");
+
+            // When
+            var value = Arguments.Value(new TextNode( parameter));
+            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value.Text, Is.EqualTo(expected));
         } 
+
     }
 }

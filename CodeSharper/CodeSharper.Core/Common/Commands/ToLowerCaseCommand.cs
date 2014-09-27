@@ -1,4 +1,6 @@
-﻿namespace CodeSharper.Core.Common.Commands
+﻿using System;
+
+namespace CodeSharper.Core.Common.Commands
 {
     public class ToLowerCaseCommand : StringTransformationCommand
     {

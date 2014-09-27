@@ -1,5 +1,6 @@
 using CodeSharper.Core.Texts;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace CodeSharper.Tests.Core.Texts
 {
@@ -10,7 +11,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeShouldHaveTextAndPositionProperty()
         {
             // Given
-            var underTest = new TextNode("Hello World!");
+            var underTest = new TextNode( "Hello World!");
 
             // When
             var result = new
@@ -54,10 +55,45 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = new TextNode("Hello World!");
 
             // When
-            var result = underTest.GetSubText(0, 4);
+            var result = underTest.GetSubText(0, 5);
 
             // Then
             Assert.That(result, Is.TypeOf<TextNode>());
+            Assert.That(result.Parent, Is.EqualTo(underTest));
+            Assert.That(underTest.Children, Contains.Item(result));
+            Assert.That(result.Text, Is.EqualTo("Hello"));
+            Assert.That(result.TextSpan, Is.EqualTo(new TextSpan(0, "Hello")));
+        }
+
+        [Test]
+        public void TextNodeShouldBeAbleToDetachToAnotherNode()
+        {
+            // Given
+            var parent = new TextNode("Hello World!");
+            var underTest = new TextNode("Hello", parent);
+
+            // When
+            var result = underTest.Detach();
+
+            // Then
+            Assert.That(result.Parent, Is.Null);
+            Assert.That(parent.Children, Is.Not.Contains(underTest));
+        }
+
+        [Test]
+        public void TextNodeShouldBeAbleToAnotherToAnotherNode()
+        {
+            // Given
+            var parent = new TextNode("Hello World!");
+            var underTest = new TextNode("Hello");
+
+            // When
+            var result = underTest.AttachTo(parent);
+
+            // Then
+            Assert.That(result.Parent, Is.Not.Null);
+            Assert.That(result.Parent, Is.EqualTo(parent));
+            Assert.That(parent.Children, Contains.Item(underTest));
         }
     }
 }

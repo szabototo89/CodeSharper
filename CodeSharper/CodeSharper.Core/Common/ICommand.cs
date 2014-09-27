@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.SymbolStore;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography.X509Certificates;
@@ -18,6 +19,7 @@ namespace CodeSharper.Core.Common
         where TIn : Argument
         where TOut : Argument
     {
+        [DebuggerStepThrough]
         public virtual Argument Execute(Argument parameter)
         {
             if (parameter is TIn)
