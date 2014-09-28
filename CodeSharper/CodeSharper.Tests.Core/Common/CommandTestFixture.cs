@@ -151,15 +151,15 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var textDocument = new TextDocument("Hello World!");
-            var moqCommand = new Mock<ICommand>();
-            moqCommand
+            var mockCommand = new Mock<ICommand>();
+            mockCommand
                 .Setup(command => command.Execute(It.IsAny<ValueArgument<Int32>>()))
                 .Returns((ValueArgument<Int32> r) => Arguments.Value(r.Value + 1));
 
             var underTest = new ComposeCommand(
-                moqCommand.Object,
-                moqCommand.Object,
-                moqCommand.Object
+                mockCommand.Object,
+                mockCommand.Object,
+                mockCommand.Object
             );
 
             // When
@@ -169,6 +169,23 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value, Is.EqualTo(3));
+            mockCommand.Verify(command => command.Execute(It.IsAny<Argument>()), Times.Exactly(3));
+        }
+
+        [Test]
+        public void FindTextCommandShouldReturnFoundSubStringsOfText()
+        {
+            // Given
+            var textDocument = new TextDocument("This string contains 'abc' twice. This was the first, and the second is here: abc.");
+            var underTest = new FindTextCommand("abc");
+
+            // When
+            var value = Arguments.Value(textDocument.TextNode);
+            var result = underTest.Execute(value) as ValueArgument<IEnumerable<TextNode>>;
+
+            // Then
+            Assert.That(result.Value, Is.Not.Null);
+            Assert.That(result.Value, Has.Count.EqualTo(2));
         }
     }
 }

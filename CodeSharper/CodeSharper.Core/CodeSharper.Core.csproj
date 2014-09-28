@@ -40,11 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Commands\FillStringCommand.cs" />
+    <Compile Include="Common\Commands\FindTextCommand.cs" />
     <Compile Include="Common\Commands\ReplaceTextCommand.cs" />
     <Compile Include="Common\Commands\StringTransformationCommand.cs" />
     <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
     <Compile Include="Common\Commands\ToUpperCaseCommand.cs" />
-    <Compile Include="Common\ComposeCommand.cs" />
+    <Compile Include="Common\Commands\ComposeCommand.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintArgument.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintEventArgs.cs" />
@@ -55,15 +56,15 @@
     <Compile Include="Common\ConstraintChecking\NotBlankConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotEmptyConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotNullConstraint.cs" />
-    <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\Commands\DelegateCommand.cs" />
     <Compile Include="Common\ICloneable.cs" />
-    <Compile Include="Common\ICommand.cs" />
-    <Compile Include="Common\IdentityCommand.cs" />
+    <Compile Include="Common\Commands\ICommand.cs" />
+    <Compile Include="Common\Commands\IdentityCommand.cs" />
     <Compile Include="Common\IIdentifiable.cs" />
     <Compile Include="Common\NumberHelper.cs" />
     <Compile Include="Common\Optional.cs" />
     <Compile Include="Common\OptionalHelper.cs" />
-    <Compile Include="Common\ToStringCommand.cs" />
+    <Compile Include="Common\Commands\ToStringCommand.cs" />
     <Compile Include="Common\Values\Argument.cs" />
     <Compile Include="Common\Values\Arguments.cs" />
     <Compile Include="Common\Values\ErrorArgument.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="Common\Values\MultiValueArgument.cs" />
     <Compile Include="Common\Values\TypeErrorArgument.cs" />
     <Compile Include="Common\Values\ValueArgument.cs" />
-    <Compile Include="Common\WriteToConsoleCommand.cs" />
+    <Compile Include="Common\Commands\WriteToConsoleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
     <Compile Include="Texts\TextDocument.cs" />

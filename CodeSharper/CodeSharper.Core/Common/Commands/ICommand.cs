@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.SymbolStore;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml.Schema;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Common.Commands
 {
     public interface ICommand
     {

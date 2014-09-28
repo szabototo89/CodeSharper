@@ -1,10 +1,6 @@
-﻿using System;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core.Common.Values;
+﻿using CodeSharper.Core.Common.Values;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Common.Commands
 {
     public class IdentityCommand : ICommand
     {
