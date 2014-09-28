@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
@@ -14,6 +15,14 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     class CommandTestFixture
     {
+        private TextDocument TextDocument { get; set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            TextDocument = new TextDocument("Hello World!");
+        }
+
         [Test(Description = "IdentityCommand should return with passed value.")]
         public void IdentityCommandShouldReturnWithPassedValue()
         {
@@ -64,7 +73,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new ToLowerCaseCommand();
 
             // When
-            var value = Arguments.Value(new TextNode(parameter));
+            var value = Arguments.Value(new TextNode(parameter, TextDocument));
             var result = underTest.Execute(value) as ValueArgument<TextNode>;
 
             // Then
@@ -80,7 +89,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new ToUpperCaseCommand();
 
             // When
-            var value = Arguments.Value(new TextNode(parameter));
+            var value = Arguments.Value(new TextNode(parameter, TextDocument));
             var result = underTest.Execute(value) as ValueArgument<TextNode>;
 
             // Then
@@ -96,7 +105,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new FillStringCommand('*');
 
             // When
-            var value = Arguments.Value(new TextNode(parameter));
+            var value = Arguments.Value(new TextNode(parameter, TextDocument));
             var result = underTest.Execute(value) as ValueArgument<TextNode>;
 
             // Then
@@ -112,7 +121,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new FillStringCommand("hi");
 
             // When
-            var value = Arguments.Value(new TextNode( parameter));
+            var value = Arguments.Value(new TextNode(parameter, TextDocument));
             var result = underTest.Execute(value) as ValueArgument<TextNode>;
 
             // Then
@@ -120,5 +129,43 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Value.Text, Is.EqualTo(expected));
         } 
 
+        [Test(Description = "ReplaceTextCommand should replace text of node.")]
+        [TestCase("Hello World!", "hello")]
+        public void ReplaceTextCommandShouldReplaceTextOfNode(string parameter, string expected)
+        {
+            // Given
+            var underTest = new ReplaceTextCommand(expected);
+
+            // When
+            var value = Arguments.Value(new TextNode(parameter, TextDocument));
+            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value.Text, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void ComposeCommandShouldBeAbleToExecuteCommandsSequentially()
+        {
+            // Given
+            var textDocument = new TextDocument("Hello World!");
+
+            // TODO: Convert to Moq!!!
+
+            var underTest = new ComposeCommand(
+                new ToUpperCaseCommand(),
+                new ToLowerCaseCommand(),
+                new ToUpperCaseCommand()
+            );
+
+            // When
+            var argument = Arguments.Value(textDocument.TextNode);
+            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value.Text, Is.EqualTo("HELLO WORLD!"));
+        }
     }
 }

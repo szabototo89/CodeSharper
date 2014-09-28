@@ -10,7 +10,7 @@ namespace CodeSharper.Tests.Core.Texts
         private TextDocument UnderTest { get; set; }
 
         [SetUp]
-        private void Setup()
+        public void Setup()
         {
             UnderTest = new TextDocument("Hello World!");
         }
@@ -102,6 +102,17 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expectedText));
 
             Assert.That(last.TextSpan.Start, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void TextDocumentShouldAbleToConvertToTextNode()
+        {
+            // Given in setup
+            // When
+            var result = UnderTest.AsTextNode();
+
+            // Then
+            Assert.That(result.Text, Is.EqualTo(UnderTest.Text));
         }
 
     }

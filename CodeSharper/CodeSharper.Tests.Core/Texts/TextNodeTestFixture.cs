@@ -13,7 +13,6 @@ namespace CodeSharper.Tests.Core.Texts
         public void Setup()
         {
             TextDocument = new TextDocument("Hello World!");
-
         }
 
         [Test(Description = "TextNode should have Text and Position property")]
@@ -39,7 +38,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
+        [Test(Description = "TextNode should be able to detach to another node.")]
         public void TextNodeShouldBeAbleToDetachToAnotherNode()
         {
             // Given
@@ -54,8 +53,8 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(parent.Children, Is.Not.Contains(underTest));
         }
 
-        [Test]
-        public void TextNodeShouldBeAbleToAnotherToAnotherNode()
+        [Test(Description = "TextNode should be able to attach to another node.")]
+        public void TextNodeShouldBeAbleToAttachToAnotherNode()
         {
             // Given
             var parent = TextDocument;

@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Commands\FillStringCommand.cs" />
+    <Compile Include="Common\Commands\ReplaceTextCommand.cs" />
     <Compile Include="Common\Commands\StringTransformationCommand.cs" />
     <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
     <Compile Include="Common\Commands\ToUpperCaseCommand.cs" />

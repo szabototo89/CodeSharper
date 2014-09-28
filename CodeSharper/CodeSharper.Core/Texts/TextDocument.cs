@@ -10,6 +10,8 @@ namespace CodeSharper.Core.Texts
     {
         private readonly List<TextNode> _children;
 
+        public TextNode TextNode { get; protected set; }
+
         public String Text { get; protected set; }
 
         public TextDocument(String text)
@@ -17,9 +19,11 @@ namespace CodeSharper.Core.Texts
             Constraints.NotNull(() => text);
 
             Text = text;
+            TextNode = new TextNode(Text, this);
 
             _children = new List<TextNode>();
         }
+
         public IEnumerable<TextNode> Children
         {
             get { return _children; }
@@ -38,7 +42,6 @@ namespace CodeSharper.Core.Texts
         public TextDocument RemoveChild(TextNode child)
         {
             _children.Remove(child);
-
             return this;
         }
 
@@ -72,6 +75,11 @@ namespace CodeSharper.Core.Texts
                 child.TextSpan = child.TextSpan.OffsetBy(offset);
 
             return this;
+        }
+
+        public TextNode AsTextNode()
+        {
+            return TextNode;
         }
     }
 }
