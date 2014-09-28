@@ -8,6 +8,7 @@ using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Commands;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
+using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
@@ -150,22 +151,24 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var textDocument = new TextDocument("Hello World!");
-
-            // TODO: Convert to Moq!!!
+            var moqCommand = new Mock<ICommand>();
+            moqCommand
+                .Setup(command => command.Execute(It.IsAny<ValueArgument<Int32>>()))
+                .Returns((ValueArgument<Int32> r) => Arguments.Value(r.Value + 1));
 
             var underTest = new ComposeCommand(
-                new ToUpperCaseCommand(),
-                new ToLowerCaseCommand(),
-                new ToUpperCaseCommand()
+                moqCommand.Object,
+                moqCommand.Object,
+                moqCommand.Object
             );
 
             // When
-            var argument = Arguments.Value(textDocument.TextNode);
-            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+            var argument = Arguments.Value(0);
+            var result = underTest.Execute(argument) as ValueArgument<Int32>;
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Value.Text, Is.EqualTo("HELLO WORLD!"));
+            Assert.That(result.Value, Is.EqualTo(3));
         }
     }
 }

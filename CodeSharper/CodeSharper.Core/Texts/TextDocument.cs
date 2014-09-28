@@ -71,8 +71,9 @@ namespace CodeSharper.Core.Texts
             Text = Text.Remove(start, length)
                        .Insert(start, value);
 
-            foreach (var child in Children.Where(child => child.TextSpan.Start > start))
-                child.TextSpan = child.TextSpan.OffsetBy(offset);
+            if (offset != 0)
+                foreach (var child in Children.Where(child => child.TextSpan.Start > start))
+                    child.TextSpan = child.TextSpan.OffsetBy(offset);
 
             return this;
         }
