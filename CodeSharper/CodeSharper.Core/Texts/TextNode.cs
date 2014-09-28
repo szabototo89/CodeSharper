@@ -10,8 +10,20 @@ namespace CodeSharper.Core.Texts
 {
     public class TextNode
     {
+        private String _text;
 
-        public string Text { get; set; }
+        public String Text
+        {
+            get { return _text; }
+            set
+            {
+                if (_text == value)
+                    return;
+
+                _text = value;
+                Parent.UpdateText(this, value);
+            }
+        }
 
         public TextSpan TextSpan { get; set; }
 
@@ -30,12 +42,10 @@ namespace CodeSharper.Core.Texts
         {
             Constraints.NotNull(() => text);
 
-            Text = text;
+            _text = text;
             Parent = parent;
 
             TextSpan = new TextSpan(start, text);
-            if (parent != null)
-                parent.AppendChild(this);
         }
 
         public TextNode Detach()

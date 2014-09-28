@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace CodeSharper.Core.Common.ConstraintChecking
 {
+    [DebuggerStepThrough]
     public static class Constraints
     {
         public static IConstraint NotNull<TArgumentType>(Expression<Func<TArgumentType>> func)

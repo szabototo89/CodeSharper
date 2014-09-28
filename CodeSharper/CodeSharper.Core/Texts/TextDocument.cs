@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Texts
@@ -40,12 +42,36 @@ namespace CodeSharper.Core.Texts
             return this;
         }
 
-        public TextNode GetSubText(Int32 start, Int32 exclusiveEnd)
+        public TextNode SubStringOfText(Int32 start, Int32 exclusiveEnd)
         {
             var node = new TextNode(start, Text.Substring(start, exclusiveEnd - start), this);
             AppendChild(node);
             return node;
         }
 
+        public TextNode SubStringOfText(Int32 start)
+        {
+            return SubStringOfText(start, Text.Length);
+        }
+
+        public TextDocument UpdateText(TextNode node, String value)
+        {
+            Constraints
+                .NotNull(() => node)
+                .NotNull(() => value);
+
+            var start = node.TextSpan.Start;
+            var length = node.TextSpan.Length;
+
+            var offset = value.Length - length;
+
+            Text = Text.Remove(start, length)
+                       .Insert(start, value);
+
+            foreach (var child in Children.Where(child => child.TextSpan.Start > start))
+                child.TextSpan = child.TextSpan.OffsetBy(offset);
+
+            return this;
+        }
     }
 }
