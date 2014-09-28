@@ -2,7 +2,7 @@
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Common.Commands
 {
     public class DelegateCommand : ICommand
     {

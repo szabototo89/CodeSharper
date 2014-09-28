@@ -44,6 +44,7 @@
     <Compile Include="Common\Commands\StringTransformationCommand.cs" />
     <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
     <Compile Include="Common\Commands\ToUpperCaseCommand.cs" />
+    <Compile Include="Common\ComposeCommand.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintArgument.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintEventArgs.cs" />
