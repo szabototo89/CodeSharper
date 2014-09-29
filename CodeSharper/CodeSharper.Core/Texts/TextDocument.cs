@@ -8,9 +8,9 @@ namespace CodeSharper.Core.Texts
 {
     public class TextDocument
     {
-        private readonly List<TextNode> _children;
+        private readonly List<TextRange> _children;
 
-        public TextNode TextNode { get; protected set; }
+        public TextRange TextRange { get; protected set; }
 
         public String Text { get; protected set; }
 
@@ -19,17 +19,17 @@ namespace CodeSharper.Core.Texts
             Constraints.NotNull(() => text);
 
             Text = text;
-            TextNode = new TextNode(Text, this);
+            TextRange = new TextRange(Text, this);
 
-            _children = new List<TextNode>();
+            _children = new List<TextRange>();
         }
 
-        public IEnumerable<TextNode> Children
+        public IEnumerable<TextRange> Children
         {
             get { return _children; }
         }
 
-        public TextDocument AppendChild(TextNode child)
+        public TextDocument AppendChild(TextRange child)
         {
             Constraints
                 .NotNull(() => child);
@@ -39,48 +39,48 @@ namespace CodeSharper.Core.Texts
             return this;
         }
 
-        public TextDocument RemoveChild(TextNode child)
+        public TextDocument RemoveChild(TextRange child)
         {
             _children.Remove(child);
             return this;
         }
 
-        public TextNode SubStringOfText(Int32 start, Int32 exclusiveEnd)
+        public TextRange SubStringOfText(Int32 start, Int32 exclusiveEnd)
         {
-            var node = new TextNode(start, Text.Substring(start, exclusiveEnd - start), this);
+            var node = new TextRange(start, Text.Substring(start, exclusiveEnd - start), this);
             AppendChild(node);
             return node;
         }
 
-        public TextNode SubStringOfText(Int32 start)
+        public TextRange SubStringOfText(Int32 start)
         {
             return SubStringOfText(start, Text.Length);
         }
 
-        public TextDocument UpdateText(TextNode node, String value)
+        public TextDocument UpdateText(TextRange range, String value)
         {
             Constraints
-                .NotNull(() => node)
+                .NotNull(() => range)
                 .NotNull(() => value);
 
-            var start = node.TextSpan.Start;
-            var length = node.TextSpan.Length;
+            var start = range.Start;
+            var length = range.Length;
 
             var offset = value.Length - length;
 
             Text = Text.Remove(start, length)
                        .Insert(start, value);
 
-            if (offset != 0)
-                foreach (var child in Children.Where(child => child.TextSpan.Start > start))
-                    child.TextSpan = child.TextSpan.OffsetBy(offset);
+            /*if (offset != 0)
+                foreach (var child in Children.Where(child => child.Start > start))
+                    child.TextRange = child.TextRange.OffsetBy(offset);*/
 
             return this;
         }
 
-        public TextNode AsTextNode()
+        public TextRange AsTextNode()
         {
-            return TextNode;
+            return TextRange;
         }
     }
 }

@@ -17,11 +17,11 @@ namespace CodeSharper.Core.Common.Commands
             Value = value;
         }
 
-        protected Argument Execute(TextNode node)
+        protected Argument Execute(TextRange range)
         {
-            var document = node.Parent;
+            var document = range.TextDocument;
 
-            var results = new List<TextNode>();
+            var results = new List<TextRange>();
             var index = -Value.Length;
 
             while ((index = document.Text.IndexOf(Value, index + Value.Length, StringComparison.Ordinal)) != -1)
@@ -29,7 +29,7 @@ namespace CodeSharper.Core.Common.Commands
                 results.Add(document.SubStringOfText(index, index + Value.Length));
             }
 
-            return Arguments.Value(results as IEnumerable<TextNode>);
+            return Arguments.Value(results as IEnumerable<TextRange>);
         }
 
         public Argument Execute(Argument parameter)
@@ -40,8 +40,8 @@ namespace CodeSharper.Core.Common.Commands
             if (parameter == null)
                 return Arguments.Error("Input for find command must be a non-null value!");
 
-            if (parameter is ValueArgument<TextNode>)
-                return Execute(((ValueArgument<TextNode>)parameter).Value);
+            if (parameter is ValueArgument<TextRange>)
+                return Execute(((ValueArgument<TextRange>)parameter).Value);
 
             return Arguments.Error("Input type error of FindCommand");
         }

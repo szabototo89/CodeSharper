@@ -59,7 +59,7 @@
     <Compile Include="Texts\ArgumentTestFixture.cs" />
     <Compile Include="Texts\TextDocumentTestFixture.cs" />
     <Compile Include="Texts\TextNodeTestFixture.cs" />
-    <Compile Include="Texts\TextSpanTestFixture.cs" />
+    <Compile Include="Texts\TextRangeTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -38,8 +38,8 @@ namespace CodeSharper.Tests.Core.Texts
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Text, Is.EqualTo("Hello"));
-            Assert.That(result.TextSpan.Start, Is.EqualTo(0));
-            Assert.That(result.TextSpan.Stop, Is.EqualTo(5));
+            Assert.That(result.Start, Is.EqualTo(0));
+            Assert.That(result.Stop, Is.EqualTo(5));
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace CodeSharper.Tests.Core.Texts
             var expectedText = string.Join(string.Empty, UnderTest.Children.Select(child => child.Text));
             Assert.That(result, Is.EqualTo(expectedText));
 
-            Assert.That(last.TextSpan.Start, Is.EqualTo(10));
+            Assert.That(last.Start, Is.EqualTo(10));
         }
 
         [Test]

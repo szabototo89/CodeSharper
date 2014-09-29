@@ -9,11 +9,11 @@ namespace CodeSharper.Core.Texts
 {
     public static class TextNodeHelper
     {
-        public static Boolean IsRoot(this TextNode node)
+        public static Boolean IsRoot(this TextRange range)
         {
-            Constraints.NotNull(() => node);
+            Constraints.NotNull(() => range);
 
-            return node.Parent == null;
+            return range.TextDocument == null;
         }
     }
 }

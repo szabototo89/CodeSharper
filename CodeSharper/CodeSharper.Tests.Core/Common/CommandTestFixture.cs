@@ -66,7 +66,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(value, Is.EqualTo(result));                                                            
         }
 
-        [Test(Description = "ToLowerCaseCommand should convert text of TextNode to lower case.")]
+        [Test(Description = "ToLowerCaseCommand should convert text of TextRange to lower case.")]
         [TestCase("Hello World!", "hello world!")]
         public void ToLowerCaseCommandShouldConvertTextOfTextNodeToLowerCase(string parameter, string expected)
         {
@@ -74,15 +74,15 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new ToLowerCaseCommand();
 
             // When
-            var value = Arguments.Value(new TextNode(parameter, TextDocument));
-            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value.Text, Is.EqualTo(expected));
         } 
 
-        [Test(Description = "ToUpperCaseCommand should convert text of TextNode to upper case")]
+        [Test(Description = "ToUpperCaseCommand should convert text of TextRange to upper case")]
         [TestCase("Hello World!", "HELLO WORLD!")]
         public void ToUpperCaseCommandShouldConvertTextOfTextNodeToUpperCase(string parameter, string expected)
         {
@@ -90,8 +90,8 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new ToUpperCaseCommand();
 
             // When
-            var value = Arguments.Value(new TextNode(parameter, TextDocument));
-            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -106,8 +106,8 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new FillStringCommand('*');
 
             // When
-            var value = Arguments.Value(new TextNode(parameter, TextDocument));
-            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -122,15 +122,15 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new FillStringCommand("hi");
 
             // When
-            var value = Arguments.Value(new TextNode(parameter, TextDocument));
-            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value.Text, Is.EqualTo(expected));
         } 
 
-        [Test(Description = "ReplaceTextCommand should replace text of node.")]
+        [Test(Description = "ReplaceTextCommand should replace text of range.")]
         [TestCase("Hello World!", "hello")]
         public void ReplaceTextCommandShouldReplaceTextOfNode(string parameter, string expected)
         {
@@ -138,8 +138,8 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new ReplaceTextCommand(expected);
 
             // When
-            var value = Arguments.Value(new TextNode(parameter, TextDocument));
-            var result = underTest.Execute(value) as ValueArgument<TextNode>;
+            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -180,8 +180,8 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new FindTextCommand("abc");
 
             // When
-            var value = Arguments.Value(textDocument.TextNode);
-            var result = underTest.Execute(value) as ValueArgument<IEnumerable<TextNode>>;
+            var value = Arguments.Value(textDocument.TextRange);
+            var result = underTest.Execute(value) as ValueArgument<IEnumerable<TextRange>>;
 
             // Then
             Assert.That(result.Value, Is.Not.Null);

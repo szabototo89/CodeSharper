@@ -6,7 +6,7 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class StringTransformationCommand : ValueCommand<TextNode>
+    public class StringTransformationCommand : ValueCommand<TextRange>
     {
         private readonly Func<string, string> _transformation;
 
@@ -17,7 +17,7 @@ namespace CodeSharper.Core.Common.Commands
         }
 
         [DebuggerStepThrough]
-        protected override ValueArgument<TextNode> Execute(ValueArgument<TextNode> parameter)
+        protected override ValueArgument<TextRange> Execute(ValueArgument<TextRange> parameter)
         {
             Constraints
                 .NotNull(() => parameter);
