@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,10 @@ namespace CodeSharper.Core.Texts
     {
         private String _text;
 
-        private readonly Int32 _start;
-        private readonly Int32 _stop;
+        private Int32 _start;
+        private Int32 _stop;
 
-        private int SpecifyStopIndex(int start, string text)
+        private Int32 SpecifyStopIndex(Int32 start, String text)
         {
             return start + text.Length;
         }
@@ -24,14 +25,21 @@ namespace CodeSharper.Core.Texts
         public String Text
         {
             get { return _text; }
-            set
-            {
-                if (_text == value)
-                    return;
+        }
 
-                _text = value;
-                TextDocument.UpdateText(this, value);
-            }
+        public TextRange SetText(String value)
+        {
+            Constraints.NotNull(() => value);
+
+            if (_text == value)
+                return this;
+
+            // TODO: update Stop property 
+            TextDocument.UpdateText(this, value);
+
+            _text = value;
+
+            return this;
         }
 
         public TextDocument TextDocument { get; protected set; }
@@ -61,22 +69,37 @@ namespace CodeSharper.Core.Texts
 
         }
 
-        public int Start
+        public TextRange OffsetBy(int offset)
+        {
+            Constraints
+                .IsGreaterThan(() => offset, 0);
+
+            if (Start + offset < 0)
+                throw ThrowHelper.InvalidOperationException();
+
+            _start = _start + offset;
+            _stop = _stop + offset;
+
+            return this;
+        }
+
+
+        public Int32 Start
         {
             get { return _start; }
         }
 
-        public int Stop
+        public Int32 Stop
         {
             get { return _stop; }
         }
 
-        public int Length
+        public Int32 Length
         {
             get { return Text.Length; }
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             return String.Format("Start: {0} Stop: {1}", Start, Stop);
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using CodeSharper.Core.Common.ConstraintChecking;
 
@@ -20,7 +21,6 @@ namespace CodeSharper.Core.Texts
 
             Text = text;
             TextRange = new TextRange(Text, this);
-
             _children = new List<TextRange>();
         }
 
@@ -65,15 +65,18 @@ namespace CodeSharper.Core.Texts
 
             var start = range.Start;
             var length = range.Length;
-
             var offset = value.Length - length;
 
             Text = Text.Remove(start, length)
                        .Insert(start, value);
 
-            /*if (offset != 0)
+            if (offset != 0)
+            {
                 foreach (var child in Children.Where(child => child.Start > start))
-                    child.TextRange = child.TextRange.OffsetBy(offset);*/
+                {
+                    child.OffsetBy(offset);
+                }
+            }
 
             return this;
         }

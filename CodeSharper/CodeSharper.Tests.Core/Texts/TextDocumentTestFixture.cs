@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using CodeSharper.Core.Texts;
 using NUnit.Framework;
@@ -49,7 +50,7 @@ namespace CodeSharper.Tests.Core.Texts
             var node = UnderTest.SubStringOfText(0, 5);
 
             // When
-            node.Text = "hello";
+            node.SetText("hello");
             var result = UnderTest.Text;
 
             // Then
@@ -63,7 +64,7 @@ namespace CodeSharper.Tests.Core.Texts
             var node = UnderTest.SubStringOfText(0, 5);
 
             // When
-            node.Text = "";
+            node.SetText("");
             var result = UnderTest.Text;
 
             // Then
@@ -77,7 +78,7 @@ namespace CodeSharper.Tests.Core.Texts
             var node = UnderTest.SubStringOfText(0, 5);
 
             // When
-            node.Text = "HelloHello";
+            node.SetText("HelloHello");
             var result = UnderTest.Text;
 
             // Then
@@ -92,13 +93,13 @@ namespace CodeSharper.Tests.Core.Texts
             var last = UnderTest.SubStringOfText(5);
 
             // When
-            first.Text = "HelloHello";
+            first.SetText("HelloHello");
             var result = UnderTest.Text;
 
             // Then
             Assert.That(result, Is.EqualTo("HelloHello World!"));
 
-            var expectedText = string.Join(string.Empty, UnderTest.Children.Select(child => child.Text));
+            var expectedText = String.Join(String.Empty, UnderTest.Children.Select(child => child.Text));
             Assert.That(result, Is.EqualTo(expectedText));
 
             Assert.That(last.Start, Is.EqualTo(10));

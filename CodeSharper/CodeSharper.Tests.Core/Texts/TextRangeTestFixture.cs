@@ -34,7 +34,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextRangeHasStartTest()
         {
             // GIVEN
-            var underTest = new TextRange("");
+            var underTest = new TextRange(String.Empty);
 
             // WHEN
             var result = underTest.Start;
@@ -47,7 +47,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextRangeHasStopTest()
         {
             // GIVEN
-            var underTest = new TextRange(string.Empty);
+            var underTest = new TextRange(String.Empty);
 
             // WHEN
             var result = underTest.Stop;
@@ -60,7 +60,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextRangeHasLengthTest()
         {
             // GIVEN
-            var underTest = new TextRange(string.Empty);
+            var underTest = new TextRange(String.Empty);
 
             // WHEN
             var result = underTest.Length;
@@ -83,21 +83,21 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Throws.InstanceOf<InvalidOperationException>());
         }
 
-        [TestCase(0, "Hello World!")]
-        [TestCase(10, "Hello World!")]
-        [TestCase(30, "Hello World!")]
-        public void TextRangeShouldOffsetByIndexTest(int start, string text)
+        [TestCase(0, 10, "Hello World!", 10, 22)]
+        [TestCase(10, 5, "Hello World!", 15, 27)]
+        [TestCase(30, -20, "Hello World!", 10, 22)]
+        public void TextRangeShouldOffsetByIndexTest(Int32 start, Int32 offset, String text, Int32 expectedStart, Int32 expectedStop)
         {
             // GIVEN
             var underTest = new TextRange(start, text);
 
             // WHEN
-            var offset = 10;
             var result = underTest.OffsetBy(offset);
 
             // THEN
-            Assert.That(result, Is.Not.EqualTo(underTest));
-            Assert.That(result.Start, Is.EqualTo(underTest.Start + offset));
+            Assert.That(result, Is.EqualTo(underTest));
+            Assert.That(result.Start, Is.EqualTo(expectedStart));
+            Assert.That(result.Stop, Is.EqualTo(expectedStop));
             Assert.That(result.Text, Is.EqualTo(underTest.Text));
         }
 
