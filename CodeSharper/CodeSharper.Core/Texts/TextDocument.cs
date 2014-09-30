@@ -57,7 +57,7 @@ namespace CodeSharper.Core.Texts
             return SubStringOfText(start, Text.Length);
         }
 
-        public TextDocument UpdateText(TextRange range, String value)
+        public TextDocument UpdateTextByRange(TextRange range, String value)
         {
             Constraints
                 .NotNull(() => range)
@@ -67,8 +67,7 @@ namespace CodeSharper.Core.Texts
             var length = range.Length;
             var offset = value.Length - length;
 
-            Text = Text.Remove(start, length)
-                       .Insert(start, value);
+            Text = ReplaceByStartAndLength(Text, start, length, value);
 
             if (offset != 0)
             {
@@ -79,6 +78,12 @@ namespace CodeSharper.Core.Texts
             }
 
             return this;
+        }
+
+        private string ReplaceByStartAndLength(String oldValue, Int32 start, Int32 length, String newValue)
+        {
+            return oldValue.Remove(start, length)
+                           .Insert(start, newValue);
         }
 
         public TextRange AsTextNode()

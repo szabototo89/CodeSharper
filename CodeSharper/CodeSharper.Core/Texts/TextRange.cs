@@ -21,7 +21,6 @@ namespace CodeSharper.Core.Texts
             return start + text.Length;
         }
 
-
         public String Text
         {
             get { return _text; }
@@ -34,9 +33,7 @@ namespace CodeSharper.Core.Texts
             if (_text == value)
                 return this;
 
-            // TODO: update Stop property 
-            TextDocument.UpdateText(this, value);
-
+            TextDocument.UpdateTextByRange(this, value);
             _text = value;
 
             return this;
@@ -71,9 +68,6 @@ namespace CodeSharper.Core.Texts
 
         public TextRange OffsetBy(Int32 offset)
         {
-            Constraints
-                .IsGreaterThan(() => offset, 0);
-
             if (Start + offset < 0)
                 throw ThrowHelper.InvalidOperationException();
 
@@ -103,6 +97,5 @@ namespace CodeSharper.Core.Texts
         {
             return String.Format("Start: {0} Stop: {1}", Start, Stop);
         }
-
     }
 }

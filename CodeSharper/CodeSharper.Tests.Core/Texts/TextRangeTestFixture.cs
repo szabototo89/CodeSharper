@@ -11,18 +11,18 @@ namespace CodeSharper.Tests.Core.Texts
         [Test]
         public void TextRangeShouldBeInitializedTest()
         {
-            // GIVEN
+            // Given
             var text = "Hello World!";
             var underTest = new TextRange(text);
 
-            // WHEN
+            // When
             var result = new {
                 Start = underTest.Start,
                 Stop = underTest.Stop,
                 Length = underTest.Length
             };
 
-            // THEN
+            // Then
             Assert.That(result, Is.EqualTo(new {
                 Start = 0,
                 Stop = text.Length,
@@ -33,53 +33,53 @@ namespace CodeSharper.Tests.Core.Texts
         [Test]
         public void TextRangeHasStartTest()
         {
-            // GIVEN
+            // Given
             var underTest = new TextRange(String.Empty);
 
-            // WHEN
+            // When
             var result = underTest.Start;
 
-            // THEN
+            // Then
             Assert.That(result, Is.EqualTo(0));
         }
 
         [Test]
         public void TextRangeHasStopTest()
         {
-            // GIVEN
+            // Given
             var underTest = new TextRange(String.Empty);
 
-            // WHEN
+            // When
             var result = underTest.Stop;
 
-            // THEN
+            // Then
             Assert.That(result, Is.EqualTo(0));
         }
 
         [Test]
         public void TextRangeHasLengthTest()
         {
-            // GIVEN
+            // Given
             var underTest = new TextRange(String.Empty);
 
-            // WHEN
+            // When
             var result = underTest.Length;
 
-            // THEN
+            // Then
             Assert.That(result, Is.EqualTo(0));
         }
 
         [Test]
         public void TextRangeShouldThrowExceptionWhenOffsetTooMuchIntoNegativeDirectionTest()
         {
-            // GIVEN
+            // Given
             const string text = "Hello World!";
             var underTest = new TextRange(text);
 
-            // WHEN
+            // When
             TestDelegate result = () => underTest.OffsetBy(-10);
 
-            // THEN
+            // Then
             Assert.That(result, Throws.InstanceOf<InvalidOperationException>());
         }
 
@@ -88,13 +88,13 @@ namespace CodeSharper.Tests.Core.Texts
         [TestCase(30, -20, "Hello World!", 10, 22)]
         public void TextRangeShouldOffsetByIndexTest(Int32 start, Int32 offset, String text, Int32 expectedStart, Int32 expectedStop)
         {
-            // GIVEN
+            // Given
             var underTest = new TextRange(start, text);
 
-            // WHEN
+            // When
             var result = underTest.OffsetBy(offset);
 
-            // THEN
+            // Then
             Assert.That(result, Is.EqualTo(underTest));
             Assert.That(result.Start, Is.EqualTo(expectedStart));
             Assert.That(result.Stop, Is.EqualTo(expectedStop));

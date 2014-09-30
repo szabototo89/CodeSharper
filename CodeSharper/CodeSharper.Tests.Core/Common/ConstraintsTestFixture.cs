@@ -249,9 +249,15 @@ namespace CodeSharper.Tests.Core.Common
             var value = 10;
 
             // When
-            Constraints
-                .Argument(() => value)
-                    .Evaluate(v => v % 2 == 0, "text message");
+            TestDelegate test = () =>
+            {
+                Constraints
+                    .Argument(() => value)
+                        .Evaluate(v => v % 2 == 0, "text message");
+            };
+
+            // Then
+            Assert.That(test, Throws.Nothing);
         }
 
         [Test]
