@@ -69,7 +69,7 @@ namespace CodeSharper.Core.Texts
 
         }
 
-        public TextRange OffsetBy(int offset)
+        public TextRange OffsetBy(Int32 offset)
         {
             Constraints
                 .IsGreaterThan(() => offset, 0);

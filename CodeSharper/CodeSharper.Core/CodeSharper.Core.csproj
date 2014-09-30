@@ -51,6 +51,7 @@
     <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintEventArgs.cs" />
     <Compile Include="Common\ConstraintChecking\Constraints.cs" />
+    <Compile Include="Common\ConstraintChecking\EvaluateConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\ExpressionHelper.cs" />
     <Compile Include="Common\ConstraintChecking\GreaterThanConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\IConstraint.cs" />

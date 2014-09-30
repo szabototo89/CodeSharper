@@ -214,6 +214,58 @@ namespace CodeSharper.Tests.Core.Common
                 .Argument(() => value)
                     .IsLesserThan(100);
         }
+
+
+        [Test]
+        public void ConstraintsShouldHaveEvaluateMethod()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints
+                .Evaluate(() => value, v => v % 2 == 0);
+
+            // Then
+
+        }
+
+        [Test]
+        public void EvaluateConstraintShouldSupportArgumentFlowStyle()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints
+                .Argument(() => value)
+                    .Evaluate(v => v % 2 == 0);
+        }
+
+        [Test]
+        public void EvaluateConstraintWithMessageInformationShouldSupportArgumentFlowStyle()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints
+                .Argument(() => value)
+                    .Evaluate(v => v % 2 == 0, "text message");
+        }
+
+        [Test]
+        public void EvaluateConstraintShouldThrowArgumentExceptionWhenPredicateIsFalse()
+        {
+            // Given
+            var value = 11;
+
+            // When
+            TestDelegate test = () => Constraints.Evaluate(() => value, v => v % 2 == 0, "argument error");
+
+            // Then
+            Assert.That(test, Throws.ArgumentException);
+        }
     }
 
 }

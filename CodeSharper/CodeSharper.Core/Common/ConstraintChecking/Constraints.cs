@@ -101,5 +101,20 @@ namespace CodeSharper.Core.Common.ConstraintChecking
 
             return argument;
         }
+
+        public static IConstraint Evaluate<TArgumentType>(Expression<Func<TArgumentType>> argument,
+            Predicate<TArgumentType> predicate, String message = "")
+        {
+            return new EvaluateConstraint<TArgumentType>(predicate, message).Check(argument);
+        }
+
+        public static ConstraintArgument<TArgumentType> Evaluate<TArgumentType>(this ConstraintArgument<TArgumentType> argument, Predicate<TArgumentType> predicate, String message = "")
+        {
+            foreach (var arg in argument.Arguments)
+                Evaluate(arg, predicate, message);
+
+            return argument;
+        }
+
     }
 }
