@@ -49,7 +49,7 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [Test(Description = "Constraints should throw NullArgumentException")]
-        [ExpectedException(typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstraintsShouldThrowNullArgumentException()
         {
             // Given
@@ -58,7 +58,7 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [Test(Description = "Constraints should throw ArgumentException")]
-        [ExpectedException(typeof (ArgumentException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void ConstraintsShouldThrowArgumentException()
         {
             // Given
@@ -149,6 +149,71 @@ namespace CodeSharper.Tests.Core.Common
                     .NotEmpty();
         }
 
+        [Test]
+        public void ConstraintsShouldCheckGreaterThanConstraint()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints.IsGreaterThan(() => value, 0);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstraintsShouldThrowArgumentExceptionWhenValueLesserThanExpectedValue()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints.IsGreaterThan(() => value, 100);
+        }
+
+        [Test]
+        public void GreaterThanConstraintShouldUseWithStyleArgumentToo()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints
+                .Argument(() => value)
+                    .IsGreaterThan(0);
+        }
+
+        [Test]
+        public void ConstraintsShouldCheckLesserThanConstraint()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints.IsLesserThan(() => value, 100);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstraintsShouldThrowArgumentExceptionWhenValueGreaterThanExpectedValue()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints.IsLesserThan(() => value, 0);
+        }
+
+        [Test]
+        public void LesserThanConstraintShouldUseWithStyleArgumentToo()
+        {
+            // Given
+            var value = 10;
+
+            // When
+            Constraints
+                .Argument(() => value)
+                    .IsLesserThan(100);
+        }
     }
 
 }

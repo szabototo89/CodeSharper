@@ -23,7 +23,7 @@ namespace CodeSharper.Core.Common.Commands
                 .NotNull(() => parameter);
 
             var node = parameter.Value;
-            node.Text = _transformation(node.Text);
+            node.SetText(_transformation(node.Text));
 
             return Arguments.Value(node);
         }

@@ -46,13 +46,16 @@
     <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
     <Compile Include="Common\Commands\ToUpperCaseCommand.cs" />
     <Compile Include="Common\Commands\ComposeCommand.cs" />
+    <Compile Include="Common\ConstraintChecking\ComparisonConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintArgument.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintEventArgs.cs" />
     <Compile Include="Common\ConstraintChecking\Constraints.cs" />
     <Compile Include="Common\ConstraintChecking\ExpressionHelper.cs" />
+    <Compile Include="Common\ConstraintChecking\GreaterThanConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\IConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\IConstraintArgument.cs" />
+    <Compile Include="Common\ConstraintChecking\LesserThanConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotBlankConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotEmptyConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotNullConstraint.cs" />
@@ -78,7 +81,6 @@
     <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Texts\TextNodeHelper.cs" />
-    <Compile Include="Texts\TextRangeHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
