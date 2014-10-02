@@ -76,14 +76,16 @@ namespace CodeSharper.Core.Common.ConstraintChecking
             return new ConstraintArgument<TNewArgumentType>(argumentName);
         }
 
-        public static IConstraint IsGreaterThan(Expression<Func<Int32>> argument, Int32 expectedValue)
+        public static IConstraint IsGreaterThan<TComparable>(Expression<Func<TComparable>> argument, TComparable expectedValue)
+            where TComparable : IComparable
         {
-            return new GreaterThanConstraint(expectedValue).Check(argument);
+            return new GreaterThanConstraint<TComparable>(expectedValue).Check(argument);
         }
 
-        public static IConstraint IsLesserThan(Expression<Func<Int32>> argument, Int32 expectedValue)
+        public static IConstraint IsLesserThan<TComparable>(Expression<Func<TComparable>> argument, TComparable expectedValue)
+            where TComparable : IComparable
         {
-            return new LesserThanConstraint(expectedValue).Check(argument);
+            return new LesserThanConstraint<TComparable>(expectedValue).Check(argument);
         }
 
         public static ConstraintArgument<Int32> IsGreaterThan(this ConstraintArgument<Int32> argument, Int32 expectedValue)

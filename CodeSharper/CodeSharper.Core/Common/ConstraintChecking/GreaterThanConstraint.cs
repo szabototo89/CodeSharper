@@ -2,10 +2,11 @@ using System;
 
 namespace CodeSharper.Core.Common.ConstraintChecking
 {
-    public class GreaterThanConstraint : ComparisonConstraint
+    public class GreaterThanConstraint<TComparable> : ComparisonConstraint<TComparable>
+        where TComparable : IComparable
     {
-        public GreaterThanConstraint(Int32 expectedValue) 
-            : base(value => value > expectedValue, String.Format("Argument must be greater than {0}!", expectedValue))
+        public GreaterThanConstraint(TComparable expectedValue)
+            : base(value => value.CompareTo(expectedValue) > 0, String.Format("Argument must be greater than {0}!", expectedValue))
         {
         }
     }

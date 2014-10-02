@@ -140,17 +140,17 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given
             var underTest = new TextDocument("Long");
-            var ranges = new[]{
+            var ranges = new[] {
                 underTest.SubStringOfText(0, 4),
                 underTest.SubStringOfText(0, 4)
             };
 
             // When
-            ranges[0].SetText("Loooong");
+            ranges[0].SetText("long");
             ranges[1].SetText("LONG");
 
             // Then
-            Assert.That(underTest.Text, Is.EqualTo("Loooong"));
+            Assert.That(underTest.Text, Is.EqualTo("LONG"));
         }
     }
 }
