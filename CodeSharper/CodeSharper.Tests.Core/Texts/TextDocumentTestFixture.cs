@@ -35,7 +35,7 @@ namespace CodeSharper.Tests.Core.Texts
             // Given in setup
 
             // When
-            var result = UnderTest.SubStringOfText(0, 5);
+            var result = UnderTest.TextRange.SubStringOfText(0, 5);
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -51,7 +51,7 @@ namespace CodeSharper.Tests.Core.Texts
             var node = UnderTest.SubStringOfText(0, 5);
 
             // When
-            node.SetText("hello");
+            node.ReplaceText("hello");
             var result = UnderTest.Text;
 
             // Then
@@ -65,7 +65,7 @@ namespace CodeSharper.Tests.Core.Texts
             var node = UnderTest.SubStringOfText(0, 5);
 
             // When
-            node.SetText("");
+            node.ReplaceText("");
             var result = UnderTest.Text;
 
             // Then
@@ -79,7 +79,7 @@ namespace CodeSharper.Tests.Core.Texts
             var node = UnderTest.SubStringOfText(0, 5);
 
             // When
-            node.SetText("HelloHello");
+            node.ReplaceText("HelloHello");
             var result = UnderTest.Text;
 
             // Then
@@ -90,11 +90,11 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeOfTextDocumentShouldBeAbleToUpdateOtherNodes()
         {
             // Given in setup
-            var first = UnderTest.SubStringOfText(0, 5);
-            var last = UnderTest.SubStringOfText(5);
+            var first = UnderTest.TextRange.SubStringOfText(0, 5);
+            var last = UnderTest.TextRange.SubStringOfText(5);
 
             // When
-            first.SetText("HelloHello");
+            first.ReplaceText("HelloHello");
             var result = UnderTest.Text;
 
             // Then
@@ -107,11 +107,11 @@ namespace CodeSharper.Tests.Core.Texts
         }
 
         [Test]
-        public void TextDocumentShouldAbleToConvertToTextNode()
+        public void TextDocumentShouldAbleToConvertToTextRange()
         {
             // Given in setup
             // When
-            var result = UnderTest.AsTextNode();
+            var result = UnderTest.AsTextRange();
 
             // Then
             Assert.That(result.Text, Is.EqualTo(UnderTest.Text));
@@ -123,13 +123,13 @@ namespace CodeSharper.Tests.Core.Texts
             // Given
             var underTest = new TextDocument("hi hi world!");
             var ranges = new[]{
-                underTest.SubStringOfText(0, 2),
-                underTest.SubStringOfText(3, 5)
+                underTest.TextRange.SubStringOfText(0, 2),
+                underTest.TextRange.SubStringOfText(3, 5)
             };
 
             // When
             foreach (var range in ranges)
-                range.SetText("hello");
+                range.ReplaceText("hello");
 
             // Then
             Assert.That(underTest.Text, Is.EqualTo("hello hello world!"));
@@ -141,16 +141,16 @@ namespace CodeSharper.Tests.Core.Texts
             // Given
             var underTest = new TextDocument("Long");
             var ranges = new[] {
-                underTest.SubStringOfText(0, 4),
-                underTest.SubStringOfText(0, 4)
+                underTest.TextRange.SubStringOfText(0, 4),
+                underTest.TextRange.SubStringOfText(0, 4)
             };
 
             // When
-            ranges[0].SetText("long");
-            ranges[1].SetText("LONG");
+            ranges[0].ReplaceText("long");
+            ranges[1].ReplaceText("LONG");
 
             // Then
             Assert.That(underTest.Text, Is.EqualTo("LONG"));
-        }
+        }   
     }
 }

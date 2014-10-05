@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +20,8 @@ namespace CodeSharper.Core.Texts
         private Int32 _start;
         private Int32 _stop;
 
+        private List<TextRange> _children;
+
         private Int32 SpecifyStopIndex(Int32 start, String text)
         {
             return start + text.Length;
@@ -26,7 +32,7 @@ namespace CodeSharper.Core.Texts
             get { return _text; }
         }
 
-        public TextRange SetText(String value)
+        public TextRange ReplaceText(String value)
         {
             Constraints.NotNull(() => value);
 
@@ -44,10 +50,22 @@ namespace CodeSharper.Core.Texts
         /// <summary>
         /// Constructor for cloning of TextRange
         /// </summary>
-        private TextRange() { }
+        private TextRange()
+        {
+            _children = new List<TextRange>();
+            Parent = TextRange.Empty;
+        }
 
-        public TextRange(String text, TextDocument parent = null)
-            : this(0, text, parent) { }
+        public static readonly TextRange Empty = new TextRange();
+
+        private TextRange(Int32 start, String text, TextDocument textDocument, TextRange parent)
+            : this(start, text, textDocument)
+        {
+            Parent = parent;
+        }
+
+        public TextRange(String text, TextDocument textDocument = null)
+            : this(0, text, textDocument) { }
 
         public TextRange(Int32 start, String text, TextDocument textDocument = null)
             : this()
@@ -93,9 +111,33 @@ namespace CodeSharper.Core.Texts
             get { return Text.Length; }
         }
 
+        public IEnumerable<TextRange> Children { get { return _children; } }
+        public TextRange Parent { get; private set; }
+
         public override String ToString()
         {
             return String.Format("Start: {0} Stop: {1}", Start, Stop);
         }
+
+        public TextRange SubStringOfText(Int32 start, Int32 exclusiveStop)
+        {
+            Constraints
+                .IsLesserThan(() => exclusiveStop, start + Text.Length);
+
+            var node = new TextRange(start, Text.Substring(start, exclusiveStop - start), TextDocument, this);
+            AppendChild(node);
+            return node;
+        }
+
+        protected TextRange AppendChild(TextRange child)
+        {
+            Constraints
+                .NotNull(() => child);
+
+            _children.Add(child);
+
+            return this;
+        }
+
     }
 }

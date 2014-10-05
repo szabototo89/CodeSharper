@@ -82,6 +82,7 @@
     <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Texts\TextNodeHelper.cs" />
+    <Compile Include="Texts\TextRangeHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

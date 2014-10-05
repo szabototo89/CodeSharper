@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CodeSharper.Core.Texts;
+using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Texts
@@ -8,6 +9,14 @@ namespace CodeSharper.Tests.Core.Texts
     [TestFixture]
     public class TextRangeTestFixture
     {
+        private TextDocument TextDocument;
+
+        [Test]
+        public void Setup()
+        {
+            TextDocument = new TextDocument("Hello World!");
+        }
+
         [Test]
         public void TextRangeShouldBeInitializedTest()
         {
@@ -16,14 +25,16 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = new TextRange(text);
 
             // When
-            var result = new {
+            var result = new
+            {
                 Start = underTest.Start,
                 Stop = underTest.Stop,
                 Length = underTest.Length
             };
 
             // Then
-            Assert.That(result, Is.EqualTo(new {
+            Assert.That(result, Is.EqualTo(new
+            {
                 Start = 0,
                 Stop = text.Length,
                 Length = text.Length
@@ -69,7 +80,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(0));
         }
 
-        [Test]
+        [Test(Description = "TextRange should throw exception when Offset too much into negative direction")]
         public void TextRangeShouldThrowExceptionWhenOffsetTooMuchIntoNegativeDirectionTest()
         {
             // Given
@@ -83,6 +94,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Throws.InstanceOf<InvalidOperationException>());
         }
 
+        [Test(Description = "TextRange should offet by index")]
         [TestCase(0, 10, "Hello World!", 10, 22)]
         [TestCase(10, 5, "Hello World!", 15, 27)]
         [TestCase(30, -20, "Hello World!", 10, 22)]
@@ -99,6 +111,38 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result.Start, Is.EqualTo(expectedStart));
             Assert.That(result.Stop, Is.EqualTo(expectedStop));
             Assert.That(result.Text, Is.EqualTo(underTest.Text));
+        }
+
+        [Test]
+        public void TextRangeShouldHaveChildren()
+        {
+            // Given
+            var underTest = TextDocument.TextRange;
+
+            // When
+            var result = underTest.Children;
+
+            // Then
+            Assert.That(result, Is.Empty);
+        }
+
+        [Test]
+        public void TextRangeShouldBeAbleToDefineSubTextRange()
+        {
+            // Given
+            var textDocument = new TextDocument("Hello");
+            var underTest = textDocument.TextRange;
+
+            // When
+            var result = underTest.SubStringOfText(1, underTest.Length - 1);
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Length, Is.EqualTo(3));
+            Assert.That(result.Start, Is.EqualTo(1));
+            Assert.That(result.Stop, Is.EqualTo(4));
+            Assert.That(result.Parent, Is.EqualTo(underTest));
+            Assert.That(underTest.Children, Has.Member(result));
         }
 
     }

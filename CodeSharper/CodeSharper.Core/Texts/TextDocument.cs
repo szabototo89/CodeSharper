@@ -39,12 +39,6 @@ namespace CodeSharper.Core.Texts
             return this;
         }
 
-        public TextDocument RemoveChild(TextRange child)
-        {
-            _children.Remove(child);
-            return this;
-        }
-
         public TextRange SubStringOfText(Int32 start, Int32 exclusiveEnd)
         {
             var node = new TextRange(start, Text.Substring(start, exclusiveEnd - start), this);
@@ -86,7 +80,7 @@ namespace CodeSharper.Core.Texts
                            .Insert(start, newValue);
         }
 
-        public TextRange AsTextNode()
+        public TextRange AsTextRange()
         {
             return TextRange;
         }
