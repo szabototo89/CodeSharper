@@ -5,7 +5,7 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class ComposeCommand : ICommand
+    public class ComposeCommand : CommandBase
     {
         private readonly IEnumerable<ICommand> _commands;
 
@@ -18,7 +18,7 @@ namespace CodeSharper.Core.Common.Commands
             _commands = commands;
         }
 
-        public Argument Execute(Argument parameter)
+        public override Argument Execute(Argument parameter)
         {
             Argument argument = parameter;
             foreach (var command in _commands)

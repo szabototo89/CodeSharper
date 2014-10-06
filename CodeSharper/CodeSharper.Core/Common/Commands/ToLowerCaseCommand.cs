@@ -7,7 +7,6 @@ namespace CodeSharper.Core.Common.Commands
         public ToLowerCaseCommand()
             : base(text => text.ToLowerInvariant())
         {
-            
         }
     }
 }

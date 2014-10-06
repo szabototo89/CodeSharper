@@ -29,7 +29,13 @@ namespace CodeSharper.Core.Common.Values
 
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as Argument);
+            if (obj == null)
+                return false;
+
+            if (obj.GetType() != GetType())
+                return false;
+
+            return Equals(obj as ValueArgument<TValue>);
         }
 
         public Boolean Equals(ValueArgument<TValue> other)

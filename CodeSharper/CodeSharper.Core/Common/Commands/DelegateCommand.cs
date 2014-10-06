@@ -4,7 +4,7 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class DelegateCommand : ICommand
+    public class DelegateCommand : CommandBase
     {
         private readonly Func<Argument, Argument> _function;
 
@@ -15,7 +15,7 @@ namespace CodeSharper.Core.Common.Commands
             _function = function;
         }
 
-        public Argument Execute(Argument parameter)
+        public override Argument Execute(Argument parameter)
         {
             return _function(parameter);
         }

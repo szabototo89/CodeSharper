@@ -95,7 +95,6 @@ namespace CodeSharper.Core.Texts
             return this;
         }
 
-
         public Int32 Start
         {
             get { return _start; }

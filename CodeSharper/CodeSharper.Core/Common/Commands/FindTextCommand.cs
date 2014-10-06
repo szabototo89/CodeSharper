@@ -6,7 +6,7 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class FindTextCommand : ICommand
+    public class FindTextCommand : CommandBase
     {
         public string Value { get; protected set; }
 
@@ -32,7 +32,7 @@ namespace CodeSharper.Core.Common.Commands
             return Arguments.Value(results as IEnumerable<TextRange>);
         }
 
-        public Argument Execute(Argument parameter)
+        public override Argument Execute(Argument parameter)
         {
             Constraints
                 .Argument(() => parameter).NotNull();

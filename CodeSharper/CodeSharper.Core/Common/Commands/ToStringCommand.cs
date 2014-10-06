@@ -1,11 +1,12 @@
-﻿using CodeSharper.Core.Common.ConstraintChecking;
+﻿using System;
+using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class ToStringCommand : ICommand
+    public class ToStringCommand : CommandBase
     {
-        public Argument Execute(Argument parameter)
+        public override Argument Execute(Argument parameter)
         {
             if (parameter is IValueArgument)
                 return Execute(parameter as IValueArgument);
@@ -13,7 +14,7 @@ namespace CodeSharper.Core.Common.Commands
             return null;
         }
 
-        protected ValueArgument<string> Execute(IValueArgument parameter)
+        protected ValueArgument<String> Execute(IValueArgument parameter)
         {
             Constraints
                 .NotNull(() => parameter);

@@ -63,7 +63,7 @@ namespace CodeSharper.Tests.Core.Common
             var result = underTest.Execute(value);
 
             // Then
-            Assert.That(value, Is.EqualTo(result));                                                            
+            Assert.That(value, Is.EqualTo(result));
         }
 
         [Test(Description = "ToLowerCaseCommand should convert text of TextRange to lower case.")]
@@ -80,7 +80,7 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value.Text, Is.EqualTo(expected));
-        } 
+        }
 
         [Test(Description = "ToUpperCaseCommand should convert text of TextRange to upper case")]
         [TestCase("Hello World!", "HELLO WORLD!")]
@@ -128,7 +128,7 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value.Text, Is.EqualTo(expected));
-        } 
+        }
 
         [Test(Description = "ReplaceTextCommand should replace text of range.")]
         [TestCase("Hello World!", "hello")]
@@ -186,6 +186,27 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result.Value, Is.Not.Null);
             Assert.That(result.Value, Has.Count.EqualTo(2));
+        }
+
+        [Test]
+        public void CommandsShouldBeAbleToHandleMultipleArgumentsToo()
+        {
+            // Given
+            ISupportMultipleArgumentsCommand underTest = new IdentityCommand();
+
+            // When
+            var result = underTest.Execute(new[] { "a", "b", "c" }
+                                  .Select(Arguments.Value)).ToArray();
+
+            // Then
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result, Is.EquivalentTo(new[]
+            {
+                Arguments.Value("a"), 
+                Arguments.Value("b"), 
+                Arguments.Value("c")
+            }));
+            Assert.That(result, Has.Length.EqualTo(3));
         }
     }
 }

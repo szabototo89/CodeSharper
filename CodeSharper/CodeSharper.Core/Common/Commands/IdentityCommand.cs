@@ -2,9 +2,9 @@
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class IdentityCommand : ICommand
+    public class IdentityCommand : CommandBase
     {
-        public Argument Execute(Argument parameter)
+        public override Argument Execute(Argument parameter)
         {
             return parameter;
         }
