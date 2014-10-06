@@ -79,6 +79,7 @@
     <Compile Include="Common\Commands\WriteToConsoleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
+    <Compile Include="Texts\StringHelper.cs" />
     <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Texts\TextNodeHelper.cs" />

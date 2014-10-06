@@ -29,7 +29,7 @@ namespace CodeSharper.Core.Texts
 
         public String Text
         {
-            get { return _text; }
+            get { return TextDocument.Text.Substring(_start, _stop - _start); }
         }
 
         public TextRange ReplaceText(String value)
@@ -39,7 +39,7 @@ namespace CodeSharper.Core.Texts
             if (_text == value)
                 return this;
 
-            TextDocument.UpdateTextByRange(this, value);
+            UpdateTextByRange(this, value);
             _text = value;
 
             return this;
@@ -111,6 +111,7 @@ namespace CodeSharper.Core.Texts
         }
 
         public IEnumerable<TextRange> Children { get { return _children; } }
+       
         public TextRange Parent { get; private set; }
 
         public override String ToString()
@@ -138,5 +139,33 @@ namespace CodeSharper.Core.Texts
             return this;
         }
 
+        public TextRange UpdateTextByRange(TextRange range, String value)
+        {
+            Constraints
+                .NotNull(() => range)
+                .NotNull(() => value);
+
+            var start = range.Start;
+            var length = range.Length;
+            var offset = value.Length - length;
+
+            Text = ReplaceByStartAndLength(Text, start, length, value);
+
+            if (offset != 0)
+            {
+                foreach (var child in Children.Where(child => child.Start > start))
+                {
+                    child.OffsetBy(offset);
+                }
+            }
+
+            return this;
+        }
+
+        private String ReplaceByStartAndLength(String oldValue, Int32 start, Int32 length, String newValue)
+        {
+            return oldValue.Remove(start, length)
+                           .Insert(start, newValue);
+        }
     }
 }
