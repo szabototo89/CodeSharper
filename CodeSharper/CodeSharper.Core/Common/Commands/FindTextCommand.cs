@@ -26,7 +26,7 @@ namespace CodeSharper.Core.Common.Commands
 
             while ((index = document.Text.IndexOf(Value, index + Value.Length, StringComparison.Ordinal)) != -1)
             {
-                results.Add(document.SubStringOfText(index, index + Value.Length));
+                results.Add(document.TextRange.SubStringOfText(index, index + Value.Length));
             }
 
             return Arguments.Value(results as IEnumerable<TextRange>);

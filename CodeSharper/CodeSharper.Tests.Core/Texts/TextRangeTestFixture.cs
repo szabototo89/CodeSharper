@@ -22,7 +22,7 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given
             var text = "Hello World!";
-            var underTest = new TextRange(text);
+            var underTest = new TextDocument(text).TextRange;
 
             // When
             var result = new
@@ -45,7 +45,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextRangeHasStartTest()
         {
             // Given
-            var underTest = new TextRange(String.Empty);
+            var underTest = new TextDocument(String.Empty).TextRange;
 
             // When
             var result = underTest.Start;
@@ -58,7 +58,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextRangeHasStopTest()
         {
             // Given
-            var underTest = new TextRange(String.Empty);
+            var underTest = new TextDocument(String.Empty).TextRange;
 
             // When
             var result = underTest.Stop;
@@ -71,7 +71,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextRangeHasLengthTest()
         {
             // Given
-            var underTest = new TextRange(String.Empty);
+            var underTest = new TextDocument(String.Empty).TextRange;
 
             // When
             var result = underTest.Length;
@@ -85,23 +85,25 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given
             const string text = "Hello World!";
-            var underTest = new TextRange(text);
+            var textDocument = new TextDocument(text);
+            var underTest = textDocument.TextRange;
 
             // When
             TestDelegate result = () => underTest.OffsetBy(-10);
 
             // Then
-            Assert.That(result, Throws.InstanceOf<InvalidOperationException>());
+            Assert.That(result, Throws.InstanceOf<ArgumentException>());
         }
 
-        [Test(Description = "TextRange should offet by index")]
+        [Test(Description = "TextRange should offset by index")]
         [TestCase(0, 10, "Hello World!", 10, 22)]
         [TestCase(10, 5, "Hello World!", 15, 27)]
         [TestCase(30, -20, "Hello World!", 10, 22)]
         public void TextRangeShouldOffsetByIndexTest(Int32 start, Int32 offset, String text, Int32 expectedStart, Int32 expectedStop)
         {
             // Given
-            var underTest = new TextRange(start, text);
+            var textDocument = new TextDocument(text);
+            var underTest = new TextRange(start, start + 1, textDocument);
 
             // When
             var result = underTest.OffsetBy(offset);
@@ -134,7 +136,7 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = textDocument.TextRange;
 
             // When
-            var result = underTest.SubStringOfText(1, underTest.Length - 1);
+            var result = underTest.SubStringOfText(1, underTest.Length - 2);
 
             // Then
             Assert.That(result, Is.Not.Null);

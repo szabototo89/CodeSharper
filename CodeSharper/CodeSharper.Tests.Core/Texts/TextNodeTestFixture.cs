@@ -14,28 +14,5 @@ namespace CodeSharper.Tests.Core.Texts
         {
             TextDocument = new TextDocument("Hello World!");
         }
-
-        [Test(Description = "TextRange should have Text and Position property")]
-        public void TextNodeShouldHaveTextAndPositionProperty()
-        {
-            // Given
-            var underTest = new TextRange("Hello World!", TextDocument);
-
-            // When
-            var result = new
-            {
-                underTest.Text,
-                TextRange = underTest
-            };
-
-            // Then
-            var expected = new
-            {
-                Text = "Hello World!",
-                TextRange = new TextRange(0, "Hello World!")
-            };
-
-            Assert.That(result, Is.EqualTo(expected));
-        }
     }
 }

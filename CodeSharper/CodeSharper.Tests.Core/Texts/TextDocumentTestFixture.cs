@@ -48,7 +48,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeOfTextDocumentShouldBeAbleToChangeItsText()
         {
             // Given in setup
-            var node = UnderTest.SubStringOfText(0, 5);
+            var node = UnderTest.TextRange.SubStringOfText(0, 5);
 
             // When
             node.ReplaceText("hello");
@@ -62,7 +62,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeOfTextDocumentShouldBeAbleToRemoveItsText()
         {
             // Given in setup
-            var node = UnderTest.SubStringOfText(0, 5);
+            var node = UnderTest.TextRange.SubStringOfText(0, 5);
 
             // When
             node.ReplaceText("");
@@ -76,7 +76,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeOfTextDocumentShouldBeAbleToAddMoreTextToItsText()
         {
             // Given in setup
-            var node = UnderTest.SubStringOfText(0, 5);
+            var node = UnderTest.TextRange.SubStringOfText(0, 5);
 
             // When
             node.ReplaceText("HelloHello");
@@ -90,20 +90,20 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeOfTextDocumentShouldBeAbleToUpdateOtherNodes()
         {
             // Given in setup
-            var first = UnderTest.TextRange.SubStringOfText(0, 5);
-            var last = UnderTest.TextRange.SubStringOfText(5);
+            var head = UnderTest.TextRange.SubStringOfText(0, 5);
+            var tail = UnderTest.TextRange.SubStringOfText(5);
 
             // When
-            first.ReplaceText("HelloHello");
+            head.ReplaceText("HelloHello");
             var result = UnderTest.Text;
 
             // Then
             Assert.That(result, Is.EqualTo("HelloHello World!"));
 
-            var expectedText = String.Join(String.Empty, UnderTest.Children.Select(child => child.Text));
+            var expectedText = String.Join(String.Empty, UnderTest.TextRange.Children.Select(child => child.Text));
             Assert.That(result, Is.EqualTo(expectedText));
 
-            Assert.That(last.Start, Is.EqualTo(10));
+            Assert.That(tail.Start, Is.EqualTo(10));
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given in setup
             // When
-            var result = UnderTest.AsTextRange();
+            var result = UnderTest.TextRange;
 
             // Then
             Assert.That(result.Text, Is.EqualTo(UnderTest.Text));
@@ -122,9 +122,9 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given
             var underTest = new TextDocument("hi hi world!");
-            var ranges = new[]{
+            var ranges = new[] {
                 underTest.TextRange.SubStringOfText(0, 2),
-                underTest.TextRange.SubStringOfText(3, 5)
+                underTest.TextRange.SubStringOfText(3, 2)
             };
 
             // When
@@ -132,7 +132,10 @@ namespace CodeSharper.Tests.Core.Texts
                 range.ReplaceText("hello");
 
             // Then
-            Assert.That(underTest.Text, Is.EqualTo("hello hello world!"));
+            var expected = "hello hello world!";
+            Assert.That(underTest.Text, Is.EqualTo(expected));
+            Assert.That(underTest.TextRange, Is.Not.Null);
+            Assert.That(underTest.TextRange.Length, Is.EqualTo(expected.Length));
         }
 
         [Test]
@@ -151,6 +154,6 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             Assert.That(underTest.Text, Is.EqualTo("LONG"));
-        }   
+        }
     }
 }

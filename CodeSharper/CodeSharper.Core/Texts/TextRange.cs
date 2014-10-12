@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Mime;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
@@ -13,159 +15,96 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Texts
 {
-    public class TextRange
+    public class TextRange : IDisposable
     {
-        private String _text;
+        private readonly List<TextRange> _children;
 
-        private Int32 _start;
-        private Int32 _stop;
+        public Int32 Start { get; private set; }
 
-        private List<TextRange> _children;
+        public Int32 Stop { get; private set; }
 
-        private Int32 SpecifyStopIndex(Int32 start, String text)
+        public Int32 Length { get; private set; }
+
+        public TextRange Parent { get; protected set; }
+
+        public TextDocument TextDocument { get; set; }
+
+        public virtual String Text { get { return TextDocument.Text.Substring(Start, Length); } }
+
+        public IEnumerable<TextRange> Children { get { return _children; } }
+
+        public TextRange(Int32 start, Int32 stop, TextDocument document)
         {
-            return start + text.Length;
+            Constraints.NotNull(() => document);
+
+            _children = new List<TextRange>();
+            Start = start;
+            Stop = stop;
+            Length = stop - start;
+            TextDocument = document;
+            TextDocument.Register(this);
         }
 
-        public String Text
+        void IDisposable.Dispose()
         {
-            get { return TextDocument.Text.Substring(_start, _stop - _start); }
+            TextDocument.Unregister(this);
+        }
+
+        public TextRange SubStringOfText(Int32 start, Int32 length)
+        {
+            var child = new TextRange(start, start + length, TextDocument)
+            {
+                Parent = this
+            };
+
+            _children.Add(child);
+
+            return child;
         }
 
         public TextRange ReplaceText(String value)
         {
-            Constraints.NotNull(() => value);
-
-            if (_text == value)
-                return this;
-
-            UpdateTextByRange(this, value);
-            _text = value;
-
-            return this;
-        }
-
-        public TextDocument TextDocument { get; protected set; }
-
-        /// <summary>
-        /// Constructor for cloning of TextRange
-        /// </summary>
-        private TextRange()
-        {
-            _children = new List<TextRange>();
-            Parent = TextRange.Empty;
-        }
-
-        public static readonly TextRange Empty = new TextRange();
-
-        private TextRange(Int32 start, String text, TextDocument textDocument, TextRange parent)
-            : this(start, text, textDocument)
-        {
-            Parent = parent;
-        }
-
-        public TextRange(String text, TextDocument textDocument = null)
-            : this(0, text, textDocument) { }
-
-        public TextRange(Int32 start, String text, TextDocument textDocument = null)
-            : this()
-        {
-            Constraints.NotNull(() => text);
-
-            _text = text;
-            TextDocument = textDocument;
-
-            if (start < 0)
-                throw ThrowHelper.ArgumentException("start", "Start is negative number");
-
-            _start = start;
-            _text = text;
-            _stop = SpecifyStopIndex(start, text);
-
-        }
-
-        public TextRange OffsetBy(Int32 offset)
-        {
-            if (Start + offset < 0)
-                throw ThrowHelper.InvalidOperationException();
-
-            _start = _start + offset;
-            _stop = _stop + offset;
-
-            return this;
-        }
-
-        public Int32 Start
-        {
-            get { return _start; }
-        }
-
-        public Int32 Stop
-        {
-            get { return _stop; }
-        }
-
-        public Int32 Length
-        {
-            get { return Text.Length; }
-        }
-
-        public IEnumerable<TextRange> Children { get { return _children; } }
-       
-        public TextRange Parent { get; private set; }
-
-        public override String ToString()
-        {
-            return String.Format("Start: {0} Stop: {1}", Start, Stop);
-        }
-
-        public TextRange SubStringOfText(Int32 start, Int32 exclusiveStop)
-        {
             Constraints
-                .IsLesserThan(() => exclusiveStop, start + Text.Length);
-
-            var node = new TextRange(start, Text.Substring(start, exclusiveStop - start), TextDocument, this);
-            AppendChild(node);
-            return node;
-        }
-
-        protected TextRange AppendChild(TextRange child)
-        {
-            Constraints
-                .NotNull(() => child);
-
-            _children.Add(child);
-
-            return this;
-        }
-
-        public TextRange UpdateTextByRange(TextRange range, String value)
-        {
-            Constraints
-                .NotNull(() => range)
                 .NotNull(() => value);
 
-            var start = range.Start;
-            var length = range.Length;
-            var offset = value.Length - length;
+            var offsetLength = value.Length - Length;
+            TextDocument.ReplaceText(this, value);
 
-            Text = ReplaceByStartAndLength(Text, start, length, value);
-
-            if (offset != 0)
+            if (offsetLength != 0)
             {
-                foreach (var child in Children.Where(child => child.Start > start))
-                {
-                    child.OffsetBy(offset);
-                }
+                UpdateTextByLength(value.Length);
+                UpdateParentsTextLength(offsetLength);
             }
 
             return this;
         }
 
-        private String ReplaceByStartAndLength(String oldValue, Int32 start, Int32 length, String newValue)
+        private void UpdateParentsTextLength(Int32 offsetLength)
         {
-            return oldValue.Remove(start, length)
-                           .Insert(start, newValue);
+            TextRange parent = Parent;
+            while (parent != null)
+            {
+                parent.UpdateTextByLength(parent.Length + offsetLength);
+                parent = parent.Parent;
+            }
+        }
+
+        private void UpdateTextByLength(Int32 length)
+        {
+            Length = length;
+            Stop = Start + length;
+        }
+
+        public TextRange OffsetBy(Int32 value)
+        {
+            Constraints
+                .Evaluate(() => value, _ => Start + value >= 0, "Start must be positive!");
+            Constraints
+                .Evaluate(() => value, _ => Stop + value >= 0, "Stop must be positive!");
+
+            Start += value;
+            Stop += value;
+            return this;
         }
     }
 }

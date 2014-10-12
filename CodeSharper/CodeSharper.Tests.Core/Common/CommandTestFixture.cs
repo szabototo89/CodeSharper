@@ -72,9 +72,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new ToLowerCaseCommand();
+            var textDocument = new TextDocument(parameter);
 
             // When
-            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var value = Arguments.Value(textDocument.TextRange);
             var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
@@ -88,9 +89,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new ToUpperCaseCommand();
+            var textDocument = new TextDocument(parameter);
 
             // When
-            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var value = Arguments.Value(textDocument.TextRange);
             var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
@@ -104,9 +106,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new FillStringCommand('*');
+            var textDocument = new TextDocument(parameter);
 
             // When
-            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var value = Arguments.Value(textDocument.TextRange);
             var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
@@ -120,9 +123,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new FillStringCommand("hi");
+            var textDocument = new TextDocument(parameter);
 
             // When
-            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var value = Arguments.Value(textDocument.TextRange);
             var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then
@@ -136,9 +140,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new ReplaceTextCommand(expected);
+            var textDocument = new TextDocument(parameter);
 
             // When
-            var value = Arguments.Value(new TextRange(parameter, TextDocument));
+            var value = Arguments.Value(textDocument.TextRange);
             var result = underTest.Execute(value) as ValueArgument<TextRange>;
 
             // Then

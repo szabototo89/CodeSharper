@@ -9,80 +9,54 @@ namespace CodeSharper.Core.Texts
 {
     public class TextDocument
     {
-        private readonly List<TextRange> _children;
+        private readonly List<TextRange> _registeredTextRanges;  
 
-        public TextRange TextRange { get; protected set; }
+        public String Text { get; private set; }
 
-        public String Text { get; protected set; }
+        public TextRange TextRange { get; private set; }
 
         public TextDocument(String text)
         {
             Constraints.NotNull(() => text);
 
+            _registeredTextRanges = new List<TextRange>();
             Text = text;
-            TextRange = new TextRange(Text, this);
-            _children = new List<TextRange>();
+            TextRange = new TextRange(0, Text.Length, this);
         }
 
-        public IEnumerable<TextRange> Children
+        public TextDocument Register(TextRange textRange)
         {
-            get { return _children; }
-        }
-
-        public TextDocument AppendChild(TextRange child)
-        {
-            Constraints
-                .NotNull(() => child);
-
-            _children.Add(child);
-
+            Constraints.NotNull(() => textRange);
+            _registeredTextRanges.Add(textRange);
             return this;
         }
 
-        public TextRange SubStringOfText(Int32 start, Int32 exclusiveEnd)
+        public TextDocument Unregister(TextRange textRange)
         {
-            var node = new TextRange(start, Text.Substring(start, exclusiveEnd - start), this);
-            AppendChild(node);
-            return node;
+            Constraints.NotNull(() => textRange);
+            _registeredTextRanges.Remove(textRange);
+            return this;
         }
 
-        public TextRange SubStringOfText(Int32 start)
-        {
-            return SubStringOfText(start, Text.Length);
-        }
-
-        public TextDocument UpdateTextByRange(TextRange range, String value)
+        public TextDocument ReplaceText(TextRange updatedTextRange, String newValue)
         {
             Constraints
-                .NotNull(() => range)
-                .NotNull(() => value);
+                .NotNull(() => updatedTextRange)
+                .NotNull(() => newValue);
 
-            var start = range.Start;
-            var length = range.Length;
-            var offset = value.Length - length;
+            var offsetLength = newValue.Length - updatedTextRange.Length;
 
-            Text = ReplaceByStartAndLength(Text, start, length, value);
+            Text = Text
+                .Remove(updatedTextRange.Start, updatedTextRange.Length)
+                .Insert(updatedTextRange.Start, newValue);
 
-            if (offset != 0)
+            foreach (var range in _registeredTextRanges
+                .Where(r => r.Start > updatedTextRange.Start))
             {
-                foreach (var child in Children.Where(child => child.Start > start))
-                {
-                    child.OffsetBy(offset);
-                }
+                range.OffsetBy(offsetLength);
             }
 
             return this;
-        }
-
-        private string ReplaceByStartAndLength(String oldValue, Int32 start, Int32 length, String newValue)
-        {
-            return oldValue.Remove(start, length)
-                           .Insert(start, newValue);
-        }
-
-        public TextRange AsTextRange()
-        {
-            return TextRange;
         }
     }
 }

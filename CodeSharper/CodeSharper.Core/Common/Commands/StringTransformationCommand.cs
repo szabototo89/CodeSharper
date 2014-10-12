@@ -16,7 +16,6 @@ namespace CodeSharper.Core.Common.Commands
             _transformation = transformation;
         }
 
-        [DebuggerStepThrough]
         protected override ValueArgument<TextRange> Execute(ValueArgument<TextRange> parameter)
         {
             Constraints
