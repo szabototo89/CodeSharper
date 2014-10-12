@@ -1,4 +1,4 @@
 CodeSharper
 ===========
 
-Refactoring tool, written in C#
+Refactoring tool, written in C# and using TDD for developing (experimental).
