@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Common.Commands
 {
     public class StringTransformationCommand : ValueCommandWithMultiValueSupport<TextRange>
     {
-        private readonly Func<string, string> _transformation;
+        private readonly Func<String, String> _transformation;
 
         public StringTransformationCommand(Func<String, String> transformation)
         {

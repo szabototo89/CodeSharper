@@ -43,6 +43,7 @@
     <Compile Include="Common\Commands\FindTextCommand.cs" />
     <Compile Include="Common\Commands\RegularExpressionCommand.cs" />
     <Compile Include="Common\Commands\ReplaceTextCommand.cs" />
+    <Compile Include="Common\Commands\SplitStringCommand.cs" />
     <Compile Include="Common\Commands\StringTransformationCommand.cs" />
     <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
     <Compile Include="Common\Commands\ToUpperCaseCommand.cs" />

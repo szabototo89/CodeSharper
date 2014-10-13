@@ -46,7 +46,7 @@ namespace CodeSharper.Core.Common.Commands
             if (parameter is MultiValueArgument<TextRange>)
             {
                 var values = ((MultiValueArgument<TextRange>) parameter).Values;
-                var result = values.Select(Execute).SelectMany(argument => argument.Values).ToArray();
+                var result = values.Select(Execute).SelectMany(multiValue => multiValue.Values).ToArray();
                 return Arguments.MultiValue(result);
             }
 

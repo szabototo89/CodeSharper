@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
@@ -6,7 +7,7 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class RegularExpressionCommand : ValueCommandWithMultiValueSupport<TextRange>
+    public class RegularExpressionCommand : CommandWithMultiValueSupport<TextRange, MultiValueArgument<TextRange>>
     {
         private readonly Regex _regex;
 
@@ -19,16 +20,16 @@ namespace CodeSharper.Core.Common.Commands
             _regex = new Regex(pattern, RegexOptions.Multiline);
         }
 
-        protected override ValueArgument<TextRange> Execute(ValueArgument<TextRange> parameter)
+        protected override MultiValueArgument<TextRange> Execute(ValueArgument<TextRange> parameter)
         {
             Constraints.NotNull(() => parameter);
 
-            foreach (Match match in _regex.Matches(parameter.Value.Text))
-            {
-                
-            }
+            var range = parameter.Value;
 
-            throw new NotImplementedException();
+            var matches = _regex.Matches(range.Text)
+                         .OfType<Match>()
+                         .Select(match => range.SubStringOfText(match.Index, match.Length));
+            return Arguments.MultiValue(matches.ToArray());
         }
     }
 }

@@ -162,12 +162,12 @@ namespace CodeSharper.Tests.Core.Common
 
             // When
             var result = replaceCommand.Execute(
-                findCommand.Execute(Arguments.Values(new[] { underTest }))
-            ).ToArray();
+                findCommand.Execute(Arguments.Value(underTest))
+            ) as MultiValueArgument<TextRange>;
 
             // Then
-            Assert.That(result, Is.Not.Null.And.Not.Empty);
-            Assert.That(result, Has.Length.EqualTo(1));
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Values, Is.Not.Empty);
             Assert.That(underTest.Text, Is.EqualTo("Lorem IPSUUUM dolor"));
         }
 
@@ -276,12 +276,69 @@ namespace CodeSharper.Tests.Core.Common
         public void RegularExpressionCommandShouldBeAbleToFindTextWithRegularExpressions()
         {
             // Given
+            var argument = Arguments.Value(new TextDocument(TestHelper.LoremIpsum.TakeWords(4)).TextRange);
             var underTest = new RegularExpressionCommand(@"\w+");
 
             // When
+            var result = underTest.Execute(argument);
 
             // Then
+            Assert.That(result, Is.Not.Null.And.InstanceOf<MultiValueArgument<TextRange>>());
 
+            var expectedValues = (result as MultiValueArgument<TextRange>).Values;
+            Assert.That(expectedValues, Is.Not.Null.And.Not.Empty);
+        }
+
+        [Test]
+        public void RegularExpressionCommandShouldHandleMultipleValueArguments()
+        {
+            // Given
+            var argument = Arguments.Value(new TextDocument(TestHelper.LoremIpsum.TakeWords(4)).TextRange);
+            var selectWords = new RegularExpressionCommand(@"\w+");
+            var selectLowerCaseWords = new RegularExpressionCommand(@"[a-z]+");
+
+            // When
+            var result = selectLowerCaseWords.Execute(
+                selectWords.Execute(argument)
+            );
+
+            // Then
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void SplitStringCommandShouldSplitAnyStringToMultipleValues()
+        {
+            // Given
+            var argument = Arguments.Value(new TextDocument("a b c d").TextRange);
+            var underTest = new SplitStringCommand(" ");
+
+            // When
+            var result = underTest.Execute(argument) as MultiValueArgument<TextRange>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Values, Is.Not.Empty);
+            Assert.That(result.Values.Select(range => range.Text), Is.EquivalentTo(new[] { "a", "b", "c", "d" }));
+        }
+
+        [Test]
+        public void SplitStringCommandShouldHandleMultipleValueArguments()
+        {
+            // Given
+            var argument = Arguments.Value(new TextDocument("a_A b_B c_C").TextRange);
+            var first = new SplitStringCommand(" ");
+            var second = new SplitStringCommand("_");
+
+            // When
+            var subResult = second.Execute(first.Execute(argument));
+            var result = subResult as MultiValueArgument<TextRange>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Values, Is.Not.Empty);
+            Assert.That(result.Values.Select(range => range.Text), Is.EquivalentTo(new[] { "a", "A", "b", "B", "c", "C" }));
+            throw new NotImplementedException();
         }
 
     }
