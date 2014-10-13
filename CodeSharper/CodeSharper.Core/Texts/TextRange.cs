@@ -19,11 +19,11 @@ namespace CodeSharper.Core.Texts
     {
         private readonly List<TextRange> _children;
 
-        public Int32 Start { get; private set; }
+        public Int32 Start { get; protected set; }
 
-        public Int32 Stop { get; private set; }
+        public Int32 Stop { get; protected set; }
 
-        public Int32 Length { get; private set; }
+        public Int32 Length { get; protected set; }
 
         public TextRange Parent { get; protected set; }
 

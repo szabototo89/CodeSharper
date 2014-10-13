@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Common.Values
 {
@@ -21,9 +22,16 @@ namespace CodeSharper.Core.Common.Values
             throw new System.NotImplementedException();
         }
 
-        public static MultiValueArgument MultiValue<T>(IEnumerable<T> source)
+        public static MultiValueArgument<T> MultiValue<T>(IEnumerable<T> values)
         {
-            return new MultiValueArgument(source.Select(Value));
+            return new MultiValueArgument<T>(values);
+        }
+
+        public static IEnumerable<ValueArgument<T>> Values<T>(IEnumerable<T> values)
+        {
+            Constraints.NotNull(() => values);
+
+            return values.Select(value => Value(value));
         }
     }
 }

@@ -8,6 +8,7 @@ using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Commands;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
+using CodeSharper.Tests.Core.Utilities;
 using Moq;
 using NUnit.Framework;
 
@@ -152,6 +153,43 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [Test]
+        public void FindAndReplaceCommandsShouldBeAbleToCombine()
+        {
+            // Given
+            var findCommand = new FindTextCommand("ipsum");
+            var replaceCommand = new ReplaceTextCommand("IPSUUUM");
+            var underTest = new TextDocument(TestHelper.LoremIpsum.TakeWords(3)).TextRange;
+
+            // When
+            var result = replaceCommand.Execute(
+                findCommand.Execute(Arguments.Values(new[] { underTest }))
+            ).ToArray();
+
+            // Then
+            Assert.That(result, Is.Not.Null.And.Not.Empty);
+            Assert.That(result, Has.Length.EqualTo(1));
+            Assert.That(underTest.Text, Is.EqualTo("Lorem IPSUUUM dolor"));
+        }
+
+        [Test]
+        public void FindAndReplaceCommandsShouldBeAbleToCombineAndHandleMultipleValues()
+        {
+            // Given
+            var findCommand = new FindTextCommand("o");
+            var replaceCommand = new ReplaceTextCommand("_o_");
+            var underTest = new TextDocument(TestHelper.LoremIpsum.TakeWords(3)).TextRange;
+
+            // When
+            var result = replaceCommand.Execute(
+                findCommand.Execute(Arguments.Values(new[] { underTest }))
+            ).ToArray();
+
+            // Then
+            Assert.That(result, Is.Not.Null.And.Not.Empty);
+            Assert.That(underTest.Text, Is.EqualTo("L_o_rem ipsum d_o_l_o_r"));
+        }
+
+        [Test]
         public void ComposeCommandShouldBeAbleToExecuteCommandsSequentially()
         {
             // Given
@@ -186,12 +224,32 @@ namespace CodeSharper.Tests.Core.Common
 
             // When
             var value = Arguments.Value(textDocument.TextRange);
-            var result = underTest.Execute(value) as ValueArgument<IEnumerable<TextRange>>;
+            var result = underTest.Execute(value) as MultiValueArgument<TextRange>;
 
             // Then
-            Assert.That(result.Value, Is.Not.Null);
-            Assert.That(result.Value, Has.Count.EqualTo(2));
+            Assert.That(result.Values, Is.Not.Null.And.Not.Empty);
+            Assert.That(result.Values, Has.Count.Or.Length.EqualTo(2));
         }
+
+        [Test]
+        public void FindTextCommandShouldHandleMultipleValues()
+        {
+            // Given
+            var firstFindCommand = new FindTextCommand("abcdef");
+            var secondFindCommand = new FindTextCommand("cde");
+            var underTest = new TextDocument("abcdef abcdef abcdef").TextRange;
+
+            // When
+            var result = secondFindCommand.Execute(
+                firstFindCommand.Execute(Arguments.Value(underTest))
+            ) as MultiValueArgument<TextRange>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Values, Is.Not.Empty);
+            Assert.That(result.Values.Select(value => value.Text), Is.All.EqualTo("cde"));
+        }
+
 
         [Test]
         public void CommandsShouldBeAbleToHandleMultipleArgumentsToo()
@@ -213,5 +271,18 @@ namespace CodeSharper.Tests.Core.Common
             }));
             Assert.That(result, Has.Length.EqualTo(3));
         }
+
+        [Test]
+        public void RegularExpressionCommandShouldBeAbleToFindTextWithRegularExpressions()
+        {
+            // Given
+            var underTest = new RegularExpressionCommand(@"\w+");
+
+            // When
+
+            // Then
+
+        }
+
     }
 }

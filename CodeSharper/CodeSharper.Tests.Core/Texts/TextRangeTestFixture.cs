@@ -11,7 +11,7 @@ namespace CodeSharper.Tests.Core.Texts
     {
         private TextDocument TextDocument;
 
-        [Test]
+        [SetUp]
         public void Setup()
         {
             TextDocument = new TextDocument("Hello World!");

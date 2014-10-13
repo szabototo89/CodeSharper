@@ -1,18 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeSharper.Core.Common.Values
 {
-    public class MultiValueArgument : Argument
+    public class MultiValueArgument<TValue> : Argument, IMultiValueArgument, IEquatable<MultiValueArgument<TValue>>
     {
-        private readonly IEnumerable<Argument> _source;
-
-        public IEnumerable<Argument> Source { get { return _source; } }
-
-        public MultiValueArgument(IEnumerable<Argument> source)
+        public MultiValueArgument(IEnumerable<TValue> values)
         {
-            _source = source ?? Enumerable.Empty<Argument>();
+            Values = values ?? Enumerable.Empty<TValue>();
         }
+
+        public IEnumerable<TValue> Values { get; protected set; }
+
+        public Boolean Equals(MultiValueArgument<TValue> other)
+        {
+            if (other == null) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return Equals(Values, other.Values);
+        }
+
+        IEnumerable<Object> IMultiValueArgument.Values { get { return Values.OfType<Object>(); }}
     }
 }

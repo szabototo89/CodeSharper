@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Common\Commands\FillStringCommand.cs" />
     <Compile Include="Common\Commands\FindTextCommand.cs" />
+    <Compile Include="Common\Commands\RegularExpressionCommand.cs" />
     <Compile Include="Common\Commands\ReplaceTextCommand.cs" />
     <Compile Include="Common\Commands\StringTransformationCommand.cs" />
     <Compile Include="Common\Commands\ToLowerCaseCommand.cs" />
@@ -69,9 +70,11 @@
     <Compile Include="Common\Optional.cs" />
     <Compile Include="Common\OptionalHelper.cs" />
     <Compile Include="Common\Commands\ToStringCommand.cs" />
+    <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\Values\Argument.cs" />
     <Compile Include="Common\Values\Arguments.cs" />
     <Compile Include="Common\Values\ErrorArgument.cs" />
+    <Compile Include="Common\Values\IMultiValueArgument.cs" />
     <Compile Include="Common\Values\IValueArgument.cs" />
     <Compile Include="Common\Values\MultiValueArgument.cs" />
     <Compile Include="Common\Values\TypeErrorArgument.cs" />

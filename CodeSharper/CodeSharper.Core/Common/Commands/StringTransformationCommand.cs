@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Commands
 {
-    public class StringTransformationCommand : ValueCommand<TextRange>
+    public class StringTransformationCommand : ValueCommandWithMultiValueSupport<TextRange>
     {
         private readonly Func<string, string> _transformation;
 

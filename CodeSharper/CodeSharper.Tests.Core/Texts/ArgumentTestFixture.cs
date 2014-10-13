@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Runtime.InteropServices;
 using CodeSharper.Core.Common.Values;
 using NUnit.Framework;
@@ -88,6 +89,20 @@ namespace CodeSharper.Tests.Core.Texts
             // Then
             Assert.That(result, Is.True);
         }
+
+        [Test]
+        public void ValuesShouldBeAbleToInitialize()
+        {
+            // Given
+            var underTest = Enumerable.Range(1, 10);
+
+            // When
+            var result = Arguments.Values(underTest);
+
+            // Then
+            Assert.That(result, Is.EqualTo(Enumerable.Range(1, 10).Select(Arguments.Value)));
+        }
+
 
     }
 }

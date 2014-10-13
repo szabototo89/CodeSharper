@@ -47,30 +47,16 @@ namespace CodeSharper.Core.Common.Commands
 
     public abstract class ValueCommand<T> : Command<ValueArgument<T>, ValueArgument<T>> { }
 
-    public class MultiCommand : ICommand
+    public abstract class ValueCommandWithMultiValueSupport<T> : ValueCommand<T>
     {
-        private readonly ICommand _command;
-
-        public MultiCommand(ICommand command)
+        public override Argument Execute(Argument parameter)
         {
-            Constraints
-                .NotNull(() => command);
-            _command = command;
-        }
+            var parameters = parameter as MultiValueArgument<T>;
 
-        public Argument Execute(Argument parameter)
-        {
-            var values = parameter as MultiValueArgument;
-            if (values != null)
-                return new MultiValueArgument(ExecuteValues(values));
+            if (parameters != null)
+                return Arguments.Value(parameters.Values.Select(param => Execute(Arguments.Value(param))).ToArray());
 
-            return Arguments.TypeError<MultiValueArgument>();
-        }
-
-        private IEnumerable<Argument> ExecuteValues(MultiValueArgument values)
-        {
-            foreach (var value in values.Source)
-                yield return _command.Execute(value);
+            return base.Execute(parameter);
         }
     }
 }

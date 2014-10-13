@@ -60,6 +60,7 @@
     <Compile Include="Texts\TextDocumentTestFixture.cs" />
     <Compile Include="Texts\TextNodeTestFixture.cs" />
     <Compile Include="Texts\TextRangeTestFixture.cs" />
+    <Compile Include="Utilities\TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

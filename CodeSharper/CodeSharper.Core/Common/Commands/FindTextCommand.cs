@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
@@ -17,19 +18,21 @@ namespace CodeSharper.Core.Common.Commands
             Value = value;
         }
 
-        protected Argument Execute(TextRange range)
+        protected MultiValueArgument<TextRange> Execute(TextRange range)
         {
-            var document = range.TextDocument;
+            Constraints.NotNull(() => range);
+
+            var document = range.Text;
 
             var results = new List<TextRange>();
             var index = -Value.Length;
 
-            while ((index = document.Text.IndexOf(Value, index + Value.Length, StringComparison.Ordinal)) != -1)
+            while ((index = document.IndexOf(Value, index + Value.Length, StringComparison.Ordinal)) != -1)
             {
-                results.Add(document.TextRange.SubStringOfText(index, index + Value.Length));
+                results.Add(range.SubStringOfText(index, Value.Length));
             }
 
-            return Arguments.Value(results as IEnumerable<TextRange>);
+            return Arguments.MultiValue(results);
         }
 
         public override Argument Execute(Argument parameter)
@@ -39,6 +42,13 @@ namespace CodeSharper.Core.Common.Commands
 
             if (parameter == null)
                 return Arguments.Error("Input for find command must be a non-null value!");
+
+            if (parameter is MultiValueArgument<TextRange>)
+            {
+                var values = ((MultiValueArgument<TextRange>) parameter).Values;
+                var result = values.Select(Execute).SelectMany(argument => argument.Values).ToArray();
+                return Arguments.MultiValue(result);
+            }
 
             if (parameter is ValueArgument<TextRange>)
                 return Execute(((ValueArgument<TextRange>)parameter).Value);

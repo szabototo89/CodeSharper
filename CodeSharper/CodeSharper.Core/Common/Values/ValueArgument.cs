@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,6 +49,6 @@ namespace CodeSharper.Core.Common.Values
             return EqualityComparer<TValue>.Default.GetHashCode(Value);
         }
 
-        object IValueArgument.Value { get { return Value; } }
+        Object IValueArgument.Value { get { return Value; } }
     }
 }
