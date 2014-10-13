@@ -95,26 +95,6 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Throws.InstanceOf<ArgumentException>());
         }
 
-        [Test(Description = "TextRange should offset by index")]
-        [TestCase(0, 10, "Hello World!", 10, 22)]
-        [TestCase(10, 5, "Hello World!", 15, 27)]
-        [TestCase(30, -20, "Hello World!", 10, 22)]
-        public void TextRangeShouldOffsetByIndexTest(Int32 start, Int32 offset, String text, Int32 expectedStart, Int32 expectedStop)
-        {
-            // Given
-            var textDocument = new TextDocument(text);
-            var underTest = new TextRange(start, start + 1, textDocument);
-
-            // When
-            var result = underTest.OffsetBy(offset);
-
-            // Then
-            Assert.That(result, Is.EqualTo(underTest));
-            Assert.That(result.Start, Is.EqualTo(expectedStart));
-            Assert.That(result.Stop, Is.EqualTo(expectedStop));
-            Assert.That(result.Text, Is.EqualTo(underTest.Text));
-        }
-
         [Test]
         public void TextRangeShouldHaveChildren()
         {

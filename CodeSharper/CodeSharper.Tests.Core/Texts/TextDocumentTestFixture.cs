@@ -90,17 +90,18 @@ namespace CodeSharper.Tests.Core.Texts
         public void TextNodeOfTextDocumentShouldBeAbleToUpdateOtherNodes()
         {
             // Given in setup
-            var head = UnderTest.TextRange.SubStringOfText(0, 5);
-            var tail = UnderTest.TextRange.SubStringOfText(5);
+            var underTest = new TextDocument("Hello World!");
+            var head = underTest.TextRange.SubStringOfText(0, 5);
+            var tail = underTest.TextRange.SubStringOfText(5);
 
             // When
             head.ReplaceText("HelloHello");
-            var result = UnderTest.Text;
+            var result = underTest.Text;
 
             // Then
             Assert.That(result, Is.EqualTo("HelloHello World!"));
 
-            var expectedText = String.Join(String.Empty, UnderTest.TextRange.Children.Select(child => child.Text));
+            var expectedText = String.Join(String.Empty, underTest.TextRange.Children.Select(child => child.Text));
             Assert.That(result, Is.EqualTo(expectedText));
 
             Assert.That(tail.Start, Is.EqualTo(10));

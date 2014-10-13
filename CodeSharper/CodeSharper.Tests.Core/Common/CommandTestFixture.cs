@@ -207,8 +207,8 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.Not.Empty);
             Assert.That(result, Is.EquivalentTo(new[]
             {
-                Arguments.Value("a"), 
-                Arguments.Value("b"), 
+                Arguments.Value("a"),
+                Arguments.Value("b"),
                 Arguments.Value("c")
             }));
             Assert.That(result, Has.Length.EqualTo(3));
