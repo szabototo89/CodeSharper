@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Data;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.StringTransformation
 {
     public class ReplaceTextRunnable : StringTransformationRunnable
     {

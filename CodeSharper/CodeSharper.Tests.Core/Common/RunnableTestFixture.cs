@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Texts;
 using CodeSharper.Tests.Core.Utilities;
 using NUnit.Framework;
@@ -14,16 +15,11 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     internal class RunnableTestFixture
     {
-        private TextRange _TextRange(String value)
-        {
-            return new TextDocument(value).TextRange;
-        }
-
         [Test]
         public void ToUpperCaseRunnableShouldReturnUppercaseTextRange()
         {
             // Given
-            var parameter = _TextRange("hello world!");
+            var parameter = TestHelper.TextRange("hello world!");
             var underTest = new ToUpperCaseRunnable();
 
             // When
@@ -38,7 +34,7 @@ namespace CodeSharper.Tests.Core.Common
         public void ToLowerCaseRunnableShouldReturnLowercaseTextRange()
         {
             // Given
-            var parameter = _TextRange("HELLO WORLD!");
+            var parameter = TestHelper.TextRange("HELLO WORLD!");
             var underTest = new ToLowerCaseRunnable();
 
             // When
@@ -53,7 +49,7 @@ namespace CodeSharper.Tests.Core.Common
         public void ReplaceTextRunnableShouldAbleToReplaceGivenText()
         {
             // Given
-            var parameter = _TextRange("hello world!");
+            var parameter = TestHelper.TextRange("hello world!");
             var underTest = new ReplaceTextRunnable("hi world!");
 
             // When
@@ -70,7 +66,7 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new FillStringRunnable('*');
-            var textDocument = _TextRange(parameter);
+            var textDocument = TestHelper.TextRange(parameter);
 
             // When
             var result = underTest.Run(textDocument);
@@ -86,7 +82,7 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = new FillStringRunnable("hi");
-            var textDocument = _TextRange(parameter);
+            var textDocument = TestHelper.TextRange(parameter);
 
             // When
             var result = underTest.Run(textDocument);
@@ -100,7 +96,7 @@ namespace CodeSharper.Tests.Core.Common
         public void FindTextRunnableShouldReturnFoundSubStringsOfText()
         {
             // Given
-            var value = _TextRange("This string contains 'abc' twice. This was the first, and the second is here: abc.");
+            var value = TestHelper.TextRange("This string contains 'abc' twice. This was the first, and the second is here: abc.");
             var underTest = new FindTextRunnable("abc");
 
             // When
@@ -129,7 +125,7 @@ namespace CodeSharper.Tests.Core.Common
         public void SplitStringRunnableShouldSplitAnyStringToMultipleValues()
         {
             // Given
-            var argument = _TextRange("a b c d");
+            var argument = TestHelper.TextRange("a b c d");
             var underTest = new SplitStringRunnable(" ");
 
             // When
@@ -145,7 +141,7 @@ namespace CodeSharper.Tests.Core.Common
         public void RegularExpressionCommandShouldBeAbleToFindTextWithRegularExpressions()
         {
             // Given
-            var argument = _TextRange(TestHelper.LoremIpsum.TakeWords(4));
+            var argument = TestHelper.TextRange(TestHelper.LoremIpsum.TakeWords(4));
             var underTest = new RegularExpressionRunnable(@"\w+");
 
             // When

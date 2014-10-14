@@ -1,7 +1,6 @@
 using System;
-using CodeSharper.Core.Common.Values;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.Converters
 {
     public abstract class ArgumentConverter<TInParameter, TOutParameter> : IArgumentConverter
     {

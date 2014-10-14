@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
@@ -10,9 +11,11 @@ namespace CodeSharper.Core.Common.Runnables
 
         public SplitStringRunnable(String separator)
         {
+            Consumes<ValueArgumentUnwrapper<TextRange>>();
+            Produces<MultiValueArgumentWrapper<TextRange>>();
+
             Separator = separator;
         }
-
 
         public override IEnumerable<TextRange> Run(TextRange parameter)
         {

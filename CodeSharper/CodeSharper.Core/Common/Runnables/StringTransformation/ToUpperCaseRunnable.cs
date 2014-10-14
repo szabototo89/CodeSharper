@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using System.Net.Mime;
-using System.Reflection;
-
-namespace CodeSharper.Core.Common.Runnables
+﻿namespace CodeSharper.Core.Common.Runnables.StringTransformation
 {
     public class ToUpperCaseRunnable : StringTransformationRunnable
     {

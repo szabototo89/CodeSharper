@@ -1,4 +1,4 @@
-﻿namespace CodeSharper.Core.Common.Runnables
+﻿namespace CodeSharper.Core.Common.Runnables.StringTransformation
 {
     public class ToLowerCaseRunnable : StringTransformationRunnable
     {

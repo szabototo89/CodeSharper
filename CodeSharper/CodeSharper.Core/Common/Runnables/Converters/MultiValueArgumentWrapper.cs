@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CodeSharper.Core.Common.Values;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.Converters
 {
     public class MultiValueArgumentWrapper<TParameter> 
         : ArgumentWrapper<IEnumerable<TParameter>, MultiValueArgument<TParameter>>

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Common.Values;
+using CodeSharper.Core.Texts;
+using CodeSharper.Tests.Core.Utilities;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
@@ -49,7 +52,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new MultiValueArgumentWrapper<Int32>();
 
             var runnableMock = new Mock<IRunnable<Int32, IEnumerable<Int32>>>();
-            runnableMock.Setup(r => r.SupportedArgumentConverters)
+            runnableMock.Setup(r => r.SupportedArgumentWrappers)
                 .Returns(() => new[] { underTest });
             runnableMock.Setup(r => r.Run(It.IsAny<Int32>()))
                 .Returns<Int32>(value => Enumerable.Repeat(value, 3));
@@ -71,6 +74,19 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That((result.Value as MultiValueArgument<Int32>).Values, Is.EquivalentTo(new[] { 20, 20, 20 }));
         }
 
+        [Test]
+        public void ExecutorShouldHandleDifferentRunModesOfRunnables()
+        {
+            // Given
+            var parameter = Arguments.Value(TestHelper.TextRange("abc abc abc"));
+            var underTest = Executor.Create(new SplitStringRunnable(" "));
 
+            // When
+            var result = underTest.Execute(parameter);
+
+            // Then
+            Assert.That(result, Is.InstanceOf<MultiValueArgument<TextRange>>());
+            Assert.That((result as MultiValueArgument<TextRange>).Values, Has.Length.Or.Count.EqualTo(3));
+        }
     }
 }

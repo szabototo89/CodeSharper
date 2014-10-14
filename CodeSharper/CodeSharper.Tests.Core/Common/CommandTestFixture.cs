@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
 {
-    [TestFixture]
+    //[TestFixture]
     class CommandTestFixture
     {
         private TextDocument TextDocument { get; set; }
