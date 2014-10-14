@@ -9,7 +9,7 @@ namespace CodeSharper.Core.Common.Runnables
 {
     public interface IRunnable
     {
-        IEnumerable<IArgumentWrapper> SupportedArgumentConverters { get; }
+        IEnumerable<IArgumentConverter> SupportedArgumentConverters { get; }
 
         Object Run(Object parameter);
     }
@@ -21,19 +21,19 @@ namespace CodeSharper.Core.Common.Runnables
 
     public abstract class Runnable<TIn, TOut> : IRunnable<TIn, TOut>
     {
-        private readonly List<IArgumentWrapper> _supportedArgumentWrappers; 
+        private readonly List<IArgumentConverter> _supportedArgumentWrappers; 
 
-        public IEnumerable<IArgumentWrapper> SupportedArgumentConverters { get; protected set; }
+        public IEnumerable<IArgumentConverter> SupportedArgumentConverters { get; protected set; }
 
         protected void RegisterArgumentConverter<TArgumentWrapper>()
-            where TArgumentWrapper : IArgumentWrapper, new()
+            where TArgumentWrapper : IArgumentConverter, new()
         {
             _supportedArgumentWrappers.Add(new TArgumentWrapper());
         }
 
         protected Runnable()
         {
-            _supportedArgumentWrappers = new List<IArgumentWrapper>();
+            _supportedArgumentWrappers = new List<IArgumentConverter>();
         }
 
         public abstract TOut Run(TIn parameter);
