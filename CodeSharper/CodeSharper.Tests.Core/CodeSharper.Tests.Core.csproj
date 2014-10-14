@@ -53,8 +53,10 @@
   <ItemGroup>
     <Compile Include="Common\CommandTestFixture.cs" />
     <Compile Include="Common\ConstraintsTestFixture.cs" />
+    <Compile Include="Common\ExecutorTestFixture.cs" />
     <Compile Include="Common\OptionalTestFixture.cs" />
     <Compile Include="Common\NumberHelperTestFixture.cs" />
+    <Compile Include="Common\RunnableTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts\ArgumentTestFixture.cs" />
     <Compile Include="Texts\TextDocumentTestFixture.cs" />

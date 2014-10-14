@@ -71,6 +71,14 @@
     <Compile Include="Common\Optional.cs" />
     <Compile Include="Common\OptionalHelper.cs" />
     <Compile Include="Common\Commands\ToStringCommand.cs" />
+    <Compile Include="Common\Runnables\ArgumentWrapper.cs" />
+    <Compile Include="Common\Runnables\IArgumentWrapper.cs" />
+    <Compile Include="Common\Runnables\IRunnable.cs" />
+    <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
+    <Compile Include="Common\Runnables\StringTransformationRunnable.cs" />
+    <Compile Include="Common\Runnables\ToLowerCaseRunnable.cs" />
+    <Compile Include="Common\Runnables\ToUpperCaseRunnable.cs" />
+    <Compile Include="Common\Runnables\ValueArgumentWrapper.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\Values\Argument.cs" />
     <Compile Include="Common\Values\Arguments.cs" />
