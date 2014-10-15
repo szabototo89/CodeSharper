@@ -33,6 +33,9 @@
     <Reference Include="Antlr4.Runtime.v4.5">
       <HintPath>..\packages\Antlr4.Runtime.4.2.2-alpha001\lib\net45\Antlr4.Runtime.v4.5.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -48,21 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractSyntaxTreeTestFixture.cs" />
+    <Compile Include="Common\CommandTestFixture.cs" />
+    <Compile Include="Common\ConstraintsTestFixture.cs" />
+    <Compile Include="Common\ExecutorTestFixture.cs" />
+    <Compile Include="Common\ObjectHelperTestFixture.cs" />
     <Compile Include="Common\OptionalTestFixture.cs" />
     <Compile Include="Common\NumberHelperTestFixture.cs" />
-    <Compile Include="Compilers\CsvCompilerTestFixture.cs" />
-    <Compile Include="Compilers\CsvNodeVisitorTestFixture.cs" />
-    <Compile Include="Csv\CsvAbstractSyntaxTreeTestFixture.cs" />
-    <Compile Include="Csv\CsvLanguageTestFixture.cs" />
-    <Compile Include="Csv\Factories\CsvNodeFactoryTestFixture.cs" />
-    <Compile Include="Csv\Nodes\CsvNodesTestFixture.cs" />
-    <Compile Include="MutableNodeTestFixture.cs" />
-    <Compile Include="NodeTypeDescriptorTestFixture.cs" />
+    <Compile Include="Common\RunnableTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Texts\TextInformationTestFixture.cs" />
-    <Compile Include="Texts\TextLocationTestFixture.cs" />
-    <Compile Include="Texts\TextSpanTestFixture.cs" />
+    <Compile Include="Texts\ArgumentTestFixture.cs" />
+    <Compile Include="Texts\TextDocumentTestFixture.cs" />
+    <Compile Include="Texts\TextNodeTestFixture.cs" />
+    <Compile Include="Texts\TextRangeTestFixture.cs" />
+    <Compile Include="Utilities\TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -71,10 +72,6 @@
     <ProjectReference Include="..\CodeSharper.Core\CodeSharper.Core.csproj">
       <Project>{7e07494f-1cfc-42e1-b550-42b2c616cfd1}</Project>
       <Name>CodeSharper.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CodeSharper.Languages\CodeSharper.Languages.csproj">
-      <Project>{3A2E1DC0-D7C6-42C1-98DF-3FE94775AC21}</Project>
-      <Name>CodeSharper.Languages</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
