@@ -10,8 +10,8 @@ namespace CodeSharper.Core.Common.Runnables
 {
     public interface IRunnable
     {
-        IEnumerable<IArgumentConverter> SupportedArgumentWrappers { get; }
-        IEnumerable<IArgumentConverter> SupportedArgumentUnwrappers { get; }
+        IEnumerable<IArgumentWrapper> SupportedArgumentWrappers { get; }
+        IEnumerable<IArgumentUnwrapper> SupportedArgumentUnwrappers { get; }
 
         Object Run(Object parameter);
     }
@@ -24,29 +24,29 @@ namespace CodeSharper.Core.Common.Runnables
     // TODO: Refactor this section (Consumes/Produces) to another static class
     public abstract class Runnable<TIn, TOut> : IRunnable<TIn, TOut>
     {
-        private readonly List<IArgumentConverter> _supportedArgumentWrappers;
-        private readonly List<IArgumentConverter> _supportedArgumentUnwrappers; 
+        private readonly List<IArgumentWrapper> _supportedArgumentWrappers;
+        private readonly List<IArgumentUnwrapper> _supportedArgumentUnwrappers; 
 
-        public IEnumerable<IArgumentConverter> SupportedArgumentWrappers { get { return _supportedArgumentWrappers.AsReadOnly(); } }
+        public IEnumerable<IArgumentWrapper> SupportedArgumentWrappers { get { return _supportedArgumentWrappers.AsReadOnly(); } }
 
-        public IEnumerable<IArgumentConverter> SupportedArgumentUnwrappers { get { return _supportedArgumentUnwrappers.AsReadOnly(); } }
+        public IEnumerable<IArgumentUnwrapper> SupportedArgumentUnwrappers { get { return _supportedArgumentUnwrappers.AsReadOnly(); } }
 
-        protected void Consumes<TArgumentWrapper>()
-            where TArgumentWrapper : IArgumentConverter, new()
-        {
-            _supportedArgumentWrappers.Add(new TArgumentWrapper());
-        }
-
-        protected void Produces<TArgumentUnwrapper>() 
-            where TArgumentUnwrapper : IArgumentConverter, new()
-
+        protected void Consumes<TArgumentUnwrapper>()
+            where TArgumentUnwrapper : IArgumentUnwrapper, new()
         {
             _supportedArgumentUnwrappers.Add(new TArgumentUnwrapper());
         }
+
+        protected void Produces<TArgumentWrapper>() 
+            where TArgumentWrapper : IArgumentWrapper, new()
+
+        {
+            _supportedArgumentWrappers.Add(new TArgumentWrapper());
+        }
         protected Runnable()
         {
-            _supportedArgumentWrappers = new List<IArgumentConverter>();
-            _supportedArgumentUnwrappers =  new List<IArgumentConverter>();
+            _supportedArgumentWrappers = new List<IArgumentWrapper>();
+            _supportedArgumentUnwrappers =  new List<IArgumentUnwrapper>();
         }
 
         public abstract TOut Run(TIn parameter);

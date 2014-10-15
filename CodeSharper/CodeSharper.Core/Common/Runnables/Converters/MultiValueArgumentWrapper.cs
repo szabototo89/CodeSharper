@@ -6,7 +6,7 @@ namespace CodeSharper.Core.Common.Runnables.Converters
     public class MultiValueArgumentWrapper<TParameter> 
         : ArgumentWrapper<IEnumerable<TParameter>, MultiValueArgument<TParameter>>
     {
-        protected override MultiValueArgument<TParameter> Convert(IEnumerable<TParameter> parameter)
+        public override MultiValueArgument<TParameter> Wrap(IEnumerable<TParameter> parameter)
         {
             return Arguments.MultiValue(parameter);
         }
