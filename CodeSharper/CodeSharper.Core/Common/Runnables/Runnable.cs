@@ -8,7 +8,7 @@ namespace CodeSharper.Core.Common.Runnables
     public abstract class Runnable<TIn, TOut> : IRunnable<TIn, TOut>
     {
         private readonly List<IArgumentWrapper> _supportedArgumentWrappers;
-        private readonly List<IArgumentUnwrapper> _supportedArgumentUnwrappers; 
+        private readonly List<IArgumentUnwrapper> _supportedArgumentUnwrappers;
 
         public IEnumerable<IArgumentWrapper> SupportedArgumentWrappers { get { return _supportedArgumentWrappers.AsReadOnly(); } }
 
@@ -20,16 +20,15 @@ namespace CodeSharper.Core.Common.Runnables
             _supportedArgumentUnwrappers.Add(new TArgumentUnwrapper());
         }
 
-        protected void Produces<TArgumentWrapper>() 
+        protected void Produces<TArgumentWrapper>()
             where TArgumentWrapper : IArgumentWrapper, new()
-
         {
             _supportedArgumentWrappers.Add(new TArgumentWrapper());
         }
         protected Runnable()
         {
             _supportedArgumentWrappers = new List<IArgumentWrapper>();
-            _supportedArgumentUnwrappers =  new List<IArgumentUnwrapper>();
+            _supportedArgumentUnwrappers = new List<IArgumentUnwrapper>();
         }
 
         public abstract TOut Run(TIn parameter);

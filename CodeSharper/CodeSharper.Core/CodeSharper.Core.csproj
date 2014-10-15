@@ -73,6 +73,7 @@
     <Compile Include="Common\Optional.cs" />
     <Compile Include="Common\OptionalHelper.cs" />
     <Compile Include="Common\Commands\ToStringCommand.cs" />
+    <Compile Include="Common\Runnables\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentConverter.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentUnwrapper.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentWrapper.cs" />
@@ -86,7 +87,10 @@
     <Compile Include="Common\Runnables\IdentityRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueArgumentWrapper.cs" />
+    <Compile Include="Common\Runnables\ProducesAttribute.cs" />
     <Compile Include="Common\Runnables\RegularExpressionRunnable.cs" />
+    <Compile Include="Common\Runnables\Runnable.cs" />
+    <Compile Include="Common\Runnables\RunnableManager.cs" />
     <Compile Include="Common\Runnables\StringTransformation\FillStringRunnable.cs" />
     <Compile Include="Common\Runnables\StringTransformation\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\SplitStringRunnable.cs" />

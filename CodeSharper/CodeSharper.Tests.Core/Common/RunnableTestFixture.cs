@@ -150,5 +150,21 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null.And.Not.Empty);
         }
+
+        [Test]
+        public void RunnableManagerShouldHandleArgumentWrappersAndUnwrappers()
+        {
+            // Given
+            var underTest = RunnableManager.Instance;
+            var runnableType = typeof(FindTextRunnable);
+            underTest.Register(runnableType);
+
+            // When
+            var result = underTest.GetRunnableDescriptor(runnableType);
+
+            // Then
+            Assert.That(result.Type, Is.EqualTo(runnableType));
+        }
+
     }
 }

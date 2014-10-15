@@ -8,6 +8,10 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
+    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>))]
+    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>))]
+    [Produces(typeof(MultiValueArgumentWrapper<TextRange>))]
+    [Produces(typeof(FlattenArgumentWrapper<TextRange>))]
     public class FindTextRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public String Pattern { get; set; }
