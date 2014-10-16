@@ -20,12 +20,6 @@ namespace CodeSharper.Core.Common.Runnables
         {
             Constraints.NotNull(() => pattern);
             Pattern = pattern;
-
-            Consumes<ValueArgumentUnwrapper<TextRange>>();
-            Consumes<MultiValueArgumentUnwrapper<TextRange>>();
-
-            Produces<MultiValueArgumentWrapper<TextRange>>();
-            Produces<FlattenArgumentWrapper<TextRange>>();
         }
 
         public override IEnumerable<TextRange> Run(TextRange range)

@@ -5,15 +5,14 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
+    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<TextRange>))]
+    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(FlattenArgumentWrapper<TextRange>))]
     public class SplitStringRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public string Separator { get; protected set; }
 
         public SplitStringRunnable(String separator)
         {
-            Consumes<ValueArgumentUnwrapper<TextRange>>();
-            Produces<MultiValueArgumentWrapper<TextRange>>();
-
             Separator = separator;
         }
 

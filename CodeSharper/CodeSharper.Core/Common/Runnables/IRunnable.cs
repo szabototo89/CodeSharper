@@ -10,9 +10,6 @@ namespace CodeSharper.Core.Common.Runnables
 {
     public interface IRunnable
     {
-        IEnumerable<IArgumentWrapper> SupportedArgumentWrappers { get; }
-        IEnumerable<IArgumentUnwrapper> SupportedArgumentUnwrappers { get; }
-
         Object Run(Object parameter);
     }
 

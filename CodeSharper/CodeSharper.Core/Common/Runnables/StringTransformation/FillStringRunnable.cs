@@ -1,9 +1,13 @@
 using System;
 using System.Linq;
 using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Core.Common.Runnables.Converters;
+using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables.StringTransformation
 {
+    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(ValueArgumentWrapper<TextRange>))]
+    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<TextRange>))]
     public class FillStringRunnable : StringTransformationRunnable
     {
         public FillStringRunnable(Char character) :
@@ -23,7 +27,7 @@ namespace CodeSharper.Core.Common.Runnables.StringTransformation
                 .NotNull()
                 .NotBlank();
 
-            return String.Join(String.Empty, Enumerable.Repeat(fillPattern, text.Length / fillPattern.Length))
+            return String.Join(String.Empty, Enumerable.Repeat(fillPattern, text.Length / fillPattern.Length + 1))
                 .Substring(0, text.Length);
         }
 

@@ -27,20 +27,22 @@ namespace CodeSharper.Core.Common.Runnables
             _registeredRunnables = new Dictionary<Type, RunnableDescriptor>();
         }
 
-        public RunnableManager Register(IRunnable runnable)
+        public RunnableDescriptor Register(IRunnable runnable)
         {
             Constraints.NotNull(() => runnable);
             return Register(runnable.GetType());
         }
 
-        public RunnableManager Register(Type type)
+        public RunnableDescriptor Register(Type type)
         {
-            if (_registeredRunnables.ContainsKey(type))
-                return this;
+            RunnableDescriptor runnableDescriptor;
+            if (_registeredRunnables.TryGetValue(type, out runnableDescriptor))
+                return runnableDescriptor;
 
-            _registeredRunnables.Add(type, new RunnableDescriptor(type));
+            runnableDescriptor = new RunnableDescriptor(type);
+            _registeredRunnables.Add(type, runnableDescriptor);
 
-            return this;
+            return runnableDescriptor;
         }
 
         public RunnableDescriptor GetRunnableDescriptor(Type type)

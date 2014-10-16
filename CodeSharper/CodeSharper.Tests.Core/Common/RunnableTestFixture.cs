@@ -60,6 +60,22 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo("hi world!"));
         }
 
+        [Test]
+        public void ReplaceTextRunnableShouldAbleToReplaceArrayOfGivenValues()
+        {
+            // Given
+            var parameter = TestHelper.TextRange("hello world!");
+            var underTest = new ReplaceTextRunnable("hi world!");
+
+            // When
+            var result = underTest.Run(parameter);
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Text, Is.EqualTo("hi world!"));
+        }
+
+
         [Test(Description = "FillStringRunnable should fill with given character in string")]
         [TestCase("Hello World!", "************")]
         public void FillStringRunnableShouldFillWithGivenCharacterInString(String parameter, String expected)
@@ -119,6 +135,20 @@ namespace CodeSharper.Tests.Core.Common
 
             // Then
             Assert.That(result, Is.EqualTo(parameter));
+        }
+
+        [Test]
+        public void RepeatRunnableShouldReturnARepeatedValuesOfPassedValue()
+        {
+            // Given
+            var parameter = 10;
+            var underTest = new RepeatRunnable(3);
+
+            // When
+            var result = underTest.Run(parameter);
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(new[] { 10, 10, 10 }));
         }
 
         [Test]

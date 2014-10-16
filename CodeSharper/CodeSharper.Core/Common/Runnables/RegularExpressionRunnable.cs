@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
+    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(ValueArgumentWrapper<IEnumerable<TextRange>>))]
+    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<IEnumerable<TextRange>>))]
     public class RegularExpressionRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         private readonly Regex _regex;
