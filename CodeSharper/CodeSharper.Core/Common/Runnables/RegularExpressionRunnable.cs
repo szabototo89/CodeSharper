@@ -8,8 +8,8 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(ValueArgumentWrapper<IEnumerable<TextRange>>))]
-    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<IEnumerable<TextRange>>))]
+    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<TextRange>))]
+    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(FlattenArgumentWrapper<TextRange>))]
     public class RegularExpressionRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         private readonly Regex _regex;

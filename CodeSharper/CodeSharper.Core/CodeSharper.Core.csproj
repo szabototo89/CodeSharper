@@ -53,6 +53,8 @@
     <Compile Include="Common\ConstraintChecking\NotBlankConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotEmptyConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\NotNullConstraint.cs" />
+    <Compile Include="Common\ControlFlow\ControlFlows.cs" />
+    <Compile Include="Common\ControlFlow\StandardControlFlow.cs" />
     <Compile Include="Common\Executors.cs" />
     <Compile Include="Common\ICloneable.cs" />
     <Compile Include="Common\IExecutor.cs" />

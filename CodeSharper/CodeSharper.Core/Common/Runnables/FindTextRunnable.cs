@@ -22,18 +22,18 @@ namespace CodeSharper.Core.Common.Runnables
             Pattern = pattern;
         }
 
-        public override IEnumerable<TextRange> Run(TextRange range)
+        public override IEnumerable<TextRange> Run(TextRange parameter)
         {
-            Constraints.NotNull(() => range);
+            Constraints.NotNull(() => parameter);
 
-            var document = range.Text;
+            var text = parameter.Text;
 
             var results = new List<TextRange>();
             var index = -Pattern.Length;
 
-            while ((index = document.IndexOf(Pattern, index + Pattern.Length, StringComparison.Ordinal)) != -1)
+            while ((index = text.IndexOf(Pattern, index + Pattern.Length, StringComparison.Ordinal)) != -1)
             {
-                results.Add(range.SubStringOfText(range.Start + index, Pattern.Length));
+                results.Add(parameter.SubStringOfText(parameter.Start + index, Pattern.Length));
             }
 
             return results;
