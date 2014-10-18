@@ -5,7 +5,7 @@ using CodeSharper.Core.Common.Runnables.Converters;
 namespace CodeSharper.Core.Common.Runnables
 {
     // TODO: Refactor this section (Consumes/Produces) to another static class
-    public abstract class Runnable<TIn, TOut> : IRunnable<TIn, TOut>
+    public abstract class Runnable<TIn, TOut> : IRunnable, IRunnable<TIn, TOut>
     {
         protected Runnable() {}
 
@@ -13,7 +13,7 @@ namespace CodeSharper.Core.Common.Runnables
 
         Object IRunnable.Run(Object parameter)
         {
-            return Run((TIn)parameter);
+            return (TOut)Run((TIn)parameter);
         }
     }
 }

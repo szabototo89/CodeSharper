@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CodeSharper.Core.Common.Values
 {
@@ -7,6 +8,15 @@ namespace CodeSharper.Core.Common.Values
         /// <summary>
         /// Value of argument object
         /// </summary>
-        IEnumerable<object> Values { get; }
+        IEnumerable<Object> Values { get; }
     }
+
+    public interface IMultiValueArgument<out TValue>
+    {
+        /// <summary>
+        /// Value of argument object
+        /// </summary>
+        IEnumerable<TValue> Values { get; }
+    }
+
 }

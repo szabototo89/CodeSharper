@@ -44,6 +44,7 @@ namespace CodeSharper.Tests.Core.Common
         public void RunnableShouldAbleToHandleSingleValue()
         {
             Func<Argument> argument = () => Arguments.Value(TextRange("abcdef abcdef"));
+            
             CheckRunnableWithSingleValue(
                 argument(), new FindTextRunnable("a"));
 
@@ -55,6 +56,9 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithSingleValue(
                 argument(), new RepeatRunnable(3));
+
+            CheckRunnableWithSingleValue(
+                argument(), new IdentityRunnable());
         }
 
         [Test]
@@ -69,6 +73,9 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithMultipleValues(
                 argument(), new FillStringRunnable("abc"));
+
+            CheckRunnableWithSingleValue(
+                argument(), new IdentityRunnable());
         }
 
         [Test]

@@ -28,10 +28,10 @@ namespace CodeSharper.Core.Common
 
         public Argument Execute(Argument parameter)
         {
-            return UnwrapResult(WrapParameter(parameter));
+            return WrapResult(UnwrapParameter(parameter));
         }
 
-        private Argument UnwrapResult(Object result)
+        private Argument WrapResult(Object result)
         {
             var unwrapper = _runnableDescriptor.SupportedArgumentWrappers.FirstOrDefault(c => c.IsWrappable(result));
 
@@ -39,12 +39,12 @@ namespace CodeSharper.Core.Common
             return unwrapper.Wrap(result) as Argument;
         }
 
-        private Object WrapParameter(Argument parameter)
+        private Object UnwrapParameter(Argument parameter)
         {
             var converter = _runnableDescriptor.SupportedArgumentUnwrappers.FirstOrDefault(c => c.IsUnwrappable(parameter));
 
             if (converter == null) return null;
-            return converter.Unwrap(parameter, unwrapped => _runnable.Run((TIn) unwrapped));
+            return converter.Unwrap(parameter, unwrapped => _runnable.Run((TIn)unwrapped));
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CodeSharper.Core.Common.Values
 {
-    public class MultiValueArgument<TValue> : Argument, IValueArgument, IMultiValueArgument, IEquatable<MultiValueArgument<TValue>>
+    public class MultiValueArgument<TValue> : Argument, IValueArgument, IMultiValueArgument, IMultiValueArgument<TValue>, IEquatable<MultiValueArgument<TValue>>
     {
         public MultiValueArgument(IEnumerable<TValue> values)
         {

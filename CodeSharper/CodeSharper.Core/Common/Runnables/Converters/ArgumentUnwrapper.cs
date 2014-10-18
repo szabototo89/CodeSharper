@@ -6,14 +6,13 @@ using CodeSharper.Core.Common.Values;
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
     public abstract class ArgumentUnwrapper<TArgument, TParameter> : IArgumentUnwrapper
-        where TArgument : Argument
     {
         public virtual Boolean IsUnwrappable(Object parameter)
         {
             return parameter is TArgument;
         }
 
-        Object IArgumentUnwrapper.Unwrap<TFunctionResult>(Object parameter, Func<Object, TFunctionResult> func)
+        public virtual Object Unwrap<TFunctionResult>(Object parameter, Func<Object, TFunctionResult> func)
         {
             return Unwrap((TArgument)parameter, param => func(param));
         }

@@ -10,7 +10,7 @@ namespace CodeSharper.Core.Common.Values
     /// Represents value of arguments
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
-    public class ValueArgument<TValue> : Argument, IValueArgument, IEquatable<ValueArgument<TValue>>
+    public class ValueArgument<TValue> : Argument, IValueArgument, IValueArgument<TValue>, IEquatable<ValueArgument<TValue>>
     {
         /// <summary>
         /// Default constructor of ValueArgument

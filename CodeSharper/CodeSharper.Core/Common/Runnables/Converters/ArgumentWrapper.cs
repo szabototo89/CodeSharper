@@ -6,12 +6,12 @@ namespace CodeSharper.Core.Common.Runnables.Converters
     public abstract class ArgumentWrapper<TParameter, TArgument> : IArgumentWrapper
         where TArgument : Argument
     {
-        public Boolean IsWrappable(Object parameter)
+        public virtual Boolean IsWrappable(Object parameter)
         {
             return parameter is TParameter;
         }
 
-        Object IArgumentWrapper.Wrap(Object parameter)
+        public virtual Object Wrap(Object parameter)
         {
             return Wrap((TParameter)parameter);
         }

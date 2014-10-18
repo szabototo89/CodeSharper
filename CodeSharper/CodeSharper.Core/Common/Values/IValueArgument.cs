@@ -9,4 +9,9 @@ namespace CodeSharper.Core.Common.Values
         /// </summary>
         Object Value { get; }
     }
-}
+
+    public interface IValueArgument<out TValue>
+    {
+        TValue Value { get; }
+    }
+} 
