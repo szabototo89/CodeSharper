@@ -73,6 +73,7 @@
     <Compile Include="Common\Runnables\Converters\IArgumentWrapper.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueArgumentUnwrapper.cs" />
     <Compile Include="Common\Runnables\Converters\ValueArgumentUnwrapper.cs" />
+    <Compile Include="Common\Runnables\CountTextRangeLength.cs" />
     <Compile Include="Common\Runnables\FilterTextByColumn.cs" />
     <Compile Include="Common\Runnables\FilterTextByLine.cs" />
     <Compile Include="Common\Runnables\FindTextRunnable.cs" />
@@ -105,6 +106,8 @@
     <Compile Include="Common\Values\ValueArgument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
+    <Compile Include="Texts\FilterPosition.cs" />
+    <Compile Include="Texts\FilterPositions.cs" />
     <Compile Include="Texts\StringHelper.cs" />
     <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextRange.cs" />

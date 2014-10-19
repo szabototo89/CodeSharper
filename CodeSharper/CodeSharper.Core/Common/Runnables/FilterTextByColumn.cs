@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
+    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<TextRange>))]
+    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(FlattenArgumentWrapper<TextRange>))]
     public class FilterTextByColumn : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public int Column { get; protected set; }

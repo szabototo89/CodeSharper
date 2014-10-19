@@ -57,6 +57,9 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithSingleValue(
                 argument(), new FilterTextByLine(0, " "));
+
+            CheckRunnableWithSingleValue(
+                argument(), new FilterTextByColumn(0));
         }
 
         [Test]
@@ -72,11 +75,14 @@ namespace CodeSharper.Tests.Core.Common
             CheckRunnableWithMultipleValues(
                 argument(), new FillStringRunnable("abc"));
 
-            CheckRunnableWithSingleValue(
+            CheckRunnableWithMultipleValues(
                 argument(), new IdentityRunnable());
             
-            CheckRunnableWithSingleValue(
+            CheckRunnableWithMultipleValues(
                 argument(), new FilterTextByLine(0, " "));
+
+            CheckRunnableWithMultipleValues(
+                argument(), new FilterTextByColumn(0));
         }
 
         [Test]

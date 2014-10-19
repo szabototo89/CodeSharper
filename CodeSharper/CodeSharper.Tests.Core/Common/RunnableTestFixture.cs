@@ -212,6 +212,22 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [Test]
+        public void FilterByLineShouldFilterByEvenPositionsTextRanges()
+        {
+            // Given
+            var text = String.Join(Environment.NewLine, Enumerable.Range(0, 15));
+            var textRange = TextRange(text);
+            var underTest = new FilterTextByLine(FilterPositions.Even);
+
+            // When
+            var result = underTest.Run(textRange);
+
+            // Then
+            Assert.That(result.Text, Is.EqualTo("5"));
+        }
+
+
+        [Test]
         public void FilterByColumnShouldFilterTextRanges()
         {
             // Given
@@ -249,5 +265,19 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Select(range => range.Text), Is.EquivalentTo(expected));
         }
 
+        [Test]
+        public void CountTextRangeLengthShouldReturnLengthOfTextRange()
+        {
+            // Given
+            var text = "Hello World!";
+            var textRange = TextRange(text);
+            var underTest = new CountTextRangeLength();
+
+            // When
+            var result = underTest.Run(textRange);
+
+            // Then
+            Assert.That(result, Is.EqualTo(12));
+        }
     }
 }

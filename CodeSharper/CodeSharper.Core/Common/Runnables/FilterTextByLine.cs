@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Common.Runnables
     public class FilterTextByLine : Runnable<TextRange, TextRange>
     {
         public int Line { get; protected set; }
-        
+
         public string Separator { get; protected set; }
 
         public FilterTextByLine(Int32 line) : this(line, Environment.NewLine) { }
@@ -25,6 +25,11 @@ namespace CodeSharper.Core.Common.Runnables
             Separator = separator;
         }
 
+        public FilterTextByLine(FilterPosition position)
+        {
+            throw new NotImplementedException();
+        }
+
         public override TextRange Run(TextRange textRange)
         {
             Constraints.NotNull(() => textRange);
@@ -34,8 +39,7 @@ namespace CodeSharper.Core.Common.Runnables
 
             Int32 line = -1, index = -Separator.Length, start = 0;
 
-            while ((index = text.IndexOf(Separator, index + Separator.Length, StringComparison.Ordinal)) != -1 &&
-                   line < Line - 1)
+            while ((index = text.IndexOf(Separator, index + Separator.Length, StringComparison.Ordinal)) != -1 && line < Line - 1)
             {
                 ++line;
                 start = index;
