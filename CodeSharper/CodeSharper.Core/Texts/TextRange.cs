@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Mime;
 using System.Reflection.Emit;
@@ -15,6 +16,7 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Texts
 {
+    [DebuggerDisplay("TextRange({Text})")]
     public class TextRange : IDisposable
     {
         private readonly List<TextRange> _children;

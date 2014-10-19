@@ -73,6 +73,8 @@
     <Compile Include="Common\Runnables\Converters\IArgumentWrapper.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueArgumentUnwrapper.cs" />
     <Compile Include="Common\Runnables\Converters\ValueArgumentUnwrapper.cs" />
+    <Compile Include="Common\Runnables\FilterTextByColumn.cs" />
+    <Compile Include="Common\Runnables\FilterTextByLine.cs" />
     <Compile Include="Common\Runnables\FindTextRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\IArgumentConverter.cs" />
     <Compile Include="Common\Runnables\IdentityRunnable.cs" />
@@ -109,7 +111,9 @@
     <Compile Include="Texts\TextNodeHelper.cs" />
     <Compile Include="Texts\TextRangeHelper.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Texts\Filters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

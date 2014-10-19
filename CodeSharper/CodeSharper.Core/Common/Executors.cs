@@ -10,10 +10,10 @@ namespace CodeSharper.Core.Common
 {
     public static class Executors
     {
-        public static StandardExecutor<TIn, TOut> CreateStandardExecutor<TIn, TOut>(IRunnable<TIn, TOut> runnable)
+        public static StandardExecutor CreateStandardExecutor(IRunnable runnable)
         {
             Constraints.NotNull(() => runnable);
-            return new StandardExecutor<TIn, TOut>(runnable);
+            return new StandardExecutor(runnable);
         }
     }
 }

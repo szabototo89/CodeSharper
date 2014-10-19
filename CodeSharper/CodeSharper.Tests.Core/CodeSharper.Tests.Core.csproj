@@ -59,6 +59,7 @@
     <Compile Include="Common\NumberHelperTestFixture.cs" />
     <Compile Include="Common\RunnableTestFixture.cs" />
     <Compile Include="Common\RunnableWithStandardExecutorTestFixture.cs" />
+    <Compile Include="Common\TextRangeTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts\ArgumentTestFixture.cs" />
     <Compile Include="Texts\TextDocumentTestFixture.cs" />

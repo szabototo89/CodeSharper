@@ -28,9 +28,8 @@ namespace CodeSharper.Core.Common.Runnables
             Constraints.NotNull(() => parameter);
             var matches = _regex.Matches(parameter.Text)
                 .OfType<Match>()
-                .Select(match => parameter.SubStringOfText(match.Index, match.Length));
+                .Select(match => parameter.SubStringOfText(parameter.Start + match.Index, match.Length));
             return matches.ToArray();
-
         }
     }
 }

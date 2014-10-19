@@ -25,11 +25,11 @@ namespace CodeSharper.Core.Common.Runnables
 
             while ((index = text.IndexOf(Separator, lastIndex, StringComparison.Ordinal)) != -1)
             {
-                ranges.Add(parameter.SubStringOfText(lastIndex, index - lastIndex));
-                lastIndex = index + 1;
+                ranges.Add(parameter.SubStringOfText(parameter.Start + lastIndex, index - lastIndex));
+                lastIndex = index + Separator.Length;
             }
 
-            ranges.Add(parameter.SubStringOfText(lastIndex));
+            ranges.Add(parameter.SubStringOfText(parameter.Start + lastIndex, parameter.Text.Length - lastIndex));
 
             return ranges;
         }

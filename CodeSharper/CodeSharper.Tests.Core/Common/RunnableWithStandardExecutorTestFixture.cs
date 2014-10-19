@@ -9,13 +9,8 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Common
 {
     [TestFixture]
-    internal class RunnableWithStandardExecutorTestFixture
+    internal class RunnableWithStandardExecutorTestFixture : TextRangeTestBase
     {
-        private static TextRange TextRange(String text)
-        {
-            return new TextDocument(text).TextRange;
-        }
-
         private static void CheckRunnableWithSingleValue<TIn, TOut>(Argument argument, IRunnable<TIn, TOut> runnable)
         {
             // Given in parameters
@@ -44,7 +39,7 @@ namespace CodeSharper.Tests.Core.Common
         public void RunnableShouldAbleToHandleSingleValue()
         {
             Func<Argument> argument = () => Arguments.Value(TextRange("abcdef abcdef"));
-            
+
             CheckRunnableWithSingleValue(
                 argument(), new FindTextRunnable("a"));
 
@@ -59,6 +54,9 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithSingleValue(
                 argument(), new IdentityRunnable());
+
+            CheckRunnableWithSingleValue(
+                argument(), new FilterTextByLine(0, " "));
         }
 
         [Test]
@@ -76,6 +74,9 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithSingleValue(
                 argument(), new IdentityRunnable());
+            
+            CheckRunnableWithSingleValue(
+                argument(), new FilterTextByLine(0, " "));
         }
 
         [Test]

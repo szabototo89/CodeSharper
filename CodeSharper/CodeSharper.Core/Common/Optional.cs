@@ -35,7 +35,8 @@ namespace CodeSharper.Core.Common
         /// Initializes a new instance of the <see cref="Optional{TType}"/> struct.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Optional(TType value) : this()
+        public Optional(TType value)
+            : this()
         {
             _value = value;
             IsInitalized = true;
@@ -91,9 +92,9 @@ namespace CodeSharper.Core.Common
         /// <summary>
         /// Represents an uninitialized Option(TType) object
         /// </summary>
-        public static Optional<TType> None()
+        public static Optional<TType> None
         {
-            return _none;
+            get { return _none; }
         }
 
         /// <summary>

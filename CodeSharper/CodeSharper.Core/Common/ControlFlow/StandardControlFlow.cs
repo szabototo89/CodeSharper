@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables;
@@ -23,12 +24,6 @@ namespace CodeSharper.Core.Common.ControlFlow
             return this;
         }
 
-        public StandardControlFlow AddRunnable<TIn, TOut>(IRunnable<TIn, TOut> runnable)
-        {
-            _executors.Add(Executors.CreateStandardExecutor(runnable));
-            return this;
-        }
-
         public StandardControlFlow SetControlFlow(IEnumerable<IExecutor> executors)
         {
             Constraints.NotEmpty(() => executors);
@@ -36,6 +31,15 @@ namespace CodeSharper.Core.Common.ControlFlow
             _executors.AddRange(executors);
             return this;
         }
+
+        public StandardControlFlow SetControlFlow(IEnumerable<IRunnable> runnables)
+        {
+            Constraints.NotEmpty(() => runnables);
+            Clear();
+            _executors.AddRange(runnables.Select(Executors.CreateStandardExecutor));
+            return this;
+        }
+
 
         public Argument Execute(Argument parameter)
         {

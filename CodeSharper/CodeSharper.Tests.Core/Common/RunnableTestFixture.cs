@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Common
 {
     [TestFixture]
-    internal class RunnableTestFixture
+    internal class RunnableTestFixture : TextRangeTestBase
     {
         [Test]
         public void ToUpperCaseRunnableShouldReturnUppercaseTextRange()
@@ -194,6 +194,59 @@ namespace CodeSharper.Tests.Core.Common
 
             // Then
             Assert.That(result.Type, Is.EqualTo(runnableType));
+        }
+
+        [Test]
+        public void FilterByLineShouldFilterTextRanges()
+        {
+            // Given
+            var text = String.Join(Environment.NewLine, Enumerable.Range(0, 15));
+            var textRange = TextRange(text);
+            var underTest = new FilterTextByLine(5);
+
+            // When
+            var result = underTest.Run(textRange);
+
+            // Then
+            Assert.That(result.Text, Is.EqualTo("5"));
+        }
+
+        [Test]
+        public void FilterByColumnShouldFilterTextRanges()
+        {
+            // Given
+            var text = String.Join(Environment.NewLine, Enumerable.Repeat("a b c d e f", 3));
+            var textRange = TextRange(text);
+            var underTest = new FilterTextByColumn(2);
+
+            // When
+            var result = underTest.Run(textRange);
+
+            // Then
+            var expected = Enumerable.Repeat("c", 3);
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(expected));
+        }
+
+        [Test]
+        public void FilterByColumnShouldFilterVariableLengthOfLinesTextRange()
+        {
+            // Given
+            var text = String.Join(Environment.NewLine, new[]
+            {
+                "a b c d e",
+                "aaa b c d e",
+                "hello world c again",
+                "hi"
+            });
+            var textRange = TextRange(text);
+            var underTest = new FilterTextByColumn(2);
+
+            // When
+            var result = underTest.Run(textRange);
+
+            // Then
+            var expected = Enumerable.Repeat("c", 3);
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(expected));
         }
 
     }

@@ -6,13 +6,13 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common
 {
-    public class StandardExecutor<TIn, TOut> : IExecutor
+    public class StandardExecutor : IExecutor
     {
-        private readonly IRunnable<TIn, TOut> _runnable;
+        private readonly IRunnable _runnable;
         private readonly RunnableManager _runnableManager;
         private RunnableDescriptor _runnableDescriptor;
 
-        public StandardExecutor(IRunnable<TIn, TOut> runnable)
+        public StandardExecutor(IRunnable runnable)
         {
             Constraints.NotNull(() => runnable);
             _runnable = runnable;
@@ -20,7 +20,7 @@ namespace CodeSharper.Core.Common
             RegisterRunnable(runnable);
         }
 
-        private StandardExecutor<TIn, TOut> RegisterRunnable(IRunnable<TIn, TOut> runnable)
+        private StandardExecutor RegisterRunnable(IRunnable runnable)
         {
             _runnableDescriptor = _runnableManager.Register(runnable);
             return this;

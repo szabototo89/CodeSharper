@@ -11,6 +11,7 @@ using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
+using CodeSharper.Tests.Core.Utilities;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
@@ -44,9 +45,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
-            underTest
-                .AddRunnable(new SplitStringRunnable(" "))
-                .AddRunnable(new ToUpperCaseRunnable());
+            underTest.SetControlFlow(new IRunnable[] {
+                new SplitStringRunnable(" "),
+                new ToUpperCaseRunnable()
+            });
 
             // When
             var result = underTest.Execute(
@@ -63,10 +65,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
-            underTest.SetControlFlow(new[]
+            underTest.SetControlFlow(new IRunnable[]
             {
-                StandardExecutor(new SplitStringRunnable(" ")),
-                StandardExecutor(new ToUpperCaseRunnable())
+                new SplitStringRunnable(" "),
+                new ToUpperCaseRunnable()
             });
 
             // When
@@ -84,6 +86,7 @@ namespace CodeSharper.Tests.Core.Common
         [TestCase(10)]
         [TestCase(50)]
         [TestCase(100)]
+        [TestCase(500)]
         public void PerformanceTest(Int32 count)
         {
             // Given
@@ -106,5 +109,35 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
         }
+
+        [Test]
+        [TestCase("Hello World!")]
+        [TestCase(TestHelper.LoremIpsum)]
+        public void StandardControlFlowShouldSplitAndFilterByRegularExpressionAndConvertedToUpperCase(String text)
+        {
+            // Given
+            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
+            underTest.SetControlFlow(new IRunnable[] {
+                new SplitStringRunnable(" "),
+                new RegularExpressionRunnable(@"\w{7,}"), 
+                new ToUpperCaseRunnable()
+            });
+
+            // When
+            var textRange = TextRange(text);
+            var result = underTest.Execute(
+                Value(textRange)
+            ) as MultiValueArgument<TextRange>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            var expected = text
+                .Split(new[] { " ", ",", "." }, StringSplitOptions.None)
+                .Where(word => word.Length >= 7)
+                .Select(word => word.ToUpperInvariant());
+
+            Assert.That(result.Values.Select(range => range.Text), Is.EquivalentTo(expected));
+        }
+
     }
 }
