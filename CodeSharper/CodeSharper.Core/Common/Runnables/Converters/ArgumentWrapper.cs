@@ -3,7 +3,7 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
-    public abstract class ArgumentWrapper<TParameter, TArgument> : IArgumentWrapper
+    public abstract class ArgumentWrapper<TParameter, TArgument> : IArgumentWrapper, IArgumentWrapper<TParameter, TArgument>
         where TArgument : Argument
     {
         public virtual Boolean IsWrappable(Object parameter)

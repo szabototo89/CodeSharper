@@ -44,11 +44,9 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
-            underTest.SetControlFlow(new IExecutor[]
-            {
-                StandardExecutor(new SplitStringRunnable(" ")),
-                StandardExecutor(new ToUpperCaseRunnable())
-            });
+            underTest
+                .AddRunnable(new SplitStringRunnable(" "))
+                .AddRunnable(new ToUpperCaseRunnable());
 
             // When
             var result = underTest.Execute(

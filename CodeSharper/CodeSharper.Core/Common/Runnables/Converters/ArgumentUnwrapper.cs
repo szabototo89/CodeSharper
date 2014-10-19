@@ -5,7 +5,7 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
-    public abstract class ArgumentUnwrapper<TArgument, TParameter> : IArgumentUnwrapper
+    public abstract class ArgumentUnwrapper<TArgument, TParameter> : IArgumentUnwrapper, IArgumentUnwrapper<TArgument, TParameter>
     {
         public virtual Boolean IsUnwrappable(Object parameter)
         {

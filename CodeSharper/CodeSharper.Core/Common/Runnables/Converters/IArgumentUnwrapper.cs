@@ -8,4 +8,9 @@ namespace CodeSharper.Core.Common.Runnables.Converters
 
         Object Unwrap<TFunctionResult>(Object parameter, Func<Object, TFunctionResult> func);
     }
+
+    public interface IArgumentUnwrapper<in TArgument, out TParameter>
+    {
+        Object Unwrap<TFunctionResult>(TArgument parameter, Func<TParameter, TFunctionResult> func);
+    }
 }

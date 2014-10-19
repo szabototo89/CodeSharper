@@ -1,4 +1,5 @@
 using System;
+using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
@@ -7,5 +8,11 @@ namespace CodeSharper.Core.Common.Runnables.Converters
         Boolean IsWrappable(Object parameter);
 
         Object Wrap(Object parameter);
+    }
+
+    public interface IArgumentWrapper<in TParameter, out TArgument>
+        where TArgument : Argument
+    {
+        TArgument Wrap(TParameter parameter);
     }
 }

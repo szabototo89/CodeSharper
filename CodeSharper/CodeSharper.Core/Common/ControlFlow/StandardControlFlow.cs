@@ -10,12 +10,30 @@ namespace CodeSharper.Core.Common.ControlFlow
 {
     public class StandardControlFlow
     {
-        private IEnumerable<IExecutor> _executors;
+        private readonly List<IExecutor> _executors;
+
+        public StandardControlFlow()
+        {
+            _executors = new List<IExecutor>();
+        }
+
+        public StandardControlFlow Clear()
+        {
+            _executors.Clear();
+            return this;
+        }
+
+        public StandardControlFlow AddRunnable<TIn, TOut>(IRunnable<TIn, TOut> runnable)
+        {
+            _executors.Add(Executors.CreateStandardExecutor(runnable));
+            return this;
+        }
 
         public StandardControlFlow SetControlFlow(IEnumerable<IExecutor> executors)
         {
             Constraints.NotEmpty(() => executors);
-            _executors = executors;
+            Clear();
+            _executors.AddRange(executors);
             return this;
         }
 

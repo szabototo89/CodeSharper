@@ -44,7 +44,7 @@ namespace CodeSharper.Core.Common
             var converter = _runnableDescriptor.SupportedArgumentUnwrappers.FirstOrDefault(c => c.IsUnwrappable(parameter));
 
             if (converter == null) return null;
-            return converter.Unwrap(parameter, unwrapped => _runnable.Run((TIn)unwrapped));
+            return converter.Unwrap(parameter, unwrapped => _runnable.Run(unwrapped));
         }
     }
 }

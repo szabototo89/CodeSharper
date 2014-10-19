@@ -7,7 +7,11 @@ namespace CodeSharper.Core.Common.Runnables.Converters
 {
     public class MultiValueArgumentUnwrapper<TParameter> : ArgumentUnwrapper<IMultiValueArgument<TParameter>, TParameter>
     {
-        
+        public override Boolean IsUnwrappable(Object parameter)
+        {
+            var i = 0;
+            return base.IsUnwrappable(parameter);
+        }
 
         public override Object Unwrap<TFunctionResult>(IMultiValueArgument<TParameter> parameter, Func<TParameter, TFunctionResult> func)
         {
