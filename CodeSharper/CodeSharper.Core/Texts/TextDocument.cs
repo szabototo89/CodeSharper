@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Texts
     {
         private readonly List<TextRange> _registeredTextRanges;  
 
-        public String Text { get; private set; }
+        public StringBuilder Text { get; private set; }
 
         public TextRange TextRange { get; private set; }
 
@@ -21,7 +21,7 @@ namespace CodeSharper.Core.Texts
             Constraints.NotNull(() => text);
 
             _registeredTextRanges = new List<TextRange>();
-            Text = text;
+            Text = new StringBuilder(text);
             TextRange = new TextRange(0, Text.Length, this);
         }
 

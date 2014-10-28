@@ -31,7 +31,7 @@ namespace CodeSharper.Core.Texts
 
         public TextDocument TextDocument { get; set; }
 
-        public virtual String Text { get { return TextDocument.Text.Substring(Start, Length); } }
+        public virtual String Text { get { return TextDocument.Text.ToString(Start, Length); } }
 
         public IEnumerable<TextRange> Children { get { return _children; } }
 

@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core.Texts
             // Given in setup
 
             // When
-            var result = UnderTest.Text;
+            var result = UnderTest.Text.ToString();
 
             // Then
             Assert.That(result, Is.EqualTo("Hello World!"));
@@ -52,7 +52,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             node.ReplaceText("hello");
-            var result = UnderTest.Text;
+            var result = UnderTest.Text.ToString();
 
             // Then
             Assert.That(result, Is.EqualTo("hello World!"));
@@ -66,7 +66,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             node.ReplaceText("");
-            var result = UnderTest.Text;
+            var result = UnderTest.Text.ToString();
 
             // Then
             Assert.That(result, Is.EqualTo(" World!"));
@@ -80,7 +80,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             node.ReplaceText("HelloHello");
-            var result = UnderTest.Text;
+            var result = UnderTest.Text.ToString();
 
             // Then
             Assert.That(result, Is.EqualTo("HelloHello World!"));
@@ -96,7 +96,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             head.ReplaceText("HelloHello");
-            var result = underTest.Text;
+            var result = underTest.Text.ToString();
 
             // Then
             Assert.That(result, Is.EqualTo("HelloHello World!"));
@@ -115,7 +115,7 @@ namespace CodeSharper.Tests.Core.Texts
             var result = UnderTest.TextRange;
 
             // Then
-            Assert.That(result.Text, Is.EqualTo(UnderTest.Text));
+            Assert.That(result.Text, Is.EqualTo(UnderTest.Text.ToString()));
         }
 
         [Test]
@@ -134,7 +134,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             var expected = "hello hello world!";
-            Assert.That(underTest.Text, Is.EqualTo(expected));
+            Assert.That(underTest.Text.ToString(), Is.EqualTo(expected));
             Assert.That(underTest.TextRange, Is.Not.Null);
             Assert.That(underTest.TextRange.Length, Is.EqualTo(expected.Length));
         }
@@ -154,7 +154,7 @@ namespace CodeSharper.Tests.Core.Texts
             ranges[1].ReplaceText("LONG");
 
             // Then
-            Assert.That(underTest.Text, Is.EqualTo("LONG"));
+            Assert.That(underTest.Text.ToString(), Is.EqualTo("LONG"));
         }
     }
 }
