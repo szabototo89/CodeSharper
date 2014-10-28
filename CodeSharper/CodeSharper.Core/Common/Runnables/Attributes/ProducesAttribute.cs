@@ -1,8 +1,6 @@
 ﻿using System;
-using CodeSharper.Core.Common.ConstraintChecking;
-using CodeSharper.Core.Common.Runnables.Converters;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class ProducesAttribute : Attribute

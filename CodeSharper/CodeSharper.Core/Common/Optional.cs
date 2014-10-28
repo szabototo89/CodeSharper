@@ -10,14 +10,14 @@ namespace CodeSharper.Core.Common
     /// <summary>
     /// Optional(T) class which is representing that value is initialized or not.
     /// </summary>
-    /// <typeparam name="TType">The type of the type.</typeparam>
-    public struct Optional<TType>
+    /// <typeparam name="TValue">The type of the type.</typeparam>
+    public struct Optional<TValue>
     {
-        private static Optional<TType> _none;
+        private static Optional<TValue> _none;
 
         #region Private fields
 
-        private TType _value;
+        private TValue _value;
 
         #endregion
 
@@ -28,14 +28,14 @@ namespace CodeSharper.Core.Common
         /// </summary>
         static Optional()
         {
-            _none = new Optional<TType>();
+            _none = new Optional<TValue>();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Optional{TType}"/> struct.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Optional(TType value)
+        public Optional(TValue value)
             : this()
         {
             _value = value;
@@ -57,7 +57,7 @@ namespace CodeSharper.Core.Common
         /// <summary>
         /// Gets or sets the value of optional object.
         /// </summary>
-        public TType Value
+        public TValue Value
         {
             get { return _value; }
             set { _value = value; }
@@ -67,12 +67,12 @@ namespace CodeSharper.Core.Common
 
         #region Public implicit operators
 
-        public static implicit operator Boolean(Optional<TType> optional)
+        public static implicit operator Boolean(Optional<TValue> optional)
         {
             return optional.IsInitalized;
         }
 
-        public static implicit operator TType(Optional<TType> optional)
+        public static implicit operator TValue(Optional<TValue> optional)
         {
             if (!optional.IsInitalized)
                 throw new Exception("Optional is not initialized!");
@@ -80,9 +80,9 @@ namespace CodeSharper.Core.Common
             return optional.Value;
         }
 
-        public static implicit operator Optional<TType>(TType value)
+        public static implicit operator Optional<TValue>(TValue value)
         {
-            return new Optional<TType>(value);
+            return new Optional<TValue>(value);
         }
 
         #endregion
@@ -92,7 +92,7 @@ namespace CodeSharper.Core.Common
         /// <summary>
         /// Represents an uninitialized Option(TType) object
         /// </summary>
-        public static Optional<TType> None
+        public static Optional<TValue> None
         {
             get { return _none; }
         }
@@ -100,9 +100,9 @@ namespace CodeSharper.Core.Common
         /// <summary>
         /// Initializes an Optional(TType) instance with some value. 
         /// </summary>
-        public static Optional<TType> Some(TType value)
+        public static Optional<TValue> Some(TValue value)
         {
-            return new Optional<TType>(value);
+            return new Optional<TValue>(value);
         }
 
         #endregion

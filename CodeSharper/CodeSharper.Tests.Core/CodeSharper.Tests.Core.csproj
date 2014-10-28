@@ -65,10 +65,15 @@
     <Compile Include="Texts\TextDocumentTestFixture.cs" />
     <Compile Include="Texts\TextNodeTestFixture.cs" />
     <Compile Include="Texts\TextRangeTestFixture.cs" />
+    <Compile Include="TextTestFixtureBase.cs" />
+    <Compile Include="TextTransformationTests\CommonTextTransformationsTests.cs" />
     <Compile Include="Utilities\TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TestData\tolowercase-example-1" />
+    <None Include="TestData\tolowercase-expected-1" />
+    <None Include="TestData\touppercase-expected-1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeSharper.Core\CodeSharper.Core.csproj">
@@ -79,7 +84,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="TestData\touppercase-example-1" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -6,7 +6,7 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    public class RunnableManager
+    public class RunnableManager : IRunnableManager
     {
         private static readonly RunnableManager _runnableManager;
 

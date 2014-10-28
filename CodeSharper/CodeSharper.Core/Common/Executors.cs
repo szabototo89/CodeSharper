@@ -8,12 +8,12 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common
 {
-    public static class Executors
+    public static class Executors 
     {
         public static StandardExecutor CreateStandardExecutor(IRunnable runnable)
         {
             Constraints.NotNull(() => runnable);
-            return new StandardExecutor(runnable);
+            return new StandardExecutor(runnable, RunnableManager.Instance);
         }
     }
 }

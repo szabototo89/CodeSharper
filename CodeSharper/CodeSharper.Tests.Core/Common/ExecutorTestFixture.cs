@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
@@ -25,7 +26,7 @@ namespace CodeSharper.Tests.Core.Common
         public void SimpleValueArgumentWrapperShouldConvertAnyValueToValueArgument()
         {
             // Given
-            var underTest = new ValueArgumentWrapper<Int32>();
+            var underTest = new ValueArgumentAfter<Int32>();
 
             var runnableMock = new Mock<IRunnable<Int32, Int32>>();
             runnableMock.Setup(r => r.Run(It.IsAny<Int32>()))
@@ -39,8 +40,8 @@ namespace CodeSharper.Tests.Core.Common
 
             var result = new
             {
-                IsWrappable = underTest.IsWrappable(parameter),
-                Wrap = underTest.Wrap(runnableResult),
+                IsWrappable = underTest.IsConvertable(parameter),
+                Wrap = underTest.Convert(runnableResult),
             };
 
             // Then
@@ -52,7 +53,7 @@ namespace CodeSharper.Tests.Core.Common
         public void MultiValueArgumentWrapperShouldConvertAnyValueToValueArgument()
         {
             // Given
-            var underTest = new MultiValueArgumentWrapper<Int32>();
+            var underTest = new MultiValueArgumentAfter<Int32>();
 
             var runnableMock = new Mock<IRunnable<Int32, IEnumerable<Int32>>>();
             runnableMock.Setup(r => r.Run(It.IsAny<Int32>()))
@@ -66,8 +67,8 @@ namespace CodeSharper.Tests.Core.Common
             var runnableResult = runnable.Run(parameter);
             var result = new
             {
-                IsConvertable = underTest.IsWrappable(runnableResult),
-                Value = underTest.Wrap(runnableResult)
+                IsConvertable = underTest.IsConvertable(runnableResult),
+                Value = underTest.Convert(runnableResult)
             };
 
             // Then
@@ -80,7 +81,7 @@ namespace CodeSharper.Tests.Core.Common
         public void FlattenArgumentWrapperShouldFlattenMultiValueArguments()
         {
             // Given
-            var underTest = new FlattenArgumentWrapper<Int32>();
+            var underTest = new FlattenArgumentAfter<Int32>();
 
             var runnableMock = new Mock<IRunnable<IEnumerable<Int32>, IEnumerable<IEnumerable<Int32>>>>();
             runnableMock.Setup(r => r.Run(It.IsAny<IEnumerable<Int32>>()))
@@ -94,8 +95,8 @@ namespace CodeSharper.Tests.Core.Common
             var runnableResult = runnable.Run(parameter);
             var result = new
             {
-                IsConvertable = underTest.IsWrappable(runnableResult),
-                Value = underTest.Wrap(runnableResult)
+                IsConvertable = underTest.IsConvertable(runnableResult),
+                Value = underTest.Convert(runnableResult)
             };
 
             // Then

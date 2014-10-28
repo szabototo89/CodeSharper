@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    [Consumes(typeof(ValueArgumentUnwrapper<TextRange>)), Produces(typeof(MultiValueArgumentWrapper<TextRange>))]
-    [Consumes(typeof(MultiValueArgumentUnwrapper<TextRange>)), Produces(typeof(FlattenArgumentWrapper<TextRange>))]
+    [Consumes(typeof(ValueArgumentBefore<TextRange>)), Produces(typeof(MultiValueArgumentAfter<TextRange>))]
+    [Consumes(typeof(MultiValueArgumentBefore<TextRange>)), Produces(typeof(FlattenArgumentAfter<TextRange>))]
     public class SplitStringRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public string Separator { get; protected set; }

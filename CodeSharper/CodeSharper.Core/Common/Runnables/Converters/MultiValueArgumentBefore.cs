@@ -5,15 +5,15 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
-    public class MultiValueArgumentUnwrapper<TParameter> : ArgumentUnwrapper<IMultiValueArgument<TParameter>, TParameter>
+    public class MultiValueArgumentBefore<TParameter> : ArgumentBefore<IMultiValueArgument<TParameter>, TParameter>
     {
-        public override Boolean IsUnwrappable(Object parameter)
+        public override Boolean IsConvertable(Object parameter)
         {
             var i = 0;
-            return base.IsUnwrappable(parameter);
+            return base.IsConvertable(parameter);
         }
 
-        public override Object Unwrap<TFunctionResult>(IMultiValueArgument<TParameter> parameter, Func<TParameter, TFunctionResult> func)
+        public override Object Convert<TFunctionResult>(IMultiValueArgument<TParameter> parameter, Func<TParameter, TFunctionResult> func)
         {
             var result = new List<TFunctionResult>();
             foreach (var value in parameter.Values)

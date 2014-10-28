@@ -8,9 +8,9 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
-    public class MultiValueArgumentWrapper<TParameter> : ArgumentWrapper<IEnumerable<TParameter>, MultiValueArgument<TParameter>>
+    public class MultiValueArgumentAfter<TParameter> : ArgumentAfter<IEnumerable<TParameter>, MultiValueArgument<TParameter>>
     {
-        public override Boolean IsWrappable(Object parameter)
+        public override Boolean IsConvertable(Object parameter)
         {
             var result = parameter as IEnumerable;
             if (result == null)
@@ -19,12 +19,12 @@ namespace CodeSharper.Core.Common.Runnables.Converters
             return result.All(element => element is TParameter);
         }
 
-        public override Object Wrap(Object parameter)
+        public override Object Convert(Object parameter)
         {
-            return Wrap(((IEnumerable)parameter).Cast<TParameter>());
+            return Convert(((IEnumerable)parameter).Cast<TParameter>());
         }
 
-        public override MultiValueArgument<TParameter> Wrap(IEnumerable<TParameter> parameter)
+        public override MultiValueArgument<TParameter> Convert(IEnumerable<TParameter> parameter)
         {
             return Arguments.MultiValue(parameter);
         }

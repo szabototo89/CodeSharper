@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Text;
 using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Texts
