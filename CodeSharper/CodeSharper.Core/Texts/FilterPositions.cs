@@ -1,8 +1,15 @@
-﻿namespace CodeSharper.Core.Texts
+﻿using System;
+
+namespace CodeSharper.Core.Texts
 {
     public static class FilterPositions
     {
-        public static readonly FilterPosition Even;
-        public static readonly FilterPosition Odd;
+        public static readonly FilterPosition Even = new FilterEvenPosition();
+        public static readonly FilterPosition Odd = new FilterOddPosition();
+
+        public static FilterPosition ByLine(Int32 line)
+        {
+            return new FilterPositionByLine(line);
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace CodeSharper.Core.Texts
             return this;
         }
 
-        public TextDocument ReplaceText(TextRange updatedTextRange, String newValue)
+        public virtual TextDocument ReplaceText(TextRange updatedTextRange, String newValue)
         {
             Constraints
                 .NotNull(() => updatedTextRange)

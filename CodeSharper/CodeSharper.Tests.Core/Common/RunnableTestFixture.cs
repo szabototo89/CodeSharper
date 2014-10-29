@@ -8,6 +8,9 @@ using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Texts;
 using CodeSharper.Tests.Core.Utilities;
+using Ninject;
+using Ninject.Activation;
+using Ninject.Parameters;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
@@ -15,6 +18,26 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     internal class RunnableTestFixture : TextRangeTestBase
     {
+        public StandardKernel Kernel { get; private set; }
+
+        [SetUp]
+        public void Setup()
+        {
+            Kernel = new StandardKernel();
+            Kernel.Bind<TextDocument>().ToConstant(new TextDocument("Hello World!"));
+            Kernel
+                .Bind<TextRange>()
+                .ToConstructor(ctor => new TextRange(0, 12, ctor.Inject<TextDocument>()))
+                .Named("full");
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            if (!Kernel.IsDisposed)
+                Kernel.Dispose();
+        }
+
         [Test]
         public void ToUpperCaseRunnableShouldReturnUppercaseTextRange()
         {
@@ -205,7 +228,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new FilterTextByLine(5);
 
             // When
-            var result = underTest.Run(textRange);
+            var result = underTest.Run(textRange).Single();
 
             // Then
             Assert.That(result.Text, Is.EqualTo("5"));
@@ -215,7 +238,7 @@ namespace CodeSharper.Tests.Core.Common
         public void FilterByLineShouldFilterByEvenPositionsTextRanges()
         {
             // Given
-            var text = String.Join(Environment.NewLine, Enumerable.Range(0, 15));
+            var text = String.Join(Environment.NewLine, Enumerable.Range(1, 6));
             var textRange = TextRange(text);
             var underTest = new FilterTextByLine(FilterPositions.Even);
 
@@ -223,8 +246,24 @@ namespace CodeSharper.Tests.Core.Common
             var result = underTest.Run(textRange);
 
             // Then
-            Assert.That(result.Text, Is.EqualTo("5"));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "2", "4", "6" }));
         }
+
+        [Test]
+        public void FilterByLineShouldFilterByOddPositionsTextRanges()
+        {
+            // Given
+            var text = String.Join(Environment.NewLine, Enumerable.Range(1, 6));
+            var textRange = TextRange(text);
+            var underTest = new FilterTextByLine(FilterPositions.Odd);
+
+            // When
+            var result = underTest.Run(textRange);
+
+            // Then
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "1", "3", "5" }));
+        }
+
 
 
         [Test]

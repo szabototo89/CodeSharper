@@ -8,48 +8,68 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    [Consumes(typeof(ValueArgumentBefore<TextRange>)), Produces(typeof(ValueArgumentAfter<TextRange>))]
-    [Consumes(typeof(MultiValueArgumentBefore<TextRange>)), Produces(typeof(MultiValueArgumentAfter<TextRange>))]
-    public class FilterTextByLine : Runnable<TextRange, TextRange>
+    [Consumes(typeof(ValueArgumentBefore<TextRange>)), Produces(typeof(ValueArgumentAfter<IEnumerable<TextRange>>))]
+    [Consumes(typeof(MultiValueArgumentBefore<TextRange>)), Produces(typeof(FlattenArgumentAfter<TextRange>))]
+    public class FilterTextByLine : Runnable<TextRange, IEnumerable<TextRange>>
     {
+        public FilterPosition FilterPosition { get; protected set; }
+
         public int Line { get; protected set; }
 
         public string Separator { get; protected set; }
 
         public FilterTextByLine(Int32 line) : this(line, Environment.NewLine) { }
 
+        public FilterTextByLine(FilterPosition position) : this(position, Environment.NewLine) { }
+
         public FilterTextByLine(Int32 line, String separator)
+            : this(FilterPositions.ByLine(line), separator)
         {
-            Constraints.IsGreaterThan(() => line, -1);
+            
+        }
+
+        public FilterTextByLine(FilterPosition position, String separator)
+        {
+            Constraints.NotNull(() => position);
             Constraints.NotNull(() => separator);
-            Line = line;
+            FilterPosition = position;
             Separator = separator;
         }
 
-        public FilterTextByLine(FilterPosition position)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override TextRange Run(TextRange textRange)
+        public override IEnumerable<TextRange> Run(TextRange textRange)
         {
             Constraints.NotNull(() => textRange);
-            Constraints.NotNull(() => Separator);
 
             var text = textRange.Text;
 
             Int32 line = -1, index = -Separator.Length, start = 0;
 
-            while ((index = text.IndexOf(Separator, index + Separator.Length, StringComparison.Ordinal)) != -1 && line < Line - 1)
+            var list = new List<TextRange>();
+
+            while ((index = text.IndexOf(Separator, index + Separator.Length, StringComparison.Ordinal)) != -1)
             {
-                ++line;
+                line = line + 1;
+
+                if (FilterPosition.Filter(line))
+                {
+                    list.Add(line == 0
+                        ? textRange.SubStringOfText(start, index)
+                        : textRange.SubStringOfText(start + Separator.Length, index - start - Separator.Length));
+                }
+
                 start = index;
             }
 
-            if (index == -1)
-                return null;
+            line = line + 1;
+            if (FilterPosition.Filter(line))
+            {
+                list.Add(line == 0
+                    ? textRange.SubStringOfText(start, index)
+                    : textRange.SubStringOfText(start + Separator.Length, text.Length - start - Separator.Length));
+            }
 
-            return textRange.SubStringOfText(start + Separator.Length, index - start - Separator.Length);
+            return list;
+            // return new[] { textRange.SubStringOfText(start + Separator.Length, index - start - Separator.Length) };
         }
     }
 }
