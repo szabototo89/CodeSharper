@@ -16,7 +16,7 @@ namespace CodeSharper.Tests.Core
 {
     public abstract class TextTestFixtureBase
     {
-        private string _testDirectory;
+        private readonly string _testDirectory;
 
         protected struct TextTestCaseDescriptor
         {
@@ -52,14 +52,15 @@ namespace CodeSharper.Tests.Core
 
         protected IEnumerable<String> ReadValues(String name, String searchPattern)
         {
-            var files = Directory.GetFiles(_testDirectory);
+            var files = Directory.GetFiles(Path.Combine(_testDirectory, name));
             var regex = new Regex(searchPattern);
 
-            var values = files.Where(file => regex.IsMatch(file))
-                .ToArray();
+            var values = files.Where(file => regex.IsMatch(file)).ToArray();
 
             if (!values.Any())
+            {
                 throw new FileNotFoundException(name);
+            }
 
             foreach (var value in values)
             {
@@ -77,12 +78,12 @@ namespace CodeSharper.Tests.Core
 
         protected IEnumerable<String> ReadExpectedResults(String name)
         {
-            return ReadValues(name, Path.GetFileName(name) + @"\-expected(-\d+)?");
+            return ReadValues(name, @"expected(-\d+)?");
         }
 
         public IEnumerable<String> ReadExamples(String name)
         {
-            return ReadValues(name, Path.GetFileName(name) + @"\-example(-\d+)?");
+            return ReadValues(name, @"example(-\d+)?");
         }
 
         protected void TestRunnableWithTestCasesOf(IRunnable runnable, params TextTestCaseDescriptor[] testCasesName)

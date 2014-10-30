@@ -73,9 +73,9 @@
     <Compile Include="Common\Runnables\Converters\IArgumentAfter.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueArgumentBefore.cs" />
     <Compile Include="Common\Runnables\Converters\ValueArgumentBefore.cs" />
-    <Compile Include="Common\Runnables\CountTextRangeLength.cs" />
-    <Compile Include="Common\Runnables\FilterTextByColumn.cs" />
-    <Compile Include="Common\Runnables\FilterTextByLine.cs" />
+    <Compile Include="Common\Runnables\CountTextRangeLengthRunnable.cs" />
+    <Compile Include="Common\Runnables\FilterTextByColumnRunnable.cs" />
+    <Compile Include="Common\Runnables\FilterTextByLineRunnable.cs" />
     <Compile Include="Common\Runnables\FindTextRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\IArgumentConverter.cs" />
     <Compile Include="Common\Runnables\IdentityRunnable.cs" />
@@ -89,12 +89,15 @@
     <Compile Include="Common\Runnables\RunnableDescriptor.cs" />
     <Compile Include="Common\Runnables\RunnableManager.cs" />
     <Compile Include="Common\Runnables\StringTransformation\FillStringRunnable.cs" />
+    <Compile Include="Common\Runnables\StringTransformation\InsertTextRangeRunnable.cs" />
     <Compile Include="Common\Runnables\StringTransformation\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\SplitStringRunnable.cs" />
     <Compile Include="Common\Runnables\StringTransformation\StringTransformationRunnable.cs" />
     <Compile Include="Common\Runnables\StringTransformation\ToLowerCaseRunnable.cs" />
     <Compile Include="Common\Runnables\StringTransformation\ToUpperCaseRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\ValueArgumentAfter.cs" />
+    <Compile Include="Common\Runnables\StringTransformation\TrimOptions.cs" />
+    <Compile Include="Common\Runnables\StringTransformation\TrimTextRangeRunnable.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
     <Compile Include="Common\StringHelper.cs" />
     <Compile Include="Common\Values\Argument.cs" />
@@ -107,21 +110,18 @@
     <Compile Include="Common\Values\ValueArgument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ThrowHelper.cs" />
-    <Compile Include="Texts\FilterEvenPosition.cs" />
-    <Compile Include="Texts\FilterOddPosition.cs" />
-    <Compile Include="Texts\FilterPosition.cs" />
-    <Compile Include="Texts\FilterPositionByLine.cs" />
-    <Compile Include="Texts\FilterPositions.cs" />
-    <Compile Include="Texts\PreprocessedTextDocument.cs" />
+    <Compile Include="Texts\Filters\FilterEvenPosition.cs" />
+    <Compile Include="Texts\Filters\FilterOddPosition.cs" />
+    <Compile Include="Texts\Filters\FilterPosition.cs" />
+    <Compile Include="Texts\Filters\FilterPositionByLine.cs" />
+    <Compile Include="Texts\Filters\FilterPositions.cs" />
     <Compile Include="Texts\StringHelper.cs" />
     <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Texts\TextNodeHelper.cs" />
     <Compile Include="Texts\TextRangeHelper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Texts\Filters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

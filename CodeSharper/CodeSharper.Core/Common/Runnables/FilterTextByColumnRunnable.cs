@@ -10,15 +10,15 @@ namespace CodeSharper.Core.Common.Runnables
 {
     [Consumes(typeof(ValueArgumentBefore<TextRange>)), Produces(typeof(MultiValueArgumentAfter<TextRange>))]
     [Consumes(typeof(MultiValueArgumentBefore<TextRange>)), Produces(typeof(FlattenArgumentAfter<TextRange>))]
-    public class FilterTextByColumn : Runnable<TextRange, IEnumerable<TextRange>>
+    public class FilterTextByColumnRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public int Column { get; protected set; }
 
         public string Separator { get; protected set; }
 
-        public FilterTextByColumn(Int32 column) : this(column, " ") { }
+        public FilterTextByColumnRunnable(Int32 column) : this(column, " ") { }
 
-        public FilterTextByColumn(Int32 column, String separator)
+        public FilterTextByColumnRunnable(Int32 column, String separator)
         {
             Constraints.IsGreaterThan(() => column, -1);
             Column = column;

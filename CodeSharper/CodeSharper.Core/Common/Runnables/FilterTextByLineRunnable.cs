@@ -5,12 +5,13 @@ using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Texts.Filters;
 
 namespace CodeSharper.Core.Common.Runnables
 {
     [Consumes(typeof(ValueArgumentBefore<TextRange>)), Produces(typeof(ValueArgumentAfter<IEnumerable<TextRange>>))]
     [Consumes(typeof(MultiValueArgumentBefore<TextRange>)), Produces(typeof(FlattenArgumentAfter<TextRange>))]
-    public class FilterTextByLine : Runnable<TextRange, IEnumerable<TextRange>>
+    public class FilterTextByLineRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public FilterPosition FilterPosition { get; protected set; }
 
@@ -18,17 +19,17 @@ namespace CodeSharper.Core.Common.Runnables
 
         public string Separator { get; protected set; }
 
-        public FilterTextByLine(Int32 line) : this(line, Environment.NewLine) { }
+        public FilterTextByLineRunnable(Int32 line) : this(line, Environment.NewLine) { }
 
-        public FilterTextByLine(FilterPosition position) : this(position, Environment.NewLine) { }
+        public FilterTextByLineRunnable(FilterPosition position) : this(position, Environment.NewLine) { }
 
-        public FilterTextByLine(Int32 line, String separator)
+        public FilterTextByLineRunnable(Int32 line, String separator)
             : this(FilterPositions.ByLine(line), separator)
         {
             
         }
 
-        public FilterTextByLine(FilterPosition position, String separator)
+        public FilterTextByLineRunnable(FilterPosition position, String separator)
         {
             Constraints.NotNull(() => position);
             Constraints.NotNull(() => separator);
@@ -69,7 +70,6 @@ namespace CodeSharper.Core.Common.Runnables
             }
 
             return list;
-            // return new[] { textRange.SubStringOfText(start + Separator.Length, index - start - Separator.Length) };
         }
     }
 }

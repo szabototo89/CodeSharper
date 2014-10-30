@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeSharper.Core.Texts
+namespace CodeSharper.Core.Texts.Filters
 {
     public class FilterEvenPosition : FilterPosition
     {

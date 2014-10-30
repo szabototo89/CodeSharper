@@ -1,7 +1,7 @@
 ﻿using System;
 using CodeSharper.Core.Common.ConstraintChecking;
 
-namespace CodeSharper.Core.Texts
+namespace CodeSharper.Core.Texts.Filters
 {
     public class FilterPositionByLine : FilterPosition
     {

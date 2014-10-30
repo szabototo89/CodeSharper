@@ -1,4 +1,4 @@
-﻿namespace CodeSharper.Core.Texts
+﻿namespace CodeSharper.Core.Texts.Filters
 {
     public class FilterOddPosition : FilterPosition
     {

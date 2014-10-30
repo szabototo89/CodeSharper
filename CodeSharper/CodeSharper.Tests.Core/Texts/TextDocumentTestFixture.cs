@@ -156,19 +156,5 @@ namespace CodeSharper.Tests.Core.Texts
             // Then
             Assert.That(underTest.Text.ToString(), Is.EqualTo("LONG"));
         }
-
-        [Test]
-        public void PreprocessedTextDocumentShouldBeAbleToReturnListOfLines()
-        {
-            // Given
-            var underTest = new PreprocessedTextDocument(string.Join(Environment.NewLine, Enumerable.Range(1, 4)));
-
-            // When
-            var result = underTest.GetTextRangesByLines();
-
-            // Then
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "1", "2", "3", "4" }));
-        }
-
     }
 }

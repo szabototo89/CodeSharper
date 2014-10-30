@@ -7,6 +7,7 @@ using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Texts.Filters;
 using CodeSharper.Tests.Core.Utilities;
 using Ninject;
 using Ninject.Activation;
@@ -39,103 +40,12 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [Test]
-        public void ToUpperCaseRunnableShouldReturnUppercaseTextRange()
-        {
-            // Given
-            var parameter = TestHelper.TextRange("hello world!");
-            var underTest = new ToUpperCaseRunnable();
-
-            // When
-            var result = underTest.Run(parameter);
-
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Text, Is.EqualTo("HELLO WORLD!"));
-        }
-
-        [Test]
-        public void ToLowerCaseRunnableShouldReturnLowercaseTextRange()
-        {
-            // Given
-            var parameter = TestHelper.TextRange("HELLO WORLD!");
-            var underTest = new ToLowerCaseRunnable();
-
-            // When
-            var result = underTest.Run(parameter);
-
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Text, Is.EqualTo("hello world!"));
-        }
-
-        [Test]
-        public void ReplaceTextRunnableShouldAbleToReplaceGivenText()
-        {
-            // Given
-            var parameter = TestHelper.TextRange("hello world!");
-            var underTest = new ReplaceTextRunnable("hi world!");
-
-            // When
-            var result = underTest.Run(parameter);
-
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Text, Is.EqualTo("hi world!"));
-        }
-
-        [Test]
-        public void ReplaceTextRunnableShouldAbleToReplaceArrayOfGivenValues()
-        {
-            // Given
-            var parameter = TestHelper.TextRange("hello world!");
-            var underTest = new ReplaceTextRunnable("hi world!");
-
-            // When
-            var result = underTest.Run(parameter);
-
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Text, Is.EqualTo("hi world!"));
-        }
-
-
-        [Test(Description = "FillStringRunnable should fill with given character in string")]
-        [TestCase("Hello World!", "************")]
-        public void FillStringRunnableShouldFillWithGivenCharacterInString(String parameter, String expected)
-        {
-            // Given
-            var underTest = new FillStringRunnable('*');
-            var textDocument = TestHelper.TextRange(parameter);
-
-            // When
-            var result = underTest.Run(textDocument);
-
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Text, Is.EqualTo(expected));
-        }
-
-        [Test(Description = "FillStringRunnable should fill with given character in string")]
-        [TestCase("Hello World!", "hihihihihihi")]
-        public void FillStringRunnableShouldFillWithGivenTextPatternInString(String parameter, String expected)
-        {
-            // Given
-            var underTest = new FillStringRunnable("hi");
-            var textDocument = TestHelper.TextRange(parameter);
-
-            // When
-            var result = underTest.Run(textDocument);
-
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Text, Is.EqualTo(expected));
-        }
-
-        [Test]
         public void FindTextRunnableShouldReturnFoundSubStringsOfText()
         {
             // Given
-            var value = TestHelper.TextRange("This string contains 'abc' twice. This was the first, and the second is here: abc.");
+            var value =
+                TestHelper.TextRange(
+                    "This string contains 'abc' twice. This was the first, and the second is here: abc.");
             var underTest = new FindTextRunnable("abc");
 
             // When
@@ -171,7 +81,7 @@ namespace CodeSharper.Tests.Core.Common
             var result = underTest.Run(parameter);
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] { 10, 10, 10 }));
+            Assert.That(result, Is.EquivalentTo(new[] {10, 10, 10}));
         }
 
         [Test]
@@ -187,7 +97,7 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.Not.Empty);
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "a", "b", "c", "d" }));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] {"a", "b", "c", "d"}));
         }
 
         [Test]
@@ -209,7 +119,7 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = RunnableManager.Instance;
-            var runnableType = typeof(FindTextRunnable);
+            var runnableType = typeof (FindTextRunnable);
             underTest.Register(runnableType);
 
             // When
@@ -225,7 +135,7 @@ namespace CodeSharper.Tests.Core.Common
             // Given
             var text = String.Join(Environment.NewLine, Enumerable.Range(0, 15));
             var textRange = TextRange(text);
-            var underTest = new FilterTextByLine(5);
+            var underTest = new FilterTextByLineRunnable(5);
 
             // When
             var result = underTest.Run(textRange).Single();
@@ -240,13 +150,13 @@ namespace CodeSharper.Tests.Core.Common
             // Given
             var text = String.Join(Environment.NewLine, Enumerable.Range(1, 6));
             var textRange = TextRange(text);
-            var underTest = new FilterTextByLine(FilterPositions.Even);
+            var underTest = new FilterTextByLineRunnable(FilterPositions.Even);
 
             // When
             var result = underTest.Run(textRange);
 
             // Then
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "2", "4", "6" }));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] {"2", "4", "6"}));
         }
 
         [Test]
@@ -255,16 +165,14 @@ namespace CodeSharper.Tests.Core.Common
             // Given
             var text = String.Join(Environment.NewLine, Enumerable.Range(1, 6));
             var textRange = TextRange(text);
-            var underTest = new FilterTextByLine(FilterPositions.Odd);
+            var underTest = new FilterTextByLineRunnable(FilterPositions.Odd);
 
             // When
             var result = underTest.Run(textRange);
 
             // Then
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "1", "3", "5" }));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] {"1", "3", "5"}));
         }
-
-
 
         [Test]
         public void FilterByColumnShouldFilterTextRanges()
@@ -272,7 +180,7 @@ namespace CodeSharper.Tests.Core.Common
             // Given
             var text = String.Join(Environment.NewLine, Enumerable.Repeat("a b c d e f", 3));
             var textRange = TextRange(text);
-            var underTest = new FilterTextByColumn(2);
+            var underTest = new FilterTextByColumnRunnable(2);
 
             // When
             var result = underTest.Run(textRange);
@@ -294,7 +202,7 @@ namespace CodeSharper.Tests.Core.Common
                 "hi"
             });
             var textRange = TextRange(text);
-            var underTest = new FilterTextByColumn(2);
+            var underTest = new FilterTextByColumnRunnable(2);
 
             // When
             var result = underTest.Run(textRange);
@@ -310,7 +218,7 @@ namespace CodeSharper.Tests.Core.Common
             // Given
             var text = "Hello World!";
             var textRange = TextRange(text);
-            var underTest = new CountTextRangeLength();
+            var underTest = new CountTextRangeLengthRunnable();
 
             // When
             var result = underTest.Run(textRange);

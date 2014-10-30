@@ -8,7 +8,7 @@ namespace CodeSharper.Core.Common.Runnables
 {
     [Consumes(typeof(ValueArgumentBefore<TextRange>)), Produces(typeof(ValueArgumentAfter<Int32>))]
     [Consumes(typeof(MultiValueArgumentAfter<TextRange>)), Produces(typeof(MultiValueArgumentAfter<Int32>))]
-    public class CountTextRangeLength : Runnable<TextRange, int>
+    public class CountTextRangeLengthRunnable : Runnable<TextRange, int>
     {
         public override Int32 Run(TextRange parameter)
         {

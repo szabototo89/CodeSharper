@@ -56,10 +56,10 @@ namespace CodeSharper.Tests.Core.Common
                 argument(), new IdentityRunnable());
 
             CheckRunnableWithSingleValue(
-                argument(), new FilterTextByLine(0, " "));
+                argument(), new FilterTextByLineRunnable(0, " "));
 
             CheckRunnableWithSingleValue(
-                argument(), new FilterTextByColumn(0));
+                argument(), new FilterTextByColumnRunnable(0));
         }
 
         [Test]
@@ -79,10 +79,10 @@ namespace CodeSharper.Tests.Core.Common
                 argument(), new IdentityRunnable());
             
             CheckRunnableWithMultipleValues(
-                argument(), new FilterTextByLine(0, " "));
+                argument(), new FilterTextByLineRunnable(0, " "));
 
             CheckRunnableWithMultipleValues(
-                argument(), new FilterTextByColumn(0));
+                argument(), new FilterTextByColumnRunnable(0));
         }
 
         [Test]
@@ -97,6 +97,12 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithSingleValue(
                 argument, new RegularExpressionRunnable(".+"));
+
+            CheckRunnableWithSingleValue(
+                argument, new InsertTextRangeRunnable(0, ""));
+
+            CheckRunnableWithSingleValue(
+                argument, new TrimTextRangeRunnable());
         }
 
 
@@ -115,6 +121,14 @@ namespace CodeSharper.Tests.Core.Common
             CheckRunnableWithMultipleValues(
                 ranges,
                 new RegularExpressionRunnable(".+"));
+
+            CheckRunnableWithMultipleValues(
+                ranges,
+                new InsertTextRangeRunnable(0, ""));
+
+            CheckRunnableWithMultipleValues(
+                ranges,
+                new TrimTextRangeRunnable());
         }
 
     }
