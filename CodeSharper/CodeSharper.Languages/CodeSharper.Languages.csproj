@@ -44,12 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compilers\CodeSharperCompiler.cs" />
+    <Compile Include="Compilers\CodeSharperVisitor.cs" />
+    <Compile Include="Compilers\ICommandFactory.cs" />
+    <Compile Include="Grammar\CodeSharperGrammar.g4.lexer.cs">
+      <DependentUpon>CodeSharperGrammar.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Grammar\CodeSharperGrammar.g4.parser.cs">
+      <DependentUpon>CodeSharperGrammar.g4</DependentUpon>
+    </Compile>
     <Compile Include="Grammar\Csv.g4.lexer.cs">
       <DependentUpon>Csv.g4</DependentUpon>
     </Compile>
     <Compile Include="Grammar\Csv.g4.parser.cs">
       <DependentUpon>Csv.g4</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\CodeSharperGrammarBaseListener.cs" />
+    <Compile Include="obj\Debug\CodeSharperGrammarBaseVisitor.cs" />
+    <Compile Include="obj\Debug\CodeSharperGrammarLexer.cs" />
+    <Compile Include="obj\Debug\CodeSharperGrammarListener.cs" />
+    <Compile Include="obj\Debug\CodeSharperGrammarParser.cs" />
+    <Compile Include="obj\Debug\CodeSharperGrammarVisitor.cs" />
     <Compile Include="obj\Debug\CsvBaseListener.cs" />
     <Compile Include="obj\Debug\CsvBaseVisitor.cs" />
     <Compile Include="obj\Debug\CsvLexer.cs" />
@@ -58,9 +73,7 @@
     <Compile Include="obj\Debug\CsvVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Compilers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Antlr4 Include="Grammar\Csv.g4">
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +86,10 @@
     </Antlr4>
   </ItemGroup>
   <ItemGroup>
+    <Antlr4 Include="Grammar\CodeSharperGrammar.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>CodeSharper.Languages.Grammar</CustomToolNamespace>
+    </Antlr4>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +107,9 @@
     <Error Condition="!Exists('..\packages\Antlr4.4.2.2-alpha001\build\Antlr4.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr4.4.2.2-alpha001\build\Antlr4.targets'))" />
   </Target>
   <Import Project="..\packages\Antlr4.4.2.2-alpha001\build\Antlr4.targets" Condition="Exists('..\packages\Antlr4.4.2.2-alpha001\build\Antlr4.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>echo Hello World!;</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
