@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlow;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
@@ -33,11 +32,6 @@ namespace CodeSharper.Tests.Core.Common
         private TextRange TextRange(String text)
         {
             return new TextDocument(text).TextRange;
-        }
-
-        private IExecutor StandardExecutor<TIn, TOut>(IRunnable<TIn, TOut> runnable)
-        {
-            return Executors.CreateStandardExecutor(runnable);
         }
 
         [Test]
@@ -93,7 +87,7 @@ namespace CodeSharper.Tests.Core.Common
             StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
             underTest.SetControlFlow(new[]
             {
-                StandardExecutor(new RegularExpressionRunnable("\\w+"))
+                new RegularExpressionRunnable("\\w+")
             });
 
             // When

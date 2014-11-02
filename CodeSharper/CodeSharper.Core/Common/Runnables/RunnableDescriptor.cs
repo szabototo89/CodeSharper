@@ -9,9 +9,9 @@ namespace CodeSharper.Core.Common.Runnables
 {
     public struct RunnableDescriptor
     {
-        private readonly List<IArgumentAfter> _supportedArgumentWrappers;
+        private readonly List<IArgumentAfter> _supportedArgumentAfters;
 
-        private readonly List<IArgumentBefore> _supportedArgumentUnwrappers;
+        private readonly List<IArgumentBefore> _supportedArgumentBefores;
         private readonly IEnumerable<Attribute> _attributes;
 
         public Type Type { get; private set; }
@@ -22,34 +22,34 @@ namespace CodeSharper.Core.Common.Runnables
             Constraints.NotNull(() => type);
             Type = type;
 
-            _supportedArgumentWrappers = new List<IArgumentAfter>();
-            _supportedArgumentUnwrappers = new List<IArgumentBefore>();
+            _supportedArgumentAfters = new List<IArgumentAfter>();
+            _supportedArgumentBefores = new List<IArgumentBefore>();
             _attributes = Type.GetCustomAttributes(true).OfType<Attribute>();
 
-            HandleArgumentWrappers();
-            HandleArgumentUnwrappers();
+            HandleArgumentAfters();
+            HandleArgumentBefores();
         }
 
-        private void HandleArgumentUnwrappers()
+        private void HandleArgumentBefores()
         {
-            _supportedArgumentUnwrappers.AddRange(
+            _supportedArgumentBefores.AddRange(
                 _attributes.OfType<ConsumesAttribute>()
-                    .Select(attribute => attribute.TypeOfArgumentUnwrapper)
+                    .Select(attribute => attribute.TypeOfArgumentBefore)
                     .Select(type => (IArgumentBefore)Activator.CreateInstance(type))
                 );
         }
 
-        private void HandleArgumentWrappers()
+        private void HandleArgumentAfters()
         {
-            _supportedArgumentWrappers.AddRange(
+            _supportedArgumentAfters.AddRange(
                 _attributes.OfType<ProducesAttribute>()
-                    .Select(attribute => attribute.TypeOfArgumentWrapper)
+                    .Select(attribute => attribute.TypeOfArgumentAfter)
                     .Select(type => (IArgumentAfter)Activator.CreateInstance(type))
                 );
         }
 
-        public IEnumerable<IArgumentAfter> SupportedArgumentAfters { get { return _supportedArgumentWrappers.AsReadOnly(); } }
+        public IEnumerable<IArgumentAfter> SupportedArgumentAfters { get { return _supportedArgumentAfters.AsReadOnly(); } }
 
-        public IEnumerable<IArgumentBefore> SupportedArgumentBefores { get { return _supportedArgumentUnwrappers.AsReadOnly(); } }
+        public IEnumerable<IArgumentBefore> SupportedArgumentBefores { get { return _supportedArgumentBefores.AsReadOnly(); } }
     }
 }

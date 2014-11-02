@@ -110,10 +110,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var parameter = Arguments.Value(TestHelper.TextRange("abc abc abc"));
-            var underTest = Executors.CreateStandardExecutor(new SplitStringRunnable(" "));
+            var underTest = Executors.StandardExecutor;
 
             // When
-            var result = underTest.Execute(parameter);
+            var result = underTest.Execute(new SplitStringRunnable(" "), parameter);
 
             // Then
             Assert.That(result, Is.InstanceOf<MultiValueArgument<TextRange>>());
@@ -125,10 +125,10 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var parameter = Arguments.Value(TestHelper.TextRange("abc abc abc"));
-            var underTest = Executors.CreateStandardExecutor(new FindTextRunnable("abc"));
+            var underTest = Executors.StandardExecutor;
 
             // When
-            var result = underTest.Execute(parameter);
+            var result = underTest.Execute(new FindTextRunnable("abc"), parameter);
 
             // Then
             Assert.That(result, Is.InstanceOf<MultiValueArgument<TextRange>>());
@@ -142,12 +142,12 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var parameter = Arguments.Value(TestHelper.TextRange("abcdef abcdef abcdef"));
-            var findRunnable = Executors.CreateStandardExecutor(new FindTextRunnable("abcdef"));
-            var underTest = Executors.CreateStandardExecutor(new FindTextRunnable("bcd"));
+            var findRunnable = Executors.StandardExecutor;
+            var underTest = Executors.StandardExecutor;
 
             // When
-            var subResult = findRunnable.Execute(parameter);
-            var result = underTest.Execute(subResult);
+            var subResult = findRunnable.Execute(new FindTextRunnable("abcdef"), parameter);
+            var result = underTest.Execute(new FindTextRunnable("bcd"), subResult);
 
             // Then
             Assert.That(result, Is.InstanceOf<MultiValueArgument<TextRange>>());
@@ -161,11 +161,11 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var parameter = Arguments.Value(TestHelper.TextRange("abcdef abcdef abcdef"));
-            var underTest = Executors.CreateStandardExecutor(new FindTextRunnable("abcdef"));
+            var underTest = Executors.StandardExecutor;
 
             // When
             Argument result = parameter;
-            5.Times(() => result = underTest.Execute(result));
+            5.Times(() => result = underTest.Execute(new FindTextRunnable("abcdef"), result));
 
             // Then
             Assert.That(result, Is.InstanceOf<MultiValueArgument<TextRange>>());
@@ -179,12 +179,12 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var parameter = Arguments.Value(TestHelper.TextRange("abcdef abcdef abcdef"));
-            var find = Executors.CreateStandardExecutor(new FindTextRunnable("cde"));
-            var replace = Executors.CreateStandardExecutor(new ReplaceTextRunnable("CD"));
+            var find = Executors.StandardExecutor;
+            var replace = Executors.StandardExecutor;
 
             // When
-            var subResult = find.Execute(parameter);
-            var result = replace.Execute(subResult);
+            var subResult = find.Execute(new FindTextRunnable("cde"), parameter);
+            var result = replace.Execute(new ReplaceTextRunnable("CD"), subResult);
 
             // Then
             Assert.That(result, Is.Not.Null);

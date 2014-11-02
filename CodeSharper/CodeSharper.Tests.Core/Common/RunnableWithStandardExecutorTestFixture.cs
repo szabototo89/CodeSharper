@@ -16,8 +16,8 @@ namespace CodeSharper.Tests.Core.Common
             // Given in parameters
 
             // When
-            var result = Executors.CreateStandardExecutor(runnable)
-                .Execute(argument);
+            var result = Executors.StandardExecutor
+                .Execute(runnable, argument);
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -28,8 +28,8 @@ namespace CodeSharper.Tests.Core.Common
             // Given in parameter
 
             // When
-            var result = Executors.CreateStandardExecutor(runnable)
-                .Execute(parameter);
+            var result = Executors.StandardExecutor
+                .Execute(runnable, parameter);
 
             // Then
             Assert.That(result, Is.Not.Null);

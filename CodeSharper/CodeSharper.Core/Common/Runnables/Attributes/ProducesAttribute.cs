@@ -5,11 +5,11 @@ namespace CodeSharper.Core.Common.Runnables.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class ProducesAttribute : Attribute
     {
-        public Type TypeOfArgumentWrapper { get; protected set; }
+        public Type TypeOfArgumentAfter { get; protected set; }
 
-        public ProducesAttribute(Type typeOfArgumentWrapper)
+        public ProducesAttribute(Type typeOfArgumentAfter)
         {
-            TypeOfArgumentWrapper = typeOfArgumentWrapper;
+            TypeOfArgumentAfter = typeOfArgumentAfter;
         }
     }
 }

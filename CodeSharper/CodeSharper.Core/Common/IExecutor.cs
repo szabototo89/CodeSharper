@@ -1,9 +1,10 @@
-﻿using CodeSharper.Core.Common.Values;
+﻿using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common
 {
     public interface IExecutor
     {
-        Argument Execute(Argument parameter);
+        Argument Execute(IRunnable runnable, Argument parameter);
     }
 }

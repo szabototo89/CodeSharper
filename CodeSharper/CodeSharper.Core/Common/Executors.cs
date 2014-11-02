@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common.ConstraintChecking;
@@ -8,12 +9,18 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common
 {
-    public static class Executors 
+    public static class Executors
     {
-        public static StandardExecutor CreateStandardExecutor(IRunnable runnable)
+        private static readonly StandardExecutor _standardExecutor;
+
+        static Executors()
         {
-            Constraints.NotNull(() => runnable);
-            return new StandardExecutor(runnable, RunnableManager.Instance);
+            _standardExecutor = new StandardExecutor(RunnableManager.Instance);
+        }
+
+        public static StandardExecutor StandardExecutor
+        {
+            get { return _standardExecutor; }
         }
     }
 }

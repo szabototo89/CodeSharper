@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace CodeSharper.Core.Common
 {
@@ -16,6 +17,17 @@ namespace CodeSharper.Core.Common
         public static void ThrowArgumentNullException(string argumentName)
         {
             throw new ArgumentNullException(argumentName);
+        }
+
+        public static void ThrowException<TException>()
+            where TException : Exception, new()
+        {
+            throw new TException();
+        }
+
+        public static void ThrowException()
+        {
+            ThrowException<Exception>();
         }
 
         [DebuggerStepThrough]

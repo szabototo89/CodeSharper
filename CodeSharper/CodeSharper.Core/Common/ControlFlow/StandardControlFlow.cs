@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Values;
@@ -11,24 +12,24 @@ namespace CodeSharper.Core.Common.ControlFlow
 {
     public class StandardControlFlow
     {
-        private readonly List<IExecutor> _executors;
+        private readonly List<ICommand> _commands;
 
         public StandardControlFlow()
         {
-            _executors = new List<IExecutor>();
+            _commands = new List<ICommand>();
         }
 
         public StandardControlFlow Clear()
         {
-            _executors.Clear();
+            _commands.Clear();
             return this;
         }
 
-        public StandardControlFlow SetControlFlow(IEnumerable<IExecutor> executors)
+        public StandardControlFlow SetControlFlow(IEnumerable<ICommand> commands)
         {
-            Constraints.NotEmpty(() => executors);
+            Constraints.NotEmpty(() => commands);
             Clear();
-            _executors.AddRange(executors);
+            _commands.AddRange(commands);
             return this;
         }
 
@@ -36,7 +37,7 @@ namespace CodeSharper.Core.Common.ControlFlow
         {
             Constraints.NotEmpty(() => runnables);
             Clear();
-            _executors.AddRange(runnables.Select(Executors.CreateStandardExecutor));
+            _commands.AddRange(runnables.Select(runnable => new ConstantCommand() { Runnable = runnable }));
             return this;
         }
 
@@ -44,10 +45,12 @@ namespace CodeSharper.Core.Common.ControlFlow
         public Argument Execute(Argument parameter)
         {
             Argument result = parameter;
+            var executor = Executors.StandardExecutor;
 
-            foreach (var executor in _executors)
+            foreach (var command in _commands)
             {
-                result = executor.Execute(result);
+                var runnable = command.GetRunnable();
+                result = executor.Execute(runnable, result);
             }
 
             return result;

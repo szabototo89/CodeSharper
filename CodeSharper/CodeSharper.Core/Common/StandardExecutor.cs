@@ -8,16 +8,12 @@ namespace CodeSharper.Core.Common
 {
     public class StandardExecutor : IExecutor
     {
-        private readonly IRunnable _runnable;
         private readonly IRunnableManager _runnableManager;
         private RunnableDescriptor _runnableDescriptor;
 
-        public StandardExecutor(IRunnable runnable, IRunnableManager runnableManager)
+        public StandardExecutor(IRunnableManager runnableManager)
         {
-            Constraints.NotNull(() => runnable);
-            _runnable = runnable;
             _runnableManager = runnableManager;
-            RegisterRunnable(runnable);
         }
 
         private StandardExecutor RegisterRunnable(IRunnable runnable)
@@ -26,9 +22,10 @@ namespace CodeSharper.Core.Common
             return this;
         }
 
-        public Argument Execute(Argument parameter)
+        public Argument Execute(IRunnable runnable, Argument parameter)
         {
-            return After(Before(parameter));
+            RegisterRunnable(runnable);
+            return After(Before(runnable, parameter));
         }
 
         private Argument After(Object result)
@@ -39,12 +36,12 @@ namespace CodeSharper.Core.Common
             return converter.Convert(result) as Argument;
         }
 
-        private Object Before(Argument parameter)
+        private Object Before(IRunnable runnable, Argument parameter)
         {
             var converter = _runnableDescriptor.SupportedArgumentBefores.FirstOrDefault(c => c.IsConvertable(parameter));
 
             if (converter == null) return null;
-            return converter.Convert(parameter, param => _runnable.Run(param));
+            return converter.Convert(parameter, runnable.Run);
         }
     }
 }
