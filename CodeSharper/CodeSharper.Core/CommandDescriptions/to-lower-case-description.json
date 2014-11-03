@@ -1,0 +1,6 @@
+﻿{
+    "name": "Convert To LowerCase Command",
+    "description": "Convert text range to lower case",
+    "command-names": [ "to-lower-case", "to-lower" ],
+    "arguments": []
+}

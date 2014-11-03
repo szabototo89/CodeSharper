@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +53,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\IdentityCommand.cs" />
+    <Compile Include="Commands\InsertTextRangeCommand.cs" />
     <Compile Include="Common\InitializerAttribute.cs" />
     <Compile Include="Commands\StandardCommandManager.cs" />
     <Compile Include="Commands\ToUpperCaseCommand.cs" />
@@ -135,8 +139,15 @@
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Texts\TextNodeHelper.cs" />
     <Compile Include="Texts\TextRangeHelper.cs" />
+    <Compile Include="Utilities\ICommandDescriptorParser.cs" />
+    <Compile Include="Utilities\JsonCommandDescriptorParser.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="CommandDescriptions\find-text-descriptor.json" />
+    <None Include="CommandDescriptions\to-lower-case-description.json" />
+    <None Include="CommandDescriptions\to-upper-case-descriptor.json" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,7 +1,7 @@
 ﻿using System;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Texts;
-using CodeSharper.Tests.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using Ninject;
 using NUnit.Framework;
 

@@ -1,0 +1,12 @@
+﻿{
+    "name": "Find Text Command",
+    "command-names": [ "find-text" ],
+    "arguments": [
+        {
+            "name": "pattern",
+            "type": "System.String",
+            "optional": false,
+            "default-value": null
+        }
+    ]
+}

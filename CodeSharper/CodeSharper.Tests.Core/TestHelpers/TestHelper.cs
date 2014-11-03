@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CodeSharper.Core.Texts;
 
-namespace CodeSharper.Tests.Core.Utilities
+namespace CodeSharper.Tests.Core.TestHelpers
 {
     internal class TestHelper
     {

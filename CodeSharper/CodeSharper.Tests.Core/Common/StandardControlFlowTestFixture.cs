@@ -10,7 +10,7 @@ using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
-using CodeSharper.Tests.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common

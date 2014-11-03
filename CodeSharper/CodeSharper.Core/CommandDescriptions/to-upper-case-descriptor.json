@@ -1,0 +1,6 @@
+﻿{
+    "name": "Convert To UpperCase Command",
+    "description": "Convert text range to upper case",
+    "command-names": [ "to-upper-case", "to-upper" ],
+    "arguments": []
+}

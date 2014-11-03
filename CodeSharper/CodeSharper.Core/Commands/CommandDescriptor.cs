@@ -8,5 +8,7 @@ namespace CodeSharper.Core.Commands
         public String Name { get; set; }
 
         public IEnumerable<ArgumentDescriptor> Arguments { get; set; }
+        
+        public IEnumerable<String> CommandNames { get; set; }
     }
 }

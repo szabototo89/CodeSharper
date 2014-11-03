@@ -25,6 +25,11 @@ namespace CodeSharper.Core.Common
             throw new TException();
         }
 
+        public static void ThrowException(String message)
+        {
+            throw new Exception(message);
+        }
+
         public static void ThrowException()
         {
             ThrowException<Exception>();

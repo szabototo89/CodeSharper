@@ -2,6 +2,8 @@
 using System.Linq;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Texts;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace CodeSharper.Core.Commands
 {
@@ -26,7 +28,9 @@ namespace CodeSharper.Core.Commands
                     .All(arg => arguments.Any(a => a.Name == arg.ArgumentName)))
                 ThrowHelper.ThrowException<InvalidOperationException>();
 
-            // TODO: Finish this method
+            if (!Descriptor.Arguments.Join(arguments, arg => arg.ArgumentName, arg => arg.Name,
+                (left, right) => left.ArgumentType == right.Value.GetType()).All(element => element))
+                ThrowHelper.ThrowException(String.Format("Argument type error of {0}!", Descriptor.Name));
         }
 
         [Initializer]

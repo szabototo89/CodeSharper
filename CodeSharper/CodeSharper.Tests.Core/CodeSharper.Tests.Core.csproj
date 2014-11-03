@@ -69,7 +69,8 @@
     <Compile Include="Texts\TextRangeTestFixture.cs" />
     <Compile Include="TextTestFixtureBase.cs" />
     <Compile Include="TextTransformationTests\CommonTextTransformationsTests.cs" />
-    <Compile Include="Utilities\TestHelper.cs" />
+    <Compile Include="TestHelpers\TestHelper.cs" />
+    <Compile Include="Utilities\JsonCommandDescriptorParserTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
