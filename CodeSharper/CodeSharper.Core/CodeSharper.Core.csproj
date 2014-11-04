@@ -46,6 +46,7 @@
     <Compile Include="Commands\ArgumentDescriptorBuilder.cs" />
     <Compile Include="Commands\CommandArgument.cs" />
     <Compile Include="Commands\CommandArgumentCollection.cs" />
+    <Compile Include="Commands\CommandArgumentResolver.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandDescriptor.cs" />
     <Compile Include="Commands\ConstantCommand.cs" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CommandDescriptions\find-text-descriptor.json" />
+    <None Include="CommandDescriptions\insert-text-range-descriptor.json" />
     <None Include="CommandDescriptions\to-lower-case-description.json" />
     <None Include="CommandDescriptions\to-upper-case-descriptor.json" />
     <None Include="packages.config" />

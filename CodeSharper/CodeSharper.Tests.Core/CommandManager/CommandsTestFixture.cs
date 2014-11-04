@@ -7,6 +7,7 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
+using CodeSharper.Core.Utilities;
 using Moq;
 using Ninject;
 using NUnit.Framework;
@@ -35,17 +36,17 @@ namespace CodeSharper.Tests.Core.CommandManager
         public void CommandShouldHaveCommandDescriptor()
         {
             // Given
-            var mock = new Mock<ICommand>();
-            mock.SetupProperty(command => command.Descriptor,
-                new CommandDescriptor
-                {
-                    Name = "mock-command",
-                    Arguments = Kernel.Get<ArgumentDescriptorBuilder>()
-                                      .Argument<String>("first", true, "Hello World!")
-                                      .Argument<Int32>("second", false, 0)
-                                      .Create()
-                });
+            var descriptor = new CommandDescriptor {
+                Name = "mock-command",
+                Arguments = Kernel.Get<ArgumentDescriptorBuilder>()
+                    .Argument<String>("first", true, "Hello World!")
+                    .Argument<Int32>("second", false, 0)
+                    .Create()
+            };
 
+            var mock = new Mock<ICommand>();
+            mock.SetupGet(command => command.Descriptor)
+                .Returns(() => descriptor);
 
             var underTest = mock.Object;
 
@@ -63,7 +64,10 @@ namespace CodeSharper.Tests.Core.CommandManager
         public void InsertTextRangeCommandShouldBeAbleToInitialize()
         {
             // Given
-            var underTest = new InsertTextRangeCommand();
+            var descriptor =
+                JsonCommandDescriptorParser.ParseFrom(
+                    "{\"name\":\"Insert TextRange Command\",\"command-names\":[\"insert\",\"insert-text-range\"],\"arguments\":[{\"name\":\"startIndex\",\"type\":\"System.Int32\",\"optional\":false,\"default-value\":null},{\"name\":\"value\",\"type\":\"System.String\",\"optional\":false,\"default-value\":\"\"}]}");
+            var underTest = new InsertTextRangeCommand(descriptor);
 
             // When
             underTest.PassArguments(
@@ -72,7 +76,7 @@ namespace CodeSharper.Tests.Core.CommandManager
                   .SetArgument("value", "Hello World!")
             );
 
-            var result = underTest.GetRunnable() as InsertTextRangeRunnable;
+            var result = underTest.GetRunnable().To<InsertTextRangeRunnable>();
 
             // Then
             Assert.That(result, Is.Not.Null);

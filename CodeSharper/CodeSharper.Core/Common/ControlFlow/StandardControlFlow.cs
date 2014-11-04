@@ -37,7 +37,7 @@ namespace CodeSharper.Core.Common.ControlFlow
         {
             Constraints.NotEmpty(() => runnables);
             Clear();
-            _commands.AddRange(runnables.Select(runnable => new ConstantCommand() { Runnable = runnable }));
+            _commands.AddRange(runnables.Select(runnable => new ConstantCommand(CommandDescriptor.Empty) { Runnable = runnable }));
             return this;
         }
 

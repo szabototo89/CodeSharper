@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Texts;
 using Microsoft.CSharp.RuntimeBinder;
@@ -9,7 +10,19 @@ namespace CodeSharper.Core.Commands
 {
     public abstract class CommandBase : ICommand
     {
-        public CommandDescriptor Descriptor { get; set; }
+        public CommandDescriptor Descriptor { get; protected set; }
+
+        protected CommandBase(CommandDescriptor descriptor)
+        {
+            Constraints.NotNull(() => descriptor);
+
+            Descriptor = descriptor;
+        }
+
+        protected void UpdateArgument<TValue>(ref TValue value, CommandArgumentCollection arguments, String argumentName)
+        {
+            value = arguments.GetArgument<TValue>(argumentName);
+        }
 
         protected virtual void CreateRunnable() { }
 
@@ -31,16 +44,6 @@ namespace CodeSharper.Core.Commands
             if (!Descriptor.Arguments.Join(arguments, arg => arg.ArgumentName, arg => arg.Name,
                 (left, right) => left.ArgumentType == right.Value.GetType()).All(element => element))
                 ThrowHelper.ThrowException(String.Format("Argument type error of {0}!", Descriptor.Name));
-        }
-
-        [Initializer]
-        protected virtual void InitializeCommand(ArgumentDescriptorBuilder builder)
-        {
-            Descriptor = new CommandDescriptor()
-            {
-                Name = GetType().Name,
-                Arguments = Enumerable.Empty<ArgumentDescriptor>()
-            };
         }
 
         public virtual void PassArguments(CommandArgumentCollection arguments)

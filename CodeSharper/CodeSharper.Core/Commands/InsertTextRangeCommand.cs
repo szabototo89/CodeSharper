@@ -1,6 +1,7 @@
 using System;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
+using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Commands
 {
@@ -12,23 +13,18 @@ namespace CodeSharper.Core.Commands
         private readonly string ARGUMENT_VALUE = "value";
         private readonly string ARGUMENT_START_INDEX = "startIndex";
 
-        protected override void InitializeCommand(ArgumentDescriptorBuilder builder)
+        public InsertTextRangeCommand(CommandDescriptor descriptor) : base(descriptor)
         {
-            Descriptor = new CommandDescriptor()
-            {
-                Name = "InsertTextRangeCommand",
-                Arguments = builder
-                    .Argument<String>(ARGUMENT_VALUE)
-                    .Argument<Int32>(ARGUMENT_START_INDEX)
-                    .Create()
-            };
         }
 
         protected override void MapArguments(CommandArgumentCollection arguments)
         {
             base.MapArguments(arguments);
-            _value = arguments.GetArgument<String>(ARGUMENT_VALUE);
-            _startIndex = arguments.GetArgument<Int32>(ARGUMENT_START_INDEX);
+
+            var resolver = new CommandArgumentResolver(arguments);
+            resolver
+                .UpdateArgument(ref _value, ARGUMENT_VALUE)
+                .UpdateArgument(ref _startIndex, ARGUMENT_START_INDEX);
         }
 
         protected override void CreateRunnable()

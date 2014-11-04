@@ -8,6 +8,6 @@ namespace CodeSharper.Core.Commands
 
         IRunnable GetRunnable();
 
-        CommandDescriptor Descriptor { get; set; }
+        CommandDescriptor Descriptor { get; }
     }
 }

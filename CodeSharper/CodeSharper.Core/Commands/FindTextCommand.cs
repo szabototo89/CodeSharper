@@ -9,13 +9,8 @@ namespace CodeSharper.Core.Commands
 
         private String _pattern;
 
-        protected override void InitializeCommand(ArgumentDescriptorBuilder builder)
+        public FindTextCommand(CommandDescriptor descriptor) : base(descriptor)
         {
-            Descriptor = new CommandDescriptor()
-            {
-                Name = "FindTextCommand",
-                Arguments = builder.Argument<String>("pattern").Create()
-            };
         }
 
         protected override void CreateRunnable()

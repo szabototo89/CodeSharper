@@ -10,16 +10,10 @@ namespace CodeSharper.Tests.Core.Utilities
     internal class JsonCommandDescriptorParserTestFixture
     {
         [SetUp]
-        public void Setup()
-        {
-            // TODO: (optional) not implemented
-        }
+        public void Setup() { }
 
         [TearDown]
-        public void Teardown()
-        {
-            // TODO: (optional) not implemented
-        }
+        public void Teardown() { }
 
         [Test]
         public void JsonCommandDescriptorParserShouldBeAbleToParseJsonFile()
@@ -27,10 +21,9 @@ namespace CodeSharper.Tests.Core.Utilities
             // Given
             var json =
                 "{\r\n    \"name\": \"Find Text Command\",\r\n    \"command-names\": [ \"find-text\" ],\r\n    \"arguments\": [\r\n        {\r\n            \"name\": \"pattern\",\r\n            \"type\": \"System.String\",\r\n            \"optional\": false,\r\n            \"default-value\": null\r\n        }\r\n    ]\r\n}";
-            var underTest = new JsonCommandDescriptorParser();
 
             // When
-            var result = underTest.Parse(json);
+            var result = JsonCommandDescriptorParser.ParseFrom(json);
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -43,6 +36,5 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(argument.IsOptional, Is.False);
             Assert.That(argument.DefaultValue, Is.Null);
         }
-         
     }
 }

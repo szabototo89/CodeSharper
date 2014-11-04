@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.CommandManager
 {
-    [TestFixture]
+    /*[TestFixture]
     internal class CommandManagerTestFixture
     {
         protected StandardKernel Kernel { get; set; }
@@ -51,5 +51,5 @@ namespace CodeSharper.Tests.Core.CommandManager
             // Then
             Assert.That(result, Is.False);
         }
-    }
+    }*/
 }

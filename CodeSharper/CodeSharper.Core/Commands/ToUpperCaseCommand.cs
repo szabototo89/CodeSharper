@@ -7,7 +7,7 @@ namespace CodeSharper.Core.Commands
     {
         private readonly ToUpperCaseRunnable _runnable;
 
-        public ToUpperCaseCommand()
+        public ToUpperCaseCommand(CommandDescriptor descriptor) : base(descriptor)
         {
             _runnable = new ToUpperCaseRunnable();
         }

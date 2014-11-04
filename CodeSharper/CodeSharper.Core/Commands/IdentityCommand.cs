@@ -6,7 +6,7 @@ namespace CodeSharper.Core.Commands
     {
         private readonly IdentityRunnable _identityRunnable;
 
-        public IdentityCommand()
+        public IdentityCommand(CommandDescriptor descriptor) : base(descriptor)
         {
             _identityRunnable = new IdentityRunnable();
         }

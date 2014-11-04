@@ -18,5 +18,20 @@ namespace CodeSharper.Core.Common
         {
             return new List<T>(new[] { that });
         }
+
+        public static Boolean Is<T>(this Object that)
+        {
+            return that is T;
+        }
+
+        public static T As<T>(this Object that) where T : class
+        {
+            return that as T;
+        }
+
+        public static T To<T>(this Object that)
+        {
+            return (T)that;
+        }
     }
 }
