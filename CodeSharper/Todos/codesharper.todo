@@ -1,0 +1,17 @@
+ CodeSharper To-Do List
+
+ ✔ Finish (redesign and refactor) Option<T> class @done (14-11-07 23:43)
+   ✔ Should be able to convert implicitly from Optional.None @done (14-11-06 00:13)
+   ✔ Write unit tests for testing properly @done (14-11-06 00:14)
+   ✔ Implement IMonadish interface properly @done (14-11-07 23:32)
+ 
+ ☐ Finish ArgumentResolver implementation
+   ☐ It should able to set option values and check its value is optional or required!
+
+ ✔ Figure out what is the problem with iceScrum @done (14-11-07 23:32)
+   ✔ You can find log file here: c:\Users\Tamas\AppData\Local\Kagilum\iceScrum Server\logs\  @done (14-11-07 23:32)
+   ✔ I won't use this iceScrum @done (14-11-07 23:32)
+
+ 
+
+

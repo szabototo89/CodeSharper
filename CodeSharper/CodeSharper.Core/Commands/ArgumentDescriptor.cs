@@ -2,7 +2,7 @@
 
 namespace CodeSharper.Core.Commands
 {
-    public struct ArgumentDescriptor
+    public class ArgumentDescriptor
     {
         public String ArgumentName { get; set; }
 

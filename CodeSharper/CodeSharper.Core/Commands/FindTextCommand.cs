@@ -21,7 +21,7 @@ namespace CodeSharper.Core.Commands
         protected override void MapArguments(CommandArgumentCollection arguments)
         {
             base.MapArguments(arguments);
-            _pattern = arguments.GetArgument<String>("pattern");
+            _pattern = arguments.GetArgumentValue<String>("pattern");
         }
 
         public override IRunnable GetRunnable()

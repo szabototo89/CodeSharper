@@ -21,7 +21,7 @@ namespace CodeSharper.Core.Commands
         {
             base.MapArguments(arguments);
 
-            var resolver = new CommandArgumentResolver(arguments);
+            var resolver = new CommandArgumentResolver(Descriptor, arguments);
             resolver
                 .UpdateArgument(ref _value, ARGUMENT_VALUE)
                 .UpdateArgument(ref _startIndex, ARGUMENT_START_INDEX);

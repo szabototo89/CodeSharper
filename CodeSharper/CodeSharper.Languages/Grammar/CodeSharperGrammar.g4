@@ -3,36 +3,41 @@ grammar CodeSharperGrammar;
 start:
          Commands=commands;
 
-commands:
-        Command=command (Operator=operator Command=command+)?;
+commands:   Command=command (Operator=operator? Command=command)+?
+        ;
 
 operator: '|'
         | ','
+        | '&'
+        | ';'
         | '>'
         ;
 
 command:
            CommandId=ID Parameters=parameters?
-       |   Selector=selector;
+       |   Selector=selector
+       |   '(' commands ')'
+       |   '{' commands '}'
+       ;
 
 parameters:
               Parameter=parameter (',' Parameter=parameter)*;
 
 parameter:
-             (ParameterName=parameterName '=')? ParameterValue=parameterValue;
+             (ParameterName=parameter_name '=')? ParameterValue=parameter_value;
 
-parameterName:
+parameter_name:
                   ParameterId=ID
               ;
 
-parameterValue:
+parameter_value:
                    STRING 
                |   NUMBER
                |   BOOLEAN
                |   Selector=selector;
 
-parameterValues:
-                    ParameterValues=parameterValue (',' ParameterValues=parameterValue)*;
+parameter_values:
+                    ParameterValues=parameter_value (',' ParameterValues=parameter_value)*;
 
 selector:
             SelectorLiterals=selector_literal (SelectorOperators=selector_operator? SelectorLiterals=selector_literal)*;
@@ -49,11 +54,11 @@ selector_literal:
                 ;
 
 selector_attributes:
-                    '[' SelectorAttributeId=ID '=' ParameterValue=parameterValue ']'
+                    '[' SelectorAttributeId=ID '=' ParameterValue=parameter_value ']'
                    ;
 
 pseudo_selector:
-                ':' PseudoSelectorId=ID ('(' ParameterValue=parameterValues ')')?  
+                ':' PseudoSelectorId=ID ('(' ParameterValue=parameter_values ')')?  
                ;
 BOOLEAN:
            'true'|'false';
@@ -64,8 +69,8 @@ STRING: '"'.+?'"';
 
 NUMBER: [0-9]+(.[0-9]+)?;
 
+WS : [ \n\u000D] -> skip ;
+
 fragment LETTER: [a-zA-Z];
 
 fragment SYMBOL: [_\-];
-
-WS : [ \n\u000D] -> skip ;

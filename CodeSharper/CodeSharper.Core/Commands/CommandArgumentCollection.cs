@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using CodeSharper.Core.Common;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Commands
 {
@@ -13,7 +15,7 @@ namespace CodeSharper.Core.Commands
             _arguments = new Dictionary<String, CommandArgument>();
         }
 
-        public TValue GetArgument<TValue>(String argumentName)
+        public TValue GetArgumentValue<TValue>(String argumentName)
         {
             return ((TValue)_arguments[argumentName].Value);
         }
@@ -36,6 +38,15 @@ namespace CodeSharper.Core.Commands
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public Option<CommandArgument> TryGetArgument(String argumentName)
+        {
+            CommandArgument argument;
+            if (!_arguments.TryGetValue(argumentName, out argument))
+                return Option.None;
+
+            return Option.Some(argument);
         }
     }
 }

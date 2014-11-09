@@ -48,6 +48,7 @@
     <Compile Include="Commands\CommandArgumentCollection.cs" />
     <Compile Include="Commands\CommandArgumentResolver.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\CommandBuilder.cs" />
     <Compile Include="Commands\CommandDescriptor.cs" />
     <Compile Include="Commands\ConstantCommand.cs" />
     <Compile Include="Commands\FindTextCommand.cs" />
@@ -82,8 +83,7 @@
     <Compile Include="Common\IIdentifiable.cs" />
     <Compile Include="Common\NumberHelper.cs" />
     <Compile Include="Common\ObjectHelper.cs" />
-    <Compile Include="Common\Optional.cs" />
-    <Compile Include="Common\OptionalHelper.cs" />
+    <Compile Include="Common\OptionHelper.cs" />
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentConverter.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentBefore.cs" />
@@ -141,7 +141,9 @@
     <Compile Include="Texts\TextNodeHelper.cs" />
     <Compile Include="Texts\TextRangeHelper.cs" />
     <Compile Include="Utilities\ICommandDescriptorParser.cs" />
+    <Compile Include="Utilities\IMonadic.cs" />
     <Compile Include="Utilities\JsonCommandDescriptorParser.cs" />
+    <Compile Include="Utilities\Option.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CommandDescriptions\find-text-descriptor.json" />

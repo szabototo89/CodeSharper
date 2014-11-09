@@ -33,5 +33,10 @@ namespace CodeSharper.Core.Common
         {
             return (T)that;
         }
+
+        public static IEnumerable<T> Repeat<T>(this T value, Int32 count)
+        {
+            return Enumerable.Repeat(value, count);
+        } 
     }
 }

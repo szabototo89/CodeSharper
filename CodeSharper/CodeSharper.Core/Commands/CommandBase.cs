@@ -21,7 +21,7 @@ namespace CodeSharper.Core.Commands
 
         protected void UpdateArgument<TValue>(ref TValue value, CommandArgumentCollection arguments, String argumentName)
         {
-            value = arguments.GetArgument<TValue>(argumentName);
+            value = arguments.GetArgumentValue<TValue>(argumentName);
         }
 
         protected virtual void CreateRunnable() { }
