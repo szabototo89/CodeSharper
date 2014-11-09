@@ -35,20 +35,22 @@ namespace CodeSharper.Tests.Core.CommandManager
         public void CommandBuilderShouldAbleToRegisterCommands()
         {
             // Given
-            var underTest = new CommandBuilder();
+            var commandMock = new Mock<ICommandFactory>();
+
+            var underTest = new StandardCommandManager();
 
             // When
-            underTest.RegisterRunnable(_runnableMock.Object, _descriptorMock.Object);
+            underTest.RegisterCommand(commandMock.Object);
         }
 
         [Test]
         public void CommandBuilderShouldGetRunnableByCommandName()
         {
             // Given
-            var underTest = new CommandBuilder();
+            var underTest = new StandardCommandManager();
 
             // When
-            var result = underTest.TryGetRunnablesByName("mock");
+            var result = underTest.TryGetCommandsByName("mock");
 
             // Then
             Assert.That(result, Is.InstanceOf<Option<IRunnable>>());

@@ -30,8 +30,8 @@ namespace CodeSharper.Tests.Core.CommandManager
             var underTest = Kernel.Get<ICommandManager>();
 
             // When
-            underTest.RegisterCommand<IdentityCommand>();
-            var result = underTest.IsCommandRegistered<IdentityCommand>();
+            underTest.RegisterCommand<IdentityCommandFactory>();
+            var result = underTest.IsCommandRegistered<IdentityCommandFactory>();
 
             // Then
             Assert.That(result, Is.True);
@@ -44,9 +44,9 @@ namespace CodeSharper.Tests.Core.CommandManager
             var underTest = Kernel.Get<ICommandManager>();
 
             // When
-            underTest.RegisterCommand<IdentityCommand>();
-            underTest.UnregisterCommand<IdentityCommand>();
-            var result = underTest.IsCommandRegistered<IdentityCommand>();
+            underTest.RegisterCommand<IdentityCommandFactory>();
+            underTest.UnregisterCommand<IdentityCommandFactory>();
+            var result = underTest.IsCommandRegistered<IdentityCommandFactory>();
 
             // Then
             Assert.That(result, Is.False);

@@ -42,23 +42,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ArgumentDescriptor.cs" />
+    <Compile Include="Commands\ArgumentDescriptorBase.cs" />
     <Compile Include="Commands\ArgumentDescriptorBuilder.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandArgument.cs" />
     <Compile Include="Commands\CommandArgumentCollection.cs" />
     <Compile Include="Commands\CommandArgumentResolver.cs" />
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\CommandBuilder.cs" />
-    <Compile Include="Commands\CommandDescriptor.cs" />
-    <Compile Include="Commands\ConstantCommand.cs" />
-    <Compile Include="Commands\FindTextCommand.cs" />
+    <Compile Include="Commands\CommandFactoryBase.cs" />
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandManager.cs" />
-    <Compile Include="Commands\IdentityCommand.cs" />
-    <Compile Include="Commands\InsertTextRangeCommand.cs" />
-    <Compile Include="Common\InitializerAttribute.cs" />
     <Compile Include="Commands\StandardCommandManager.cs" />
-    <Compile Include="Commands\ToUpperCaseCommand.cs" />
+    <Compile Include="Commands\CommandCallDescriptor.cs" />
+    <Compile Include="Commands\CommandDescriptor.cs" />
+    <Compile Include="Commands\ConstantCommandFactory.cs" />
+    <Compile Include="Commands\FindTextCommandFactory.cs" />
+    <Compile Include="Commands\ICommandFactory.cs" />
+    <Compile Include="Commands\IdentityCommandFactory.cs" />
+    <Compile Include="Commands\InsertTextRangeCommandFactory.cs" />
+    <Compile Include="Common\InitializerAttribute.cs" />
+    <Compile Include="Commands\ToUpperCaseCommandFactory.cs" />
     <Compile Include="Common\ConstraintChecking\ComparisonConstraint.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintArgument.cs" />
     <Compile Include="Common\ConstraintChecking\ConstraintBase.cs" />

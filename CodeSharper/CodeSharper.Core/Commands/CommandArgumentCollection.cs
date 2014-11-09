@@ -8,31 +8,31 @@ namespace CodeSharper.Core.Commands
 {
     public class CommandArgumentCollection : IEnumerable<CommandArgument>
     {
-        private readonly Dictionary<String, CommandArgument> _arguments;
+        private readonly Dictionary<String, CommandArgument> _namedArguments;
 
         public CommandArgumentCollection()
         {
-            _arguments = new Dictionary<String, CommandArgument>();
+            _namedArguments = new Dictionary<String, CommandArgument>();
         }
 
         public TValue GetArgumentValue<TValue>(String argumentName)
         {
-            return ((TValue)_arguments[argumentName].Value);
+            return ((TValue)_namedArguments[argumentName].Value);
         }
 
         public CommandArgumentCollection SetArgument(String argumentName, Object value)
         {
             var argument = new CommandArgument { Name = argumentName, Value = value };
-            if (_arguments.ContainsKey(argumentName))
-                _arguments[argumentName] = argument;
-            else _arguments.Add(argumentName, argument);
+            if (_namedArguments.ContainsKey(argumentName))
+                _namedArguments[argumentName] = argument;
+            else _namedArguments.Add(argumentName, argument);
 
             return this;
         }
 
         public IEnumerator<CommandArgument> GetEnumerator()
         {
-            return _arguments.Values.GetEnumerator();
+            return _namedArguments.Values.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -43,7 +43,7 @@ namespace CodeSharper.Core.Commands
         public Option<CommandArgument> TryGetArgument(String argumentName)
         {
             CommandArgument argument;
-            if (!_arguments.TryGetValue(argumentName, out argument))
+            if (!_namedArguments.TryGetValue(argumentName, out argument))
                 return Option.None;
 
             return Option.Some(argument);

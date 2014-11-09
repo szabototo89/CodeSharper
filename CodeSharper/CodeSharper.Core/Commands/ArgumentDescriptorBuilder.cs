@@ -5,14 +5,14 @@ namespace CodeSharper.Core.Commands
 {
     public class ArgumentDescriptorBuilder
     {
-        private readonly List<ArgumentDescriptor> _descriptors;
+        private readonly List<ArgumentDescriptorBase> _descriptors;
 
         public ArgumentDescriptorBuilder()
         {
-            _descriptors  = new List<ArgumentDescriptor>();
+            _descriptors  = new List<ArgumentDescriptorBase>();
         }
 
-        public IEnumerable<ArgumentDescriptor> Create()
+        public IEnumerable<ArgumentDescriptorBase> Create()
         {
             var result = _descriptors.ToArray();
             _descriptors.Clear();
@@ -21,7 +21,7 @@ namespace CodeSharper.Core.Commands
 
         public ArgumentDescriptorBuilder Argument<TArgument>(String argumentName, Boolean isOptional = false, TArgument defaultValue = default(TArgument))
         {
-            _descriptors.Add(new ArgumentDescriptor
+            _descriptors.Add(new NamedArgumentDescriptor
             {
                 ArgumentName = argumentName,
                 ArgumentType = typeof(TArgument),

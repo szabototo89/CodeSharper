@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandManager\CommandBuilderTestFixture.cs" />
+    <Compile Include="CommandManager\CommandCallDescriptorTextFixture.cs" />
     <Compile Include="CommandManager\CommandManagerTestFixture.cs" />
     <Compile Include="CommandManager\CommandsTestFixture.cs" />
     <Compile Include="Common\ConstraintsTestFixture.cs" />

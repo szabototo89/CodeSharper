@@ -15,7 +15,7 @@ namespace CodeSharper.Core.Commands
 
         public String Name { get; set; }
 
-        public IEnumerable<ArgumentDescriptor> Arguments { get; set; }
+        public IEnumerable<ArgumentDescriptorBase> Arguments { get; set; }
         
         public IEnumerable<String> CommandNames { get; set; }
 
@@ -23,7 +23,7 @@ namespace CodeSharper.Core.Commands
 
         public CommandDescriptor()
         {
-            Arguments = Enumerable.Empty<ArgumentDescriptor>();
+            Arguments = Enumerable.Empty<ArgumentDescriptorBase>();
             CommandNames = Enumerable.Empty<String>();
         }
     }

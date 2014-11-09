@@ -2,16 +2,16 @@
 
 namespace CodeSharper.Core.Commands
 {
-    public class IdentityCommand : CommandBase
+    public class IdentityCommandFactory : CommandFactoryBase
     {
         private readonly IdentityRunnable _identityRunnable;
 
-        public IdentityCommand(CommandDescriptor descriptor) : base(descriptor)
+        public IdentityCommandFactory()
         {
             _identityRunnable = new IdentityRunnable();
         }
 
-        public override IRunnable GetRunnable()
+        protected override IRunnable CreateRunnable()
         {
             return _identityRunnable;
         }

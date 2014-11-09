@@ -42,15 +42,15 @@ namespace CodeSharper.Core.Commands
             return this;
         }
 
-        private Option<ArgumentDescriptor> TryGetArgumentDescriptor(String argumentName)
+        private Option<ArgumentDescriptorBase> TryGetArgumentDescriptor(String argumentName)
         {
-            var arguments = _descriptor.Arguments;
+            var arguments = _descriptor.Arguments.OfType<NamedArgumentDescriptor>();
             var result = arguments.FirstOrDefault(argument => argument.ArgumentName == argumentName);
 
             if (result == null)
                 return Option.None;
 
-            return Option.Some(result);
+            return Option.Some((ArgumentDescriptorBase)result);
         }
     }
 }

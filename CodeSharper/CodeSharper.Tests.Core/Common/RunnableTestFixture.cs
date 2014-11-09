@@ -56,7 +56,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Has.Count.Or.Length.EqualTo(2));
         }
 
-        [Test(Description = "IdentityCommand should return with passed value.")]
+        [Test(Description = "IdentityCommandFactory should return with passed value.")]
         public void IdentityRunnableShouldReturnWithPassedValue()
         {
             // Given

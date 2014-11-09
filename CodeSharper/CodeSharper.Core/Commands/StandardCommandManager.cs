@@ -1,38 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeSharper.Core.Common;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Commands
 {
-    public class StandardCommandManager : ICommandManager
+    public class StandardCommandManager
     {
-        private readonly List<Type> _commands;
+        private readonly Dictionary<CommandDescriptor, ICommandFactory> _commands;
 
         public StandardCommandManager()
         {
-            _commands = new List<Type>();
+            _commands = new Dictionary<CommandDescriptor, ICommandFactory>();
         }
 
-        public void RegisterCommand<TCommand>()
-            where TCommand : ICommand, new()
+        public StandardCommandManager RegisterCommand(ICommandFactory commandFactory)
         {
-            if (IsCommandRegistered<TCommand>())
-                ThrowHelper.ThrowArgumentException("TCommand");
-
-            _commands.Add(typeof(TCommand));
+            return this;
         }
 
-        public void UnregisterCommand<TCommand>() where TCommand : ICommand, new()
+        public Option<ICommandFactory> TryGetCommand(CommandCallDescriptor callDescriptor)
         {
-            if (!IsCommandRegistered<TCommand>())
-                ThrowHelper.ThrowArgumentException("TCommand");
+            Constraints.NotNull(() => callDescriptor);
 
-            _commands.Remove(typeof(TCommand));
+            var command = TryGetCommandsByName(callDescriptor.Name).SingleOrDefault();
+
+            if (command == null)
+                return Option.None;
+
+            var arguments = new CommandArgumentCollection();
+            foreach (var argument in callDescriptor.NamedArguments)
+                arguments.SetArgument(argument.Key, argument.Value);
+
+            //command.PassArguments(arguments);
+            return Option.Some(command);
         }
 
-        public Boolean IsCommandRegistered<TCommand>() where TCommand : ICommand, new()
+        public IEnumerable<ICommandFactory> TryGetCommandsByName(String name)
         {
-            return _commands.Contains(typeof(TCommand));
+            return _commands.Where(pair => pair.Key.CommandNames.Any(command => String.Equals(command, name)))
+                .Select(pair => pair.Value);
         }
     }
 }

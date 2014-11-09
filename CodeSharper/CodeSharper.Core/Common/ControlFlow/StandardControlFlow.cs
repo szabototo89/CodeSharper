@@ -37,7 +37,7 @@ namespace CodeSharper.Core.Common.ControlFlow
         {
             Constraints.NotEmpty(() => runnables);
             Clear();
-            _commands.AddRange(runnables.Select(runnable => new ConstantCommand(CommandDescriptor.Empty) { Runnable = runnable }));
+            _commands.AddRange(runnables.Select(runnable => new Command(runnable, CommandDescriptor.Empty, new CommandArgumentCollection())));
             return this;
         }
 
@@ -49,7 +49,7 @@ namespace CodeSharper.Core.Common.ControlFlow
 
             foreach (var command in _commands)
             {
-                var runnable = command.GetRunnable();
+                var runnable = command.Runnable;
                 result = executor.Execute(runnable, result);
             }
 

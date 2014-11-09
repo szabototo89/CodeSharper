@@ -45,7 +45,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             };
 
             var mock = new Mock<ICommand>();
-            mock.SetupGet(command => command.Descriptor)
+            mock.SetupGet(cmd => cmd.Descriptor)
                 .Returns(() => descriptor);
 
             var underTest = mock.Object;
@@ -56,7 +56,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo("mock-command"));
-            Assert.That(result.Arguments.Select(arg => arg.ArgumentName), Is.EquivalentTo(new[] { "first", "second" }));
+            Assert.That(result.Arguments.OfType<NamedArgumentDescriptor>().Select(arg => arg.ArgumentName), Is.EquivalentTo(new[] { "first", "second" }));
             Assert.That(result.Arguments.Select(arg => arg.ArgumentType), Is.EquivalentTo(new[] { typeof(String), typeof(Int32) }));
         }
 
@@ -67,16 +67,16 @@ namespace CodeSharper.Tests.Core.CommandManager
             var descriptor =
                 JsonCommandDescriptorParser.ParseFrom(
                     "{\"name\":\"Insert TextRange Command\",\"command-names\":[\"insert\",\"insert-text-range\"],\"arguments\":[{\"name\":\"startIndex\",\"type\":\"System.Int32\",\"optional\":false,\"default-value\":null},{\"name\":\"value\",\"type\":\"System.String\",\"optional\":false,\"default-value\":\"\"}]}");
-            var underTest = new InsertTextRangeCommand(descriptor);
+
+            var arguments = new CommandArgumentCollection()
+                .SetArgument("startIndex", 10)
+                .SetArgument("value", "Hello World!");
+
+            var underTest = new InsertTextRangeCommandFactory();
 
             // When
-            underTest.PassArguments(
-                new CommandArgumentCollection()
-                  .SetArgument("startIndex", 10)
-                  .SetArgument("value", "Hello World!")
-            );
 
-            var result = underTest.GetRunnable().To<InsertTextRangeRunnable>();
+            var result = underTest.CreateCommand(descriptor, arguments);
 
             // Then
             Assert.That(result, Is.Not.Null);
