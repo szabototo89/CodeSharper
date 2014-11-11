@@ -110,6 +110,29 @@ namespace CodeSharper.Tests.Core.Compiler
         }
 
         [Test]
+        public void CodeSharperCompilerShouldAbleToParseAndOperatorCommands()
+        {
+            // Given
+            var underTest = new CodeSharperCompiler();
+            var command = "test-1 1 && test-2 2";
+
+            // When
+            var result = underTest
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command);
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<LazyAndCommandCallTree>());
+
+            var descriptors = result.Children.OfType<SingleCommandCallTree>().Select(x => x.CommandCallDescriptor);
+            Assert.That(descriptors, Is.Not.Null);
+            Assert.That(descriptors.Select(call => call.Name), Is.EquivalentTo(new[] { "test-1", "test-2" }));
+
+            var arguments = descriptors.SelectMany(call => call.Arguments);
+            Assert.That(arguments, Is.EquivalentTo(new[] { 1, 2 }));
+        }
+
+        [Test]
         public void CodeSharperCompilerShouldAbleToParseComplicatedCommandCall()
         {
             // Given
