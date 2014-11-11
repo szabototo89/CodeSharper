@@ -11,6 +11,5 @@ namespace CodeSharper.Core.Utilities
         IMonadic<TResult> Map<TResult>(Func<TValue, TResult> transform);
 
         IMonadic<TValue> Filter(Predicate<TValue> predicate);
-
     }
 }

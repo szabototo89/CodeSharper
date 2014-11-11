@@ -12,6 +12,8 @@ namespace CodeSharper.Core.Commands
 {
     public abstract class CommandFactoryBase : ICommandFactory
     {
+        public CommandDescriptor Descriptor { get; set; }
+
         protected void UpdateArgument<TValue>(ref TValue value, CommandArgumentCollection arguments, String argumentName)
         {
             value = arguments.GetArgumentValue<TValue>(argumentName);
@@ -19,37 +21,36 @@ namespace CodeSharper.Core.Commands
 
         protected abstract IRunnable CreateRunnable();
 
-        protected virtual void MapArguments(CommandDescriptor descriptor, CommandArgumentCollection arguments)
+        protected virtual void MapArguments(CommandArgumentCollection arguments)
         {
-            foreach (var argument in descriptor.Arguments.OfType<NamedArgumentDescriptor>())
+            foreach (var argument in Descriptor.Arguments.OfType<NamedArgumentDescriptor>())
                 if (arguments
                     .All(arg => arg.Name != argument.ArgumentName))
                     arguments.SetArgument(argument.ArgumentName, argument.DefaultValue);
         }
 
-        protected virtual void CheckArguments(CommandDescriptor descriptor, CommandArgumentCollection arguments)
+        protected virtual void CheckArguments(CommandArgumentCollection arguments)
         {
-            if (!descriptor
+            if (!Descriptor
                     .Arguments.OfType<NamedArgumentDescriptor>()
                     .Where(arg => !arg.IsOptional)
                     .All(arg => arguments.Any(a => a.Name == arg.ArgumentName)))
                 ThrowHelper.ThrowException<InvalidOperationException>();
 
-            if (!descriptor.Arguments.OfType<NamedArgumentDescriptor>().Join(arguments, arg => arg.ArgumentName, arg => arg.Name,
+            if (!Descriptor.Arguments.OfType<NamedArgumentDescriptor>().Join(arguments, arg => arg.ArgumentName, arg => arg.Name,
                 (left, right) => left.ArgumentType == right.Value.GetType()).All(element => element))
-                ThrowHelper.ThrowException(String.Format("Argument type error of {0}!", descriptor.Name));
+                ThrowHelper.ThrowException(String.Format("Argument type error of {0}!", Descriptor.Name));
         }
 
-        public virtual Command CreateCommand(CommandDescriptor descriptor, CommandArgumentCollection arguments)
+        public virtual ICommand CreateCommand(CommandArgumentCollection arguments)
         {
             Constraints
-                .NotNull(() => descriptor)
                 .NotNull(() => arguments);
 
-            CheckArguments(descriptor, arguments);
-            MapArguments(descriptor, arguments);
+            CheckArguments(arguments);
+            MapArguments(arguments);
             var runnable = CreateRunnable();
-            return new Command(runnable, descriptor, arguments);
+            return new Command(runnable, Descriptor, arguments);
         }
     }
 }

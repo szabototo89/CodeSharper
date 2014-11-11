@@ -4,6 +4,8 @@ namespace CodeSharper.Core.Commands
 {
     public interface ICommandFactory
     {
-        Command CreateCommand(CommandDescriptor descriptor, CommandArgumentCollection arguments);
+        CommandDescriptor Descriptor { get; set; }
+
+        ICommand CreateCommand(CommandArgumentCollection arguments);
     }
 }

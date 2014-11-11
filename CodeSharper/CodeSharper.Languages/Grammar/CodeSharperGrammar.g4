@@ -1,76 +1,99 @@
 grammar CodeSharperGrammar;
 
+// TODO: Refactor the rule names!
+
 start:
          Commands=commands;
 
-commands:   Command=command (Operator=operator? Command=command)+?
-        ;
+// commands:   Command=command (Operator=operator? Command=command)+? ;
 
-operator: '|'
-        | ','
-        | '&'
-        | ';'
-        | '>'
-        ;
+commands:   commandExpression;
 
-command:
-           CommandId=ID Parameters=parameters?
+commandExpression: 
+                    commandExpression pipeLineOperator='|' commandExpression   #PipeLineCommandExpression      
+                  | commandExpression commaOperator=',' commandExpression      #CommaCommandExpression      
+                  | commandExpression andOperator='&&' commandExpression       #AndCommandExpression  
+                  | commandExpression orOperator='||' commandExpression        #OrCommandExpression  
+                  | commandExpression semicolonOperator=';' commandExpression  #SemicolonCommandExpression      
+                  | command                                                    #SingleCommandExpression
+                  ;
+        
+command:   CommandCall=commandCall
        |   Selector=selector
        |   '(' commands ')'
        |   '{' commands '}'
        ;
 
+commandCall: CommandName=ID Parameters=parameters
+           ; 
+
+
 parameters:
-              Parameter=parameter (',' Parameter=parameter)*;
+              (Parameter=parameter)* (NamedParameter=namedParameter)*
+          ;
 
 parameter:
-             (ParameterName=parameter_name '=')? ParameterValue=parameter_value;
+             ParameterValue=parameterValue;
 
-parameter_name:
-                  ParameterId=ID
+namedParameter:
+             (ParameterName=parameterName '=')? ParameterValue=parameterValue;
+
+parameterName:
+                  ParameterName=ID
               ;
 
-parameter_value:
-                   STRING 
-               |   NUMBER
-               |   BOOLEAN
-               |   Selector=selector;
+parameterValue:            
+                   STRING             #StringParameterValue
+               |   NUMBER             #NumberParameterValue
+               |   BOOLEAN            #BooleanParameterValue  
+               |   Selector=selector  #SelectorParameterValue            
+               ;
 
-parameter_values:
-                    ParameterValues=parameter_value (',' ParameterValues=parameter_value)*;
+parameterValues:
+                    ParameterValues=parameterValue (',' ParameterValues=parameterValue)*;
 
 selector:
-            SelectorLiterals=selector_literal (SelectorOperators=selector_operator? SelectorLiterals=selector_literal)*;
+            SelectorLiterals=selectorLiteral (SelectorOperators=selectorOperator? SelectorLiterals=selectorLiteral)*;
 
-selector_operator:
+selectorOperator:
                      '>' 
                  |   '~'
                  |   '+';
 
-selector_literal:
-                    SelectorId=ID SelectorAttributes=selector_attributes* PseudoSelectors=pseudo_selector*
-                |   SelectorAttributes=selector_attributes+ PseudoSelectors=pseudo_selector*
-                |   PseudoSelectors=pseudo_selector+
+selectorLiteral:
+                    SelectorId=ID SelectorAttributes=selectorAttributes* PseudoSelectors=pseudoSelector*
+                |   SelectorAttributes=selectorAttributes+ PseudoSelectors=pseudoSelector*
+                |   PseudoSelectors=pseudoSelector+
                 ;
 
-selector_attributes:
-                    '[' SelectorAttributeId=ID '=' ParameterValue=parameter_value ']'
+selectorAttributes:
+                    '[' SelectorAttributeId=ID '=' ParameterValue=parameterValue ']'
                    ;
 
-pseudo_selector:
-                ':' PseudoSelectorId=ID ('(' ParameterValue=parameter_values ')')?  
+pseudoSelector:
+                ':' PseudoSelectorId=ID ('(' ParameterValue= parameterValues ')')?  
                ;
-BOOLEAN:
-           'true'|'false';
 
-ID: LETTER (LETTER | SYMBOL)*;
+BOOLEAN: 'true'|'false';
 
-STRING: '"'.+?'"';
-
-NUMBER: [0-9]+(.[0-9]+)?;
-
-WS : [ \n\u000D] -> skip ;
+ID: LETTER (LETTER | SYMBOL | NUMBER)*;
 
 fragment LETTER: [a-zA-Z];
 
 fragment SYMBOL: [_\-];
+
+STRING: '"'.+?'"'
+      | '\''.+?'\'';
+
+NUMBER: [0-9]+;
+
+/*
+PIPE_LINE_OPERATOR: '|';
+COMMA_OPERATOR: ',';
+AND_OPERATOR: '&&';
+OR_OPERATOR: '||';
+SEMICOLON_OPERATOR: ';';
+*/
+
+WS : [ \n\u000D] -> skip ;
+

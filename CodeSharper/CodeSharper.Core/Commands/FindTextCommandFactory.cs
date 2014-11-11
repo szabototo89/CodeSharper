@@ -15,9 +15,9 @@ namespace CodeSharper.Core.Commands
             return new FindTextRunnable(_pattern);
         }
 
-        protected override void MapArguments(CommandDescriptor descriptor, CommandArgumentCollection arguments)
+        protected override void MapArguments(CommandArgumentCollection arguments)
         {
-            base.MapArguments(descriptor, arguments);
+            base.MapArguments(arguments);
             _pattern = arguments.GetArgumentValue<String>("pattern");
         }
     }

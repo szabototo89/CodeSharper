@@ -12,11 +12,11 @@ namespace CodeSharper.Core.Commands
         private readonly string ARGUMENT_VALUE = "value";
         private readonly string ARGUMENT_START_INDEX = "startIndex";
 
-        protected override void MapArguments(CommandDescriptor descriptor, CommandArgumentCollection arguments)
+        protected override void MapArguments(CommandArgumentCollection arguments)
         {
-            base.MapArguments(descriptor, arguments);
+            base.MapArguments(arguments);
 
-            var resolver = new CommandArgumentResolver(descriptor, arguments);
+            var resolver = new CommandArgumentResolver(Descriptor, arguments);
             resolver
                 .UpdateArgument(ref _value, ARGUMENT_VALUE)
                 .UpdateArgument(ref _startIndex, ARGUMENT_START_INDEX);

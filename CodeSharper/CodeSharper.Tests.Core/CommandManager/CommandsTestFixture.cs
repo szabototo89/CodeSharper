@@ -72,11 +72,11 @@ namespace CodeSharper.Tests.Core.CommandManager
                 .SetArgument("startIndex", 10)
                 .SetArgument("value", "Hello World!");
 
-            var underTest = new InsertTextRangeCommandFactory();
+            var underTest = new InsertTextRangeCommandFactory() { Descriptor = descriptor };
 
             // When
 
-            var result = underTest.CreateCommand(descriptor, arguments);
+            var result = underTest.CreateCommand(arguments);
 
             // Then
             Assert.That(result, Is.Not.Null);

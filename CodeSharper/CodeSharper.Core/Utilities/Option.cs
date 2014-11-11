@@ -52,11 +52,6 @@ namespace CodeSharper.Core.Utilities
             return value.Value;
         }
 
-        public static implicit operator Option<TValue>(TValue value)
-        {
-            return Option.Some(value);
-        }
-
         public static Boolean operator ==(Option<TValue> left, Option<TValue> right)
         {
             if (left.HasValue != right.HasValue)

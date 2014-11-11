@@ -18,29 +18,34 @@ namespace CodeSharper.Core.Commands
             _commands = new Dictionary<CommandDescriptor, ICommandFactory>();
         }
 
-        public StandardCommandManager RegisterCommand(ICommandFactory commandFactory)
+        public StandardCommandManager RegisterCommandFactory(ICommandFactory commandFactory)
         {
+            Constraints
+                .NotNull(() => commandFactory)
+                .NotNull(() => commandFactory.Descriptor);
+
+            _commands.Add(commandFactory.Descriptor, commandFactory);
+
             return this;
         }
 
-        public Option<ICommandFactory> TryGetCommand(CommandCallDescriptor callDescriptor)
+        public Option<ICommand> TryGetCommand(CommandCallDescriptor callDescriptor)
         {
             Constraints.NotNull(() => callDescriptor);
 
-            var command = TryGetCommandsByName(callDescriptor.Name).SingleOrDefault();
+            var factory = TryGetCommandFactoriesByName(callDescriptor.Name).SingleOrDefault();
 
-            if (command == null)
+            if (factory == null)
                 return Option.None;
 
             var arguments = new CommandArgumentCollection();
             foreach (var argument in callDescriptor.NamedArguments)
                 arguments.SetArgument(argument.Key, argument.Value);
 
-            //command.PassArguments(arguments);
-            return Option.Some(command);
+            return Option.Some(factory.CreateCommand(arguments));
         }
 
-        public IEnumerable<ICommandFactory> TryGetCommandsByName(String name)
+        public IEnumerable<ICommandFactory> TryGetCommandFactoriesByName(String name)
         {
             return _commands.Where(pair => pair.Key.CommandNames.Any(command => String.Equals(command, name)))
                 .Select(pair => pair.Value);

@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compilers\CodeSharperArgumentVisitor.cs" />
     <Compile Include="Compilers\CodeSharperCompiler.cs" />
-    <Compile Include="Compilers\CodeSharperVisitor.cs" />
+    <Compile Include="Compilers\CodeSharperGrammarVisitor.cs" />
     <Compile Include="Compilers\ICommandFactory.cs" />
+    <Compile Include="Compilers\IVisitor.cs" />
     <Compile Include="Grammar\CodeSharperGrammar.g4.lexer.cs">
       <DependentUpon>CodeSharperGrammar.g4</DependentUpon>
     </Compile>
