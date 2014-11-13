@@ -45,7 +45,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             var result = underTest.TryGetCommandFactoriesByName("mock");
 
             // Then
-            Assert.That(result, Is.InstanceOf<Option<IRunnable>>());
+            Assert.That(result, Is.InstanceOf<IEnumerable<ICommandFactory>>());
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace CodeSharper.Tests.Core.CommandManager
 
             factoryMock
                 .Setup(_ => _.CreateCommand(It.IsAny<CommandArgumentCollection>()))
-                .Returns<CommandArgumentCollection, ICommand>((arguments, command) => new Command(null, CommandDescriptor.Empty, arguments));
+                .Returns<CommandArgumentCollection>(arguments => new Command(null, CommandDescriptor.Empty, arguments));
 
             var underTest = new StandardCommandManager();
             underTest.RegisterCommandFactory(factoryMock.Object);

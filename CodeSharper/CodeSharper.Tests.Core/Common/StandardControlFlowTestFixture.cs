@@ -5,12 +5,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.Commands;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlow;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
+using CodeSharper.Languages.Compilers.CodeSharper;
+using CodeSharper.Tests.Core.Mocks;
 using CodeSharper.Tests.Core.TestHelpers;
+using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
@@ -18,6 +23,8 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     internal class StandardControlFlowTestFixture
     {
+        private Mock<ICommandManager> _commandManagerMock;
+
         private ValueArgument<TValue> Value<TValue>(TValue value)
         {
             return new ValueArgument<TValue>(value);
@@ -34,11 +41,17 @@ namespace CodeSharper.Tests.Core.Common
             return new TextDocument(text).TextRange;
         }
 
+        [SetUp]
+        public void Setup()
+        {
+            _commandManagerMock = new Mock<ICommandManager>();
+        }
+
         [Test]
         public void StandardControlFlowShouldHandleSingleExecutor()
         {
             // Given
-            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
+            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow(_commandManagerMock.Object, new StandardExecutor(RunnableManager.Instance));
             underTest.SetControlFlow(new IRunnable[] {
                 new SplitStringRunnable(" "),
                 new ToUpperCaseRunnable()
@@ -58,7 +71,7 @@ namespace CodeSharper.Tests.Core.Common
         public void StandardControlFlowShouldHandleMultipleValues()
         {
             // Given
-            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
+            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow(_commandManagerMock.Object, new StandardExecutor(RunnableManager.Instance));
             underTest.SetControlFlow(new IRunnable[]
             {
                 new SplitStringRunnable(" "),
@@ -84,7 +97,7 @@ namespace CodeSharper.Tests.Core.Common
         public void PerformanceTest(Int32 count)
         {
             // Given
-            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
+            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow(_commandManagerMock.Object, new StandardExecutor(RunnableManager.Instance));
             underTest.SetControlFlow(new[]
             {
                 new RegularExpressionRunnable("\\w+")
@@ -110,7 +123,7 @@ namespace CodeSharper.Tests.Core.Common
         public void StandardControlFlowShouldSplitAndFilterByRegularExpressionAndConvertedToUpperCase(String text)
         {
             // Given
-            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow();
+            StandardControlFlow underTest = ControlFlows.CreateStandardControlFlow(_commandManagerMock.Object, new StandardExecutor(RunnableManager.Instance));
             underTest.SetControlFlow(new IRunnable[] {
                 new SplitStringRunnable(" "),
                 new RegularExpressionRunnable(@"\w{7,}"), 
@@ -131,6 +144,27 @@ namespace CodeSharper.Tests.Core.Common
                 .Select(word => word.ToUpperInvariant());
 
             Assert.That(result.Values.Select(range => range.Text), Is.EquivalentTo(expected));
+        }
+
+        [Test(Description = "StandardControlFlow should be able to parse SingleCommandCall and create proper control flow")]
+        public void StandardControlFlowShouldBeAbleToParseSingleCommandCallAndCreateProperControlFlow()
+        {
+            // Given
+            var compiler = new CodeSharperCompiler();
+            var commandCall = compiler.RunVisitor<CodeSharperGrammarVisitor, ICommandCall>("id value='hello world!'");
+
+            var emptyValue = Arguments.Value(0);
+            var underTest = new StandardControlFlow(new StandardCommandManager(), ExecutorMocks.SimpleExecutor<Int32>());
+            underTest.CommandManager.RegisterCommandFactory(CommandFactoryMocks.ConstantCommandFactory("id"));
+
+            // When
+            var result = underTest
+                .ParseCommandCall(commandCall)
+                .Execute(emptyValue) as ValueArgument<Object>;
+
+            // Then
+            Assert.That(result , Is.Not.Null);
+            Assert.That(result.Value, Is.EqualTo("hello world!"));
         }
 
     }

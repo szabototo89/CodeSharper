@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using CodeSharper.Core.Commands;
@@ -7,15 +8,24 @@ using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.ControlFlow
 {
     public class StandardControlFlow
     {
         private readonly List<ICommand> _commands;
+        private readonly IExecutor _executor;
+        public ICommandManager CommandManager { get; protected set; }
 
-        public StandardControlFlow()
+        public StandardControlFlow(ICommandManager commandManager, IExecutor executor)
         {
+            Constraints.NotNull(() => commandManager);
+            Constraints.NotNull(() => executor);
+
+            CommandManager = commandManager;
+            _executor = executor;
+
             _commands = new List<ICommand>();
         }
 
@@ -45,15 +55,28 @@ namespace CodeSharper.Core.Common.ControlFlow
         public Argument Execute(Argument parameter)
         {
             Argument result = parameter;
-            var executor = Executors.StandardExecutor;
 
             foreach (var command in _commands)
             {
                 var runnable = command.Runnable;
-                result = executor.Execute(runnable, result);
+                result = _executor.Execute(runnable, result);
             }
 
             return result;
+        }
+
+        public StandardControlFlow ParseCommandCall(ICommandCall commandCall)
+        {
+            Constraints.NotNull(() => commandCall);
+
+            if (commandCall is SingleCommandCall)
+            {
+                var command = CommandManager.TryGetCommand((commandCall as SingleCommandCall).CommandCallDescriptor);
+                if (command != Option.None)
+                    _commands.Add(command.Value);
+            }
+
+            return this;
         }
     }
 }

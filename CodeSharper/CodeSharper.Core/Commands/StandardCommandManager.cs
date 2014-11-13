@@ -9,7 +9,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Commands
 {
-    public class StandardCommandManager
+    public class StandardCommandManager : ICommandManager
     {
         private readonly Dictionary<CommandDescriptor, ICommandFactory> _commands;
 
