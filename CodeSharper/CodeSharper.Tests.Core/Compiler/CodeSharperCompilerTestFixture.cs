@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Commands;
 using CodeSharper.Languages.Compilers;
+using CodeSharper.Languages.Compilers.CodeSharper;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Compiler

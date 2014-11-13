@@ -4,19 +4,17 @@ using System.Globalization;
 using System.Linq;
 using Antlr4.Runtime;
 using CodeSharper.Core.Commands;
-using CodeSharper.Core.Common;
-using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Grammar;
 
-namespace CodeSharper.Languages.Compilers
+namespace CodeSharper.Languages.Compilers.CodeSharper
 {
     public class CodeSharperGrammarVisitor : CodeSharperGrammarBaseVisitor<Object>, IVisitor<ICommandCallTree>
     {
         private readonly List<CommandParameter> _parameters;
         private readonly Stack<CommandCallDescriptor> _commandCallDescriptors;
+        private readonly Stack<ICommandCallTree> _commandCallTreeDescriptors;
         private CommandParameter _parameter;
-        private Stack<ICommandCallTree> _commandCallTreeDescriptors;
 
         private struct CommandParameter
         {
