@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Commands;
+using CodeSharper.Core.Common;
 using CodeSharper.Languages.Compilers;
 using CodeSharper.Languages.Compilers.CodeSharper;
 using NUnit.Framework;
@@ -23,8 +24,8 @@ namespace CodeSharper.Tests.Core.Compiler
             // TODO: (optional) not implemented
         }
 
-        [Test]
-        public void CodeSharperCompilerShouldParseACommandWithoutArgument()
+        [Test(Description = "CodeSharperCompiler should parse command without argument")]
+        public void CodeSharperCompilerShouldParseCommandWithoutArgument()
         {
             // Given
             var underTest = new CodeSharperCompiler();
@@ -43,7 +44,7 @@ namespace CodeSharper.Tests.Core.Compiler
             Assert.That(descriptor.NamedArguments.Any(), Is.False);
         }
 
-        [Test]
+        [Test(Description = "CodeSharperCompiler should parse command call with named argument")]
         public void CodeSharperCompilerShouldParseCommandCallWithNamedArgument()
         {
             // Given
@@ -66,8 +67,8 @@ namespace CodeSharper.Tests.Core.Compiler
             Assert.That(argument.Value, Is.EqualTo(15));
         }
 
-        [Test]
-        public void CodeSharperCompilerShouldAbleToParseMultipleArguments()
+        [Test(Description = "CodeSharperCompiler should be able to parse multiple arguments")]
+        public void CodeSharperCompilerShouldBeAbleToParseMultipleArguments()
         {
             // Given
             var underTest = new CodeSharperCompiler();
@@ -89,8 +90,8 @@ namespace CodeSharper.Tests.Core.Compiler
             Assert.That(argument.Value, Is.EqualTo(false));
         }
 
-        [Test]
-        public void CodeSharperCompilerShouldAbleToParseMultipleCommands()
+        [Test(Description = "CodeSharperCompiler should be able to parse multiple commands")]
+        public void CodeSharperCompilerShouldBeAbleToParseMultipleCommands()
         {
             // Given
             var underTest = new CodeSharperCompiler();
@@ -110,8 +111,8 @@ namespace CodeSharper.Tests.Core.Compiler
             Assert.That(arguments, Is.EquivalentTo(new[] { 1, 2 }));
         }
 
-        [Test]
-        public void CodeSharperCompilerShouldAbleToParseAndOperatorCommands()
+        [Test(Description = "CodeSharperCompiler should be able to parse 'and' operator with commands")]
+        public void CodeSharperCompilerShouldBeAbleToParseAndOperatorWithCommands()
         {
             // Given
             var underTest = new CodeSharperCompiler();
@@ -133,8 +134,8 @@ namespace CodeSharper.Tests.Core.Compiler
             Assert.That(arguments, Is.EquivalentTo(new[] { 1, 2 }));
         }
 
-        [Test]
-        public void CodeSharperCompilerShouldAbleToParseComplicatedCommandCall()
+        [Test(Description = "CodeSharperCompiler should be able to parse complicated command call")]
+        public void CodeSharperCompilerShouldBeAbleToParseComplicatedCommandCall()
         {
             // Given
             var underTest = new CodeSharperCompiler();
@@ -146,6 +147,15 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // Then
             Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<PipeLineCommandCallTree>());
+            Assert.That(result.Children, Is.Not.Null.And.Not.Empty);
+
+            var left = result.Children.First(); // test-1 :line(120)
+            Assert.That(left, Is.InstanceOf<SingleCommandCallTree>());
+
+            var right = result.Children.Last(); // (test-2 && test-3)
+            Assert.That(right, Is.InstanceOf<LazyAndCommandCallTree>());
+            Assert.That(right.Children, Is.All.InstanceOf<SingleCommandCallTree>());
         }
     }
 }
