@@ -5,25 +5,25 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Commands
 {
-    public interface ICommandCallTree
+    public interface ICommandCall
     {
-        IEnumerable<ICommandCallTree> Children { get; }
+        IEnumerable<ICommandCall> Children { get; }
 
-        void AddCommandCallTree(ICommandCallTree tree);
+        void AddCommandCallTree(ICommandCall tree);
     }
 
-    public abstract class CommandCallTreeBase : ICommandCallTree
+    public abstract class CommandCallBase : ICommandCall
     {
-        private readonly List<ICommandCallTree> _children;
+        private readonly List<ICommandCall> _children;
 
-        public IEnumerable<ICommandCallTree> Children
+        public IEnumerable<ICommandCall> Children
         {
             get { return _children.ToArray(); }
         }
 
-        protected CommandCallTreeBase()
+        protected CommandCallBase()
         {
-            _children = new List<ICommandCallTree>();
+            _children = new List<ICommandCall>();
         }
 
         public void ClearCommandCallTree()
@@ -31,18 +31,18 @@ namespace CodeSharper.Core.Commands
             _children.Clear();
         }
 
-        public void AddCommandCallTree(ICommandCallTree tree)
+        public void AddCommandCallTree(ICommandCall tree)
         {
             Constraints.NotNull(() => tree);
             _children.Add(tree);
         }
     }
 
-    public class SequenceCommandCallTree : CommandCallTreeBase { }
+    public class SequenceCommandCall : CommandCallBase { }
 
-    public class PipeLineCommandCallTree : CommandCallTreeBase { }
+    public class PipeLineCommandCall : CommandCallBase { }
 
-    public class LazyAndCommandCallTree : CommandCallTreeBase { }
+    public class LazyAndCommandCall : CommandCallBase { }
 
-    public class LazyOrCommandCallTree : CommandCallTreeBase { }
+    public class LazyOrCommandCall : CommandCallBase { }
 }

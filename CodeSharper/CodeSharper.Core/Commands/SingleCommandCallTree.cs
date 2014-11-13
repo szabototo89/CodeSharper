@@ -1,10 +1,10 @@
 ﻿namespace CodeSharper.Core.Commands
 {
-    public class SingleCommandCallTree : CommandCallTreeBase
+    public class SingleCommandCall : CommandCallBase
     {
         public CommandCallDescriptor CommandCallDescriptor { get; protected set; }
 
-        public SingleCommandCallTree(CommandCallDescriptor descriptor)
+        public SingleCommandCall(CommandCallDescriptor descriptor)
         {
             CommandCallDescriptor = descriptor;
         }

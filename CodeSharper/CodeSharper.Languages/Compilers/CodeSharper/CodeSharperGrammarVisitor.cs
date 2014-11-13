@@ -9,11 +9,11 @@ using CodeSharper.Languages.Grammar;
 
 namespace CodeSharper.Languages.Compilers.CodeSharper
 {
-    public class CodeSharperGrammarVisitor : CodeSharperGrammarBaseVisitor<Object>, IVisitor<ICommandCallTree>
+    public class CodeSharperGrammarVisitor : CodeSharperGrammarBaseVisitor<Object>, IVisitor<ICommandCall>
     {
         private readonly List<CommandParameter> _parameters;
         private readonly Stack<CommandCallDescriptor> _commandCallDescriptors;
-        private readonly Stack<ICommandCallTree> _commandCallTreeDescriptors;
+        private readonly Stack<ICommandCall> _commandCallTreeDescriptors;
         private CommandParameter _parameter;
 
         private struct CommandParameter
@@ -26,7 +26,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
         {
             _parameters = new List<CommandParameter>();
             _commandCallDescriptors = new Stack<CommandCallDescriptor>();
-            _commandCallTreeDescriptors = new Stack<ICommandCallTree>();
+            _commandCallTreeDescriptors = new Stack<ICommandCall>();
         }
 
         public override Object VisitBooleanParameterValue(CodeSharperGrammarParser.BooleanParameterValueContext context)
@@ -98,25 +98,25 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
         public override Object VisitPipeLineCommandExpression(CodeSharperGrammarParser.PipeLineCommandExpressionContext context)
         {
             base.VisitPipeLineCommandExpression(context);
-            return parseCommandCallOperator<PipeLineCommandCallTree>(_commandCallTreeDescriptors);
+            return parseCommandCallOperator<PipeLineCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitAndCommandExpression(CodeSharperGrammarParser.AndCommandExpressionContext context)
         {
             base.VisitAndCommandExpression(context);
-            return parseCommandCallOperator<LazyAndCommandCallTree>(_commandCallTreeDescriptors);
+            return parseCommandCallOperator<LazyAndCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitOrCommandExpression(CodeSharperGrammarParser.OrCommandExpressionContext context)
         {
             base.VisitOrCommandExpression(context);
-            return parseCommandCallOperator<LazyOrCommandCallTree>(_commandCallTreeDescriptors);
+            return parseCommandCallOperator<LazyOrCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitSemicolonCommandExpression(CodeSharperGrammarParser.SemicolonCommandExpressionContext context)
         {
             base.VisitSemicolonCommandExpression(context);
-            return parseCommandCallOperator<SequenceCommandCallTree>(_commandCallTreeDescriptors);
+            return parseCommandCallOperator<SequenceCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitSingleCommandExpression(CodeSharperGrammarParser.SingleCommandExpressionContext context)
@@ -125,7 +125,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
             if (_commandCallDescriptors.Any())
             {
                 var descriptor = _commandCallDescriptors.Pop();
-                _commandCallTreeDescriptors.Push(new SingleCommandCallTree(descriptor));
+                _commandCallTreeDescriptors.Push(new SingleCommandCall(descriptor));
             }
             return null;
         }
@@ -138,15 +138,15 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
             return null;
         }
 
-        public ICommandCallTree Visit(RuleContext context)
+        public ICommandCall Visit(RuleContext context)
         {
             VisitStart(context as CodeSharperGrammarParser.StartContext);
             var result = _commandCallTreeDescriptors.Pop();
             return result;
         }
 
-        private Object parseCommandCallOperator<TCommandCallOperator>(Stack<ICommandCallTree> commandCallTreeDescriptors)
-            where TCommandCallOperator : ICommandCallTree, new()
+        private Object parseCommandCallOperator<TCommandCallOperator>(Stack<ICommandCall> commandCallTreeDescriptors)
+            where TCommandCallOperator : ICommandCall, new()
         {
             var right = commandCallTreeDescriptors.Pop();
             var left = commandCallTreeDescriptors.Pop();

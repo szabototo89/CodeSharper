@@ -33,7 +33,7 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // When
             var result = underTest
-                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command + Environment.NewLine) as SingleCommandCallTree;
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command + Environment.NewLine) as SingleCommandCall;
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -53,7 +53,7 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // When
             var result = underTest
-                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command + Environment.NewLine) as SingleCommandCallTree;
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command + Environment.NewLine) as SingleCommandCall;
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -76,7 +76,7 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // When
             var result = (underTest
-                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command) as SingleCommandCallTree);
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command) as SingleCommandCall);
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -99,8 +99,8 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // When
             var result = underTest
-                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command)
-                .Children.OfType<SingleCommandCallTree>()
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command)
+                .Children.OfType<SingleCommandCall>()
                 .Select(x => x.CommandCallDescriptor);
 
             // Then
@@ -120,13 +120,13 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // When
             var result = underTest
-                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command);
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command);
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.InstanceOf<LazyAndCommandCallTree>());
+            Assert.That(result, Is.InstanceOf<LazyAndCommandCall>());
 
-            var descriptors = result.Children.OfType<SingleCommandCallTree>().Select(x => x.CommandCallDescriptor);
+            var descriptors = result.Children.OfType<SingleCommandCall>().Select(x => x.CommandCallDescriptor);
             Assert.That(descriptors, Is.Not.Null);
             Assert.That(descriptors.Select(call => call.Name), Is.EquivalentTo(new[] { "test-1", "test-2" }));
 
@@ -143,19 +143,19 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // When
             var result = underTest
-                .RunVisitor<CodeSharperGrammarVisitor, ICommandCallTree>(command);
+                .RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command);
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.InstanceOf<PipeLineCommandCallTree>());
+            Assert.That(result, Is.InstanceOf<PipeLineCommandCall>());
             Assert.That(result.Children, Is.Not.Null.And.Not.Empty);
 
             var left = result.Children.First(); // test-1 :line(120)
-            Assert.That(left, Is.InstanceOf<SingleCommandCallTree>());
+            Assert.That(left, Is.InstanceOf<SingleCommandCall>());
 
             var right = result.Children.Last(); // (test-2 && test-3)
-            Assert.That(right, Is.InstanceOf<LazyAndCommandCallTree>());
-            Assert.That(right.Children, Is.All.InstanceOf<SingleCommandCallTree>());
+            Assert.That(right, Is.InstanceOf<LazyAndCommandCall>());
+            Assert.That(right.Children, Is.All.InstanceOf<SingleCommandCall>());
         }
     }
 }

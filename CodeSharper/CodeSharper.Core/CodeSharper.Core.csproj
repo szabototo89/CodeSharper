@@ -49,6 +49,7 @@
     <Compile Include="Commands\CommandArgumentCollection.cs" />
     <Compile Include="Commands\CommandArgumentResolver.cs" />
     <Compile Include="Commands\CommandCallTree.cs" />
+    <Compile Include="Commands\CommandCallVisitor.cs" />
     <Compile Include="Commands\CommandFactoryBase.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\NamedArgumentDescriptor.cs" />
