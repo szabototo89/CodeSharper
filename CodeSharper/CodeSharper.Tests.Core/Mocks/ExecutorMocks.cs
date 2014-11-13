@@ -16,9 +16,15 @@ namespace CodeSharper.Tests.Core.Mocks
         {
             var mock = new Mock<IExecutor>();
 
-            mock.Setup(executor => executor.Execute(It.IsAny<IRunnable>(), It.IsAny<ValueArgument<TArgument>>()))
-                .Returns<IRunnable, ValueArgument<TArgument>>((runnable, argument) => {
-                    return Arguments.Value(runnable.Run(argument.Value));
+            mock.Setup(executor => executor.Execute(It.IsAny<IRunnable>(), It.IsAny<Argument>()))
+                .Returns<IRunnable, Argument>((runnable, argument) => {
+                    if (argument is IValueArgument)
+                    {
+                        var valueArgument = argument as IValueArgument;
+                        return Arguments.Value(runnable.Run((TArgument)valueArgument.Value));
+                    }
+
+                    throw new NotSupportedException("Not supported argument type!");
                 });
 
             return mock.Object;
