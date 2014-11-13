@@ -147,7 +147,7 @@ namespace CodeSharper.Tests.Core.Compiler
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.InstanceOf<PipeLineCommandCall>());
+            Assert.That(result, Is.InstanceOf<PipelineCommandCall>());
             Assert.That(result.Children, Is.Not.Null.And.Not.Empty);
 
             var left = result.Children.First(); // test-1 :line(120)

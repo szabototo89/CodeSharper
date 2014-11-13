@@ -12,7 +12,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.ControlFlow
 {
-    public class StandardControlFlow
+    public class StandardControlFlow : IStandardControlFlow
     {
         private readonly List<ICommand> _commands;
         private readonly IExecutor _executor;
@@ -74,6 +74,12 @@ namespace CodeSharper.Core.Common.ControlFlow
                 var command = CommandManager.TryGetCommand((commandCall as SingleCommandCall).CommandCallDescriptor);
                 if (command != Option.None)
                     _commands.Add(command.Value);
+            }
+            else if (commandCall is PipelineCommandCall)
+            {
+                var call = commandCall as PipelineCommandCall;
+                foreach (var child in call.Children)
+                    ParseCommandCall(child);
             }
 
             return this;

@@ -98,7 +98,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
         public override Object VisitPipeLineCommandExpression(CodeSharperGrammarParser.PipeLineCommandExpressionContext context)
         {
             base.VisitPipeLineCommandExpression(context);
-            return parseCommandCallOperator<PipeLineCommandCall>(_commandCallTreeDescriptors);
+            return parseCommandCallOperator<PipelineCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitAndCommandExpression(CodeSharperGrammarParser.AndCommandExpressionContext context)

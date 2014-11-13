@@ -40,7 +40,7 @@ namespace CodeSharper.Core.Commands
 
     public class SequenceCommandCall : CommandCallBase { }
 
-    public class PipeLineCommandCall : CommandCallBase { }
+    public class PipelineCommandCall : CommandCallBase { }
 
     public class LazyAndCommandCall : CommandCallBase { }
 

@@ -151,11 +151,11 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var compiler = new CodeSharperCompiler();
-            var commandCall = compiler.RunVisitor<CodeSharperGrammarVisitor, ICommandCall>("id value='hello world!'");
+            var commandCall = compiler.RunVisitor<CodeSharperGrammarVisitor, ICommandCall>("constant value='hello world!'");
 
             var emptyValue = Arguments.Value(0);
-            var underTest = new StandardControlFlow(new StandardCommandManager(), ExecutorMocks.SimpleExecutor<Int32>());
-            underTest.CommandManager.RegisterCommandFactory(CommandFactoryMocks.ConstantCommandFactory("id"));
+            var underTest = new StandardControlFlow(new StandardCommandManager(), ExecutorMocks.SimpleExecutor<Object>());
+            underTest.CommandManager.RegisterCommandFactory(CommandFactoryMocks.ConstantCommandFactory("constant"));
 
             // When
             var result = underTest
@@ -167,5 +167,25 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Value, Is.EqualTo("hello world!"));
         }
 
+        [Test(Description = "StandardControlFlow should be able to parse PipelineCommandCall and create proper control flow")]
+        public void StandardControlFlowShouldBeAbleToParsePipelineCommandCallAndCreateProperControlFlow()
+        {
+            // Given
+            var compiler = new CodeSharperCompiler();
+            var commandCall = compiler.RunVisitor<CodeSharperGrammarVisitor, ICommandCall>("constant value=0 | constant value=false");
+
+            var emptyValue = Arguments.Value(0);
+            var underTest = new StandardControlFlow(new StandardCommandManager(), ExecutorMocks.SimpleExecutor<Object>());
+            underTest.CommandManager.RegisterCommandFactory(CommandFactoryMocks.ConstantCommandFactory("constant"));
+
+            // When
+            var result = underTest
+                .ParseCommandCall(commandCall)
+                .Execute(emptyValue) as ValueArgument<Object>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value, Is.EqualTo(false));
+        }
     }
 }
