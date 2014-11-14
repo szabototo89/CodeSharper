@@ -10,6 +10,16 @@ namespace CodeSharper.Tests.Core.Mocks
 {
     public static class RunnableMocks
     {
+        public static IRunnable DelegateRunnable<TIn, TOut>(Func<TIn, TOut> function)
+        {
+            var mock = new Mock<IRunnable>();
+
+            mock.Setup(runnable => runnable.Run(It.IsAny<Object>()))
+                .Returns<Object>(arg => function((TIn)arg));
+
+            return mock.Object;
+        }
+
         public static IRunnable ConstantRunnable(Object value)
         {
             var mock = new Mock<IRunnable>();

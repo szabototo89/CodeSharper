@@ -187,5 +187,27 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Value, Is.EqualTo(false));
         }
+
+        [Test(Description = "StandardControlFlow with this command should return added value of numbers")]
+        public void StandardControlFlowWithThisCommandShouldReturnAddedValueOfNumbers()
+        {
+            // Given
+            var compiler = new CodeSharperCompiler();
+            var commandCall = compiler.RunVisitor<CodeSharperGrammarVisitor, ICommandCall>("inc | (inc | (inc | double))");
+
+            var emptyValue = Arguments.Value(0);
+            var underTest = new StandardControlFlow(new StandardCommandManager(), ExecutorMocks.SimpleExecutor<Object>());
+            underTest.CommandManager.RegisterCommandFactory(CommandFactoryMocks.DelegateCommandFactory("inc", value => value + 1));
+            underTest.CommandManager.RegisterCommandFactory(CommandFactoryMocks.DelegateCommandFactory("double", value => 2 * value));
+
+            // When
+            var result = underTest
+                .ParseCommandCall(commandCall)
+                .Execute(emptyValue) as ValueArgument<Object>;
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Value, Is.EqualTo(6));
+        }
     }
 }
