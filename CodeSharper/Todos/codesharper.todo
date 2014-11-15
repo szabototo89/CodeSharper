@@ -12,6 +12,12 @@
    ✔ You can find log file here: c:\Users\Tamas\AppData\Local\Kagilum\iceScrum Server\logs\  @done (14-11-07 23:32)
    ✔ I won't use this iceScrum @done (14-11-07 23:32)
 
- 
+ ☐ Convert (or try to rewrite) every dependency in tests to use Ninject instead. 
+     for example: 
+       var underTest = new StandardControlFlow(new StandardCommandManager(), ExecutorMocks.SimpleExecutor<Object>());
+       // rewrite to:
+       kernel.Bind<ICommandManager>().To<StandardCommandManager>(); // in Setup() method
+       var underTest = new StandardControlFlow(kernel.Get<ICommandManager>(), ExecutorMocks.SimpleExecutor<Object>()); // in current test
+
 
 
