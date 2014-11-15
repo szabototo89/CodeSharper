@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
   <Grid>
-    <ListBox ItemsSource="{Binding DemoApplicationList}">
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-          <DockPanel>
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-              <TextBlock>
+    <GroupBox Header="Select a demo:">
+      <ItemsControl ItemsSource="{Binding DemoApplications}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <DockPanel>
+              <DockPanel DockPanel.Dock="Right">
+                <Button>Run</Button>
+              </DockPanel>
+              <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
+                <TextBlock>
                 <TextBlock FontWeight="Bold">Name:</TextBlock>
                 <TextBlock Text="{Binding Name}"/>
               </TextBlock>
@@ -16,13 +20,11 @@
                 <TextBlock FontWeight="Bold">Description:</TextBlock>
                 <TextBlock Text="{Binding Description}"/>
               </TextBlock>
-              <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                <Button>Run</Button>
               </StackPanel>
-            </StackPanel>
-          </DockPanel>
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ListBox>
+            </DockPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </GroupBox>
   </Grid>
 </Window>

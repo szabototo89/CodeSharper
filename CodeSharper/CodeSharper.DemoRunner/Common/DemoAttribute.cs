@@ -11,7 +11,7 @@ namespace CodeSharper.DemoRunner.Common
     {
         public String Name { get; set; }
 
-        public String Namespace { get; set; }
+        public String Description { get; set; }
 
         public DemoAttribute(String name)
         {
