@@ -8,6 +8,6 @@ namespace CodeSharper.DemoRunner.Models
 
         public String Description { get; set; }
 
-        public Delegate Method { get; set; }
+        public Action Run { get; set; }
     }
 }

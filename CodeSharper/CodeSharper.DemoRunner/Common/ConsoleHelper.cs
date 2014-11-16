@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
+namespace CodeSharper.DemoRunner.Common
 {
     public class ConsoleHelper
     {
@@ -11,9 +11,18 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern Boolean FreeConsole();
 
-        public static Boolean OpenConsoleWindow()
+        [DllImport("Kernel32")]
+        public static extern void AllocConsole();
+
+        public static void OpenConsoleWindow()
         {
-            AttachConsole(-1);
+            if (!AttachConsole(-1))
+                AllocConsole();
+        }
+
+        public static void CloseConsoleWindow()
+        {
+            FreeConsole();
         }
     }
 }

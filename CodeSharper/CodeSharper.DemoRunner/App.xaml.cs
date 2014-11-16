@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using CodeSharper.DemoRunner.Models;
@@ -18,15 +19,16 @@ namespace CodeSharper.DemoRunner
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var window = new MainWindow()
-            {
-                DataContext = new MainWindowViewModel()
-                {
-                    DemoApplications = new ObservableCollection<DemoApplicationDescriptor>(new[]
-                    {
-                        new DemoApplicationDescriptor() { Name = "Demo1", Description = "Lorem ipsum ..."}
-                    })
-                }
+            var viewModel = new MainWindowViewModel() {
+                DemoApplications = new ObservableCollection<DemoApplicationDescriptor>(new[] {
+                    new DemoApplicationDescriptor() { Name = "Demo1", Description = "Lorem ipsum ..."}
+                })
+            };
+
+            viewModel.InitializeDemoApplicationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            var window = new MainWindow() {
+                DataContext = viewModel
             };
 
             window.Show();

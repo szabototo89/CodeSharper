@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using CodeSharper.Core.Common.ConstraintChecking;
 
-namespace CodeSharper.DemoRunner.ViewModels
+namespace CodeSharper.DemoRunner.Common
 {
     public class ActionCommand : ICommand
     {
