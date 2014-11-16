@@ -99,10 +99,11 @@ namespace CodeSharper.Core.Texts
 
         public TextRange OffsetBy(Int32 value)
         {
-            Constraints
-                .Evaluate(() => value, _ => Start + value >= 0, "Start must be positive!");
-            Constraints
-                .Evaluate(() => value, _ => Stop + value >= 0, "Stop must be positive!");
+            if (Start + value < 0)
+                ThrowHelper.ThrowArgumentException("Start must be positive!");
+
+            if (Stop + value < 0)
+                ThrowHelper.ThrowArgumentException("Stop must be positive!");
 
             Start += value;
             Stop += value;

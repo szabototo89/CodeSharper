@@ -17,4 +17,20 @@ namespace CodeSharper.Core.Commands
             return _runnable;
         }
     }
+
+    public class ToLowerCaseCommandFactory : CommandFactoryBase
+    {
+        private readonly ToLowerCaseRunnable _runnable;
+
+        public ToLowerCaseCommandFactory()
+        {
+            _runnable = new ToLowerCaseRunnable();
+        }
+
+        protected override IRunnable CreateRunnable()
+        {
+            return _runnable;
+        }
+    }
+
 }

@@ -10,6 +10,7 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlow;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
@@ -84,8 +85,8 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
 
             if (result is MultiValueArgument<TextRange>)
             {
-                var values = result as MultiValueArgument<TextRange>;
-                return String.Format("[{0}]", String.Join(",", values.Values.Select(x => x.Text)));
+                var values = (result as MultiValueArgument<TextRange>).Values.ToArray();
+                return String.Format("[{0}] (count {1})", String.Join(",", values.Select(x => x.Text)), values.Length);
             }
 
             return "An error has occured!";
@@ -101,10 +102,6 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
 
             var dir = "../../DemoApplications/CodeREPL/CommandDescriptions";
 
-            var insertTextRange = new InsertTextRangeCommandFactory() {
-                Descriptor = JsonCommandDescriptorParser.ParseFrom(File.ReadAllText(Path.Combine(dir, "insert-text-range-descriptor.json")))
-            };
-
             var toUpper = new ToUpperCaseCommandFactory() {
                 Descriptor = JsonCommandDescriptorParser.ParseFrom(File.ReadAllText(Path.Combine(dir, "to-upper-case-descriptor.json")))
             };
@@ -113,13 +110,17 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
                 Descriptor = JsonCommandDescriptorParser.ParseFrom(File.ReadAllText(Path.Combine(dir, "find-text-descriptor.json")))
             };
 
-            _controlFlow.CommandManager
-                .RegisterCommandFactory(findText)
-                .RegisterCommandFactory(insertTextRange)
-                .RegisterCommandFactory(toUpper);
+            var factories = new[] {
+                createCommandFactory<InsertTextRangeCommandFactory>(Path.Combine(dir, "insert-text-range-descriptor.json")),
+                createCommandFactory<ToUpperCaseCommandFactory>(Path.Combine(dir, "to-upper-case-descriptor.json")),
+                createCommandFactory<ToLowerCaseRunnable>(Path.Combine(dir, "to-lower-case-descriptor.json")),
+            };
+
+            foreach (var factory in factories)
+                _controlFlow.CommandManager.RegisterCommandFactory(factory);
 
             var textBuilder = new StringBuilder(_text);
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
                 textBuilder.Append(_text);
 
             _text = textBuilder.ToString();
@@ -127,6 +128,16 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             _textDocument = new TextDocument(_text);
 
             Console.WriteLine("CodeSharper is ready!");
+        }
+
+        private static TCommandFactory createCommandFactory<TCommandFactory>(String path)
+            where TCommandFactory : ICommandFactory, new()
+        {
+            return new TCommandFactory() {
+                Descriptor =
+                    JsonCommandDescriptorParser.ParseFrom(
+                        File.ReadAllText(path))
+            };
         }
     }
 }
