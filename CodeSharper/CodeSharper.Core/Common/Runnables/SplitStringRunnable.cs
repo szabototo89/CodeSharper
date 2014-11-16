@@ -11,7 +11,7 @@ namespace CodeSharper.Core.Common.Runnables
     public class SplitStringRunnable : Runnable<TextRange, IEnumerable<TextRange>>
     {
         public string Separator { get; protected set; }
-
+        
         public SplitStringRunnable(String separator)
         {
             Separator = separator;

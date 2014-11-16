@@ -110,17 +110,21 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
                 Descriptor = JsonCommandDescriptorParser.ParseFrom(File.ReadAllText(Path.Combine(dir, "find-text-descriptor.json")))
             };
 
-            var factories = new[] {
+            var factories = new ICommandFactory[] {
                 createCommandFactory<InsertTextRangeCommandFactory>(Path.Combine(dir, "insert-text-range-descriptor.json")),
                 createCommandFactory<ToUpperCaseCommandFactory>(Path.Combine(dir, "to-upper-case-descriptor.json")),
-                createCommandFactory<ToLowerCaseRunnable>(Path.Combine(dir, "to-lower-case-descriptor.json")),
+                createCommandFactory<ToLowerCaseCommandFactory>(Path.Combine(dir, "to-lower-case-descriptor.json")),
+                createCommandFactory<FindTextCommandFactory>(Path.Combine(dir, "find-text-descriptor.json")),
+                createCommandFactory<RegularExpressionCommandFactory>(Path.Combine(dir, "regular-expression-descriptor.json")),
+                createCommandFactory<ReplaceTextCommandFactory>(Path.Combine(dir, "replace-text-descriptor.json")),
+                createCommandFactory<SplitStringCommandFactory>(Path.Combine(dir, "split-string-descriptor.json")),
             };
 
             foreach (var factory in factories)
                 _controlFlow.CommandManager.RegisterCommandFactory(factory);
 
             var textBuilder = new StringBuilder(_text);
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 2; i++)
                 textBuilder.Append(_text);
 
             _text = textBuilder.ToString();

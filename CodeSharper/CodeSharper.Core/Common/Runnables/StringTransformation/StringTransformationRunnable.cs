@@ -9,6 +9,8 @@ namespace CodeSharper.Core.Common.Runnables.StringTransformation
     {
         private readonly Func<TextRange, TextRange> _transformation;
 
+        protected StringTransformationRunnable() { }
+
         public StringTransformationRunnable(Func<String, String> transformation)
             : this(parameter => parameter.ReplaceText(transformation(parameter.Text)))
         {

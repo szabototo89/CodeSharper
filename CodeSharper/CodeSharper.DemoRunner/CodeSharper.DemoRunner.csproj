@@ -95,9 +95,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DemoApplications\CodeREPL\CommandDescriptions\split-string-descriptor.json" />
     <None Include="DemoApplications\CodeREPL\CommandDescriptions\find-text-descriptor.json" />
     <None Include="DemoApplications\CodeREPL\CommandDescriptions\insert-text-range-descriptor.json" />
-    <None Include="DemoApplications\CodeREPL\CommandDescriptions\to-lower-case-description.json" />
+    <None Include="DemoApplications\CodeREPL\CommandDescriptions\regular-expression-descriptor.json" />
+    <None Include="DemoApplications\CodeREPL\CommandDescriptions\replace-text-descriptor.json" />
+    <None Include="DemoApplications\CodeREPL\CommandDescriptions\to-lower-case-descriptor.json" />
     <None Include="DemoApplications\CodeREPL\CommandDescriptions\to-upper-case-descriptor.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

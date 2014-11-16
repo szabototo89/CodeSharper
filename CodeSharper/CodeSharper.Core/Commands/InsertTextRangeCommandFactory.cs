@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;

@@ -54,7 +54,10 @@
     <Compile Include="Commands\ICommandManager.cs" />
     <Compile Include="Commands\NamedArgumentDescriptor.cs" />
     <Compile Include="Commands\PositionedArgumentDescriptor.cs" />
+    <Compile Include="Commands\RegularExpressionCommandFactory.cs" />
+    <Compile Include="Commands\ReplaceTextCommandFactory.cs" />
     <Compile Include="Commands\SingleCommandCallTree.cs" />
+    <Compile Include="Commands\SplitStringCommandFactory.cs" />
     <Compile Include="Commands\StandardCommandManager.cs" />
     <Compile Include="Commands\CommandCallDescriptor.cs" />
     <Compile Include="Commands\CommandDescriptor.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Commands\ICommandFactory.cs" />
     <Compile Include="Commands\IdentityCommandFactory.cs" />
     <Compile Include="Commands\InsertTextRangeCommandFactory.cs" />
+    <Compile Include="Commands\ToLowerCaseCommandFactory.cs" />
     <Compile Include="Common\ControlFlow\IStandardControlFlow.cs" />
     <Compile Include="Common\InitializerAttribute.cs" />
     <Compile Include="Commands\ToUpperCaseCommandFactory.cs" />
