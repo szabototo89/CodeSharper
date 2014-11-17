@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Commands;
+using CodeSharper.Core.Commands.CommandFactories;
 using Moq;
 
 namespace CodeSharper.Tests.Core.Mocks

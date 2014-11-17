@@ -18,6 +18,8 @@
        // rewrite to:
        kernel.Bind<ICommandManager>().To<StandardCommandManager>(); // in Setup() method
        var underTest = new StandardControlFlow(kernel.Get<ICommandManager>(), ExecutorMocks.SimpleExecutor<Object>()); // in current test
+ 
+ ☐ Decouple StandardControlFlow to two different classes: ControlFlowFactory and ControlFlow. 
 
 
 

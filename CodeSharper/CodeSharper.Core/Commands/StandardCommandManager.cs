@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Utilities;
@@ -39,6 +40,9 @@ namespace CodeSharper.Core.Commands
                 return Option.None;
 
             var arguments = new CommandArgumentCollection();
+
+
+
             foreach (var argument in callDescriptor.NamedArguments)
                 arguments.SetArgument(argument.Key, argument.Value);
 

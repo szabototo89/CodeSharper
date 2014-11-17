@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Commands;
+using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlow;
 using CodeSharper.Core.Common.Runnables;
@@ -101,14 +102,6 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             _controlFlow = new StandardControlFlow(new StandardCommandManager(), new StandardExecutor(RunnableManager.Instance));
 
             var dir = "../../DemoApplications/CodeREPL/CommandDescriptions";
-
-            var toUpper = new ToUpperCaseCommandFactory() {
-                Descriptor = JsonCommandDescriptorParser.ParseFrom(File.ReadAllText(Path.Combine(dir, "to-upper-case-descriptor.json")))
-            };
-
-            var findText = new FindTextCommandFactory() {
-                Descriptor = JsonCommandDescriptorParser.ParseFrom(File.ReadAllText(Path.Combine(dir, "find-text-descriptor.json")))
-            };
 
             var factories = new ICommandFactory[] {
                 createCommandFactory<InsertTextRangeCommandFactory>(Path.Combine(dir, "insert-text-range-descriptor.json")),
