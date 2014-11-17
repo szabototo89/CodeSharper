@@ -32,7 +32,7 @@ namespace CodeSharper.Core.Commands
         }
 
         public Option<ICommand> TryGetCommand(CommandCallDescriptor callDescriptor)
-        {
+       {
             Constraints.NotNull(() => callDescriptor);
 
             var factory = TryGetCommandFactoriesByName(callDescriptor.Name).SingleOrDefault();
@@ -41,7 +41,6 @@ namespace CodeSharper.Core.Commands
                 return Option.None;
 
             var formalArguments = factory.Descriptor.Arguments.ToArray();
-
             var actualArguments = new CommandArgumentCollection();
 
             callDescriptor.Arguments.Foreach((argument, index) =>

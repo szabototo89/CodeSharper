@@ -3,16 +3,16 @@
     "command-names": [ "insert", "insert-text-range" ],
     "arguments": [
         {
-            "name": "startIndex",
-            "type": "System.Int32",
-            "optional": false,
-            "default-value": null
-        },
-        {
             "name": "value",
             "type": "System.String",
             "optional": false,
             "default-value": ""
+        },
+        {
+            "name": "startIndex",
+            "type": "System.Int32",
+            "optional": false,
+            "default-value": 0
         }
     ]
 }

@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CodeSharper.Core.Common
 {
     public static class EnumerableHelper
     {
+        [DebuggerStepThrough]
         public static void Foreach<TSource>(this IEnumerable<TSource> source, Action<TSource> function)
         {
             foreach (var element in source)
                 function(element);
         }
 
+        [DebuggerStepThrough]
         public static void Foreach<TSource>(this IEnumerable<TSource> source, Action<TSource, Int32> function)
         {
             var index = 0;
