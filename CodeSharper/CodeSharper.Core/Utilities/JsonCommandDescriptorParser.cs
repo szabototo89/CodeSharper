@@ -48,7 +48,7 @@ namespace CodeSharper.Core.Utilities
                 CommandNames = body[COMMAND_NAMES].Values<String>(),
                 Description = _GetValueOrDefault<String>(body, COMMAND_DESCRIPTION),
                 Arguments = body[COMMAND_ARGUMENTS].ToArray().Cast<JObject>()
-                    .Select(arg => new NamedArgumentDescriptor() {
+                    .Select(arg => new ArgumentDescriptor {
                         ArgumentName = _GetValueOrDefault<String>(arg, COMMAND_ARGUMENT_NAME),
                         DefaultValue = _ParseDefaultValue(_GetValueOrDefault<JToken>(arg, COMMAND_ARGUMENT_DEFAULT_VALUE)),
                         IsOptional = _GetValueOrDefault<Boolean>(arg, COMMAND_ARGUMENT_OPTIONAL),

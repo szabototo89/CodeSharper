@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Commands.CommandFactories;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ConstraintChecking;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Utilities;
@@ -39,14 +40,23 @@ namespace CodeSharper.Core.Commands
             if (factory == null)
                 return Option.None;
 
-            var arguments = new CommandArgumentCollection();
+            var formalArguments = factory.Descriptor.Arguments.ToArray();
 
+            var actualArguments = new CommandArgumentCollection();
 
+            callDescriptor.Arguments.Foreach((argument, index) =>
+            {
+                if (index >= formalArguments.Length)
+                    ThrowHelper.ThrowException<ArgumentOutOfRangeException>();
+
+                var formalArgument = formalArguments[index];
+                actualArguments.SetArgument(formalArgument.ArgumentName, argument);
+            });
 
             foreach (var argument in callDescriptor.NamedArguments)
-                arguments.SetArgument(argument.Key, argument.Value);
+                actualArguments.SetArgument(argument.Key, argument.Value);
 
-            return Option.Some(factory.CreateCommand(arguments));
+            return Option.Some(factory.CreateCommand(actualArguments));
         }
 
         public IEnumerable<ICommandFactory> TryGetCommandFactoriesByName(String name)

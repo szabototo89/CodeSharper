@@ -19,7 +19,7 @@ namespace CodeSharper.Tests.Core.Mocks
             var descriptor = new CommandDescriptor() {
                 CommandNames = new[] { commandName },
                 Arguments = new[] {
-                    new NamedArgumentDescriptor {ArgumentName = parameterName, ArgumentType = typeof (Object)}
+                    new ArgumentDescriptor {ArgumentName = parameterName, ArgumentType = typeof (Object)}
                 }
             };
 
@@ -40,7 +40,7 @@ namespace CodeSharper.Tests.Core.Mocks
 
             var descriptor = new CommandDescriptor() {
                 CommandNames = new[] { commandName },
-                Arguments = Enumerable.Empty<ArgumentDescriptorBase>()
+                Arguments = Enumerable.Empty<ArgumentDescriptor>()
             };
 
             mock.SetupGet(command => command.Descriptor).Returns(descriptor);

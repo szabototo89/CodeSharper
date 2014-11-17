@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Antlr4.Runtime;
 using CodeSharper.Core.Commands;
+using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
@@ -56,7 +57,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo("mock-command"));
-            Assert.That(result.Arguments.OfType<NamedArgumentDescriptor>().Select(arg => arg.ArgumentName), Is.EquivalentTo(new[] { "first", "second" }));
+            Assert.That(result.Arguments.OfType<ArgumentDescriptor>().Select(arg => arg.ArgumentName), Is.EquivalentTo(new[] { "first", "second" }));
             Assert.That(result.Arguments.Select(arg => arg.ArgumentType), Is.EquivalentTo(new[] { typeof(String), typeof(Int32) }));
         }
 

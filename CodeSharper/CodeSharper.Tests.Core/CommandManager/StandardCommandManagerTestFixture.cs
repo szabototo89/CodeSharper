@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using CodeSharper.Core.Commands;
 using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Core.Common.Runnables;
@@ -82,7 +83,7 @@ namespace CodeSharper.Tests.Core.CommandManager
                 .Returns(() => new CommandDescriptor {
                     CommandNames = new[] { commandName },
                     Arguments = new[] { 
-                        new NamedArgumentDescriptor(){
+                        new ArgumentDescriptor {
                             ArgumentName = "value",
                             ArgumentType =  typeof(Int32),
                             IsOptional = false
@@ -118,7 +119,7 @@ namespace CodeSharper.Tests.Core.CommandManager
                 .Returns(() => new CommandDescriptor {
                     CommandNames = new[] { commandName },
                     Arguments = new[] { 
-                        new NamedArgumentDescriptor(){
+                        new ArgumentDescriptor {
                             ArgumentName = "value",
                             ArgumentType =  typeof(Int32),
                             IsOptional = false
@@ -136,7 +137,8 @@ namespace CodeSharper.Tests.Core.CommandManager
             // When
             var result = underTest.TryGetCommand(
                 new CommandCallDescriptor(commandName,
-                                          namedArguments: new Dictionary<String, Object> { { "value", 10 } }));
+                                          new Object[] { 10 }
+                                          ));
 
             // Then
             Assert.That(result.HasValue, Is.True);

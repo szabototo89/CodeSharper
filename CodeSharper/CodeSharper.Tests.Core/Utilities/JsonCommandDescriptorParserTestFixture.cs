@@ -31,7 +31,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result.Name, Is.EqualTo("Find Text Command"));
             Assert.That(result.CommandNames, Is.EquivalentTo(new[] { "find-text" }));
 
-            var argument = result.Arguments.OfType<NamedArgumentDescriptor>().Single();
+            var argument = result.Arguments.OfType<ArgumentDescriptor>().Single();
             Assert.That(argument.ArgumentName, Is.EqualTo("pattern"));
             Assert.That(argument.ArgumentType, Is.EqualTo(typeof(String)));
             Assert.That(argument.IsOptional, Is.False);
