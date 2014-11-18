@@ -9,7 +9,7 @@
             "default-value": ""
         },
         {
-            "name": "startIndex",
+            "name": "start-index",
             "type": "System.Int32",
             "optional": false,
             "default-value": 0

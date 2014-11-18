@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.Attributes;
+using CodeSharper.Core.Common.Runnables.Converters;
 using Moq;
 
 namespace CodeSharper.Tests.Core.Mocks
 {
-    public static class RunnableMocks
+    public static partial class RunnableMocks
     {
         public static IRunnable DelegateRunnable<TIn, TOut>(Func<TIn, TOut> function)
         {

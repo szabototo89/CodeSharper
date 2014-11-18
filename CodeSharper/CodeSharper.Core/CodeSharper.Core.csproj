@@ -49,6 +49,8 @@
     <Compile Include="Commands\CommandArgumentCollection.cs" />
     <Compile Include="Commands\CommandArgumentResolver.cs" />
     <Compile Include="Commands\CommandCalls.cs" />
+    <Compile Include="Commands\CommandFactories\AutoCommandFactory.cs" />
+    <Compile Include="Commands\CommandFactories\BindToAttribute.cs" />
     <Compile Include="Commands\CommandFactories\CommandFactoryBase.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandManager.cs" />

@@ -6,7 +6,7 @@
    ✔ Implement IMonadish interface properly @done (14-11-07 23:32)
  
  ☐ Finish ArgumentResolver implementation
-   ☐ It should able to set option values and check its value is optional or required!
+   ✔ It should able to set option values and check its value is optional or required! @done (14-11-18 00:20)
 
  ✔ Figure out what is the problem with iceScrum @done (14-11-07 23:32)
    ✔ You can find log file here: c:\Users\Tamas\AppData\Local\Kagilum\iceScrum Server\logs\  @done (14-11-07 23:32)
@@ -20,6 +20,23 @@
        var underTest = new StandardControlFlow(kernel.Get<ICommandManager>(), ExecutorMocks.SimpleExecutor<Object>()); // in current test
  
  ☐ Decouple StandardControlFlow to two different classes: ControlFlowFactory and ControlFlow. 
+   
+ ☐ Update JsonCommandDescriptor parser to handle arguments like this: 
+   {
+        "name": "Insert TextRange Command",
+        "command-names": [ "insert", "insert-text-range" ],
+        "arguments": [{
+          "name": {
+            "value": "value",          // actual name of parameter
+            "bind-to": "insert-value"  // binds to BindToAttribute.PropertyName
+          },
+          // rest of property values
+          "type": "System.String",
+          "optional": false,
+          "default-value": ""
+        }]
+   }
+
 
 
 
