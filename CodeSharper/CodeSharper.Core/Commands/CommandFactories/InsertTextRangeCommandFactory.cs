@@ -6,10 +6,24 @@ namespace CodeSharper.Core.Commands.CommandFactories
 {
     public class InsertTextRangeCommandFactory : CommandFactoryBase
     {
+        private readonly String ARGUMENT_VALUE = "value";
+        private readonly String ARGUMENT_START_INDEX = "startIndex";
         private String _value;
         private Int32 _startIndex;
-        private readonly string ARGUMENT_VALUE = "value";
-        private readonly string ARGUMENT_START_INDEX = "startIndex";
+
+        [BindTo("value")]
+        public String Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
+
+        [BindTo("startIndex")]
+        public Int32 StartIndex
+        {
+            get { return _startIndex; }
+            set { _startIndex = value; }
+        }
 
         protected override void MapArguments(CommandArgumentCollection arguments)
         {
@@ -23,7 +37,7 @@ namespace CodeSharper.Core.Commands.CommandFactories
 
         protected override IRunnable CreateRunnable()
         {
-            return new InsertTextRangeRunnable(_startIndex, _value);
+            return new InsertTextRangeRunnable(StartIndex, Value);
         }
     }
 }

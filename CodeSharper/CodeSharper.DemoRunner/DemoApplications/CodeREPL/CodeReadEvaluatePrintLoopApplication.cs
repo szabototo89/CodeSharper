@@ -41,13 +41,11 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             var input = String.Empty;
             Console.WriteLine(_text);
 
-            do
-            {
+            do {
                 Console.Write(">>> ");
                 input = Console.ReadLine();
 
-                switch (input)
-                {
+                switch (input) {
                     case "show":
                         Console.WriteLine(_textDocument.Text);
                         break;
@@ -55,13 +53,11 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
                         ConsoleHelper.CloseConsoleWindow();
                         break;
                     default:
-                        try
-                        {
+                        try {
                             var result = callCommand(input);
                             Console.WriteLine(result);
                         }
-                        catch (Exception ex)
-                        {
+                        catch (Exception ex) {
                             Console.Error.WriteLine(ex.Message);
                         }
                         break;
@@ -78,14 +74,12 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
                 .ParseCommandCall(commandCall)
                 .Execute(Arguments.Value(textRange));
 
-            if (result is ValueArgument<TextRange>)
-            {
+            if (result is ValueArgument<TextRange>) {
                 var value = result as ValueArgument<TextRange>;
                 return value.Value.Text;
             }
 
-            if (result is MultiValueArgument<TextRange>)
-            {
+            if (result is MultiValueArgument<TextRange>) {
                 var values = (result as MultiValueArgument<TextRange>).Values.ToArray();
                 return String.Format("[{0}] (count {1})", String.Join(",", values.Select(x => x.Text)), values.Length);
             }
