@@ -68,6 +68,7 @@
     <Compile Include="Mocks\CommandFactoryMocks.cs" />
     <Compile Include="Mocks\ExecutorMocks.cs" />
     <Compile Include="Mocks\RunnableMocks.cs" />
+    <Compile Include="Mocks\RunnableMocks.Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts\ArgumentTestFixture.cs" />
     <Compile Include="Texts\TextDocumentTestFixture.cs" />
