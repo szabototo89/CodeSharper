@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core.Common;
+﻿using System.Linq;
 using CodeSharper.Core.Utilities;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Common
+namespace CodeSharper.Tests.Core.Utilities
 {
     [TestFixture]
     class NumberHelperTestFixture

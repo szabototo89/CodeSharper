@@ -27,7 +27,7 @@ namespace CodeSharper.Core.Utilities
             return new[] { that };
         }
 
-        public static List<T> AsList<T>(this T that)
+        public static List<T> WrapToList<T>(this T that)
         {
             return new List<T>(new[] { that });
         }
@@ -49,7 +49,9 @@ namespace CodeSharper.Core.Utilities
 
         public static IEnumerable<T> Repeat<T>(this T value, Int32 count)
         {
-            return Enumerable.Repeat(value, count);
+            for (Int32 i = 0; i < count; i++) {
+                yield return value;
+            }
         }
     }
 }
