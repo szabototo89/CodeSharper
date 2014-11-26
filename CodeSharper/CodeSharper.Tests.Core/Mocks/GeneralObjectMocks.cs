@@ -9,16 +9,24 @@ namespace CodeSharper.Tests.Core.Mocks
 {
     internal class GeneralObjectMocks
     {
+        public static class Persons
+        {
+            public static Person JohnDoe
+            {
+                get { return new Person { Name = "John Doe", Age = 24 }; }
+            }
+
+            public static Person JaneDoe
+            {
+                get { return new Person { Name = "Jane Doe", Age = 15 }; }
+            }
+        }
+
         public class Person
         {
             public String Name { get; set; }
 
             public Int32 Age { get; set; }
-
-            public static Person JohnDoe
-            {
-                get { return new Person { Name = "John Doe", Age = 24 }; }
-            }
         }
 
         public class Employee : Person
@@ -26,7 +34,7 @@ namespace CodeSharper.Tests.Core.Mocks
             public Address Address { get; set; }
         }
 
-        public class Address
+        public struct Address
         {
             public String City { get; set; }
 

@@ -99,12 +99,12 @@ namespace CodeSharper.Tests.Core.Utilities
             GeneralObjectMocks.Person underTest = null;
 
             // When
-            var result = underTest.SafeOrDefault(GeneralObjectMocks.Person.JohnDoe);
+            var result = underTest.SafeOrDefault(GeneralObjectMocks.Persons.JohnDoe);
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Name, Is.EqualTo(GeneralObjectMocks.Person.JohnDoe.Name));
-            Assert.That(result.Age, Is.EqualTo(GeneralObjectMocks.Person.JohnDoe.Age));
+            Assert.That(result.Name, Is.EqualTo(GeneralObjectMocks.Persons.JohnDoe.Name));
+            Assert.That(result.Age, Is.EqualTo(GeneralObjectMocks.Persons.JohnDoe.Age));
         }
 
         [Test]
