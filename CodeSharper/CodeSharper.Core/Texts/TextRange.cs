@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Texts
 {

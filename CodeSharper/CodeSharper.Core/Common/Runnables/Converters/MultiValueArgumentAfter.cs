@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using CodeSharper.Core.Common.Values;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
