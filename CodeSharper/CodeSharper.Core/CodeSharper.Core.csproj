@@ -87,14 +87,14 @@
     <Compile Include="Common\ControlFlow\ControlFlows.cs" />
     <Compile Include="Common\ControlFlow\StandardControlFlow.cs" />
     <Compile Include="Common\Either.cs" />
-    <Compile Include="Common\EnumerableHelper.cs" />
+    <Compile Include="Utilities\EnumerableHelper.cs" />
     <Compile Include="Common\Executors.cs" />
     <Compile Include="Common\ICloneable.cs" />
     <Compile Include="Common\IExecutor.cs" />
     <Compile Include="Common\IIdentifiable.cs" />
-    <Compile Include="Common\NumberHelper.cs" />
-    <Compile Include="Common\ObjectHelper.cs" />
-    <Compile Include="Common\OptionHelper.cs" />
+    <Compile Include="Utilities\NumberHelper.cs" />
+    <Compile Include="Utilities\ObjectHelper.cs" />
+    <Compile Include="Utilities\OptionHelper.cs" />
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentConverter.cs" />
     <Compile Include="Common\Runnables\Converters\ArgumentBefore.cs" />
@@ -130,7 +130,7 @@
     <Compile Include="Common\Runnables\StringTransformation\TrimOptions.cs" />
     <Compile Include="Common\Runnables\StringTransformation\TrimTextRangeRunnable.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
-    <Compile Include="Common\StringHelper.cs" />
+    <Compile Include="Utilities\StringHelper.cs" />
     <Compile Include="Common\Values\Argument.cs" />
     <Compile Include="Common\Values\Arguments.cs" />
     <Compile Include="Common\Values\ErrorArgument.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="Common\Values\TypeErrorArgument.cs" />
     <Compile Include="Common\Values\ValueArgument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\ThrowHelper.cs" />
+    <Compile Include="Utilities\ThrowHelper.cs" />
     <Compile Include="Texts\Filters\FilterEvenPosition.cs" />
     <Compile Include="Texts\Filters\FilterOddPosition.cs" />
     <Compile Include="Texts\Filters\FilterPosition.cs" />

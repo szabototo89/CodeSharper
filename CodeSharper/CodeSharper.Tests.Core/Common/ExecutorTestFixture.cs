@@ -12,6 +12,7 @@ using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Utilities;
 using CodeSharper.Tests.Core.TestHelpers;
 using Moq;
 using NUnit.Framework;

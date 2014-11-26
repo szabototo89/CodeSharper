@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Utilities;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common

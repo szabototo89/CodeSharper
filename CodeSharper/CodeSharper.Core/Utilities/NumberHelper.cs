@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using CodeSharper.Core.Common.ConstraintChecking;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Utilities
 {
     public static class NumberHelper
     {

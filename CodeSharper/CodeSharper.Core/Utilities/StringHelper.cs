@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Common.ConstraintChecking;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Utilities
 {
     public static class StringHelper
     {

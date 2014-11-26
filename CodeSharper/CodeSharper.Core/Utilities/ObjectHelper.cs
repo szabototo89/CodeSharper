@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Utilities
 {
     public static class ObjectHelper
     {
+        public static T Safe<T>(this T value) where T : new()
+        {
+            return !Equals(value, null) ? value : new T();
+        }
+
+        public static T SafeOrDefault<T>(this T value, T defaultValue)
+        {
+            return !Equals(value, null) ? value : defaultValue;
+        }
+
         public static T[] AsArray<T>(this T that)
         {
             return new[] { that };
@@ -37,6 +44,6 @@ namespace CodeSharper.Core.Common
         public static IEnumerable<T> Repeat<T>(this T value, Int32 count)
         {
             return Enumerable.Repeat(value, count);
-        } 
+        }
     }
 }

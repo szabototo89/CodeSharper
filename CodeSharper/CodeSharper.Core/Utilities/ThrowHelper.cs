@@ -1,8 +1,7 @@
 using System;
 using System.Diagnostics;
-using System.Reflection;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Utilities
 {
     [DebuggerStepThrough]
     internal static class ThrowHelper

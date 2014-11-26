@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.ConstraintChecking
 {

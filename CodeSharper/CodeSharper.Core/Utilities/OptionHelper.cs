@@ -1,7 +1,6 @@
 ﻿using System;
-using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Utilities
 {
     /// <summary>
     /// Helper class for Option(T) class

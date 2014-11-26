@@ -8,6 +8,7 @@ using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Texts.Filters;
+using CodeSharper.Core.Utilities;
 using CodeSharper.Tests.Core.TestHelpers;
 using Ninject;
 using Ninject.Activation;

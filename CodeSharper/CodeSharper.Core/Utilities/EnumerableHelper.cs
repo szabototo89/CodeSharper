@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Utilities
 {
     public static class EnumerableHelper
     {
