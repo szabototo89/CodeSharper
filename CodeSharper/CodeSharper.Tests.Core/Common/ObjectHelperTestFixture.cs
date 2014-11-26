@@ -58,7 +58,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = 5;
 
             // When
-            var result = underTest.AsList();
+            var result = underTest.WrapToList();
 
             // Then
             Assert.That(result, Is.InstanceOf<List<Int32>>());

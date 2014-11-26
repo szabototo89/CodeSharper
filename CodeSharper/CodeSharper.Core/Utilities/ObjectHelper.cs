@@ -6,6 +6,12 @@ namespace CodeSharper.Core.Utilities
 {
     public static class ObjectHelper
     {
+        public static T With<T>(this T element, Action<T> withStatement)
+        {
+            withStatement(element);
+            return element;
+        }
+
         public static T Safe<T>(this T value) where T : new()
         {
             return !Equals(value, null) ? value : new T();
