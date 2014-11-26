@@ -22,7 +22,7 @@ namespace CodeSharper.Core.Utilities
             return !Equals(value, null) ? value : defaultValue;
         }
 
-        public static T[] AsArray<T>(this T that)
+        public static T[] WrapToArray<T>(this T that)
         {
             return new[] { that };
         }

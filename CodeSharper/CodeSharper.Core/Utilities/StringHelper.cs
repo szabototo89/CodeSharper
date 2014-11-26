@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Utilities
             Constraints.NotNull(() => transform);
 
             const string separator = " ";
-            return String.Join(separator, transform(text.Split(new[] { separator }, StringSplitOptions.None)));           
+            return String.Join(separator, transform(text.Split(new[] { separator }, StringSplitOptions.None)));
         }
 
         public static String TakeWords(this String text, Int32 count)
@@ -25,5 +25,9 @@ namespace CodeSharper.Core.Utilities
             return _TransformWords(text, words => words.Skip(count));
         }
 
+        public static String FormatString(this String format, params Object[] parameters)
+        {
+            return String.Format(format, parameters);
+        }
     }
 }
