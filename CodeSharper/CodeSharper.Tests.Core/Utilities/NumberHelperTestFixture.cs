@@ -1,15 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CodeSharper.Core.Utilities;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Utilities
 {
     [TestFixture]
-    class NumberHelperTestFixture
+    internal class NumberHelperTestFixture
     {
         [TestCase(124)]
         [TestCase(1000)]
-        public void TimesShouldIterateTheGivenNumberOfTimesTest(int times)
+        public void TimesShouldIterateTheGivenNumberOfTimesTest(Int32 times)
         {
             // GIVEN
             var underTest = times;
@@ -24,7 +25,7 @@ namespace CodeSharper.Tests.Core.Utilities
         }
 
         [TestCase(100)]
-        public void TimesShouldIterateTheGivenNumberOfTimesWithoutParameterTest(int times)
+        public void TimesShouldIterateTheGivenNumberOfTimesWithoutParameterTest(Int32 times)
         {
             // GIVEN
             var underTest = times;
@@ -40,7 +41,7 @@ namespace CodeSharper.Tests.Core.Utilities
 
         [TestCase(24)]
         [TestCase(100)]
-        public void TimeShouldReturnTheGivenNumberTest(int times)
+        public void TimeShouldReturnTheGivenNumberTest(Int32 times)
         {
             // GIVEN
             var underTest = times;
@@ -56,7 +57,7 @@ namespace CodeSharper.Tests.Core.Utilities
         [TestCase(1, 10)]
         [TestCase(99, 100)]
         [TestCase(100, 100)]
-        public void ToShouldReturnRangeOfElementsTest(int start, int stop)
+        public void ToShouldReturnRangeOfElementsTest(Int32 start, Int32 stop)
         {
             // GIVEN
             var underTest = start;
@@ -66,6 +67,21 @@ namespace CodeSharper.Tests.Core.Utilities
 
             // THEN
             Assert.That(result, Is.EquivalentTo(Enumerable.Range(start, stop - start)));
+        }
+
+        [TestCase(1, 20)]
+        [TestCase(99, 100)]
+        [Test(Description = "Until should return range of elements")]
+        public void UntilShouldReturnRangeOfElements(Int32 start, Int32 stop)
+        {
+            // Given
+            var underTest = start;
+
+            // When
+            var result = underTest.Until(stop);
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(Enumerable.Range(start, stop - start - 1)));
         }
     }
 }

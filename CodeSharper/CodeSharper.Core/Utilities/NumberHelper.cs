@@ -30,10 +30,14 @@ namespace CodeSharper.Core.Utilities
             var times = Math.Abs(start - stop);
             var direction = stop.CompareTo(start);
 
-            for (var i = 0; i < times; i++)
-            {
+            for (var i = 0; i < times; i++) {
                 yield return start + i * direction;
             }
+        }
+
+        public static IEnumerable<Int32> Until(this Int32 start, Int32 stop)
+        {
+            return To(start, stop - 1);
         }
     }
 }
