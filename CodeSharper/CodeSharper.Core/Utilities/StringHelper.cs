@@ -29,5 +29,15 @@ namespace CodeSharper.Core.Utilities
         {
             return String.Format(format, parameters);
         }
+
+        public static TEnum ToEnum<TEnum>(this String value) where TEnum : struct
+        {
+            TEnum result;
+
+            if (!Enum.TryParse(value, out result))
+                ThrowHelper.ThrowException<InvalidOperationException>();
+
+            return result;
+        }
     }
 }
