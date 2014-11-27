@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class ObjectHelper
+    public static class ObjectExtensions
     {
         public static T With<T>(this T element, Action<T> withStatement)
         {

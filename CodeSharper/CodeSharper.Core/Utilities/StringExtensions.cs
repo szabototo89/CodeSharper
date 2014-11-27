@@ -5,7 +5,7 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class StringHelper
+    public static class StringExtensions
     {
         private static String _TransformWords(this String text, Func<IEnumerable<String>, IEnumerable<String>> transform)
         {

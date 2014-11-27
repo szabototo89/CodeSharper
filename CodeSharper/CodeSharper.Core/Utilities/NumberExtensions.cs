@@ -4,7 +4,7 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class NumberHelper
+    public static class NumberExtensions
     {
         public static int Times(this int that, Action action)
         {
