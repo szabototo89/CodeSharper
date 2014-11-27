@@ -7,8 +7,10 @@ using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Mocks
 {
-    internal class GeneralObjectMocks
+    internal class TypeMocks
     {
+        public enum TestEnum { Begin, End, Over }
+
         public static class Persons
         {
             public static Person JohnDoe
