@@ -7,7 +7,7 @@ namespace CodeSharper.Tests.Core.Common
     {
         protected IKernel Kernel;
 
-        public TestFixtureBase()
+        protected TestFixtureBase()
         {
             Kernel = new StandardKernel();
         }
