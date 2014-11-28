@@ -3,7 +3,7 @@ using CodeSharper.Core.Common.Values;
 
 namespace CodeSharper.Core.Common.ControlFlow
 {
-    public interface IStandardControlFlow
+    public interface IControlFlow
     {
         ICommandManager CommandManager { get; }
         Argument Execute(Argument parameter);
