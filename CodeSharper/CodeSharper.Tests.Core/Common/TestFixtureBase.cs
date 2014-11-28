@@ -3,7 +3,7 @@ using Ninject;
 
 namespace CodeSharper.Tests.Core.Common
 {
-    internal class TestFixtureBase : IDisposable
+    internal abstract class TestFixtureBase : IDisposable
     {
         protected IKernel Kernel;
 
