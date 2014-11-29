@@ -16,7 +16,15 @@ namespace CodeSharper.Core.Common.ControlFlow
     {
         private readonly List<ICommand> _commands;
         private readonly IExecutor _executor;
+
         public ICommandManager CommandManager { get; protected set; }
+
+        public StandardControlFlow(IEnumerable<ICommand> commands)
+        {
+            Constraints.NotNull(() => commands);
+
+            _commands = commands.ToList();
+        }
 
         public StandardControlFlow(ICommandManager commandManager, IExecutor executor)
         {
