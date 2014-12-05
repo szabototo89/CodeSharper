@@ -5,14 +5,14 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class StringHelper
+    public static class StringExtensions
     {
         private static String _TransformWords(this String text, Func<IEnumerable<String>, IEnumerable<String>> transform)
         {
             Constraints.NotNull(() => transform);
 
             const string separator = " ";
-            return String.Join(separator, transform(text.Split(new[] { separator }, StringSplitOptions.None)));           
+            return String.Join(separator, transform(text.Split(new[] { separator }, StringSplitOptions.None)));
         }
 
         public static String TakeWords(this String text, Int32 count)
@@ -25,5 +25,19 @@ namespace CodeSharper.Core.Utilities
             return _TransformWords(text, words => words.Skip(count));
         }
 
+        public static String FormatString(this String format, params Object[] parameters)
+        {
+            return String.Format(format, parameters);
+        }
+
+        public static TEnum ToEnum<TEnum>(this String value) where TEnum : struct
+        {
+            TEnum result;
+
+            if (!Enum.TryParse(value, out result))
+                ThrowHelper.ThrowException<InvalidOperationException>();
+
+            return result;
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace CodeSharper.Tests.Core.Common
 
             // When
             var result = underTest.CreateCommand(new CommandArgumentCollection().SetArgument("count", 3));
-            
+
             // Then
             Assert.That(result.Runnable, Is.Not.Null);
             Assert.That(result.Runnable, Is.InstanceOf<RunnableMocks.TestRunnable>());

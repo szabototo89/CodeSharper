@@ -5,7 +5,7 @@ namespace CodeSharper.Core.Utilities
     /// <summary>
     /// Helper class for Option(T) class
     /// </summary>
-    public static class OptionHelper
+    public static class OptionExtensions
     {
         /// <summary>
         /// Converts any value to Option(T) type
