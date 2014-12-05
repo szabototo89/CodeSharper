@@ -20,7 +20,13 @@ namespace CodeSharper.Tests.Core.Common
         public void Setup()
         {
             Kernel.Bind<SingleCommandCall>().ToSelf();
-            Kernel.Bind(x => x.FromAssembliesMatching("*").SelectAllClasses().BindAllInterfaces());
+            /*Kernel.Bind(
+                x => x.FromAssembliesMatching("*")
+                      .SelectAllClasses()
+                      .Excluding<ICommandManager>()
+                      .BindAllInterfaces());*/
+
+            Kernel.Bind<ICommandManager>().To<StandardCommandManager>();
         }
 
         [TearDown]
@@ -33,11 +39,15 @@ namespace CodeSharper.Tests.Core.Common
         public void StandardControlFlowFactoryShouldAbleToParseCommandCallAndBuildAnControlFlowFromIt()
         {
             // Given
-            ICommandCall commandCall = Kernel.Get<SingleCommandCall>(new ConstructorArgument("descriptor", new CommandCallDescriptor("test")));
-            var underTest = new StandardControlFlowFactory();
+            ICommandCall commandCall = Kernel.Get<SingleCommandCall>(
+                new ConstructorArgument("descriptor", new CommandCallDescriptor("test")));
+
+            var commandManager = Kernel.Get<ICommandManager>();
+
+            var underTest = new StandardControlFlowFactory(commandManager);
 
             // When
-            var result = underTest.Parse(commandCall);
+            var result = underTest.CreateControlFlow(commandCall);
 
             // Then
             Assert.That(result, Is.Not.Null);
