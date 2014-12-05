@@ -36,7 +36,7 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
 
             ConsoleHelper.OpenConsoleWindow();
 
-            initializeCodeSharper();
+            _InitializeCodeSharper();
 
             var input = String.Empty;
             Console.WriteLine(_text);
@@ -57,7 +57,7 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
                     default:
                         try
                         {
-                            var result = callCommand(input);
+                            var result = _CallCommand(input);
                             Console.WriteLine(result);
                         }
                         catch (Exception ex)
@@ -69,7 +69,7 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             } while (input != "exit");
         }
 
-        private String callCommand(String command)
+        private String _CallCommand(String command)
         {
             var commandCall = _compiler.RunVisitor<CodeSharperGrammarVisitor, ICommandCall>(command);
             var textRange = _textDocument.TextRange;
@@ -93,7 +93,7 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             return "An error has occured!";
         }
 
-        private void initializeCodeSharper()
+        private void _InitializeCodeSharper()
         {
             Console.WriteLine("Initializing CodeSharper ...");
             _compiler = new CodeSharperCompiler();
@@ -104,13 +104,13 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             var dir = "../../DemoApplications/CodeREPL/CommandDescriptions";
 
             var factories = new ICommandFactory[] {
-                createCommandFactory<InsertTextRangeCommandFactory>(Path.Combine(dir, "insert-text-range-descriptor.json")),
-                createCommandFactory<ToUpperCaseCommandFactory>(Path.Combine(dir, "to-upper-case-descriptor.json")),
-                createCommandFactory<ToLowerCaseCommandFactory>(Path.Combine(dir, "to-lower-case-descriptor.json")),
-                createCommandFactory<FindTextCommandFactory>(Path.Combine(dir, "find-text-descriptor.json")),
-                createCommandFactory<RegularExpressionCommandFactory>(Path.Combine(dir, "regular-expression-descriptor.json")),
-                createCommandFactory<ReplaceTextCommandFactory>(Path.Combine(dir, "replace-text-descriptor.json")),
-                createCommandFactory<SplitStringCommandFactory>(Path.Combine(dir, "split-string-descriptor.json")),
+                _CreateCommandFactory<InsertTextRangeCommandFactory>(Path.Combine(dir, "insert-text-range-descriptor.json")),
+                _CreateCommandFactory<ToUpperCaseCommandFactory>(Path.Combine(dir, "to-upper-case-descriptor.json")),
+                _CreateCommandFactory<ToLowerCaseCommandFactory>(Path.Combine(dir, "to-lower-case-descriptor.json")),
+                _CreateCommandFactory<FindTextCommandFactory>(Path.Combine(dir, "find-text-descriptor.json")),
+                _CreateCommandFactory<RegularExpressionCommandFactory>(Path.Combine(dir, "regular-expression-descriptor.json")),
+                _CreateCommandFactory<ReplaceTextCommandFactory>(Path.Combine(dir, "replace-text-descriptor.json")),
+                _CreateCommandFactory<SplitStringCommandFactory>(Path.Combine(dir, "split-string-descriptor.json")),
             };
 
             foreach (var factory in factories)
@@ -127,7 +127,7 @@ namespace CodeSharper.DemoRunner.DemoApplications.CodeREPL
             Console.WriteLine("CodeSharper is ready!");
         }
 
-        private static TCommandFactory createCommandFactory<TCommandFactory>(String path)
+        private static TCommandFactory _CreateCommandFactory<TCommandFactory>(String path)
             where TCommandFactory : ICommandFactory, new()
         {
             return new TCommandFactory() {
