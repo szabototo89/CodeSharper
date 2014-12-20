@@ -12,19 +12,13 @@ namespace CodeSharper.Tests.Core.Utilities
     internal class OptionTestFixture
     {
         [SetUp]
-        public void Setup()
-        {
-            // TODO: (optional) not implemented
-        }
+        public void Setup() { }
 
         [TearDown]
-        public void Teardown()
-        {
-            // TODO: (optional) not implemented
-        }
+        public void Teardown() { }
 
-        [Test]
-        public void OptionalShouldBeAbleToContainValue()
+        [Test(Description = "Option should be able to contain value")]
+        public void OptionShouldBeAbleToContainValue()
         {
             // Given
             Option<Int32> underTest = Option.Some(10);
@@ -42,8 +36,8 @@ namespace CodeSharper.Tests.Core.Utilities
             }));
         }
 
-        [Test]
-        public void OptionalShouldBeAbleToContainNoneValues()
+        [Test(Description = "Option should be able to contain none values")]
+        public void OptionShouldBeAbleToContainNoneValues()
         {
             // Given
             Option<String> underTest = Option.None;
@@ -56,8 +50,8 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(underTest == Option.None, Is.True);
         }
 
-        [Test]
-        public void OptionalThrowsExceptionIfItHasNoValue()
+        [Test(Description = "Option throws exception if it has no value")]
+        public void OptionThrowsExceptionIfItHasNoValue()
         {
             // Given
             Option<Int32> underTest = Option.None;
@@ -71,8 +65,8 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result, Throws.InstanceOf<InvalidOperationException>());
         }
 
-        [Test]
-        public void OptionalShouldBeAbleToCompareTheirValues()
+        [Test(Description = "Option should be able to compare their values")]
+        public void OptionShouldBeAbleToCompareTheirValues()
         {
             // Given
             var underTest = Option.Some(Option.Some("Hello World!"));
@@ -88,7 +82,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result.IsNotEqual, Is.False);
         }
 
-        [Test]
+        [Test(Description = "Option should be able to transfrom its value")]
         public void OptionShouldBeAbleToTransfromItsValue()
         {
             // Given
@@ -103,8 +97,8 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result, Is.EqualTo(40));
         }
 
-        [Test]
-        public void OptionShouldBeAbleToFilterByValue()
+        [Test(Description = "Option should be filtered by value")]
+        public void OptionShouldBeFilteredByValue()
         {
             // Given
             var underTest = Option.Some(15);
@@ -117,7 +111,7 @@ namespace CodeSharper.Tests.Core.Utilities
 
             // Then
             Assert.That(result.PositiveValue, Is.EqualTo(Option.Some(15)));
-            Assert.That(result.NegativeValue, Is.EqualTo((Option<Int32>)Option.None));
+            Assert.That(result.NegativeValue == Option.None, Is.True);
         }
 
     }

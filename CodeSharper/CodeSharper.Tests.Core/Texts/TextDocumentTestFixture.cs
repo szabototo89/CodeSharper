@@ -17,7 +17,7 @@ namespace CodeSharper.Tests.Core.Texts
             UnderTest = new TextDocument("Hello World!");
         }
 
-        [Test]
+        [Test(Description = "TextDocument should be represented raw text")]
         public void TextDocumentShouldBeRepresentedRawText()
         {
             // Given in setup
@@ -29,7 +29,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo("Hello World!"));
         }
 
-        [Test]
+        [Test(Description = "SubString of text should create text node from text")]
         public void SubStringOfTextShouldCreateTextNodeFromText()
         {
             // Given in setup
@@ -44,7 +44,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result.Stop, Is.EqualTo(5));
         }
 
-        [Test]
+        [Test(Description = "TextNode of TextDocument should be able to change its text")]
         public void TextNodeOfTextDocumentShouldBeAbleToChangeItsText()
         {
             // Given in setup
@@ -58,7 +58,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo("hello World!"));
         }
 
-        [Test]
+        [Test(Description = "TextNode of TextDocument should be able to remove its text")]
         public void TextNodeOfTextDocumentShouldBeAbleToRemoveItsText()
         {
             // Given in setup
@@ -72,7 +72,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(" World!"));
         }
 
-        [Test]
+        [Test(Description = "TextNode of TextDocument should be able to add more text to its text")]
         public void TextNodeOfTextDocumentShouldBeAbleToAddMoreTextToItsText()
         {
             // Given in setup
@@ -86,7 +86,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo("HelloHello World!"));
         }
 
-        [Test]
+        [Test(Description = "TextNode of TextDocument should be able to update other nodes")]
         public void TextNodeOfTextDocumentShouldBeAbleToUpdateOtherNodes()
         {
             // Given in setup
@@ -107,7 +107,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(tail.Start, Is.EqualTo(10));
         }
 
-        [Test]
+        [Test(Description = "TextDocument should able to convert to TextRange")]
         public void TextDocumentShouldAbleToConvertToTextRange()
         {
             // Given in setup
@@ -118,7 +118,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result.Text, Is.EqualTo(UnderTest.Text.ToString()));
         }
 
-        [Test]
+        [Test(Description = "TextDocument should be able to change via TextRange")]
         public void TextDocumentShouldBeAbleToChangeViaTextRanges()
         {
             // Given
@@ -139,7 +139,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(underTest.TextRange.Length, Is.EqualTo(expected.Length));
         }
 
-        [Test]
+        [Test(Description = "TextDocument should be able to change via overlapping TextRange")]
         public void TextDocumentShouldBeAbleToChangeViaOverlappingTextRanges()
         {
             // Given

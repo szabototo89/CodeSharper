@@ -16,7 +16,7 @@ namespace CodeSharper.Tests.Core.TextTransformationTests
         {
             TestRunnableWithTestCasesOf(
               new ToUpperCaseRunnable(), TestCase(name: "touppercase")
-            );
+                );
 
             TestRunnableWithTestCasesOf(
               new ToLowerCaseRunnable(), TestCase(name: "tolowercase")

@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     internal class ExecutorTestFixture
     {
-        [Test]
+        [Test(Description = "SimpleValueArgumentWrapper should convert any value to value argument")]
         public void SimpleValueArgumentWrapperShouldConvertAnyValueToValueArgument()
         {
             // Given
@@ -39,8 +39,7 @@ namespace CodeSharper.Tests.Core.Common
             var parameter = 20;
             var runnableResult = runnable.Run(parameter);
 
-            var result = new
-            {
+            var result = new {
                 IsWrappable = underTest.IsConvertable(parameter),
                 Wrap = underTest.Convert(runnableResult),
             };
@@ -50,7 +49,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Wrap, Is.EqualTo(Arguments.Value(40)));
         }
 
-        [Test]
+        [Test(Description = "MultiValueArgumentWrapper should convert any value to value argument")]
         public void MultiValueArgumentWrapperShouldConvertAnyValueToValueArgument()
         {
             // Given
@@ -66,8 +65,7 @@ namespace CodeSharper.Tests.Core.Common
             // When
             var parameter = 20;
             var runnableResult = runnable.Run(parameter);
-            var result = new
-            {
+            var result = new {
                 IsConvertable = underTest.IsConvertable(runnableResult),
                 Value = underTest.Convert(runnableResult)
             };
@@ -78,7 +76,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That((result.Value as MultiValueArgument<Int32>).Values, Is.EquivalentTo(new[] { 20, 20, 20 }));
         }
 
-        [Test]
+        [Test(Description = "FlattenArgumentWrapper should flatten multi value arguments")]
         public void FlattenArgumentWrapperShouldFlattenMultiValueArguments()
         {
             // Given
@@ -94,8 +92,7 @@ namespace CodeSharper.Tests.Core.Common
             // When
             var parameter = new[] { 1 };
             var runnableResult = runnable.Run(parameter);
-            var result = new
-            {
+            var result = new {
                 IsConvertable = underTest.IsConvertable(runnableResult),
                 Value = underTest.Convert(runnableResult)
             };
@@ -106,7 +103,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That((result.Value as MultiValueArgument<Int32>).Values, Is.EquivalentTo(new[] { 1, 1, 1 }));
         }
 
-        [Test]
+        [Test(Description = "StandardExecutor should handle different run modes of runnables")]
         public void StandardExecutorShouldHandleDifferentRunModesOfRunnables()
         {
             // Given
@@ -121,7 +118,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That((result as MultiValueArgument<TextRange>).Values, Has.Length.Or.Count.EqualTo(3));
         }
 
-        [Test]
+        [Test(Description = "FindTextRunnable should handle multiple values")]
         public void FindTextRunnableShouldHandleMultipleValues()
         {
             // Given
@@ -138,7 +135,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(ranges.Select(range => range.Text), Is.All.EqualTo("abc"));
         }
 
-        [Test]
+        [Test(Description = "FindTextRunnable should handle enumerable values")]
         public void FindTextRunnableShouldHandleEnumerableValues()
         {
             // Given
@@ -157,7 +154,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(ranges.Select(range => range.Text), Is.All.EqualTo("bcd"));
         }
 
-        [Test]
+        [Test(Description = "FindTextRunnable should handle enumerable values multiple times")]
         public void FindTextRunnableShouldHandleEnumerableValuesMultipleTimes()
         {
             // Given
@@ -175,7 +172,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(ranges.Select(range => range.Text), Is.All.EqualTo("abcdef"));
         }
 
-        [Test]
+        [Test(Description = "StandardExecutor should be able to chain multiple runnables")]
         public void StandardExecutorShouldBeAbleToChainMultipleRunnables()
         {
             // Given
