@@ -9,7 +9,7 @@ namespace CodeSharper.Tests.Core.Texts
     [TestFixture]
     internal class ArgumentsTestFixture : TestFixtureBase
     {
-        [Test]
+        [Test(Description = "ArgumentValue should be initialized by value")]
         public void ArgumentValueShouldBeInitializedByValue()
         {
             // Given
@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
+        [Test(Description = "ArgumentValue should be equalitiable")]
         public void ArgumentValueShouldBeEqualitiable()
         {
             // Given
@@ -37,7 +37,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
+        [Test(Description = "ArgumentValue should extend argument base class")]
         public void ArgumentValueShouldExtendArgumentBaseClass()
         {
             // Given
@@ -49,7 +49,7 @@ namespace CodeSharper.Tests.Core.Texts
         }
 
 
-        [Test]
+        [Test(Description = "ArgumentValue should be initialized via static factory")]
         public void ArgumentValueShouldBeInitializedViaStaticFactory()
         {
             // Given
@@ -62,7 +62,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.True);
         }
 
-        [Test]
+        [Test(Description = "Arguments should have error argument")]
         public void ArgumentsShouldHaveErrorArgument()
         {
             // Given
@@ -78,7 +78,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(expected));
         }
 
-        [Test]
+        [Test(Description = "ErrorValue should be initialized via static factory")]
         public void ErrorValueShouldBeInitializedViaStaticFactory()
         {
             // Given
@@ -91,7 +91,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.True);
         }
 
-        [Test]
+        [Test(Description = "Values should be able to initialize")]
         public void ValuesShouldBeAbleToInitialize()
         {
             // Given

@@ -13,7 +13,7 @@ namespace CodeSharper.Tests.Core.Common
         public StandardKernel Kernel { get; private set; }
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             Kernel = new StandardKernel();
             Kernel.Bind<TextDocument>().ToConstant(new TextDocument("Hello World!"));
@@ -25,13 +25,13 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
             if (!Kernel.IsDisposed)
                 Kernel.Dispose();
         }
 
-        [Test]
+        [Test(Description = "ToUpperCaseRunnable should return uppercase text range")]
         public void ToUpperCaseRunnableShouldReturnUppercaseTextRange()
         {
             // Given
@@ -46,7 +46,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo("HELLO WORLD!"));
         }
 
-        [Test]
+        [Test(Description = "ToLowerCaseRunnable should return lowercase text range")]
         public void ToLowerCaseRunnableShouldReturnLowercaseTextRange()
         {
             // Given
@@ -61,7 +61,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo("hello world!"));
         }
 
-        [Test]
+        [Test(Description = "ReplaceTextRunnable should able to replace given text")]
         public void ReplaceTextRunnableShouldAbleToReplaceGivenText()
         {
             // Given
@@ -76,7 +76,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo("hi world!"));
         }
 
-        [Test]
+        [Test(Description = "ReplaceTextRunnable should able to replace array of given values")]
         public void ReplaceTextRunnableShouldAbleToReplaceArrayOfGivenValues()
         {
             // Given
@@ -124,7 +124,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo(expected));
         }
 
-        [Test]
+        [Test(Description = "InsertTextRangeRunnable should insert new value to text range")]
         public void InsertTextRangeRunnableShouldInsertNewValueToTextRange()
         {
             // Given
@@ -139,7 +139,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo("Hi, Hello World!"));
         }
 
-        [Test]
+        [Test(Description = "InsertTextRangeRunnable should insert new value into middle of text range")]
         public void InsertTextRangeRunnableShouldInsertNewValueIntoMiddleOfTextRange()
         {
             // Given
@@ -155,7 +155,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.TextDocument.Text.ToString(), Is.EqualTo("Hello Hi, World!"));
         }
 
-        [Test]
+        [Test(Description = "TrimTextRangeRunnable should trim text")]
         public void TrimTextRangeRunnableShouldTrimText()
         {
             // Given
@@ -170,7 +170,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.TextDocument.Text.ToString(), Is.EqualTo("Hello World!"));
         }
 
-        [Test]
+        [Test(Description = "TrimTextRangeRunnable should trim beginning of text")]
         public void TrimTextRangeRunnableShouldTrimBeginningOfText()
         {
             // Given
@@ -185,7 +185,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.TextDocument.Text.ToString(), Is.EqualTo("Hello World!   "));
         }
 
-        [Test]
+        [Test(Description = "TrimTextRangeRunnable should trim end of text")]
         public void TrimTextRangeRunnableShouldTrimEndOfText()
         {
             // Given

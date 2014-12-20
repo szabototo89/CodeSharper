@@ -29,12 +29,12 @@ namespace CodeSharper.Tests.Core.CommandManager
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
             Kernel.Dispose();
         }
 
-        [Test]
+        [Test(Description = "Command should have command descriptor")]
         public void CommandShouldHaveCommandDescriptor()
         {
             // Given
@@ -62,7 +62,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             Assert.That(result.Arguments.Select(arg => arg.ArgumentType), Is.EquivalentTo(new[] { typeof(String), typeof(Int32) }));
         }
 
-        [Test]
+        [Test(Description = "InsertTextRange command should be able to initialize")]
         public void InsertTextRangeCommandShouldBeAbleToInitialize()
         {
             // Given

@@ -13,7 +13,7 @@ namespace CodeSharper.Tests.Core.CommandManager
     [TestFixture]
     internal class CommandCallDescriptorTextFixture : TestFixtureBase
     {
-        [Test]
+        [Test(Description = "CommandCallDescriptor should have command name and parameter value and parameter name")]
         public void CommandCallDescriptorShouldHaveCommandNameAndParameterValueAndParameterName()
         {
             // Given

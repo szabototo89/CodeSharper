@@ -12,7 +12,7 @@ namespace CodeSharper.Tests.Core.TextTransformationTests
 {
     internal class CommonTextTransformationsTests : TextTestFixtureBase
     {
-        [Test]
+        [Test(Description = "TextTransformation tests should be able to pass")]
         public void TextTransformationTestsShouldBeAbleToPass()
         {
             TestRunnableWithTestCasesOf(

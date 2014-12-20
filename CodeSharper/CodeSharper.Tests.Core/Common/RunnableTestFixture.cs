@@ -40,7 +40,7 @@ namespace CodeSharper.Tests.Core.Common
                 Kernel.Dispose();
         }
 
-        [Test]
+        [Test(Description = "FindTextRunnable should return found sub strings of text")]
         public void FindTextRunnableShouldReturnFoundSubStringsOfText()
         {
             // Given
@@ -57,7 +57,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Has.Count.Or.Length.EqualTo(2));
         }
 
-        [Test(Description = "IdentityCommandFactory should return with passed value.")]
+        [Test(Description = "IdentityRunnable should return with passed value")]
         public void IdentityRunnableShouldReturnWithPassedValue()
         {
             // Given
@@ -71,7 +71,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.EqualTo(parameter));
         }
 
-        [Test]
+        [Test(Description = "RepeatRunnable should return a repeated values of passed value")]
         public void RepeatRunnableShouldReturnARepeatedValuesOfPassedValue()
         {
             // Given
@@ -85,7 +85,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.EquivalentTo(new[] { 10, 10, 10 }));
         }
 
-        [Test]
+        [Test(Description = "SplitStringRunnable should split any string to multiple values")]
         public void SplitStringRunnableShouldSplitAnyStringToMultipleValues()
         {
             // Given
@@ -101,7 +101,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "a", "b", "c", "d" }));
         }
 
-        [Test]
+        [Test(Description = "RegularExpressionCommand should be able to find text with regular expressions")]
         public void RegularExpressionCommandShouldBeAbleToFindTextWithRegularExpressions()
         {
             // Given
@@ -115,7 +115,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.Not.Null.And.Not.Empty);
         }
 
-        [Test]
+        [Test(Description = "RunnableManager should handle argument wrappers and unwrappers")]
         public void RunnableManagerShouldHandleArgumentWrappersAndUnwrappers()
         {
             // Given
@@ -130,7 +130,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Type, Is.EqualTo(runnableType));
         }
 
-        [Test]
+        [Test(Description = "FilterByLine should filter text ranges")]
         public void FilterByLineShouldFilterTextRanges()
         {
             // Given
@@ -145,7 +145,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Text, Is.EqualTo("5"));
         }
 
-        [Test]
+        [Test(Description = "FilterByLine should filter by even positions text ranges")]
         public void FilterByLineShouldFilterByEvenPositionsTextRanges()
         {
             // Given
@@ -160,7 +160,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "2", "4", "6" }));
         }
 
-        [Test]
+        [Test(Description = "FilterByLine should filter by odd positions text ranges")]
         public void FilterByLineShouldFilterByOddPositionsTextRanges()
         {
             // Given
@@ -175,7 +175,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "1", "3", "5" }));
         }
 
-        [Test]
+        [Test(Description = "FilterByColumn should filter text ranges")]
         public void FilterByColumnShouldFilterTextRanges()
         {
             // Given
@@ -191,7 +191,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Select(range => range.Text), Is.EquivalentTo(expected));
         }
 
-        [Test]
+        [Test(Description = "FilterByColumn should filter variable length of lines text range")]
         public void FilterByColumnShouldFilterVariableLengthOfLinesTextRange()
         {
             // Given
@@ -213,7 +213,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Select(range => range.Text), Is.EquivalentTo(expected));
         }
 
-        [Test]
+        [Test(Description = "CountTextRange Length should return length of text range")]
         public void CountTextRangeLengthShouldReturnLengthOfTextRange()
         {
             // Given

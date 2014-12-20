@@ -10,6 +10,7 @@ namespace CodeSharper.Tests.Core.Utilities
     {
         [TestCase(124)]
         [TestCase(1000)]
+        [Test(Description = "Times should iterate the given number of times test")]
         public void TimesShouldIterateTheGivenNumberOfTimesTest(int times)
         {
             // GIVEN
@@ -25,6 +26,7 @@ namespace CodeSharper.Tests.Core.Utilities
         }
 
         [TestCase(100)]
+        [Test(Description = "Times should iterate the given number of times without parameter test")]
         public void TimesShouldIterateTheGivenNumberOfTimesWithoutParameterTest(int times)
         {
             // GIVEN
@@ -41,7 +43,8 @@ namespace CodeSharper.Tests.Core.Utilities
 
         [TestCase(24)]
         [TestCase(100)]
-        public void TimeShouldReturnTheGivenNumberTest(int times)
+        [Test(Description = "Times should return the given number test")]
+        public void TimesShouldReturnTheGivenNumberTest(int times)
         {
             // GIVEN
             var underTest = times;
@@ -57,6 +60,7 @@ namespace CodeSharper.Tests.Core.Utilities
         [TestCase(1, 10)]
         [TestCase(99, 100)]
         [TestCase(100, 100)]
+        [Test(Description = "To should return range of elements test")]
         public void ToShouldReturnRangeOfElementsTest(int start, int stop)
         {
             // GIVEN

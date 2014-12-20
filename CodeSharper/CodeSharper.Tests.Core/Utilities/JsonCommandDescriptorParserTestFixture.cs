@@ -11,7 +11,7 @@ namespace CodeSharper.Tests.Core.Utilities
     [TestFixture]
     internal class JsonCommandDescriptorParserTestFixture : TestFixtureBase
     {
-        [Test]
+        [Test(Description = "JsonCommandDescriptorParser should be able to parse JSON file")]
         public void JsonCommandDescriptorParserShouldBeAbleToParseJsonFile()
         {
             // Given

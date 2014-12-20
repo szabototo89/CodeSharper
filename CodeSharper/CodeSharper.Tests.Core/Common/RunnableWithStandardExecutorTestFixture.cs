@@ -35,7 +35,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result, Is.Not.Null);
         }
 
-        [Test]
+        [Test(Description = "Runnable should able to handle single value")]
         public void RunnableShouldAbleToHandleSingleValue()
         {
             Func<Argument> argument = () => Arguments.Value(TextRange("abcdef abcdef"));
@@ -62,7 +62,7 @@ namespace CodeSharper.Tests.Core.Common
                 argument(), new FilterTextByColumnRunnable(0));
         }
 
-        [Test]
+        [Test(Description = "Runnable should able to handle multiple values")]
         public void RunnableShouldAbleToHandleMultipleValues()
         {
             Func<Argument> argument = () => Arguments.MultiValue(new[] { TextRange("abcdef abcdef") });
@@ -85,7 +85,7 @@ namespace CodeSharper.Tests.Core.Common
                 argument(), new FilterTextByColumnRunnable(0));
         }
 
-        [Test]
+        [Test(Description = "StringTransformationRunnables should able to handle single value")]
         public void StringTransformationRunnablesShouldAbleToHandleSingleValue()
         {
             var argument = Arguments.Value(TextRange("abcdef abcdef"));
@@ -106,7 +106,7 @@ namespace CodeSharper.Tests.Core.Common
         }
 
 
-        [Test]
+        [Test(Description = "StringTransformationRunnable should able to handle multiple values")]
         public void StringTransformationRunnableShouldAbleToHandleMultipleValues()
         {
             var ranges = Arguments.MultiValue(new[] { TextRange("abcdef abcdef") });

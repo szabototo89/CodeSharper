@@ -10,7 +10,7 @@ namespace CodeSharper.Tests.Core.Utilities
     [TestFixture]
     internal class ObjectHelperTestFixture : TestFixtureBase
     {
-        [Test]
+        [Test(Description = "Every object should able to convert to array")]
         public void EveryObjectShouldAbleToConvertToArray()
         {
             // Given
@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result, Is.EquivalentTo(new[] { 5 }));
         }
 
-        [Test]
+        [Test(Description = "WrapToArray should able to handle strings")]
         public void WrapToArrayShouldAbleToHandleStrings()
         {
             // Given
@@ -36,7 +36,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result, Is.EquivalentTo(new[] { "hello world" }));
         }
 
-        [Test]
+        [Test(Description = "WrapToArray should able to handle enumerable")]
         public void WrapToArrayShouldAbleToHandleEnumerable()
         {
             // Given
@@ -49,7 +49,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result, Is.EquivalentTo(new[] { new[] { "hello world" } }));
         }
 
-        [Test]
+        [Test(Description = "WrapToList should able to convert every object to list")]
         public void WrapToListShouldAbleToConvertEveryObjectToList()
         {
             // Given
@@ -63,7 +63,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result, Is.EquivalentTo(new[] { 5 }));
         }
 
-        [Test]
+        [Test(Description = "Safe should be able to invoke safely every type of object")]
         public void SafeShouldBeAbleToInvokeSafelyEveryTypeOfObject()
         {
             // Given
@@ -78,7 +78,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result.Age, Is.EqualTo(0));
         }
 
-        [Test]
+        [Test(Description = "Safe should return its value if it is not null")]
         public void SafeShouldReturnItsValueIfItIsNotNull()
         {
             // Given
@@ -93,7 +93,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result.Age, Is.EqualTo(34));
         }
 
-        [Test]
+        [Test(Description = "SafeOrDefault should return default value if object is null")]
         public void SafeOrDefaultShouldReturnDefaultValueIfObjectIsNull()
         {
             // Given
@@ -108,7 +108,7 @@ namespace CodeSharper.Tests.Core.Utilities
             Assert.That(result.Age, Is.EqualTo(GeneralObjectMocks.Persons.JohnDoe.Age));
         }
 
-        [Test]
+        [Test(Description = "With should able to change value state")]
         public void WithShouldAbleToChangeValueState()
         {
             // Given

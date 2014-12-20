@@ -17,7 +17,7 @@ namespace CodeSharper.Tests.Core.CommandManager
     [TestFixture]
     internal class StandardCommandManagerTestFixture : TestFixtureBase
     {
-        [Test]
+        [Test(Description = "StandardCommandManager should able to register commands")]
         public void StandardCommandManagerShouldAbleToRegisterCommands()
         {
             // Given
@@ -32,7 +32,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             underTest.RegisterCommandFactory(commandMock.Object);
         }
 
-        [Test]
+        [Test(Description = "StandardCommandManager should get runnable by command name")]
         public void StandardCommandManagerShouldGetRunnableByCommandName()
         {
             // Given
@@ -45,7 +45,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             Assert.That(result, Is.InstanceOf<IEnumerable<ICommandFactory>>());
         }
 
-        [Test]
+        [Test(Description = "StandardCommandManager should create command without argument")]
         public void StandardCommandManagerShouldCreateCommandWithoutArgument()
         {
             // Given
@@ -66,7 +66,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             Assert.That(result.HasValue, Is.True);
         }
 
-        [Test]
+        [Test(Description = "StandardCommandManager should create command with name arguments")]
         public void StandardCommandManagerShouldCreateCommandWithNameArguments()
         {
             // Given
@@ -102,7 +102,7 @@ namespace CodeSharper.Tests.Core.CommandManager
             Assert.That(result.HasValue, Is.True);
         }
 
-        [Test]
+        [Test(Description = "StandardCommandManager should create command with positioned arguments")]
         public void StandardCommandManagerShouldCreateCommandWithPositionedArguments()
         {
             // Given

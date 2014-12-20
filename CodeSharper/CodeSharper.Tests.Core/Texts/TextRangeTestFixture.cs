@@ -18,7 +18,7 @@ namespace CodeSharper.Tests.Core.Texts
             TextDocument = new TextDocument("Hello World!");
         }
 
-        [Test]
+        [Test(Description = "TextRange should be initialized test")]
         public void TextRangeShouldBeInitializedTest()
         {
             // Given
@@ -40,7 +40,7 @@ namespace CodeSharper.Tests.Core.Texts
             }));
         }
 
-        [Test]
+        [Test(Description = "TextRange has start test")]
         public void TextRangeHasStartTest()
         {
             // Given
@@ -53,7 +53,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(0));
         }
 
-        [Test]
+        [Test(Description = "TextRange has stop test")]
         public void TextRangeHasStopTest()
         {
             // Given
@@ -66,7 +66,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EqualTo(0));
         }
 
-        [Test]
+        [Test(Description = "TextRange has length test")]
         public void TextRangeHasLengthTest()
         {
             // Given
@@ -94,7 +94,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Throws.InstanceOf<ArgumentException>());
         }
 
-        [Test]
+        [Test(Description = "TextRange should have children")]
         public void TextRangeShouldHaveChildren()
         {
             // Given
@@ -107,7 +107,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.Empty);
         }
 
-        [Test]
+        [Test(Description = "TextRange should be able to define sub TextRange")]
         public void TextRangeShouldBeAbleToDefineSubTextRange()
         {
             // Given

@@ -12,7 +12,7 @@ namespace CodeSharper.Tests.Core.Utilities
     [TestFixture]
     internal class StringHelperTestFixture : TestFixtureBase
     {
-        [Test]
+        [Test(Description = "Format method should able to format string values")]
         public void FormatMethodShouldAbleToFormatStringValues()
         {
             // When

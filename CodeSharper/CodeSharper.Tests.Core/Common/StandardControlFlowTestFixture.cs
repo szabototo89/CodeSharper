@@ -42,12 +42,12 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             _commandManagerMock = new Mock<ICommandManager>();
         }
 
-        [Test]
+        [Test(Description = "StandardControlFlow should handle single executor")]
         public void StandardControlFlowShouldHandleSingleExecutor()
         {
             // Given
@@ -67,7 +67,7 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Values.Select(value => value.Text), Is.EquivalentTo(new[] { "HELLO", "WORLD!" }));
         }
 
-        [Test]
+        [Test(Description = "StandardControlFlow should handle multiple values")]
         public void StandardControlFlowShouldHandleMultipleValues()
         {
             // Given
