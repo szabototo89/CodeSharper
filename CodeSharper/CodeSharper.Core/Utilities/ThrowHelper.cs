@@ -51,5 +51,17 @@ namespace CodeSharper.Core.Utilities
         {
             return new InvalidOperationException(message);
         }
+
+        public static TException Exception<TException>()
+            where TException : Exception, new()
+        {
+            return new TException();
+        }
+
+        public static TException Exception<TException>(params Object[] arguments)
+            where TException : Exception
+        {
+            return (TException)Activator.CreateInstance(typeof(TException), arguments);
+        }
     }
 }

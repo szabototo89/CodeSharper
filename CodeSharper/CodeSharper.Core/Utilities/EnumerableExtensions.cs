@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class EnumerableHelper
+    public static class EnumerableExtensions
     {
         [DebuggerStepThrough]
         public static void Foreach<TSource>(this IEnumerable<TSource> source, Action<TSource> function)

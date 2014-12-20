@@ -12,11 +12,19 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.ControlFlow
 {
-    public class StandardControlFlow : IStandardControlFlow
+    public class StandardControlFlow : IControlFlow
     {
         private readonly List<ICommand> _commands;
         private readonly IExecutor _executor;
+
         public ICommandManager CommandManager { get; protected set; }
+
+        public StandardControlFlow(IEnumerable<ICommand> commands)
+        {
+            Constraints.NotNull(() => commands);
+
+            _commands = commands.ToList();
+        }
 
         public StandardControlFlow(ICommandManager commandManager, IExecutor executor)
         {
@@ -56,8 +64,7 @@ namespace CodeSharper.Core.Common.ControlFlow
         {
             Argument result = parameter;
 
-            foreach (var command in _commands)
-            {
+            foreach (var command in _commands) {
                 var runnable = command.Runnable;
                 result = _executor.Execute(runnable, result);
             }
@@ -75,14 +82,12 @@ namespace CodeSharper.Core.Common.ControlFlow
         {
             Constraints.NotNull(() => commandCall);
 
-            if (commandCall is SingleCommandCall)
-            {
+            if (commandCall is SingleCommandCall) {
                 var command = CommandManager.TryGetCommand((commandCall as SingleCommandCall).CommandCallDescriptor);
                 if (command != Option.None)
                     _commands.Add(command.Value);
             }
-            else if (commandCall is PipelineCommandCall)
-            {
+            else if (commandCall is PipelineCommandCall) {
                 var call = commandCall as PipelineCommandCall;
                 foreach (var child in call.Children)
                     parseCommandCallWithOutInitialization(child);

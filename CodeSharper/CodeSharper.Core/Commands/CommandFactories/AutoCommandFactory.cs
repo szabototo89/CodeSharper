@@ -41,7 +41,6 @@ namespace CodeSharper.Core.Commands.CommandFactories
 
         public AutoCommandFactory() : this(Activator.CreateInstance<TRunnable>)
         {
-            
         }
 
         protected override void MapArguments(CommandArgumentCollection arguments)

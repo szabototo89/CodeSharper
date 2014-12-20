@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class ObjectHelper
+    public static class ObjectExtensions
     {
         public static T With<T>(this T element, Action<T> withStatement)
         {
@@ -36,13 +36,23 @@ namespace CodeSharper.Core.Utilities
         {
             return that is T;
         }
+        public static Boolean Is<T>(this Object that, Func<T, Object> trueCase)
+        {
+            var result = that is T;
+
+            if (result)
+                trueCase((T)that);
+
+            return result;
+        }
+
 
         public static T As<T>(this Object that) where T : class
         {
             return that as T;
         }
 
-        public static T To<T>(this Object that)
+        public static T Cast<T>(this Object that)
         {
             return (T)that;
         }

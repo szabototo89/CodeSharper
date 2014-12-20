@@ -67,7 +67,7 @@ namespace CodeSharper.Tests.Core.Utilities
         public void SafeShouldBeAbleToInvokeSafelyEveryTypeOfObject()
         {
             // Given
-            GeneralObjectMocks.Person underTest = null;
+            TypeMocks.Person underTest = null;
 
             // When
             var result = underTest.Safe();
@@ -82,7 +82,7 @@ namespace CodeSharper.Tests.Core.Utilities
         public void SafeShouldReturnItsValueIfItIsNotNull()
         {
             // Given
-            var underTest = new GeneralObjectMocks.Person() { Name = "John Doe", Age = 34 };
+            var underTest = new TypeMocks.Person() { Name = "John Doe", Age = 34 };
 
             // When
             var result = underTest.Safe();
@@ -97,22 +97,22 @@ namespace CodeSharper.Tests.Core.Utilities
         public void SafeOrDefaultShouldReturnDefaultValueIfObjectIsNull()
         {
             // Given
-            GeneralObjectMocks.Person underTest = null;
+            TypeMocks.Person underTest = null;
 
             // When
-            var result = underTest.SafeOrDefault(GeneralObjectMocks.Persons.JohnDoe);
+            var result = underTest.SafeOrDefault(TypeMocks.Persons.JohnDoe);
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Name, Is.EqualTo(GeneralObjectMocks.Persons.JohnDoe.Name));
-            Assert.That(result.Age, Is.EqualTo(GeneralObjectMocks.Persons.JohnDoe.Age));
+            Assert.That(result.Name, Is.EqualTo(TypeMocks.Persons.JohnDoe.Name));
+            Assert.That(result.Age, Is.EqualTo(TypeMocks.Persons.JohnDoe.Age));
         }
 
         [Test(Description = "With should able to change value state")]
         public void WithShouldAbleToChangeValueState()
         {
             // Given
-            var underTest = new GeneralObjectMocks.Person();
+            var underTest = new TypeMocks.Person();
 
             // When
             var result = underTest.With(person => {

@@ -5,7 +5,7 @@ using CodeSharper.Core.Common.ConstraintChecking;
 
 namespace CodeSharper.Core.Utilities
 {
-    public static class StringHelper
+    public static class StringExtensions
     {
         private static String _TransformWords(this String text, Func<IEnumerable<String>, IEnumerable<String>> transform)
         {
@@ -28,6 +28,16 @@ namespace CodeSharper.Core.Utilities
         public static String FormatString(this String format, params Object[] parameters)
         {
             return String.Format(format, parameters);
+        }
+
+        public static TEnum ToEnum<TEnum>(this String value) where TEnum : struct
+        {
+            TEnum result;
+
+            if (!Enum.TryParse(value, out result))
+                ThrowHelper.ThrowException<InvalidOperationException>();
+
+            return result;
         }
     }
 }
