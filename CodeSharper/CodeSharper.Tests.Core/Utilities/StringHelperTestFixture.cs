@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Tests.Core.Mocks;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Utilities
@@ -13,7 +14,6 @@ namespace CodeSharper.Tests.Core.Utilities
     [TestFixture]
     internal class StringHelperTestFixture : TestFixtureBase
     {
-        [Test]
         [Test(Description = "Format method should able to format string values")]
         public void FormatMethodShouldAbleToFormatStringValues()
         {

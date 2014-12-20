@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common.ControlFlow;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using Ninject;
 using Ninject.Parameters;
 using Ninject.Extensions.Conventions;

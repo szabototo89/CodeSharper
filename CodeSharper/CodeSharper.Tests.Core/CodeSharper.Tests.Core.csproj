@@ -62,7 +62,6 @@
     <Compile Include="Common\ControlFlowFactoryTestFixture.cs" />
     <Compile Include="Common\StandardControlFlowTestFixture.cs" />
     <Compile Include="Common\ExecutorTestFixture.cs" />
-    <Compile Include="Common\TestFixtureBase.cs" />
     <Compile Include="Mocks\TypeMocks.cs" />
     <Compile Include="TestHelpers\TestFixtureBase.cs" />
     <Compile Include="Utilities\ObjectHelperTestFixture.cs" />
