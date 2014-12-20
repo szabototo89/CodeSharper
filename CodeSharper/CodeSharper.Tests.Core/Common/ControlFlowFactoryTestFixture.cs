@@ -37,7 +37,7 @@ namespace CodeSharper.Tests.Core.Common
             var underTest = new StandardControlFlowFactory();
 
             // When
-            var result = underTest.Parse(commandCall);
+            var result = underTest.CreateControlFlow(commandCall);
 
             // Then
             Assert.That(result, Is.Not.Null);
