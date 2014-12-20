@@ -1,12 +1,13 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using CodeSharper.Core.Common.Values;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
-    internal class ArgumentsTestFixture
+    internal class ArgumentsTestFixture : TestFixtureBase
     {
         [Test]
         public void ArgumentValueShouldBeInitializedByValue()

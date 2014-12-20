@@ -77,7 +77,7 @@ namespace CodeSharper.Tests.Core.Common
 
             CheckRunnableWithMultipleValues(
                 argument(), new IdentityRunnable());
-            
+
             CheckRunnableWithMultipleValues(
                 argument(), new FilterTextByLineRunnable(0, " "));
 

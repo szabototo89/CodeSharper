@@ -3,19 +3,14 @@ using System.Linq;
 using System.Security.AccessControl;
 using CodeSharper.Core.Commands;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Utilities
 {
     [TestFixture]
-    internal class JsonCommandDescriptorParserTestFixture
+    internal class JsonCommandDescriptorParserTestFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup() { }
-
-        [TearDown]
-        public void Teardown() { }
-
         [Test]
         public void JsonCommandDescriptorParserShouldBeAbleToParseJsonFile()
         {

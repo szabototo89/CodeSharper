@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.TextTransformationTests

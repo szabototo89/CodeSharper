@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Tests.Core.Mocks;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Utilities
 {
     [TestFixture]
-    internal class ObjectHelperTestFixture
+    internal class ObjectHelperTestFixture : TestFixtureBase
     {
         [Test]
         public void EveryObjectShouldAbleToConvertToArray()

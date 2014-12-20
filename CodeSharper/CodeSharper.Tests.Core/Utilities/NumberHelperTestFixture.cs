@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Utilities
 {
     [TestFixture]
-    class NumberHelperTestFixture
+    internal class NumberHelperTestFixture : TestFixtureBase
     {
         [TestCase(124)]
         [TestCase(1000)]

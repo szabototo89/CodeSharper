@@ -7,6 +7,7 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
@@ -14,14 +15,8 @@ using NUnit.Framework.Constraints;
 namespace CodeSharper.Tests.Core.CommandManager
 {
     [TestFixture]
-    internal class StandardCommandManagerTestFixture
+    internal class StandardCommandManagerTestFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup() { }
-
-        [TearDown]
-        public void Teardown() { }
-
         [Test]
         public void StandardCommandManagerShouldAbleToRegisterCommands()
         {

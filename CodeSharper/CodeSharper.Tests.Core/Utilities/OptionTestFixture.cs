@@ -4,19 +4,14 @@ using System.Reflection;
 using System.Xml.Schema;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Utilities
 {
     [TestFixture]
-    internal class OptionTestFixture
+    internal class OptionTestFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup() { }
-
-        [TearDown]
-        public void Teardown() { }
-
         [Test(Description = "Option should be able to contain value")]
         public void OptionShouldBeAbleToContainValue()
         {

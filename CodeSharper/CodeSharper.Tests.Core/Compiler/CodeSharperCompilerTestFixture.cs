@@ -5,25 +5,14 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Languages.Compilers;
 using CodeSharper.Languages.Compilers.CodeSharper;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Compiler
 {
     [TestFixture]
-    internal class CodeSharperCompilerTestFixture
+    internal class CodeSharperCompilerTestFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup()
-        {
-            // TODO: (optional) not implemented
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            // TODO: (optional) not implemented
-        }
-
         [Test(Description = "CodeSharperCompiler should parse command without argument")]
         public void CodeSharperCompilerShouldParseCommandWithoutArgument()
         {

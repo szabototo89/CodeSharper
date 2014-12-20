@@ -21,7 +21,7 @@ using NUnit.Framework.Constraints;
 namespace CodeSharper.Tests.Core.Common
 {
     [TestFixture]
-    internal class ExecutorTestFixture
+    internal class ExecutorTestFixture : TestFixtureBase
     {
         [Test(Description = "SimpleValueArgumentWrapper should convert any value to value argument")]
         public void SimpleValueArgumentWrapperShouldConvertAnyValueToValueArgument()

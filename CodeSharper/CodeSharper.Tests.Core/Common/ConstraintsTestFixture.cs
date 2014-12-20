@@ -5,12 +5,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common.ConstraintChecking;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
 {
     [TestFixture]
-    internal class ConstraintsTestFixture
+    internal class ConstraintsTestFixture : TestFixtureBase
     {
         [Test(Description = "Constraints should check NullReference of a parameter")]
         public void ConstraintsShouldCheckNullReferenceOfAParameter()
@@ -249,8 +250,7 @@ namespace CodeSharper.Tests.Core.Common
             var value = 10;
 
             // When
-            TestDelegate test = () =>
-            {
+            TestDelegate test = () => {
                 Constraints
                     .Argument(() => value)
                         .Evaluate(v => v % 2 == 0, "text message");

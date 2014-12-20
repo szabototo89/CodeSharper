@@ -1,18 +1,19 @@
 using System;
 using System.Linq;
 using CodeSharper.Core.Texts;
+using CodeSharper.Tests.Core.TestHelpers;
 using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
-    internal class TextDocumentTestFixture
+    internal class TextDocumentTestFixture : TestFixtureBase
     {
         private TextDocument UnderTest { get; set; }
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             UnderTest = new TextDocument("Hello World!");
         }

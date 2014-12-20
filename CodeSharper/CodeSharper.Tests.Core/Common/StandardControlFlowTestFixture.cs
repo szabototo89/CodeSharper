@@ -21,7 +21,7 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Common
 {
     [TestFixture]
-    internal class StandardControlFlowTestFixture
+    internal class StandardControlFlowTestFixture : TestFixtureBase
     {
         private Mock<ICommandManager> _commandManagerMock;
 

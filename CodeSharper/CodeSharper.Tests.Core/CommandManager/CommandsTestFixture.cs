@@ -9,6 +9,7 @@ using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables.StringTransformation;
 using CodeSharper.Core.Common.Values;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.Core.TestHelpers;
 using Moq;
 using Ninject;
 using NUnit.Framework;
@@ -16,12 +17,12 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.CommandManager
 {
     [TestFixture]
-    internal class CommandsTestFixture
+    internal class CommandsTestFixture : TestFixtureBase
     {
         private StandardKernel Kernel { get; set; }
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             Kernel = new StandardKernel();
             Kernel.Bind<ArgumentDescriptorBuilder>().ToSelf();

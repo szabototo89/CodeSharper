@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core.Common
         public StandardKernel Kernel { get; private set; }
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             Kernel = new StandardKernel();
             Kernel.Bind<TextDocument>().ToConstant(new TextDocument("Hello World!"));
@@ -34,7 +34,7 @@ namespace CodeSharper.Tests.Core.Common
         }
 
         [TearDown]
-        public void Teardown()
+        public override void Teardown()
         {
             if (!Kernel.IsDisposed)
                 Kernel.Dispose();
@@ -82,7 +82,7 @@ namespace CodeSharper.Tests.Core.Common
             var result = underTest.Run(parameter);
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] {10, 10, 10}));
+            Assert.That(result, Is.EquivalentTo(new[] { 10, 10, 10 }));
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace CodeSharper.Tests.Core.Common
             // Then
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.Not.Empty);
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] {"a", "b", "c", "d"}));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "a", "b", "c", "d" }));
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace CodeSharper.Tests.Core.Common
         {
             // Given
             var underTest = RunnableManager.Instance;
-            var runnableType = typeof (FindTextRunnable);
+            var runnableType = typeof(FindTextRunnable);
             underTest.Register(runnableType);
 
             // When
@@ -157,7 +157,7 @@ namespace CodeSharper.Tests.Core.Common
             var result = underTest.Run(textRange);
 
             // Then
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] {"2", "4", "6"}));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "2", "4", "6" }));
         }
 
         [Test]
@@ -172,7 +172,7 @@ namespace CodeSharper.Tests.Core.Common
             var result = underTest.Run(textRange);
 
             // Then
-            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] {"1", "3", "5"}));
+            Assert.That(result.Select(range => range.Text), Is.EquivalentTo(new[] { "1", "3", "5" }));
         }
 
         [Test]

@@ -2,19 +2,14 @@
 using CodeSharper.Core.Commands;
 using CodeSharper.Core.Commands.CommandFactories;
 using CodeSharper.Tests.Core.Mocks;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Common
 {
     [TestFixture]
-    internal class AutoCommandFactoryTestFixture
+    internal class AutoCommandFactoryTestFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup() { }
-
-        [TearDown]
-        public void Teardown() { }
-
         [Test(Description = "AutoCommandFactory should be able to bind arguments automatically")]
         public void AutoCommandFactoryShouldBeAbleToBindArgumentsAutomatically()
         {

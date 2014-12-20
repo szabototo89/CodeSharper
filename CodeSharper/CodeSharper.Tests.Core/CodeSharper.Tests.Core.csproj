@@ -59,6 +59,7 @@
     <Compile Include="Common\StandardControlFlowTestFixture.cs" />
     <Compile Include="Common\ExecutorTestFixture.cs" />
     <Compile Include="Mocks\GeneralObjectMocks.cs" />
+    <Compile Include="TestHelpers\TestFixtureBase.cs" />
     <Compile Include="Utilities\ObjectHelperTestFixture.cs" />
     <Compile Include="Utilities\NumberHelperTestFixture.cs" />
     <Compile Include="Common\RunnableTestFixture.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Texts\ArgumentTestFixture.cs" />
     <Compile Include="Texts\TextDocumentTestFixture.cs" />
     <Compile Include="Texts\TextRangeTestFixture.cs" />
-    <Compile Include="TextTestFixtureBase.cs" />
+    <Compile Include="TestHelpers\TextTestFixtureBase.cs" />
     <Compile Include="TextTransformationTests\CommonTextTransformationsTests.cs" />
     <Compile Include="TestHelpers\TestHelper.cs" />
     <Compile Include="Utilities\JsonCommandDescriptorParserTestFixture.cs" />

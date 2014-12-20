@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Linq;
 using CodeSharper.Core.Texts;
+using CodeSharper.Tests.Core.TestHelpers;
 using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
-    public class TextRangeTestFixture
+    internal class TextRangeTestFixture : TestFixtureBase
     {
         private TextDocument TextDocument;
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             TextDocument = new TextDocument("Hello World!");
         }
@@ -25,16 +26,14 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = new TextDocument(text).TextRange;
 
             // When
-            var result = new
-            {
+            var result = new {
                 Start = underTest.Start,
                 Stop = underTest.Stop,
                 Length = underTest.Length
             };
 
             // Then
-            Assert.That(result, Is.EqualTo(new
-            {
+            Assert.That(result, Is.EqualTo(new {
                 Start = 0,
                 Stop = text.Length,
                 Length = text.Length

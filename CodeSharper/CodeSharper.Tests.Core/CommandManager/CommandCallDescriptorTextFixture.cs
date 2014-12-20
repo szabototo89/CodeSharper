@@ -5,19 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime;
 using CodeSharper.Core.Commands;
+using CodeSharper.Tests.Core.TestHelpers;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.CommandManager
 {
     [TestFixture]
-    internal class CommandCallDescriptorTextFixture
+    internal class CommandCallDescriptorTextFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup() { }
-
-        [TearDown]
-        public void Teardown() { }
-
         [Test]
         public void CommandCallDescriptorShouldHaveCommandNameAndParameterValueAndParameterName()
         {
