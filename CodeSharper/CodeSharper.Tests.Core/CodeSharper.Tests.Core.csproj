@@ -60,6 +60,7 @@
     <Compile Include="Common\AutoCommandFactoryTestFixture.cs" />
     <Compile Include="Common\ConstraintsTestFixture.cs" />
     <Compile Include="Common\ControlFlowFactoryTestFixture.cs" />
+    <Compile Include="Common\ControlFlow\CommandCallControlFlowTestFixture.cs" />
     <Compile Include="Common\StandardControlFlowTestFixture.cs" />
     <Compile Include="Common\ExecutorTestFixture.cs" />
     <Compile Include="Mocks\TypeMocks.cs" />
