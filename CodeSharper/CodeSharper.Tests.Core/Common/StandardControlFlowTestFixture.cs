@@ -188,8 +188,8 @@ namespace CodeSharper.Tests.Core.Common
             Assert.That(result.Value, Is.EqualTo(false));
         }
 
-        [Test(Description = "StandardControlFlow with this command should return added value of numbers")]
-        public void StandardControlFlowWithThisCommandShouldReturnAddedValueOfNumbers()
+        [Test(Description = "StandardControlFlow should return added value of numbers when parse this command")]
+        public void StandardControlFlowShouldReturnAddedValueOfNumbersWhenParseThisCommand()
         {
             // Given
             var compiler = new CodeSharperCompiler();
