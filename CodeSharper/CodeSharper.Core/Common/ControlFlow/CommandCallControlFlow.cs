@@ -16,13 +16,19 @@ namespace CodeSharper.Core.Common.ControlFlow
         public IExecutor Executor { get; private set; }
         public ICommand Command { get; private set; }
 
-        public CommandCallControlFlow(IExecutor executor, ICommand command)
+        public CommandCallControlFlow(ICommand command, IExecutor executor)
         {
             Constraints.NotNull(() => executor);
             Constraints.NotNull(() => command);
 
             Executor = executor;
             Command = command;
+        }
+
+        public CommandCallControlFlow(ICommand command)
+            : this(command, null)
+        {
+            
         }
 
         public Argument Execute(Argument parameter)
