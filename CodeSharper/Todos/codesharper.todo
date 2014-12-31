@@ -19,9 +19,9 @@
        kernel.Bind<ICommandManager>().To<StandardCommandManager>(); // in Setup() method
        var underTest = new StandardControlFlow(kernel.Get<ICommandManager>(), ExecutorMocks.SimpleExecutor<Object>()); // in current test
  
- ☐ Decouple StandardControlFlow to two different classes: ControlFlowFactory and ControlFlow. 
-   
- ☐ Update JsonCommandDescriptor parser to handle arguments like this: 
+ ☐ @high Decouple StandardControlFlow to two different classes: ControlFlowFactory and ControlFlow. 
+
+ ☐ @low Update JsonCommandDescriptor parser to handle arguments like this: 
    {
         "name": "Insert TextRange Command",
         "command-names": [ "insert", "insert-text-range" ],
@@ -37,6 +37,13 @@
         }]
    }
 
+   ☐ @low Decouple actual source and testing code. Move source code to /src folder and tests to /test folder.
+     This could be a better solution to maintain this code base
 
-
+   ☐ @low Find a proper naming convention for unit tests:
+     - Actual naming convention: [Class name]Should[Verb]
+       - This version is not the most convinient way to express.
+     - Recommendations for naming convention
+       - 7 Popular Unit Test Naming Conventions [http://java.dzone.com/articles/7-popular-unit-test-naming]
+       - Naming standards for unit tests by Roy Osherove [http://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html]
 

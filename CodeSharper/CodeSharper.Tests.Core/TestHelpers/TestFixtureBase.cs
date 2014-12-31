@@ -30,6 +30,9 @@ namespace CodeSharper.Tests.Core.TestHelpers
         public virtual void Setup() { }
 
         [TearDown]
-        public virtual void Teardown() { }
+        public virtual void Teardown()
+        {
+            Dispose();
+        }
     }
 }

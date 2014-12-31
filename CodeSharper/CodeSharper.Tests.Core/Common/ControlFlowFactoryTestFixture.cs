@@ -17,8 +17,7 @@ namespace CodeSharper.Tests.Core.Common
     [TestFixture]
     internal class ControlFlowFactoryTestFixture : TestFixtureBase
     {
-        [SetUp]
-        public void Setup()
+        public override void Setup()
         {
             Kernel.Bind<SingleCommandCall>().ToSelf();
             /*Kernel.Bind(
@@ -30,14 +29,8 @@ namespace CodeSharper.Tests.Core.Common
             Kernel.Bind<ICommandManager>().To<StandardCommandManager>();
         }
 
-        [TearDown]
-        public void Teardown()
-        {
-            this.Dispose();
-        }
-
-        [Test]
-        public void StandardControlFlowFactoryShouldAbleToParseCommandCallAndBuildAnControlFlowFromIt()
+        [Test(Description = "StandardControlFlowFactory should able to parse command call and build a control flow from it")]
+        public void StandardControlFlowFactoryShouldAbleToParseCommandCallAndBuildAControlFlowFromIt()
         {
             // Given
             ICommandCall commandCall = Kernel.Get<SingleCommandCall>(
