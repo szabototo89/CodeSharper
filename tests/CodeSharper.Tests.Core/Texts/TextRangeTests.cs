@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using CodeSharper.Core.Texts;
 using Moq;
 using NUnit.Framework;
@@ -50,8 +51,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void Dispose_ShouldUnregisterTextRangeInTextDocument_WhenItIsCalled()
         {
             // Given
-            var textDocumentMock = new Mock<ITextDocument>();
-            textDocumentMock.SetupAllProperties();
+            var textDocumentMock = MakeTextDocumentMock("Hello World!");
 
             IDisposable underTest = new TextRange(0, 5, textDocumentMock.Object);
 
@@ -62,6 +62,17 @@ namespace CodeSharper.Tests.Core.Texts
             textDocumentMock
                 .Verify(document => document.Unregister(It.Is<TextRange>(value => Equals(value, underTest))),
                         Times.Once());
+        }
+
+        private static Mock<ITextDocument> MakeTextDocumentMock(String text)
+        {
+            var mock = new Mock<ITextDocument>();
+            mock.SetupAllProperties();
+
+            mock.SetupGet(document => document.Text)
+                .Returns(new StringBuilder(text));
+
+            return mock;
         }
     }
 }

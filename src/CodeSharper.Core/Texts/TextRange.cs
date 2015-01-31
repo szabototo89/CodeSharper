@@ -39,17 +39,15 @@ namespace CodeSharper.Core.Texts
         /// <param name="textDocument">Text document reference of TextRange.</param>
         internal TextRange(Int32 start, Int32 stop, ITextDocument textDocument)
         {
-            Assume.NotNull(textDocument, "textDocument");
             Assume.IsTrue(start <= stop, "Start must be less than stop!");
             Assume.IsTrue(start >= 0, "Start must be positive or zero!");
+            Assume.NotNull(textDocument, "textDocument");
 
             Start = start;
             Stop = stop;
             Length = stop - start;
 
             TextDocument = textDocument;
-            TextDocument.Register(this);
-
             Text = CreateTextFromTextDocument(start, stop, TextDocument);
         }
 
@@ -58,7 +56,7 @@ namespace CodeSharper.Core.Texts
             Assume.IsTrue(start <= stop, "Start must be less than stop!");
             Assume.NotNull(textDocument, "textDocument");
 
-            return TextDocument.Text.ToString(start, stop);
+            return TextDocument.Text.ToString(start, Length);
         }
 
         #region Equality members of TextRange

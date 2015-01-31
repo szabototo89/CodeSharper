@@ -1,4 +1,5 @@
-﻿using CodeSharper.Core.Texts;
+﻿using System;
+using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Texts
@@ -32,6 +33,20 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             Assert.That(result, Has.Member(underTest.TextRange));
+        }
+
+        [Test(Description = "CreateTextRange should instantiate new TextRange when start and stop values are passed")]
+        public void CreateTextRange_ShouldInstantiateNewTextRange_WhenStartAndStopValuesArePassed()
+        {
+            // Given
+            String text = "Hello World!";
+            var underTest = new TextDocument(text);
+
+            // When
+            var result = underTest.CreateTextRange(1, 5);
+
+            // Then
+            Assert.That(result, Is.EqualTo(new TextRange(1, 5, underTest)));
         }
     }
 }

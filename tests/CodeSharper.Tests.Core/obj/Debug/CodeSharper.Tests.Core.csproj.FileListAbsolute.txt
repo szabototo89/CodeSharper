@@ -18,7 +18,6 @@ e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Code
 e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Core.pdb
 e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Tests.pdb
 e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\Moq.xml
-e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\nunit.framework.xml
 e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\obj\Debug\CodeSharper.Tests.Core.csprojResolveAssemblyReference.cache
 e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\obj\Debug\CodeSharper.Tests.Core.dll
 e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\CodeSharper.Tests.Core\obj\Debug\CodeSharper.Tests.Core.pdb

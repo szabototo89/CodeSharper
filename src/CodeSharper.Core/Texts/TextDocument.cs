@@ -37,7 +37,7 @@ namespace CodeSharper.Core.Texts
             _textRanges = new List<TextRange>();
 
             Text = new StringBuilder(text);
-            TextRange = new TextRange(0, text.Length, this);
+            TextRange = CreateTextRange(0, Text.Length);
         }
 
         /// <summary>
@@ -56,6 +56,18 @@ namespace CodeSharper.Core.Texts
         {
             Assume.NotNull(textRange, "textRange");
             _textRanges.Remove(textRange);
+        }
+
+        public TextRange CreateTextRange(Int32 start, Int32 stop)
+        {
+            Assume.IsTrue(start <= stop, "start must be smaller than stop!");
+            Assume.IsTrue(start >= 0, "start must be a positive or zero!");
+            Assume.IsTrue(stop - start <= Text.Length, "stop cannot be larger than text length!");
+
+            var textRange = new TextRange(start, stop, this);
+            Register(textRange);
+
+            return textRange;
         }
     }
 }
