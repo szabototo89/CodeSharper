@@ -3,3 +3,8 @@ E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\src\CodeSharper.Cor
 E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\src\CodeSharper.Core\obj\Debug\CodeSharper.Core.csprojResolveAssemblyReference.cache
 E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\src\CodeSharper.Core\obj\Debug\CodeSharper.Core.dll
 E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\src\CodeSharper.Core\obj\Debug\CodeSharper.Core.pdb
+e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\src\CodeSharper.Core\bin\Debug\CodeSharper.Core.dll
+e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\src\CodeSharper.Core\bin\Debug\CodeSharper.Core.pdb
+e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\src\CodeSharper.Core\obj\Debug\CodeSharper.Core.csprojResolveAssemblyReference.cache
+e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\src\CodeSharper.Core\obj\Debug\CodeSharper.Core.dll
+e:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\src\CodeSharper.Core\obj\Debug\CodeSharper.Core.pdb

@@ -5,7 +5,7 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Texts
 {
-    public class TextDocument
+    public class TextDocument : ITextDocument
     {
         private readonly List<TextRange> _textRanges;
 
@@ -43,10 +43,19 @@ namespace CodeSharper.Core.Texts
         /// <summary>
         /// Registers the specified text range of TextDocument. 
         /// </summary>
-        internal void Register(TextRange textRange)
+        public void Register(TextRange textRange)
         {
             Assume.NotNull(textRange, "textRange");
             _textRanges.Add(textRange);
+        }
+
+        /// <summary>
+        /// Unregisters the specified text range in TextDocument
+        /// </summary>
+        public void Unregister(TextRange textRange)
+        {
+            Assume.NotNull(textRange, "textRange");
+            _textRanges.Remove(textRange);
         }
     }
 }

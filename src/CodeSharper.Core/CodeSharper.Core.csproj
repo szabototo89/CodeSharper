@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorHandling\Assume.cs" />
+    <Compile Include="Texts\ITextDocument.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts\TextDocument.cs" />

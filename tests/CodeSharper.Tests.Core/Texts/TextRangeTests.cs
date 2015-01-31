@@ -1,4 +1,6 @@
-﻿using CodeSharper.Core.Texts;
+﻿using System;
+using CodeSharper.Core.Texts;
+using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Texts
@@ -42,6 +44,24 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             Assert.That(result, Is.EqualTo(5));
+        }
+
+        [Test(Description = "Dispose should unregister TextRange in TextDocument text document when it is called")]
+        public void Dispose_ShouldUnregisterTextRangeInTextDocument_WhenItIsCalled()
+        {
+            // Given
+            var textDocumentMock = new Mock<ITextDocument>();
+            textDocumentMock.SetupAllProperties();
+
+            IDisposable underTest = new TextRange(0, 5, textDocumentMock.Object);
+
+            // When
+            underTest.Dispose();
+
+            // Then
+            textDocumentMock
+                .Verify(document => document.Unregister(It.Is<TextRange>(value => Equals(value, underTest))),
+                        Times.Once());
         }
     }
 }

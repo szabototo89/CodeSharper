@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.Design.Serialization;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Texts
 {
-    public class TextRange : IEquatable<TextRange>
+    public class TextRange : IEquatable<TextRange>, IDisposable
     {
         /// <summary>
         /// Gets start position of text range
@@ -28,7 +29,7 @@ namespace CodeSharper.Core.Texts
         /// <summary>
         /// Gets or sets the text document of text range
         /// </summary>
-        public TextDocument TextDocument { get; protected set; }
+        public ITextDocument TextDocument { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextRange" /> class.
@@ -36,10 +37,11 @@ namespace CodeSharper.Core.Texts
         /// <param name="start">Start of TextRange.</param>
         /// <param name="stop">Stop of TextRange.</param>
         /// <param name="textDocument">Text document reference of TextRange.</param>
-        internal TextRange(Int32 start, Int32 stop, TextDocument textDocument)
+        internal TextRange(Int32 start, Int32 stop, ITextDocument textDocument)
         {
             Assume.NotNull(textDocument, "textDocument");
             Assume.IsTrue(start <= stop, "Start must be less than stop!");
+            Assume.IsTrue(start >= 0, "Start must be positive or zero!");
 
             Start = start;
             Stop = stop;
@@ -48,7 +50,15 @@ namespace CodeSharper.Core.Texts
             TextDocument = textDocument;
             TextDocument.Register(this);
 
-            Text = TextDocument.Text.ToString(start, stop);
+            Text = CreateTextFromTextDocument(start, stop, TextDocument);
+        }
+
+        private string CreateTextFromTextDocument(int start, int stop, ITextDocument textDocument)
+        {
+            Assume.IsTrue(start <= stop, "Start must be less than stop!");
+            Assume.NotNull(textDocument, "textDocument");
+
+            return TextDocument.Text.ToString(start, stop);
         }
 
         #region Equality members of TextRange
@@ -96,11 +106,13 @@ namespace CodeSharper.Core.Texts
             }
         }
 
-        #endregion
-
-        #region Helper methods for calculating positions
-
-
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            TextDocument.Unregister(this);
+        }
 
         #endregion
     }
