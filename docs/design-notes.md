@@ -15,9 +15,10 @@ Text ranges are the essential data types in CodeSharper. They represent a higher
 
 ### TextRange features
 
-- **remove selected text range** from text document (source)
-- **update/replace text** of range in text document (source)
-- **attach to/detach from** (like a node in *HTML*) text document
+1. **remove selected text range** from text document (source)
+2. **update/replace text** of range in text document (source)
+3. **create substring** of text range in text document 
+4. **attach to/detach from** (like a node in *HTML*) text document
 
 ## Components of CodeSharper
 

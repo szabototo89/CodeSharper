@@ -17,6 +17,20 @@ namespace CodeSharper.Tests.Core.Texts
             TextDocument = new TextDocument("Hello World!");
         }
 
+        #region Helper methods for testing
+
+        private static Mock<ITextDocument> MakeTextDocumentMock(String text)
+        {
+            var mock = new Mock<ITextDocument>();
+            mock.SetupAllProperties();
+
+            mock.SetupGet(document => document.Text).Returns(new StringBuilder(text));
+
+            return mock;
+        }
+
+        #endregion
+
         [Test(Description = "Constructor should take start position and text when it is called")]
         public void Constructor_ShouldTakeStartPositionAndText_WhenItIsCalled()
         {
@@ -64,15 +78,17 @@ namespace CodeSharper.Tests.Core.Texts
                         Times.Once());
         }
 
-        private static Mock<ITextDocument> MakeTextDocumentMock(String text)
+        [Test(Description = "SubRange should instantiate sub text-range when proper parameters are passed")]
+        public void SubRange_ShouldInstantiateSubTextRange_WhenProperParametersArePassed()
         {
-            var mock = new Mock<ITextDocument>();
-            mock.SetupAllProperties();
+            // Given
+            var underTest = TextDocument.CreateTextRange(1, 5);
 
-            mock.SetupGet(document => document.Text)
-                .Returns(new StringBuilder(text));
+            // When
+            var result = underTest.SubRange(0, 3, areRelativePositions: true);
 
-            return mock;
+            // Then
+
         }
     }
 }

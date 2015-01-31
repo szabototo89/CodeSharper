@@ -51,7 +51,7 @@ namespace CodeSharper.Core.Texts
             Text = CreateTextFromTextDocument(start, stop, TextDocument);
         }
 
-        private string CreateTextFromTextDocument(int start, int stop, ITextDocument textDocument)
+        private string CreateTextFromTextDocument(Int32 start, Int32 stop, ITextDocument textDocument)
         {
             Assume.IsTrue(start <= stop, "Start must be less than stop!");
             Assume.NotNull(textDocument, "textDocument");
@@ -113,6 +113,14 @@ namespace CodeSharper.Core.Texts
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns sub range of the object based on start and stop positions.
+        /// </summary>
+        public TextRange SubRange(Int32 start, Int32 stop, Boolean areRelativePositions = true)
+        {
+            Assume.IsTrue(start <= stop, "start must be smaller than stop!");
+        }
     }
 }
 
