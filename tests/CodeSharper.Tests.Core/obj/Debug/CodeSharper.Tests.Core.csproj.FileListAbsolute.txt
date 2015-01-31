@@ -1,0 +1,12 @@
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\obj\Debug\CodeSharper.Tests.Core.csprojResolveAssemblyReference.cache
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Tests.Core.dll
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Tests.Core.pdb
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Core.dll
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Core.pdb
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\nunit.framework.xml
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\obj\Debug\CodeSharper.Tests.Core.dll
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\obj\Debug\CodeSharper.Tests.Core.pdb
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\Moq.dll
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\Moq.xml
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Tests.dll
+E:\Development\Projects\C#\CodeSharper\re-master\CodeSharper\tests\CodeSharper.Tests.Core\bin\Debug\CodeSharper.Tests.pdb
