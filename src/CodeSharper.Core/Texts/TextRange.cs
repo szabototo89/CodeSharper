@@ -1,18 +1,21 @@
-﻿using System;
-using System.ComponentModel.Design.Serialization;
-using CodeSharper.Core.ErrorHandling;
+﻿using System.Collections.Generic;
 
 namespace CodeSharper.Core.Texts
 {
-    public class TextRange : IEquatable<TextRange>, IDisposable
+    using System;
+    using ErrorHandling;
+
+    public class TextRange : IEquatable<TextRange>, IHasChildren<TextRange>, IDisposable
     {
+        private readonly List<TextRange> _children;
+
         /// <summary>
-        /// Gets start position of text range
+        /// Gets or sets start position of text range
         /// </summary>
         public Int32 Start { get; protected set; }
 
         /// <summary>
-        /// Gets stop position of text range
+        /// Gets or sets stop position of text range
         /// </summary>
         public Int32 Stop { get; protected set; }
 
@@ -32,6 +35,14 @@ namespace CodeSharper.Core.Texts
         public ITextDocument TextDocument { get; protected set; }
 
         /// <summary>
+        /// Gets or sets children of text range
+        /// </summary>
+        public IEnumerable<TextRange> Children
+        {
+            get { return _children.AsReadOnly(); }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TextRange" /> class.
         /// </summary>
         /// <param name="start">Start of TextRange.</param>
@@ -46,6 +57,7 @@ namespace CodeSharper.Core.Texts
             Start = start;
             Stop = stop;
             Length = stop - start;
+            _children = new List<TextRange>();
 
             TextDocument = textDocument;
             Text = CreateTextFromTextDocument(start, stop, TextDocument);
@@ -99,7 +111,8 @@ namespace CodeSharper.Core.Texts
         /// <filterpriority>2</filterpriority>
         public override Int32 GetHashCode()
         {
-            unchecked {
+            unchecked
+            {
                 return (Start * 397) ^ (Text != null ? Text.GetHashCode() : 0);
             }
         }
@@ -120,7 +133,41 @@ namespace CodeSharper.Core.Texts
         public TextRange SubRange(Int32 start, Int32 stop, Boolean areRelativePositions = true)
         {
             Assume.IsTrue(start <= stop, "start must be smaller than stop!");
+
+            TextRange subRange = areRelativePositions
+                                    ? SubRangeWithRelativePositions(start, stop)
+                                    : SubRangeWithAbsolutePositions(start, stop);
+
+            AddSubRangeIntoChildren(subRange);
+
+            return subRange;
         }
+
+        private void AddSubRangeIntoChildren(TextRange subRange)
+        {
+            _children.Add(subRange);
+        }
+
+        #region Helper methods for creating subrange of text range
+
+        private TextRange SubRangeWithAbsolutePositions(Int32 start, Int32 stop)
+        {
+            Assume.IsTrue(Start <= start, "start is out of range!");
+            Assume.IsTrue(stop <= Stop, "stop is out of range!");
+
+            return new TextRange(start, stop, TextDocument);
+        }
+
+        private TextRange SubRangeWithRelativePositions(Int32 start, Int32 stop)
+        {
+            Assume.IsTrue(start >= 0, "start must be positive");
+            Assume.IsTrue(stop < Length, "stop cannot be greater than length of text range");
+
+            return new TextRange(Start + start, Start + stop, TextDocument);
+        }
+
+        #endregion
+
     }
 }
 

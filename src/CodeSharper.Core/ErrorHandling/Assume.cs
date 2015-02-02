@@ -15,5 +15,12 @@ namespace CodeSharper.Core.ErrorHandling
             if (!condition)
                 throw new Exception(message);
         }
+
+        public static void IsTrue(Boolean condition, Func<Exception> exception)
+        {
+            if (!condition)
+                throw exception();
+        }
+
     }
 }
