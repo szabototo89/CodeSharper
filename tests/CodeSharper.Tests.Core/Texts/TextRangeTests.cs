@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections;
 using System.Text;
 using CodeSharper.Core.Texts;
 using Moq;
@@ -75,7 +75,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             textDocumentMock
-                .Verify(document => document.Unregister(It.Is<TextRange>(value => Object.Equals(value, underTest))),
+                .Verify(document => document.Unregister(It.Is<TextRange>(value => Equals(value, underTest))),
                         Times.Once());
         }
 
@@ -83,10 +83,10 @@ namespace CodeSharper.Tests.Core.Texts
         public void SubRange_ShouldInstantiateSubTextRange_WhenRelativePositionsArePassed()
         {
             // Given
-            var underTest = TextDocument.CreateTextRange(1, 5);
+            var underTest = TextDocument.GetOrCreateTextRange(1, 5);
 
             // When
-            var result = underTest.SubRange(0, 3, areRelativePositions: true);
+            var result = underTest.SubRange(0, 3, TextPosition.Relative);
 
             // Then
             Assert.That(result.Text, Is.EqualTo("ell"));
@@ -97,10 +97,10 @@ namespace CodeSharper.Tests.Core.Texts
         public void SubRange_ShouldInstantiateSubText_WhenAbsolutePositionsArePassed()
         {
             // Given
-            var underTest = TextDocument.CreateTextRange(1, 5);
+            var underTest = TextDocument.GetOrCreateTextRange(1, 5);
 
             // When
-            var result = underTest.SubRange(1, 4, areRelativePositions: false);
+            var result = underTest.SubRange(1, 4, TextPosition.Absolute);
 
             // Then
             Assert.That(result.Text, Is.EqualTo("ell"));
@@ -111,10 +111,10 @@ namespace CodeSharper.Tests.Core.Texts
         public void SubRange_ShouldThrowException_WhenRelativePositionsAreNotInTheSpecifiedTextRange()
         {
             // Given
-            var underTest = TextDocument.CreateTextRange(1, 5);
+            var underTest = TextDocument.GetOrCreateTextRange(1, 5);
 
             // When
-            TestDelegate subRangeWithTooLargePositions = () => underTest.SubRange(1, 10, areRelativePositions: true);
+            TestDelegate subRangeWithTooLargePositions = () => underTest.SubRange(1, 10, TextPosition.Relative);
 
             // Then
             Assert.That(subRangeWithTooLargePositions, Throws.Exception);
@@ -124,10 +124,10 @@ namespace CodeSharper.Tests.Core.Texts
         public void SubRange_ShouldThrowAnException_WhenAbsolutePositionsAreNotInTheSpecifiedTextRange()
         {
             // Given
-            var underTest = TextDocument.CreateTextRange(1, 5);
+            var underTest = TextDocument.GetOrCreateTextRange(1, 5);
 
             // When
-            TestDelegate subRangeWithTooLargePositions = () => underTest.SubRange(1, 6, areRelativePositions: false);
+            TestDelegate subRangeWithTooLargePositions = () => underTest.SubRange(1, 6, TextPosition.Absolute);
 
             // Then
             Assert.That(subRangeWithTooLargePositions, Throws.Exception);
@@ -137,8 +137,8 @@ namespace CodeSharper.Tests.Core.Texts
         public void SubRange_ShouldAddSubRangeToItsChildrenCollection_WhenItIsCalledProperly()
         {
             // Given
-            var underTest = TextDocument.CreateTextRange(1, 5);
-            var subRange = underTest.SubRange(0, 3, areRelativePositions: true);
+            var underTest = TextDocument.GetOrCreateTextRange(1, 5);
+            var subRange = underTest.SubRange(0, 3, TextPosition.Relative);
 
             // When
             var result = underTest.Children;
@@ -151,7 +151,7 @@ namespace CodeSharper.Tests.Core.Texts
         public void SubRange_ShouldAddItsChildJustOnce_WhenSameTextRangesAreInitialized()
         {
             // Given
-            var underTest = TextDocument.CreateTextRange(1, 5);
+            var underTest = TextDocument.GetOrCreateTextRange(1, 6);
             var subRange = underTest.SubRange(0, 4);
 
             // When
@@ -159,6 +159,49 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             Assert.That(result, Is.SameAs(subRange));
+        }
+
+        [Test(Description = "UpdateText should change value of text range when it has no any child")]
+        public void UpdateText_ShouldChangeValueOfTextRange_WhenItHasNoAnyChild()
+        {
+            // Given
+            var underTest = TextDocument.TextRange;
+
+            // When
+            var result = underTest.UpdateText("Hi World!");
+
+            // Then
+            Assert.That(result, Is.SameAs(underTest));
+            Assert.That(result.Text, Is.EqualTo("Hi World!"));
+        }
+
+        [Test(Description = "UpdateText should change value of TextDocument when it has no any child and TextRange is the root")]
+        public void UpdateText_ShouldChangeValueOfTextDocument_WhenItHasNoAnyChildAndTextRangeIsTheRoot()
+        {
+            // Given
+            var underTest = TextDocument.TextRange;
+
+            // When
+            underTest.UpdateText("Hi World!");
+
+            // Then
+            Assert.That(TextDocument.Text.ToString(), Is.EqualTo("Hi World!"));
+        }
+
+        [Test(Description = "UpdateText should update its children when it has one child and text's length is the same")]
+        public void UpdateText_ShouldUpdateItsChild_WhenItHasOneChildAndTextsLengthIsTheSame()
+        {
+            // Given
+            var underTest = TextDocument.TextRange;
+            var subTextRange = underTest.SubRange(1, 11, TextPosition.Absolute);
+
+            // When
+            underTest.UpdateText("HELLO WORLD!");
+
+            // Then
+            Assert.That(subTextRange.Start, Is.EqualTo(1));
+            Assert.That(subTextRange.Stop, Is.EqualTo(11));
+            Assert.That(subTextRange.Text, Is.EqualTo("ELLO WORLD"));
         }
     }
 }

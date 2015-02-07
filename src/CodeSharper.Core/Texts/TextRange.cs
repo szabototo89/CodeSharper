@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
+using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Texts
 {
-    using System;
-    using ErrorHandling;
-
     public class TextRange : IEquatable<TextRange>, IHasChildren<TextRange>, IDisposable
     {
         private readonly List<TextRange> _children;
+
+        #region Public properties of text ranges
 
         /// <summary>
         /// Gets or sets start position of text range
@@ -27,7 +30,14 @@ namespace CodeSharper.Core.Texts
         /// <summary>
         /// Gets or sets the length of text
         /// </summary>
-        public Int32 Length { get; protected set; }
+        public Int32 Length
+        {
+            get
+            {
+                if (Text == null) return 0;
+                return Text.Length;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the text document of text range
@@ -41,6 +51,8 @@ namespace CodeSharper.Core.Texts
         {
             get { return _children.AsReadOnly(); }
         }
+
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextRange" /> class.
@@ -56,20 +68,23 @@ namespace CodeSharper.Core.Texts
 
             Start = start;
             Stop = stop;
-            Length = stop - start;
             _children = new List<TextRange>();
 
             TextDocument = textDocument;
-            Text = CreateTextFromTextDocument(start, stop, TextDocument);
+            Text = createTextFromTextDocument(start, stop, TextDocument);
         }
 
-        private string CreateTextFromTextDocument(Int32 start, Int32 stop, ITextDocument textDocument)
+        #region Helper methods for initializing text range
+
+        private string createTextFromTextDocument(Int32 start, Int32 stop, ITextDocument textDocument)
         {
             Assume.IsTrue(start <= stop, "Start must be less than stop!");
             Assume.NotNull(textDocument, "textDocument");
 
             return TextDocument.Text.ToString(start, Length);
         }
+
+        #endregion
 
         #region Equality members of TextRange
 
@@ -99,7 +114,7 @@ namespace CodeSharper.Core.Texts
         /// <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
         public override Boolean Equals(Object obj)
         {
-            return this.Equals(obj as TextRange);
+            return Equals(obj as TextRange);
         }
 
         /// <summary>
@@ -130,40 +145,84 @@ namespace CodeSharper.Core.Texts
         /// <summary>
         /// Returns sub range of the object based on start and stop positions.
         /// </summary>
-        public TextRange SubRange(Int32 start, Int32 stop, Boolean areRelativePositions = true)
+        public TextRange SubRange(Int32 start, Int32 stop, TextPosition position = TextPosition.Relative)
         {
             Assume.IsTrue(start <= stop, "start must be smaller than stop!");
 
-            TextRange subRange = areRelativePositions
-                                    ? SubRangeWithRelativePositions(start, stop)
-                                    : SubRangeWithAbsolutePositions(start, stop);
+            TextRange subRange = position == TextPosition.Relative
+                                    ? subRangeWithRelativePositions(start, stop)
+                                    : subRangeWithAbsolutePositions(start, stop);
 
-            AddSubRangeIntoChildren(subRange);
+            addSubRangeIntoChildren(subRange);
 
             return subRange;
         }
 
-        private void AddSubRangeIntoChildren(TextRange subRange)
+        #region Helper methods for creating subrange of text range
+
+        private void addSubRangeIntoChildren(TextRange subRange)
         {
             _children.Add(subRange);
         }
 
-        #region Helper methods for creating subrange of text range
-
-        private TextRange SubRangeWithAbsolutePositions(Int32 start, Int32 stop)
+        private TextRange subRangeWithAbsolutePositions(Int32 start, Int32 stop)
         {
             Assume.IsTrue(Start <= start, "start is out of range!");
             Assume.IsTrue(stop <= Stop, "stop is out of range!");
 
-            return new TextRange(start, stop, TextDocument);
+            return TextDocument.GetOrCreateTextRange(start, stop);
         }
 
-        private TextRange SubRangeWithRelativePositions(Int32 start, Int32 stop)
+        private TextRange subRangeWithRelativePositions(Int32 start, Int32 stop)
         {
             Assume.IsTrue(start >= 0, "start must be positive");
             Assume.IsTrue(stop < Length, "stop cannot be greater than length of text range");
 
-            return new TextRange(Start + start, Start + stop, TextDocument);
+            return TextDocument.GetOrCreateTextRange(Start + start, Start + stop);
+        }
+
+        #endregion
+
+        #region Helper methods for updating text in text range
+
+        /// <summary>
+        /// Updates text value of text range
+        /// </summary>
+        public TextRange UpdateText(String text)
+        {
+            Assume.NotNull(text, "text");
+
+            var old = new
+            {
+                Start = Start,
+                Stop = Stop
+            };
+
+            var isTextLengthChanged = Text.Length != text.Length;
+
+            Text = text;
+            Stop = text.Length;
+
+            TextDocument.UpdateText(
+                oldStart: old.Start,
+                oldStop: old.Stop,
+                updatedTextRange: this
+                );
+
+            if (!isTextLengthChanged)
+                updateChildrenText();
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            return this;
+        }
+
+        private void updateChildrenText()
+        {
+            foreach (var child in Children)
+                child.Text = createTextFromTextDocument(child.Start, child.Stop, TextDocument);
         }
 
         #endregion

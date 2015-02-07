@@ -35,7 +35,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Has.Member(underTest.TextRange));
         }
 
-        [Test(Description = "CreateTextRange should instantiate new TextRange when start and stop values are passed")]
+        [Test(Description = "GetOrCreateTextRange should instantiate new TextRange when start and stop values are passed")]
         public void CreateTextRange_ShouldInstantiateNewTextRange_WhenStartAndStopValuesArePassed()
         {
             // Given
@@ -43,7 +43,7 @@ namespace CodeSharper.Tests.Core.Texts
             var underTest = new TextDocument(text);
 
             // When
-            var result = underTest.CreateTextRange(1, 5);
+            var result = underTest.GetOrCreateTextRange(1, 5);
 
             // Then
             Assert.That(result, Is.EqualTo(new TextRange(1, 5, underTest)));

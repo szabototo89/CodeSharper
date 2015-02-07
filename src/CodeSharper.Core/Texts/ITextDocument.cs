@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace CodeSharper.Core.Texts
 {
@@ -18,5 +19,15 @@ namespace CodeSharper.Core.Texts
         /// Unregisters the specified text range in TextDocument
         /// </summary>
         void Unregister(TextRange textRange);
+
+        /// <summary>
+        /// Gets an existing or creates a new text range in text document
+        /// </summary>
+        TextRange GetOrCreateTextRange(Int32 start, Int32 stop);
+
+        /// <summary>
+        /// Updates the text of text document based on a specified text range
+        /// </summary>
+        TextDocument UpdateText(Int32 oldStart, Int32 oldStop, TextRange updatedTextRange);
     }
 }
