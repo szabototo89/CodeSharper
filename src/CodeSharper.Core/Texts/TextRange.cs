@@ -2,231 +2,130 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Texts
 {
-    public class TextRange : IEquatable<TextRange>, IHasChildren<TextRange>, IDisposable
+    public class TextRange : ILinkedStyle<TextRange>, IEquatable<TextRange>
     {
-        private readonly List<TextRange> _children;
-
-        #region Public properties of text ranges
+        /// <summary>
+        /// Gets or sets the start of text range
+        /// </summary>
+        public Int32 Start { get; protected internal set; }
 
         /// <summary>
-        /// Gets or sets start position of text range
+        /// Gets or sets the stop of text range
         /// </summary>
-        public Int32 Start { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets stop position of text range
-        /// </summary>
-        public Int32 Stop { get; protected set; }
-
-        /// <summary>
-        /// Gets value of text range
-        /// </summary>
-        public String Text { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the length of text
-        /// </summary>
-        public Int32 Length
-        {
-            get
-            {
-                if (Text == null) return 0;
-                return Text.Length;
-            }
-        }
+        public Int32 Stop { get; protected internal set; }
 
         /// <summary>
         /// Gets or sets the text document of text range
         /// </summary>
-        public ITextDocument TextDocument { get; protected set; }
+        public TextDocument TextDocument { get; protected set; }
 
         /// <summary>
-        /// Gets or sets children of text range
+        /// Gets the next element of object
         /// </summary>
-        public IEnumerable<TextRange> Children
+        public TextRange Next { get; protected internal set; }
+
+        /// <summary>
+        /// Gets the previous element of object
+        /// </summary>
+        public TextRange Previous { get; protected internal set; }
+
+        /// <summary>
+        /// Offsets position (start and stop) by specified value
+        /// </summary>
+        internal void OffsetBy(Int32 offset)
         {
-            get { return _children.AsReadOnly(); }
+            Start += offset;
+            Stop += offset;
         }
 
-        #endregion
+        #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextRange" /> class.
+        /// Initializes a new instance of the <see cref="TextRange"/> class.
         /// </summary>
-        /// <param name="start">Start of TextRange.</param>
-        /// <param name="stop">Stop of TextRange.</param>
-        /// <param name="textDocument">Text document reference of TextRange.</param>
-        internal TextRange(Int32 start, Int32 stop, ITextDocument textDocument)
+        internal TextRange(Int32 start, Int32 stop, TextDocument textDocument, TextRange previous = null,
+            TextRange next = null)
         {
-            Assume.IsTrue(start <= stop, "Start must be less than stop!");
-            Assume.IsTrue(start >= 0, "Start must be positive or zero!");
+            Assume.IsTrue(start >= 0, "start must be positive or zero!");
+            Assume.IsTrue(start <= stop, "start must be lesser than stop!");
             Assume.NotNull(textDocument, "textDocument");
 
             Start = start;
             Stop = stop;
-            _children = new List<TextRange>();
-
             TextDocument = textDocument;
-            Text = createTextFromTextDocument(start, stop, TextDocument);
-        }
 
-        #region Helper methods for initializing text range
-
-        private string createTextFromTextDocument(Int32 start, Int32 stop, ITextDocument textDocument)
-        {
-            Assume.IsTrue(start <= stop, "Start must be less than stop!");
-            Assume.NotNull(textDocument, "textDocument");
-
-            return TextDocument.Text.ToString(start, Length);
+            Previous = previous;
+            Next = next;
         }
 
         #endregion
 
-        #region Equality members of TextRange
+        #region Equality methods of TextRange
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        /// Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
         /// </summary>
-        /// <returns>
-        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
-        /// </returns>
-        /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(TextRange other)
-        {
-            if (ReferenceEquals(other, null)) return false;
-            if (ReferenceEquals(other, this)) return true;
-
-            return ReferenceEquals(TextDocument, other.TextDocument) &&
-                   Start.Equals(other.Start) &&
-                   Stop.Equals(other.Stop);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
-        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>
         /// true if the specified object  is equal to the current object; otherwise, false.
         /// </returns>
-        /// <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
         public override Boolean Equals(Object obj)
         {
             return Equals(obj as TextRange);
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type. 
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// </returns>
+        public Boolean Equals(TextRange other)
+        {
+            if (ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(other, this)) return true;
+
+            return Start.Equals(other.Start) &&
+                   Stop.Equals(other.Stop) &&
+                   TextDocument.Equals(other.TextDocument);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for a particular type.
         /// </summary>
         /// <returns>
-        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// A hash code for the current <see cref="T:System.Object" />.
         /// </returns>
-        /// <filterpriority>2</filterpriority>
         public override Int32 GetHashCode()
         {
             unchecked
             {
-                return (Start * 397) ^ (Text != null ? Text.GetHashCode() : 0);
+                var hashCode = Start;
+                hashCode = (hashCode * 397) ^ Stop;
+                hashCode = (hashCode * 397) ^ (TextDocument != null ? TextDocument.GetHashCode() : 0);
+                return hashCode;
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            TextDocument.Unregister(this);
-        }
-
         #endregion
 
         /// <summary>
-        /// Returns sub range of the object based on start and stop positions.
+        /// Returns a string that represents the current object.
         /// </summary>
-        public TextRange SubRange(Int32 start, Int32 stop, TextPosition position = TextPosition.Relative)
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override String ToString()
         {
-            Assume.IsTrue(start <= stop, "start must be smaller than stop!");
-
-            TextRange subRange = position == TextPosition.Relative
-                                    ? subRangeWithRelativePositions(start, stop)
-                                    : subRangeWithAbsolutePositions(start, stop);
-
-            addSubRangeIntoChildren(subRange);
-
-            return subRange;
+            return String.Format("TextRange({0}:{1})", Start, Stop);
         }
-
-        #region Helper methods for creating subrange of text range
-
-        private void addSubRangeIntoChildren(TextRange subRange)
-        {
-            _children.Add(subRange);
-        }
-
-        private TextRange subRangeWithAbsolutePositions(Int32 start, Int32 stop)
-        {
-            Assume.IsTrue(Start <= start, "start is out of range!");
-            Assume.IsTrue(stop <= Stop, "stop is out of range!");
-
-            return TextDocument.GetOrCreateTextRange(start, stop);
-        }
-
-        private TextRange subRangeWithRelativePositions(Int32 start, Int32 stop)
-        {
-            Assume.IsTrue(start >= 0, "start must be positive");
-            Assume.IsTrue(stop < Length, "stop cannot be greater than length of text range");
-
-            return TextDocument.GetOrCreateTextRange(Start + start, Start + stop);
-        }
-
-        #endregion
-
-        #region Helper methods for updating text in text range
-
-        /// <summary>
-        /// Updates text value of text range
-        /// </summary>
-        public TextRange UpdateText(String text)
-        {
-            Assume.NotNull(text, "text");
-
-            var old = new
-            {
-                Start = Start,
-                Stop = Stop
-            };
-
-            var isTextLengthChanged = Text.Length != text.Length;
-
-            Text = text;
-            Stop = text.Length;
-
-            TextDocument.UpdateText(
-                oldStart: old.Start,
-                oldStop: old.Stop,
-                updatedTextRange: this
-                );
-
-            if (!isTextLengthChanged)
-                updateChildrenText();
-            else
-            {
-                throw new NotImplementedException();
-            }
-
-            return this;
-        }
-
-        private void updateChildrenText()
-        {
-            foreach (var child in Children)
-                child.Text = createTextFromTextDocument(child.Start, child.Stop, TextDocument);
-        }
-
-        #endregion
-
     }
 }
 

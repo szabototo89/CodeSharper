@@ -1,52 +1,208 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Utilities;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace CodeSharper.Tests.Core.Texts
 {
     [TestFixture]
     internal class TextDocumentTests : TestFixtureBase
     {
-        [Test(Description = "Constructor should create TextRange from passed text after initializing itself")]
-        public void Constructor_ShouldCreateTextRangeFromPassedText_AfterInitializingItself()
+        protected TextDocument UnderTest { get; set; }
+
+        public override void Setup()
         {
-            // Given
-            var text = "Hello World!";
-            var underTest = new TextDocument(text);
-
-            // When
-            var result = underTest.TextRange;
-
-            // Then
-            Assert.That(result, Is.EqualTo(new TextRange(0, 12, underTest)));
+            base.Setup();
+            UnderTest = new TextDocument("Hello World!");
         }
 
-        [Test(Description = "TextRanges should always contain the main TextRange when it is called")]
-        public void TextRanges_ShouldAlwaysContainMainTextRange_WhenItIsCalled()
+        [Test(Description = "CreateOrGetTextRange should create new TextRange when proper positions are passed and there is no existing TextRange")]
+        public void CreateOrGetTextRange_ShouldCreateNewTextRange_WhenProperPositionsArePassedAndThereIsNoExistingTextRange()
         {
-            // Given
-            var text = "Hello World!";
-            var underTest = new TextDocument(text);
+            // Given in setup 
 
             // When
-            var result = underTest.TextRanges;
+            var result = UnderTest.CreateOrGetTextRange(0, 5);
 
             // Then
-            Assert.That(result, Has.Member(underTest.TextRange));
+            Assert.That(result.Start, Is.EqualTo(0));
+            Assert.That(result.Stop, Is.EqualTo(5));
+            Assert.That(result.TextDocument, Is.EqualTo(UnderTest));
+
+            Assert.That(result, Is.EqualTo(new TextRange(0, 5, UnderTest)));
         }
 
-        [Test(Description = "GetOrCreateTextRange should instantiate new TextRange when start and stop values are passed")]
-        public void CreateTextRange_ShouldInstantiateNewTextRange_WhenStartAndStopValuesArePassed()
+        [Test(Description = "TextRange should return root element of TextDocument when TextDocument is initialized")]
+        public void TextRange_ShouldReturnRootElementOfTextDocument_WhenTextDocumentIsInitialized()
         {
-            // Given
-            String text = "Hello World!";
-            var underTest = new TextDocument(text);
+            // Given in setup
 
             // When
-            var result = underTest.GetOrCreateTextRange(1, 5);
+            var result = UnderTest.TextRange;
 
             // Then
-            Assert.That(result, Is.EqualTo(new TextRange(1, 5, underTest)));
+            Assert.That(result, Is.EqualTo(new TextRange(0, 12, UnderTest)));
+        }
+
+        [Test(Description = "CreateOrGetTextRange should return an existing TextRange when it is called")]
+        public void CreateOrGetTextRange_ShouldReturnAnExistingTextRange_WhenItIsCalled()
+        {
+            // Given in setup
+
+
+            // When
+            var result = UnderTest.CreateOrGetTextRange(0, 12);
+
+            // Then
+            Assert.That(result, Is.SameAs(UnderTest.TextRange));
+        }
+
+        [TestCase(0, 5)]
+        [TestCase(1, 5)]
+        [TestCase(5, 5)]
+        [Test(Description = "CreateOrGetTextRange should return existing sub TextRange when sub TextRange is initialized previously")]
+        public void CreateOrGetTextRange_ShouldReturnExistingSubTextRange_WhenSubTextRangeIsInitializedPreviously(Int32 start, Int32 stop)
+        {
+            // Given in setup
+
+            var textRange = UnderTest.CreateOrGetTextRange(start, stop);
+
+            // When
+            var result = UnderTest.CreateOrGetTextRange(start, stop);
+
+            // Then
+            Assert.That(result, Is.SameAs(textRange));
+        }
+
+        [Test(Description = "CreateOrGetTextRange should order text ranges by start and stop positions when it is called")]
+        public void CreateOrGetTextRange_ShouldOrderTextRangesByStartAndStopPositions_WhenItIsCalled()
+        {
+            // Given in setup
+
+            var textRanges = new[] {
+                UnderTest.CreateOrGetTextRange(3, 5),
+                UnderTest.CreateOrGetTextRange(1, 5),
+                UnderTest.CreateOrGetTextRange(3, 4),
+                UnderTest.CreateOrGetTextRange(2, 7),
+                UnderTest.CreateOrGetTextRange(0, 7)
+            };
+
+            // When
+            var result = UnderTest.TextRange
+                                  .Select(textRange => new {
+                                      Start = textRange.Start,
+                                      Stop = textRange.Stop
+                                  })
+                                  .ToArray();
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(new[]
+            {
+                new {Start = 0, Stop = 7},
+                new {Start = 0, Stop = 12},
+                new {Start = 1, Stop = 5},
+                new {Start = 2, Stop = 7},
+                new {Start = 3, Stop = 4},
+                new {Start = 3, Stop = 5},
+            }));
+        }
+
+        [Test(Description = "ChangeText should remove existing substring when insert new value when there is no conflict between text ranges")]
+        public void ChangeText_ShouldRemoveExistingSubstringAndInsertNewValue_WhenThereIsNoConflictBetweenTextRanges()
+        {
+            // Given in setup
+
+
+            // When
+            UnderTest.ChangeText(UnderTest.TextRange, "Hi World!");
+            var result = UnderTest.Text.ToString();
+
+            // Then
+            Assert.That(result, Is.EqualTo("Hi World!"));
+        }
+
+        [Test(Description = "ChangeText should return updated text range when whole text range is passed")]
+        public void ChangeText_ShouldReturnUpdatedTextRange_WhenWholeTextRangeIsPassed()
+        {
+            // Given in setup
+
+            // When
+            UnderTest.ChangeText(UnderTest.TextRange, "Hi World!");
+            var result = UnderTest.GetText(UnderTest.TextRange);
+
+            // Then
+            Assert.That(UnderTest.TextRange, Is.EqualTo(new TextRange(0, 9, UnderTest)));
+            Assert.That(result, Is.EqualTo("Hi World!"));
+        }
+
+        [Test(Description = "ChangeText should update non-conflict text ranges after it changed text")]
+        public void ChangeText_ShouldUpdateNonConflictTextRanges_AfterItChangedText()
+        {
+            // Given in setup
+            var words = new[]
+            {
+                UnderTest.CreateOrGetTextRange(0, 5),
+                UnderTest.CreateOrGetTextRange(6, 12)
+            };
+
+            // When
+            UnderTest.ChangeText(words[0], "Hi");
+            var result = UnderTest.TextRange.Select(textRange => UnderTest.GetText(textRange)).ToArray();
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(new[]{ "Hi", "World!" }));
+        }
+
+        [Test(Description = "ChangeText should update superset text ranges after it changed text")]
+        public void ChangeText_ShouldUpdateSupersetTextRanges_AfterItChangedText()
+        {
+            // Given in setup
+            var words = new[]
+            {
+                UnderTest.CreateOrGetTextRange(6, 11),
+                UnderTest.CreateOrGetTextRange(0, 12),
+            };
+
+            // When
+            UnderTest.ChangeText(words[0], "Me");
+            var result = UnderTest.TextRange.Select(textRange => UnderTest.GetText(textRange)).ToArray();
+
+            // Then
+            Assert.That(UnderTest.Text, Is.EqualTo("Hello Me!"));
+            Assert.That(result, Is.EquivalentTo(new[] { "Me", "Hello Me!" }));
+        }
+
+        [Test(Description = "ChangeRawText should update text but it does not update any text ranges when it is called")]
+        public void ChangeRawText_ShouldUpdateTextButItDoesNotUpdateAnyTextRanges_WhenItIsCalled()
+        {
+            // Given in setup
+            var textRange = UnderTest.CreateOrGetTextRange(0, 5);
+
+            // When
+            UnderTest.ChangeRawText(textRange, "Hi");
+            var result = UnderTest.Text;
+
+            // Then
+            Assert.That(result, Is.EqualTo("Hi World!"));
+
+            var textRanges = UnderTest.TextRange.AsEnumerable();
+            Assert.That(new[] { textRange }, Is.SubsetOf(textRanges));
+        }
+
+        [Test(Description = "GetText should return positioned text when proper TextRange is passed")]
+        public void GetText_ShouldReturnPositionedText_WhenProperTextRangeIsPassed()
+        {
+            // Given in setup
+
+            // When
+            var result = UnderTest.GetText(UnderTest.TextRange);
+
+            // Then
+            Assert.That(result, Is.EqualTo("Hello World!"));
         }
     }
 }
