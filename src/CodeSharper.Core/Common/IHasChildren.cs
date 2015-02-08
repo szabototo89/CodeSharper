@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodeSharper.Core.Texts
+namespace CodeSharper.Core.Common
 {
     /// <summary>
     /// Represents an object which may have children

@@ -1,4 +1,4 @@
-﻿namespace CodeSharper.Core.Texts
+﻿namespace CodeSharper.Core.Common
 {
     public interface IHasParent<out TParent>
     {
