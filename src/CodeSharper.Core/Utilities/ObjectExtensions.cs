@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Security.Policy;
 
 namespace CodeSharper.Core.Utilities
 {
@@ -16,6 +18,15 @@ namespace CodeSharper.Core.Utilities
         public static TResult With<TValue, TResult>(this TValue value, Func<TValue, TResult> function)
         {
             return function(value);
+        }
+
+        public static TResult Safe<TValue, TResult>(this TValue value, Func<TValue, TResult> function)
+            where TValue : class
+        {
+            if (value != null)
+                return function(value);
+
+            return default(TResult);
         }
     }
 }
