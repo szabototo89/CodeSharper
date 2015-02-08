@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Texts
 {
     public class TextDocument : ITextDocument
     {
-        private readonly List<TextRange> _textRanges;
+        private StringBuilder _text;
 
         /// <summary>
         /// Gets or sets the text of document.
         /// </summary>
-        public StringBuilder Text { get; protected set; }
+        public String Text
+        {
+            get { return _text.ToString(); }
+            protected set { _text = new StringBuilder(value); }
+        }
 
         /// <summary>
         /// Gets or sets the text range of document
         /// </summary>
         public TextRange TextRange { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the text ranges.
-        /// </summary>
-        public IEnumerable<TextRange> TextRanges
-        {
-            get { return _textRanges; }
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextDocument"/> class.
@@ -35,70 +34,197 @@ namespace CodeSharper.Core.Texts
         {
             Assume.NotNull("text", text);
 
-            _textRanges = new List<TextRange>();
-
-            Text = new StringBuilder(text);
-            TextRange = createTextRange(0, Text.Length);
+            Text = text;
+            TextRange = CreateOrGetTextRange(0, text.Length);
         }
 
         /// <summary>
-        /// Registers the specified text range of TextDocument. 
+        /// Gets the text by specified text range
         /// </summary>
-        public void Register(TextRange textRange)
+        public String GetText(TextRange textRange)
         {
             Assume.NotNull(textRange, "textRange");
-            _textRanges.Add(textRange);
+            return _text.ToString(textRange.Start, textRange.Stop - textRange.Start);
         }
 
         /// <summary>
-        /// Unregisters the specified text range in TextDocument
+        /// Creates a new or gets an existing text range from text document
         /// </summary>
-        public void Unregister(TextRange textRange)
+        /// <param name="start">The start position of text range</param>
+        /// <param name="stop">The stop position of text range</param>
+        public TextRange CreateOrGetTextRange(Int32 start, Int32 stop)
         {
-            Assume.NotNull(textRange, "textRange");
-            _textRanges.Remove(textRange);
-        }
+            Assume.IsTrue(start >= 0, "start must be positive or zero!");
+            Assume.IsTrue(start <= stop, "start must be lesser than stop!");
 
-        /// <summary>
-        /// Gets an existing or creates a new text range in text document
-        /// </summary>
-        public TextRange GetOrCreateTextRange(Int32 start, Int32 stop)
-        {
-            Assume.IsTrue(start <= stop, "start must be smaller than stop!");
-            Assume.IsTrue(start >= 0, "start must be a positive or zero!");
-            Assume.IsTrue(stop - start <= Text.Length, "stop cannot be larger than text length!");
+            var textRange = getExistingTextRange(start, stop);
+            var isFoundExistingTextRange = (textRange != null);
 
-            var textRange = getExistingTextRange(start, stop)?? 
-                            createTextRange(start, stop);
+            if (!isFoundExistingTextRange)
+                textRange = createTextRange(start, stop);
 
             return textRange;
         }
 
         /// <summary>
-        /// Updates the text of text document based on a specified text range
+        /// Changes the text in text document. It removes passed text range and creates a new one. Finally, it returns the updated text range. 
         /// </summary>
-        public TextDocument UpdateText(Int32 oldStart, Int32 oldStop, TextRange updatedTextRange)
+        public TextDocument ChangeText(TextRange textRange, String replacedText)
         {
-            Assume.NotNull(updatedTextRange, "updatedTextRange");
+            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(replacedText, "replacedText");
 
-            Text.Remove(oldStart, oldStop)
-                .Insert(updatedTextRange.Start, updatedTextRange.Text);
+            ChangeRawText(textRange, replacedText);
+
+            var offset = textRange.Start + replacedText.Length - textRange.Stop;
+            textRange.Stop = textRange.Start + replacedText.Length;
+
+            updateTextRanges(textRange, offset);
 
             return this;
         }
 
-        #region Helper methods for creating text ranges
+        private void updateTextRanges(TextRange updatedTextRange, Int32 offset)
+        {
+            Assume.NotNull(updatedTextRange, "updatedTextRange");
+            if (offset == 0) return;
+
+            foreach (var range in TextRange.AsEnumerable()
+                                           .Where(range => !ReferenceEquals(range, updatedTextRange)))
+            {
+                if (isNoConflictWith(range, updatedTextRange))
+                {
+                    range.OffsetBy(offset);
+                }
+                else if (isSuperRangeOf(range, updatedTextRange))
+                {
+                    range.Stop += offset;
+                }
+            }
+        }
+
+        private Boolean isSuperRangeOf(TextRange range, TextRange updatedTextRange)
+        {
+            return range.Start <= updatedTextRange.Start && updatedTextRange.Stop <= range.Stop;
+        }
+
+        private Boolean isNoConflictWith(TextRange range, TextRange updatedTextRange)
+        {
+            return range.Start > updatedTextRange.Stop;
+        }
+
+        /// <summary>
+        /// Changes text in text document without updating positions of other text ranges.
+        /// </summary>
+        public TextDocument ChangeRawText(TextRange textRange, String replacedText)
+        {
+            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(replacedText, "replacedText");
+
+            _text.Remove(textRange.Start, textRange.Stop - textRange.Start)
+                 .Insert(textRange.Start, replacedText);
+
+            return this;
+        }
+
+        #region Helper methods for creating or getting back text ranges
 
         private TextRange createTextRange(Int32 start, Int32 stop)
         {
-            var textRange = new TextRange(start, stop, this);
-            Register(textRange);
+            var current = TextRange;
+
+            while (current != null)
+            {
+                if (current.Start > start)
+                    return insertTextRangeBeforeTo(current, start, stop);
+
+                if (current.Start == start && current.Stop > stop)
+                    return insertTextRangeBeforeTo(current, start, stop);
+
+                if (current.Next == null)
+                    return insertTextRangeAfterTo(current, start, stop);
+
+                current = current.Next;
+            }
+
+            if (TextRange == null)
+                return initializeTextRangeRoot(start, stop);
+
+            throw new NotImplementedException();
+        }
+
+        private TextRange initializeTextRangeRoot(Int32 start, Int32 stop)
+        {
+            return new TextRange(start, stop, this);
+        }
+
+        private TextRange insertTextRangeBeforeTo(TextRange current, Int32 start, Int32 stop)
+        {
+            var textRange = new TextRange(start, stop, this,
+                previous: current.Previous,
+                next: current);
+
+            if (current.Previous != null)
+                current.Previous.Next = textRange;
+
+            current.Previous = textRange;
+
+            if (ReferenceEquals(current, TextRange))
+                TextRange = textRange;
+
+            return textRange;
+        }
+
+        private TextRange insertTextRangeAfterTo(TextRange current, Int32 start, Int32 stop)
+        {
+            var textRange = new TextRange(start, stop, this,
+                previous: current,
+                next: current.Next);
+
+            if (current.Next != null)
+            {
+                current.Next.Previous = textRange;
+            }
+
+            if (current.Previous != null)
+            {
+                current.Previous.Next = textRange;
+            }
+
+            current.Next = textRange;
+
             return textRange;
         }
 
         private TextRange getExistingTextRange(Int32 start, Int32 stop)
         {
-            return _textRanges.FirstOrDefault(textRange => textRange.Start == start && textRange.Stop == stop);
+            var current = TextRange;
+
+            while (current != null)
+            {
+                if (current.Start == start && current.Stop == stop)
+                    break;
+
+                current = current.Next;
+            }
+
+            return current;
+        }
+
+        #endregion
+
+        #region Helper methods for changing text ranges in TextDocument
+
+        private void changeToUpdatedTextRange(TextRange oldTextRange, TextRange newTextRange)
+        {
+            if (ReferenceEquals(oldTextRange, TextRange))
+                TextRange = newTextRange;
+
+            if (oldTextRange.Previous != null)
+                oldTextRange.Previous.Next = newTextRange;
+
+            if (oldTextRange.Next != null)
+                oldTextRange.Next.Previous = newTextRange;
         }
 
         #endregion
