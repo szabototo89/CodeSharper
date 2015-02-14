@@ -45,9 +45,16 @@
     <Compile Include="Common\IHasNext.cs" />
     <Compile Include="Common\IHasParent.cs" />
     <Compile Include="Common\IHasPrevious.cs" />
+    <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="SyntaxTrees\ILeaf.cs" />
+    <Compile Include="SyntaxTrees\LeafNode.cs" />
+    <Compile Include="SyntaxTrees\Node.cs" />
     <Compile Include="Texts\ITextDocument.cs" />
     <Compile Include="Texts\TextPosition.cs" />
+    <Compile Include="Trees\SyntaxTree.cs" />
+    <Compile Include="Trees\Tree.cs" />
     <Compile Include="Utilities\EnumerableExtensions.cs" />
+    <Compile Include="Utilities\NodeExtensions.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts\TextDocument.cs" />

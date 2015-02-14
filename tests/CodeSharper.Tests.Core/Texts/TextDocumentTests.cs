@@ -176,6 +176,27 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.EquivalentTo(new[] { "Me", "Hello Me!" }));
         }
 
+        [Test(Description = "ChangeText should update overlapping text ranges after it changed text")]
+        public void ChangeText_ShouldUpdateOverlappingTextRanges_AfterItChangedText()
+        {
+            // Given 
+            var underTest = new TextDocument("0123456789");
+
+            var words = new[]
+            {
+                underTest.CreateOrGetTextRange(0, 4),
+                underTest.CreateOrGetTextRange(2, 10),
+            };
+
+            // When
+            underTest.ChangeText(words[0], "9");
+            var result = underTest.TextRange.Select(textRange => underTest.GetText(textRange)).ToArray();
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(new[] { "9", "9456789" }));
+        }
+
+
         [Test(Description = "ChangeRawText should update text but it does not update any text ranges when it is called")]
         public void ChangeRawText_ShouldUpdateTextButItDoesNotUpdateAnyTextRanges_WhenItIsCalled()
         {

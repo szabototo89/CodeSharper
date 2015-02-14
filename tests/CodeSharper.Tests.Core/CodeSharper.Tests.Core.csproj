@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Texts\TextDocumentTests.cs" />
-    <Compile Include="Texts\TextRangeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -43,7 +43,7 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public String GetText(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, "updatableTextRange");
             return _text.ToString(textRange.Start, textRange.Stop - textRange.Start);
         }
 
@@ -77,40 +77,66 @@ namespace CodeSharper.Core.Texts
             ChangeRawText(textRange, replacedText);
 
             var offset = textRange.Start + replacedText.Length - textRange.Stop;
-            textRange.Stop = textRange.Start + replacedText.Length;
 
             updateTextRanges(textRange, offset);
+
+            textRange.Stop = textRange.Start + replacedText.Length;
 
             return this;
         }
 
-        private void updateTextRanges(TextRange updatedTextRange, Int32 offset)
+        private void updateTextRanges(TextRange updatableTextRange, Int32 offset)
         {
-            Assume.NotNull(updatedTextRange, "updatedTextRange");
+            Assume.NotNull(updatableTextRange, "updatableTextRange");
             if (offset == 0) return;
 
             foreach (var range in TextRange.AsEnumerable()
-                                           .Where(range => !ReferenceEquals(range, updatedTextRange)))
+                                           .Where(range => !ReferenceEquals(range, updatableTextRange)))
             {
-                if (isNoConflictWith(range, updatedTextRange))
+                if (isNoConflictWith(range, updatableTextRange))
                 {
                     range.OffsetBy(offset);
                 }
-                else if (isSuperRangeOf(range, updatedTextRange))
+                else if (isSubRangeOf(range, updatableTextRange))
+                {
+                    throw new NotImplementedException();
+                }
+                else if (isSuperRangeOf(range, updatableTextRange))
                 {
                     range.Stop += offset;
+                }
+                else if (isOverlapping(range, updatableTextRange))
+                {
+                    range.OffsetBy(offset);
+                    var gap = updatableTextRange.Stop - range.Start + offset;
+
+                    if (updatableTextRange.Length + offset < gap)
+                    {
+                        var difference = gap - (updatableTextRange.Length + offset);
+                        range.Start = Math.Max(range.Start + difference, 0);
+                    }
                 }
             }
         }
 
-        private Boolean isSuperRangeOf(TextRange range, TextRange updatedTextRange)
+        private Boolean isSubRangeOf(TextRange range, TextRange otherRange)
         {
-            return range.Start <= updatedTextRange.Start && updatedTextRange.Stop <= range.Stop;
+            return isSuperRangeOf(otherRange, range);
         }
 
-        private Boolean isNoConflictWith(TextRange range, TextRange updatedTextRange)
+        private Boolean isOverlapping(TextRange range, TextRange otherRange)
         {
-            return range.Start > updatedTextRange.Stop;
+            return range.Start >= otherRange.Start && range.Start <= otherRange.Stop;
+        }
+
+        private Boolean isSuperRangeOf(TextRange range, TextRange otherRange)
+        {
+            return range.Start <= otherRange.Start && otherRange.Stop <= range.Stop;
+        }
+
+        private Boolean isNoConflictWith(TextRange range, TextRange otherRange)
+        {
+            return range.Start > otherRange.Stop;
         }
 
         /// <summary>
@@ -118,7 +144,7 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public TextDocument ChangeRawText(TextRange textRange, String replacedText)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, "updatableTextRange");
             Assume.NotNull(replacedText, "replacedText");
 
             _text.Remove(textRange.Start, textRange.Stop - textRange.Start)

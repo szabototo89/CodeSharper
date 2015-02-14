@@ -35,6 +35,11 @@ namespace CodeSharper.Core.Texts
         public TextRange Previous { get; protected internal set; }
 
         /// <summary>
+        /// Gets the length of text
+        /// </summary>
+        public Int32 Length { get { return Stop - Start; } }
+
+        /// <summary>
         /// Offsets position (start and stop) by specified value
         /// </summary>
         internal void OffsetBy(Int32 offset)

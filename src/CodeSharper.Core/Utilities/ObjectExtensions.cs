@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection.Emit;
+using System.Security;
 using System.Security.Policy;
 
 namespace CodeSharper.Core.Utilities
@@ -27,6 +29,12 @@ namespace CodeSharper.Core.Utilities
                 return function(value);
 
             return default(TResult);
+        }
+
+        public static TTo As<TTo>(this Object value)
+            where TTo : class
+        {
+            return value as TTo;
         }
     }
 }
