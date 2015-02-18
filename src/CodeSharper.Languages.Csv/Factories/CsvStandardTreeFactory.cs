@@ -56,7 +56,6 @@ namespace CodeSharper.Languages.Csv.Factories
         /// Creates comma and appends it to actual row
         /// </summary>
         /// <param name="textRange">The text range.</param>
-        /// <returns></returns>
         public ICsvTreeFactory CreateComma(TextRange textRange)
         {
             Assume.NotNull(textRange, "textRange");
