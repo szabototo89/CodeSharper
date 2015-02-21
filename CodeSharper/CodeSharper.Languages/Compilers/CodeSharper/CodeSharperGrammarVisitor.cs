@@ -31,19 +31,19 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
 
         public override Object VisitBooleanParameterValue(CodeSharperGrammarParser.BooleanParameterValueContext context)
         {
-            _parameter.Value = parseBooleanValue(context);
+            _parameter.Value = _ParseBooleanValue(context);
             return base.VisitBooleanParameterValue(context);
         }
 
         public override Object VisitNumberParameterValue(CodeSharperGrammarParser.NumberParameterValueContext context)
         {
-            _parameter.Value = parseNumberValue(context);
+            _parameter.Value = _ParseNumberValue(context);
             return base.VisitNumberParameterValue(context);
         }
 
         public override Object VisitStringParameterValue(CodeSharperGrammarParser.StringParameterValueContext context)
         {
-            _parameter.Value = parseStringValue(context);
+            _parameter.Value = _ParseStringValue(context);
             return base.VisitStringParameterValue(context);
         }
 
@@ -98,25 +98,25 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
         public override Object VisitPipeLineCommandExpression(CodeSharperGrammarParser.PipeLineCommandExpressionContext context)
         {
             base.VisitPipeLineCommandExpression(context);
-            return parseCommandCallOperator<PipelineCommandCall>(_commandCallTreeDescriptors);
+            return _ParseCommandCallOperator<PipelineCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitAndCommandExpression(CodeSharperGrammarParser.AndCommandExpressionContext context)
         {
             base.VisitAndCommandExpression(context);
-            return parseCommandCallOperator<LazyAndCommandCall>(_commandCallTreeDescriptors);
+            return _ParseCommandCallOperator<LazyAndCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitOrCommandExpression(CodeSharperGrammarParser.OrCommandExpressionContext context)
         {
             base.VisitOrCommandExpression(context);
-            return parseCommandCallOperator<LazyOrCommandCall>(_commandCallTreeDescriptors);
+            return _ParseCommandCallOperator<LazyOrCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitSemicolonCommandExpression(CodeSharperGrammarParser.SemicolonCommandExpressionContext context)
         {
             base.VisitSemicolonCommandExpression(context);
-            return parseCommandCallOperator<SequenceCommandCall>(_commandCallTreeDescriptors);
+            return _ParseCommandCallOperator<SequenceCommandCall>(_commandCallTreeDescriptors);
         }
 
         public override Object VisitSingleCommandExpression(CodeSharperGrammarParser.SingleCommandExpressionContext context)
@@ -145,7 +145,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
             return result;
         }
 
-        private Object parseCommandCallOperator<TCommandCallOperator>(Stack<ICommandCall> commandCallTreeDescriptors)
+        private Object _ParseCommandCallOperator<TCommandCallOperator>(Stack<ICommandCall> commandCallTreeDescriptors)
             where TCommandCallOperator : ICommandCall, new()
         {
             var right = commandCallTreeDescriptors.Pop();
@@ -160,7 +160,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
             return null;
         }
 
-        private String parseStringValue(CodeSharperGrammarParser.StringParameterValueContext context)
+        private String _ParseStringValue(CodeSharperGrammarParser.StringParameterValueContext context)
         {
             var value = context.STRING();
             if (value == null)
@@ -179,7 +179,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
             return result;
         }
 
-        private Int32 parseNumberValue(CodeSharperGrammarParser.NumberParameterValueContext context)
+        private Int32 _ParseNumberValue(CodeSharperGrammarParser.NumberParameterValueContext context)
         {
             var value = context.NUMBER();
             if (value == null)
@@ -192,7 +192,7 @@ namespace CodeSharper.Languages.Compilers.CodeSharper
             return result;
         }
 
-        private Boolean parseBooleanValue(CodeSharperGrammarParser.BooleanParameterValueContext context)
+        private Boolean _ParseBooleanValue(CodeSharperGrammarParser.BooleanParameterValueContext context)
         {
             var value = context.BOOLEAN();
             if (value == null)

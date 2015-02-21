@@ -75,10 +75,10 @@ namespace CodeSharper.Core.Common.ControlFlow
         public StandardControlFlow ParseCommandCall(ICommandCall commandCall)
         {
             _commands.Clear();
-            return parseCommandCallWithOutInitialization(commandCall);
+            return _ParseCommandCallWithOutInitialization(commandCall);
         }
 
-        private StandardControlFlow parseCommandCallWithOutInitialization(ICommandCall commandCall)
+        private StandardControlFlow _ParseCommandCallWithOutInitialization(ICommandCall commandCall)
         {
             Constraints.NotNull(() => commandCall);
 
@@ -90,7 +90,7 @@ namespace CodeSharper.Core.Common.ControlFlow
             else if (commandCall is PipelineCommandCall) {
                 var call = commandCall as PipelineCommandCall;
                 foreach (var child in call.Children)
-                    parseCommandCallWithOutInitialization(child);
+                    _ParseCommandCallWithOutInitialization(child);
             }
 
             return this;

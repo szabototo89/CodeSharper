@@ -67,6 +67,7 @@
     <Compile Include="Commands\CommandFactories\IdentityCommandFactory.cs" />
     <Compile Include="Commands\CommandFactories\InsertTextRangeCommandFactory.cs" />
     <Compile Include="Commands\CommandFactories\ToLowerCaseCommandFactory.cs" />
+    <Compile Include="Common\ControlFlow\CommandCallControlFlow.cs" />
     <Compile Include="Common\ControlFlow\IControlFlow.cs" />
     <Compile Include="Common\ControlFlow\IControlFlowFactory.cs" />
     <Compile Include="Common\ControlFlow\StandardControlFlowFactory.cs" />
