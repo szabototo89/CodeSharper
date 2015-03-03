@@ -1,4 +1,4 @@
-﻿namespace CodeSharper.Core.Selectors.NodeSelectorOperands
+﻿namespace CodeSharper.Core.Nodes.Operands
 {
     public abstract class BinaryNodeSelectorOperand : NodeSelectorOperandBase
     {

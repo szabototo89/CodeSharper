@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Selectors.NodeModifiers;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;

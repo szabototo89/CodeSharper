@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Selectors.NodeModifiers
+namespace CodeSharper.Core.Nodes.Modifiers
 {
     public class SiblingsNodeModifier : NodeModifierBase
     {

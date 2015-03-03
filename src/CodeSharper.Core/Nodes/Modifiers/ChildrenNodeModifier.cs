@@ -2,7 +2,7 @@
 using System.Linq;
 using CodeSharper.Core.SyntaxTrees;
 
-namespace CodeSharper.Core.Selectors.NodeModifiers
+namespace CodeSharper.Core.Nodes.Modifiers
 {
     public class ChildrenNodeModifier : NodeModifierBase
     {

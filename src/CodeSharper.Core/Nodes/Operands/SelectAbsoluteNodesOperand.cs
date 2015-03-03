@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Selectors.NodeModifiers;
 using CodeSharper.Core.SyntaxTrees;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Selectors.NodeSelectorOperands
 {
@@ -29,7 +30,7 @@ namespace CodeSharper.Core.Selectors.NodeSelectorOperands
             Assume.NotNull(nodeSelector, "nodeSelector");
 
             NodeSelector = nodeSelector;
-            NodeModifiers = nodeModifiers ?? Enumerable.Empty<NodeModifierBase>();
+            NodeModifiers = nodeModifiers.GetOrEmpty();
         }
 
         public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)

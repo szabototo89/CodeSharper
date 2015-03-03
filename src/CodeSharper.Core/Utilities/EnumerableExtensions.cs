@@ -10,6 +10,11 @@ namespace CodeSharper.Core.Utilities
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<TValue> GetOrEmpty<TValue>(this IEnumerable<TValue> enumerable)
+        {
+            return enumerable ?? Enumerable.Empty<TValue>();
+        } 
+
         public static IEnumerable<TResult> Select<TElement, TResult>(this TElement element, Func<TElement, TResult> func)
             where TElement : IHasNext<TElement>
         {

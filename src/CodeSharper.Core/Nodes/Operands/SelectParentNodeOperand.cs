@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CodeSharper.Core.SyntaxTrees;
 
-namespace CodeSharper.Core.Selectors.NodeSelectorOperands
+namespace CodeSharper.Core.Nodes.Operands
 {
     public class SelectParentNodeOperand : BinaryNodeSelectorOperand
     {

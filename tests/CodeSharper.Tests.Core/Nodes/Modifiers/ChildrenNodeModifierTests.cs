@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core.Selectors.NodeModifiers;
-using CodeSharper.Core.SyntaxTrees;
+﻿using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Tests.Core.TestHelpers.Stubs;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Selectors.NodeModifiers
+namespace CodeSharper.Tests.Core.Nodes.Modifiers
 {
     [TestFixture]
     internal class ChildrenNodeModifierTests : TestFixtureBase
