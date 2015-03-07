@@ -37,7 +37,6 @@ namespace CodeSharper.Languages.Csv.Visitors
         public override CsvSyntaxTreeBuilder VisitStart(CsvParser.StartContext context)
         {
             var textRange = createTextRange(context);
-
             _treeFactory.CreateDocument(textRange);
 
             foreach (var row in context.row())
@@ -70,7 +69,6 @@ namespace CodeSharper.Languages.Csv.Visitors
         {
             var textRange = createTextRange(context);
             _treeFactory.CreateField(textRange);
-
             return this;
         }
 

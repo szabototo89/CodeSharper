@@ -52,8 +52,9 @@
     <Compile Include="Grammar\CsvParser.cs" />
     <Compile Include="Grammar\CsvVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selectors\FilterNodeSelector.cs" />
-    <Compile Include="Selectors\RowNodeSelector.cs" />
+    <Compile Include="Nodes\Selectors\FilterNodeSelector.cs" />
+    <Compile Include="Nodes\Selectors\RowNodeSelector.cs" />
+    <Compile Include="SemanticTrees\ColumnSemanticNode.cs" />
     <Compile Include="SyntaxTrees\CommaNode.cs" />
     <Compile Include="SyntaxTrees\CsvDocumentNode.cs" />
     <Compile Include="SyntaxTrees\FieldNode.cs" />

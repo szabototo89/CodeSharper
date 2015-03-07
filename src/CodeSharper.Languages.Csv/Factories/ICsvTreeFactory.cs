@@ -2,12 +2,13 @@
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Trees;
 
 namespace CodeSharper.Languages.Csv.Factories
 {
-    public interface ICsvTreeFactory
+    public interface ICsvTreeFactory : IHasSyntaxTree
     {
         ICsvTreeFactory CreateRow(TextRange textRange);
 
@@ -18,7 +19,5 @@ namespace CodeSharper.Languages.Csv.Factories
         ICsvTreeFactory CreateDocument(TextRange textRange);
 
         TextDocument GetTextDocument();
-
-        SyntaxTree GetSyntaxTree();
     }
 }

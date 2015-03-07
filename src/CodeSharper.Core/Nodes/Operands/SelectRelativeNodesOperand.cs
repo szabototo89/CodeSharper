@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using CodeSharper.Core.ErrorHandling;
-using CodeSharper.Core.Selectors.NodeModifiers;
+using CodeSharper.Core.Nodes.Modifiers;
+using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Selectors.NodeSelectorOperands
+namespace CodeSharper.Core.Nodes.Operands
 {
     public class SelectRelativeNodesOperand : SelectAbsoluteNodesOperand
     {

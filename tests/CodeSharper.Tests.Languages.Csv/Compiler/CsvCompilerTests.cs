@@ -65,5 +65,19 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             Assert.That(textFields, Is.EquivalentTo(new[] { "2", "5" }));
             Assert.That(emptyFields, Is.EquivalentTo(new[] { "" }));
         }
+
+        [Test(Description = "Parse should able to parse multiple rows when valid input is passed")]
+        public void Parse_ShouldAbleToParseMultipleRows_WhenValidInputIsPassed()
+        {
+            // Given
+            var input = "1,2,3\n4,5,6";
+            var underTest = new CsvCompiler();
+
+            // When
+            
+
+            // Then
+
+        }
     }
 }

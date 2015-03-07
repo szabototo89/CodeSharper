@@ -21,6 +21,9 @@ namespace CodeSharper.Core.SyntaxTrees
             TextDocument = TextRange.TextDocument;
         }
 
+        /// <summary>
+        /// Gets the text document of node
+        /// </summary>
         public TextDocument TextDocument { get; private set; }
 
         /// <summary>
@@ -37,17 +40,6 @@ namespace CodeSharper.Core.SyntaxTrees
         }
 
         /// <summary>
-        /// Detaches this instance from its parent child
-        /// </summary>
-        public virtual void Detach()
-        {
-            if (Parent != null)
-                Parent._children.Remove(this);
-
-            Parent = null;
-        }
-
-        /// <summary>
         /// Appends the specified child to this instance
         /// </summary>
         public virtual void AppendChild(Node child)
@@ -57,6 +49,28 @@ namespace CodeSharper.Core.SyntaxTrees
             _children.Add(child);
 
             child.Parent = this;
+        }
+
+        /// <summary>
+        /// Attaches this instance to specified node.
+        /// </summary>
+        public virtual void Attach(Node node)
+        {
+            Assume.NotNull(node, "node");
+
+            node._children.Add(this);
+            Parent = node;
+        }
+
+        /// <summary>
+        /// Detaches this instance from its parent child
+        /// </summary>
+        public virtual void Detach()
+        {
+            if (Parent != null)
+                Parent._children.Remove(this);
+
+            Parent = null;
         }
 
         /// <summary>

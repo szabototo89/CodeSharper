@@ -29,12 +29,9 @@ namespace CodeSharper.Languages.Csv.Factories
         public ICsvTreeFactory CreateRow(TextRange textRange)
         {
             Assume.NotNull(textRange, "textRange");
-
             checkIsDocumentDefined();
-
             _actualRow = new RowNode(textRange);
             _csvDocuments.Peek().AppendChild(_actualRow);
-
             return this;
         }
 

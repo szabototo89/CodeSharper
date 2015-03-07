@@ -1,7 +1,7 @@
 ﻿using System;
 using CodeSharper.Core.SyntaxTrees;
 
-namespace CodeSharper.Core.Selectors
+namespace CodeSharper.Core.Nodes.Selectors
 {
     public abstract class TypedNodeSelectorBase<TNode> : NodeSelectorBase
         where TNode : Node

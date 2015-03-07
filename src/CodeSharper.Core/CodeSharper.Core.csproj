@@ -46,19 +46,21 @@
     <Compile Include="Common\IHasParent.cs" />
     <Compile Include="Common\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
-    <Compile Include="Selectors\NodeModifiers\ChildrenNodeModifier.cs" />
-    <Compile Include="Selectors\NodeModifiers\NodeModifierBase.cs" />
-    <Compile Include="Selectors\NodeModifiers\SiblingsNodeModifier.cs" />
-    <Compile Include="Selectors\NodeSelectorBase.cs" />
-    <Compile Include="Selectors\NodeModifiers\ParentNodeModifier.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\BinaryNodeSelectorOperand.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\ConcatNodesOperand.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\NodeSelectorOperandBase.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\SelectChildrenOperand.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\SelectAbsoluteNodesOperand.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\SelectParentNodeOperand.cs" />
-    <Compile Include="Selectors\NodeSelectorOperands\SelectRelativeNodesOperand.cs" />
-    <Compile Include="Selectors\TypedNodeSelectorBase.cs" />
+    <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
+    <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
+    <Compile Include="Nodes\Selectors\NodeSelectorBase.cs" />
+    <Compile Include="Nodes\Modifiers\ParentNodeModifier.cs" />
+    <Compile Include="Nodes\Operands\BinaryNodeSelectorOperand.cs" />
+    <Compile Include="Nodes\Operands\ConcatNodesOperand.cs" />
+    <Compile Include="Nodes\Operands\NodeSelectorOperandBase.cs" />
+    <Compile Include="Nodes\Operands\SelectChildrenOperand.cs" />
+    <Compile Include="Nodes\Operands\SelectAbsoluteNodesOperand.cs" />
+    <Compile Include="Nodes\Operands\SelectParentNodeOperand.cs" />
+    <Compile Include="Nodes\Operands\SelectRelativeNodesOperand.cs" />
+    <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
+    <Compile Include="SemanticTrees\SemanticNode.cs" />
+    <Compile Include="Trees\IHasSyntaxTree.cs" />
     <Compile Include="SyntaxTrees\ILeaf.cs" />
     <Compile Include="SyntaxTrees\LeafNode.cs" />
     <Compile Include="SyntaxTrees\Node.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

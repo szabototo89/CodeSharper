@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selectors\NodeModifiers\ChildrenNodeModifierTests.cs" />
-    <Compile Include="Selectors\NodeModifiers\ParentNodeModifierTests.cs" />
-    <Compile Include="Selectors\NodeModifiers\SiblingNodeModifierTests.cs" />
+    <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />
+    <Compile Include="Nodes\Modifiers\ParentNodeModifierTests.cs" />
+    <Compile Include="Nodes\Modifiers\SiblingNodeModifierTests.cs" />
     <Compile Include="TestHelpers\Stubs\StubNode.cs" />
     <Compile Include="Texts\TextDocumentTests.cs" />
   </ItemGroup>
@@ -67,7 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Selectors\NodeSelectorOperands\" />
+    <Folder Include="Nodes\Operands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeSharper.Core.SyntaxTrees;
 
-namespace CodeSharper.Core.Selectors.NodeModifiers
+namespace CodeSharper.Core.Nodes.Modifiers
 {
     public abstract class NodeModifierBase
     {
