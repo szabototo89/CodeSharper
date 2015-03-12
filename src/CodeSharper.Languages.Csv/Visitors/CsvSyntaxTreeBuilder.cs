@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Antlr4.Runtime;
+using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
@@ -17,21 +18,29 @@ using Grammar;
 
 namespace CodeSharper.Languages.Csv.Visitors
 {
-    public class CsvSyntaxTreeBuilder : CsvBaseVisitor<CsvSyntaxTreeBuilder>
+    public class CsvSyntaxTreeBuilder : CsvBaseVisitor<CsvSyntaxTreeBuilder>, 
+                                        ISyntaxTreeVisitor<CsvSyntaxTreeBuilder, IParseTree>
     {
         private readonly ICsvTreeFactory _treeFactory;
-        private readonly TextDocument _textDocument;
+        private TextDocument _textDocument;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CsvSyntaxTreeBuilder"/> class.
         /// </summary>
-        public CsvSyntaxTreeBuilder(String input, ICsvTreeFactory treeFactory)
+        public CsvSyntaxTreeBuilder(ICsvTreeFactory treeFactory)
+        {
+            Assume.NotNull(treeFactory, "treeFactory");
+            _treeFactory = treeFactory;
+        }
+
+        public virtual CsvSyntaxTreeBuilder Visit(String input, IParseTree tree)
         {
             Assume.NotNull(input, "input");
-            Assume.NotNull(treeFactory, "treeFactory");
+            Assume.NotNull(tree, "tree");
 
             _textDocument = new TextDocument(input);
-            _treeFactory = treeFactory;
+
+            return base.Visit(tree);
         }
 
         public override CsvSyntaxTreeBuilder VisitStart(CsvParser.StartContext context)
@@ -72,6 +81,8 @@ namespace CodeSharper.Languages.Csv.Visitors
             return this;
         }
 
+        #region Methods for creating text ranges
+
         private TextRange createTextRange(ITerminalNode comma)
         {
             return _textDocument.CreateOrGetTextRange(comma.Symbol.StartIndex, comma.Symbol.StopIndex + 1);
@@ -79,8 +90,12 @@ namespace CodeSharper.Languages.Csv.Visitors
 
         private TextRange createTextRange(ParserRuleContext context)
         {
-            TextRange textRange = _textDocument.CreateOrGetTextRange(context.Start.StartIndex, context.Stop.StopIndex + 1);
+            TextRange textRange = _textDocument.CreateOrGetTextRange(context.Start.StartIndex,
+                context.Stop.StopIndex + 1);
             return textRange;
         }
+
+        #endregion
+
     }
 }

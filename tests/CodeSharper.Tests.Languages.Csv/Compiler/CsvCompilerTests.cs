@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Csv.Compiler;
+using CodeSharper.Languages.Csv.Factories;
 using CodeSharper.Languages.Csv.SyntaxTrees;
+using CodeSharper.Tests.Languages.Csv.Fakes;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Languages.Csv.Compiler
@@ -70,14 +72,19 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         public void Parse_ShouldAbleToParseMultipleRows_WhenValidInputIsPassed()
         {
             // Given
-            var input = "1,2,3\n4,5,6";
+            var input = "1,2,3\n4,5,6\n";
+            var visitor = new CsvTreeVisitorStub(CsvLanguageElements.Row);
+            var treeFactory = new CsvTreeFactoryStub();
             var underTest = new CsvCompiler();
 
             // When
-            
+            underTest.Parse(input, visitor, treeFactory);
+            var result = visitor.GetVisitedRules();
 
             // Then
-
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result, Contains.Item("Row(1,2,3\n)"));
+            Assert.That(result, Contains.Item("Row(4,5,6\n)"));
         }
     }
 }

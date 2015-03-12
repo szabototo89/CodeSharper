@@ -60,6 +60,7 @@
     <Compile Include="Nodes\Operands\SelectRelativeNodesOperand.cs" />
     <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
+    <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="Trees\IHasSyntaxTree.cs" />
     <Compile Include="SyntaxTrees\ILeaf.cs" />
     <Compile Include="SyntaxTrees\LeafNode.cs" />
