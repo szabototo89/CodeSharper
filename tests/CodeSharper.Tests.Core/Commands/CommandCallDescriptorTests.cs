@@ -15,7 +15,7 @@ namespace CodeSharper.Tests.Core.Commands
         public void Equals_ShouldReturnTrue_WhenSameReferencesAreCompared()
         {
             // Given
-            var underTest = new CommandCallDescriptor("test-call", Enumerable.Empty<ICommandParameter>());
+            var underTest = new CommandCallDescriptor("test-call", Enumerable.Empty<ICommandCallActualArgument>());
 
             // When
             var result = underTest.Equals(underTest);
@@ -28,7 +28,7 @@ namespace CodeSharper.Tests.Core.Commands
         public void Equals_ShouldReturnFalse_WhenItIsComparedWithNullValue()
         {
             // Given
-            var underTest = new CommandCallDescriptor("test-call", Enumerable.Empty<ICommandParameter>);
+            var underTest = new CommandCallDescriptor("test-call", Enumerable.Empty<ICommandCallActualArgument>());
 
             // When
             var result = underTest.Equals(null);

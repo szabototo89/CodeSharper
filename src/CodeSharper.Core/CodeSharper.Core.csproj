@@ -39,7 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandCallBase.cs" />
     <Compile Include="Commands\CommandCallDescriptor.cs" />
+    <Compile Include="Commands\ICommandCall.cs" />
+    <Compile Include="Commands\ICommandCallActualArgument.cs" />
+    <Compile Include="Commands\NamedCommandCallActualArgument.cs" />
+    <Compile Include="Commands\PositionedCommandCallActualArgument.cs" />
     <Compile Include="Common\ILinkedStyle.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\IHasChildren.cs" />

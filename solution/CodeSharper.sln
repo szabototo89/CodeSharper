@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSharper.Tests.Languages
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSharper.Interpreter", "..\src\CodeSharper.Interpreter\CodeSharper.Interpreter.csproj", "{35259875-D91E-4F40-95A3-879C80CF5F98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSharper.Tests.Interpreter", "..\tests\CodeSharper.Tests.Interpreter\CodeSharper.Tests.Interpreter.csproj", "{859BE24F-7361-4549-8145-9D5D0B0048D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{35259875-D91E-4F40-95A3-879C80CF5F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35259875-D91E-4F40-95A3-879C80CF5F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35259875-D91E-4F40-95A3-879C80CF5F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859BE24F-7361-4549-8145-9D5D0B0048D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859BE24F-7361-4549-8145-9D5D0B0048D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859BE24F-7361-4549-8145-9D5D0B0048D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859BE24F-7361-4549-8145-9D5D0B0048D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +66,6 @@ Global
 		{88782320-E761-4273-907A-21C2FA813150} = {C211423A-1727-4C32-AEEC-73A320BA4109}
 		{B83CAE62-BB24-49F1-818E-F0BBBC114306} = {B044F4A8-0613-4932-93D0-C47368529721}
 		{35259875-D91E-4F40-95A3-879C80CF5F98} = {C211423A-1727-4C32-AEEC-73A320BA4109}
+		{859BE24F-7361-4549-8145-9D5D0B0048D1} = {B044F4A8-0613-4932-93D0-C47368529721}
 	EndGlobalSection
 EndGlobal

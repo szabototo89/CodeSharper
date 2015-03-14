@@ -2,7 +2,7 @@
 
 namespace CodeSharper.Core.Commands
 {
-    public interface ICommandCallActualArguments
+    public interface ICommandCallActualArgument
     {
         /// <summary>
         /// Gets the value of command call actual parameter

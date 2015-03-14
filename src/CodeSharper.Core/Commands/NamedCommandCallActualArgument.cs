@@ -48,7 +48,7 @@ namespace CodeSharper.Core.Commands
         {
             unchecked
             {
-                return ((Value != null ? Value.GetHashCode() : 0)*397) ^ (ArgumentName != null ? ArgumentName.GetHashCode() : 0);
+                return ((Value != null ? Value.GetHashCode() : 0) * 397) ^ (ArgumentName != null ? ArgumentName.GetHashCode() : 0);
             }
         }
 

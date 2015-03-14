@@ -52,14 +52,18 @@ namespace CodeSharper.Core.Commands
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type.
+        /// Serves as a hash function for a particular type. 
         /// </summary>
         /// <returns>
-        /// A hash code for the current <see cref="T:System.Object" />.
+        /// A hash code for the current <see cref="T:System.Object"/>.
         /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override Int32 GetHashCode()
         {
-            return (Name != null ? Name.GetHashCode() : 0);
+            unchecked
+            {
+                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (ActualParameters != null ? ActualParameters.GetHashCode() : 0);
+            }
         }
 
         /// <summary>
@@ -69,15 +73,15 @@ namespace CodeSharper.Core.Commands
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public Boolean Equals(CommandCallDescriptor other)
         {
             if (ReferenceEquals(other, null)) return false;
             if (ReferenceEquals(other, this)) return true;
 
-            return String.Equals(Name, other.Name);
+            return String.Equals(Name, other.Name) &&
+                   Enumerable.SequenceEqual(ActualParameters, other.ActualParameters);
         }
 
         #endregion
     }
-}   
+}
