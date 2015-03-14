@@ -225,5 +225,51 @@ namespace CodeSharper.Tests.Core.Texts
             // Then
             Assert.That(result, Is.EqualTo("Hello World!"));
         }
+
+        [Test(Description = "RemoveText should remove selected text when proper text range is passed")]
+        public void RemoveText_ShouldRemoveSelectedText_WhenProperTextRangeIsPassed()
+        {
+            // Given
+            var textRange = UnderTest.CreateOrGetTextRange(0, 5);
+
+            // When
+            UnderTest.RemoveText(textRange);
+            var result = UnderTest.Text;
+
+            // Then
+            Assert.That(result, Is.EqualTo(" World!"));
+        }
+
+        [Test(Description = "RemoveText should remove text range when prefix of text range is passed")]
+        public void RemoveText_ShouldRemoveTextRange_WhenPrefixOfTextRangeIsPassed()
+        {
+            // Given
+            var textRange = UnderTest.CreateOrGetTextRange(0, 5);
+
+            // When
+            UnderTest.RemoveText(textRange);
+            var result = UnderTest.TextRange;
+
+            // Then
+            Assert.That(result, Is.EqualTo(textRange.Next));
+        }
+
+        [TestCase(0, 5)]
+        [TestCase(1, 5)]
+        [TestCase(6, 11)]
+        [Test(Description = "RemoveText should remove text range from chain when proper text range is passed")]
+        public void RemoveText_ShouldRemoveTextRangeFromChain_WhenProperTextRangeIsPassed(Int32 start, Int32 stop)
+        {
+            // Given
+            var textRange = UnderTest.CreateOrGetTextRange(start, stop);
+
+            // When
+            UnderTest.RemoveText(textRange);
+            var textRanges = UnderTest.TextRange.AsEnumerable().ToArray();
+            var result = textRanges.FirstOrDefault(range => textRange.Equals(range));
+
+            // Then
+            Assert.That(result, Is.Null);
+        }
     }
 }

@@ -43,8 +43,24 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public String GetText(TextRange textRange)
         {
-            Assume.NotNull(textRange, "updatableTextRange");
+            Assume.NotNull(textRange, "textRange");
             return _text.ToString(textRange.Start, textRange.Stop - textRange.Start);
+        }
+
+        /// <summary>
+        /// Removes the text.
+        /// </summary>
+        /// <param name="textRange">The text range.</param>
+        /// <returns></returns>
+        public TextDocument RemoveText(TextRange textRange)
+        {
+            Assume.NotNull(textRange, "textRange");
+
+            ChangeText(textRange, String.Empty);
+
+            removeTextRange(textRange);
+
+            return this;
         }
 
         /// <summary>
@@ -235,6 +251,28 @@ namespace CodeSharper.Core.Texts
             }
 
             return current;
+        }
+
+        #endregion
+
+        #region Helper methods for removing text range in TextDocument
+
+        private void removeTextRange(TextRange textRange)
+        {
+            if (textRange.Previous != null)
+            {
+                textRange.Previous.Next = textRange.Next;
+            }
+
+            if (textRange.Next != null)
+            {
+                textRange.Next.Previous = textRange.Previous;
+            }
+
+            if (TextRange.Equals(textRange))
+            {
+                TextRange = textRange.Next;
+            }
         }
 
         #endregion
