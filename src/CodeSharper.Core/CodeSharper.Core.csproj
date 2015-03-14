@@ -45,6 +45,11 @@
     <Compile Include="Commands\ICommandCallActualArgument.cs" />
     <Compile Include="Commands\NamedCommandCallActualArgument.cs" />
     <Compile Include="Commands\PositionedCommandCallActualArgument.cs" />
+    <Compile Include="Commands\Selectors\PseudoSelectorDescriptor.cs" />
+    <Compile Include="Commands\Selectors\SelectorAttributeDescriptor.cs" />
+    <Compile Include="Commands\Selectors\SelectorDescriptor.cs" />
+    <Compile Include="Common\IHasName.cs" />
+    <Compile Include="Common\IHasValue.cs" />
     <Compile Include="Common\ILinkedStyle.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\IHasChildren.cs" />
@@ -76,6 +81,7 @@
     <Compile Include="Trees\SyntaxTree.cs" />
     <Compile Include="Trees\Tree.cs" />
     <Compile Include="Utilities\EnumerableExtensions.cs" />
+    <Compile Include="Utilities\EqualityHelper.cs" />
     <Compile Include="Utilities\NodeExtensions.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -50,12 +50,12 @@ public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>ExpressionInBrackets</c>
+	/// Visit a parse tree produced by the <c>ExpressionInner</c>
 	/// labeled alternative in <see cref="CodeQuery.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitExpressionInBrackets([NotNull] CodeQuery.ExpressionInBracketsContext context);
+	Result VisitExpressionInner([NotNull] CodeQuery.ExpressionInnerContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="CodeQuery.methodCall"/>.
 	/// </summary>
@@ -116,9 +116,24 @@ public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.constant"/>.
+	/// Visit a parse tree produced by the <c>ConstantString</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitConstant([NotNull] CodeQuery.ConstantContext context);
+	Result VisitConstantString([NotNull] CodeQuery.ConstantStringContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ConstantNumber</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstantNumber([NotNull] CodeQuery.ConstantNumberContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ConstantBoolean</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context);
 }

@@ -63,17 +63,17 @@ public interface ICodeQueryListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>ExpressionInBrackets</c>
+	/// Enter a parse tree produced by the <c>ExpressionInner</c>
 	/// labeled alternative in <see cref="CodeQuery.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterExpressionInBrackets([NotNull] CodeQuery.ExpressionInBracketsContext context);
+	void EnterExpressionInner([NotNull] CodeQuery.ExpressionInnerContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>ExpressionInBrackets</c>
+	/// Exit a parse tree produced by the <c>ExpressionInner</c>
 	/// labeled alternative in <see cref="CodeQuery.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitExpressionInBrackets([NotNull] CodeQuery.ExpressionInBracketsContext context);
+	void ExitExpressionInner([NotNull] CodeQuery.ExpressionInnerContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CodeQuery.methodCall"/>.
 	/// </summary>
@@ -175,13 +175,39 @@ public interface ICodeQueryListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CodeQuery.constant"/>.
+	/// Enter a parse tree produced by the <c>ConstantString</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterConstant([NotNull] CodeQuery.ConstantContext context);
+	void EnterConstantString([NotNull] CodeQuery.ConstantStringContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CodeQuery.constant"/>.
+	/// Exit a parse tree produced by the <c>ConstantString</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitConstant([NotNull] CodeQuery.ConstantContext context);
+	void ExitConstantString([NotNull] CodeQuery.ConstantStringContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ConstantNumber</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstantNumber([NotNull] CodeQuery.ConstantNumberContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ConstantNumber</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstantNumber([NotNull] CodeQuery.ConstantNumberContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ConstantBoolean</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ConstantBoolean</c>
+	/// labeled alternative in <see cref="CodeQuery.constant"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context);
 }

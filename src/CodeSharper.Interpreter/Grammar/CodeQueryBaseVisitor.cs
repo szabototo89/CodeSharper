@@ -62,7 +62,7 @@ public partial class CodeQueryBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// <return>The visitor result.</return>
 	public virtual Result VisitExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ExpressionInBrackets"/>.
+	/// Visit a parse tree produced by <see cref="CodeQuery.ExpressionInner"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -70,7 +70,7 @@ public partial class CodeQueryBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitExpressionInBrackets([NotNull] CodeQuery.ExpressionInBracketsContext context) { return VisitChildren(context); }
+	public virtual Result VisitExpressionInner([NotNull] CodeQuery.ExpressionInnerContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="CodeQuery.methodCall"/>.
 	/// <para>
@@ -162,7 +162,7 @@ public partial class CodeQueryBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// <return>The visitor result.</return>
 	public virtual Result VisitSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.constant"/>.
+	/// Visit a parse tree produced by <see cref="CodeQuery.ConstantString"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -170,5 +170,25 @@ public partial class CodeQueryBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitConstant([NotNull] CodeQuery.ConstantContext context) { return VisitChildren(context); }
+	public virtual Result VisitConstantString([NotNull] CodeQuery.ConstantStringContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="CodeQuery.ConstantNumber"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitConstantNumber([NotNull] CodeQuery.ConstantNumberContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="CodeQuery.ConstantBoolean"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context) { return VisitChildren(context); }
 }
