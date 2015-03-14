@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Commands
 {
@@ -75,10 +76,8 @@ namespace CodeSharper.Core.Commands
         /// </returns>
         public Boolean Equals(CommandCallDescriptor other)
         {
-            if (ReferenceEquals(other, null)) return false;
-            if (ReferenceEquals(other, this)) return true;
-
-            return String.Equals(Name, other.Name) &&
+            return EqualityHelper.IsNullOrReferenceEqual(other, this) ??
+                   String.Equals(Name, other.Name) &&
                    Enumerable.SequenceEqual(ActualParameters, other.ActualParameters);
         }
 
