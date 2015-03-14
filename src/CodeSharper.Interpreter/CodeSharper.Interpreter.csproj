@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7EDCB4D6-C2A7-400F-9AE0-EB5D1C227E58}</ProjectGuid>
+    <ProjectGuid>{35259875-D91E-4F40-95A3-879C80CF5F98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeSharper.Tests.Core</RootNamespace>
-    <AssemblyName>CodeSharper.Tests.Core</AssemblyName>
+    <RootNamespace>CodeSharper.Interpreter</RootNamespace>
+    <AssemblyName>CodeSharper.Interpreter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\..\solution\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\solution\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    <Reference Include="Antlr4.Runtime">
+      <HintPath>..\..\..\..\..\..\..\..\Downloads\Antlr4.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,30 +42,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandCallDescriptorTests.cs" />
+    <Compile Include="Grammar\CodeQuery.cs" />
+    <Compile Include="Grammar\CodeQueryBaseListener.cs" />
+    <Compile Include="Grammar\CodeQueryBaseVisitor.cs" />
+    <Compile Include="Grammar\CodeQueryLexer.cs" />
+    <Compile Include="Grammar\CodeQueryListener.cs" />
+    <Compile Include="Grammar\CodeQueryVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />
-    <Compile Include="Nodes\Modifiers\ParentNodeModifierTests.cs" />
-    <Compile Include="Nodes\Modifiers\SiblingNodeModifierTests.cs" />
-    <Compile Include="TestHelpers\Stubs\StubNode.cs" />
-    <Compile Include="Texts\TextDocumentTests.cs" />
-    <Compile Include="Utilities\OptionTests.cs" />
+    <Compile Include="Visitors\CodeQueryVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\CodeSharper.Core\CodeSharper.Core.csproj">
+    <ProjectReference Include="..\CodeSharper.Core\CodeSharper.Core.csproj">
       <Project>{794268e8-3ecb-4d3a-99d8-9c310c8fd583}</Project>
       <Name>CodeSharper.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CodeSharper.Tests\CodeSharper.Tests.csproj">
-      <Project>{27bc9728-db64-4d00-87fe-721afcff5701}</Project>
-      <Name>CodeSharper.Tests</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Nodes\Operands\" />
+    <Folder Include="Nodes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AntlrTokens Include="Grammar\CodeQuery.tokens">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>CodeSharper.Interpreter.Grammar</CustomToolNamespace>
+    </AntlrTokens>
+    <AntlrTokens Include="Grammar\CodeQueryLexer.tokens">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>CodeSharper.Interpreter.Grammar</CustomToolNamespace>
+    </AntlrTokens>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

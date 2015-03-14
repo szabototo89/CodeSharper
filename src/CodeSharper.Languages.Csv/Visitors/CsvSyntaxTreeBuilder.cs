@@ -90,8 +90,7 @@ namespace CodeSharper.Languages.Csv.Visitors
 
         private TextRange createTextRange(ParserRuleContext context)
         {
-            TextRange textRange = _textDocument.CreateOrGetTextRange(context.Start.StartIndex,
-                context.Stop.StopIndex + 1);
+            TextRange textRange = _textDocument.CreateOrGetTextRange(context.Start.StartIndex, context.Stop.StopIndex + 1);
             return textRange;
         }
 

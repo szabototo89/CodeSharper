@@ -57,7 +57,6 @@ namespace CodeSharper.Core.Texts
             Assume.NotNull(textRange, "textRange");
 
             ChangeText(textRange, String.Empty);
-
             removeTextRange(textRange);
 
             return this;
