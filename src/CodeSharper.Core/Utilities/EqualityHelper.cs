@@ -8,6 +8,9 @@ namespace CodeSharper.Core.Utilities
 {
     public static class EqualityHelper
     {
+        /// <summary>
+        /// Determines whether the specified element is null or same with other
+        /// </summary>
         public static Boolean? IsNullOrReferenceEqual<TElement>(TElement other, TElement @this)
             where TElement : class // to avoid boxing-unboxing
         {

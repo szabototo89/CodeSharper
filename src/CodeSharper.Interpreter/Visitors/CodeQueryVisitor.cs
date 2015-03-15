@@ -3,21 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Visitors
 {
     public class CodeQueryVisitor : CodeQueryBaseVisitor<CodeQueryVisitor>
     {
+        private readonly ISelectorBuilder _selectorBuilder;
         private readonly Stack<Object> _constants;
 
-        public CodeQueryVisitor()
+        public CodeQueryVisitor(ISelectorBuilder selectorBuilder)
         {
+            Assume.NotNull(selectorBuilder, "selectorBuilder");
+
             _constants = new Stack<Object>();
+            _selectorBuilder = selectorBuilder;
         }
 
         protected override CodeQueryVisitor DefaultResult
         {
             get { return this; }
+        }
+
+        public override CodeQueryVisitor VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
+        {
+            var name = context.ID().GetText();
+            var value = _constants.Pop();
+
+            throw new NotImplementedException();
+
+            _selectorBuilder.CreatePseudoSelector(name, value);
+
+            return base.VisitPseudoSelectorWithConstant(context);
+        }
+
+        public override CodeQueryVisitor VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
+        {
+            context.AttributeValue.Accept(this);
+            if (!_constants.Any())
+                throw new Exception("Invalid selector attribute!");
+
+            _selectorBuilder.CreateSelectorAttribute(context.AttributeName.Text, _constants.Pop());
+
+            return base.VisitSelectorAttribute(context);
         }
 
         public override CodeQueryVisitor VisitExpressionInner(CodeQuery.ExpressionInnerContext context)
@@ -67,5 +95,12 @@ namespace CodeSharper.Interpreter.Visitors
 
             return base.VisitConstantBoolean(context);
         }
+    }
+
+    public interface ISelectorBuilder
+    {
+        void CreateSelectorAttribute(String name, Object value);
+
+        void CreatePseudoSelector(String name, Object value);
     }
 }

@@ -49,10 +49,10 @@ namespace CodeSharper.Core.Commands.Selectors
         /// <returns>
         /// true if the specified object  is equal to the current object; otherwise, false.
         /// </returns>
-        /// <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
-        public override Boolean Equals(Object obj)
+        /// <param name="other">The object to compare with the current object. </param><filterpriority>2</filterpriority>
+        public override Boolean Equals(Object other)
         {
-            return Equals(obj as SelectorAttributeDescriptor);
+            return Equals(other as SelectorAttributeDescriptor);
         }
 
         /// <summary>

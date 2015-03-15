@@ -10,7 +10,6 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public Object Value { get; protected set; }
 
-
         /// <summary>
         /// Gets or sets the position of actual argument
         /// </summary>
