@@ -13,8 +13,8 @@ using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Csv.Factories;
+using CodeSharper.Languages.Csv.Grammar;
 using CodeSharper.Languages.Csv.SyntaxTrees;
-using Grammar;
 
 namespace CodeSharper.Languages.Csv.Visitors
 {

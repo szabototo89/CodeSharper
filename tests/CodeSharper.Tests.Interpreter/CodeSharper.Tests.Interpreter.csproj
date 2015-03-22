@@ -43,11 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visitors\CodeQueryVisitorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\CodeSharper.Interpreter\CodeSharper.Interpreter.csproj">
       <Project>{35259875-d91e-4f40-95a3-879c80cf5f98}</Project>
       <Name>CodeSharper.Interpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeSharper.Tests\CodeSharper.Tests.csproj">
+      <Project>{27BC9728-DB64-4D00-87FE-721AFCFF5701}</Project>
+      <Name>CodeSharper.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

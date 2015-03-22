@@ -11,18 +11,19 @@
 // Generated from D:/Development/Projects/playground/antlr_sample/src\Csv.g4 by ANTLR 4.5
 
 // Unreachable code detected
+
+using Antlr4.Runtime.Misc;
+
 #pragma warning disable 0162
 // The variable '...' is assigned but its value is never used
 #pragma warning disable 0219
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace Grammar {
-using Antlr4.Runtime.Misc;
-using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
-using IToken = Antlr4.Runtime.IToken;
+namespace CodeSharper.Languages.Csv.Grammar {
+    using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
 
-/// <summary>
+    /// <summary>
 /// This interface defines a complete listener for a parse tree produced by
 /// <see cref="CsvParser"/>.
 /// </summary>

@@ -6,20 +6,11 @@ using System.Threading.Tasks;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using CodeSharper.Core.SyntaxTrees;
+using CodeSharper.Languages.Csv.Grammar;
 using CodeSharper.Languages.Csv.Visitors;
-using Grammar;
 
 namespace CodeSharper.Tests.Languages.Csv.Fakes
 {
-    [Flags]
-    public enum CsvLanguageElements
-    {
-        Row = 1,
-        TextField = 2,
-        StringField = 4,
-        Field = TextField | StringField
-    }
-
     public class CsvTreeVisitorStub : CsvBaseVisitor<CsvTreeVisitorStub>, 
                                       ISyntaxTreeVisitor<CsvTreeVisitorStub, IParseTree>
     {

@@ -11,19 +11,19 @@
 // Generated from D:/Development/Projects/playground/antlr_sample/src\Csv.g4 by ANTLR 4.5
 
 // Unreachable code detected
+
+using Antlr4.Runtime.Misc;
+
 #pragma warning disable 0162
 // The variable '...' is assigned but its value is never used
 #pragma warning disable 0219
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace Grammar {
-
-using Antlr4.Runtime.Misc;
-using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
+namespace CodeSharper.Languages.Csv.Grammar {
+    using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
 using ITerminalNode = Antlr4.Runtime.Tree.ITerminalNode;
-using IToken = Antlr4.Runtime.IToken;
-using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
+    using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
 /// <summary>
 /// This class provides an empty implementation of <see cref="ICsvListener"/>,

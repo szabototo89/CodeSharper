@@ -11,19 +11,18 @@
 // Generated from D:/Development/Projects/playground/antlr_sample/src\Csv.g4 by ANTLR 4.5
 
 // Unreachable code detected
+
+using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
+
 #pragma warning disable 0162
 // The variable '...' is assigned but its value is never used
 #pragma warning disable 0219
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace Grammar {
-using Antlr4.Runtime.Misc;
-using Antlr4.Runtime.Tree;
-using IToken = Antlr4.Runtime.IToken;
-using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
-
-/// <summary>
+namespace CodeSharper.Languages.Csv.Grammar {
+    /// <summary>
 /// This class provides an empty implementation of <see cref="ICsvVisitor{Result}"/>,
 /// which can be extended to create a visitor which only needs to handle a subset
 /// of the available methods.

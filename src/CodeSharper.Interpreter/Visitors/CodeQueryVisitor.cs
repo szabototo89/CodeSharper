@@ -30,8 +30,6 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.ID().GetText();
             var value = _constants.Pop();
 
-            throw new NotImplementedException();
-
             _selectorBuilder.CreatePseudoSelector(name, value);
 
             return base.VisitPseudoSelectorWithConstant(context);

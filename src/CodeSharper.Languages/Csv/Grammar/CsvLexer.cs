@@ -11,20 +11,19 @@
 // Generated from D:/Development/Projects/playground/antlr_sample/src\Csv.g4 by ANTLR 4.5
 
 // Unreachable code detected
+
+using Antlr4.Runtime;
+using Antlr4.Runtime.Atn;
+using Antlr4.Runtime.Misc;
+
 #pragma warning disable 0162
 // The variable '...' is assigned but its value is never used
 #pragma warning disable 0219
 // Missing XML comment for publicly visible type or member '...'
 #pragma warning disable 1591
 
-namespace Grammar {
-using System;
-using Antlr4.Runtime;
-using Antlr4.Runtime.Atn;
-using Antlr4.Runtime.Misc;
-using DFA = Antlr4.Runtime.Dfa.DFA;
-
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
+namespace CodeSharper.Languages.Csv.Grammar {
+    [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class CsvLexer : Lexer {
 	public const int
