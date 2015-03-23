@@ -11,13 +11,13 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
     [TestFixture]
     internal class NodeOperandTests : TestFixtureBase
     {
-        [Test(Description = "SelectChildrenOperand should return all children of rows when CsvDocumentNode is passed")]
+        [Test(Description = "SelectChildrenOperand should return all children of rows when CsvCompilationUnit is passed")]
         public void SelectChildrenOperand_ShouldReturnAllChildrenOfRows_WhenCsvDocumentNodeIsPassed()
         {
             // Given
             var compiler = new CsvCompiler();
             var input = "first,second,third";
-            var documentNode = compiler.Parse(input).As<CsvDocumentNode>();
+            var documentNode = compiler.Parse(input).As<CsvCompilationUnit>();
             var underTest = new RowNodeSelector();
 
             // When
@@ -28,16 +28,16 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var result = operand.Calculate(documentNode.Children);
 
             // Then
-            Assert.That(result, Has.All.InstanceOf<FieldNode>());
+            Assert.That(result, Has.All.InstanceOf<FieldSyntax>());
         }
 
-        [Test(Description = "SelectChildrenOperand should return all children of rows when CsvDocumentNode is passed and SelectRelativeNodesOperand is used")]
+        [Test(Description = "SelectChildrenOperand should return all children of rows when CsvCompilationUnit is passed and SelectRelativeNodesOperand is used")]
         public void SelectChildrenOperand_ShouldReturnAllChildrenOfRows_WhenCsvDocumentNodeIsPassedAndSelectRelativeNodesOperandIsUsed()
         {
             // Given
             var compiler = new CsvCompiler();
             var input = "first,second,third";
-            var documentNode = compiler.Parse(input).As<CsvDocumentNode>();
+            var documentNode = compiler.Parse(input).As<CsvCompilationUnit>();
 
             // When
             var left = new SelectRelativeNodesOperand(new RowNodeSelector());
@@ -47,7 +47,7 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var result = operand.Calculate(new[] { documentNode });
 
             // Then
-            Assert.That(result, Has.All.InstanceOf<FieldNode>());
+            Assert.That(result, Has.All.InstanceOf<FieldSyntax>());
         }
 
     }

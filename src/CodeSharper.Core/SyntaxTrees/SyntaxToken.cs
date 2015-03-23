@@ -3,12 +3,12 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.SyntaxTrees
 {
-    public abstract class LeafNode : Node, ILeaf
+    public abstract class SyntaxToken : Node, ILeaf
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LeafNode"/> class.
+        /// Initializes a new instance of the <see cref="SyntaxToken"/> class.
         /// </summary>
-        protected LeafNode(TextRange textRange)
+        protected SyntaxToken(TextRange textRange)
             : base(textRange)
         {
         }

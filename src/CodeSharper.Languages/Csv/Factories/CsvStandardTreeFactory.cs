@@ -12,15 +12,15 @@ namespace CodeSharper.Languages.Csv.Factories
 {
     public class CsvStandardTreeFactory : ICsvTreeFactory
     {
-        private readonly Stack<CsvDocumentNode> _csvDocuments;
-        private RowNode _actualRow;
+        private readonly Stack<CsvCompilationUnit> _csvCompilationUnits;
+        private RowSyntax _actualRow;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CsvStandardTreeFactory"/> class.
         /// </summary>
         public CsvStandardTreeFactory()
         {
-            _csvDocuments = new Stack<CsvDocumentNode>();
+            _csvCompilationUnits = new Stack<CsvCompilationUnit>();
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace CodeSharper.Languages.Csv.Factories
         {
             Assume.NotNull(textRange, "textRange");
             checkIsDocumentDefined();
-            _actualRow = new RowNode(textRange);
-            _csvDocuments.Peek().AppendChild(_actualRow);
+            _actualRow = new RowSyntax(textRange);
+            _csvCompilationUnits.Peek().AppendChild(_actualRow);
             return this;
         }
 
@@ -43,7 +43,7 @@ namespace CodeSharper.Languages.Csv.Factories
             Assume.NotNull(textRange, "textRange");
             checkIsRowAdded();
 
-            var field = new FieldNode(textRange);
+            var field = new FieldSyntax(textRange);
             addChildToLastDefinedRow(field);
 
             return this;
@@ -58,7 +58,7 @@ namespace CodeSharper.Languages.Csv.Factories
             Assume.NotNull(textRange, "textRange");
             checkIsRowAdded();
 
-            var comma = new CommaNode(textRange);
+            var comma = new CommaToken(textRange);
             addChildToLastDefinedRow(comma);
 
             return this;
@@ -70,9 +70,9 @@ namespace CodeSharper.Languages.Csv.Factories
         public ICsvTreeFactory CreateDocument(TextRange textRange)
         {
             Assume.NotNull(textRange, "textRange");
-            var csvDocument = new CsvDocumentNode(textRange);
+            var csvCompilationUnit = new CsvCompilationUnit(textRange);
 
-            _csvDocuments.Push(csvDocument);
+            _csvCompilationUnits.Push(csvCompilationUnit);
 
             return this;
         }
@@ -89,7 +89,7 @@ namespace CodeSharper.Languages.Csv.Factories
         {
             checkIsDocumentDefined();
 
-            var document = _csvDocuments.Peek();
+            var document = _csvCompilationUnits.Peek();
 
             return new SyntaxTree(document);
         }
@@ -107,7 +107,7 @@ namespace CodeSharper.Languages.Csv.Factories
 
         private void checkIsDocumentDefined()
         {
-            if (!_csvDocuments.Any())
+            if (!_csvCompilationUnits.Any())
                 throw ThrowHelper.Exception("Document is not defined!");
         }
 

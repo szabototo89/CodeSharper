@@ -74,7 +74,7 @@
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="Trees\IHasSyntaxTree.cs" />
     <Compile Include="SyntaxTrees\ILeaf.cs" />
-    <Compile Include="SyntaxTrees\LeafNode.cs" />
+    <Compile Include="SyntaxTrees\SyntaxToken.cs" />
     <Compile Include="SyntaxTrees\Node.cs" />
     <Compile Include="Texts\ITextDocument.cs" />
     <Compile Include="Texts\TextPosition.cs" />

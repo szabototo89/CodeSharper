@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.SyntaxTrees
 {
@@ -45,9 +47,7 @@ namespace CodeSharper.Core.SyntaxTrees
         public virtual void AppendChild(Node child)
         {
             Assume.NotNull(child, "child");
-
             _children.Add(child);
-
             child.Parent = this;
         }
 
@@ -71,6 +71,17 @@ namespace CodeSharper.Core.SyntaxTrees
                 Parent._children.Remove(this);
 
             Parent = null;
+        }
+
+        protected void ReplaceChildrenWith(IEnumerable<Node> oldChildren, IEnumerable<Node> newChildren)
+        {
+            if (oldChildren == null) return;
+            foreach (var child in oldChildren.WhereNotNull())
+                child.Detach();
+
+            if (newChildren == null) return;
+            foreach (var child in newChildren.WhereNotNull())
+                child.Attach(this);
         }
 
         /// <summary>

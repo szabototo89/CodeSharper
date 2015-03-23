@@ -8,6 +8,7 @@ using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Csv.Compiler;
 using CodeSharper.Languages.Csv.Factories;
 using CodeSharper.Languages.Csv.SyntaxTrees;
+using CodeSharper.Languages.Csv.Visitors;
 using CodeSharper.Tests.Languages.Csv.Fakes;
 using NUnit.Framework;
 
@@ -21,6 +22,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             return node.TextRange.TextDocument.GetText(node.TextRange);
         }
 
+
         [Test(Description = "Parse should create parse tree when valid input is passed")]
         public void Parse_ShouldCreateParseTree_WhenValidInputIsPassed()
         {
@@ -29,8 +31,8 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             var underTest = new CsvCompiler();
 
             // When
-            var node = underTest.Parse(input) as CsvDocumentNode;
-            var fields = node.ToEnumerable().OfType<FieldNode>();
+            var node = underTest.Parse(input) as CsvCompilationUnit;
+            var fields = node.ToEnumerable().OfType<FieldSyntax>();
             var allOfThemIsTextField = fields.All(field => field.IsTextField);
             var fieldValues = fields.Select(getTextFromNode);
 
@@ -50,8 +52,8 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             var underTest = new CsvCompiler();
 
             // When
-            var node = underTest.Parse(input).As<CsvDocumentNode>();
-            var fields = node.ToEnumerable().OfType<FieldNode>();
+            var node = underTest.Parse(input).As<CsvCompilationUnit>();
+            var fields = node.ToEnumerable().OfType<FieldSyntax>();
 
             var stringFields = fields.Where(field => field.IsStringField)
                                      .Select(getTextFromNode);
@@ -86,5 +88,32 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             Assert.That(result, Contains.Item("Row(1,2,3\n)"));
             Assert.That(result, Contains.Item("Row(4,5,6\n)"));
         }
+
+        #region Using CsvStandardSyntaxTreeBuilder for parsing CSV file
+
+        [Test(Description = "Parse should create parse tree when CsvStandardSyntaxTreeBuilder is passed")]
+        public void Parse_ShouldCreateParseTree_WhenCsvStandardSyntaxTreeBuilderIsPassed()
+        {
+            // Given
+            var input = "one,two\nthree,four";
+            var treeVisitor = new CsvStandardSyntaxTreeBuilder();
+            var underTest = new CsvCompiler();
+
+            // When
+            var node = underTest.Parse(input, treeVisitor) as CsvCompilationUnit;
+            var fields = node.ToEnumerable().OfType<FieldSyntax>();
+            var allOfThemIsTextField = fields.All(field => field.IsTextField);
+            var fieldValues = fields.Select(getTextFromNode);
+
+            // Then
+            Assert.That(allOfThemIsTextField, Is.True);
+            Assert.That(fieldValues, Is.EquivalentTo(new[]
+            {
+                "one", "two", "three", "four"
+            }));
+        }
+
+        #endregion
+
     }
 }

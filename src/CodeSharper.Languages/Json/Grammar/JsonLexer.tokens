@@ -1,0 +1,17 @@
+T__0=1
+T__1=2
+T__2=3
+T__3=4
+COLON=5
+COMMA=6
+BOOLEAN=7
+NUMBER=8
+STRING=9
+IDENTIFIER=10
+WHITESPACE=11
+'{'=1
+'}'=2
+'['=3
+']'=4
+':'=5
+','=6

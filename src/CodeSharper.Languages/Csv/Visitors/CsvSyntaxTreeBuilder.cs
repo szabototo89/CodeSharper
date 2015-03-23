@@ -15,6 +15,7 @@ using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Csv.Factories;
 using CodeSharper.Languages.Csv.Grammar;
 using CodeSharper.Languages.Csv.SyntaxTrees;
+using CodeSharper.Languages.Utilities;
 
 namespace CodeSharper.Languages.Csv.Visitors
 {
@@ -45,7 +46,7 @@ namespace CodeSharper.Languages.Csv.Visitors
 
         public override CsvSyntaxTreeBuilder VisitStart(CsvParser.StartContext context)
         {
-            var textRange = createTextRange(context);
+            var textRange = context.CreateTextRange(_textDocument);
             _treeFactory.CreateDocument(textRange);
 
             foreach (var row in context.row())
@@ -58,7 +59,7 @@ namespace CodeSharper.Languages.Csv.Visitors
 
         public override CsvSyntaxTreeBuilder VisitRow(CsvParser.RowContext context)
         {
-            var textRange = createTextRange(context);
+            var textRange = context.CreateTextRange(_textDocument);
 
             _treeFactory.CreateRow(textRange);
 
@@ -67,7 +68,7 @@ namespace CodeSharper.Languages.Csv.Visitors
 
             foreach (var comma in context.COMMA())
             {
-                var range = createTextRange(comma);
+                var range = comma.CreateTextRange(_textDocument);
                 _treeFactory.CreateComma(range);
             }
 
@@ -76,25 +77,10 @@ namespace CodeSharper.Languages.Csv.Visitors
 
         public override CsvSyntaxTreeBuilder VisitField(CsvParser.FieldContext context)
         {
-            var textRange = createTextRange(context);
+            var textRange = context.CreateTextRange(_textDocument);
             _treeFactory.CreateField(textRange);
             return this;
         }
-
-        #region Methods for creating text ranges
-
-        private TextRange createTextRange(ITerminalNode comma)
-        {
-            return _textDocument.CreateOrGetTextRange(comma.Symbol.StartIndex, comma.Symbol.StopIndex + 1);
-        }
-
-        private TextRange createTextRange(ParserRuleContext context)
-        {
-            TextRange textRange = _textDocument.CreateOrGetTextRange(context.Start.StartIndex, context.Stop.StopIndex + 1);
-            return textRange;
-        }
-
-        #endregion
 
     }
 }

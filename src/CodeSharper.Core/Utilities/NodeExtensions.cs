@@ -15,5 +15,23 @@ namespace CodeSharper.Core.Utilities
         {
             return root.Children.Union(root.Children.SelectMany(ToEnumerable));
         }
+
+        public static void AppendChildren<TNode>(this Node node, IEnumerable<TNode> children)
+            where TNode : Node
+        {
+            foreach (var child in children)
+            {
+                node.AppendChild(child);
+            }
+        }
+
+        public static void DetachChildren<TNode>(this Node node, IEnumerable<TNode> children)
+            where TNode : Node
+        {
+            foreach (var child in children.Where(ch => ch != null))
+            {
+                child.Detach();
+            }
+        }
     }
 }

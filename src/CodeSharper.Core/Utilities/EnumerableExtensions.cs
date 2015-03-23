@@ -40,5 +40,13 @@ namespace CodeSharper.Core.Utilities
                 current = current.Next;
             }
         }
+
+        public static IEnumerable<TValue> WhereNotNull<TValue>(this IEnumerable<TValue> enumerable)
+        {
+            if (enumerable == null)
+                return null;
+
+            return enumerable.Where(element => element != null);
+        } 
     }
 }

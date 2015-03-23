@@ -3,12 +3,12 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Languages.Csv.SyntaxTrees
 {
-    public class CommaNode : LeafNode
+    public class CommaToken : CsvNode
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommaNode"/> class.
+        /// Initializes a new instance of the <see cref="CommaToken"/> class.
         /// </summary>
-        public CommaNode(TextRange textRange)
+        public CommaToken(TextRange textRange)
             : base(textRange)
         { }
     }

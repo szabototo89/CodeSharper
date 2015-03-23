@@ -11,6 +11,7 @@ using CodeSharper.Core.Trees;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Csv.Factories;
 using CodeSharper.Languages.Csv.Grammar;
+using CodeSharper.Languages.Csv.SyntaxTrees;
 using CodeSharper.Languages.Csv.Visitors;
 
 namespace CodeSharper.Languages.Csv.Compiler
@@ -35,6 +36,23 @@ namespace CodeSharper.Languages.Csv.Compiler
             treeVisitor.Visit(input, tree);
 
             return treeFactory.GetSyntaxTree().Safe(syntaxTree => syntaxTree.Root);
+        }
+
+        public CsvNode Parse(String input, ISyntaxTreeVisitor<CsvNode, IParseTree> treeVisitor)
+        {
+            Assume.NotNull(input, "input");
+            Assume.NotNull(treeVisitor, "treeVisitor");
+
+            var stream = new AntlrInputStream(input);
+            ITokenSource lexer = new CsvLexer(stream);
+            ITokenStream tokens = new CommonTokenStream(lexer);
+            var parser = new CsvParser(tokens) {
+                BuildParseTree = true
+            };
+
+            var tree = parser.start();
+
+            return treeVisitor.Visit(input, tree);
         }
 
         public Node Parse(String input)
