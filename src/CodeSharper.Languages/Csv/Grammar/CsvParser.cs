@@ -12,6 +12,7 @@
 
 // Unreachable code detected
 
+using System;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
@@ -27,19 +28,19 @@ namespace CodeSharper.Languages.Csv.Grammar {
     [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class CsvParser : Parser {
-	public const int
-		T__0=1, T__1=2, COMMA=3, TEXT=4, STRING=5;
-	public const int
+	public const Int32
+		T__0=1, T__1=2, COMMA=3, TEXT=4, String=5;
+	public const Int32
 		RULE_start = 0, RULE_row = 1, RULE_field = 2;
-	public static readonly string[] ruleNames = {
+	public static readonly String[] ruleNames = {
 		"start", "row", "field"
 	};
 
-	private static readonly string[] _LiteralNames = {
+	private static readonly String[] _LiteralNames = {
 		null, "'\r'", "'\n'", "','"
 	};
-	private static readonly string[] _SymbolicNames = {
-		null, null, null, "COMMA", "TEXT", "STRING"
+	private static readonly String[] _SymbolicNames = {
+		null, null, null, "COMMA", "TEXT", "String"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -52,11 +53,11 @@ public partial class CsvParser : Parser {
 		}
 	}
 
-	public override string GrammarFileName { get { return "Csv.g4"; } }
+	public override String GrammarFileName { get { return "Csv.g4"; } }
 
-	public override string[] RuleNames { get { return ruleNames; } }
+	public override String[] RuleNames { get { return ruleNames; } }
 
-	public override string SerializedAtn { get { return _serializedATN; } }
+	public override String SerializedAtn { get { return _serializedATN; } }
 
 	public CsvParser(ITokenStream input)
 		: base(input)
@@ -68,14 +69,14 @@ public partial class CsvParser : Parser {
 		public RowContext[] row() {
 			return GetRuleContexts<RowContext>();
 		}
-		public RowContext row(int i) {
+		public RowContext row(Int32 i) {
 			return GetRuleContext<RowContext>(i);
 		}
-		public StartContext(ParserRuleContext parent, int invokingState)
+		public StartContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_start; } }
+		public override Int32 RuleIndex { get { return RULE_start; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICsvListener typedListener = listener as ICsvListener;
 			if (typedListener != null) typedListener.EnterStart(this);
@@ -95,14 +96,14 @@ public partial class CsvParser : Parser {
 	public StartContext start() {
 		StartContext _localctx = new StartContext(Context, State);
 		EnterRule(_localctx, 0, RULE_start);
-		int _la;
+		Int32 _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 9;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.La(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << COMMA) | (1L << TEXT) | (1L << STRING))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__1) | (1L << COMMA) | (1L << TEXT) | (1L << String))) != 0)) {
 				{
 				{
 				State = 6; _localctx.Rows = row();
@@ -131,18 +132,18 @@ public partial class CsvParser : Parser {
 		public FieldContext[] field() {
 			return GetRuleContexts<FieldContext>();
 		}
-		public FieldContext field(int i) {
+		public FieldContext field(Int32 i) {
 			return GetRuleContext<FieldContext>(i);
 		}
 		public ITerminalNode[] COMMA() { return GetTokens(CsvParser.COMMA); }
-		public ITerminalNode COMMA(int i) {
+		public ITerminalNode COMMA(Int32 i) {
 			return GetToken(CsvParser.COMMA, i);
 		}
-		public RowContext(ParserRuleContext parent, int invokingState)
+		public RowContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_row; } }
+		public override Int32 RuleIndex { get { return RULE_row; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICsvListener typedListener = listener as ICsvListener;
 			if (typedListener != null) typedListener.EnterRow(this);
@@ -162,7 +163,7 @@ public partial class CsvParser : Parser {
 	public RowContext row() {
 		RowContext _localctx = new RowContext(Context, State);
 		EnterRule(_localctx, 2, RULE_row);
-		int _la;
+		Int32 _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
@@ -207,12 +208,12 @@ public partial class CsvParser : Parser {
 
 	public partial class FieldContext : ParserRuleContext {
 		public ITerminalNode TEXT() { return GetToken(CsvParser.TEXT, 0); }
-		public ITerminalNode STRING() { return GetToken(CsvParser.STRING, 0); }
-		public FieldContext(ParserRuleContext parent, int invokingState)
+		public ITerminalNode String() { return GetToken(CsvParser.String, 0); }
+		public FieldContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_field; } }
+		public override Int32 RuleIndex { get { return RULE_field; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICsvListener typedListener = listener as ICsvListener;
 			if (typedListener != null) typedListener.EnterField(this);
@@ -241,10 +242,10 @@ public partial class CsvParser : Parser {
 				State = 25; Match(TEXT);
 				}
 				break;
-			case STRING:
+			case String:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 26; Match(STRING);
+				State = 26; Match(String);
 				}
 				break;
 			case T__0:
@@ -269,7 +270,7 @@ public partial class CsvParser : Parser {
 		return _localctx;
 	}
 
-	public static readonly string _serializedATN =
+	public static readonly String _serializedATN =
 		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\a!\x4\x2\t\x2\x4"+
 		"\x3\t\x3\x4\x4\t\x4\x3\x2\a\x2\n\n\x2\f\x2\xE\x2\r\v\x2\x3\x3\x3\x3\x3"+
 		"\x3\a\x3\x12\n\x3\f\x3\xE\x3\x15\v\x3\x3\x3\x5\x3\x18\n\x3\x3\x3\x3\x3"+

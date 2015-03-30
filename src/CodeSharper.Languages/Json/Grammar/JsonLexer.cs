@@ -26,16 +26,16 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class JsonLexer : Lexer {
-	public const int
+	public const Int32
 		T__0=1, T__1=2, T__2=3, T__3=4, COLON=5, COMMA=6, BOOLEAN=7, NUMBER=8, 
-		STRING=9, IDENTIFIER=10, WHITESPACE=11;
-	public static string[] modeNames = {
+		String=9, IDENTIFIER=10, WHITESPACE=11;
+	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
 
-	public static readonly string[] ruleNames = {
+	public static readonly String[] ruleNames = {
 		"T__0", "T__1", "T__2", "T__3", "COLON", "COMMA", "BOOLEAN", "NUMBER", 
-		"STRING", "IDENTIFIER", "SYMBOL", "CHARACTER", "WHITESPACE"
+		"String", "IDENTIFIER", "SYMBOL", "CHARACTER", "WHITESPACE"
 	};
 
 
@@ -45,11 +45,11 @@ public partial class JsonLexer : Lexer {
 		Interpreter = new LexerATNSimulator(this,_ATN);
 	}
 
-	private static readonly string[] _LiteralNames = {
+	private static readonly String[] _LiteralNames = {
 		null, "'{'", "'}'", "'['", "']'", "':'", "','"
 	};
-	private static readonly string[] _SymbolicNames = {
-		null, null, null, null, null, "COLON", "COMMA", "BOOLEAN", "NUMBER", "STRING", 
+	private static readonly String[] _SymbolicNames = {
+		null, null, null, null, null, "COLON", "COMMA", "BOOLEAN", "NUMBER", "String", 
 		"IDENTIFIER", "WHITESPACE"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
@@ -63,15 +63,15 @@ public partial class JsonLexer : Lexer {
 		}
 	}
 
-	public override string GrammarFileName { get { return "Json.g4"; } }
+	public override String GrammarFileName { get { return "Json.g4"; } }
 
-	public override string[] RuleNames { get { return ruleNames; } }
+	public override String[] RuleNames { get { return ruleNames; } }
 
-	public override string[] ModeNames { get { return modeNames; } }
+	public override String[] ModeNames { get { return modeNames; } }
 
-	public override string SerializedAtn { get { return _serializedATN; } }
+	public override String SerializedAtn { get { return _serializedATN; } }
 
-	public static readonly string _serializedATN =
+	public static readonly String _serializedATN =
 		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x2\rj\b\x1\x4\x2\t"+
 		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t"+
 		"\t\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x3\x2\x3\x2\x3\x3"+

@@ -51,6 +51,10 @@
     <Compile Include="Common\IHasName.cs" />
     <Compile Include="Common\IHasValue.cs" />
     <Compile Include="Common\ILinkedStyle.cs" />
+    <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
+    <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />
+    <Compile Include="Common\Runnables\IRunnable.cs" />
+    <Compile Include="Common\Runnables\Runnable.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\IHasChildren.cs" />
     <Compile Include="Common\IHasNext.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Utilities\Option.cs" />
+    <Compile Include="Utilities\OptionExtensions.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />

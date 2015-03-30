@@ -72,7 +72,7 @@ namespace CodeSharper.Interpreter.Visitors
 
         public override CodeQueryVisitor VisitConstantString(CodeQuery.ConstantStringContext context)
         {
-            var stringValue = context.STRING().GetText().Trim('"');
+            var stringValue = context.String().GetText().Trim('"');
             _constants.Push(stringValue);
             return base.VisitConstantString(context);
         }

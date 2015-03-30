@@ -68,11 +68,11 @@ namespace CodeSharper.Core.Commands
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        /// Indicates whether the current Object is equal to another Object of the same type.
         /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
+        /// <param name="other">An Object to compare with this Object.</param>
         /// <returns>
-        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// true if the current Object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
         public Boolean Equals(CommandCallDescriptor other)
         {

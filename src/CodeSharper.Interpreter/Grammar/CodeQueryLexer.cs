@@ -26,16 +26,16 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class CodeQueryLexer : Lexer {
-	public const int
-		STRING=1, LEFT_BRACKET=2, RIGHT_BRACKET=3, LEFT_SQUARE_BRACKET=4, RIGHT_SQUARE_BRACKET=5, 
+	public const Int32
+		String=1, LEFT_BRACKET=2, RIGHT_BRACKET=3, LEFT_SQUARE_BRACKET=4, RIGHT_SQUARE_BRACKET=5, 
 		NUMBER=6, BOOLEAN=7, ID=8, SELECTOR_OPERATOR=9, DOT=10, COLON=11, COMMA=12, 
 		METHOD_CALL_SYMBOL=13, ASSIGNMENT_OPERATOR=14, PIPELINE_OPERATOR=15, WHITESPACE=16;
-	public static string[] modeNames = {
+	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
 
-	public static readonly string[] ruleNames = {
-		"STRING", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", "RIGHT_SQUARE_BRACKET", 
+	public static readonly String[] ruleNames = {
+		"String", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", "RIGHT_SQUARE_BRACKET", 
 		"NUMBER", "BOOLEAN", "ID", "SELECTOR_OPERATOR", "DOT", "COLON", "COMMA", 
 		"METHOD_CALL_SYMBOL", "ASSIGNMENT_OPERATOR", "PIPELINE_OPERATOR", "ID_SYMBOL", 
 		"CHARACTER", "WHITESPACE"
@@ -48,12 +48,12 @@ public partial class CodeQueryLexer : Lexer {
 		Interpreter = new LexerATNSimulator(this,_ATN);
 	}
 
-	private static readonly string[] _LiteralNames = {
+	private static readonly String[] _LiteralNames = {
 		null, null, "'('", "')'", "'['", "']'", null, null, null, null, "'.'", 
 		"':'", "','", "'@'", "'='"
 	};
-	private static readonly string[] _SymbolicNames = {
-		null, "STRING", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", 
+	private static readonly String[] _SymbolicNames = {
+		null, "String", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", 
 		"RIGHT_SQUARE_BRACKET", "NUMBER", "BOOLEAN", "ID", "SELECTOR_OPERATOR", 
 		"DOT", "COLON", "COMMA", "METHOD_CALL_SYMBOL", "ASSIGNMENT_OPERATOR", 
 		"PIPELINE_OPERATOR", "WHITESPACE"
@@ -69,15 +69,15 @@ public partial class CodeQueryLexer : Lexer {
 		}
 	}
 
-	public override string GrammarFileName { get { return "CodeQueryLexer.g4"; } }
+	public override String GrammarFileName { get { return "CodeQueryLexer.g4"; } }
 
-	public override string[] RuleNames { get { return ruleNames; } }
+	public override String[] RuleNames { get { return ruleNames; } }
 
-	public override string[] ModeNames { get { return modeNames; } }
+	public override String[] ModeNames { get { return modeNames; } }
 
-	public override string SerializedAtn { get { return _serializedATN; } }
+	public override String SerializedAtn { get { return _serializedATN; } }
 
-	public static readonly string _serializedATN =
+	public static readonly String _serializedATN =
 		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x2\x12{\b\x1\x4\x2"+
 		"\t\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4"+
 		"\t\t\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10"+

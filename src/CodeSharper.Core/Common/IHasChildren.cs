@@ -3,7 +3,7 @@
 namespace CodeSharper.Core.Common
 {
     /// <summary>
-    /// Represents an object which may have children
+    /// Represents an Object which may have children
     /// </summary>
     public interface IHasChildren<out TChild>
     {
@@ -13,3 +13,4 @@ namespace CodeSharper.Core.Common
         IEnumerable<TChild> Children { get; }
     }
 }
+

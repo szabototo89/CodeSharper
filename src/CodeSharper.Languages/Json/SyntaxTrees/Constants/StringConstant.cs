@@ -5,7 +5,7 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Languages.Json.SyntaxTrees
 {
-    public class StringConstant : ConstantSyntax, IHasValue<string>
+    public class StringConstant : ConstantSyntax, IHasValue<String>
     {
         /// <summary>
         /// Gets or sets the value.

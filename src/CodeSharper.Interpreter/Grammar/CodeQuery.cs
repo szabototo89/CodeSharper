@@ -30,25 +30,25 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class CodeQuery : Parser {
-	public const int
-		STRING=1, LEFT_BRACKET=2, RIGHT_BRACKET=3, LEFT_SQUARE_BRACKET=4, RIGHT_SQUARE_BRACKET=5, 
+	public const Int32
+		String=1, LEFT_BRACKET=2, RIGHT_BRACKET=3, LEFT_SQUARE_BRACKET=4, RIGHT_SQUARE_BRACKET=5, 
 		NUMBER=6, BOOLEAN=7, ID=8, SELECTOR_OPERATOR=9, DOT=10, COLON=11, COMMA=12, 
 		METHOD_CALL_SYMBOL=13, ASSIGNMENT_OPERATOR=14, PIPELINE_OPERATOR=15, WHITESPACE=16;
-	public const int
+	public const Int32
 		RULE_command = 0, RULE_expression = 1, RULE_methodCall = 2, RULE_methodCallParameter = 3, 
 		RULE_selector = 4, RULE_selectableElement = 5, RULE_pseudoSelector = 6, 
 		RULE_selectorAttribute = 7, RULE_constant = 8;
-	public static readonly string[] ruleNames = {
+	public static readonly String[] ruleNames = {
 		"command", "expression", "methodCall", "methodCallParameter", "selector", 
 		"selectableElement", "pseudoSelector", "selectorAttribute", "constant"
 	};
 
-	private static readonly string[] _LiteralNames = {
+	private static readonly String[] _LiteralNames = {
 		null, null, "'('", "')'", "'['", "']'", null, null, null, null, "'.'", 
 		"':'", "','", "'@'", "'='"
 	};
-	private static readonly string[] _SymbolicNames = {
-		null, "STRING", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", 
+	private static readonly String[] _SymbolicNames = {
+		null, "String", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", 
 		"RIGHT_SQUARE_BRACKET", "NUMBER", "BOOLEAN", "ID", "SELECTOR_OPERATOR", 
 		"DOT", "COLON", "COMMA", "METHOD_CALL_SYMBOL", "ASSIGNMENT_OPERATOR", 
 		"PIPELINE_OPERATOR", "WHITESPACE"
@@ -64,11 +64,11 @@ public partial class CodeQuery : Parser {
 		}
 	}
 
-	public override string GrammarFileName { get { return "CodeQuery.g4"; } }
+	public override String GrammarFileName { get { return "CodeQuery.g4"; } }
 
-	public override string[] RuleNames { get { return ruleNames; } }
+	public override String[] RuleNames { get { return ruleNames; } }
 
-	public override string SerializedAtn { get { return _serializedATN; } }
+	public override String SerializedAtn { get { return _serializedATN; } }
 
 	public CodeQuery(ITokenStream input)
 		: base(input)
@@ -83,11 +83,11 @@ public partial class CodeQuery : Parser {
 		public CommandContext command() {
 			return GetRuleContext<CommandContext>(0);
 		}
-		public CommandContext(ParserRuleContext parent, int invokingState)
+		public CommandContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_command; } }
+		public override Int32 RuleIndex { get { return RULE_command; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterCommand(this);
@@ -134,11 +134,11 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class ExpressionContext : ParserRuleContext {
-		public ExpressionContext(ParserRuleContext parent, int invokingState)
+		public ExpressionContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_expression; } }
+		public override Int32 RuleIndex { get { return RULE_expression; } }
 	 
 		public ExpressionContext() { }
 		public virtual void CopyFrom(ExpressionContext context) {
@@ -259,14 +259,14 @@ public partial class CodeQuery : Parser {
 		public MethodCallParameterContext[] methodCallParameter() {
 			return GetRuleContexts<MethodCallParameterContext>();
 		}
-		public MethodCallParameterContext methodCallParameter(int i) {
+		public MethodCallParameterContext methodCallParameter(Int32 i) {
 			return GetRuleContext<MethodCallParameterContext>(i);
 		}
-		public MethodCallContext(ParserRuleContext parent, int invokingState)
+		public MethodCallContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_methodCall; } }
+		public override Int32 RuleIndex { get { return RULE_methodCall; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterMethodCall(this);
@@ -287,7 +287,7 @@ public partial class CodeQuery : Parser {
 		MethodCallContext _localctx = new MethodCallContext(Context, State);
 		EnterRule(_localctx, 4, RULE_methodCall);
 		try {
-			int _alt;
+			Int32 _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 31; Match(METHOD_CALL_SYMBOL);
@@ -321,11 +321,11 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class MethodCallParameterContext : ParserRuleContext {
-		public MethodCallParameterContext(ParserRuleContext parent, int invokingState)
+		public MethodCallParameterContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_methodCallParameter; } }
+		public override Int32 RuleIndex { get { return RULE_methodCallParameter; } }
 	 
 		public MethodCallParameterContext() { }
 		public virtual void CopyFrom(MethodCallParameterContext context) {
@@ -336,7 +336,7 @@ public partial class CodeQuery : Parser {
 		public IToken ParameterName;
 		public IToken ActualParameterValue;
 		public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
-		public ITerminalNode ID(int i) {
+		public ITerminalNode ID(Int32 i) {
 			return GetToken(CodeQuery.ID, i);
 		}
 		public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
@@ -406,7 +406,7 @@ public partial class CodeQuery : Parser {
 	public MethodCallParameterContext methodCallParameter() {
 		MethodCallParameterContext _localctx = new MethodCallParameterContext(Context, State);
 		EnterRule(_localctx, 6, RULE_methodCallParameter);
-		int _la;
+		Int32 _la;
 		try {
 			State = 54;
 			switch ( Interpreter.AdaptivePredict(TokenStream,6,Context) ) {
@@ -475,24 +475,24 @@ public partial class CodeQuery : Parser {
 		public SelectableElementContext[] selectableElement() {
 			return GetRuleContexts<SelectableElementContext>();
 		}
-		public SelectableElementContext selectableElement(int i) {
+		public SelectableElementContext selectableElement(Int32 i) {
 			return GetRuleContext<SelectableElementContext>(i);
 		}
 		public SelectorAttributeContext[] selectorAttribute() {
 			return GetRuleContexts<SelectorAttributeContext>();
 		}
-		public SelectorAttributeContext selectorAttribute(int i) {
+		public SelectorAttributeContext selectorAttribute(Int32 i) {
 			return GetRuleContext<SelectorAttributeContext>(i);
 		}
 		public ITerminalNode[] SELECTOR_OPERATOR() { return GetTokens(CodeQuery.SELECTOR_OPERATOR); }
-		public ITerminalNode SELECTOR_OPERATOR(int i) {
+		public ITerminalNode SELECTOR_OPERATOR(Int32 i) {
 			return GetToken(CodeQuery.SELECTOR_OPERATOR, i);
 		}
-		public SelectorContext(ParserRuleContext parent, int invokingState)
+		public SelectorContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_selector; } }
+		public override Int32 RuleIndex { get { return RULE_selector; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterSelector(this);
@@ -512,9 +512,9 @@ public partial class CodeQuery : Parser {
 	public SelectorContext selector() {
 		SelectorContext _localctx = new SelectorContext(Context, State);
 		EnterRule(_localctx, 8, RULE_selector);
-		int _la;
+		Int32 _la;
 		try {
-			int _alt;
+			Int32 _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 56; selectableElement();
@@ -573,14 +573,14 @@ public partial class CodeQuery : Parser {
 		public PseudoSelectorContext[] pseudoSelector() {
 			return GetRuleContexts<PseudoSelectorContext>();
 		}
-		public PseudoSelectorContext pseudoSelector(int i) {
+		public PseudoSelectorContext pseudoSelector(Int32 i) {
 			return GetRuleContext<PseudoSelectorContext>(i);
 		}
-		public SelectableElementContext(ParserRuleContext parent, int invokingState)
+		public SelectableElementContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_selectableElement; } }
+		public override Int32 RuleIndex { get { return RULE_selectableElement; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterSelectableElement(this);
@@ -600,7 +600,7 @@ public partial class CodeQuery : Parser {
 	public SelectableElementContext selectableElement() {
 		SelectableElementContext _localctx = new SelectableElementContext(Context, State);
 		EnterRule(_localctx, 10, RULE_selectableElement);
-		int _la;
+		Int32 _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
@@ -640,11 +640,11 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class PseudoSelectorContext : ParserRuleContext {
-		public PseudoSelectorContext(ParserRuleContext parent, int invokingState)
+		public PseudoSelectorContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_pseudoSelector; } }
+		public override Int32 RuleIndex { get { return RULE_pseudoSelector; } }
 	 
 		public PseudoSelectorContext() { }
 		public virtual void CopyFrom(PseudoSelectorContext context) {
@@ -677,7 +677,7 @@ public partial class CodeQuery : Parser {
 	public partial class PseudoSelectorWithIdentifierContext : PseudoSelectorContext {
 		public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
 		public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
-		public ITerminalNode ID(int i) {
+		public ITerminalNode ID(Int32 i) {
 			return GetToken(CodeQuery.ID, i);
 		}
 		public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
@@ -764,11 +764,11 @@ public partial class CodeQuery : Parser {
 		public ConstantContext constant() {
 			return GetRuleContext<ConstantContext>(0);
 		}
-		public SelectorAttributeContext(ParserRuleContext parent, int invokingState)
+		public SelectorAttributeContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_selectorAttribute; } }
+		public override Int32 RuleIndex { get { return RULE_selectorAttribute; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterSelectorAttribute(this);
@@ -810,11 +810,11 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class ConstantContext : ParserRuleContext {
-		public ConstantContext(ParserRuleContext parent, int invokingState)
+		public ConstantContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_constant; } }
+		public override Int32 RuleIndex { get { return RULE_constant; } }
 	 
 		public ConstantContext() { }
 		public virtual void CopyFrom(ConstantContext context) {
@@ -822,7 +822,7 @@ public partial class CodeQuery : Parser {
 		}
 	}
 	public partial class ConstantStringContext : ConstantContext {
-		public ITerminalNode STRING() { return GetToken(CodeQuery.STRING, 0); }
+		public ITerminalNode String() { return GetToken(CodeQuery.String, 0); }
 		public ConstantStringContext(ConstantContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -880,11 +880,11 @@ public partial class CodeQuery : Parser {
 		try {
 			State = 108;
 			switch (TokenStream.La(1)) {
-			case STRING:
+			case String:
 				_localctx = new ConstantStringContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 105; Match(STRING);
+				State = 105; Match(String);
 				}
 				break;
 			case NUMBER:
@@ -916,7 +916,7 @@ public partial class CodeQuery : Parser {
 		return _localctx;
 	}
 
-	public static readonly string _serializedATN =
+	public static readonly String _serializedATN =
 		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x12q\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
 		"\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\x5\x2\x18\n\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3"+

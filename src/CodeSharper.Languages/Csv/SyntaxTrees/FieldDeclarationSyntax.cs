@@ -47,10 +47,10 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is string field.
+        /// Gets a value indicating whether this instance is String field.
         /// </summary>
         /// <value>
-        /// <c>true</c> if this instance is string field; otherwise, <c>false</c>.
+        /// <c>true</c> if this instance is String field; otherwise, <c>false</c>.
         /// </value>
         public Boolean IsTextField
         {

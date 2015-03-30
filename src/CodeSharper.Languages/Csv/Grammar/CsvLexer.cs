@@ -12,6 +12,7 @@
 
 // Unreachable code detected
 
+using System;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
@@ -26,14 +27,14 @@ namespace CodeSharper.Languages.Csv.Grammar {
     [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class CsvLexer : Lexer {
-	public const int
-		T__0=1, T__1=2, COMMA=3, TEXT=4, STRING=5;
-	public static string[] modeNames = {
+	public const Int32
+		T__0=1, T__1=2, COMMA=3, TEXT=4, String=5;
+	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
 
-	public static readonly string[] ruleNames = {
-		"T__0", "T__1", "COMMA", "TEXT", "STRING"
+	public static readonly String[] ruleNames = {
+		"T__0", "T__1", "COMMA", "TEXT", "String"
 	};
 
 
@@ -43,11 +44,11 @@ public partial class CsvLexer : Lexer {
 		Interpreter = new LexerATNSimulator(this,_ATN);
 	}
 
-	private static readonly string[] _LiteralNames = {
+	private static readonly String[] _LiteralNames = {
 		null, "'\r'", "'\n'", "','"
 	};
-	private static readonly string[] _SymbolicNames = {
-		null, null, null, "COMMA", "TEXT", "STRING"
+	private static readonly String[] _SymbolicNames = {
+		null, null, null, "COMMA", "TEXT", "String"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -60,15 +61,15 @@ public partial class CsvLexer : Lexer {
 		}
 	}
 
-	public override string GrammarFileName { get { return "Csv.g4"; } }
+	public override String GrammarFileName { get { return "Csv.g4"; } }
 
-	public override string[] RuleNames { get { return ruleNames; } }
+	public override String[] RuleNames { get { return ruleNames; } }
 
-	public override string[] ModeNames { get { return modeNames; } }
+	public override String[] ModeNames { get { return modeNames; } }
 
-	public override string SerializedAtn { get { return _serializedATN; } }
+	public override String SerializedAtn { get { return _serializedATN; } }
 
-	public static readonly string _serializedATN =
+	public static readonly String _serializedATN =
 		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x2\a#\b\x1\x4\x2\t"+
 		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x3\x2\x3\x2\x3\x3\x3\x3"+
 		"\x3\x4\x3\x4\x3\x5\x6\x5\x15\n\x5\r\x5\xE\x5\x16\x3\x6\x3\x6\x3\x6\x3"+

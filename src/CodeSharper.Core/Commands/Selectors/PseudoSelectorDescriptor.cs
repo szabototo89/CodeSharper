@@ -48,21 +48,21 @@ namespace CodeSharper.Core.Commands.Selectors
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// true if the specified object  is equal to the current object; otherwise, false.
+        /// true if the specified Object  is equal to the current Object; otherwise, false.
         /// </returns>
-        /// <param name="other">The object to compare with the current object. </param><filterpriority>2</filterpriority>
+        /// <param name="other">The Object to compare with the current Object. </param><filterpriority>2</filterpriority>
         public override Boolean Equals(Object other)
         {
             return Equals(other as PseudoSelectorDescriptor);
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        /// Indicates whether the current Object is equal to another Object of the same type.
         /// </summary>
         /// <returns>
-        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+        /// true if the current Object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
-        /// <param name="other">An object to compare with this object.</param>
+        /// <param name="other">An Object to compare with this Object.</param>
         public Boolean Equals(PseudoSelectorDescriptor other)
         {
             return EqualityHelper.IsNullOrReferenceEqual(other, this) ??

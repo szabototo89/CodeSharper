@@ -3,7 +3,7 @@
     public interface IHasNext<out TValue>
     {
         /// <summary>
-        /// Gets the next element of object
+        /// Gets the next element of Object
         /// </summary>
         TValue Next { get; }
     }

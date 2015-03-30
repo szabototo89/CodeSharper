@@ -30,22 +30,22 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class JsonParser : Parser {
-	public const int
+	public const Int32
 		T__0=1, T__1=2, T__2=3, T__3=4, COLON=5, COMMA=6, BOOLEAN=7, NUMBER=8, 
-		STRING=9, IDENTIFIER=10, WHITESPACE=11;
-	public const int
+		String=9, IDENTIFIER=10, WHITESPACE=11;
+	public const Int32
 		RULE_start = 0, RULE_literal = 1, RULE_objectLiteral = 2, RULE_arrayLiteral = 3, 
 		RULE_keyValuePair = 4, RULE_key = 5, RULE_value = 6, RULE_constant = 7;
-	public static readonly string[] ruleNames = {
+	public static readonly String[] ruleNames = {
 		"start", "literal", "objectLiteral", "arrayLiteral", "keyValuePair", "key", 
 		"value", "constant"
 	};
 
-	private static readonly string[] _LiteralNames = {
+	private static readonly String[] _LiteralNames = {
 		null, "'{'", "'}'", "'['", "']'", "':'", "','"
 	};
-	private static readonly string[] _SymbolicNames = {
-		null, null, null, null, null, "COLON", "COMMA", "BOOLEAN", "NUMBER", "STRING", 
+	private static readonly String[] _SymbolicNames = {
+		null, null, null, null, null, "COLON", "COMMA", "BOOLEAN", "NUMBER", "String", 
 		"IDENTIFIER", "WHITESPACE"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
@@ -59,11 +59,11 @@ public partial class JsonParser : Parser {
 		}
 	}
 
-	public override string GrammarFileName { get { return "Json.g4"; } }
+	public override String GrammarFileName { get { return "Json.g4"; } }
 
-	public override string[] RuleNames { get { return ruleNames; } }
+	public override String[] RuleNames { get { return ruleNames; } }
 
-	public override string SerializedAtn { get { return _serializedATN; } }
+	public override String SerializedAtn { get { return _serializedATN; } }
 
 	public JsonParser(ITokenStream input)
 		: base(input)
@@ -74,11 +74,11 @@ public partial class JsonParser : Parser {
 		public LiteralContext literal() {
 			return GetRuleContext<LiteralContext>(0);
 		}
-		public StartContext(ParserRuleContext parent, int invokingState)
+		public StartContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_start; } }
+		public override Int32 RuleIndex { get { return RULE_start; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitStart(this);
@@ -114,11 +114,11 @@ public partial class JsonParser : Parser {
 		public ArrayLiteralContext arrayLiteral() {
 			return GetRuleContext<ArrayLiteralContext>(0);
 		}
-		public LiteralContext(ParserRuleContext parent, int invokingState)
+		public LiteralContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_literal; } }
+		public override Int32 RuleIndex { get { return RULE_literal; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitLiteral(this);
@@ -164,18 +164,18 @@ public partial class JsonParser : Parser {
 		public KeyValuePairContext[] keyValuePair() {
 			return GetRuleContexts<KeyValuePairContext>();
 		}
-		public KeyValuePairContext keyValuePair(int i) {
+		public KeyValuePairContext keyValuePair(Int32 i) {
 			return GetRuleContext<KeyValuePairContext>(i);
 		}
 		public ITerminalNode[] COMMA() { return GetTokens(JsonParser.COMMA); }
-		public ITerminalNode COMMA(int i) {
+		public ITerminalNode COMMA(Int32 i) {
 			return GetToken(JsonParser.COMMA, i);
 		}
-		public ObjectLiteralContext(ParserRuleContext parent, int invokingState)
+		public ObjectLiteralContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_objectLiteral; } }
+		public override Int32 RuleIndex { get { return RULE_objectLiteral; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitObjectLiteral(this);
@@ -187,15 +187,15 @@ public partial class JsonParser : Parser {
 	public ObjectLiteralContext objectLiteral() {
 		ObjectLiteralContext _localctx = new ObjectLiteralContext(Context, State);
 		EnterRule(_localctx, 4, RULE_objectLiteral);
-		int _la;
+		Int32 _la;
 		try {
-			int _alt;
+			Int32 _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 22; Match(T__0);
 			State = 31;
 			_la = TokenStream.La(1);
-			if (_la==STRING || _la==IDENTIFIER) {
+			if (_la==String || _la==IDENTIFIER) {
 				{
 				State = 23; keyValuePair();
 				State = 28;
@@ -243,18 +243,18 @@ public partial class JsonParser : Parser {
 		public ValueContext[] value() {
 			return GetRuleContexts<ValueContext>();
 		}
-		public ValueContext value(int i) {
+		public ValueContext value(Int32 i) {
 			return GetRuleContext<ValueContext>(i);
 		}
 		public ITerminalNode[] COMMA() { return GetTokens(JsonParser.COMMA); }
-		public ITerminalNode COMMA(int i) {
+		public ITerminalNode COMMA(Int32 i) {
 			return GetToken(JsonParser.COMMA, i);
 		}
-		public ArrayLiteralContext(ParserRuleContext parent, int invokingState)
+		public ArrayLiteralContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_arrayLiteral; } }
+		public override Int32 RuleIndex { get { return RULE_arrayLiteral; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitArrayLiteral(this);
@@ -266,15 +266,15 @@ public partial class JsonParser : Parser {
 	public ArrayLiteralContext arrayLiteral() {
 		ArrayLiteralContext _localctx = new ArrayLiteralContext(Context, State);
 		EnterRule(_localctx, 6, RULE_arrayLiteral);
-		int _la;
+		Int32 _la;
 		try {
-			int _alt;
+			Int32 _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 38; Match(T__2);
 			State = 47;
 			_la = TokenStream.La(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << BOOLEAN) | (1L << NUMBER) | (1L << STRING))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << BOOLEAN) | (1L << NUMBER) | (1L << String))) != 0)) {
 				{
 				State = 39; value();
 				State = 44;
@@ -325,11 +325,11 @@ public partial class JsonParser : Parser {
 		public ValueContext value() {
 			return GetRuleContext<ValueContext>(0);
 		}
-		public KeyValuePairContext(ParserRuleContext parent, int invokingState)
+		public KeyValuePairContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_keyValuePair; } }
+		public override Int32 RuleIndex { get { return RULE_keyValuePair; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitKeyValuePair(this);
@@ -362,12 +362,12 @@ public partial class JsonParser : Parser {
 
 	public partial class KeyContext : ParserRuleContext {
 		public ITerminalNode IDENTIFIER() { return GetToken(JsonParser.IDENTIFIER, 0); }
-		public ITerminalNode STRING() { return GetToken(JsonParser.STRING, 0); }
-		public KeyContext(ParserRuleContext parent, int invokingState)
+		public ITerminalNode String() { return GetToken(JsonParser.String, 0); }
+		public KeyContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_key; } }
+		public override Int32 RuleIndex { get { return RULE_key; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitKey(this);
@@ -379,13 +379,13 @@ public partial class JsonParser : Parser {
 	public KeyContext key() {
 		KeyContext _localctx = new KeyContext(Context, State);
 		EnterRule(_localctx, 10, RULE_key);
-		int _la;
+		Int32 _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 58;
 			_la = TokenStream.La(1);
-			if ( !(_la==STRING || _la==IDENTIFIER) ) {
+			if ( !(_la==String || _la==IDENTIFIER) ) {
 			ErrorHandler.RecoverInline(this);
 			}
 			Consume();
@@ -409,11 +409,11 @@ public partial class JsonParser : Parser {
 		public LiteralContext literal() {
 			return GetRuleContext<LiteralContext>(0);
 		}
-		public ValueContext(ParserRuleContext parent, int invokingState)
+		public ValueContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_value; } }
+		public override Int32 RuleIndex { get { return RULE_value; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitValue(this);
@@ -430,7 +430,7 @@ public partial class JsonParser : Parser {
 			switch (TokenStream.La(1)) {
 			case BOOLEAN:
 			case NUMBER:
-			case STRING:
+			case String:
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 60; constant();
@@ -461,12 +461,12 @@ public partial class JsonParser : Parser {
 	public partial class ConstantContext : ParserRuleContext {
 		public ITerminalNode BOOLEAN() { return GetToken(JsonParser.BOOLEAN, 0); }
 		public ITerminalNode NUMBER() { return GetToken(JsonParser.NUMBER, 0); }
-		public ITerminalNode STRING() { return GetToken(JsonParser.STRING, 0); }
-		public ConstantContext(ParserRuleContext parent, int invokingState)
+		public ITerminalNode String() { return GetToken(JsonParser.String, 0); }
+		public ConstantContext(ParserRuleContext parent, Int32 invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_constant; } }
+		public override Int32 RuleIndex { get { return RULE_constant; } }
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConstant(this);
@@ -478,13 +478,13 @@ public partial class JsonParser : Parser {
 	public ConstantContext constant() {
 		ConstantContext _localctx = new ConstantContext(Context, State);
 		EnterRule(_localctx, 14, RULE_constant);
-		int _la;
+		Int32 _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 64;
 			_la = TokenStream.La(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << NUMBER) | (1L << STRING))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << NUMBER) | (1L << String))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
 			}
 			Consume();
@@ -501,7 +501,7 @@ public partial class JsonParser : Parser {
 		return _localctx;
 	}
 
-	public static readonly string _serializedATN =
+	public static readonly String _serializedATN =
 		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\r\x45\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
 		"\t\x3\x2\x3\x2\x3\x3\x3\x3\x5\x3\x17\n\x3\x3\x4\x3\x4\x3\x4\x3\x4\a\x4"+

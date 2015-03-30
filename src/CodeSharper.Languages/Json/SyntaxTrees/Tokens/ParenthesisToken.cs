@@ -26,7 +26,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Tokens
         public Boolean IsArrayType { get { return ParenthesisType.HasFlag(ParenthesisType.ArrayType); } }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is object type.
+        /// Gets a value indicating whether this instance is Object type.
         /// </summary>
         public Boolean IsObjectType { get { return ParenthesisType.HasFlag(ParenthesisType.ObjectType); } }
 

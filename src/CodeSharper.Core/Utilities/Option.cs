@@ -120,11 +120,11 @@ namespace CodeSharper.Core.Utilities
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        /// Indicates whether the current Object is equal to another Object of the same type.
         /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
+        /// <param name="other">An Object to compare with this Object.</param>
         /// <returns>
-        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// true if the current Object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
         public Boolean Equals(Option<TValue> other)
         {
@@ -132,9 +132,9 @@ namespace CodeSharper.Core.Utilities
         }
 
         /// <summary>
-        /// Indicates whether this instance and a specified object are equal.
+        /// Indicates whether this instance and a specified Object are equal.
         /// </summary>
-        /// <param name="obj">Another object to compare to.</param>
+        /// <param name="obj">Another Object to compare to.</param>
         /// <returns>
         /// true if <paramref name="obj" /> and this instance are the same type and represent the same value; otherwise, false.
         /// </returns>
@@ -177,6 +177,9 @@ namespace CodeSharper.Core.Utilities
 
     public sealed class None
     {
+        /// <summary>
+        /// The instance of <see cref="None"/>
+        /// </summary>
         internal static readonly None Instance = new None();
 
         /// <summary>
