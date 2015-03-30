@@ -52,8 +52,9 @@
     <Compile Include="Csv\Grammar\CsvParser.cs" />
     <Compile Include="Csv\Grammar\CsvVisitor.cs" />
     <Compile Include="Csv\SyntaxTrees\CsvNode.cs" />
-    <Compile Include="Csv\SyntaxTrees\CsvSyntax.cs" />
+    <Compile Include="Csv\Factories\CsvSyntaxTreeFactory.cs" />
     <Compile Include="Csv\SyntaxTrees\CsvTokens.cs" />
+    <Compile Include="Csv\Factories\ICsvSyntaxTreeFactory.cs" />
     <Compile Include="Csv\Visitors\CsvStandardSyntaxTreeBuilder.cs" />
     <Compile Include="Json\Grammar\JsonBaseVisitor.cs" />
     <Compile Include="Json\Grammar\JsonLexer.cs" />
@@ -78,8 +79,8 @@
     <Compile Include="Csv\SemanticTrees\ColumnSemanticNode.cs" />
     <Compile Include="Csv\SyntaxTrees\CommaToken.cs" />
     <Compile Include="Csv\SyntaxTrees\CsvCompilationUnit.cs" />
-    <Compile Include="Csv\SyntaxTrees\FieldSyntax.cs" />
-    <Compile Include="Csv\SyntaxTrees\RowSyntax.cs" />
+    <Compile Include="Csv\SyntaxTrees\FieldDeclarationSyntax.cs" />
+    <Compile Include="Csv\SyntaxTrees\RowDeclarationSyntax.cs" />
     <Compile Include="Csv\Visitors\CsvSyntaxTreeBuilder.cs" />
     <Compile Include="Utilities\ParseTreeVisitorExtensions.cs" />
   </ItemGroup>

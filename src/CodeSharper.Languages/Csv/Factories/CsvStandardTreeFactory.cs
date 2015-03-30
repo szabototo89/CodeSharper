@@ -13,7 +13,7 @@ namespace CodeSharper.Languages.Csv.Factories
     public class CsvStandardTreeFactory : ICsvTreeFactory
     {
         private readonly Stack<CsvCompilationUnit> _csvCompilationUnits;
-        private RowSyntax _actualRow;
+        private RowDeclarationSyntax _actualRowDeclaration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CsvStandardTreeFactory"/> class.
@@ -30,8 +30,8 @@ namespace CodeSharper.Languages.Csv.Factories
         {
             Assume.NotNull(textRange, "textRange");
             checkIsDocumentDefined();
-            _actualRow = new RowSyntax(textRange);
-            _csvCompilationUnits.Peek().AppendChild(_actualRow);
+            _actualRowDeclaration = new RowDeclarationSyntax(textRange);
+            _csvCompilationUnits.Peek().AppendChild(_actualRowDeclaration);
             return this;
         }
 
@@ -43,7 +43,7 @@ namespace CodeSharper.Languages.Csv.Factories
             Assume.NotNull(textRange, "textRange");
             checkIsRowAdded();
 
-            var field = new FieldSyntax(textRange);
+            var field = new FieldDeclarationSyntax(textRange);
             addChildToLastDefinedRow(field);
 
             return this;
@@ -98,7 +98,7 @@ namespace CodeSharper.Languages.Csv.Factories
 
         private void addChildToLastDefinedRow(Node field)
         {
-            _actualRow.AppendChild(field);
+            _actualRowDeclaration.AppendChild(field);
         }
 
         #endregion
@@ -114,7 +114,7 @@ namespace CodeSharper.Languages.Csv.Factories
         [DebuggerStepThrough]
         private void checkIsRowAdded()
         {
-            if (_actualRow == null)
+            if (_actualRowDeclaration == null)
                 throw ThrowHelper.Exception("Row is not defined!");
         }
 

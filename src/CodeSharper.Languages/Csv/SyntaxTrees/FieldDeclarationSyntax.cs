@@ -5,13 +5,13 @@ using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Languages.Csv.SyntaxTrees
 {
-    public class FieldSyntax : CsvNode
+    public class FieldDeclarationSyntax : CsvNode
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FieldSyntax"/> class.
+        /// Initializes a new instance of the <see cref="FieldDeclarationSyntax"/> class.
         /// </summary>
         /// <param name="textRange"></param>
-        public FieldSyntax(TextRange textRange)
+        public FieldDeclarationSyntax(TextRange textRange)
             : base(textRange)
         {
         }

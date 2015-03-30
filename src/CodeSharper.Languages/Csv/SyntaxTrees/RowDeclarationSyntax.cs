@@ -5,15 +5,15 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Languages.Csv.SyntaxTrees
 {
-    public class RowSyntax : CsvNode
+    public class RowDeclarationSyntax : CsvNode
     {
         private IEnumerable<CommaToken> _commas;
-        private IEnumerable<FieldSyntax> _fields;
+        private IEnumerable<FieldDeclarationSyntax> _fields;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RowSyntax"/> class.
+        /// Initializes a new instance of the <see cref="RowDeclarationSyntax"/> class.
         /// </summary>
-        public RowSyntax(TextRange textRange) 
+        public RowDeclarationSyntax(TextRange textRange) 
             : base(textRange)
         {
         }
@@ -28,7 +28,7 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
             }
         }
 
-        public IEnumerable<FieldSyntax> Fields
+        public IEnumerable<FieldDeclarationSyntax> Fields
         {
             get { return _fields; }
             internal set

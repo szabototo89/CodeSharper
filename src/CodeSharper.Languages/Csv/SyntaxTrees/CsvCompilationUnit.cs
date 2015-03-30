@@ -9,12 +9,12 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
 {
     public class CsvCompilationUnit : CsvNode
     {
-        private IEnumerable<RowSyntax> _rows;
+        private IEnumerable<RowDeclarationSyntax> _rows;
 
         /// <summary>
         /// Gets or sets the rows.
         /// </summary>
-        public IEnumerable<RowSyntax> Rows
+        public IEnumerable<RowDeclarationSyntax> Rows
         {
             get { return _rows; }
             internal set
@@ -27,12 +27,12 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
         /// <summary>
         /// Initializes a new instance of the <see cref="CsvCompilationUnit"/> class.
         /// </summary>
-        public CsvCompilationUnit(TextRange textRange) : this(textRange, Enumerable.Empty<RowSyntax>()) { }
+        public CsvCompilationUnit(TextRange textRange) : this(textRange, Enumerable.Empty<RowDeclarationSyntax>()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CsvCompilationUnit"/> class.
         /// </summary>
-        public CsvCompilationUnit(TextRange textRange, IEnumerable<RowSyntax> rows)
+        public CsvCompilationUnit(TextRange textRange, IEnumerable<RowDeclarationSyntax> rows)
             : base(textRange)
         {
             Assume.NotNull(rows, "rows");

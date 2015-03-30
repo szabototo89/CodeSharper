@@ -59,7 +59,7 @@ namespace CodeSharper.Core.Texts
             Assume.IsTrue(start >= 0, "start must be positive or zero!");
             Assume.IsTrue(start <= stop, "start must be lesser than stop!");
             Assume.NotNull(textDocument, "textDocument");
-
+            
             Start = start;
             Stop = stop;
             TextDocument = textDocument;

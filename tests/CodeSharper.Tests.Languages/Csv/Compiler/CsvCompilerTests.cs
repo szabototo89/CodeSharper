@@ -32,7 +32,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
 
             // When
             var node = underTest.Parse(input) as CsvCompilationUnit;
-            var fields = node.ToEnumerable().OfType<FieldSyntax>();
+            var fields = node.ToEnumerable().OfType<FieldDeclarationSyntax>();
             var allOfThemIsTextField = fields.All(field => field.IsTextField);
             var fieldValues = fields.Select(getTextFromNode);
 
@@ -53,7 +53,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
 
             // When
             var node = underTest.Parse(input).As<CsvCompilationUnit>();
-            var fields = node.ToEnumerable().OfType<FieldSyntax>();
+            var fields = node.ToEnumerable().OfType<FieldDeclarationSyntax>();
 
             var stringFields = fields.Where(field => field.IsStringField)
                                      .Select(getTextFromNode);
@@ -96,12 +96,12 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         {
             // Given
             var input = "one,two\nthree,four";
-            var treeVisitor = new CsvStandardSyntaxTreeBuilder();
+            var treeVisitor = new CsvStandardSyntaxTreeBuilder(CsvSyntaxTreeFactory.Instance);
             var underTest = new CsvCompiler();
 
             // When
             var node = underTest.Parse(input, treeVisitor) as CsvCompilationUnit;
-            var fields = node.ToEnumerable().OfType<FieldSyntax>();
+            var fields = node.ToEnumerable().OfType<FieldDeclarationSyntax>();
             var allOfThemIsTextField = fields.All(field => field.IsTextField);
             var fieldValues = fields.Select(getTextFromNode);
 

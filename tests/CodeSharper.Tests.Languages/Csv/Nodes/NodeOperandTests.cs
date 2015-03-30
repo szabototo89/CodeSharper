@@ -28,7 +28,7 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var result = operand.Calculate(documentNode.Children);
 
             // Then
-            Assert.That(result, Has.All.InstanceOf<FieldSyntax>());
+            Assert.That(result, Has.All.InstanceOf<FieldDeclarationSyntax>());
         }
 
         [Test(Description = "SelectChildrenOperand should return all children of rows when CsvCompilationUnit is passed and SelectRelativeNodesOperand is used")]
@@ -47,7 +47,7 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var result = operand.Calculate(new[] { documentNode });
 
             // Then
-            Assert.That(result, Has.All.InstanceOf<FieldSyntax>());
+            Assert.That(result, Has.All.InstanceOf<FieldDeclarationSyntax>());
         }
 
     }
