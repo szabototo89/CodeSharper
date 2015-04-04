@@ -38,7 +38,7 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
             Assume.NotNull(rows, "rows");
 
             Rows = rows;
-            this.AppendChildren(rows);
+            this.AttachChildren(rows);
         }
     }
 }

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Commands\CommandCallActualArgumentTests.cs" />
     <Compile Include="Commands\CommandCallDescriptorTests.cs" />
+    <Compile Include="Common\ExecutorTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifierTests.cs" />

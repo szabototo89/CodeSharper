@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using CodeSharper.Core.Utilities;
+
+namespace CodeSharper.Core.Common.Runnables.Converters
+{
+    public class FlattenValueProducer<TParameter> : ValueProducerBase<IEnumerable<IEnumerable<TParameter>>, IEnumerable<TParameter>>
+    {
+        /// <summary>
+        /// Determines whether the specified parameter is convertable.
+        /// </summary>
+        public override Boolean IsConvertable(Object parameter)
+        {
+            return parameter is IEnumerable<IEnumerable<TParameter>>;
+        }
+
+        /// <summary>
+        /// Converts the specified parameter to the proper format
+        /// </summary>
+        public override Object Convert(Object parameter)
+        {
+            return Convert(parameter as IEnumerable<IEnumerable<TParameter>>);
+        }
+
+        /// <summary>
+        /// Converts the specified parameter to the proper format
+        /// </summary>
+        public override IEnumerable<TParameter> Convert(IEnumerable<IEnumerable<TParameter>> parameter)
+        {
+            return parameter.SelectMany(element => element);
+        }
+    }
+
+    public class MultiValueArgumentBefore<TParameter> : ValueConsumerBase<IEnumerable<TParameter>, TParameter>
+    {
+        /// <summary>
+        /// Determines whether the specified parameter is convertable.
+        /// </summary>
+        public override Boolean IsConvertable(Object parameter)
+        {
+            return parameter is IEnumerable<TParameter>;
+        }
+
+        /// <summary>
+        /// Converts the specified parameter to the proper value
+        /// </summary>
+        public override Object Convert<TResult>(IEnumerable<TParameter> parameter, Func<TParameter, TResult> func)
+        {
+            var result = new List<TResult>();
+            foreach (var value in parameter)
+            {
+                result.Add(func(value));
+            }
+
+            return result;
+        }
+    }
+
+}

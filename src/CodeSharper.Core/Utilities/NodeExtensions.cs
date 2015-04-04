@@ -16,7 +16,7 @@ namespace CodeSharper.Core.Utilities
             return root.Children.Union(root.Children.SelectMany(ToEnumerable));
         }
 
-        public static void AppendChildren<TNode>(this Node node, IEnumerable<TNode> children)
+        public static void AttachChildren<TNode>(this Node node, IEnumerable<TNode> children)
             where TNode : Node
         {
             foreach (var child in children)

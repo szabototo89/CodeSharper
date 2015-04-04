@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Commands;
+using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.Attributes;
+using CodeSharper.Core.Texts;
+using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Commands
