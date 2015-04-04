@@ -1,5 +1,8 @@
 ﻿namespace CodeSharper.Core.Common
 {
+    /// <summary>
+    /// Represents an object which has a parent
+    /// </summary>
     public interface IHasParent<out TParent>
     {
         /// <summary>
