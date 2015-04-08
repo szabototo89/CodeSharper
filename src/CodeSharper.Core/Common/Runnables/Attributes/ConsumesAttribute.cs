@@ -9,16 +9,16 @@ namespace CodeSharper.Core.Common.Runnables.Attributes
         /// <summary>
         /// Gets or sets the type of argument before.
         /// </summary>
-        public Type TypeOfArgumentBefore { get; protected set; }
+        public Type ConsumerType { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConsumesAttribute"/> class.
         /// </summary>
-        public ConsumesAttribute(Type typeOfArgumentBefore)
+        public ConsumesAttribute(Type consumerType)
         {
-            Assume.NotNull(typeOfArgumentBefore, "typeOfArgumentBefore");
+            Assume.NotNull(consumerType, "ConsumerType");
 
-            TypeOfArgumentBefore = typeOfArgumentBefore;
+            ConsumerType = consumerType;
         }
     }
 }

@@ -19,5 +19,15 @@ namespace CodeSharper.Core.Utilities
 
             return null;
         }
+
+        /// <summary>
+        /// Determines whether the specified element is null or same with other
+        /// </summary>
+        public static Boolean? IsNullOrReferenceEqual<TElement>(TElement other, TElement @this,
+            Boolean checkTypeEquality) where TElement : class
+        {
+            return IsNullOrReferenceEqual(other, @this) ??
+                  (checkTypeEquality && other.GetType() == @this.GetType());
+        }
     }
 }

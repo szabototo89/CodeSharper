@@ -9,16 +9,16 @@ namespace CodeSharper.Core.Common.Runnables.Attributes
         /// <summary>
         /// Gets or sets the type of argument after.
         /// </summary>
-        public Type TypeOfArgumentAfter { get; protected set; }
+        public Type ProducerType { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProducesAttribute"/> class.
         /// </summary>
-        public ProducesAttribute(Type typeOfArgumentAfter)
+        public ProducesAttribute(Type producerType)
         {
-            Assume.NotNull(typeOfArgumentAfter, "typeOfArgumentAfter");
+            Assume.NotNull(producerType, "ProducerType");
 
-            TypeOfArgumentAfter = typeOfArgumentAfter;
+            ProducerType = producerType;
         }
     }
 }
