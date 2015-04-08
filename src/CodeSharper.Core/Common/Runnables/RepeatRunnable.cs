@@ -11,6 +11,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Gets or sets the count of repeating
         /// </summary>
+        [BindTo("count")]
         public Int32 Count { get; set; }
 
         /// <summary>

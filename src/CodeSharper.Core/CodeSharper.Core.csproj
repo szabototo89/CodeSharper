@@ -48,6 +48,14 @@
     <Compile Include="Commands\Selectors\PseudoSelectorDescriptor.cs" />
     <Compile Include="Commands\Selectors\SelectorAttributeDescriptor.cs" />
     <Compile Include="Commands\Selectors\SelectorDescriptor.cs" />
+    <Compile Include="Common\ArgumentDescriptor.cs" />
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\ControlFlows\CommandCallControlFlow.cs" />
+    <Compile Include="Common\CommandDescriptor.cs" />
+    <Compile Include="Common\ControlFlows\ComplexControlFlowBase.cs" />
+    <Compile Include="Common\ControlFlows\ControlFlowBase.cs" />
+    <Compile Include="Common\ControlFlows\PipelineControlFlow.cs" />
+    <Compile Include="Common\ControlFlows\SequenceControlFlow.cs" />
     <Compile Include="Common\IExecutor.cs" />
     <Compile Include="Common\IHasName.cs" />
     <Compile Include="Common\IHasValue.cs" />
@@ -62,6 +70,7 @@
     <Compile Include="Common\Runnables\Converters\IValueProducer.cs" />
     <Compile Include="Common\Runnables\Converters\ValueConsumerBase.cs" />
     <Compile Include="Common\Runnables\IRunnable.cs" />
+    <Compile Include="Common\Runnables\IRunnableFactory.cs" />
     <Compile Include="Common\Runnables\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\Runnable.cs" />
