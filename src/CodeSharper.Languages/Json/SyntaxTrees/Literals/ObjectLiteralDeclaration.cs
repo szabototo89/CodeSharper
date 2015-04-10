@@ -3,7 +3,7 @@ using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
 using CodeSharper.Languages.Json.SyntaxTrees.Tokens;
 
-namespace CodeSharper.Languages.Json.SyntaxTrees
+namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
 {
     public class ObjectLiteralDeclaration : LiteralSyntax
     {

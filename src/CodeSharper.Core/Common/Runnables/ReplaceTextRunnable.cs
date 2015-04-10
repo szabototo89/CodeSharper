@@ -8,7 +8,7 @@ using CodeSharper.Core.Utilities;
 namespace CodeSharper.Core.Common.Runnables
 {
     [Consumes(typeof(MultiValueConsumer<TextRange>))]
-    public class ReplaceTextRunnable : Runnable<TextRange, TextRange>
+    public class ReplaceTextRunnable : RunnableBase<TextRange, TextRange>
     {
         /// <summary>
         /// Gets or sets the replaced text

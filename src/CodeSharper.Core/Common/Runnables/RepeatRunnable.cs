@@ -6,7 +6,7 @@ using CodeSharper.Core.Common.Runnables.Attributes;
 namespace CodeSharper.Core.Common.Runnables
 {
     [Consumes(typeof(Object)), Produces(typeof(IEnumerable<Object>))]
-    public class RepeatRunnable : Runnable<Object, Object>
+    public class RepeatRunnable : RunnableBase<Object, Object>
     {
         /// <summary>
         /// Gets or sets the count of repeating

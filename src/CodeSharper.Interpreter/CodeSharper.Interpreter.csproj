@@ -48,8 +48,14 @@
     <Compile Include="Grammar\CodeQueryLexer.cs" />
     <Compile Include="Grammar\CodeQueryListener.cs" />
     <Compile Include="Grammar\CodeQueryVisitor.cs" />
+    <Compile Include="Nodes\ActualParameterSyntax.cs" />
+    <Compile Include="Nodes\CodeQueryNode.cs" />
+    <Compile Include="Nodes\ConstantSyntax.cs" />
+    <Compile Include="Nodes\MethodCallSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visitors\CodeQuerySyntaxTreeBuilder.cs" />
     <Compile Include="Visitors\CodeQueryVisitor.cs" />
+    <Compile Include="Visitors\ICodeQuerySyntaxTreeFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeSharper.Core\CodeSharper.Core.csproj">
@@ -57,9 +63,7 @@
       <Name>CodeSharper.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Nodes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AntlrTokens Include="Grammar\CodeQuery.tokens">
       <Generator>MSBuild:Compile</Generator>

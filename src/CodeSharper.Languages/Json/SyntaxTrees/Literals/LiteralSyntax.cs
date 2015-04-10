@@ -1,7 +1,6 @@
-using System.Collections;
 using CodeSharper.Core.Texts;
 
-namespace CodeSharper.Languages.Json.SyntaxTrees
+namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
 {
     public abstract class LiteralSyntax : JsonNode
     {

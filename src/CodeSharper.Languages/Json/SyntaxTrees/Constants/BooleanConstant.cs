@@ -2,7 +2,7 @@ using System;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Texts;
 
-namespace CodeSharper.Languages.Json.SyntaxTrees
+namespace CodeSharper.Languages.Json.SyntaxTrees.Constants
 {
     public class BooleanConstant : ConstantSyntax, IHasValue<Boolean>
     {

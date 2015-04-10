@@ -19,62 +19,64 @@
 
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
-using IToken = Antlr4.Runtime.IToken;
 
-/// <summary>
-/// This interface defines a complete generic visitor for a parse tree produced
-/// by <see cref="JsonParser"/>.
-/// </summary>
-/// <typeparam name="Result">The return type of the visit operation.</typeparam>
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
-[System.CLSCompliant(false)]
-public interface IJsonVisitor<Result> : IParseTreeVisitor<Result> {
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.start"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitStart([NotNull] JsonParser.StartContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.literal"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitLiteral([NotNull] JsonParser.LiteralContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.objectLiteral"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitObjectLiteral([NotNull] JsonParser.ObjectLiteralContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.arrayLiteral"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitArrayLiteral([NotNull] JsonParser.ArrayLiteralContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.keyValuePair"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitKeyValuePair([NotNull] JsonParser.KeyValuePairContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.key"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitKey([NotNull] JsonParser.KeyContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.value"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitValue([NotNull] JsonParser.ValueContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="JsonParser.constant"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitConstant([NotNull] JsonParser.ConstantContext context);
+namespace CodeSharper.Languages.Json.Grammar
+{
+    /// <summary>
+    /// This interface defines a complete generic visitor for a parse tree produced
+    /// by <see cref="JsonParser"/>.
+    /// </summary>
+    /// <typeparam name="Result">The return type of the visit operation.</typeparam>
+    [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
+    [System.CLSCompliant(false)]
+    public interface IJsonVisitor<Result> : IParseTreeVisitor<Result> {
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.start"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitStart([NotNull] JsonParser.StartContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.literal"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitLiteral([NotNull] JsonParser.LiteralContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.objectLiteral"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitObjectLiteral([NotNull] JsonParser.ObjectLiteralContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.arrayLiteral"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitArrayLiteral([NotNull] JsonParser.ArrayLiteralContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.keyValuePair"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitKeyValuePair([NotNull] JsonParser.KeyValuePairContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.key"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitKey([NotNull] JsonParser.KeyContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.value"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitValue([NotNull] JsonParser.ValueContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="JsonParser.constant"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitConstant([NotNull] JsonParser.ConstantContext context);
+    }
 }

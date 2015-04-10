@@ -18,514 +18,513 @@
 #pragma warning disable 1591
 
 using System;
-using System.Text;
-using System.Diagnostics;
-using System.Collections.Generic;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
-using DFA = Antlr4.Runtime.Dfa.DFA;
 
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
-[System.CLSCompliant(false)]
-public partial class JsonParser : Parser {
-	public const Int32
-		T__0=1, T__1=2, T__2=3, T__3=4, COLON=5, COMMA=6, BOOLEAN=7, NUMBER=8, 
-		String=9, IDENTIFIER=10, WHITESPACE=11;
-	public const Int32
-		RULE_start = 0, RULE_literal = 1, RULE_objectLiteral = 2, RULE_arrayLiteral = 3, 
-		RULE_keyValuePair = 4, RULE_key = 5, RULE_value = 6, RULE_constant = 7;
-	public static readonly String[] ruleNames = {
-		"start", "literal", "objectLiteral", "arrayLiteral", "keyValuePair", "key", 
-		"value", "constant"
-	};
+namespace CodeSharper.Languages.Json.Grammar
+{
+    [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
+    [System.CLSCompliant(false)]
+    public partial class JsonParser : Parser {
+        public const Int32
+            T__0=1, T__1=2, T__2=3, T__3=4, COLON=5, COMMA=6, BOOLEAN=7, NUMBER=8, 
+            String=9, IDENTIFIER=10, WHITESPACE=11;
+        public const Int32
+            RULE_start = 0, RULE_literal = 1, RULE_objectLiteral = 2, RULE_arrayLiteral = 3, 
+            RULE_keyValuePair = 4, RULE_key = 5, RULE_value = 6, RULE_constant = 7;
+        public static readonly String[] ruleNames = {
+            "start", "literal", "objectLiteral", "arrayLiteral", "keyValuePair", "key", 
+            "value", "constant"
+        };
 
-	private static readonly String[] _LiteralNames = {
-		null, "'{'", "'}'", "'['", "']'", "':'", "','"
-	};
-	private static readonly String[] _SymbolicNames = {
-		null, null, null, null, null, "COLON", "COMMA", "BOOLEAN", "NUMBER", "String", 
-		"IDENTIFIER", "WHITESPACE"
-	};
-	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
+        private static readonly String[] _LiteralNames = {
+            null, "'{'", "'}'", "'['", "']'", "':'", "','"
+        };
+        private static readonly String[] _SymbolicNames = {
+            null, null, null, null, null, "COLON", "COMMA", "BOOLEAN", "NUMBER", "String", 
+            "IDENTIFIER", "WHITESPACE"
+        };
+        public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
-	[NotNull]
-	public override IVocabulary Vocabulary
-	{
-		get
-		{
-			return DefaultVocabulary;
-		}
-	}
+        [NotNull]
+        public override IVocabulary Vocabulary
+        {
+            get
+            {
+                return DefaultVocabulary;
+            }
+        }
 
-	public override String GrammarFileName { get { return "Json.g4"; } }
+        public override String GrammarFileName { get { return "Json.g4"; } }
 
-	public override String[] RuleNames { get { return ruleNames; } }
+        public override String[] RuleNames { get { return ruleNames; } }
 
-	public override String SerializedAtn { get { return _serializedATN; } }
+        public override String SerializedAtn { get { return _serializedATN; } }
 
-	public JsonParser(ITokenStream input)
-		: base(input)
-	{
-		Interpreter = new ParserATNSimulator(this,_ATN);
-	}
-	public partial class StartContext : ParserRuleContext {
-		public LiteralContext literal() {
-			return GetRuleContext<LiteralContext>(0);
-		}
-		public StartContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_start; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitStart(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public JsonParser(ITokenStream input)
+            : base(input)
+        {
+            Interpreter = new ParserATNSimulator(this,_ATN);
+        }
+        public partial class StartContext : ParserRuleContext {
+            public LiteralContext literal() {
+                return GetRuleContext<LiteralContext>(0);
+            }
+            public StartContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_start; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitStart(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public StartContext start() {
-		StartContext _localctx = new StartContext(Context, State);
-		EnterRule(_localctx, 0, RULE_start);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 16; literal();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+        [RuleVersion(0)]
+        public StartContext start() {
+            StartContext _localctx = new StartContext(Context, State);
+            EnterRule(_localctx, 0, RULE_start);
+            try {
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 16; literal();
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class LiteralContext : ParserRuleContext {
-		public ObjectLiteralContext objectLiteral() {
-			return GetRuleContext<ObjectLiteralContext>(0);
-		}
-		public ArrayLiteralContext arrayLiteral() {
-			return GetRuleContext<ArrayLiteralContext>(0);
-		}
-		public LiteralContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_literal; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitLiteral(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class LiteralContext : ParserRuleContext {
+            public ObjectLiteralContext objectLiteral() {
+                return GetRuleContext<ObjectLiteralContext>(0);
+            }
+            public ArrayLiteralContext arrayLiteral() {
+                return GetRuleContext<ArrayLiteralContext>(0);
+            }
+            public LiteralContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_literal; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitLiteral(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public LiteralContext literal() {
-		LiteralContext _localctx = new LiteralContext(Context, State);
-		EnterRule(_localctx, 2, RULE_literal);
-		try {
-			State = 20;
-			switch (TokenStream.La(1)) {
-			case T__0:
-				EnterOuterAlt(_localctx, 1);
-				{
-				State = 18; objectLiteral();
-				}
-				break;
-			case T__2:
-				EnterOuterAlt(_localctx, 2);
-				{
-				State = 19; arrayLiteral();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+        [RuleVersion(0)]
+        public LiteralContext literal() {
+            LiteralContext _localctx = new LiteralContext(Context, State);
+            EnterRule(_localctx, 2, RULE_literal);
+            try {
+                State = 20;
+                switch (TokenStream.La(1)) {
+                    case T__0:
+                        EnterOuterAlt(_localctx, 1);
+                    {
+                        State = 18; objectLiteral();
+                    }
+                        break;
+                    case T__2:
+                        EnterOuterAlt(_localctx, 2);
+                    {
+                        State = 19; arrayLiteral();
+                    }
+                        break;
+                    default:
+                        throw new NoViableAltException(this);
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class ObjectLiteralContext : ParserRuleContext {
-		public KeyValuePairContext[] keyValuePair() {
-			return GetRuleContexts<KeyValuePairContext>();
-		}
-		public KeyValuePairContext keyValuePair(Int32 i) {
-			return GetRuleContext<KeyValuePairContext>(i);
-		}
-		public ITerminalNode[] COMMA() { return GetTokens(JsonParser.COMMA); }
-		public ITerminalNode COMMA(Int32 i) {
-			return GetToken(JsonParser.COMMA, i);
-		}
-		public ObjectLiteralContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_objectLiteral; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitObjectLiteral(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class ObjectLiteralContext : ParserRuleContext {
+            public KeyValuePairContext[] keyValuePair() {
+                return GetRuleContexts<KeyValuePairContext>();
+            }
+            public KeyValuePairContext keyValuePair(Int32 i) {
+                return GetRuleContext<KeyValuePairContext>(i);
+            }
+            public ITerminalNode[] COMMA() { return GetTokens(JsonParser.COMMA); }
+            public ITerminalNode COMMA(Int32 i) {
+                return GetToken(JsonParser.COMMA, i);
+            }
+            public ObjectLiteralContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_objectLiteral; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitObjectLiteral(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public ObjectLiteralContext objectLiteral() {
-		ObjectLiteralContext _localctx = new ObjectLiteralContext(Context, State);
-		EnterRule(_localctx, 4, RULE_objectLiteral);
-		Int32 _la;
-		try {
-			Int32 _alt;
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 22; Match(T__0);
-			State = 31;
-			_la = TokenStream.La(1);
-			if (_la==String || _la==IDENTIFIER) {
-				{
-				State = 23; keyValuePair();
-				State = 28;
-				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
-				while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
-					if ( _alt==1 ) {
-						{
-						{
-						State = 24; Match(COMMA);
-						State = 25; keyValuePair();
-						}
-						} 
-					}
-					State = 30;
-					ErrorHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
-				}
-				}
-			}
+        [RuleVersion(0)]
+        public ObjectLiteralContext objectLiteral() {
+            ObjectLiteralContext _localctx = new ObjectLiteralContext(Context, State);
+            EnterRule(_localctx, 4, RULE_objectLiteral);
+            Int32 _la;
+            try {
+                Int32 _alt;
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 22; Match(T__0);
+                    State = 31;
+                    _la = TokenStream.La(1);
+                    if (_la==String || _la==IDENTIFIER) {
+                        {
+                            State = 23; keyValuePair();
+                            State = 28;
+                            ErrorHandler.Sync(this);
+                            _alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
+                            while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+                                if ( _alt==1 ) {
+                                    {
+                                        {
+                                            State = 24; Match(COMMA);
+                                            State = 25; keyValuePair();
+                                        }
+                                    } 
+                                }
+                                State = 30;
+                                ErrorHandler.Sync(this);
+                                _alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
+                            }
+                        }
+                    }
 
-			State = 34;
-			_la = TokenStream.La(1);
-			if (_la==COMMA) {
-				{
-				State = 33; Match(COMMA);
-				}
-			}
+                    State = 34;
+                    _la = TokenStream.La(1);
+                    if (_la==COMMA) {
+                        {
+                            State = 33; Match(COMMA);
+                        }
+                    }
 
-			State = 36; Match(T__1);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+                    State = 36; Match(T__1);
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class ArrayLiteralContext : ParserRuleContext {
-		public ValueContext[] value() {
-			return GetRuleContexts<ValueContext>();
-		}
-		public ValueContext value(Int32 i) {
-			return GetRuleContext<ValueContext>(i);
-		}
-		public ITerminalNode[] COMMA() { return GetTokens(JsonParser.COMMA); }
-		public ITerminalNode COMMA(Int32 i) {
-			return GetToken(JsonParser.COMMA, i);
-		}
-		public ArrayLiteralContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_arrayLiteral; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitArrayLiteral(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class ArrayLiteralContext : ParserRuleContext {
+            public ValueContext[] value() {
+                return GetRuleContexts<ValueContext>();
+            }
+            public ValueContext value(Int32 i) {
+                return GetRuleContext<ValueContext>(i);
+            }
+            public ITerminalNode[] COMMA() { return GetTokens(JsonParser.COMMA); }
+            public ITerminalNode COMMA(Int32 i) {
+                return GetToken(JsonParser.COMMA, i);
+            }
+            public ArrayLiteralContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_arrayLiteral; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitArrayLiteral(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public ArrayLiteralContext arrayLiteral() {
-		ArrayLiteralContext _localctx = new ArrayLiteralContext(Context, State);
-		EnterRule(_localctx, 6, RULE_arrayLiteral);
-		Int32 _la;
-		try {
-			Int32 _alt;
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 38; Match(T__2);
-			State = 47;
-			_la = TokenStream.La(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << BOOLEAN) | (1L << NUMBER) | (1L << String))) != 0)) {
-				{
-				State = 39; value();
-				State = 44;
-				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,4,Context);
-				while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
-					if ( _alt==1 ) {
-						{
-						{
-						State = 40; Match(COMMA);
-						State = 41; value();
-						}
-						} 
-					}
-					State = 46;
-					ErrorHandler.Sync(this);
-					_alt = Interpreter.AdaptivePredict(TokenStream,4,Context);
-				}
-				}
-			}
+        [RuleVersion(0)]
+        public ArrayLiteralContext arrayLiteral() {
+            ArrayLiteralContext _localctx = new ArrayLiteralContext(Context, State);
+            EnterRule(_localctx, 6, RULE_arrayLiteral);
+            Int32 _la;
+            try {
+                Int32 _alt;
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 38; Match(T__2);
+                    State = 47;
+                    _la = TokenStream.La(1);
+                    if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << BOOLEAN) | (1L << NUMBER) | (1L << String))) != 0)) {
+                        {
+                            State = 39; value();
+                            State = 44;
+                            ErrorHandler.Sync(this);
+                            _alt = Interpreter.AdaptivePredict(TokenStream,4,Context);
+                            while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+                                if ( _alt==1 ) {
+                                    {
+                                        {
+                                            State = 40; Match(COMMA);
+                                            State = 41; value();
+                                        }
+                                    } 
+                                }
+                                State = 46;
+                                ErrorHandler.Sync(this);
+                                _alt = Interpreter.AdaptivePredict(TokenStream,4,Context);
+                            }
+                        }
+                    }
 
-			State = 50;
-			_la = TokenStream.La(1);
-			if (_la==COMMA) {
-				{
-				State = 49; Match(COMMA);
-				}
-			}
+                    State = 50;
+                    _la = TokenStream.La(1);
+                    if (_la==COMMA) {
+                        {
+                            State = 49; Match(COMMA);
+                        }
+                    }
 
-			State = 52; Match(T__3);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+                    State = 52; Match(T__3);
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class KeyValuePairContext : ParserRuleContext {
-		public KeyContext key() {
-			return GetRuleContext<KeyContext>(0);
-		}
-		public ValueContext value() {
-			return GetRuleContext<ValueContext>(0);
-		}
-		public KeyValuePairContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_keyValuePair; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKeyValuePair(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class KeyValuePairContext : ParserRuleContext {
+            public KeyContext key() {
+                return GetRuleContext<KeyContext>(0);
+            }
+            public ValueContext value() {
+                return GetRuleContext<ValueContext>(0);
+            }
+            public KeyValuePairContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_keyValuePair; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitKeyValuePair(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public KeyValuePairContext keyValuePair() {
-		KeyValuePairContext _localctx = new KeyValuePairContext(Context, State);
-		EnterRule(_localctx, 8, RULE_keyValuePair);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 54; key();
-			State = 55; Match(COLON);
-			State = 56; value();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+        [RuleVersion(0)]
+        public KeyValuePairContext keyValuePair() {
+            KeyValuePairContext _localctx = new KeyValuePairContext(Context, State);
+            EnterRule(_localctx, 8, RULE_keyValuePair);
+            try {
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 54; key();
+                    State = 55; Match(COLON);
+                    State = 56; value();
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class KeyContext : ParserRuleContext {
-		public ITerminalNode IDENTIFIER() { return GetToken(JsonParser.IDENTIFIER, 0); }
-		public ITerminalNode String() { return GetToken(JsonParser.String, 0); }
-		public KeyContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_key; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKey(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class KeyContext : ParserRuleContext {
+            public ITerminalNode IDENTIFIER() { return GetToken(JsonParser.IDENTIFIER, 0); }
+            public ITerminalNode String() { return GetToken(JsonParser.String, 0); }
+            public KeyContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_key; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitKey(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public KeyContext key() {
-		KeyContext _localctx = new KeyContext(Context, State);
-		EnterRule(_localctx, 10, RULE_key);
-		Int32 _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 58;
-			_la = TokenStream.La(1);
-			if ( !(_la==String || _la==IDENTIFIER) ) {
-			ErrorHandler.RecoverInline(this);
-			}
-			Consume();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+        [RuleVersion(0)]
+        public KeyContext key() {
+            KeyContext _localctx = new KeyContext(Context, State);
+            EnterRule(_localctx, 10, RULE_key);
+            Int32 _la;
+            try {
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 58;
+                    _la = TokenStream.La(1);
+                    if ( !(_la==String || _la==IDENTIFIER) ) {
+                        ErrorHandler.RecoverInline(this);
+                    }
+                    Consume();
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class ValueContext : ParserRuleContext {
-		public ConstantContext constant() {
-			return GetRuleContext<ConstantContext>(0);
-		}
-		public LiteralContext literal() {
-			return GetRuleContext<LiteralContext>(0);
-		}
-		public ValueContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_value; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitValue(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class ValueContext : ParserRuleContext {
+            public ConstantContext constant() {
+                return GetRuleContext<ConstantContext>(0);
+            }
+            public LiteralContext literal() {
+                return GetRuleContext<LiteralContext>(0);
+            }
+            public ValueContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_value; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitValue(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public ValueContext value() {
-		ValueContext _localctx = new ValueContext(Context, State);
-		EnterRule(_localctx, 12, RULE_value);
-		try {
-			State = 62;
-			switch (TokenStream.La(1)) {
-			case BOOLEAN:
-			case NUMBER:
-			case String:
-				EnterOuterAlt(_localctx, 1);
-				{
-				State = 60; constant();
-				}
-				break;
-			case T__0:
-			case T__2:
-				EnterOuterAlt(_localctx, 2);
-				{
-				State = 61; literal();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+        [RuleVersion(0)]
+        public ValueContext value() {
+            ValueContext _localctx = new ValueContext(Context, State);
+            EnterRule(_localctx, 12, RULE_value);
+            try {
+                State = 62;
+                switch (TokenStream.La(1)) {
+                    case BOOLEAN:
+                    case NUMBER:
+                    case String:
+                        EnterOuterAlt(_localctx, 1);
+                    {
+                        State = 60; constant();
+                    }
+                        break;
+                    case T__0:
+                    case T__2:
+                        EnterOuterAlt(_localctx, 2);
+                    {
+                        State = 61; literal();
+                    }
+                        break;
+                    default:
+                        throw new NoViableAltException(this);
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public partial class ConstantContext : ParserRuleContext {
-		public ITerminalNode BOOLEAN() { return GetToken(JsonParser.BOOLEAN, 0); }
-		public ITerminalNode NUMBER() { return GetToken(JsonParser.NUMBER, 0); }
-		public ITerminalNode String() { return GetToken(JsonParser.String, 0); }
-		public ConstantContext(ParserRuleContext parent, Int32 invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override Int32 RuleIndex { get { return RULE_constant; } }
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitConstant(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
+        public partial class ConstantContext : ParserRuleContext {
+            public ITerminalNode BOOLEAN() { return GetToken(JsonParser.BOOLEAN, 0); }
+            public ITerminalNode NUMBER() { return GetToken(JsonParser.NUMBER, 0); }
+            public ITerminalNode String() { return GetToken(JsonParser.String, 0); }
+            public ConstantContext(ParserRuleContext parent, Int32 invokingState)
+                : base(parent, invokingState)
+            {
+            }
+            public override Int32 RuleIndex { get { return RULE_constant; } }
+            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+                IJsonVisitor<TResult> typedVisitor = visitor as IJsonVisitor<TResult>;
+                if (typedVisitor != null) return typedVisitor.VisitConstant(this);
+                else return visitor.VisitChildren(this);
+            }
+        }
 
-	[RuleVersion(0)]
-	public ConstantContext constant() {
-		ConstantContext _localctx = new ConstantContext(Context, State);
-		EnterRule(_localctx, 14, RULE_constant);
-		Int32 _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 64;
-			_la = TokenStream.La(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << NUMBER) | (1L << String))) != 0)) ) {
-			ErrorHandler.RecoverInline(this);
-			}
-			Consume();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
+        [RuleVersion(0)]
+        public ConstantContext constant() {
+            ConstantContext _localctx = new ConstantContext(Context, State);
+            EnterRule(_localctx, 14, RULE_constant);
+            Int32 _la;
+            try {
+                EnterOuterAlt(_localctx, 1);
+                {
+                    State = 64;
+                    _la = TokenStream.La(1);
+                    if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << NUMBER) | (1L << String))) != 0)) ) {
+                        ErrorHandler.RecoverInline(this);
+                    }
+                    Consume();
+                }
+            }
+            catch (RecognitionException re) {
+                _localctx.exception = re;
+                ErrorHandler.ReportError(this, re);
+                ErrorHandler.Recover(this, re);
+            }
+            finally {
+                ExitRule();
+            }
+            return _localctx;
+        }
 
-	public static readonly String _serializedATN =
-		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\r\x45\x4\x2\t\x2"+
-		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
-		"\t\x3\x2\x3\x2\x3\x3\x3\x3\x5\x3\x17\n\x3\x3\x4\x3\x4\x3\x4\x3\x4\a\x4"+
-		"\x1D\n\x4\f\x4\xE\x4 \v\x4\x5\x4\"\n\x4\x3\x4\x5\x4%\n\x4\x3\x4\x3\x4"+
-		"\x3\x5\x3\x5\x3\x5\x3\x5\a\x5-\n\x5\f\x5\xE\x5\x30\v\x5\x5\x5\x32\n\x5"+
-		"\x3\x5\x5\x5\x35\n\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\a\x3\a\x3"+
-		"\b\x3\b\x5\b\x41\n\b\x3\t\x3\t\x3\t\x2\x2\n\x2\x4\x6\b\n\f\xE\x10\x2\x4"+
-		"\x3\x2\v\f\x3\x2\t\v\x44\x2\x12\x3\x2\x2\x2\x4\x16\x3\x2\x2\x2\x6\x18"+
-		"\x3\x2\x2\x2\b(\x3\x2\x2\x2\n\x38\x3\x2\x2\x2\f<\x3\x2\x2\x2\xE@\x3\x2"+
-		"\x2\x2\x10\x42\x3\x2\x2\x2\x12\x13\x5\x4\x3\x2\x13\x3\x3\x2\x2\x2\x14"+
-		"\x17\x5\x6\x4\x2\x15\x17\x5\b\x5\x2\x16\x14\x3\x2\x2\x2\x16\x15\x3\x2"+
-		"\x2\x2\x17\x5\x3\x2\x2\x2\x18!\a\x3\x2\x2\x19\x1E\x5\n\x6\x2\x1A\x1B\a"+
-		"\b\x2\x2\x1B\x1D\x5\n\x6\x2\x1C\x1A\x3\x2\x2\x2\x1D \x3\x2\x2\x2\x1E\x1C"+
-		"\x3\x2\x2\x2\x1E\x1F\x3\x2\x2\x2\x1F\"\x3\x2\x2\x2 \x1E\x3\x2\x2\x2!\x19"+
-		"\x3\x2\x2\x2!\"\x3\x2\x2\x2\"$\x3\x2\x2\x2#%\a\b\x2\x2$#\x3\x2\x2\x2$"+
-		"%\x3\x2\x2\x2%&\x3\x2\x2\x2&\'\a\x4\x2\x2\'\a\x3\x2\x2\x2(\x31\a\x5\x2"+
-		"\x2).\x5\xE\b\x2*+\a\b\x2\x2+-\x5\xE\b\x2,*\x3\x2\x2\x2-\x30\x3\x2\x2"+
-		"\x2.,\x3\x2\x2\x2./\x3\x2\x2\x2/\x32\x3\x2\x2\x2\x30.\x3\x2\x2\x2\x31"+
-		")\x3\x2\x2\x2\x31\x32\x3\x2\x2\x2\x32\x34\x3\x2\x2\x2\x33\x35\a\b\x2\x2"+
-		"\x34\x33\x3\x2\x2\x2\x34\x35\x3\x2\x2\x2\x35\x36\x3\x2\x2\x2\x36\x37\a"+
-		"\x6\x2\x2\x37\t\x3\x2\x2\x2\x38\x39\x5\f\a\x2\x39:\a\a\x2\x2:;\x5\xE\b"+
-		"\x2;\v\x3\x2\x2\x2<=\t\x2\x2\x2=\r\x3\x2\x2\x2>\x41\x5\x10\t\x2?\x41\x5"+
-		"\x4\x3\x2@>\x3\x2\x2\x2@?\x3\x2\x2\x2\x41\xF\x3\x2\x2\x2\x42\x43\t\x3"+
-		"\x2\x2\x43\x11\x3\x2\x2\x2\n\x16\x1E!$.\x31\x34@";
-	public static readonly ATN _ATN =
-		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
+        public static readonly String _serializedATN =
+            "\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\r\x45\x4\x2\t\x2"+
+            "\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
+            "\t\x3\x2\x3\x2\x3\x3\x3\x3\x5\x3\x17\n\x3\x3\x4\x3\x4\x3\x4\x3\x4\a\x4"+
+            "\x1D\n\x4\f\x4\xE\x4 \v\x4\x5\x4\"\n\x4\x3\x4\x5\x4%\n\x4\x3\x4\x3\x4"+
+            "\x3\x5\x3\x5\x3\x5\x3\x5\a\x5-\n\x5\f\x5\xE\x5\x30\v\x5\x5\x5\x32\n\x5"+
+            "\x3\x5\x5\x5\x35\n\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\a\x3\a\x3"+
+            "\b\x3\b\x5\b\x41\n\b\x3\t\x3\t\x3\t\x2\x2\n\x2\x4\x6\b\n\f\xE\x10\x2\x4"+
+            "\x3\x2\v\f\x3\x2\t\v\x44\x2\x12\x3\x2\x2\x2\x4\x16\x3\x2\x2\x2\x6\x18"+
+            "\x3\x2\x2\x2\b(\x3\x2\x2\x2\n\x38\x3\x2\x2\x2\f<\x3\x2\x2\x2\xE@\x3\x2"+
+            "\x2\x2\x10\x42\x3\x2\x2\x2\x12\x13\x5\x4\x3\x2\x13\x3\x3\x2\x2\x2\x14"+
+            "\x17\x5\x6\x4\x2\x15\x17\x5\b\x5\x2\x16\x14\x3\x2\x2\x2\x16\x15\x3\x2"+
+            "\x2\x2\x17\x5\x3\x2\x2\x2\x18!\a\x3\x2\x2\x19\x1E\x5\n\x6\x2\x1A\x1B\a"+
+            "\b\x2\x2\x1B\x1D\x5\n\x6\x2\x1C\x1A\x3\x2\x2\x2\x1D \x3\x2\x2\x2\x1E\x1C"+
+            "\x3\x2\x2\x2\x1E\x1F\x3\x2\x2\x2\x1F\"\x3\x2\x2\x2 \x1E\x3\x2\x2\x2!\x19"+
+            "\x3\x2\x2\x2!\"\x3\x2\x2\x2\"$\x3\x2\x2\x2#%\a\b\x2\x2$#\x3\x2\x2\x2$"+
+            "%\x3\x2\x2\x2%&\x3\x2\x2\x2&\'\a\x4\x2\x2\'\a\x3\x2\x2\x2(\x31\a\x5\x2"+
+            "\x2).\x5\xE\b\x2*+\a\b\x2\x2+-\x5\xE\b\x2,*\x3\x2\x2\x2-\x30\x3\x2\x2"+
+            "\x2.,\x3\x2\x2\x2./\x3\x2\x2\x2/\x32\x3\x2\x2\x2\x30.\x3\x2\x2\x2\x31"+
+            ")\x3\x2\x2\x2\x31\x32\x3\x2\x2\x2\x32\x34\x3\x2\x2\x2\x33\x35\a\b\x2\x2"+
+            "\x34\x33\x3\x2\x2\x2\x34\x35\x3\x2\x2\x2\x35\x36\x3\x2\x2\x2\x36\x37\a"+
+            "\x6\x2\x2\x37\t\x3\x2\x2\x2\x38\x39\x5\f\a\x2\x39:\a\a\x2\x2:;\x5\xE\b"+
+            "\x2;\v\x3\x2\x2\x2<=\t\x2\x2\x2=\r\x3\x2\x2\x2>\x41\x5\x10\t\x2?\x41\x5"+
+            "\x4\x3\x2@>\x3\x2\x2\x2@?\x3\x2\x2\x2\x41\xF\x3\x2\x2\x2\x42\x43\t\x3"+
+            "\x2\x2\x43\x11\x3\x2\x2\x2\n\x16\x1E!$.\x31\x34@";
+        public static readonly ATN _ATN =
+            new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
+    }
 }

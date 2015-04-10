@@ -1,6 +1,6 @@
 using CodeSharper.Core.Texts;
 
-namespace CodeSharper.Languages.Json.SyntaxTrees
+namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
 {
     public class KeyValueDeclaration : JsonNode
     {

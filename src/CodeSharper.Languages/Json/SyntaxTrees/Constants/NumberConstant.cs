@@ -2,9 +2,9 @@ using System;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Texts;
 
-namespace CodeSharper.Languages.Json.SyntaxTrees
+namespace CodeSharper.Languages.Json.SyntaxTrees.Constants
 {
-    public class NumberConstant : ConstantSyntax, IHasValue<decimal>
+    public class NumberConstant : ConstantSyntax, IHasValue<Decimal>
     {
         /// <summary>
         /// Gets or sets the value of number

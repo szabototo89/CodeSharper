@@ -18,21 +18,19 @@ namespace CodeSharper.Tests.Core.Common.Runnables
             /// <summary>
             /// String or sets the value.
             /// </summary>
+            [BindTo("value")]
             public Object Value { get; set; }
 
             /// <summary>
             /// String or sets the description.
             /// </summary>
+            [BindTo("description")]
             public String Description { get; set; }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="TestRunnable"/> class.
             /// </summary>
-            public TestRunnable(Object value, String description)
-            {
-                Value = value;
-                Description = description;
-            }
+            public TestRunnable() { }
 
             /// <summary>
             /// Runs an algorithm with the specified parameter.
@@ -43,11 +41,15 @@ namespace CodeSharper.Tests.Core.Common.Runnables
             }
         }
 
-        [Test(Description = "Create should instantiate runnable when non-default constructor is available")]
-        public void Create_ShouldInstantiateRunnable_WhenNonDefaultConstructorIsAvailable()
+        [Test(Description = "Create should instantiate runnable when default constructor is available")]
+        public void Create_ShouldInstantiateRunnable_WhenDefaultConstructorIsAvailable()
         {
             // Given
-            var actualArguments = new Dictionary<String, Object> { { "test", "some description" } };
+            var actualArguments = new Dictionary<String, Object>
+            {
+                { "value", "test" },
+                { "description", "some description" }
+            };
             var underTest = new DefaultRunnableFactory(new[] { typeof(TestRunnable) });
 
             // When

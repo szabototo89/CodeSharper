@@ -3,7 +3,7 @@ using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
 
-namespace CodeSharper.Languages.Json.SyntaxTrees
+namespace CodeSharper.Languages.Json.SyntaxTrees.Constants
 {
     public class StringConstant : ConstantSyntax, IHasValue<String>
     {

@@ -2,7 +2,7 @@ using System;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    public abstract class Runnable<TIn, TOut> : IRunnable, IRunnable<TIn, TOut>
+    public abstract class RunnableBase<TIn, TOut> : IRunnable, IRunnable<TIn, TOut>
     {
         /// <summary>
         /// Runs an algorithm with the specified parameter.
@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        Object IRunnable.Run(Object parameter)
+        public virtual Object Run(Object parameter)
         {
             return (TOut)Run((TIn)parameter);
         }
