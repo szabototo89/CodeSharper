@@ -42,20 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommandCallControlFlowDescriptor.cs" />
+    <Compile Include="Common\ControlFlowOperationType.cs" />
+    <Compile Include="Common\DefaultControlFlowFactory.cs" />
+    <Compile Include="Common\IControlFlowFactory.cs" />
+    <Compile Include="Common\LazyAndControlFlowDescriptor.cs" />
+    <Compile Include="Common\PipelineControlFlowDescriptor.cs" />
+    <Compile Include="Common\SequenceControlFlowDescriptor.cs" />
     <Compile Include="Grammar\CodeQuery.cs" />
     <Compile Include="Grammar\CodeQueryBaseListener.cs" />
     <Compile Include="Grammar\CodeQueryBaseVisitor.cs" />
     <Compile Include="Grammar\CodeQueryLexer.cs" />
     <Compile Include="Grammar\CodeQueryListener.cs" />
     <Compile Include="Grammar\CodeQueryVisitor.cs" />
-    <Compile Include="Nodes\ActualParameterSyntax.cs" />
-    <Compile Include="Nodes\CodeQueryNode.cs" />
-    <Compile Include="Nodes\ConstantSyntax.cs" />
-    <Compile Include="Nodes\MethodCallSymbol.cs" />
+    <Compile Include="Common\ActualParameter.cs" />
+    <Compile Include="Common\Constant.cs" />
+    <Compile Include="Common\ControlFlowDescriptorBase.cs" />
+    <Compile Include="Common\CommandCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visitors\CodeQuerySyntaxTreeBuilder.cs" />
     <Compile Include="Visitors\CodeQueryVisitor.cs" />
-    <Compile Include="Visitors\ICodeQuerySyntaxTreeFactory.cs" />
+    <Compile Include="Visitors\ICodeQueryCommandFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeSharper.Core\CodeSharper.Core.csproj">

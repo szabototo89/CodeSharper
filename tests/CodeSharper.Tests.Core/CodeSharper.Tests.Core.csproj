@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DefaultCommandCallResolverTests.cs" />
     <Compile Include="Commands\CommandCallActualArgumentTests.cs" />
     <Compile Include="Commands\CommandCallDescriptorTests.cs" />
     <Compile Include="Common\FlattenValueProducerTests.cs" />

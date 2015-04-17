@@ -7,21 +7,21 @@ using Antlr4.Runtime.Tree;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
-using CodeSharper.Interpreter.Nodes;
+using CodeSharper.Interpreter.Common;
 
 namespace CodeSharper.Interpreter.Visitors
 {
-    public class CodeQuerySyntaxTreeBuilder : CodeQueryBaseVisitor<CodeQueryNode>
+    public class CodeQuerySyntaxTreeBuilder : CodeQueryBaseVisitor<Object>
     {
         /// <summary>
         /// Gets or sets the tree factory.
         /// </summary>
-        public ICodeQuerySyntaxTreeFactory TreeFactory { get; protected set; }
+        public ICodeQueryCommandFactory TreeFactory { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeQuerySyntaxTreeBuilder"/> class.
         /// </summary>
-        public CodeQuerySyntaxTreeBuilder(ICodeQuerySyntaxTreeFactory treeFactory)
+        public CodeQuerySyntaxTreeBuilder(ICodeQueryCommandFactory treeFactory)
         {
             Assume.NotNull(treeFactory, "treeFactory");
             TreeFactory = treeFactory;
@@ -34,7 +34,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override CodeQueryNode VisitConstantBoolean(CodeQuery.ConstantBooleanContext context)
+        public override Object VisitConstantBoolean(CodeQuery.ConstantBooleanContext context)
         {
             switch (context.BOOLEAN().GetText())
             {
@@ -56,7 +56,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override CodeQueryNode VisitConstantString(CodeQuery.ConstantStringContext context)
+        public override Object VisitConstantString(CodeQuery.ConstantStringContext context)
         {
             var value = context.String().GetText().Trim('"');
             return TreeFactory.String(value);
@@ -70,7 +70,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public override CodeQueryNode VisitConstantNumber(CodeQuery.ConstantNumberContext context)
+        public override Object VisitConstantNumber(CodeQuery.ConstantNumberContext context)
         {
             Double value;
             if (!Double.TryParse(context.NUMBER().GetText(), out value))
@@ -87,9 +87,16 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override CodeQueryNode VisitMethodCallParameterValueWithConstant(CodeQuery.MethodCallParameterValueWithConstantContext context)
+        public override Object VisitMethodCallParameterValueWithConstant(CodeQuery.MethodCallParameterValueWithConstantContext context)
         {
-            var value = context.ActualParameterValue.Accept(this);
+            var value = context.ActualParameterValue.Accept(this) as Constant;
+
+            if (context.ID() != null)
+            {
+                var parameterName = context.ParameterName.Text;
+                return TreeFactory.ActualParameter(value, parameterName);
+            }
+
             return value;
         }
 
@@ -100,13 +107,19 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override CodeQueryNode VisitMethodCall(CodeQuery.MethodCallContext context)
+        public override Object VisitMethodCall(CodeQuery.MethodCallContext context)
         {
             var methodCall = new {
                 Name = context.MethodCallName.Text,
                 Parameters = context.methodCallParameter()
-                                    .Select(parameter => parameter.Accept(this))
-                                    .OfType<ActualParameterSyntax>()
+                                    .Select((parameter, index) => {
+                                        var param = parameter.Accept(this);
+                                        if (param is ActualParameter) return param;
+                                        if (param is Constant) return TreeFactory.ActualParameter((Constant)param, index);
+
+                                        return param;
+                                    })
+                                    .OfType<ActualParameter>()
                                     .ToArray()
             };
 
@@ -120,9 +133,9 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override CodeQueryNode VisitExpressionMethodCall(CodeQuery.ExpressionMethodCallContext context)
+        public override Object VisitExpressionMethodCall(CodeQuery.ExpressionMethodCallContext context)
         {
-            var methodCall = context.methodCall().Accept(this) as MethodCallSymbol;
+            var methodCall = context.methodCall().Accept(this) as CommandCall;
             return methodCall;
         }
 
@@ -133,22 +146,32 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override CodeQueryNode VisitExpressionInner(CodeQuery.ExpressionInnerContext context)
+        public override Object VisitExpressionInner(CodeQuery.ExpressionInnerContext context)
         {
             return context.expression().Accept(this);
         }
 
-        public override CodeQueryNode VisitCommand(CodeQuery.CommandContext context)
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.command"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public override Object VisitCommand(CodeQuery.CommandContext context)
         {
             var pipelineOperator = context.PIPELINE_OPERATOR().GetText();
+            var rightExpression = context.command().Accept(this) as ControlFlowDescriptorBase;
 
-            var rightExpression = context.command().Accept(this) as ControlFlowSymbol;
-
-            var methodCall = context.expression().Accept(this).As<MethodCallSymbol>();
+            var methodCall = context.expression().Accept(this).As<CommandCall>();
             if (methodCall != null)
             {
-                return TreeFactory.ControlFlow(pipelineOperator, methodCall, rightExpression);    
+                return TreeFactory.ControlFlow(pipelineOperator, methodCall, rightExpression);
             }
+
+            return null;
         }
     }
 }

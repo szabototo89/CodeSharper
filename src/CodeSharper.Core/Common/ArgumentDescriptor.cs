@@ -1,4 +1,5 @@
 using System;
+using System.Security.AccessControl;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common
@@ -25,6 +26,11 @@ namespace CodeSharper.Core.Common
         /// </summary>
         public String ArgumentName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the position.
+        /// </summary>
+        public Int32 Position { get; set; }
+
         #region Equality members
 
         /// <summary>
@@ -42,6 +48,7 @@ namespace CodeSharper.Core.Common
                 hashCode = (hashCode * 397) ^ (DefaultValue != null ? DefaultValue.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (ArgumentType != null ? ArgumentType.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (ArgumentName != null ? ArgumentName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Position.GetHashCode();
                 return hashCode;
             }
         }
@@ -71,7 +78,8 @@ namespace CodeSharper.Core.Common
                    String.Equals(ArgumentName, other.ArgumentName) &&
                    Equals(DefaultValue, other.DefaultValue) &&
                    IsOptional == other.IsOptional &&
-                   ArgumentType == other.ArgumentType;
+                   ArgumentType == other.ArgumentType &&
+                   Position == other.Position;
         }
 
         #endregion

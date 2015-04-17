@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        public virtual Object Run(Object parameter)
+        Object IRunnable.Run(Object parameter)
         {
             return (TOut)Run((TIn)parameter);
         }

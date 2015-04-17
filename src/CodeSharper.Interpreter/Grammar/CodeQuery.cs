@@ -39,7 +39,7 @@ public partial class CodeQuery : Parser {
 		RULE_selector = 4, RULE_selectableElement = 5, RULE_pseudoSelector = 6, 
 		RULE_selectorAttribute = 7, RULE_constant = 8;
 	public static readonly String[] ruleNames = {
-		"command", "expression", "methodCall", "methodCallParameter", "selector", 
+		"command", "expression", "CommandCall", "methodCallParameter", "selector", 
 		"selectableElement", "pseudoSelector", "selectorAttribute", "constant"
 	};
 

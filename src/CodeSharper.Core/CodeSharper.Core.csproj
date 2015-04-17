@@ -41,8 +41,10 @@
   <ItemGroup>
     <Compile Include="Commands\CommandCallBase.cs" />
     <Compile Include="Commands\CommandCallDescriptor.cs" />
+    <Compile Include="Commands\DefaultCommandCallResolver.cs" />
     <Compile Include="Commands\ICommandCall.cs" />
     <Compile Include="Commands\ICommandCallActualArgument.cs" />
+    <Compile Include="Commands\ICommandCallResolver.cs" />
     <Compile Include="Commands\NamedCommandCallActualArgument.cs" />
     <Compile Include="Commands\PositionedCommandCallActualArgument.cs" />
     <Compile Include="Commands\Selectors\PseudoSelectorDescriptor.cs" />
@@ -77,7 +79,6 @@
     <Compile Include="Common\Runnables\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\RunnableBase.cs" />
-    <Compile Include="Common\Runnables\SafeRunnableBase.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\IHasChildren.cs" />
