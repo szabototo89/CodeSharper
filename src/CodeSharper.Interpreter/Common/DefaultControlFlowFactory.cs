@@ -101,6 +101,8 @@ namespace CodeSharper.Interpreter.Common
         {
             Assume.NotNull(commandCall, "commandCall");
             var command = getCommand(commandCall.CommandCall);
+            if (command == null) throw new Exception("Command is not available!");
+
             return new CommandCallControlFlow(command, Executor);
         }
 

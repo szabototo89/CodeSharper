@@ -34,7 +34,7 @@ namespace CodeSharper.Core.Common
         {
             var producers = _runnableManager.GetProducers(runnable);
             var converter = producers.FirstOrDefault(c => c.IsConvertable(result));
-            if (converter == null) return null;
+            if (converter == null) return result;
             return converter.Convert(result);
         }
 
@@ -42,7 +42,7 @@ namespace CodeSharper.Core.Common
         {
             var consumers = _runnableManager.GetConsumers(runnable);
             var converter = consumers.FirstOrDefault(c => c.IsConvertable(parameter));
-            if (converter == null) return null;
+            if (converter == null) return runnable.Run(parameter);
             return converter.Convert(parameter, runnable.Run);
         }
     }

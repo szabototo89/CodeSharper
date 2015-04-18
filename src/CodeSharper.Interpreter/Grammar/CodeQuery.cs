@@ -30,28 +30,29 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
 [System.CLSCompliant(false)]
 public partial class CodeQuery : Parser {
-	public const Int32
-		String=1, LEFT_BRACKET=2, RIGHT_BRACKET=3, LEFT_SQUARE_BRACKET=4, RIGHT_SQUARE_BRACKET=5, 
-		NUMBER=6, BOOLEAN=7, ID=8, SELECTOR_OPERATOR=9, DOT=10, COLON=11, COMMA=12, 
-		METHOD_CALL_SYMBOL=13, ASSIGNMENT_OPERATOR=14, PIPELINE_OPERATOR=15, WHITESPACE=16;
-	public const Int32
+	public const int
+		LEFT_BRACKET=1, RIGHT_BRACKET=2, LEFT_SQUARE_BRACKET=3, RIGHT_SQUARE_BRACKET=4, 
+		NUMBER=5, BOOLEAN=6, STRING=7, ID=8, SELECTOR_OPERATOR=9, DOT=10, COLON=11, 
+		COMMA=12, METHOD_CALL_SYMBOL=13, ASSIGNMENT_OPERATOR=14, COMMAND_OPERATOR=15, 
+		WHITESPACE=16;
+	public const int
 		RULE_command = 0, RULE_expression = 1, RULE_methodCall = 2, RULE_methodCallParameter = 3, 
 		RULE_selector = 4, RULE_selectableElement = 5, RULE_pseudoSelector = 6, 
 		RULE_selectorAttribute = 7, RULE_constant = 8;
-	public static readonly String[] ruleNames = {
-		"command", "expression", "CommandCall", "methodCallParameter", "selector", 
+	public static readonly string[] ruleNames = {
+		"command", "expression", "methodCall", "methodCallParameter", "selector", 
 		"selectableElement", "pseudoSelector", "selectorAttribute", "constant"
 	};
 
-	private static readonly String[] _LiteralNames = {
-		null, null, "'('", "')'", "'['", "']'", null, null, null, null, "'.'", 
+	private static readonly string[] _LiteralNames = {
+		null, "'('", "')'", "'['", "']'", null, null, null, null, null, "'.'", 
 		"':'", "','", "'@'", "'='"
 	};
-	private static readonly String[] _SymbolicNames = {
-		null, "String", "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", 
-		"RIGHT_SQUARE_BRACKET", "NUMBER", "BOOLEAN", "ID", "SELECTOR_OPERATOR", 
-		"DOT", "COLON", "COMMA", "METHOD_CALL_SYMBOL", "ASSIGNMENT_OPERATOR", 
-		"PIPELINE_OPERATOR", "WHITESPACE"
+	private static readonly string[] _SymbolicNames = {
+		null, "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_SQUARE_BRACKET", "RIGHT_SQUARE_BRACKET", 
+		"NUMBER", "BOOLEAN", "STRING", "ID", "SELECTOR_OPERATOR", "DOT", "COLON", 
+		"COMMA", "METHOD_CALL_SYMBOL", "ASSIGNMENT_OPERATOR", "COMMAND_OPERATOR", 
+		"WHITESPACE"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -64,11 +65,11 @@ public partial class CodeQuery : Parser {
 		}
 	}
 
-	public override String GrammarFileName { get { return "CodeQuery.g4"; } }
+	public override string GrammarFileName { get { return "CodeQuery.g4"; } }
 
-	public override String[] RuleNames { get { return ruleNames; } }
+	public override string[] RuleNames { get { return ruleNames; } }
 
-	public override String SerializedAtn { get { return _serializedATN; } }
+	public override string SerializedAtn { get { return _serializedATN; } }
 
 	public CodeQuery(ITokenStream input)
 		: base(input)
@@ -79,15 +80,21 @@ public partial class CodeQuery : Parser {
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
 		}
-		public ITerminalNode PIPELINE_OPERATOR() { return GetToken(CodeQuery.PIPELINE_OPERATOR, 0); }
-		public CommandContext command() {
-			return GetRuleContext<CommandContext>(0);
+		public ITerminalNode[] COMMAND_OPERATOR() { return GetTokens(CodeQuery.COMMAND_OPERATOR); }
+		public ITerminalNode COMMAND_OPERATOR(int i) {
+			return GetToken(CodeQuery.COMMAND_OPERATOR, i);
 		}
-		public CommandContext(ParserRuleContext parent, Int32 invokingState)
+		public CommandContext[] command() {
+			return GetRuleContexts<CommandContext>();
+		}
+		public CommandContext command(int i) {
+			return GetRuleContext<CommandContext>(i);
+		}
+		public CommandContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_command; } }
+		public override int RuleIndex { get { return RULE_command; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterCommand(this);
@@ -108,17 +115,25 @@ public partial class CodeQuery : Parser {
 		CommandContext _localctx = new CommandContext(Context, State);
 		EnterRule(_localctx, 0, RULE_command);
 		try {
+			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 18; expression();
-			State = 21;
-			switch ( Interpreter.AdaptivePredict(TokenStream,0,Context) ) {
-			case 1:
-				{
-				State = 19; Match(PIPELINE_OPERATOR);
-				State = 20; command();
+			State = 23;
+			ErrorHandler.Sync(this);
+			_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+				if ( _alt==1 ) {
+					{
+					{
+					State = 19; Match(COMMAND_OPERATOR);
+					State = 20; command();
+					}
+					} 
 				}
-				break;
+				State = 25;
+				ErrorHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
 			}
 			}
 		}
@@ -134,40 +149,21 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class ExpressionContext : ParserRuleContext {
-		public ExpressionContext(ParserRuleContext parent, Int32 invokingState)
+		public ExpressionContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_expression; } }
+		public override int RuleIndex { get { return RULE_expression; } }
 	 
 		public ExpressionContext() { }
 		public virtual void CopyFrom(ExpressionContext context) {
 			base.CopyFrom(context);
 		}
 	}
-	public partial class ExpressionMethodCallContext : ExpressionContext {
-		public MethodCallContext methodCall() {
-			return GetRuleContext<MethodCallContext>(0);
-		}
-		public ExpressionMethodCallContext(ExpressionContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.EnterExpressionMethodCall(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.ExitExpressionMethodCall(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitExpressionMethodCall(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
 	public partial class ExpressionInnerContext : ExpressionContext {
 		public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
-		public ExpressionContext expression() {
-			return GetRuleContext<ExpressionContext>(0);
+		public CommandContext command() {
+			return GetRuleContext<CommandContext>(0);
 		}
 		public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
 		public ExpressionInnerContext(ExpressionContext context) { CopyFrom(context); }
@@ -204,19 +200,38 @@ public partial class CodeQuery : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
+	public partial class ExpressionMethodCallContext : ExpressionContext {
+		public MethodCallContext methodCall() {
+			return GetRuleContext<MethodCallContext>(0);
+		}
+		public ExpressionMethodCallContext(ExpressionContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.EnterExpressionMethodCall(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.ExitExpressionMethodCall(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExpressionMethodCall(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 
 	[RuleVersion(0)]
 	public ExpressionContext expression() {
 		ExpressionContext _localctx = new ExpressionContext(Context, State);
 		EnterRule(_localctx, 2, RULE_expression);
 		try {
-			State = 29;
+			State = 32;
 			switch (TokenStream.La(1)) {
 			case METHOD_CALL_SYMBOL:
 				_localctx = new ExpressionMethodCallContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 23; methodCall();
+				State = 26; methodCall();
 				}
 				break;
 			case ID:
@@ -224,16 +239,16 @@ public partial class CodeQuery : Parser {
 				_localctx = new ExpressionSelectorContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 24; selector();
+				State = 27; selector();
 				}
 				break;
 			case LEFT_BRACKET:
 				_localctx = new ExpressionInnerContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 25; Match(LEFT_BRACKET);
-				State = 26; expression();
-				State = 27; Match(RIGHT_BRACKET);
+				State = 28; Match(LEFT_BRACKET);
+				State = 29; command();
+				State = 30; Match(RIGHT_BRACKET);
 				}
 				break;
 			default:
@@ -259,14 +274,14 @@ public partial class CodeQuery : Parser {
 		public MethodCallParameterContext[] methodCallParameter() {
 			return GetRuleContexts<MethodCallParameterContext>();
 		}
-		public MethodCallParameterContext methodCallParameter(Int32 i) {
+		public MethodCallParameterContext methodCallParameter(int i) {
 			return GetRuleContext<MethodCallParameterContext>(i);
 		}
-		public MethodCallContext(ParserRuleContext parent, Int32 invokingState)
+		public MethodCallContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_methodCall; } }
+		public override int RuleIndex { get { return RULE_methodCall; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterMethodCall(this);
@@ -287,23 +302,23 @@ public partial class CodeQuery : Parser {
 		MethodCallContext _localctx = new MethodCallContext(Context, State);
 		EnterRule(_localctx, 4, RULE_methodCall);
 		try {
-			Int32 _alt;
+			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 31; Match(METHOD_CALL_SYMBOL);
-			State = 32; _localctx.MethodCallName = Match(ID);
-			State = 36;
+			State = 34; Match(METHOD_CALL_SYMBOL);
+			State = 35; _localctx.MethodCallName = Match(ID);
+			State = 39;
 			ErrorHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 33; _localctx.MethodCallParameter = methodCallParameter();
+					State = 36; _localctx.MethodCallParameter = methodCallParameter();
 					}
 					} 
 				}
-				State = 38;
+				State = 41;
 				ErrorHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
 			}
@@ -321,38 +336,15 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class MethodCallParameterContext : ParserRuleContext {
-		public MethodCallParameterContext(ParserRuleContext parent, Int32 invokingState)
+		public MethodCallParameterContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_methodCallParameter; } }
+		public override int RuleIndex { get { return RULE_methodCallParameter; } }
 	 
 		public MethodCallParameterContext() { }
 		public virtual void CopyFrom(MethodCallParameterContext context) {
 			base.CopyFrom(context);
-		}
-	}
-	public partial class MethodCallParameterValueWithIdentifierContext : MethodCallParameterContext {
-		public IToken ParameterName;
-		public IToken ActualParameterValue;
-		public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
-		public ITerminalNode ID(Int32 i) {
-			return GetToken(CodeQuery.ID, i);
-		}
-		public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
-		public MethodCallParameterValueWithIdentifierContext(MethodCallParameterContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.EnterMethodCallParameterValueWithIdentifier(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.ExitMethodCallParameterValueWithIdentifier(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitMethodCallParameterValueWithIdentifier(this);
-			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class MethodCallParameterValueWithExpressionContext : MethodCallParameterContext {
@@ -375,6 +367,29 @@ public partial class CodeQuery : Parser {
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitMethodCallParameterValueWithExpression(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class MethodCallParameterValueWithIdentifierContext : MethodCallParameterContext {
+		public IToken ParameterName;
+		public IToken ActualParameterValue;
+		public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
+		public ITerminalNode ID(int i) {
+			return GetToken(CodeQuery.ID, i);
+		}
+		public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
+		public MethodCallParameterValueWithIdentifierContext(MethodCallParameterContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.EnterMethodCallParameterValueWithIdentifier(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.ExitMethodCallParameterValueWithIdentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMethodCallParameterValueWithIdentifier(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -406,56 +421,56 @@ public partial class CodeQuery : Parser {
 	public MethodCallParameterContext methodCallParameter() {
 		MethodCallParameterContext _localctx = new MethodCallParameterContext(Context, State);
 		EnterRule(_localctx, 6, RULE_methodCallParameter);
-		Int32 _la;
+		int _la;
 		try {
-			State = 54;
+			State = 57;
 			switch ( Interpreter.AdaptivePredict(TokenStream,6,Context) ) {
 			case 1:
 				_localctx = new MethodCallParameterValueWithExpressionContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 41;
+				State = 44;
 				switch ( Interpreter.AdaptivePredict(TokenStream,3,Context) ) {
 				case 1:
 					{
-					State = 39; ((MethodCallParameterValueWithExpressionContext)_localctx).ParameterName = Match(ID);
-					State = 40; Match(ASSIGNMENT_OPERATOR);
+					State = 42; ((MethodCallParameterValueWithExpressionContext)_localctx).ParameterName = Match(ID);
+					State = 43; Match(ASSIGNMENT_OPERATOR);
 					}
 					break;
 				}
-				State = 43; ((MethodCallParameterValueWithExpressionContext)_localctx).ActualParameterValue = expression();
+				State = 46; ((MethodCallParameterValueWithExpressionContext)_localctx).ActualParameterValue = expression();
 				}
 				break;
 			case 2:
 				_localctx = new MethodCallParameterValueWithConstantContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 46;
+				State = 49;
 				_la = TokenStream.La(1);
 				if (_la==ID) {
 					{
-					State = 44; ((MethodCallParameterValueWithConstantContext)_localctx).ParameterName = Match(ID);
-					State = 45; Match(ASSIGNMENT_OPERATOR);
+					State = 47; ((MethodCallParameterValueWithConstantContext)_localctx).ParameterName = Match(ID);
+					State = 48; Match(ASSIGNMENT_OPERATOR);
 					}
 				}
 
-				State = 48; ((MethodCallParameterValueWithConstantContext)_localctx).ActualParameterValue = constant();
+				State = 51; ((MethodCallParameterValueWithConstantContext)_localctx).ActualParameterValue = constant();
 				}
 				break;
 			case 3:
 				_localctx = new MethodCallParameterValueWithIdentifierContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 51;
+				State = 54;
 				switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
 				case 1:
 					{
-					State = 49; ((MethodCallParameterValueWithIdentifierContext)_localctx).ParameterName = Match(ID);
-					State = 50; Match(ASSIGNMENT_OPERATOR);
+					State = 52; ((MethodCallParameterValueWithIdentifierContext)_localctx).ParameterName = Match(ID);
+					State = 53; Match(ASSIGNMENT_OPERATOR);
 					}
 					break;
 				}
-				State = 53; ((MethodCallParameterValueWithIdentifierContext)_localctx).ActualParameterValue = Match(ID);
+				State = 56; ((MethodCallParameterValueWithIdentifierContext)_localctx).ActualParameterValue = Match(ID);
 				}
 				break;
 			}
@@ -475,24 +490,24 @@ public partial class CodeQuery : Parser {
 		public SelectableElementContext[] selectableElement() {
 			return GetRuleContexts<SelectableElementContext>();
 		}
-		public SelectableElementContext selectableElement(Int32 i) {
+		public SelectableElementContext selectableElement(int i) {
 			return GetRuleContext<SelectableElementContext>(i);
 		}
 		public SelectorAttributeContext[] selectorAttribute() {
 			return GetRuleContexts<SelectorAttributeContext>();
 		}
-		public SelectorAttributeContext selectorAttribute(Int32 i) {
+		public SelectorAttributeContext selectorAttribute(int i) {
 			return GetRuleContext<SelectorAttributeContext>(i);
 		}
 		public ITerminalNode[] SELECTOR_OPERATOR() { return GetTokens(CodeQuery.SELECTOR_OPERATOR); }
-		public ITerminalNode SELECTOR_OPERATOR(Int32 i) {
+		public ITerminalNode SELECTOR_OPERATOR(int i) {
 			return GetToken(CodeQuery.SELECTOR_OPERATOR, i);
 		}
-		public SelectorContext(ParserRuleContext parent, Int32 invokingState)
+		public SelectorContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_selector; } }
+		public override int RuleIndex { get { return RULE_selector; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterSelector(this);
@@ -512,45 +527,45 @@ public partial class CodeQuery : Parser {
 	public SelectorContext selector() {
 		SelectorContext _localctx = new SelectorContext(Context, State);
 		EnterRule(_localctx, 8, RULE_selector);
-		Int32 _la;
+		int _la;
 		try {
-			Int32 _alt;
+			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 56; selectableElement();
-			State = 60;
+			State = 59; selectableElement();
+			State = 63;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.La(1);
 			while (_la==LEFT_SQUARE_BRACKET) {
 				{
 				{
-				State = 57; selectorAttribute();
+				State = 60; selectorAttribute();
 				}
 				}
-				State = 62;
+				State = 65;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.La(1);
 			}
-			State = 69;
+			State = 72;
 			ErrorHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(TokenStream,9,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 64;
+					State = 67;
 					_la = TokenStream.La(1);
 					if (_la==SELECTOR_OPERATOR) {
 						{
-						State = 63; Match(SELECTOR_OPERATOR);
+						State = 66; Match(SELECTOR_OPERATOR);
 						}
 					}
 
-					State = 66; selectableElement();
+					State = 69; selectableElement();
 					}
 					} 
 				}
-				State = 71;
+				State = 74;
 				ErrorHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(TokenStream,9,Context);
 			}
@@ -573,14 +588,14 @@ public partial class CodeQuery : Parser {
 		public PseudoSelectorContext[] pseudoSelector() {
 			return GetRuleContexts<PseudoSelectorContext>();
 		}
-		public PseudoSelectorContext pseudoSelector(Int32 i) {
+		public PseudoSelectorContext pseudoSelector(int i) {
 			return GetRuleContext<PseudoSelectorContext>(i);
 		}
-		public SelectableElementContext(ParserRuleContext parent, Int32 invokingState)
+		public SelectableElementContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_selectableElement; } }
+		public override int RuleIndex { get { return RULE_selectableElement; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterSelectableElement(this);
@@ -600,29 +615,29 @@ public partial class CodeQuery : Parser {
 	public SelectableElementContext selectableElement() {
 		SelectableElementContext _localctx = new SelectableElementContext(Context, State);
 		EnterRule(_localctx, 10, RULE_selectableElement);
-		Int32 _la;
+		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 73;
+			State = 76;
 			_la = TokenStream.La(1);
 			if (_la==DOT) {
 				{
-				State = 72; Match(DOT);
+				State = 75; Match(DOT);
 				}
 			}
 
-			State = 75; Match(ID);
-			State = 79;
+			State = 78; Match(ID);
+			State = 82;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.La(1);
 			while (_la==COLON) {
 				{
 				{
-				State = 76; pseudoSelector();
+				State = 79; pseudoSelector();
 				}
 				}
-				State = 81;
+				State = 84;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.La(1);
 			}
@@ -640,11 +655,11 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class PseudoSelectorContext : ParserRuleContext {
-		public PseudoSelectorContext(ParserRuleContext parent, Int32 invokingState)
+		public PseudoSelectorContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_pseudoSelector; } }
+		public override int RuleIndex { get { return RULE_pseudoSelector; } }
 	 
 		public PseudoSelectorContext() { }
 		public virtual void CopyFrom(PseudoSelectorContext context) {
@@ -652,13 +667,15 @@ public partial class CodeQuery : Parser {
 		}
 	}
 	public partial class PseudoSelectorWithConstantContext : PseudoSelectorContext {
+		public IToken Name;
+		public ConstantContext Value;
 		public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
 		public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
 		public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
+		public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
 		public ConstantContext constant() {
 			return GetRuleContext<ConstantContext>(0);
 		}
-		public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
 		public PseudoSelectorWithConstantContext(PseudoSelectorContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -675,9 +692,11 @@ public partial class CodeQuery : Parser {
 		}
 	}
 	public partial class PseudoSelectorWithIdentifierContext : PseudoSelectorContext {
+		public IToken Name;
+		public IToken Value;
 		public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
 		public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
-		public ITerminalNode ID(Int32 i) {
+		public ITerminalNode ID(int i) {
 			return GetToken(CodeQuery.ID, i);
 		}
 		public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
@@ -703,21 +722,21 @@ public partial class CodeQuery : Parser {
 		PseudoSelectorContext _localctx = new PseudoSelectorContext(Context, State);
 		EnterRule(_localctx, 12, RULE_pseudoSelector);
 		try {
-			State = 97;
+			State = 100;
 			switch ( Interpreter.AdaptivePredict(TokenStream,14,Context) ) {
 			case 1:
 				_localctx = new PseudoSelectorWithConstantContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 82; Match(COLON);
-				State = 83; Match(ID);
-				State = 88;
+				State = 85; Match(COLON);
+				State = 86; ((PseudoSelectorWithConstantContext)_localctx).Name = Match(ID);
+				State = 91;
 				switch ( Interpreter.AdaptivePredict(TokenStream,12,Context) ) {
 				case 1:
 					{
-					State = 84; Match(LEFT_BRACKET);
-					State = 85; constant();
-					State = 86; Match(RIGHT_BRACKET);
+					State = 87; Match(LEFT_BRACKET);
+					State = 88; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
+					State = 89; Match(RIGHT_BRACKET);
 					}
 					break;
 				}
@@ -727,15 +746,15 @@ public partial class CodeQuery : Parser {
 				_localctx = new PseudoSelectorWithIdentifierContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 90; Match(COLON);
-				State = 91; Match(ID);
-				State = 95;
+				State = 93; Match(COLON);
+				State = 94; ((PseudoSelectorWithIdentifierContext)_localctx).Name = Match(ID);
+				State = 98;
 				switch ( Interpreter.AdaptivePredict(TokenStream,13,Context) ) {
 				case 1:
 					{
-					State = 92; Match(LEFT_BRACKET);
-					State = 93; Match(ID);
-					State = 94; Match(RIGHT_BRACKET);
+					State = 95; Match(LEFT_BRACKET);
+					State = 96; ((PseudoSelectorWithIdentifierContext)_localctx).Value = Match(ID);
+					State = 97; Match(RIGHT_BRACKET);
 					}
 					break;
 				}
@@ -764,11 +783,11 @@ public partial class CodeQuery : Parser {
 		public ConstantContext constant() {
 			return GetRuleContext<ConstantContext>(0);
 		}
-		public SelectorAttributeContext(ParserRuleContext parent, Int32 invokingState)
+		public SelectorAttributeContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_selectorAttribute; } }
+		public override int RuleIndex { get { return RULE_selectorAttribute; } }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
 			if (typedListener != null) typedListener.EnterSelectorAttribute(this);
@@ -791,11 +810,11 @@ public partial class CodeQuery : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 99; Match(LEFT_SQUARE_BRACKET);
-			State = 100; _localctx.AttributeName = Match(ID);
-			State = 101; Match(ASSIGNMENT_OPERATOR);
-			State = 102; _localctx.AttributeValue = constant();
-			State = 103; Match(RIGHT_SQUARE_BRACKET);
+			State = 102; Match(LEFT_SQUARE_BRACKET);
+			State = 103; _localctx.AttributeName = Match(ID);
+			State = 104; Match(ASSIGNMENT_OPERATOR);
+			State = 105; _localctx.AttributeValue = constant();
+			State = 106; Match(RIGHT_SQUARE_BRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -810,11 +829,11 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class ConstantContext : ParserRuleContext {
-		public ConstantContext(ParserRuleContext parent, Int32 invokingState)
+		public ConstantContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override Int32 RuleIndex { get { return RULE_constant; } }
+		public override int RuleIndex { get { return RULE_constant; } }
 	 
 		public ConstantContext() { }
 		public virtual void CopyFrom(ConstantContext context) {
@@ -822,7 +841,7 @@ public partial class CodeQuery : Parser {
 		}
 	}
 	public partial class ConstantStringContext : ConstantContext {
-		public ITerminalNode String() { return GetToken(CodeQuery.String, 0); }
+		public ITerminalNode STRING() { return GetToken(CodeQuery.STRING, 0); }
 		public ConstantStringContext(ConstantContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -835,23 +854,6 @@ public partial class CodeQuery : Parser {
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConstantString(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class ConstantBooleanContext : ConstantContext {
-		public ITerminalNode BOOLEAN() { return GetToken(CodeQuery.BOOLEAN, 0); }
-		public ConstantBooleanContext(ConstantContext context) { CopyFrom(context); }
-		public override void EnterRule(IParseTreeListener listener) {
-			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.EnterConstantBoolean(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.ExitConstantBoolean(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitConstantBoolean(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -872,33 +874,50 @@ public partial class CodeQuery : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
+	public partial class ConstantBooleanContext : ConstantContext {
+		public ITerminalNode BOOLEAN() { return GetToken(CodeQuery.BOOLEAN, 0); }
+		public ConstantBooleanContext(ConstantContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.EnterConstantBoolean(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.ExitConstantBoolean(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstantBoolean(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 
 	[RuleVersion(0)]
 	public ConstantContext constant() {
 		ConstantContext _localctx = new ConstantContext(Context, State);
 		EnterRule(_localctx, 16, RULE_constant);
 		try {
-			State = 108;
+			State = 111;
 			switch (TokenStream.La(1)) {
-			case String:
+			case STRING:
 				_localctx = new ConstantStringContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 105; Match(String);
+				State = 108; Match(STRING);
 				}
 				break;
 			case NUMBER:
 				_localctx = new ConstantNumberContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 106; Match(NUMBER);
+				State = 109; Match(NUMBER);
 				}
 				break;
 			case BOOLEAN:
 				_localctx = new ConstantBooleanContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 107; Match(BOOLEAN);
+				State = 110; Match(BOOLEAN);
 				}
 				break;
 			default:
@@ -916,46 +935,47 @@ public partial class CodeQuery : Parser {
 		return _localctx;
 	}
 
-	public static readonly String _serializedATN =
-		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x12q\x4\x2\t\x2"+
+	public static readonly string _serializedATN =
+		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x12t\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
-		"\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\x5\x2\x18\n\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3"+
-		"\x3\x3\x3\x5\x3 \n\x3\x3\x4\x3\x4\x3\x4\a\x4%\n\x4\f\x4\xE\x4(\v\x4\x3"+
-		"\x5\x3\x5\x5\x5,\n\x5\x3\x5\x3\x5\x3\x5\x5\x5\x31\n\x5\x3\x5\x3\x5\x3"+
-		"\x5\x5\x5\x36\n\x5\x3\x5\x5\x5\x39\n\x5\x3\x6\x3\x6\a\x6=\n\x6\f\x6\xE"+
-		"\x6@\v\x6\x3\x6\x5\x6\x43\n\x6\x3\x6\a\x6\x46\n\x6\f\x6\xE\x6I\v\x6\x3"+
-		"\a\x5\aL\n\a\x3\a\x3\a\a\aP\n\a\f\a\xE\aS\v\a\x3\b\x3\b\x3\b\x3\b\x3\b"+
-		"\x3\b\x5\b[\n\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\b\x62\n\b\x5\b\x64\n\b\x3"+
-		"\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\n\x3\n\x3\n\x5\no\n\n\x3\n\x2\x2\v\x2\x4"+
-		"\x6\b\n\f\xE\x10\x12\x2\x2z\x2\x14\x3\x2\x2\x2\x4\x1F\x3\x2\x2\x2\x6!"+
-		"\x3\x2\x2\x2\b\x38\x3\x2\x2\x2\n:\x3\x2\x2\x2\fK\x3\x2\x2\x2\xE\x63\x3"+
-		"\x2\x2\x2\x10\x65\x3\x2\x2\x2\x12n\x3\x2\x2\x2\x14\x17\x5\x4\x3\x2\x15"+
-		"\x16\a\x11\x2\x2\x16\x18\x5\x2\x2\x2\x17\x15\x3\x2\x2\x2\x17\x18\x3\x2"+
-		"\x2\x2\x18\x3\x3\x2\x2\x2\x19 \x5\x6\x4\x2\x1A \x5\n\x6\x2\x1B\x1C\a\x4"+
-		"\x2\x2\x1C\x1D\x5\x4\x3\x2\x1D\x1E\a\x5\x2\x2\x1E \x3\x2\x2\x2\x1F\x19"+
-		"\x3\x2\x2\x2\x1F\x1A\x3\x2\x2\x2\x1F\x1B\x3\x2\x2\x2 \x5\x3\x2\x2\x2!"+
-		"\"\a\xF\x2\x2\"&\a\n\x2\x2#%\x5\b\x5\x2$#\x3\x2\x2\x2%(\x3\x2\x2\x2&$"+
-		"\x3\x2\x2\x2&\'\x3\x2\x2\x2\'\a\x3\x2\x2\x2(&\x3\x2\x2\x2)*\a\n\x2\x2"+
-		"*,\a\x10\x2\x2+)\x3\x2\x2\x2+,\x3\x2\x2\x2,-\x3\x2\x2\x2-\x39\x5\x4\x3"+
-		"\x2./\a\n\x2\x2/\x31\a\x10\x2\x2\x30.\x3\x2\x2\x2\x30\x31\x3\x2\x2\x2"+
-		"\x31\x32\x3\x2\x2\x2\x32\x39\x5\x12\n\x2\x33\x34\a\n\x2\x2\x34\x36\a\x10"+
-		"\x2\x2\x35\x33\x3\x2\x2\x2\x35\x36\x3\x2\x2\x2\x36\x37\x3\x2\x2\x2\x37"+
-		"\x39\a\n\x2\x2\x38+\x3\x2\x2\x2\x38\x30\x3\x2\x2\x2\x38\x35\x3\x2\x2\x2"+
-		"\x39\t\x3\x2\x2\x2:>\x5\f\a\x2;=\x5\x10\t\x2<;\x3\x2\x2\x2=@\x3\x2\x2"+
-		"\x2><\x3\x2\x2\x2>?\x3\x2\x2\x2?G\x3\x2\x2\x2@>\x3\x2\x2\x2\x41\x43\a"+
-		"\v\x2\x2\x42\x41\x3\x2\x2\x2\x42\x43\x3\x2\x2\x2\x43\x44\x3\x2\x2\x2\x44"+
-		"\x46\x5\f\a\x2\x45\x42\x3\x2\x2\x2\x46I\x3\x2\x2\x2G\x45\x3\x2\x2\x2G"+
-		"H\x3\x2\x2\x2H\v\x3\x2\x2\x2IG\x3\x2\x2\x2JL\a\f\x2\x2KJ\x3\x2\x2\x2K"+
-		"L\x3\x2\x2\x2LM\x3\x2\x2\x2MQ\a\n\x2\x2NP\x5\xE\b\x2ON\x3\x2\x2\x2PS\x3"+
-		"\x2\x2\x2QO\x3\x2\x2\x2QR\x3\x2\x2\x2R\r\x3\x2\x2\x2SQ\x3\x2\x2\x2TU\a"+
-		"\r\x2\x2UZ\a\n\x2\x2VW\a\x4\x2\x2WX\x5\x12\n\x2XY\a\x5\x2\x2Y[\x3\x2\x2"+
-		"\x2ZV\x3\x2\x2\x2Z[\x3\x2\x2\x2[\x64\x3\x2\x2\x2\\]\a\r\x2\x2]\x61\a\n"+
-		"\x2\x2^_\a\x4\x2\x2_`\a\n\x2\x2`\x62\a\x5\x2\x2\x61^\x3\x2\x2\x2\x61\x62"+
-		"\x3\x2\x2\x2\x62\x64\x3\x2\x2\x2\x63T\x3\x2\x2\x2\x63\\\x3\x2\x2\x2\x64"+
-		"\xF\x3\x2\x2\x2\x65\x66\a\x6\x2\x2\x66g\a\n\x2\x2gh\a\x10\x2\x2hi\x5\x12"+
-		"\n\x2ij\a\a\x2\x2j\x11\x3\x2\x2\x2ko\a\x3\x2\x2lo\a\b\x2\x2mo\a\t\x2\x2"+
-		"nk\x3\x2\x2\x2nl\x3\x2\x2\x2nm\x3\x2\x2\x2o\x13\x3\x2\x2\x2\x12\x17\x1F"+
-		"&+\x30\x35\x38>\x42GKQZ\x61\x63n";
+		"\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\a\x2\x18\n\x2\f\x2\xE\x2\x1B\v\x2\x3\x3"+
+		"\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x5\x3#\n\x3\x3\x4\x3\x4\x3\x4\a\x4(\n\x4"+
+		"\f\x4\xE\x4+\v\x4\x3\x5\x3\x5\x5\x5/\n\x5\x3\x5\x3\x5\x3\x5\x5\x5\x34"+
+		"\n\x5\x3\x5\x3\x5\x3\x5\x5\x5\x39\n\x5\x3\x5\x5\x5<\n\x5\x3\x6\x3\x6\a"+
+		"\x6@\n\x6\f\x6\xE\x6\x43\v\x6\x3\x6\x5\x6\x46\n\x6\x3\x6\a\x6I\n\x6\f"+
+		"\x6\xE\x6L\v\x6\x3\a\x5\aO\n\a\x3\a\x3\a\a\aS\n\a\f\a\xE\aV\v\a\x3\b\x3"+
+		"\b\x3\b\x3\b\x3\b\x3\b\x5\b^\n\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\b\x65\n\b"+
+		"\x5\bg\n\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3\n\x3\n\x3\n\x5\nr\n\n\x3\n"+
+		"\x2\x2\v\x2\x4\x6\b\n\f\xE\x10\x12\x2\x2}\x2\x14\x3\x2\x2\x2\x4\"\x3\x2"+
+		"\x2\x2\x6$\x3\x2\x2\x2\b;\x3\x2\x2\x2\n=\x3\x2\x2\x2\fN\x3\x2\x2\x2\xE"+
+		"\x66\x3\x2\x2\x2\x10h\x3\x2\x2\x2\x12q\x3\x2\x2\x2\x14\x19\x5\x4\x3\x2"+
+		"\x15\x16\a\x11\x2\x2\x16\x18\x5\x2\x2\x2\x17\x15\x3\x2\x2\x2\x18\x1B\x3"+
+		"\x2\x2\x2\x19\x17\x3\x2\x2\x2\x19\x1A\x3\x2\x2\x2\x1A\x3\x3\x2\x2\x2\x1B"+
+		"\x19\x3\x2\x2\x2\x1C#\x5\x6\x4\x2\x1D#\x5\n\x6\x2\x1E\x1F\a\x3\x2\x2\x1F"+
+		" \x5\x2\x2\x2 !\a\x4\x2\x2!#\x3\x2\x2\x2\"\x1C\x3\x2\x2\x2\"\x1D\x3\x2"+
+		"\x2\x2\"\x1E\x3\x2\x2\x2#\x5\x3\x2\x2\x2$%\a\xF\x2\x2%)\a\n\x2\x2&(\x5"+
+		"\b\x5\x2\'&\x3\x2\x2\x2(+\x3\x2\x2\x2)\'\x3\x2\x2\x2)*\x3\x2\x2\x2*\a"+
+		"\x3\x2\x2\x2+)\x3\x2\x2\x2,-\a\n\x2\x2-/\a\x10\x2\x2.,\x3\x2\x2\x2./\x3"+
+		"\x2\x2\x2/\x30\x3\x2\x2\x2\x30<\x5\x4\x3\x2\x31\x32\a\n\x2\x2\x32\x34"+
+		"\a\x10\x2\x2\x33\x31\x3\x2\x2\x2\x33\x34\x3\x2\x2\x2\x34\x35\x3\x2\x2"+
+		"\x2\x35<\x5\x12\n\x2\x36\x37\a\n\x2\x2\x37\x39\a\x10\x2\x2\x38\x36\x3"+
+		"\x2\x2\x2\x38\x39\x3\x2\x2\x2\x39:\x3\x2\x2\x2:<\a\n\x2\x2;.\x3\x2\x2"+
+		"\x2;\x33\x3\x2\x2\x2;\x38\x3\x2\x2\x2<\t\x3\x2\x2\x2=\x41\x5\f\a\x2>@"+
+		"\x5\x10\t\x2?>\x3\x2\x2\x2@\x43\x3\x2\x2\x2\x41?\x3\x2\x2\x2\x41\x42\x3"+
+		"\x2\x2\x2\x42J\x3\x2\x2\x2\x43\x41\x3\x2\x2\x2\x44\x46\a\v\x2\x2\x45\x44"+
+		"\x3\x2\x2\x2\x45\x46\x3\x2\x2\x2\x46G\x3\x2\x2\x2GI\x5\f\a\x2H\x45\x3"+
+		"\x2\x2\x2IL\x3\x2\x2\x2JH\x3\x2\x2\x2JK\x3\x2\x2\x2K\v\x3\x2\x2\x2LJ\x3"+
+		"\x2\x2\x2MO\a\f\x2\x2NM\x3\x2\x2\x2NO\x3\x2\x2\x2OP\x3\x2\x2\x2PT\a\n"+
+		"\x2\x2QS\x5\xE\b\x2RQ\x3\x2\x2\x2SV\x3\x2\x2\x2TR\x3\x2\x2\x2TU\x3\x2"+
+		"\x2\x2U\r\x3\x2\x2\x2VT\x3\x2\x2\x2WX\a\r\x2\x2X]\a\n\x2\x2YZ\a\x3\x2"+
+		"\x2Z[\x5\x12\n\x2[\\\a\x4\x2\x2\\^\x3\x2\x2\x2]Y\x3\x2\x2\x2]^\x3\x2\x2"+
+		"\x2^g\x3\x2\x2\x2_`\a\r\x2\x2`\x64\a\n\x2\x2\x61\x62\a\x3\x2\x2\x62\x63"+
+		"\a\n\x2\x2\x63\x65\a\x4\x2\x2\x64\x61\x3\x2\x2\x2\x64\x65\x3\x2\x2\x2"+
+		"\x65g\x3\x2\x2\x2\x66W\x3\x2\x2\x2\x66_\x3\x2\x2\x2g\xF\x3\x2\x2\x2hi"+
+		"\a\x5\x2\x2ij\a\n\x2\x2jk\a\x10\x2\x2kl\x5\x12\n\x2lm\a\x6\x2\x2m\x11"+
+		"\x3\x2\x2\x2nr\a\t\x2\x2or\a\a\x2\x2pr\a\b\x2\x2qn\x3\x2\x2\x2qo\x3\x2"+
+		"\x2\x2qp\x3\x2\x2\x2r\x13\x3\x2\x2\x2\x12\x19\").\x33\x38;\x41\x45JNT"+
+		"]\x64\x66q";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

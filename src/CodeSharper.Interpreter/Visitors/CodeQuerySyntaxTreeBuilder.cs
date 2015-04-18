@@ -58,7 +58,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitConstantString(CodeQuery.ConstantStringContext context)
         {
-            var value = context.String().GetText().Trim('"');
+            var value = context.STRING().GetText().Trim('"');
             return TreeFactory.String(value);
         }
 
@@ -149,7 +149,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitExpressionInner(CodeQuery.ExpressionInnerContext context)
         {
-            return context.expression().Accept(this);
+            return context.command().Accept(this);
         }
 
         /// <summary>
@@ -163,13 +163,26 @@ namespace CodeSharper.Interpreter.Visitors
         /// <return>The visitor result.</return>
         public override Object VisitCommand(CodeQuery.CommandContext context)
         {
-            var pipelineOperator = context.PIPELINE_OPERATOR().GetText();
-            var rightExpression = context.command().Accept(this) as ControlFlowDescriptorBase;
-
             var methodCall = context.expression().Accept(this).As<CommandCall>();
-            if (methodCall != null)
+            var operators = context.COMMAND_OPERATOR().ToArray();
+
+            if (!operators.Any())
             {
-                return TreeFactory.ControlFlow(pipelineOperator, methodCall, rightExpression);
+                return TreeFactory.ControlFlow(methodCall);
+            }
+
+            for (var i = 0; i < operators.Length; i++)
+            {
+                var op = operators[i];
+                var command = context.command().ToArray()[i];
+
+                var pipelineOperator = op.GetText();
+                var rightExpression = command.Accept(this) as ControlFlowDescriptorBase;
+
+                if (methodCall != null)
+                {
+                    return TreeFactory.ControlFlow(pipelineOperator, methodCall, rightExpression);
+                }
             }
 
             return null;

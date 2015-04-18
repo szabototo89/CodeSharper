@@ -31,6 +31,11 @@ namespace CodeSharper.Core.Common.Runnables
 
             // instantiate runnable
             var runnableType = AvailableRunnables.FirstOrDefault(type => type.Name == runnableName);
+            if (runnableType == null)
+            {
+                throw new Exception(String.Format("Runnable ({0}) is not available!", runnableName));
+            }
+
             IRunnable runnable = null;
 
             var constructors = runnableType.GetConstructors();
