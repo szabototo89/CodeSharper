@@ -45,6 +45,7 @@
     <Compile Include="Commands\ICommandCall.cs" />
     <Compile Include="Commands\ICommandCallActualArgument.cs" />
     <Compile Include="Commands\ICommandCallResolver.cs" />
+    <Compile Include="Commands\ICommandDescriptorManager.cs" />
     <Compile Include="Commands\NamedCommandCallActualArgument.cs" />
     <Compile Include="Commands\PositionedCommandCallActualArgument.cs" />
     <Compile Include="Commands\Selectors\PseudoSelectorDescriptor.cs" />

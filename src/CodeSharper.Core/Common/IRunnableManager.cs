@@ -22,7 +22,7 @@ namespace CodeSharper.Core.Common
         IEnumerable<IValueProducer> GetProducers(IRunnable runnable);
     }
 
-    public class StandardRunnableManager : IRunnableManager
+    public class DefaultRunnableManager : IRunnableManager
     {
         /// <summary>
         /// Gets the consumers of specified runnable

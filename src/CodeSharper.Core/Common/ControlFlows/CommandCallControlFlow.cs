@@ -11,13 +11,19 @@ namespace CodeSharper.Core.Common.ControlFlows
         public Command Command { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the executor.
+        /// </summary>
+        public IExecutor Executor { get; protected set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CommandCallControlFlow"/> class.
         /// </summary>
         public CommandCallControlFlow(Command command, IExecutor executor)
-            : base(executor)
         {
             Assume.NotNull(command, "command");
+            Assume.NotNull(executor, "executor");
             Command = command;
+            Executor = executor;
         }
 
         /// <summary>

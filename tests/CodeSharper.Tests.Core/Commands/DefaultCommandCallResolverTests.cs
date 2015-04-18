@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Commands;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
+using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Commands
@@ -14,14 +16,119 @@ namespace CodeSharper.Tests.Core.Commands
     {
         #region Stubs for initializing
 
+        internal class StubCommandDescriptorManager : ICommandDescriptorManager
+        {
+            /// <summary>
+            /// Registers the specified descriptor.
+            /// </summary>
+            void ICommandDescriptorManager.Register(CommandDescriptor descriptor)
+            {
+                throw new NotImplementedException();
+            }
+
+            /// <summary>
+            /// Gets the command descriptors.
+            /// </summary>
+            public IEnumerable<CommandDescriptor> GetCommandDescriptors()
+            {
+                yield return new CommandDescriptor {
+                    Name = "test-command",
+                    CommandNames = new[] { "test-command" },
+                    Arguments = new[] { 
+                                    new ArgumentDescriptor {
+                                        ArgumentName = "parameter",
+                                        ArgumentType = typeof (Boolean),
+                                        Position = 0
+                                    }
+                                }
+                };
+            }
+        }
+
+        internal class StubRunnableFactory : IRunnableFactory
+        {
+            /// <summary>
+            /// Creates a runnable with the specified name and actual arguments
+            /// </summary>
+            public IRunnable Create(String runnableName, IEnumerable<KeyValuePair<String, Object>> actualArguments)
+            {
+                var runnable = new Mock<IRunnable>();
+                runnable.Setup(r => r.Run(It.IsAny<Object>()))
+                        .Returns<Object>(parameter => parameter);
+
+                return runnable.Object;
+            }
+        }
+
         #endregion
 
         #region Initializing test fixture
+
+        /// <summary>
+        /// Gets or sets the under test.
+        /// </summary>
+        protected DefaultCommandCallResolver UnderTest { get; set; }
+
+        /// <summary>
+        /// Gets or sets the runnable factory.
+        /// </summary>
+        protected IRunnableFactory RunnableFactory { get; set; }
+
+        /// <summary>
+        /// Gets or sets the descriptor manager.
+        /// </summary>
+        protected ICommandDescriptorManager DescriptorManager { get; set; }
+
+        public override void Setup()
+        {
+            base.Setup();
+
+            DescriptorManager = new StubCommandDescriptorManager();
+            RunnableFactory = new StubRunnableFactory();
+            UnderTest = new DefaultCommandCallResolver(DescriptorManager, RunnableFactory);
+        }
 
         #endregion
 
         #region Unit tests
 
+        [Test(Description = "CreateCommand should create command when valid command call is passed")]
+        public void CreateCommand_ShouldCreateCommand_WhenValidCommandCallIsPassed()
+        {
+            // Given in setup
+
+            // When
+            var result = UnderTest.CreateCommand(
+                            new CommandCallDescriptor("test-command",
+                            new[] { new PositionedCommandCallActualArgument(0, false) }));
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+
+            var expectedArguments = new Dictionary<String, Object> {
+                {"parameter", false}
+            };
+            Assert.That(result.ActualArguments, Is.EquivalentTo(expectedArguments));
+
+            Assert.That(result.CommandDescriptor, Is.EqualTo(DescriptorManager.GetCommandDescriptors().First()));
+        }
+
+        [Test(Description = "CreateCommand should create command when valid command call is passed")]
+        public void CreateCommand_ShouldCreateCommand_WhenCommandIsNotFound()
+        {
+            // Given in setup
+            var arguments = new[] {
+                new PositionedCommandCallActualArgument(0, false),
+                new PositionedCommandCallActualArgument(1, "Hello World")
+            };
+            var commandCallDescriptor = new CommandCallDescriptor("test-command", arguments);
+
+            // When
+            var result = UnderTest.CreateCommand(commandCallDescriptor);
+
+            // Then
+            Assert.That(result, Is.Null);
+        }
 
         #endregion
     }

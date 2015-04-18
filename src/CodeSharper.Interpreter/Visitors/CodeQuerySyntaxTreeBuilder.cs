@@ -109,18 +109,19 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitMethodCall(CodeQuery.MethodCallContext context)
         {
+            var methodCallParameters = context.methodCallParameter()
+                .Select((parameter, index) => {
+                    var param = parameter.Accept(this);
+                    if (param is ActualParameter) return param;
+                    if (param is Constant) return TreeFactory.ActualParameter((Constant)param, index);
+
+                    return param;
+                });
+
             var methodCall = new {
                 Name = context.MethodCallName.Text,
-                Parameters = context.methodCallParameter()
-                                    .Select((parameter, index) => {
-                                        var param = parameter.Accept(this);
-                                        if (param is ActualParameter) return param;
-                                        if (param is Constant) return TreeFactory.ActualParameter((Constant)param, index);
-
-                                        return param;
-                                    })
-                                    .OfType<ActualParameter>()
-                                    .ToArray()
+                Parameters = methodCallParameters.OfType<ActualParameter>()
+                                                 .ToArray()
             };
 
             return TreeFactory.MethodCall(methodCall.Name, methodCall.Parameters);

@@ -40,17 +40,22 @@ namespace CodeSharper.Interpreter.Common
 
         private Command getCommand(CommandCall commandCall)
         {
-            var actualParameters = commandCall.ActualParameters.Select<ActualParameter, ICommandCallActualArgument>(parameter => {
-                if (parameter.ParameterName.HasValue)
-                    return new NamedCommandCallActualArgument(parameter.ParameterName, parameter.Value.Value);
-                if (parameter.Position.HasValue)
-                    return new PositionedCommandCallActualArgument(parameter.Position, parameter.Value.Value);
-
-                throw new NotSupportedException("Not supported function call!");
-            });
-
+            var actualParameters = commandCall.ActualParameters.Select(Create);
             var descriptor = new CommandCallDescriptor(commandCall.MethodName, actualParameters);
             return CommandCallResolver.CreateCommand(descriptor);
+        }
+
+        /// <summary>
+        /// Creates the specified parameter.
+        /// </summary>
+        private ICommandCallActualArgument Create(ActualParameter parameter)
+        {
+            if (parameter.ParameterName.HasValue)
+                return new NamedCommandCallActualArgument(parameter.ParameterName, parameter.Value.Value);
+            if (parameter.Position.HasValue)
+                return new PositionedCommandCallActualArgument(parameter.Position, parameter.Value.Value);
+
+            throw new NotSupportedException("Not supported function call!");
         }
 
         /// <summary>
@@ -77,7 +82,7 @@ namespace CodeSharper.Interpreter.Common
         {
             Assume.NotNull(sequence, "sequence");
             var children = createChildren(sequence);
-            return new SequenceControlFlow(children, Executor);
+            return new SequenceControlFlow(children);
         }
 
         /// <summary>
@@ -86,7 +91,7 @@ namespace CodeSharper.Interpreter.Common
         public ControlFlowBase Create(PipelineControlFlowDescriptor pipeline)
         {
             Assume.NotNull(pipeline, "pipeline");
-            return new PipelineControlFlow(createChildren(pipeline), Executor);
+            return new PipelineControlFlow(createChildren(pipeline));
         }
 
         /// <summary>

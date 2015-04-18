@@ -8,8 +8,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// <summary>
         /// Initializes a new instance of the <see cref="SequenceControlFlow"/> class.
         /// </summary>
-        public SequenceControlFlow(IEnumerable<ControlFlowBase> children, IExecutor executor)
-            : base(children, executor)
+        public SequenceControlFlow(IEnumerable<ControlFlowBase> children) : base(children)
         {
 
         }

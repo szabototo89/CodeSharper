@@ -8,8 +8,8 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// <summary>
         /// Initializes a new instance of the <see cref="PipelineControlFlow"/> class.
         /// </summary>
-        public PipelineControlFlow(IEnumerable<ControlFlowBase> children, IExecutor executor)
-            : base(children, executor)
+        public PipelineControlFlow(IEnumerable<ControlFlowBase> children)
+            : base(children)
         {
 
         }

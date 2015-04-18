@@ -14,8 +14,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// <summary>
         /// Initializes a new instance of the <see cref="PipelineControlFlow"/> class.
         /// </summary>
-        protected ComplexControlFlowBase(IEnumerable<ControlFlowBase> children, IExecutor executor)
-            : base(executor)
+        protected ComplexControlFlowBase(IEnumerable<ControlFlowBase> children)
         {
             Assume.NotNull(children, "children");
             Children = children;
