@@ -74,6 +74,7 @@
     <Compile Include="LocalAddin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stubs\IdentityRunnable.cs" />
+    <Compile Include="Stubs\IncrementRunnable.cs" />
     <Compile Include="Visitors\CodeQueryVisitorIntegratedTests.cs" />
     <Compile Include="Visitors\CodeQueryVisitorTests.cs" />
   </ItemGroup>

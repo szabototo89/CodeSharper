@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
@@ -10,7 +12,15 @@ namespace CodeSharper.Core.Common.Runnables.Converters
         /// </summary>
         public override Boolean IsConvertable(Object parameter)
         {
-            return parameter is IEnumerable<TParameter>;
+            if (parameter == null) return false;
+
+            if (parameter is IEnumerable<TParameter>)
+                return true;
+
+            // checks edge cases
+            var enumerable = parameter as IEnumerable;
+            if (enumerable == null) return false;
+            return enumerable.Cast<Object>().All(element => element is TParameter);
         }
 
         /// <summary>

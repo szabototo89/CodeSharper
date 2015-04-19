@@ -14,7 +14,7 @@ namespace CodeSharper.Tests.Interpreter.Stubs
         /// </summary>
         public Object Run(Object parameter)
         {
-            return (Int32)parameter + 1;
+            return parameter;
         }
     }
 }

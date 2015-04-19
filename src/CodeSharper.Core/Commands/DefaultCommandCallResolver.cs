@@ -53,7 +53,7 @@ namespace CodeSharper.Core.Commands
             var actualArguments = getActualArguments(commandDescriptor, descriptor);
 
             // create runnable with factory
-            var runnable = RunnableFactory.Create(descriptor.Name, actualArguments);
+            var runnable = RunnableFactory.Create(commandDescriptor.Name, actualArguments);
 
             // create a command instance
             var command = new Command(runnable, commandDescriptor, actualArguments);
