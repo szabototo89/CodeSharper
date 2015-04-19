@@ -187,5 +187,29 @@ namespace CodeSharper.Interpreter.Visitors
 
             return null;
         }
+
+        public override Object VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
+        {
+            return new SelectorElementAttribute {
+                Name = context.AttributeName.Text,
+                Value = context.AttributeValue.Accept(this) as Constant
+            };
+        }
+
+        public override Object VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
+        {
+            return new PseudoSelector {
+                Name = context.Name.Text,
+                Value = context.Value.Accept(this) as Constant
+            };
+        }
+
+        public override Object VisitPseudoSelectorWithIdentifier(CodeQuery.PseudoSelectorWithIdentifierContext context)
+        {
+            return new PseudoSelector {
+                Name = context.Name.Text,
+                Value = TreeFactory.String(context.Value.Text)
+            };
+        }
     }
 }

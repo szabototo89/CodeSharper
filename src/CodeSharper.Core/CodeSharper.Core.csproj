@@ -42,6 +42,7 @@
     <Compile Include="Commands\CommandCallBase.cs" />
     <Compile Include="Commands\CommandCallDescriptor.cs" />
     <Compile Include="Commands\DefaultCommandCallResolver.cs" />
+    <Compile Include="Commands\DefaultCommandDescriptorManager.cs" />
     <Compile Include="Commands\ICommandCall.cs" />
     <Compile Include="Commands\ICommandCallActualArgument.cs" />
     <Compile Include="Commands\ICommandCallResolver.cs" />

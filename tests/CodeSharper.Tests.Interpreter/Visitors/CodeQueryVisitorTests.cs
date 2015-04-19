@@ -68,6 +68,19 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             Assert.That(expectedChildren, Is.EquivalentTo(new[] { "test-command", "test-command-2" }));
         }
 
+        [Test(Description = "Parse should handle input when selectors are defined")]
+        public void Parse_ShouldParseHandle_WhenSelectorsAreDefined()
+        {
+            // Given
+            var underTest = new CodeQueryCompiler();
+
+            // When
+            var result = underTest.Parse("column[name=\"First Name\"]");
+
+            // Then
+            Assert.That(result, Is.Not.Null);
+        }
+
         #endregion
     }
 }

@@ -48,6 +48,8 @@
     <Compile Include="Common\IControlFlowFactory.cs" />
     <Compile Include="Common\LazyAndControlFlowDescriptor.cs" />
     <Compile Include="Common\PipelineControlFlowDescriptor.cs" />
+    <Compile Include="Common\PseudoSelector.cs" />
+    <Compile Include="Common\SelectorElementAttribute.cs" />
     <Compile Include="Common\SequenceControlFlowDescriptor.cs" />
     <Compile Include="Compiler\CodeQueryCompiler.cs" />
     <Compile Include="Grammar\CodeQuery.cs" />
