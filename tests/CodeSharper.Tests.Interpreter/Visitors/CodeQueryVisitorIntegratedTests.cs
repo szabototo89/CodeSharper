@@ -43,6 +43,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
                 Arguments = Enumerable.Empty<ArgumentDescriptor>(),
                 Name = "IdentityRunnable"
             });
+
             commandDescriptorManager.Register(new CommandDescriptor() {
                 CommandNames = new[] { "IncrementRunnable", "increment", "inc" },
                 Arguments = new[] {  
@@ -148,7 +149,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             var result = controlFlow.Execute(new[] { 10.0, 1.0 });
 
             // Then
-            Assert.That(result, Is.EqualTo(new[] { 13.0, 3.0 }));
+            Assert.That(result, Is.EqualTo(new[] { 13.0, 4.0 }));
         }
 
         #endregion

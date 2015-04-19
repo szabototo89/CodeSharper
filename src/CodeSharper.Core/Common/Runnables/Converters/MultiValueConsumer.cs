@@ -26,6 +26,15 @@ namespace CodeSharper.Core.Common.Runnables.Converters
         /// <summary>
         /// Converts the specified parameter to the proper value
         /// </summary>
+        public override Object Convert<TFunctionResult>(Object parameter, Func<Object, TFunctionResult> func)
+        {
+            var enumerable = parameter as IEnumerable;
+            return Convert(enumerable.Cast<TParameter>(), argument => func(argument));
+        }
+
+        /// <summary>
+        /// Converts the specified parameter to the proper value
+        /// </summary>
         public override Object Convert<TResult>(IEnumerable<TParameter> parameter, Func<TParameter, TResult> func)
         {
             var result = new List<TResult>();
