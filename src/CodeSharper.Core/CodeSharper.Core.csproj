@@ -63,7 +63,7 @@
     <Compile Include="Common\IHasName.cs" />
     <Compile Include="Common\IHasValue.cs" />
     <Compile Include="Common\ILinkedStyle.cs" />
-    <Compile Include="Common\INameResolver.cs" />
+    <Compile Include="Common\INameMatcher.cs" />
     <Compile Include="Common\IRunnableManager.cs" />
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />

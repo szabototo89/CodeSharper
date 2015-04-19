@@ -14,11 +14,23 @@ namespace CodeSharper.Core.Common.Runnables
         public IEnumerable<Type> AvailableRunnables { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the name matcher.
+        /// </summary>
+        public INameMatcher RunnableNameMatcher { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the parameter name matcher.
+        /// </summary>
+        public INameMatcher ParameterNameMatcher { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DefaultRunnableFactory"/> class.
         /// </summary>
-        public DefaultRunnableFactory(IEnumerable<Type> availableRunnables)
+        public DefaultRunnableFactory(IEnumerable<Type> availableRunnables, INameMatcher runnableNameMatcher = null, INameMatcher parameterNameMatcher = null)
         {
             AvailableRunnables = availableRunnables ?? Enumerable.Empty<Type>();
+            RunnableNameMatcher = runnableNameMatcher ?? new EqualityNameMatcher();
+            ParameterNameMatcher = parameterNameMatcher ?? new EqualityNameMatcher();
         }
 
         /// <summary>
@@ -30,7 +42,7 @@ namespace CodeSharper.Core.Common.Runnables
             Assume.NotNull(actualArguments, "actualArguments");
 
             // instantiate runnable
-            var runnableType = AvailableRunnables.FirstOrDefault(type => type.Name == runnableName);
+            var runnableType = AvailableRunnables.FirstOrDefault(type => RunnableNameMatcher.Match(type.Name, runnableName));
             if (runnableType == null)
             {
                 throw new Exception(String.Format("Runnable ({0}) is not available!", runnableName));
@@ -45,7 +57,7 @@ namespace CodeSharper.Core.Common.Runnables
                 runnable = defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as IRunnable;
             }
             else
-            { 
+            {
                 throw new Exception("Cannot find default constructor of Runnable instance!");
             }
 
@@ -60,7 +72,7 @@ namespace CodeSharper.Core.Common.Runnables
 
             foreach (var property in properties)
             {
-                var argument = actualArguments.FirstOrDefault(arg => arg.Key == property.BindTo.PropertyName);
+                var argument = actualArguments.FirstOrDefault(arg => ParameterNameMatcher.Match(arg.Key, property.BindTo.PropertyName));
                 property.Property.SetValue(runnable, argument.Value);
             }
 
