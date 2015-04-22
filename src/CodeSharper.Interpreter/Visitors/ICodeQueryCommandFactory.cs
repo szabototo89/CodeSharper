@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Interpreter.Common;
 
 namespace CodeSharper.Interpreter.Visitors
@@ -48,5 +49,21 @@ namespace CodeSharper.Interpreter.Visitors
         /// Creates a control flow symbol node
         /// </summary>
         ControlFlowDescriptorBase ControlFlow(CommandCall methodCall);
+
+        /// <summary>
+        /// Creates a selector element
+        /// </summary>
+        SelectorElementAttribute SelectorElement(String name, Constant value);
+
+        /// <summary>
+        /// Creates a pseudo selector
+        /// </summary>
+        PseudoSelector PseudoSelector(String name, Constant value);
+
+
+        /// <summary>
+        /// Creates a selectable element
+        /// </summary>
+        SelectableElement SelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors);
     }
 }

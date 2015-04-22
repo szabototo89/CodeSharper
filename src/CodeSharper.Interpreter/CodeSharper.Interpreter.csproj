@@ -49,6 +49,7 @@
     <Compile Include="Common\LazyAndControlFlowDescriptor.cs" />
     <Compile Include="Common\PipelineControlFlowDescriptor.cs" />
     <Compile Include="Common\PseudoSelector.cs" />
+    <Compile Include="Common\SelectableElement.cs" />
     <Compile Include="Common\SelectorElementAttribute.cs" />
     <Compile Include="Common\SequenceControlFlowDescriptor.cs" />
     <Compile Include="Compiler\CodeQueryCompiler.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Common\ControlFlowDescriptorBase.cs" />
     <Compile Include="Common\CommandCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ParseTreeVisitorUtils.cs" />
     <Compile Include="Visitors\CodeQuerySyntaxTreeBuilder.cs" />
     <Compile Include="Visitors\CodeQueryVisitor.cs" />
     <Compile Include="Visitors\DefaultCodeQueryCommandFactory.cs" />

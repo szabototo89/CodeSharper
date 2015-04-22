@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Interpreter.Common;
+using CodeSharper.Interpreter.Utils;
 
 namespace CodeSharper.Interpreter.Visitors
 {
@@ -188,28 +190,90 @@ namespace CodeSharper.Interpreter.Visitors
             return null;
         }
 
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <returns></returns>
+        /// <return>The visitor result.</return>
         public override Object VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
         {
-            return new SelectorElementAttribute {
-                Name = context.AttributeName.Text,
-                Value = context.AttributeValue.Accept(this) as Constant
-            };
+            var name = context.AttributeName.Text;
+            var value = context.AttributeValue.Accept(this) as Constant;
+
+            return TreeFactory.SelectorElement(name, value);
         }
 
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithConstant" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <returns></returns>
+        /// <return>The visitor result.</return>
         public override Object VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
         {
-            return new PseudoSelector {
-                Name = context.Name.Text,
-                Value = context.Value.Accept(this) as Constant
-            };
+            var name = context.Name.Text;
+            var value = context.Value.Accept(this) as Constant;
+
+            return TreeFactory.PseudoSelector(name, value);
         }
 
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithIdentifier" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <returns></returns>
+        /// <return>The visitor result.</return>
         public override Object VisitPseudoSelectorWithIdentifier(CodeQuery.PseudoSelectorWithIdentifierContext context)
         {
-            return new PseudoSelector {
-                Name = context.Name.Text,
-                Value = TreeFactory.String(context.Value.Text)
-            };
+            var name = context.Name.Text;
+            var value = TreeFactory.String(context.Value.Text);
+
+            return TreeFactory.PseudoSelector(name, value);
+        }
+
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.selectableElement" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <returns></returns>
+        /// <return>The visitor result.</return>
+        public override Object VisitSelectableElement(CodeQuery.SelectableElementContext context)
+        {
+            var isClassElement = context.DOT() != null;
+            var name = context.ElementName.Text;
+            if (isClassElement)
+            {
+                name = "." + name;
+            }
+
+            var attributes = context.selectorAttribute().AcceptAll(this).Cast<SelectorElementAttribute>();
+            var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelector>();
+
+            return TreeFactory.SelectableElement(name, attributes, pseudoSelectors);
+        }
+
+        public override Object VisitSelector(CodeQuery.SelectorContext context)
+        {
+            
+
+            return base.VisitSelector(context);
         }
     }
 }

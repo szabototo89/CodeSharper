@@ -2,6 +2,7 @@
 using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Interpreter.Visitors;
 
 namespace CodeSharper.Interpreter.Common
 {
@@ -71,5 +72,16 @@ namespace CodeSharper.Interpreter.Common
         }
 
         #endregion
+
+        public SelectorElementAttribute SelectorElement(String name)
+        {
+            Assume.NotNull(name, "name");
+            Assume.NotNull<CodeQuerySyntaxTreeBuilder>(this, "value");
+
+            return new SelectorElementAttribute {
+                Name = name,
+                Value = this
+            };
+        }
     }
 }

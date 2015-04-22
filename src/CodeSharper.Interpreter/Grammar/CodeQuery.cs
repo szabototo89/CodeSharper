@@ -564,6 +564,9 @@ public partial class CodeQuery : Parser {
 	}
 
 	public partial class SelectableElementContext : ParserRuleContext {
+		public IToken ElementName;
+		public SelectorAttributeContext SelectorAttributes;
+		public PseudoSelectorContext PseudoSelectors;
 		public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
 		public ITerminalNode DOT() { return GetToken(CodeQuery.DOT, 0); }
 		public SelectorAttributeContext[] selectorAttribute() {
@@ -614,14 +617,14 @@ public partial class CodeQuery : Parser {
 				}
 			}
 
-			State = 72; Match(ID);
+			State = 72; _localctx.ElementName = Match(ID);
 			State = 76;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.La(1);
 			while (_la==LEFT_SQUARE_BRACKET) {
 				{
 				{
-				State = 73; selectorAttribute();
+				State = 73; _localctx.SelectorAttributes = selectorAttribute();
 				}
 				}
 				State = 78;
@@ -634,7 +637,7 @@ public partial class CodeQuery : Parser {
 			while (_la==COLON) {
 				{
 				{
-				State = 79; pseudoSelector();
+				State = 79; _localctx.PseudoSelectors = pseudoSelector();
 				}
 				}
 				State = 84;

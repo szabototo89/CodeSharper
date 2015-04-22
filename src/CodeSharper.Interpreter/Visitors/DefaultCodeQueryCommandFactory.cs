@@ -88,5 +88,45 @@ namespace CodeSharper.Interpreter.Visitors
             Assume.NotNull(methodCall, "methodCall");
             return new CommandCallControlFlowDescriptor(methodCall);
         }
+
+        /// <summary>
+        /// Creates a selector element
+        /// </summary>
+        public SelectorElementAttribute SelectorElement(String name, Constant value)
+        {
+            Assume.NotNull(name, "name");
+            Assume.NotNull(value, "value");
+
+            return new SelectorElementAttribute {
+                Name = name,
+                Value = value
+            };
+        }
+
+        /// <summary>
+        /// Creates a pseudo selector
+        /// </summary>
+        public PseudoSelector PseudoSelector(String name, Constant value)
+        {
+            Assume.NotNull(name, "name");
+            Assume.NotNull(value, "value");
+
+            return new PseudoSelector {
+                Name = name,
+                Value = value
+            };
+        }
+
+        /// <summary>
+        /// Creates a selectable element
+        /// </summary>
+        public SelectableElement SelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors)
+        {
+            Assume.NotNull(name, "name");
+            Assume.NotNull(attributes, "attributes");
+            Assume.NotNull(pseudoSelectors, "pseudoSelectors");
+
+            return new SelectableElement(name, attributes, pseudoSelectors);
+        }
     }
 }
