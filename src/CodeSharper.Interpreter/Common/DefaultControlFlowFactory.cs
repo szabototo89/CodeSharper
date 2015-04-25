@@ -91,7 +91,8 @@ namespace CodeSharper.Interpreter.Common
         public ControlFlowBase Create(PipelineControlFlowDescriptor pipeline)
         {
             Assume.NotNull(pipeline, "pipeline");
-            return new PipelineControlFlow(createChildren(pipeline));
+            var children = createChildren(pipeline);
+            return new PipelineControlFlow(children);
         }
 
         /// <summary>

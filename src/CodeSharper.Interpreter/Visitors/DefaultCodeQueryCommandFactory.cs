@@ -92,7 +92,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selector element
         /// </summary>
-        public SelectorElementAttribute SelectorElement(String name, Constant value)
+        public SelectorElementAttribute SelectorElementAttribute(String name, Constant value)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(value, "value");

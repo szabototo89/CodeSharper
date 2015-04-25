@@ -53,7 +53,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selector element
         /// </summary>
-        SelectorElementAttribute SelectorElement(String name, Constant value);
+        SelectorElementAttribute SelectorElementAttribute(String name, Constant value);
 
         /// <summary>
         /// Creates a pseudo selector

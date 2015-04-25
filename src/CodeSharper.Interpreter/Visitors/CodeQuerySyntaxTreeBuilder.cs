@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -205,7 +206,7 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.AttributeName.Text;
             var value = context.AttributeValue.Accept(this) as Constant;
 
-            return TreeFactory.SelectorElement(name, value);
+            return TreeFactory.SelectorElementAttribute(name, value);
         }
 
         /// <summary>
@@ -269,11 +270,57 @@ namespace CodeSharper.Interpreter.Visitors
             return TreeFactory.SelectableElement(name, attributes, pseudoSelectors);
         }
 
-        public override Object VisitSelector(CodeQuery.SelectorContext context)
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.UnarySelection" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+        public override Object VisitUnarySelection(CodeQuery.UnarySelectionContext context)
         {
-            
+            var element = context.Value.Accept(this).As<SelectableElement>();
 
-            return base.VisitSelector(context);
+            return new UnarySelector(element);
+        }
+
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+        public override Object VisitSelectionWithParenthesis(CodeQuery.SelectionWithParenthesisContext context)
+        {
+            return context.Selector.Accept(this);
+        }
+
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.BinarySelection" />.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
+        /// on <paramref name="context" />.
+        /// </para>
+        /// </summary>
+       public override Object VisitBinarySelection(CodeQuery.BinarySelectionContext context)
+        {
+            var left = context.Left.Accept(this).As<BaseSelector>();
+            var right = context.Right.Accept(this).As<BaseSelector>();
+
+            var op = context.SelectorOperator.Safe(value => value.Text) ?? String.Empty;
+
+            switch (op)
+            {
+                // direct child selector
+                case ">":
+                    return new BinarySelector(left, right, new DirectChildSelectorOperator());
+                // relative child selector
+                case "":
+                    return new BinarySelector(left, right, new RelativeChildSelectorOperator());
+                default:
+                    throw new NotSupportedException(String.Format("Not supported child selector: {0}.", op));
+            }
         }
     }
 }

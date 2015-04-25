@@ -72,16 +72,5 @@ namespace CodeSharper.Interpreter.Common
         }
 
         #endregion
-
-        public SelectorElementAttribute SelectorElement(String name)
-        {
-            Assume.NotNull(name, "name");
-            Assume.NotNull<CodeQuerySyntaxTreeBuilder>(this, "value");
-
-            return new SelectorElementAttribute {
-                Name = name,
-                Value = this
-            };
-        }
     }
 }

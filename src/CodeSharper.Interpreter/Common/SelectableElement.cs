@@ -95,6 +95,5 @@ namespace CodeSharper.Interpreter.Common
         }
 
         #endregion
-
     }
 }

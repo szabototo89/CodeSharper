@@ -84,11 +84,26 @@ public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.selector"/>.
+	/// Visit a parse tree produced by the <c>UnarySelection</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitSelector([NotNull] CodeQuery.SelectorContext context);
+	Result VisitUnarySelection([NotNull] CodeQuery.UnarySelectionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>BinarySelection</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBinarySelection([NotNull] CodeQuery.BinarySelectionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>SelectionWithParenthesis</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
 	/// </summary>

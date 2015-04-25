@@ -121,15 +121,41 @@ public interface ICodeQueryListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context);
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CodeQuery.selector"/>.
+	/// Enter a parse tree produced by the <c>UnarySelection</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterSelector([NotNull] CodeQuery.SelectorContext context);
+	void EnterUnarySelection([NotNull] CodeQuery.UnarySelectionContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CodeQuery.selector"/>.
+	/// Exit a parse tree produced by the <c>UnarySelection</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitSelector([NotNull] CodeQuery.SelectorContext context);
+	void ExitUnarySelection([NotNull] CodeQuery.UnarySelectionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>BinarySelection</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBinarySelection([NotNull] CodeQuery.BinarySelectionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>BinarySelection</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBinarySelection([NotNull] CodeQuery.BinarySelectionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>SelectionWithParenthesis</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>SelectionWithParenthesis</c>
+	/// labeled alternative in <see cref="CodeQuery.selector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
 	/// </summary>

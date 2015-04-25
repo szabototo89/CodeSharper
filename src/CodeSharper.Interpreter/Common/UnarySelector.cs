@@ -1,0 +1,64 @@
+using System;
+using CodeSharper.Core.ErrorHandling;
+
+namespace CodeSharper.Interpreter.Common
+{
+    public class UnarySelector : BaseSelector, IEquatable<UnarySelector>
+    {
+        /// <summary>
+        /// Gets or sets the element.
+        /// </summary>
+        public SelectableElement Element { get; protected set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UnarySelector"/> class.
+        /// </summary>
+        public UnarySelector(SelectableElement element)
+        {
+            Assume.NotNull(element, "element");
+            Element = element;
+        }
+
+        #region Equality members
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// </returns>
+        public Boolean Equals(UnarySelector other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(Element, other.Element);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override Boolean Equals(Object obj)
+        {
+            return Equals(obj as UnarySelector);
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override Int32 GetHashCode()
+        {
+            return (Element != null ? Element.GetHashCode() : 0);
+        }
+
+        #endregion
+
+    }
+}

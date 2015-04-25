@@ -129,17 +129,41 @@ public partial class CodeQueryBaseListener : ICodeQueryListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CodeQuery.selector"/>.
+	/// Enter a parse tree produced by <see cref="CodeQuery.UnarySelection"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterSelector([NotNull] CodeQuery.SelectorContext context) { }
+	public virtual void EnterUnarySelection([NotNull] CodeQuery.UnarySelectionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CodeQuery.selector"/>.
+	/// Exit a parse tree produced by <see cref="CodeQuery.UnarySelection"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitSelector([NotNull] CodeQuery.SelectorContext context) { }
+	public virtual void ExitUnarySelection([NotNull] CodeQuery.UnarySelectionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="CodeQuery.BinarySelection"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBinarySelection([NotNull] CodeQuery.BinarySelectionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CodeQuery.BinarySelection"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBinarySelection([NotNull] CodeQuery.BinarySelectionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
 	/// <para>The default implementation does nothing.</para>
