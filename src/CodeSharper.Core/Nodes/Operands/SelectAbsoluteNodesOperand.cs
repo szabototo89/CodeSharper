@@ -31,6 +31,9 @@ namespace CodeSharper.Core.Nodes.Operands
             NodeModifiers = nodeModifiers.GetOrEmpty();
         }
 
+        /// <summary>
+        /// Calculates the specified nodes.
+        /// </summary>
         public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
         {
             var filteredNodes = nodes.Where(node => NodeSelector.FilterNode(node));

@@ -13,57 +13,41 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a boolean literal value
         /// </summary>
-        Constant Boolean(Boolean value);
+        Constant CreateBoolean(Boolean value);
 
         /// <summary>
         /// Creates a number literal value
         /// </summary>
-        Constant Number(Double value);
+        Constant CreateNumber(Double value);
 
         /// <summary>
         /// Creates a string literal value
         /// </summary>
-        Constant String(String value);
+        Constant CreateString(String value);
 
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        ActualParameter ActualParameter(Constant value, String parameterName);
+        ActualParameter CreateActualParameter(Constant value, String parameterName);
 
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        ActualParameter ActualParameter(Constant value, Int32 position);
+        ActualParameter CreateActualParameter(Constant value, Int32 position);
 
         /// <summary>
         /// Creates a method call symbol node
         /// </summary>
-        CommandCall MethodCall(String name, IEnumerable<ActualParameter> parameters);
+        CommandCall CreateMethodCall(String name, IEnumerable<ActualParameter> parameters);
 
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        ControlFlowDescriptorBase ControlFlow(String @operator, CommandCall commandCall, ControlFlowDescriptorBase rightExpression);
+        ControlFlowDescriptorBase CreateControlFlow(String @operator, CommandCall commandCall, ControlFlowDescriptorBase rightExpression);
 
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        ControlFlowDescriptorBase ControlFlow(CommandCall methodCall);
-
-        /// <summary>
-        /// Creates a selector element
-        /// </summary>
-        SelectorElementAttribute SelectorElementAttribute(String name, Constant value);
-
-        /// <summary>
-        /// Creates a pseudo selector
-        /// </summary>
-        PseudoSelector PseudoSelector(String name, Constant value);
-
-
-        /// <summary>
-        /// Creates a selectable element
-        /// </summary>
-        SelectableElement SelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors);
+        ControlFlowDescriptorBase CreateControlFlow(CommandCall methodCall);
     }
 }

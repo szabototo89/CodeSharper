@@ -22,12 +22,19 @@ namespace CodeSharper.Interpreter.Visitors
         public ICodeQueryCommandFactory TreeFactory { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the node selector factory.
+        /// </summary>
+        public INodeSelectorFactory NodeSelectorFactory { get; protected set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CodeQuerySyntaxTreeBuilder"/> class.
         /// </summary>
-        public CodeQuerySyntaxTreeBuilder(ICodeQueryCommandFactory treeFactory)
+        public CodeQuerySyntaxTreeBuilder(INodeSelectorFactory nodeSelectorFactory, ICodeQueryCommandFactory treeFactory)
         {
             Assume.NotNull(treeFactory, "treeFactory");
+            Assume.NotNull(nodeSelectorFactory, "nodeSelectorFactory");
             TreeFactory = treeFactory;
+            NodeSelectorFactory = nodeSelectorFactory;
         }
 
         /// <summary>
@@ -42,10 +49,10 @@ namespace CodeSharper.Interpreter.Visitors
             switch (context.BOOLEAN().GetText())
             {
                 case "false":
-                    return TreeFactory.Boolean(false);
+                    return TreeFactory.CreateBoolean(false);
                     break;
                 case "true":
-                    return TreeFactory.Boolean(true);
+                    return TreeFactory.CreateBoolean(true);
                     break;
                 default:
                     throw new NotSupportedException("Not supported boolean value!");
@@ -62,7 +69,7 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitConstantString(CodeQuery.ConstantStringContext context)
         {
             var value = context.STRING().GetText().Trim('"');
-            return TreeFactory.String(value);
+            return TreeFactory.CreateString(value);
         }
 
         /// <summary>
@@ -80,7 +87,7 @@ namespace CodeSharper.Interpreter.Visitors
             {
                 throw new Exception("Invalid number!");
             }
-            return TreeFactory.Number(value);
+            return TreeFactory.CreateNumber(value);
         }
 
         /// <summary>
@@ -97,7 +104,7 @@ namespace CodeSharper.Interpreter.Visitors
             if (context.ID() != null)
             {
                 var parameterName = context.ParameterName.Text;
-                return TreeFactory.ActualParameter(value, parameterName);
+                return TreeFactory.CreateActualParameter(value, parameterName);
             }
 
             return value;
@@ -116,7 +123,7 @@ namespace CodeSharper.Interpreter.Visitors
                 .Select((parameter, index) => {
                     var param = parameter.Accept(this);
                     if (param is ActualParameter) return param;
-                    if (param is Constant) return TreeFactory.ActualParameter((Constant)param, index);
+                    if (param is Constant) return TreeFactory.CreateActualParameter((Constant)param, index);
 
                     return param;
                 });
@@ -127,7 +134,7 @@ namespace CodeSharper.Interpreter.Visitors
                                                  .ToArray()
             };
 
-            return TreeFactory.MethodCall(methodCall.Name, methodCall.Parameters);
+            return TreeFactory.CreateMethodCall(methodCall.Name, methodCall.Parameters);
         }
 
         /// <summary>
@@ -171,7 +178,7 @@ namespace CodeSharper.Interpreter.Visitors
 
             if (!operators.Any())
             {
-                return TreeFactory.ControlFlow(methodCall);
+                return TreeFactory.CreateControlFlow(methodCall);
             }
 
             for (var i = 0; i < operators.Length; i++)
@@ -184,12 +191,14 @@ namespace CodeSharper.Interpreter.Visitors
 
                 if (methodCall != null)
                 {
-                    return TreeFactory.ControlFlow(pipelineOperator, methodCall, rightExpression);
+                    return TreeFactory.CreateControlFlow(pipelineOperator, methodCall, rightExpression);
                 }
             }
 
             return null;
         }
+
+        #region Code selection language feature
 
         /// <summary>
         /// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute" />.
@@ -206,7 +215,7 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.AttributeName.Text;
             var value = context.AttributeValue.Accept(this) as Constant;
 
-            return TreeFactory.SelectorElementAttribute(name, value);
+            return NodeSelectorFactory.CreateSelectorElementAttribute(name, value);
         }
 
         /// <summary>
@@ -224,7 +233,7 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.Name.Text;
             var value = context.Value.Accept(this) as Constant;
 
-            return TreeFactory.PseudoSelector(name, value);
+            return NodeSelectorFactory.CreatePseudoSelector(name, value);
         }
 
         /// <summary>
@@ -240,9 +249,9 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitPseudoSelectorWithIdentifier(CodeQuery.PseudoSelectorWithIdentifierContext context)
         {
             var name = context.Name.Text;
-            var value = TreeFactory.String(context.Value.Text);
+            var value = TreeFactory.CreateString(context.Value.Text);
 
-            return TreeFactory.PseudoSelector(name, value);
+            return NodeSelectorFactory.CreatePseudoSelector(name, value);
         }
 
         /// <summary>
@@ -267,7 +276,7 @@ namespace CodeSharper.Interpreter.Visitors
             var attributes = context.selectorAttribute().AcceptAll(this).Cast<SelectorElementAttribute>();
             var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelector>();
 
-            return TreeFactory.SelectableElement(name, attributes, pseudoSelectors);
+            return NodeSelectorFactory.CreateSelectableElement(name, attributes, pseudoSelectors);
         }
 
         /// <summary>
@@ -281,7 +290,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             var element = context.Value.Accept(this).As<SelectableElement>();
 
-            return new UnarySelector(element);
+            return NodeSelectorFactory.CreateUnarySelector(element);
         }
 
         /// <summary>
@@ -303,24 +312,18 @@ namespace CodeSharper.Interpreter.Visitors
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-       public override Object VisitBinarySelection(CodeQuery.BinarySelectionContext context)
+        public override Object VisitBinarySelection(CodeQuery.BinarySelectionContext context)
         {
             var left = context.Left.Accept(this).As<BaseSelector>();
             var right = context.Right.Accept(this).As<BaseSelector>();
 
-            var op = context.SelectorOperator.Safe(value => value.Text) ?? String.Empty;
+            var @operator = context.SelectorOperator.Safe(value => value.Text) ?? String.Empty;
+            var selectorOperator = NodeSelectorFactory.CreateSelectorOperator(@operator);
 
-            switch (op)
-            {
-                // direct child selector
-                case ">":
-                    return new BinarySelector(left, right, new DirectChildSelectorOperator());
-                // relative child selector
-                case "":
-                    return new BinarySelector(left, right, new RelativeChildSelectorOperator());
-                default:
-                    throw new NotSupportedException(String.Format("Not supported child selector: {0}.", op));
-            }
+            return NodeSelectorFactory.CreateBinarySelector(left, right, selectorOperator);
         }
+
+        #endregion
+
     }
 }

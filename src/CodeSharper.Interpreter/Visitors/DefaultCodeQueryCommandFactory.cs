@@ -14,7 +14,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a boolean literal value
         /// </summary>
-        public Constant Boolean(Boolean value)
+        public Constant CreateBoolean(Boolean value)
         {
             return new Constant(value, typeof(Boolean));
         }
@@ -22,7 +22,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a number literal value
         /// </summary>
-        public Constant Number(Double value)
+        public Constant CreateNumber(Double value)
         {
             return new Constant(value, typeof(Double));
         }
@@ -30,7 +30,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a string literal value
         /// </summary>
-        public Constant String(String value)
+        public Constant CreateString(String value)
         {
             Assume.NotNull(value, "value");
             return new Constant(value, typeof(String));
@@ -39,7 +39,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        public ActualParameter ActualParameter(Constant value, String parameterName)
+        public ActualParameter CreateActualParameter(Constant value, String parameterName)
         {
             return new ActualParameter(value, parameterName);
         }
@@ -47,7 +47,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        public ActualParameter ActualParameter(Constant value, Int32 position)
+        public ActualParameter CreateActualParameter(Constant value, Int32 position)
         {
             return new ActualParameter(value, position);
         }
@@ -55,7 +55,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a method call symbol node
         /// </summary>
-        public CommandCall MethodCall(String name, IEnumerable<ActualParameter> parameters)
+        public CommandCall CreateMethodCall(String name, IEnumerable<ActualParameter> parameters)
         {
             return new CommandCall(name, parameters);
         }
@@ -63,9 +63,9 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        public ControlFlowDescriptorBase ControlFlow(String @operator, CommandCall commandCall, ControlFlowDescriptorBase rightExpression)
+        public ControlFlowDescriptorBase CreateControlFlow(String @operator, CommandCall commandCall, ControlFlowDescriptorBase rightExpression)
         {
-            var controlFlowChildren = new[] { ControlFlow(commandCall), rightExpression };
+            var controlFlowChildren = new[] { CreateControlFlow(commandCall), rightExpression };
 
             switch (@operator)
             {
@@ -83,50 +83,10 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        public ControlFlowDescriptorBase ControlFlow(CommandCall methodCall)
+        public ControlFlowDescriptorBase CreateControlFlow(CommandCall methodCall)
         {
             Assume.NotNull(methodCall, "methodCall");
             return new CommandCallControlFlowDescriptor(methodCall);
-        }
-
-        /// <summary>
-        /// Creates a selector element
-        /// </summary>
-        public SelectorElementAttribute SelectorElementAttribute(String name, Constant value)
-        {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(value, "value");
-
-            return new SelectorElementAttribute {
-                Name = name,
-                Value = value
-            };
-        }
-
-        /// <summary>
-        /// Creates a pseudo selector
-        /// </summary>
-        public PseudoSelector PseudoSelector(String name, Constant value)
-        {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(value, "value");
-
-            return new PseudoSelector {
-                Name = name,
-                Value = value
-            };
-        }
-
-        /// <summary>
-        /// Creates a selectable element
-        /// </summary>
-        public SelectableElement SelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors)
-        {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(attributes, "attributes");
-            Assume.NotNull(pseudoSelectors, "pseudoSelectors");
-
-            return new SelectableElement(name, attributes, pseudoSelectors);
         }
     }
 }
