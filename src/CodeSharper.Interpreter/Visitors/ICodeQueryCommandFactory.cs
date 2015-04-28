@@ -49,5 +49,10 @@ namespace CodeSharper.Interpreter.Visitors
         /// Creates a control flow symbol node
         /// </summary>
         ControlFlowDescriptorBase CreateControlFlow(CommandCall methodCall);
+
+        /// <summary>
+        /// Creates a control flow for selection.
+        /// </summary>
+        ControlFlowDescriptorBase CreateControlFlow(BaseSelector selector);
     }
 }

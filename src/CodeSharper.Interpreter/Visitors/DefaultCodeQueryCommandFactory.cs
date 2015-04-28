@@ -85,8 +85,17 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ControlFlowDescriptorBase CreateControlFlow(CommandCall methodCall)
         {
-            Assume.NotNull(methodCall, "methodCall");
+            Assume.NotNull(methodCall, "selector");
             return new CommandCallControlFlowDescriptor(methodCall);
+        }
+
+        /// <summary>
+        /// Creates a control flow for selection.
+        /// </summary>
+        public ControlFlowDescriptorBase CreateControlFlow(BaseSelector selector)
+        {
+            Assume.NotNull(selector, "selector");
+            return new SelectorControlFlowDescriptor(selector);
         }
     }
 }

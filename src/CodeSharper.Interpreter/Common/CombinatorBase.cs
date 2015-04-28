@@ -4,7 +4,7 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public abstract class BaseSelectorOperator : IHasValue<String>, IEquatable<BaseSelectorOperator>
+    public abstract class CombinatorBase : IHasValue<String>, IEquatable<CombinatorBase>
     {
         /// <summary>
         /// Gets or sets the value.
@@ -12,9 +12,9 @@ namespace CodeSharper.Interpreter.Common
         public String Value { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseSelectorOperator"/> class.
+        /// Initializes a new instance of the <see cref="CombinatorBase"/> class.
         /// </summary>
-        protected BaseSelectorOperator(String value)
+        protected CombinatorBase(String value)
         {
             Assume.NotNull(value, "value");
             Value = value;
@@ -29,7 +29,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(BaseSelectorOperator other)
+        public Boolean Equals(CombinatorBase other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -45,7 +45,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as BaseSelectorOperator);
+            return Equals(obj as CombinatorBase);
         }
 
         /// <summary>

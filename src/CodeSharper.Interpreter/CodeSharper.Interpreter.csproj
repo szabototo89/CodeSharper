@@ -43,19 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BaseSelector.cs" />
-    <Compile Include="Common\BaseSelectorOperator.cs" />
+    <Compile Include="Common\CombinatorBase.cs" />
     <Compile Include="Common\BinarySelector.cs" />
     <Compile Include="Common\CommandCallControlFlowDescriptor.cs" />
     <Compile Include="Common\ControlFlowOperationType.cs" />
     <Compile Include="Common\DefaultControlFlowFactory.cs" />
-    <Compile Include="Common\DirectChildSelectorOperator.cs" />
+    <Compile Include="Common\ChildCombinator.cs" />
     <Compile Include="Common\IControlFlowFactory.cs" />
     <Compile Include="Common\LazyAndControlFlowDescriptor.cs" />
     <Compile Include="Common\PipelineControlFlowDescriptor.cs" />
     <Compile Include="Common\PseudoSelector.cs" />
-    <Compile Include="Common\RelativeChildSelectorOperator.cs" />
-    <Compile Include="Common\SelectableElement.cs" />
-    <Compile Include="Common\SelectorElementAttribute.cs" />
+    <Compile Include="Common\DescendantCombinator.cs" />
+    <Compile Include="Common\ElementTypeSelector.cs" />
+    <Compile Include="Common\SelectorControlFlowDescriptor.cs" />
+    <Compile Include="Common\AttributeSelector.cs" />
     <Compile Include="Common\SequenceControlFlowDescriptor.cs" />
     <Compile Include="Common\UnarySelector.cs" />
     <Compile Include="Compiler\CodeQueryCompiler.cs" />

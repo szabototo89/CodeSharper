@@ -72,7 +72,16 @@ namespace CodeSharper.Interpreter.Common
             if (controlFlow is CommandCallControlFlowDescriptor)
                 return Create((CommandCallControlFlowDescriptor)controlFlow);
 
+            if (controlFlow is SelectorControlFlowDescriptor)
+                return Create((SelectorControlFlowDescriptor) controlFlow);
+
             throw new NotSupportedException("Not supported control flow descriptor!");
+        }
+
+        public ControlFlowBase Create(SelectorControlFlowDescriptor selector)
+        {
+            Assume.NotNull(selector, "selector");
+            throw new NotImplementedException();
         }
 
         /// <summary>

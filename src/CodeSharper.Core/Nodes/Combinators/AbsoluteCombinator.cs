@@ -6,9 +6,9 @@ using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Nodes.Operands
+namespace CodeSharper.Core.Nodes.Combinators
 {
-    public class SelectAbsoluteNodesOperand : NodeSelectorOperandBase
+    public class AbsoluteCombinator : CombinatorBase
     {
         /// <summary>
         /// Gets or sets the node selector
@@ -21,9 +21,9 @@ namespace CodeSharper.Core.Nodes.Operands
         public IEnumerable<NodeModifierBase> NodeModifiers { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectAbsoluteNodesOperand"/> class.
+        /// Initializes a new instance of the <see cref="AbsoluteCombinator"/> class.
         /// </summary>
-        public SelectAbsoluteNodesOperand(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> nodeModifiers = null)
+        public AbsoluteCombinator(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> nodeModifiers = null)
         {
             Assume.NotNull(nodeSelector, "nodeSelector");
 

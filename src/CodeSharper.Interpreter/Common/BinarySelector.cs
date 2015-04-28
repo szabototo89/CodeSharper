@@ -16,22 +16,22 @@ namespace CodeSharper.Interpreter.Common
         public BaseSelector Right { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the operator.
+        /// Gets or sets the combinator.
         /// </summary>
-        public BaseSelectorOperator Operator { get; protected set; }
+        public CombinatorBase Combinator { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinarySelector"/> class.
         /// </summary>
-        public BinarySelector(BaseSelector left, BaseSelector right, BaseSelectorOperator @operator)
+        public BinarySelector(BaseSelector left, BaseSelector right, CombinatorBase combinator)
         {
             Assume.NotNull(left, "left");
             Assume.NotNull(right, "right");
-            Assume.NotNull(@operator, "operator");
+            Assume.NotNull(combinator, "combinator");
 
             Left = left;
             Right = right;
-            Operator = @operator;
+            Combinator = combinator;
         }
 
         #region Equality members
@@ -47,7 +47,7 @@ namespace CodeSharper.Interpreter.Common
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(Left, other.Left) && Equals(Right, other.Right) && Equals(Operator, other.Operator);
+            return Equals(Left, other.Left) && Equals(Right, other.Right) && Equals(Combinator, other.Combinator);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace CodeSharper.Interpreter.Common
             {
                 var hashCode = (Left != null ? Left.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Right != null ? Right.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Operator != null ? Operator.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (Combinator != null ? Combinator.GetHashCode() : 0);
                 return hashCode;
             }
         }

@@ -8,15 +8,15 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the element.
         /// </summary>
-        public SelectableElement Element { get; protected set; }
+        public ElementTypeSelector ElementTypeSelector { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnarySelector"/> class.
         /// </summary>
-        public UnarySelector(SelectableElement element)
+        public UnarySelector(ElementTypeSelector elementTypeSelector)
         {
-            Assume.NotNull(element, "element");
-            Element = element;
+            Assume.NotNull(elementTypeSelector, "element");
+            ElementTypeSelector = elementTypeSelector;
         }
 
         #region Equality members
@@ -32,7 +32,7 @@ namespace CodeSharper.Interpreter.Common
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(Element, other.Element);
+            return Equals(ElementTypeSelector, other.ElementTypeSelector);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Int32 GetHashCode()
         {
-            return (Element != null ? Element.GetHashCode() : 0);
+            return (ElementTypeSelector != null ? ElementTypeSelector.GetHashCode() : 0);
         }
 
         #endregion

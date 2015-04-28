@@ -5,7 +5,7 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class SelectableElement : IEquatable<SelectableElement>
+    public class ElementTypeSelector : IEquatable<ElementTypeSelector>
     {
         /// <summary>
         /// Gets a value indicating whether this instance is class element.
@@ -18,31 +18,17 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public String Name { get; protected set; }
+        public String Name { get; set; }
 
         /// <summary>
         /// Gets or sets the attributes.
         /// </summary>
-        public IEnumerable<SelectorElementAttribute> Attributes { get; protected set; }
+        public IEnumerable<AttributeSelector> Attributes { get; set; }
 
         /// <summary>
         /// Gets or sets the pseudo selectors.
         /// </summary>
-        public IEnumerable<PseudoSelector> PseudoSelectors { get; protected set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectableElement"/> class.
-        /// </summary>
-        public SelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors)
-        {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(attributes, "attributes");
-            Assume.NotNull(pseudoSelectors, "pseudoSelectors");
-
-            Name = name;
-            Attributes = attributes;
-            PseudoSelectors = pseudoSelectors;
-        }
+        public IEnumerable<PseudoSelector> PseudoSelectors { get; set; }
 
         #region Equality members
 
@@ -53,7 +39,7 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(SelectableElement other)
+        public Boolean Equals(ElementTypeSelector other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -73,7 +59,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as SelectableElement);
+            return Equals(obj as ElementTypeSelector);
         }
 
         /// <summary>

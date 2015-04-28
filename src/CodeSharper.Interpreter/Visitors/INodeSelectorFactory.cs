@@ -10,33 +10,32 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates the unary selector.
         /// </summary>
-        UnarySelector CreateUnarySelector(SelectableElement element);
+        UnarySelector CreateUnarySelector(ElementTypeSelector elementTypeSelector);
 
         /// <summary>
         /// Creates the binary selector.
         /// </summary>
-        BinarySelector CreateBinarySelector(BaseSelector left, BaseSelector right, BaseSelectorOperator @operator);
+        BinarySelector CreateBinarySelector(BaseSelector left, BaseSelector right, CombinatorBase @operator);
 
         /// <summary>
-        /// Creates the selector operator.
+        /// Creates the selector combinator.
         /// </summary>
-        BaseSelectorOperator CreateSelectorOperator(String @operator);
+        CombinatorBase CreateCombinator(String combinator);
 
         /// <summary>
-        /// Creates a selector element
+        /// Creates a selector ElementTypeSelector
         /// </summary>
-        SelectorElementAttribute CreateSelectorElementAttribute(String name, Constant value);
+        AttributeSelector CreateAttributeSelector(String name, Constant value);
 
         /// <summary>
         /// Creates a pseudo selector
         /// </summary>
         PseudoSelector CreatePseudoSelector(String name, Constant value);
 
-
         /// <summary>
-        /// Creates a selectable element
+        /// Creates a selectable ElementTypeSelector
         /// </summary>
-        SelectableElement CreateSelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors);
+        ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeSelector> attributes, IEnumerable<PseudoSelector> pseudoSelectors);
     }
 
     public class DefaultNodeSelectorFactory : INodeSelectorFactory
@@ -44,46 +43,46 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates the unary selector.
         /// </summary>
-        public UnarySelector CreateUnarySelector(SelectableElement element)
+        public UnarySelector CreateUnarySelector(ElementTypeSelector elementTypeSelector)
         {
-            return new UnarySelector(element);
+            return new UnarySelector(elementTypeSelector);
         }
 
         /// <summary>
         /// Creates the binary selector.
         /// </summary>
-        public BinarySelector CreateBinarySelector(BaseSelector left, BaseSelector right, BaseSelectorOperator selectorOperator)
+        public BinarySelector CreateBinarySelector(BaseSelector left, BaseSelector right, CombinatorBase selectorOperator)
         {
             return new BinarySelector(left, right, selectorOperator);
         }
 
         /// <summary>
-        /// Creates the selector operator.
+        /// Creates the selector combinator.
         /// </summary>
-        public BaseSelectorOperator CreateSelectorOperator(String @operator)
+        public CombinatorBase CreateCombinator(String combinator)
         {
-            Assume.NotNull(@operator, "operator");
+            Assume.NotNull(combinator, "combinator");
 
-            switch (@operator)
+            switch (combinator)
             {
                 case ">":
-                    return new DirectChildSelectorOperator();
+                    return new ChildCombinator();
                 case "":
-                    return new RelativeChildSelectorOperator();
+                    return new DescendantCombinator();
                 default:
-                    throw new NotSupportedException(String.Format("Not supported child selector: {0}.", @operator));
+                    throw new NotSupportedException(String.Format("Not supported combinator: {0}.", combinator));
             }
         }
 
         /// <summary>
-        /// Creates a selector element
+        /// Creates a selector ElementTypeSelector
         /// </summary>
-        public SelectorElementAttribute CreateSelectorElementAttribute(String name, Constant value)
+        public AttributeSelector CreateAttributeSelector(String name, Constant value)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(value, "value");
 
-            return new SelectorElementAttribute {
+            return new AttributeSelector {
                 Name = name,
                 Value = value
             };
@@ -104,15 +103,19 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Creates a selectable element
+        /// Creates a selectable ElementTypeSelector
         /// </summary>
-        public SelectableElement CreateSelectableElement(String name, IEnumerable<SelectorElementAttribute> attributes, IEnumerable<PseudoSelector> pseudoSelectors)
+        public ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeSelector> attributes, IEnumerable<PseudoSelector> pseudoSelectors)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(attributes, "attributes");
             Assume.NotNull(pseudoSelectors, "pseudoSelectors");
 
-            return new SelectableElement(name, attributes, pseudoSelectors);
+            return new ElementTypeSelector {
+                Name = name,
+                Attributes = attributes,
+                PseudoSelectors = pseudoSelectors
+            };
         }
     }
 }

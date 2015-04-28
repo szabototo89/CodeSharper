@@ -2,14 +2,14 @@
 using System.Linq;
 using CodeSharper.Core.SyntaxTrees;
 
-namespace CodeSharper.Core.Nodes.Operands
+namespace CodeSharper.Core.Nodes.Combinators
 {
-    public class ConcatNodesOperand : BinaryNodeSelectorOperand
+    public class ConcatCombinator : BinaryCombinator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcatNodesOperand"/> class.
+        /// Initializes a new instance of the <see cref="ConcatCombinator"/> class.
         /// </summary>
-        public ConcatNodesOperand(NodeSelectorOperandBase left, NodeSelectorOperandBase right) : base(left, right)
+        public ConcatCombinator(CombinatorBase left, CombinatorBase right) : base(left, right)
         {
         }
 

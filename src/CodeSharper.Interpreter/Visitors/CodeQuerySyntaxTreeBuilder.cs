@@ -146,7 +146,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitExpressionMethodCall(CodeQuery.ExpressionMethodCallContext context)
         {
-            var methodCall = context.methodCall().Accept(this) as CommandCall;
+            var methodCall = context.methodCall().Accept(this).As<CommandCall>();
             return methodCall;
         }
 
@@ -173,32 +173,57 @@ namespace CodeSharper.Interpreter.Visitors
         /// <return>The visitor result.</return>
         public override Object VisitCommand(CodeQuery.CommandContext context)
         {
-            var methodCall = context.expression().Accept(this).As<CommandCall>();
-            var operators = context.COMMAND_OPERATOR().ToArray();
+            var expression = context.expression().Accept(this);
 
-            if (!operators.Any())
+            if (expression is CommandCall)
             {
-                return TreeFactory.CreateControlFlow(methodCall);
-            }
+                var methodCall = (CommandCall)expression;
+                var operators = context.COMMAND_OPERATOR().ToArray();
 
-            for (var i = 0; i < operators.Length; i++)
-            {
-                var op = operators[i];
-                var command = context.command().ToArray()[i];
-
-                var pipelineOperator = op.GetText();
-                var rightExpression = command.Accept(this) as ControlFlowDescriptorBase;
-
-                if (methodCall != null)
+                if (!operators.Any())
                 {
-                    return TreeFactory.CreateControlFlow(pipelineOperator, methodCall, rightExpression);
+                    return TreeFactory.CreateControlFlow(methodCall);
                 }
+
+                for (var i = 0; i < operators.Length; i++)
+                {
+                    var op = operators[i];
+                    var command = context.command().ToArray()[i];
+
+                    var pipelineOperator = op.GetText();
+                    var rightExpression = command.Accept(this) as ControlFlowDescriptorBase;
+
+                    if (methodCall != null)
+                    {
+                        return TreeFactory.CreateControlFlow(pipelineOperator, methodCall, rightExpression);
+                    }
+                }
+            }
+            else if (expression is BaseSelector)
+            {
+                var selector = ((BaseSelector)expression);
+                return TreeFactory.CreateControlFlow(selector);
             }
 
             return null;
         }
 
         #region Code selection language feature
+
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.ExpressionSelector"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public override Object VisitExpressionSelector(CodeQuery.ExpressionSelectorContext context)
+        {
+            var expression = context.selector().Accept(this).As<BaseSelector>();
+            return expression;
+        }
 
         /// <summary>
         /// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute" />.
@@ -215,7 +240,7 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.AttributeName.Text;
             var value = context.AttributeValue.Accept(this) as Constant;
 
-            return NodeSelectorFactory.CreateSelectorElementAttribute(name, value);
+            return NodeSelectorFactory.CreateAttributeSelector(name, value);
         }
 
         /// <summary>
@@ -273,10 +298,10 @@ namespace CodeSharper.Interpreter.Visitors
                 name = "." + name;
             }
 
-            var attributes = context.selectorAttribute().AcceptAll(this).Cast<SelectorElementAttribute>();
+            var attributes = context.selectorAttribute().AcceptAll(this).Cast<AttributeSelector>();
             var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelector>();
 
-            return NodeSelectorFactory.CreateSelectableElement(name, attributes, pseudoSelectors);
+            return NodeSelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors);
         }
 
         /// <summary>
@@ -288,7 +313,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitUnarySelection(CodeQuery.UnarySelectionContext context)
         {
-            var element = context.Value.Accept(this).As<SelectableElement>();
+            var element = context.Value.Accept(this).As<ElementTypeSelector>();
 
             return NodeSelectorFactory.CreateUnarySelector(element);
         }
@@ -318,7 +343,7 @@ namespace CodeSharper.Interpreter.Visitors
             var right = context.Right.Accept(this).As<BaseSelector>();
 
             var @operator = context.SelectorOperator.Safe(value => value.Text) ?? String.Empty;
-            var selectorOperator = NodeSelectorFactory.CreateSelectorOperator(@operator);
+            var selectorOperator = NodeSelectorFactory.CreateCombinator(@operator);
 
             return NodeSelectorFactory.CreateBinarySelector(left, right, selectorOperator);
         }

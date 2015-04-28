@@ -68,14 +68,17 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             Assert.That(expectedChildren, Is.EquivalentTo(new[] { "test-command", "test-command-2" }));
         }
 
+        [TestCase("column", Description = "Unary selection")]
+        [TestCase("column[name=\"First Name\"]", Description = "Unary selection with attribute")]
+        [TestCase("column > field", Description = "Binary selection")]
         [Test(Description = "Parse should handle input when selectors are defined")]
-        public void Parse_ShouldParseHandle_WhenSelectorsAreDefined()
+        public void Parse_ShouldParseHandle_WhenSelectorsAreDefined(String command)
         {
             // Given
             var underTest = new CodeQueryCompiler();
 
             // When
-            var result = underTest.Parse("column[name=\"First Name\"]");
+            var result = underTest.Parse(command);
 
             // Then
             Assert.That(result, Is.Not.Null);

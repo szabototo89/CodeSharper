@@ -4,14 +4,14 @@ using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Nodes.Operands
+namespace CodeSharper.Core.Nodes.Combinators
 {
-    public class SelectRelativeNodesOperand : SelectAbsoluteNodesOperand
+    public class RelativeCombinator : AbsoluteCombinator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectRelativeNodesOperand"/> class.
+        /// Initializes a new instance of the <see cref="RelativeCombinator"/> class.
         /// </summary>
-        public SelectRelativeNodesOperand(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> nodeModifiers = null) : base(nodeSelector, nodeModifiers)
+        public RelativeCombinator(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> nodeModifiers = null) : base(nodeSelector, nodeModifiers)
         {
 
         }

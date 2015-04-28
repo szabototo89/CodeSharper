@@ -1,4 +1,4 @@
-﻿using CodeSharper.Core.Nodes.Operands;
+﻿using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Csv.Compiler;
 using CodeSharper.Languages.Csv.Nodes;
@@ -11,7 +11,7 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
     [TestFixture]
     internal class NodeOperandTests : TestFixtureBase
     {
-        [Test(Description = "SelectChildrenOperand should return all children of rows when CsvCompilationUnit is passed")]
+        [Test(Description = "ChildrenCombinator should return all children of rows when CsvCompilationUnit is passed")]
         public void SelectChildrenOperand_ShouldReturnAllChildrenOfRows_WhenCsvDocumentNodeIsPassed()
         {
             // Given
@@ -21,9 +21,9 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var underTest = new RowNodeSelector();
 
             // When
-            var left = new SelectAbsoluteNodesOperand(underTest);
-            var right = new SelectAbsoluteNodesOperand(new FilterNodeSelector());
-            var operand = new SelectChildrenOperand(left, right);
+            var left = new AbsoluteCombinator(underTest);
+            var right = new AbsoluteCombinator(new FilterNodeSelector());
+            var operand = new ChildrenCombinator(left, right);
 
             var result = operand.Calculate(documentNode.Children);
 
@@ -31,7 +31,7 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             Assert.That(result, Has.All.InstanceOf<FieldDeclarationSyntax>());
         }
 
-        [Test(Description = "SelectChildrenOperand should return all children of rows when CsvCompilationUnit is passed and SelectRelativeNodesOperand is used")]
+        [Test(Description = "ChildrenCombinator should return all children of rows when CsvCompilationUnit is passed and RelativeCombinator is used")]
         public void SelectChildrenOperand_ShouldReturnAllChildrenOfRows_WhenCsvDocumentNodeIsPassedAndSelectRelativeNodesOperandIsUsed()
         {
             // Given
@@ -40,9 +40,9 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var documentNode = compiler.Parse(input).As<CsvCompilationUnit>();
 
             // When
-            var left = new SelectRelativeNodesOperand(new RowNodeSelector());
-            var right = new SelectAbsoluteNodesOperand(new FilterNodeSelector());
-            var operand = new SelectChildrenOperand(left, right);
+            var left = new RelativeCombinator(new RowNodeSelector());
+            var right = new AbsoluteCombinator(new FilterNodeSelector());
+            var operand = new ChildrenCombinator(left, right);
 
             var result = operand.Calculate(new[] { documentNode });
 
