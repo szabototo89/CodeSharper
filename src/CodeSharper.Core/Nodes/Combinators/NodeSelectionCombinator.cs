@@ -21,6 +21,9 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         public IEnumerable<NodeModifierBase> Modifiers { get; protected set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NodeSelectionCombinator"/> class.
+        /// </summary>
         public NodeSelectionCombinator(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> modifiers = null)
         {
             Assume.NotNull(nodeSelector, "nodeSelector");

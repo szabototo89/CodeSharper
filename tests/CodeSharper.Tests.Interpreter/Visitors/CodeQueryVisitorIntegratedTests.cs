@@ -7,6 +7,7 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlows;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Interpreter.Common;
 using CodeSharper.Interpreter.Compiler;
 using CodeSharper.Tests.Interpreter.Stubs;
@@ -60,7 +61,8 @@ namespace CodeSharper.Tests.Interpreter.Visitors
 
             var runnableFactory = new DefaultRunnableFactory(new[] { typeof(IdentityRunnable), typeof(IncrementRunnable) });
             var commandCallResolver = new DefaultCommandCallResolver(commandDescriptorManager, runnableFactory);
-            var nodeSelectorResolver = new DefaultNodeSelectorResolver();
+            var selectorManager = new DefaultSelectorFactory(new[] { typeof(UniversalSelector) }, Type.EmptyTypes);
+            var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager);
             var runnableManager = new DefaultRunnableManager();
             var executor = new StandardExecutor(runnableManager);
 

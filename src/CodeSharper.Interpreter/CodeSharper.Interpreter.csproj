@@ -50,9 +50,9 @@
     <Compile Include="Common\ControlFlowOperationType.cs" />
     <Compile Include="Common\DefaultControlFlowFactory.cs" />
     <Compile Include="Common\ChildCombinatorElement.cs" />
-    <Compile Include="Common\DefaultNodeSelectorResolver.cs" />
+    <Compile Include="Common\DefaultSelectorResolver.cs" />
     <Compile Include="Common\IControlFlowFactory.cs" />
-    <Compile Include="Common\INodeSelectorResolver.cs" />
+    <Compile Include="Common\ISelectorResolver.cs" />
     <Compile Include="Common\LazyAndControlFlowDescriptor.cs" />
     <Compile Include="Common\PipelineControlFlowDescriptor.cs" />
     <Compile Include="Common\PseudoSelectorElement.cs" />

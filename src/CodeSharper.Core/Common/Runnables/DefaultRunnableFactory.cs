@@ -50,6 +50,7 @@ namespace CodeSharper.Core.Common.Runnables
 
             IRunnable runnable = null;
 
+            // get its default constructor
             var constructors = runnableType.GetConstructors();
             var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
             if (defaultConstructor != null)

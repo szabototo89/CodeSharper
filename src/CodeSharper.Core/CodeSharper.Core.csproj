@@ -60,6 +60,7 @@
     <Compile Include="Common\ControlFlows\ControlFlowBase.cs" />
     <Compile Include="Common\ControlFlows\PipelineControlFlow.cs" />
     <Compile Include="Common\ControlFlows\SequenceControlFlow.cs" />
+    <Compile Include="Common\DefaultRunnableManager.cs" />
     <Compile Include="Common\IExecutor.cs" />
     <Compile Include="Common\IHasName.cs" />
     <Compile Include="Common\IHasValue.cs" />

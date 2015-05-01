@@ -19,7 +19,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the node selectorElement resolver.
         /// </summary>
-        public INodeSelectorResolver NodeSelectorResolver { get; protected set; }
+        public ISelectorResolver SelectorResolver { get; protected set; }
 
         /// <summary>
         /// Gets or sets the executor.
@@ -29,14 +29,14 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultControlFlowFactory"/> class.
         /// </summary>
-        public DefaultControlFlowFactory(ICommandCallResolver commandCallResolver, INodeSelectorResolver nodeSelectorResolver, IExecutor executor)
+        public DefaultControlFlowFactory(ICommandCallResolver commandCallResolver, ISelectorResolver selectorResolver, IExecutor executor)
         {
             Assume.NotNull(commandCallResolver, "commandCallResolver");
-            Assume.NotNull(nodeSelectorResolver, "nodeSelectorResolver");
+            Assume.NotNull(selectorResolver, "SelectorResolver");
             Assume.NotNull(executor, "executor");
 
             CommandCallResolver = commandCallResolver;
-            NodeSelectorResolver = nodeSelectorResolver;
+            SelectorResolver = selectorResolver;
             Executor = executor;
         }
 
@@ -94,9 +94,9 @@ namespace CodeSharper.Interpreter.Common
         {
             Assume.NotNull(selector, "selectorElement");
 
-            var combinator = NodeSelectorResolver.Create(selector.SelectorElement);
+            var combinator = SelectorResolver.Create(selector.SelectorElement);
 
-            throw new NotImplementedException();
+            return new SelectorControlFlowBase(combinator);
         }
 
         /// <summary>

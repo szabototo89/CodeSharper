@@ -7,6 +7,7 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlows;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Interpreter.Common;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -74,7 +75,9 @@ namespace CodeSharper.Tests.Interpreter.Common
 
         protected ICommandCallResolver CommandCallResolver { get; set; }
 
-        public INodeSelectorResolver NodeSelectorResolver { get; set; }
+        public ISelectorResolver SelectorResolver { get; set; }
+
+        public ISelectorFactory SelectorFactory { get; set; }
 
         public override void Setup()
         {
@@ -82,8 +85,9 @@ namespace CodeSharper.Tests.Interpreter.Common
             Fixture = new Fixture();
             Executor = new DummyExecutor();
             CommandCallResolver = new DummyCommandCallResolver();
-            NodeSelectorResolver = new DefaultNodeSelectorResolver();
-            UnderTest = new DefaultControlFlowFactory(CommandCallResolver, NodeSelectorResolver, Executor);
+            SelectorFactory = new DefaultSelectorFactory(new[]{ typeof(UniversalSelector) }, Type.EmptyTypes);
+            SelectorResolver = new DefaultSelectorResolver(SelectorFactory);
+            UnderTest = new DefaultControlFlowFactory(CommandCallResolver, SelectorResolver, Executor);
         }
 
         #endregion
