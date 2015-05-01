@@ -74,13 +74,16 @@ namespace CodeSharper.Tests.Interpreter.Common
 
         protected ICommandCallResolver CommandCallResolver { get; set; }
 
+        public INodeSelectorResolver NodeSelectorResolver { get; set; }
+
         public override void Setup()
         {
             base.Setup();
             Fixture = new Fixture();
             Executor = new DummyExecutor();
             CommandCallResolver = new DummyCommandCallResolver();
-            UnderTest = new DefaultControlFlowFactory(CommandCallResolver, Executor);
+            NodeSelectorResolver = new DefaultNodeSelectorResolver();
+            UnderTest = new DefaultControlFlowFactory(CommandCallResolver, NodeSelectorResolver, Executor);
         }
 
         #endregion

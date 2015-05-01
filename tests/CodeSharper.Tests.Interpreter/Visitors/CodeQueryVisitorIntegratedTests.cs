@@ -60,12 +60,13 @@ namespace CodeSharper.Tests.Interpreter.Visitors
 
             var runnableFactory = new DefaultRunnableFactory(new[] { typeof(IdentityRunnable), typeof(IncrementRunnable) });
             var commandCallResolver = new DefaultCommandCallResolver(commandDescriptorManager, runnableFactory);
+            var nodeSelectorResolver = new DefaultNodeSelectorResolver();
             var runnableManager = new DefaultRunnableManager();
             var executor = new StandardExecutor(runnableManager);
 
             // initialize compiler and control flow factory
             Compiler = new CodeQueryCompiler();
-            ControlFlowFactory = new DefaultControlFlowFactory(commandCallResolver, executor);
+            ControlFlowFactory = new DefaultControlFlowFactory(commandCallResolver, nodeSelectorResolver, executor);
         }
 
         #endregion
@@ -141,7 +142,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
         public void IncrementRunnableWithMultiValueProducer_ShouldIncrementValueByThree_WhenProperValueIsPassed()
         {
             // Given in setup
-            var input = "@IncrementRunnable 1 | @IncrementRunnable 2";
+            var input = "number:gt(2) | @IncrementRunnable 1 | @IncrementRunnable 2";
 
             // When
             var commandCall = Compiler.Parse(input);

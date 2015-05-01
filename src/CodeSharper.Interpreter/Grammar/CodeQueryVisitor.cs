@@ -30,11 +30,26 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.command"/>.
+	/// Visit a parse tree produced by the <c>CommandOperand</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitCommand([NotNull] CodeQuery.CommandContext context);
+	Result VisitCommandOperand([NotNull] CodeQuery.CommandOperandContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>CommandInner</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCommandInner([NotNull] CodeQuery.CommandInnerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>CommandExpression</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCommandExpression([NotNull] CodeQuery.CommandExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>ExpressionMethodCall</c>
 	/// labeled alternative in <see cref="CodeQuery.expression"/>.

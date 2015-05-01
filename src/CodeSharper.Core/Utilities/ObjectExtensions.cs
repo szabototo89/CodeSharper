@@ -31,6 +31,11 @@ namespace CodeSharper.Core.Utilities
             return default(TResult);
         }
 
+        public static TValue Cast<TValue>(this Object value)
+        {
+            return (TValue)value;
+        }
+
         public static TValue As<TValue>(this Object value)
             where TValue : class
         {

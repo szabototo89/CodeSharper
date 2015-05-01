@@ -79,6 +79,7 @@
     <Compile Include="Common\Runnables\ErrorMessage.cs" />
     <Compile Include="Common\Runnables\IRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnableFactory.cs" />
+    <Compile Include="Common\Runnables\JoinLinesTextRunnable.cs" />
     <Compile Include="Common\Runnables\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\RunnableBase.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Common\IHasParent.cs" />
     <Compile Include="Common\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />

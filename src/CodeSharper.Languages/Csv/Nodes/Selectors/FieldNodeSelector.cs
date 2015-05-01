@@ -3,5 +3,5 @@ using CodeSharper.Languages.Csv.SyntaxTrees;
 
 namespace CodeSharper.Languages.Csv.Nodes.Selectors
 {
-    public class FilterNodeSelector : TypedNodeSelectorBase<FieldDeclarationSyntax> { }
+    public class FieldNodeSelector : TypedNodeSelectorBase<FieldDeclarationSyntax> { }
 }

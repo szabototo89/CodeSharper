@@ -1,9 +1,10 @@
 using System;
+using CodeSharper.Core.Common;
 using CodeSharper.Interpreter.Visitors;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class PseudoSelector : IEquatable<PseudoSelector>
+    public struct PseudoSelector : IEquatable<PseudoSelector>, IHasName, IHasValue<Constant>
     {
         /// <summary>
         /// Gets or sets the name.
@@ -26,8 +27,6 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public Boolean Equals(PseudoSelector other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
             return String.Equals(Name, other.Name) && Equals(Value, other.Value);
         }
 
@@ -40,7 +39,8 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as PseudoSelector);
+            if (!(obj is PseudoSelector)) return false;
+            return Equals(((PseudoSelector)obj));
         }
 
         /// <summary>

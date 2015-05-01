@@ -33,17 +33,41 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class CodeQueryBaseListener : ICodeQueryListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CodeQuery.command"/>.
+	/// Enter a parse tree produced by <see cref="CodeQuery.CommandOperand"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCommand([NotNull] CodeQuery.CommandContext context) { }
+	public virtual void EnterCommandOperand([NotNull] CodeQuery.CommandOperandContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CodeQuery.command"/>.
+	/// Exit a parse tree produced by <see cref="CodeQuery.CommandOperand"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCommand([NotNull] CodeQuery.CommandContext context) { }
+	public virtual void ExitCommandOperand([NotNull] CodeQuery.CommandOperandContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="CodeQuery.CommandInner"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCommandInner([NotNull] CodeQuery.CommandInnerContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CodeQuery.CommandInner"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCommandInner([NotNull] CodeQuery.CommandInnerContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="CodeQuery.CommandExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCommandExpression([NotNull] CodeQuery.CommandExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CodeQuery.CommandExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCommandExpression([NotNull] CodeQuery.CommandExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CodeQuery.ExpressionMethodCall"/>.
 	/// <para>The default implementation does nothing.</para>

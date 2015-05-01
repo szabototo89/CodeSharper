@@ -16,6 +16,9 @@ namespace CodeSharper.Core.Nodes.Combinators
 
         }
 
+        /// <summary>
+        /// Calculates the specified nodes.
+        /// </summary>
         public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
         {
             var relativeNodes = new List<Node>();

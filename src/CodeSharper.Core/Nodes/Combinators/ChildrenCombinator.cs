@@ -13,7 +13,10 @@ namespace CodeSharper.Core.Nodes.Combinators
         {
         }
 
-        public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
+        /// <summary>
+        /// Calculates the specified nodes.
+        /// </summary>
+       public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
         {
             var leftExpression = Left.Calculate(nodes);
             leftExpression = leftExpression.SelectMany(node => node.Children);

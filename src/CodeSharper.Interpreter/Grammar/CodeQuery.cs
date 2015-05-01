@@ -77,63 +77,148 @@ public partial class CodeQuery : Parser {
 		Interpreter = new ParserATNSimulator(this,_ATN);
 	}
 	public partial class CommandContext : ParserRuleContext {
-		public ExpressionContext expression() {
-			return GetRuleContext<ExpressionContext>(0);
+		public CommandContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
 		}
-		public ITerminalNode[] COMMAND_OPERATOR() { return GetTokens(CodeQuery.COMMAND_OPERATOR); }
-		public ITerminalNode COMMAND_OPERATOR(int i) {
-			return GetToken(CodeQuery.COMMAND_OPERATOR, i);
+		public override int RuleIndex { get { return RULE_command; } }
+	 
+		public CommandContext() { }
+		public virtual void CopyFrom(CommandContext context) {
+			base.CopyFrom(context);
 		}
+	}
+	public partial class CommandOperandContext : CommandContext {
+		public CommandContext Left;
+		public IToken Operator;
+		public CommandContext Right;
 		public CommandContext[] command() {
 			return GetRuleContexts<CommandContext>();
 		}
 		public CommandContext command(int i) {
 			return GetRuleContext<CommandContext>(i);
 		}
-		public CommandContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_command; } }
+		public ITerminalNode COMMAND_OPERATOR() { return GetToken(CodeQuery.COMMAND_OPERATOR, 0); }
+		public CommandOperandContext(CommandContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.EnterCommand(this);
+			if (typedListener != null) typedListener.EnterCommandOperand(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			ICodeQueryListener typedListener = listener as ICodeQueryListener;
-			if (typedListener != null) typedListener.ExitCommand(this);
+			if (typedListener != null) typedListener.ExitCommandOperand(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitCommand(this);
+			if (typedVisitor != null) return typedVisitor.VisitCommandOperand(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class CommandInnerContext : CommandContext {
+		public CommandContext Command;
+		public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
+		public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
+		public CommandContext command() {
+			return GetRuleContext<CommandContext>(0);
+		}
+		public CommandInnerContext(CommandContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.EnterCommandInner(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.ExitCommandInner(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCommandInner(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class CommandExpressionContext : CommandContext {
+		public ExpressionContext Expression;
+		public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public CommandExpressionContext(CommandContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.EnterCommandExpression(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.ExitCommandExpression(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCommandExpression(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
 	public CommandContext command() {
-		CommandContext _localctx = new CommandContext(Context, State);
-		EnterRule(_localctx, 0, RULE_command);
+		return command(0);
+	}
+
+	private CommandContext command(int _p) {
+		ParserRuleContext _parentctx = Context;
+		int _parentState = State;
+		CommandContext _localctx = new CommandContext(Context, _parentState);
+		CommandContext _prevctx = _localctx;
+		int _startState = 0;
+		EnterRecursionRule(_localctx, 0, RULE_command, _p);
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 18; expression();
-			State = 23;
+			State = 24;
+			switch ( Interpreter.AdaptivePredict(TokenStream,0,Context) ) {
+			case 1:
+				{
+				_localctx = new CommandInnerContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
+
+				State = 19; Match(LEFT_BRACKET);
+				State = 20; ((CommandInnerContext)_localctx).Command = command(0);
+				State = 21; Match(RIGHT_BRACKET);
+				}
+				break;
+			case 2:
+				{
+				_localctx = new CommandExpressionContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
+				State = 23; ((CommandExpressionContext)_localctx).Expression = expression();
+				}
+				break;
+			}
+			Context.Stop = TokenStream.Lt(-1);
+			State = 31;
 			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
+			_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
+					if ( ParseListeners!=null ) 
+						TriggerExitRuleEvent();
+					_prevctx = _localctx;
 					{
 					{
-					State = 19; Match(COMMAND_OPERATOR);
-					State = 20; command();
+					_localctx = new CommandOperandContext(new CommandContext(_parentctx, _parentState));
+					((CommandOperandContext)_localctx).Left = _prevctx;
+					PushNewRecursionContext(_localctx, _startState, RULE_command);
+					State = 26;
+					if (!(Precpred(Context, 3))) throw new FailedPredicateException(this, "Precpred(Context, 3)");
+					State = 27; ((CommandOperandContext)_localctx).Operator = Match(COMMAND_OPERATOR);
+					State = 28; ((CommandOperandContext)_localctx).Right = command(4);
 					}
 					} 
 				}
-				State = 25;
+				State = 33;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
 			}
 			}
 		}
@@ -143,7 +228,7 @@ public partial class CodeQuery : Parser {
 			ErrorHandler.Recover(this, re);
 		}
 		finally {
-			ExitRule();
+			UnrollRecursionContexts(_parentctx);
 		}
 		return _localctx;
 	}
@@ -225,29 +310,29 @@ public partial class CodeQuery : Parser {
 		ExpressionContext _localctx = new ExpressionContext(Context, State);
 		EnterRule(_localctx, 2, RULE_expression);
 		try {
-			State = 32;
-			switch ( Interpreter.AdaptivePredict(TokenStream,1,Context) ) {
+			State = 40;
+			switch ( Interpreter.AdaptivePredict(TokenStream,2,Context) ) {
 			case 1:
 				_localctx = new ExpressionMethodCallContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 26; methodCall();
+				State = 34; methodCall();
 				}
 				break;
 			case 2:
 				_localctx = new ExpressionSelectorContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 27; selector(0);
+				State = 35; selector(0);
 				}
 				break;
 			case 3:
 				_localctx = new ExpressionInnerContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 28; Match(LEFT_BRACKET);
-				State = 29; command();
-				State = 30; Match(RIGHT_BRACKET);
+				State = 36; Match(LEFT_BRACKET);
+				State = 37; command(0);
+				State = 38; Match(RIGHT_BRACKET);
 				}
 				break;
 			}
@@ -302,22 +387,22 @@ public partial class CodeQuery : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 34; Match(METHOD_CALL_SYMBOL);
-			State = 35; _localctx.MethodCallName = Match(ID);
-			State = 39;
+			State = 42; Match(METHOD_CALL_SYMBOL);
+			State = 43; _localctx.MethodCallName = Match(ID);
+			State = 47;
 			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
+			_alt = Interpreter.AdaptivePredict(TokenStream,3,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 36; _localctx.MethodCallParameter = methodCallParameter();
+					State = 44; _localctx.MethodCallParameter = methodCallParameter();
 					}
 					} 
 				}
-				State = 41;
+				State = 49;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,3,Context);
 			}
 			}
 		}
@@ -420,54 +505,54 @@ public partial class CodeQuery : Parser {
 		EnterRule(_localctx, 6, RULE_methodCallParameter);
 		int _la;
 		try {
-			State = 57;
-			switch ( Interpreter.AdaptivePredict(TokenStream,6,Context) ) {
+			State = 65;
+			switch ( Interpreter.AdaptivePredict(TokenStream,7,Context) ) {
 			case 1:
 				_localctx = new MethodCallParameterValueWithExpressionContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 44;
-				switch ( Interpreter.AdaptivePredict(TokenStream,3,Context) ) {
+				State = 52;
+				switch ( Interpreter.AdaptivePredict(TokenStream,4,Context) ) {
 				case 1:
 					{
-					State = 42; ((MethodCallParameterValueWithExpressionContext)_localctx).ParameterName = Match(ID);
-					State = 43; Match(ASSIGNMENT_OPERATOR);
+					State = 50; ((MethodCallParameterValueWithExpressionContext)_localctx).ParameterName = Match(ID);
+					State = 51; Match(ASSIGNMENT_OPERATOR);
 					}
 					break;
 				}
-				State = 46; ((MethodCallParameterValueWithExpressionContext)_localctx).ActualParameterValue = expression();
+				State = 54; ((MethodCallParameterValueWithExpressionContext)_localctx).ActualParameterValue = expression();
 				}
 				break;
 			case 2:
 				_localctx = new MethodCallParameterValueWithConstantContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 49;
+				State = 57;
 				_la = TokenStream.La(1);
 				if (_la==ID) {
 					{
-					State = 47; ((MethodCallParameterValueWithConstantContext)_localctx).ParameterName = Match(ID);
-					State = 48; Match(ASSIGNMENT_OPERATOR);
+					State = 55; ((MethodCallParameterValueWithConstantContext)_localctx).ParameterName = Match(ID);
+					State = 56; Match(ASSIGNMENT_OPERATOR);
 					}
 				}
 
-				State = 51; ((MethodCallParameterValueWithConstantContext)_localctx).ActualParameterValue = constant();
+				State = 59; ((MethodCallParameterValueWithConstantContext)_localctx).ActualParameterValue = constant();
 				}
 				break;
 			case 3:
 				_localctx = new MethodCallParameterValueWithIdentifierContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 54;
-				switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
+				State = 62;
+				switch ( Interpreter.AdaptivePredict(TokenStream,6,Context) ) {
 				case 1:
 					{
-					State = 52; ((MethodCallParameterValueWithIdentifierContext)_localctx).ParameterName = Match(ID);
-					State = 53; Match(ASSIGNMENT_OPERATOR);
+					State = 60; ((MethodCallParameterValueWithIdentifierContext)_localctx).ParameterName = Match(ID);
+					State = 61; Match(ASSIGNMENT_OPERATOR);
 					}
 					break;
 				}
-				State = 56; ((MethodCallParameterValueWithIdentifierContext)_localctx).ActualParameterValue = Match(ID);
+				State = 64; ((MethodCallParameterValueWithIdentifierContext)_localctx).ActualParameterValue = Match(ID);
 				}
 				break;
 			}
@@ -581,7 +666,7 @@ public partial class CodeQuery : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 65;
+			State = 73;
 			switch (TokenStream.La(1)) {
 			case ID:
 			case DOT:
@@ -590,7 +675,7 @@ public partial class CodeQuery : Parser {
 				Context = _localctx;
 				_prevctx = _localctx;
 
-				State = 60; ((UnarySelectionContext)_localctx).Value = selectableElement();
+				State = 68; ((UnarySelectionContext)_localctx).Value = selectableElement();
 				}
 				break;
 			case LEFT_BRACKET:
@@ -598,18 +683,18 @@ public partial class CodeQuery : Parser {
 				_localctx = new SelectionWithParenthesisContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 61; Match(LEFT_BRACKET);
-				State = 62; ((SelectionWithParenthesisContext)_localctx).Selector = selector(0);
-				State = 63; Match(RIGHT_BRACKET);
+				State = 69; Match(LEFT_BRACKET);
+				State = 70; ((SelectionWithParenthesisContext)_localctx).Selector = selector(0);
+				State = 71; Match(RIGHT_BRACKET);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			Context.Stop = TokenStream.Lt(-1);
-			State = 74;
+			State = 82;
 			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,9,Context);
+			_alt = Interpreter.AdaptivePredict(TokenStream,10,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					if ( ParseListeners!=null ) 
@@ -620,23 +705,23 @@ public partial class CodeQuery : Parser {
 					_localctx = new BinarySelectionContext(new SelectorContext(_parentctx, _parentState));
 					((BinarySelectionContext)_localctx).Left = _prevctx;
 					PushNewRecursionContext(_localctx, _startState, RULE_selector);
-					State = 67;
+					State = 75;
 					if (!(Precpred(Context, 2))) throw new FailedPredicateException(this, "Precpred(Context, 2)");
-					State = 69;
+					State = 77;
 					_la = TokenStream.La(1);
 					if (_la==SELECTOR_OPERATOR) {
 						{
-						State = 68; ((BinarySelectionContext)_localctx).SelectorOperator = Match(SELECTOR_OPERATOR);
+						State = 76; ((BinarySelectionContext)_localctx).SelectorOperator = Match(SELECTOR_OPERATOR);
 						}
 					}
 
-					State = 71; ((BinarySelectionContext)_localctx).Right = selector(2);
+					State = 79; ((BinarySelectionContext)_localctx).Right = selector(2);
 					}
 					} 
 				}
-				State = 76;
+				State = 84;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,9,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,10,Context);
 			}
 			}
 		}
@@ -698,44 +783,44 @@ public partial class CodeQuery : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 78;
+			State = 86;
 			_la = TokenStream.La(1);
 			if (_la==DOT) {
 				{
-				State = 77; Match(DOT);
+				State = 85; Match(DOT);
 				}
 			}
 
-			State = 80; _localctx.ElementName = Match(ID);
-			State = 84;
-			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,11,Context);
-			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
-				if ( _alt==1 ) {
-					{
-					{
-					State = 81; _localctx.SelectorAttributes = selectorAttribute();
-					}
-					} 
-				}
-				State = 86;
-				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,11,Context);
-			}
-			State = 90;
+			State = 88; _localctx.ElementName = Match(ID);
+			State = 92;
 			ErrorHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(TokenStream,12,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 87; _localctx.PseudoSelectors = pseudoSelector();
+					State = 89; _localctx.SelectorAttributes = selectorAttribute();
 					}
 					} 
 				}
-				State = 92;
+				State = 94;
 				ErrorHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(TokenStream,12,Context);
+			}
+			State = 98;
+			ErrorHandler.Sync(this);
+			_alt = Interpreter.AdaptivePredict(TokenStream,13,Context);
+			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
+				if ( _alt==1 ) {
+					{
+					{
+					State = 95; _localctx.PseudoSelectors = pseudoSelector();
+					}
+					} 
+				}
+				State = 100;
+				ErrorHandler.Sync(this);
+				_alt = Interpreter.AdaptivePredict(TokenStream,13,Context);
 			}
 			}
 		}
@@ -818,21 +903,21 @@ public partial class CodeQuery : Parser {
 		PseudoSelectorContext _localctx = new PseudoSelectorContext(Context, State);
 		EnterRule(_localctx, 12, RULE_pseudoSelector);
 		try {
-			State = 108;
-			switch ( Interpreter.AdaptivePredict(TokenStream,15,Context) ) {
+			State = 116;
+			switch ( Interpreter.AdaptivePredict(TokenStream,16,Context) ) {
 			case 1:
 				_localctx = new PseudoSelectorWithConstantContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 93; Match(COLON);
-				State = 94; ((PseudoSelectorWithConstantContext)_localctx).Name = Match(ID);
-				State = 99;
-				switch ( Interpreter.AdaptivePredict(TokenStream,13,Context) ) {
+				State = 101; Match(COLON);
+				State = 102; ((PseudoSelectorWithConstantContext)_localctx).Name = Match(ID);
+				State = 107;
+				switch ( Interpreter.AdaptivePredict(TokenStream,14,Context) ) {
 				case 1:
 					{
-					State = 95; Match(LEFT_BRACKET);
-					State = 96; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
-					State = 97; Match(RIGHT_BRACKET);
+					State = 103; Match(LEFT_BRACKET);
+					State = 104; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
+					State = 105; Match(RIGHT_BRACKET);
 					}
 					break;
 				}
@@ -842,15 +927,15 @@ public partial class CodeQuery : Parser {
 				_localctx = new PseudoSelectorWithIdentifierContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 101; Match(COLON);
-				State = 102; ((PseudoSelectorWithIdentifierContext)_localctx).Name = Match(ID);
-				State = 106;
-				switch ( Interpreter.AdaptivePredict(TokenStream,14,Context) ) {
+				State = 109; Match(COLON);
+				State = 110; ((PseudoSelectorWithIdentifierContext)_localctx).Name = Match(ID);
+				State = 114;
+				switch ( Interpreter.AdaptivePredict(TokenStream,15,Context) ) {
 				case 1:
 					{
-					State = 103; Match(LEFT_BRACKET);
-					State = 104; ((PseudoSelectorWithIdentifierContext)_localctx).Value = Match(ID);
-					State = 105; Match(RIGHT_BRACKET);
+					State = 111; Match(LEFT_BRACKET);
+					State = 112; ((PseudoSelectorWithIdentifierContext)_localctx).Value = Match(ID);
+					State = 113; Match(RIGHT_BRACKET);
 					}
 					break;
 				}
@@ -906,11 +991,11 @@ public partial class CodeQuery : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 110; Match(LEFT_SQUARE_BRACKET);
-			State = 111; _localctx.AttributeName = Match(ID);
-			State = 112; Match(ASSIGNMENT_OPERATOR);
-			State = 113; _localctx.AttributeValue = constant();
-			State = 114; Match(RIGHT_SQUARE_BRACKET);
+			State = 118; Match(LEFT_SQUARE_BRACKET);
+			State = 119; _localctx.AttributeName = Match(ID);
+			State = 120; Match(ASSIGNMENT_OPERATOR);
+			State = 121; _localctx.AttributeValue = constant();
+			State = 122; Match(RIGHT_SQUARE_BRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -993,27 +1078,27 @@ public partial class CodeQuery : Parser {
 		ConstantContext _localctx = new ConstantContext(Context, State);
 		EnterRule(_localctx, 16, RULE_constant);
 		try {
-			State = 119;
+			State = 127;
 			switch (TokenStream.La(1)) {
 			case STRING:
 				_localctx = new ConstantStringContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 116; Match(STRING);
+				State = 124; Match(STRING);
 				}
 				break;
 			case NUMBER:
 				_localctx = new ConstantNumberContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 117; Match(NUMBER);
+				State = 125; Match(NUMBER);
 				}
 				break;
 			case BOOLEAN:
 				_localctx = new ConstantBooleanContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 118; Match(BOOLEAN);
+				State = 126; Match(BOOLEAN);
 				}
 				break;
 			default:
@@ -1033,60 +1118,70 @@ public partial class CodeQuery : Parser {
 
 	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
+		case 0: return command_sempred((CommandContext)_localctx, predIndex);
 		case 4: return selector_sempred((SelectorContext)_localctx, predIndex);
+		}
+		return true;
+	}
+	private bool command_sempred(CommandContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 0: return Precpred(Context, 3);
 		}
 		return true;
 	}
 	private bool selector_sempred(SelectorContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return Precpred(Context, 2);
+		case 1: return Precpred(Context, 2);
 		}
 		return true;
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x12|\x4\x2\t\x2"+
-		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
-		"\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\a\x2\x18\n\x2\f\x2\xE\x2\x1B\v\x2\x3\x3"+
-		"\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3\x5\x3#\n\x3\x3\x4\x3\x4\x3\x4\a\x4(\n\x4"+
-		"\f\x4\xE\x4+\v\x4\x3\x5\x3\x5\x5\x5/\n\x5\x3\x5\x3\x5\x3\x5\x5\x5\x34"+
-		"\n\x5\x3\x5\x3\x5\x3\x5\x5\x5\x39\n\x5\x3\x5\x5\x5<\n\x5\x3\x6\x3\x6\x3"+
-		"\x6\x3\x6\x3\x6\x3\x6\x5\x6\x44\n\x6\x3\x6\x3\x6\x5\x6H\n\x6\x3\x6\a\x6"+
-		"K\n\x6\f\x6\xE\x6N\v\x6\x3\a\x5\aQ\n\a\x3\a\x3\a\a\aU\n\a\f\a\xE\aX\v"+
-		"\a\x3\a\a\a[\n\a\f\a\xE\a^\v\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\b\x66"+
-		"\n\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bm\n\b\x5\bo\n\b\x3\t\x3\t\x3\t\x3\t"+
-		"\x3\t\x3\t\x3\n\x3\n\x3\n\x5\nz\n\n\x3\n\x2\x3\n\v\x2\x4\x6\b\n\f\xE\x10"+
-		"\x12\x2\x2\x86\x2\x14\x3\x2\x2\x2\x4\"\x3\x2\x2\x2\x6$\x3\x2\x2\x2\b;"+
-		"\x3\x2\x2\x2\n\x43\x3\x2\x2\x2\fP\x3\x2\x2\x2\xEn\x3\x2\x2\x2\x10p\x3"+
-		"\x2\x2\x2\x12y\x3\x2\x2\x2\x14\x19\x5\x4\x3\x2\x15\x16\a\x11\x2\x2\x16"+
-		"\x18\x5\x2\x2\x2\x17\x15\x3\x2\x2\x2\x18\x1B\x3\x2\x2\x2\x19\x17\x3\x2"+
-		"\x2\x2\x19\x1A\x3\x2\x2\x2\x1A\x3\x3\x2\x2\x2\x1B\x19\x3\x2\x2\x2\x1C"+
-		"#\x5\x6\x4\x2\x1D#\x5\n\x6\x2\x1E\x1F\a\x3\x2\x2\x1F \x5\x2\x2\x2 !\a"+
-		"\x4\x2\x2!#\x3\x2\x2\x2\"\x1C\x3\x2\x2\x2\"\x1D\x3\x2\x2\x2\"\x1E\x3\x2"+
-		"\x2\x2#\x5\x3\x2\x2\x2$%\a\xF\x2\x2%)\a\n\x2\x2&(\x5\b\x5\x2\'&\x3\x2"+
-		"\x2\x2(+\x3\x2\x2\x2)\'\x3\x2\x2\x2)*\x3\x2\x2\x2*\a\x3\x2\x2\x2+)\x3"+
-		"\x2\x2\x2,-\a\n\x2\x2-/\a\x10\x2\x2.,\x3\x2\x2\x2./\x3\x2\x2\x2/\x30\x3"+
-		"\x2\x2\x2\x30<\x5\x4\x3\x2\x31\x32\a\n\x2\x2\x32\x34\a\x10\x2\x2\x33\x31"+
-		"\x3\x2\x2\x2\x33\x34\x3\x2\x2\x2\x34\x35\x3\x2\x2\x2\x35<\x5\x12\n\x2"+
-		"\x36\x37\a\n\x2\x2\x37\x39\a\x10\x2\x2\x38\x36\x3\x2\x2\x2\x38\x39\x3"+
-		"\x2\x2\x2\x39:\x3\x2\x2\x2:<\a\n\x2\x2;.\x3\x2\x2\x2;\x33\x3\x2\x2\x2"+
-		";\x38\x3\x2\x2\x2<\t\x3\x2\x2\x2=>\b\x6\x1\x2>\x44\x5\f\a\x2?@\a\x3\x2"+
-		"\x2@\x41\x5\n\x6\x2\x41\x42\a\x4\x2\x2\x42\x44\x3\x2\x2\x2\x43=\x3\x2"+
-		"\x2\x2\x43?\x3\x2\x2\x2\x44L\x3\x2\x2\x2\x45G\f\x4\x2\x2\x46H\a\v\x2\x2"+
-		"G\x46\x3\x2\x2\x2GH\x3\x2\x2\x2HI\x3\x2\x2\x2IK\x5\n\x6\x4J\x45\x3\x2"+
-		"\x2\x2KN\x3\x2\x2\x2LJ\x3\x2\x2\x2LM\x3\x2\x2\x2M\v\x3\x2\x2\x2NL\x3\x2"+
-		"\x2\x2OQ\a\f\x2\x2PO\x3\x2\x2\x2PQ\x3\x2\x2\x2QR\x3\x2\x2\x2RV\a\n\x2"+
-		"\x2SU\x5\x10\t\x2TS\x3\x2\x2\x2UX\x3\x2\x2\x2VT\x3\x2\x2\x2VW\x3\x2\x2"+
-		"\x2W\\\x3\x2\x2\x2XV\x3\x2\x2\x2Y[\x5\xE\b\x2ZY\x3\x2\x2\x2[^\x3\x2\x2"+
-		"\x2\\Z\x3\x2\x2\x2\\]\x3\x2\x2\x2]\r\x3\x2\x2\x2^\\\x3\x2\x2\x2_`\a\r"+
-		"\x2\x2`\x65\a\n\x2\x2\x61\x62\a\x3\x2\x2\x62\x63\x5\x12\n\x2\x63\x64\a"+
-		"\x4\x2\x2\x64\x66\x3\x2\x2\x2\x65\x61\x3\x2\x2\x2\x65\x66\x3\x2\x2\x2"+
-		"\x66o\x3\x2\x2\x2gh\a\r\x2\x2hl\a\n\x2\x2ij\a\x3\x2\x2jk\a\n\x2\x2km\a"+
-		"\x4\x2\x2li\x3\x2\x2\x2lm\x3\x2\x2\x2mo\x3\x2\x2\x2n_\x3\x2\x2\x2ng\x3"+
-		"\x2\x2\x2o\xF\x3\x2\x2\x2pq\a\x5\x2\x2qr\a\n\x2\x2rs\a\x10\x2\x2st\x5"+
-		"\x12\n\x2tu\a\x6\x2\x2u\x11\x3\x2\x2\x2vz\a\t\x2\x2wz\a\a\x2\x2xz\a\b"+
-		"\x2\x2yv\x3\x2\x2\x2yw\x3\x2\x2\x2yx\x3\x2\x2\x2z\x13\x3\x2\x2\x2\x13"+
-		"\x19\").\x33\x38;\x43GLPV\\\x65lny";
+		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x12\x84\x4\x2\t"+
+		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t"+
+		"\t\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x5\x2\x1B\n\x2\x3\x2"+
+		"\x3\x2\x3\x2\a\x2 \n\x2\f\x2\xE\x2#\v\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3"+
+		"\x3\x3\x5\x3+\n\x3\x3\x4\x3\x4\x3\x4\a\x4\x30\n\x4\f\x4\xE\x4\x33\v\x4"+
+		"\x3\x5\x3\x5\x5\x5\x37\n\x5\x3\x5\x3\x5\x3\x5\x5\x5<\n\x5\x3\x5\x3\x5"+
+		"\x3\x5\x5\x5\x41\n\x5\x3\x5\x5\x5\x44\n\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3"+
+		"\x6\x3\x6\x5\x6L\n\x6\x3\x6\x3\x6\x5\x6P\n\x6\x3\x6\a\x6S\n\x6\f\x6\xE"+
+		"\x6V\v\x6\x3\a\x5\aY\n\a\x3\a\x3\a\a\a]\n\a\f\a\xE\a`\v\a\x3\a\a\a\x63"+
+		"\n\a\f\a\xE\a\x66\v\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bn\n\b\x3\b\x3"+
+		"\b\x3\b\x3\b\x3\b\x5\bu\n\b\x5\bw\n\b\x3\t\x3\t\x3\t\x3\t\x3\t\x3\t\x3"+
+		"\n\x3\n\x3\n\x5\n\x82\n\n\x3\n\x2\x4\x2\n\v\x2\x4\x6\b\n\f\xE\x10\x12"+
+		"\x2\x2\x8F\x2\x1A\x3\x2\x2\x2\x4*\x3\x2\x2\x2\x6,\x3\x2\x2\x2\b\x43\x3"+
+		"\x2\x2\x2\nK\x3\x2\x2\x2\fX\x3\x2\x2\x2\xEv\x3\x2\x2\x2\x10x\x3\x2\x2"+
+		"\x2\x12\x81\x3\x2\x2\x2\x14\x15\b\x2\x1\x2\x15\x16\a\x3\x2\x2\x16\x17"+
+		"\x5\x2\x2\x2\x17\x18\a\x4\x2\x2\x18\x1B\x3\x2\x2\x2\x19\x1B\x5\x4\x3\x2"+
+		"\x1A\x14\x3\x2\x2\x2\x1A\x19\x3\x2\x2\x2\x1B!\x3\x2\x2\x2\x1C\x1D\f\x5"+
+		"\x2\x2\x1D\x1E\a\x11\x2\x2\x1E \x5\x2\x2\x6\x1F\x1C\x3\x2\x2\x2 #\x3\x2"+
+		"\x2\x2!\x1F\x3\x2\x2\x2!\"\x3\x2\x2\x2\"\x3\x3\x2\x2\x2#!\x3\x2\x2\x2"+
+		"$+\x5\x6\x4\x2%+\x5\n\x6\x2&\'\a\x3\x2\x2\'(\x5\x2\x2\x2()\a\x4\x2\x2"+
+		")+\x3\x2\x2\x2*$\x3\x2\x2\x2*%\x3\x2\x2\x2*&\x3\x2\x2\x2+\x5\x3\x2\x2"+
+		"\x2,-\a\xF\x2\x2-\x31\a\n\x2\x2.\x30\x5\b\x5\x2/.\x3\x2\x2\x2\x30\x33"+
+		"\x3\x2\x2\x2\x31/\x3\x2\x2\x2\x31\x32\x3\x2\x2\x2\x32\a\x3\x2\x2\x2\x33"+
+		"\x31\x3\x2\x2\x2\x34\x35\a\n\x2\x2\x35\x37\a\x10\x2\x2\x36\x34\x3\x2\x2"+
+		"\x2\x36\x37\x3\x2\x2\x2\x37\x38\x3\x2\x2\x2\x38\x44\x5\x4\x3\x2\x39:\a"+
+		"\n\x2\x2:<\a\x10\x2\x2;\x39\x3\x2\x2\x2;<\x3\x2\x2\x2<=\x3\x2\x2\x2=\x44"+
+		"\x5\x12\n\x2>?\a\n\x2\x2?\x41\a\x10\x2\x2@>\x3\x2\x2\x2@\x41\x3\x2\x2"+
+		"\x2\x41\x42\x3\x2\x2\x2\x42\x44\a\n\x2\x2\x43\x36\x3\x2\x2\x2\x43;\x3"+
+		"\x2\x2\x2\x43@\x3\x2\x2\x2\x44\t\x3\x2\x2\x2\x45\x46\b\x6\x1\x2\x46L\x5"+
+		"\f\a\x2GH\a\x3\x2\x2HI\x5\n\x6\x2IJ\a\x4\x2\x2JL\x3\x2\x2\x2K\x45\x3\x2"+
+		"\x2\x2KG\x3\x2\x2\x2LT\x3\x2\x2\x2MO\f\x4\x2\x2NP\a\v\x2\x2ON\x3\x2\x2"+
+		"\x2OP\x3\x2\x2\x2PQ\x3\x2\x2\x2QS\x5\n\x6\x4RM\x3\x2\x2\x2SV\x3\x2\x2"+
+		"\x2TR\x3\x2\x2\x2TU\x3\x2\x2\x2U\v\x3\x2\x2\x2VT\x3\x2\x2\x2WY\a\f\x2"+
+		"\x2XW\x3\x2\x2\x2XY\x3\x2\x2\x2YZ\x3\x2\x2\x2Z^\a\n\x2\x2[]\x5\x10\t\x2"+
+		"\\[\x3\x2\x2\x2]`\x3\x2\x2\x2^\\\x3\x2\x2\x2^_\x3\x2\x2\x2_\x64\x3\x2"+
+		"\x2\x2`^\x3\x2\x2\x2\x61\x63\x5\xE\b\x2\x62\x61\x3\x2\x2\x2\x63\x66\x3"+
+		"\x2\x2\x2\x64\x62\x3\x2\x2\x2\x64\x65\x3\x2\x2\x2\x65\r\x3\x2\x2\x2\x66"+
+		"\x64\x3\x2\x2\x2gh\a\r\x2\x2hm\a\n\x2\x2ij\a\x3\x2\x2jk\x5\x12\n\x2kl"+
+		"\a\x4\x2\x2ln\x3\x2\x2\x2mi\x3\x2\x2\x2mn\x3\x2\x2\x2nw\x3\x2\x2\x2op"+
+		"\a\r\x2\x2pt\a\n\x2\x2qr\a\x3\x2\x2rs\a\n\x2\x2su\a\x4\x2\x2tq\x3\x2\x2"+
+		"\x2tu\x3\x2\x2\x2uw\x3\x2\x2\x2vg\x3\x2\x2\x2vo\x3\x2\x2\x2w\xF\x3\x2"+
+		"\x2\x2xy\a\x5\x2\x2yz\a\n\x2\x2z{\a\x10\x2\x2{|\x5\x12\n\x2|}\a\x6\x2"+
+		"\x2}\x11\x3\x2\x2\x2~\x82\a\t\x2\x2\x7F\x82\a\a\x2\x2\x80\x82\a\b\x2\x2"+
+		"\x81~\x3\x2\x2\x2\x81\x7F\x3\x2\x2\x2\x81\x80\x3\x2\x2\x2\x82\x13\x3\x2"+
+		"\x2\x2\x14\x1A!*\x31\x36;@\x43KOTX^\x64mtv\x81";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

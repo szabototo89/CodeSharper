@@ -162,50 +162,76 @@ namespace CodeSharper.Interpreter.Visitors
             return context.command().Accept(this);
         }
 
-        /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.command"/>.
-        /// <para>
-        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-        /// on <paramref name="context"/>.
-        /// </para>
-        /// </summary>
-        /// <param name="context">The parse tree.</param>
-        /// <return>The visitor result.</return>
-        public override Object VisitCommand(CodeQuery.CommandContext context)
+
+        /*
+                public override Object VisitCommand(CodeQuery.CommandContext context)
+                {
+                    var expression = context.expression().Accept(this);
+
+                    if (expression is CommandCall)
+                    {
+                        var methodCall = (CommandCall)expression;
+                        var operators = context.COMMAND_OPERATOR().ToArray();
+
+                        if (!operators.Any())
+                        {
+                            return TreeFactory.CreateControlFlow(methodCall);
+                        }
+
+                        for (var i = 0; i < operators.Length; i++)
+                        {
+                            var op = operators[i];
+                            var command = context.command().ToArray()[i];
+
+                            var pipelineOperator = op.GetText();
+                            var rightExpression = command.Accept(this) as ControlFlowDescriptorBase;
+
+                            if (methodCall != null)
+                            {
+                                return TreeFactory.CreateControlFlow(pipelineOperator, methodCall, rightExpression);
+                            }
+                        }
+                    }
+                    else if (expression is BaseSelector)
+                    {
+                        var selector = ((BaseSelector)expression);
+                        return TreeFactory.CreateControlFlow(selector);
+                    }
+
+                    return null;
+                }
+        */
+
+        public override Object VisitCommandOperand(CodeQuery.CommandOperandContext context)
         {
-            var expression = context.expression().Accept(this);
+            var left = context.Left.Accept(this) as ControlFlowDescriptorBase;
+            var right = context.Right.Accept(this) as ControlFlowDescriptorBase;
+            var pipelineOperator = context.Operator.Text;
+            
+            return TreeFactory.CreateControlFlow(left, right, pipelineOperator);
+        }
+
+        public override Object VisitCommandExpression(CodeQuery.CommandExpressionContext context)
+        {
+            var expression = context.Expression.Accept(this);
 
             if (expression is CommandCall)
             {
                 var methodCall = (CommandCall)expression;
-                var operators = context.COMMAND_OPERATOR().ToArray();
-
-                if (!operators.Any())
-                {
-                    return TreeFactory.CreateControlFlow(methodCall);
-                }
-
-                for (var i = 0; i < operators.Length; i++)
-                {
-                    var op = operators[i];
-                    var command = context.command().ToArray()[i];
-
-                    var pipelineOperator = op.GetText();
-                    var rightExpression = command.Accept(this) as ControlFlowDescriptorBase;
-
-                    if (methodCall != null)
-                    {
-                        return TreeFactory.CreateControlFlow(pipelineOperator, methodCall, rightExpression);
-                    }
-                }
+                return TreeFactory.CreateControlFlow(methodCall);
             }
             else if (expression is BaseSelector)
             {
-                var selector = ((BaseSelector)expression);
+                var selector = (BaseSelector)expression;
                 return TreeFactory.CreateControlFlow(selector);
             }
 
-            return null;
+            return base.VisitCommandExpression(context);
+        }
+
+        public override Object VisitCommandInner(CodeQuery.CommandInnerContext context)
+        {
+            return context.Command.Accept(this);
         }
 
         #region Code selection language feature
@@ -313,7 +339,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitUnarySelection(CodeQuery.UnarySelectionContext context)
         {
-            var element = context.Value.Accept(this).As<ElementTypeSelector>();
+            var element = context.Value.Accept(this).Cast<ElementTypeSelector>();
 
             return NodeSelectorFactory.CreateUnarySelector(element);
         }

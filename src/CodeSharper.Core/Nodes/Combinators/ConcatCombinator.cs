@@ -9,10 +9,14 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcatCombinator"/> class.
         /// </summary>
-        public ConcatCombinator(CombinatorBase left, CombinatorBase right) : base(left, right)
+        public ConcatCombinator(CombinatorBase left, CombinatorBase right)
+            : base(left, right)
         {
         }
 
+        /// <summary>
+        /// Calculates the specified nodes.
+        /// </summary>
         public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
         {
             var leftExpression = Left.Calculate(nodes);

@@ -43,7 +43,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        ControlFlowDescriptorBase CreateControlFlow(String @operator, CommandCall commandCall, ControlFlowDescriptorBase rightExpression);
+        ControlFlowDescriptorBase CreateControlFlow(ControlFlowDescriptorBase left, ControlFlowDescriptorBase right, String @operator);
 
         /// <summary>
         /// Creates a control flow symbol node

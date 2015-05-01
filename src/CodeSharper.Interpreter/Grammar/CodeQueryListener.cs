@@ -29,15 +29,41 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface ICodeQueryListener : IParseTreeListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="CodeQuery.command"/>.
+	/// Enter a parse tree produced by the <c>CommandOperand</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterCommand([NotNull] CodeQuery.CommandContext context);
+	void EnterCommandOperand([NotNull] CodeQuery.CommandOperandContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="CodeQuery.command"/>.
+	/// Exit a parse tree produced by the <c>CommandOperand</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitCommand([NotNull] CodeQuery.CommandContext context);
+	void ExitCommandOperand([NotNull] CodeQuery.CommandOperandContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>CommandInner</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCommandInner([NotNull] CodeQuery.CommandInnerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>CommandInner</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCommandInner([NotNull] CodeQuery.CommandInnerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>CommandExpression</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCommandExpression([NotNull] CodeQuery.CommandExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>CommandExpression</c>
+	/// labeled alternative in <see cref="CodeQuery.command"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCommandExpression([NotNull] CodeQuery.CommandExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>ExpressionMethodCall</c>
 	/// labeled alternative in <see cref="CodeQuery.expression"/>.

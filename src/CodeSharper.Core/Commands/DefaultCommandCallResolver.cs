@@ -44,12 +44,12 @@ namespace CodeSharper.Core.Commands
 
             // get command descriptor from manager
             var commandDescriptors = resolveCommandDescriptorsByName(descriptor);
-
             var commandDescriptor = resolveCommandDescriptorByParameters(commandDescriptors, descriptor);
+
             // if there is no proper command descriptor return null
             if (commandDescriptor == null) return null; 
             
-            // create actual parameters
+            // get actual parameters
             var actualArguments = getActualArguments(commandDescriptor, descriptor);
 
             // create runnable with factory
@@ -65,6 +65,7 @@ namespace CodeSharper.Core.Commands
 
         private Dictionary<String, Object> getActualArguments(CommandDescriptor commandDescriptor, CommandCallDescriptor commandCallDescriptor)
         {
+            // order arguments by position
             var positionedArguments = commandCallDescriptor.ActualParameters
                                             .OfType<PositionedCommandCallActualArgument>()
                                             .OrderBy(argument => argument.Position);
@@ -94,7 +95,7 @@ namespace CodeSharper.Core.Commands
             foreach (var commandDescriptor in commandDescriptors)
             {
                 // check parameters count equality (note: this class does not handle optional or named parameters
-                // if not equal jump to the next one
+                // if it is not equal jump to the next one
                 if (commandDescriptor.Arguments.Count() != commandCallDescriptor.ActualParameters.Count())
                     continue; 
 

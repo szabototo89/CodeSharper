@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class ElementTypeSelector : IEquatable<ElementTypeSelector>
+    public struct ElementTypeSelector : IEquatable<ElementTypeSelector>, IHasName
     {
         /// <summary>
         /// Gets a value indicating whether this instance is class element.
@@ -41,9 +42,6 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public Boolean Equals(ElementTypeSelector other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-
             return String.Equals(Name, other.Name) &&
                    IsClassElement == other.IsClassElement &&
                    Attributes.SequenceEqual(other.Attributes) &&
@@ -59,7 +57,8 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as ElementTypeSelector);
+            if (!(obj is ElementTypeSelector)) return false;
+            return Equals((ElementTypeSelector)obj);
         }
 
         /// <summary>

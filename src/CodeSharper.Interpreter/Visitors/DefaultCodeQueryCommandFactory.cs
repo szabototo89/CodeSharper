@@ -63,20 +63,24 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        public ControlFlowDescriptorBase CreateControlFlow(String @operator, CommandCall commandCall, ControlFlowDescriptorBase rightExpression)
+        public ControlFlowDescriptorBase CreateControlFlow(ControlFlowDescriptorBase left, ControlFlowDescriptorBase right, String @operator)
         {
-            var controlFlowChildren = new[] { CreateControlFlow(commandCall), rightExpression };
+            Assume.NotNull(left, "left");
+            Assume.NotNull(right, "right");
+            Assume.NotNull(@operator, "operator");
+
+            var children = new[] { left, right };
 
             switch (@operator)
             {
                 case PIPELINE_OPERATOR:
-                    return new PipelineControlFlowDescriptor(controlFlowChildren);
+                    return new PipelineControlFlowDescriptor(children);
                 case SEQUENCE_OPERATOR:
-                    return new SequenceControlFlowDescriptor(controlFlowChildren);
+                    return new SequenceControlFlowDescriptor(children);
                 case LAZY_AND_OPERATOR:
-                    return new LazyAndControlFlowDescriptor(controlFlowChildren);
+                    return new LazyAndControlFlowDescriptor(children);
                 default:
-                    throw new NotSupportedException(System.String.Format("Not supported operator: {0}", @operator));
+                    throw new NotSupportedException(String.Format("Not supported operator: {0}", @operator));
             }
         }
 

@@ -5,6 +5,7 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlows;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Nodes;
 
 namespace CodeSharper.Interpreter.Common
 {
@@ -16,6 +17,11 @@ namespace CodeSharper.Interpreter.Common
         public ICommandCallResolver CommandCallResolver { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the node selector resolver.
+        /// </summary>
+        public INodeSelectorResolver NodeSelectorResolver { get; protected set; }
+
+        /// <summary>
         /// Gets or sets the executor.
         /// </summary>
         public IExecutor Executor { get; protected set; }
@@ -23,11 +29,14 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultControlFlowFactory"/> class.
         /// </summary>
-        public DefaultControlFlowFactory(ICommandCallResolver commandCallResolver, IExecutor executor)
+        public DefaultControlFlowFactory(ICommandCallResolver commandCallResolver, INodeSelectorResolver nodeSelectorResolver, IExecutor executor)
         {
-            Assume.NotNull(commandCallResolver, "CommandCallResolver");
+            Assume.NotNull(commandCallResolver, "commandCallResolver");
+            Assume.NotNull(nodeSelectorResolver, "nodeSelectorResolver");
             Assume.NotNull(executor, "executor");
+
             CommandCallResolver = commandCallResolver;
+            NodeSelectorResolver = nodeSelectorResolver;
             Executor = executor;
         }
 
@@ -35,7 +44,7 @@ namespace CodeSharper.Interpreter.Common
 
         private IEnumerable<ControlFlowBase> createChildren(IHasChildren<ControlFlowDescriptorBase> controlFlow)
         {
-            return controlFlow.Children.Select(Create);
+            return controlFlow.Children.Select(Create).ToArray();
         }
 
         private Command getCommand(CommandCall commandCall)
@@ -78,9 +87,15 @@ namespace CodeSharper.Interpreter.Common
             throw new NotSupportedException("Not supported control flow descriptor!");
         }
 
+        /// <summary>
+        /// Creates the specified selector.
+        /// </summary>
         public ControlFlowBase Create(SelectorControlFlowDescriptor selector)
         {
             Assume.NotNull(selector, "selector");
+
+            var combinator = NodeSelectorResolver.Create(selector.Selector);
+
             throw new NotImplementedException();
         }
 
@@ -100,6 +115,7 @@ namespace CodeSharper.Interpreter.Common
         public ControlFlowBase Create(PipelineControlFlowDescriptor pipeline)
         {
             Assume.NotNull(pipeline, "pipeline");
+
             var children = createChildren(pipeline);
             return new PipelineControlFlow(children);
         }
@@ -110,6 +126,8 @@ namespace CodeSharper.Interpreter.Common
         public ControlFlowBase Create(CommandCallControlFlowDescriptor commandCall)
         {
             Assume.NotNull(commandCall, "commandCall");
+
+            // resolve command by call
             var command = getCommand(commandCall.CommandCall);
             if (command == null) throw new Exception("Command is not available!");
 

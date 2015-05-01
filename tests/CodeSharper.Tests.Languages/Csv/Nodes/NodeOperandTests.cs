@@ -22,10 +22,10 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
 
             // When
             var left = new AbsoluteCombinator(underTest);
-            var right = new AbsoluteCombinator(new FilterNodeSelector());
-            var operand = new ChildrenCombinator(left, right);
+            var right = new AbsoluteCombinator(new FieldNodeSelector());
+            var combinator = new ChildrenCombinator(left, right);
 
-            var result = operand.Calculate(documentNode.Children);
+            var result = combinator.Calculate(documentNode.Children);
 
             // Then
             Assert.That(result, Has.All.InstanceOf<FieldDeclarationSyntax>());
@@ -41,10 +41,10 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
 
             // When
             var left = new RelativeCombinator(new RowNodeSelector());
-            var right = new AbsoluteCombinator(new FilterNodeSelector());
-            var operand = new ChildrenCombinator(left, right);
+            var right = new AbsoluteCombinator(new FieldNodeSelector());
+            var combinator = new ChildrenCombinator(left, right);
 
-            var result = operand.Calculate(new[] { documentNode });
+            var result = combinator.Calculate(new[] { documentNode });
 
             // Then
             Assert.That(result, Has.All.InstanceOf<FieldDeclarationSyntax>());

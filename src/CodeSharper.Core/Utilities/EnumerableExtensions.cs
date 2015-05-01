@@ -13,6 +13,16 @@ namespace CodeSharper.Core.Utilities
         public static IEnumerable<TValue> GetOrEmpty<TValue>(this IEnumerable<TValue> enumerable)
         {
             return enumerable ?? Enumerable.Empty<TValue>();
+        }
+
+        public static Option<TValue> TryGetValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            TValue value = default(TValue);
+
+            if (!dictionary.TryGetValue(key, out value))
+                return Option.None;
+
+            return Option.Some(value);
         } 
 
         public static IEnumerable<TResult> Select<TElement, TResult>(this TElement element, Func<TElement, TResult> func)

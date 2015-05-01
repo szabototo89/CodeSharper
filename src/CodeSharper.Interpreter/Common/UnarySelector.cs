@@ -15,7 +15,6 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public UnarySelector(ElementTypeSelector elementTypeSelector)
         {
-            Assume.NotNull(elementTypeSelector, "element");
             ElementTypeSelector = elementTypeSelector;
         }
 
@@ -55,7 +54,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Int32 GetHashCode()
         {
-            return (ElementTypeSelector != null ? ElementTypeSelector.GetHashCode() : 0);
+            return ElementTypeSelector.GetHashCode();
         }
 
         #endregion
