@@ -17,7 +17,7 @@ namespace CodeSharper.Interpreter.Common
         public ICommandCallResolver CommandCallResolver { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the node selector resolver.
+        /// Gets or sets the node selectorElement resolver.
         /// </summary>
         public INodeSelectorResolver NodeSelectorResolver { get; protected set; }
 
@@ -88,13 +88,13 @@ namespace CodeSharper.Interpreter.Common
         }
 
         /// <summary>
-        /// Creates the specified selector.
+        /// Creates the specified selectorElement.
         /// </summary>
         public ControlFlowBase Create(SelectorControlFlowDescriptor selector)
         {
-            Assume.NotNull(selector, "selector");
+            Assume.NotNull(selector, "selectorElement");
 
-            var combinator = NodeSelectorResolver.Create(selector.Selector);
+            var combinator = NodeSelectorResolver.Create(selector.SelectorElement);
 
             throw new NotImplementedException();
         }

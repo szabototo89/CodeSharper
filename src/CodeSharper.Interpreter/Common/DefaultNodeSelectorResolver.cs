@@ -3,72 +3,78 @@ using System.Collections.Generic;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Utilities;
-using CombinatorBase=CodeSharper.Core.Nodes.Combinators.CombinatorBase;
+using CombinatorBase = CodeSharper.Core.Nodes.Combinators.CombinatorBase;
 
 namespace CodeSharper.Interpreter.Common
 {
     public class DefaultNodeSelectorResolver : INodeSelectorResolver
     {
+        private readonly Dictionary<Type, Func<CombinatorBase, CombinatorBase, BinaryCombinator>> _registeredCombinators;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultNodeSelectorResolver"/> class.
         /// </summary>
         public DefaultNodeSelectorResolver()
         {
-        
+            _registeredCombinators = new Dictionary<Type, Func<CombinatorBase, CombinatorBase, BinaryCombinator>>();
+            _registeredCombinators.Add(typeof(ChildCombinatorElement), (left, right) => new ChildrenCombinator(left, right));
+            _registeredCombinators.Add(typeof(DescendantCombinatorElement), (left, right) => new RelativeNodeCombinator(left, right));
         }
 
         /// <summary>
-        /// Creates the specified selector.
+        /// Creates the specified selectorElement.
         /// </summary>
-        public Core.Nodes.Combinators.CombinatorBase Create(BaseSelector selector)
+        public CombinatorBase Create(SelectorElementBase selectorElement)
         {
-            Assume.NotNull(selector, "selector");
+            Assume.NotNull(selectorElement, "selectorElement");
 
-            if (selector is UnarySelector)
+            if (selectorElement is UnarySelectorElement)
             {
-                var unarySelector = (UnarySelector)selector;
+                var unarySelector = (UnarySelectorElement)selectorElement;
                 return create(unarySelector);
             }
 
-            if (selector is BinarySelector)
+            if (selectorElement is BinarySelectorElement)
             {
-                var binarySelector = (BinarySelector) selector;
+                var binarySelector = (BinarySelectorElement)selectorElement;
                 return create(binarySelector);
             }
 
-            throw new NotSupportedException("Selector is not supported.");
+            throw new NotSupportedException("selectorElement is not supported.");
         }
 
         /// <summary>
-        /// Creates the specified unary selector.
+        /// Creates the specified unary selectorElement.
         /// </summary>
-        private Core.Nodes.Combinators.CombinatorBase create(UnarySelector unarySelector)
+        private CombinatorBase create(UnarySelectorElement unarySelectorElement)
         {
+            var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Creates the specified binary selector.
+        /// Creates the specified binary selectorElement.
         /// </summary>
-        private Core.Nodes.Combinators.CombinatorBase create(BinarySelector binarySelector)
+        private CombinatorBase create(BinarySelectorElement binarySelectorElement)
         {
-            var left = Create(binarySelector.Left);
-            var right = Create(binarySelector.Right);
+            var left = Create(binarySelectorElement.Left);
+            var right = Create(binarySelectorElement.Right);
 
-            var combinator = resolveCombinator(binarySelector.Combinator, left, right);
-
+            var combinator = resolveCombinator(binarySelectorElement.CombinatorElement, left, right);
             return combinator;
         }
 
         /// <summary>
-        /// Resolves the combinator.
+        /// Resolves the CombinatorElement.
         /// </summary>
-        private Core.Nodes.Combinators.CombinatorBase resolveCombinator(CombinatorBase combinator, Core.Nodes.Combinators.CombinatorBase left, Core.Nodes.Combinators.CombinatorBase right)
+        private BinaryCombinator resolveCombinator(CombinatorElementBase combinatorElement, CombinatorBase left, CombinatorBase right)
         {
-            if (combinator is ChildCombinator)
-            {
-                return new ChildrenCombinator(left, new AbsoluteCombinator());
-            }
+            var registeredCombinator = _registeredCombinators.TryGetValue(combinatorElement.GetType());
+            if (!registeredCombinator.HasValue)
+                throw new NotSupportedException(String.Format("Not supported CombinatorElement: {0}", combinatorElement.Value));
+
+            var factory = registeredCombinator.Value;
+            return factory(left, right);
         }
     }
 }

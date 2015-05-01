@@ -90,7 +90,10 @@
     <Compile Include="Common\IHasParent.cs" />
     <Compile Include="Common\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="Nodes\Combinators\NodeSelectionCombinator.cs" />
+    <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
     <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
+    <Compile Include="Nodes\Combinators\UniversalCombinator.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Nodes\Combinators\ParentCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeCombinator.cs" />
     <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
+    <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="Texts\TextRange.cs" />

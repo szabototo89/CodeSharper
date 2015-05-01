@@ -40,13 +40,13 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var documentNode = compiler.Parse(input).As<CsvCompilationUnit>();
 
             // When
-            var left = new RelativeCombinator(new RowNodeSelector());
-            var right = new AbsoluteCombinator(new FieldNodeSelector());
-            var combinator = new ChildrenCombinator(left, right);
+            var right = new NodeSelectionCombinator(new FieldNodeSelector());
+            var combinator = new RelativeNodeCombinator(new UniversalCombinator(), right);
 
             var result = combinator.Calculate(new[] { documentNode });
 
             // Then
+            Assert.That(result, Is.Not.Empty);
             Assert.That(result, Has.All.InstanceOf<FieldDeclarationSyntax>());
         }
 

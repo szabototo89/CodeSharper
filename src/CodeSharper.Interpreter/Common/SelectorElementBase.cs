@@ -1,6 +1,6 @@
 namespace CodeSharper.Interpreter.Common
 {
-    public abstract class BaseSelector
+    public abstract class SelectorElementBase
     {
 
     }

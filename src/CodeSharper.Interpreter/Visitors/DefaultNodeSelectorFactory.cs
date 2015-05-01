@@ -8,62 +8,62 @@ namespace CodeSharper.Interpreter.Visitors
     public class DefaultNodeSelectorFactory : INodeSelectorFactory
     {
         /// <summary>
-        /// Creates the unary selector.
+        /// Creates the unary selectorElement.
         /// </summary>
-        public UnarySelector CreateUnarySelector(ElementTypeSelector elementTypeSelector)
+        public UnarySelectorElement CreateUnarySelector(ElementTypeSelector elementTypeSelector)
         {
-            return new UnarySelector(elementTypeSelector);
+            return new UnarySelectorElement(elementTypeSelector);
         }
 
         /// <summary>
-        /// Creates the binary selector.
+        /// Creates the binary selectorElement.
         /// </summary>
-        public BinarySelector CreateBinarySelector(BaseSelector left, BaseSelector right, CombinatorBase selectorOperator)
+        public BinarySelectorElement CreateBinarySelector(SelectorElementBase left, SelectorElementBase right, CombinatorElementBase selectorOperator)
         {
-            return new BinarySelector(left, right, selectorOperator);
+            return new BinarySelectorElement(left, right, selectorOperator);
         }
 
         /// <summary>
-        /// Creates the selector combinator.
+        /// Creates the selectorElement CombinatorElement.
         /// </summary>
-        public CombinatorBase CreateCombinator(String combinator)
+        public CombinatorElementBase CreateCombinator(String combinator)
         {
-            Assume.NotNull(combinator, "combinator");
+            Assume.NotNull(combinator, "CombinatorElement");
 
             switch (combinator)
             {
                 case ">":
-                    return new ChildCombinator();
+                    return new ChildCombinatorElement();
                 case "":
-                    return new DescendantCombinator();
+                    return new DescendantCombinatorElement();
                 default:
-                    throw new NotSupportedException(String.Format("Not supported combinator: {0}.", combinator));
+                    throw new NotSupportedException(String.Format("Not supported CombinatorElement: {0}.", combinator));
             }
         }
 
         /// <summary>
-        /// Creates a selector ElementTypeSelector
+        /// Creates a selectorElement ElementTypeSelector
         /// </summary>
-        public AttributeSelector CreateAttributeSelector(String name, Constant value)
+        public AttributeElement CreateAttributeSelector(String name, Constant value)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(value, "value");
 
-            return new AttributeSelector {
+            return new AttributeElement {
                 Name = name,
                 Value = value
             };
         }
 
         /// <summary>
-        /// Creates a pseudo selector
+        /// Creates a pseudo selectorElement
         /// </summary>
-        public PseudoSelector CreatePseudoSelector(String name, Constant value)
+        public PseudoSelectorElement CreatePseudoSelector(String name, Constant value)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(value, "value");
 
-            return new PseudoSelector {
+            return new PseudoSelectorElement {
                 Name = name,
                 Value = value
             };
@@ -72,7 +72,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selectable ElementTypeSelector
         /// </summary>
-        public ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeSelector> attributes, IEnumerable<PseudoSelector> pseudoSelectors)
+        public ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<PseudoSelectorElement> pseudoSelectors)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(attributes, "attributes");

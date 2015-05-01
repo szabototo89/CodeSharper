@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Combinators
@@ -14,12 +16,14 @@ namespace CodeSharper.Core.Nodes.Combinators
         }
 
         /// <summary>
-        /// Calculates the specified nodes.
+        /// Calculates the specified values.
         /// </summary>
-       public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
+        public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
-            var leftExpression = Left.Calculate(nodes);
-            leftExpression = leftExpression.Select(node => node.Parent);
+            var leftExpression = Left.Calculate(values);
+            leftExpression = leftExpression
+                                .OfType<IHasParent<Object>>()
+                                .Select(node => node.Parent);
 
             return Right.Calculate(leftExpression);
         }

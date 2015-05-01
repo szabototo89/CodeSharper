@@ -33,7 +33,7 @@ namespace CodeSharper.Tests.Core.Common
 
             var runnableMock = CreateRepeaterRunnable<Object>(3);
 
-           var runnable = runnableMock.Object;
+            var runnable = runnableMock.Object;
             TypeDescriptor.AddAttributes(runnable, new ProducesAttribute(underTest.GetType()));
 
             // When

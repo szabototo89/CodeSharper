@@ -7,33 +7,33 @@ namespace CodeSharper.Interpreter.Visitors
     public interface INodeSelectorFactory
     {
         /// <summary>
-        /// Creates the unary selector.
+        /// Creates the unary selector element.
         /// </summary>
-        UnarySelector CreateUnarySelector(ElementTypeSelector elementTypeSelector);
+        UnarySelectorElement CreateUnarySelector(ElementTypeSelector elementTypeSelector);
 
         /// <summary>
-        /// Creates the binary selector.
+        /// Creates the binary selector element.
         /// </summary>
-        BinarySelector CreateBinarySelector(BaseSelector left, BaseSelector right, CombinatorBase @operator);
+        BinarySelectorElement CreateBinarySelector(SelectorElementBase left, SelectorElementBase right, CombinatorElementBase @operator);
 
         /// <summary>
-        /// Creates the selector combinator.
+        /// Creates the selector element CombinatorElement.
         /// </summary>
-        CombinatorBase CreateCombinator(String combinator);
+        CombinatorElementBase CreateCombinator(String combinator);
 
         /// <summary>
-        /// Creates a selector ElementTypeSelector
+        /// Creates a selector element ElementTypeSelector
         /// </summary>
-        AttributeSelector CreateAttributeSelector(String name, Constant value);
+        AttributeElement CreateAttributeSelector(String name, Constant value);
 
         /// <summary>
-        /// Creates a pseudo selector
+        /// Creates a pseudo selector element
         /// </summary>
-        PseudoSelector CreatePseudoSelector(String name, Constant value);
+        PseudoSelectorElement CreatePseudoSelector(String name, Constant value);
 
         /// <summary>
         /// Creates a selectable ElementTypeSelector
         /// </summary>
-        ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeSelector> attributes, IEnumerable<PseudoSelector> pseudoSelectors);
+        ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<PseudoSelectorElement> pseudoSelectors);
     }
 }

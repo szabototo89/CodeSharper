@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Combinators
@@ -6,8 +7,8 @@ namespace CodeSharper.Core.Nodes.Combinators
     public abstract class CombinatorBase
     {
         /// <summary>
-        /// Calculates the specified nodes.
+        /// Calculates the specified values.
         /// </summary>
-        public abstract IEnumerable<Node> Calculate(IEnumerable<Node> nodes);
+        public abstract IEnumerable<Object> Calculate(IEnumerable<Object> values);
     }
 }

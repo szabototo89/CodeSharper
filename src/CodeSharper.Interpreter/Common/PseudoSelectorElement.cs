@@ -4,7 +4,7 @@ using CodeSharper.Interpreter.Visitors;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public struct PseudoSelector : IEquatable<PseudoSelector>, IHasName, IHasValue<Constant>
+    public struct PseudoSelectorElement : IEquatable<PseudoSelectorElement>, IHasName, IHasValue<Constant>
     {
         /// <summary>
         /// Gets or sets the name.
@@ -25,7 +25,7 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(PseudoSelector other)
+        public Boolean Equals(PseudoSelectorElement other)
         {
             return String.Equals(Name, other.Name) && Equals(Value, other.Value);
         }
@@ -39,8 +39,8 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            if (!(obj is PseudoSelector)) return false;
-            return Equals(((PseudoSelector)obj));
+            if (!(obj is PseudoSelectorElement)) return false;
+            return Equals(((PseudoSelectorElement)obj));
         }
 
         /// <summary>

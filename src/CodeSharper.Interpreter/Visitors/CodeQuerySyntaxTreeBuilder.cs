@@ -22,7 +22,7 @@ namespace CodeSharper.Interpreter.Visitors
         public ICodeQueryCommandFactory TreeFactory { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the node selector factory.
+        /// Gets or sets the node selectorElement factory.
         /// </summary>
         public INodeSelectorFactory NodeSelectorFactory { get; protected set; }
 
@@ -192,10 +192,10 @@ namespace CodeSharper.Interpreter.Visitors
                             }
                         }
                     }
-                    else if (expression is BaseSelector)
+                    else if (expression is BaseSelectorElement)
                     {
-                        var selector = ((BaseSelector)expression);
-                        return TreeFactory.CreateControlFlow(selector);
+                        var selectorElement = ((BaseSelectorElement)expression);
+                        return TreeFactory.CreateControlFlow(selectorElement);
                     }
 
                     return null;
@@ -220,9 +220,9 @@ namespace CodeSharper.Interpreter.Visitors
                 var methodCall = (CommandCall)expression;
                 return TreeFactory.CreateControlFlow(methodCall);
             }
-            else if (expression is BaseSelector)
+            else if (expression is SelectorElementBase)
             {
-                var selector = (BaseSelector)expression;
+                var selector = (SelectorElementBase)expression;
                 return TreeFactory.CreateControlFlow(selector);
             }
 
@@ -247,7 +247,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <return>The visitor result.</return>
         public override Object VisitExpressionSelector(CodeQuery.ExpressionSelectorContext context)
         {
-            var expression = context.selector().Accept(this).As<BaseSelector>();
+            var expression = context.selector().Accept(this).As<SelectorElementBase>();
             return expression;
         }
 
@@ -324,8 +324,8 @@ namespace CodeSharper.Interpreter.Visitors
                 name = "." + name;
             }
 
-            var attributes = context.selectorAttribute().AcceptAll(this).Cast<AttributeSelector>();
-            var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelector>();
+            var attributes = context.selectorAttribute().AcceptAll(this).Cast<AttributeElement>();
+            var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelectorElement>();
 
             return NodeSelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors);
         }
@@ -365,8 +365,8 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitBinarySelection(CodeQuery.BinarySelectionContext context)
         {
-            var left = context.Left.Accept(this).As<BaseSelector>();
-            var right = context.Right.Accept(this).As<BaseSelector>();
+            var left = context.Left.Accept(this).As<SelectorElementBase>();
+            var right = context.Right.Accept(this).As<SelectorElementBase>();
 
             var @operator = context.SelectorOperator.Safe(value => value.Text) ?? String.Empty;
             var selectorOperator = NodeSelectorFactory.CreateCombinator(@operator);

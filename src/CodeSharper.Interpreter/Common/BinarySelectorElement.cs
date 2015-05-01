@@ -3,35 +3,35 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class BinarySelector : BaseSelector, IEquatable<BinarySelector>
+    public class BinarySelectorElement : SelectorElementBase, IEquatable<BinarySelectorElement>
     {
         /// <summary>
         /// Gets or sets the left.
         /// </summary>
-        public BaseSelector Left { get; protected set; }
+        public SelectorElementBase Left { get; protected set; }
 
         /// <summary>
         /// Gets or sets the right.
         /// </summary>
-        public BaseSelector Right { get; protected set; }
+        public SelectorElementBase Right { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the combinator.
+        /// Gets or sets the CombinatorElement.
         /// </summary>
-        public CombinatorBase Combinator { get; protected set; }
+        public CombinatorElementBase CombinatorElement { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinarySelector"/> class.
+        /// Initializes a new instance of the <see cref="BinarySelectorElement"/> class.
         /// </summary>
-        public BinarySelector(BaseSelector left, BaseSelector right, CombinatorBase combinator)
+        public BinarySelectorElement(SelectorElementBase left, SelectorElementBase right, CombinatorElementBase combinatorElement)
         {
             Assume.NotNull(left, "left");
             Assume.NotNull(right, "right");
-            Assume.NotNull(combinator, "combinator");
+            Assume.NotNull(combinatorElement, "CombinatorElement");
 
             Left = left;
             Right = right;
-            Combinator = combinator;
+            CombinatorElement = combinatorElement;
         }
 
         #region Equality members
@@ -43,11 +43,11 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(BinarySelector other)
+        public Boolean Equals(BinarySelectorElement other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(Left, other.Left) && Equals(Right, other.Right) && Equals(Combinator, other.Combinator);
+            return Equals(Left, other.Left) && Equals(Right, other.Right) && Equals(CombinatorElement, other.CombinatorElement);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as BinarySelector);
+            return Equals(obj as BinarySelectorElement);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace CodeSharper.Interpreter.Common
             {
                 var hashCode = (Left != null ? Left.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (Right != null ? Right.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Combinator != null ? Combinator.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (CombinatorElement != null ? CombinatorElement.GetHashCode() : 0);
                 return hashCode;
             }
         }

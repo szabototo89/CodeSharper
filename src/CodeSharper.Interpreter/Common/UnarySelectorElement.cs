@@ -1,23 +1,21 @@
 using System;
-using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public abstract class CombinatorBase : IHasValue<String>, IEquatable<CombinatorBase>
+    public class UnarySelectorElement : SelectorElementBase, IEquatable<UnarySelectorElement>
     {
         /// <summary>
-        /// Gets or sets the value.
+        /// Gets or sets the element.
         /// </summary>
-        public String Value { get; protected set; }
+        public ElementTypeSelector ElementTypeSelector { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CombinatorBase"/> class.
+        /// Initializes a new instance of the <see cref="UnarySelectorElement"/> class.
         /// </summary>
-        protected CombinatorBase(String value)
+        public UnarySelectorElement(ElementTypeSelector elementTypeSelector)
         {
-            Assume.NotNull(value, "value");
-            Value = value;
+            ElementTypeSelector = elementTypeSelector;
         }
 
         #region Equality members
@@ -25,15 +23,15 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        /// <returns>
-        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
-        /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(CombinatorBase other)
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// </returns>
+        public Boolean Equals(UnarySelectorElement other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return String.Equals(Value, other.Value);
+            return Equals(ElementTypeSelector, other.ElementTypeSelector);
         }
 
         /// <summary>
@@ -45,7 +43,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as CombinatorBase);
+            return Equals(obj as UnarySelectorElement);
         }
 
         /// <summary>
@@ -56,9 +54,10 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Int32 GetHashCode()
         {
-            return (Value != null ? Value.GetHashCode() : 0);
+            return ElementTypeSelector.GetHashCode();
         }
 
         #endregion
+
     }
 }

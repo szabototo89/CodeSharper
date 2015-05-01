@@ -3,8 +3,8 @@
     public interface INodeSelectorResolver
     {
         /// <summary>
-        /// Creates the specified selector.
+        /// Creates the specified selectorElement.
         /// </summary>
-        Core.Nodes.Combinators.CombinatorBase Create(BaseSelector selector);
+        Core.Nodes.Combinators.CombinatorBase Create(SelectorElementBase selectorElement);
     }
 }

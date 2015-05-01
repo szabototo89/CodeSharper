@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Remoting;
 using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Modifiers
@@ -8,6 +10,6 @@ namespace CodeSharper.Core.Nodes.Modifiers
         /// <summary>
         /// Modifies the selection of node 
         /// </summary>
-        public abstract IEnumerable<Node> ModifySelection(Node node);
+        public abstract IEnumerable<Object> ModifySelection(Object value);
     }
 }

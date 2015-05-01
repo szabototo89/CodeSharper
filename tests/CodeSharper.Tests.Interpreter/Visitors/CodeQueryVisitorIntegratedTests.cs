@@ -142,7 +142,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
         public void IncrementRunnableWithMultiValueProducer_ShouldIncrementValueByThree_WhenProperValueIsPassed()
         {
             // Given in setup
-            var input = "number:gt(2) | @IncrementRunnable 1 | @IncrementRunnable 2";
+            var input = "@IncrementRunnable 1 | @IncrementRunnable 2";
 
             // When
             var commandCall = Compiler.Parse(input);

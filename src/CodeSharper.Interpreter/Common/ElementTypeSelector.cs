@@ -24,12 +24,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the attributes.
         /// </summary>
-        public IEnumerable<AttributeSelector> Attributes { get; set; }
+        public IEnumerable<AttributeElement> Attributes { get; set; }
 
         /// <summary>
         /// Gets or sets the pseudo selectors.
         /// </summary>
-        public IEnumerable<PseudoSelector> PseudoSelectors { get; set; }
+        public IEnumerable<PseudoSelectorElement> PseudoSelectors { get; set; }
 
         #region Equality members
 

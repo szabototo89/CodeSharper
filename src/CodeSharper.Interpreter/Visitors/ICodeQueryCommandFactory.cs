@@ -53,6 +53,6 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow for selection.
         /// </summary>
-        ControlFlowDescriptorBase CreateControlFlow(BaseSelector selector);
+        ControlFlowDescriptorBase CreateControlFlow(SelectorElementBase selectorElement);
     }
 }

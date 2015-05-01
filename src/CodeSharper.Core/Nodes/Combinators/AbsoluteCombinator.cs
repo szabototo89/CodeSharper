@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Modifiers;
@@ -8,6 +10,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Nodes.Combinators
 {
+    [Obsolete("Use ChildrenCombinator instead of this")]
     public class AbsoluteCombinator : CombinatorBase
     {
         /// <summary>
@@ -32,13 +35,13 @@ namespace CodeSharper.Core.Nodes.Combinators
         }
 
         /// <summary>
-        /// Calculates the specified nodes.
+        /// Calculates the specified values.
         /// </summary>
-        public override IEnumerable<Node> Calculate(IEnumerable<Node> nodes)
+        public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
-            var filteredNodes = nodes.Where(node => NodeSelector.FilterNode(node));
+            var filteredNodes = values.Where(node => NodeSelector.FilterNode(node));
 
-            var results = new List<Node>();
+            var results = new List<Object>();
 
             if (NodeModifiers.Any())
             {

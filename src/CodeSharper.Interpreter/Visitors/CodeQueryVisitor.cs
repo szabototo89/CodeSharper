@@ -39,7 +39,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             context.AttributeValue.Accept(this);
             if (!_constants.Any())
-                throw new Exception("Invalid selector attribute!");
+                throw new Exception("Invalid selectorElement attribute!");
 
             _selectorBuilder.CreateSelectorAttribute(context.AttributeName.Text, _constants.Pop());
 

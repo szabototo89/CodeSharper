@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class AttributeSelector : IEquatable<AttributeSelector>
+    public class AttributeElement : IEquatable<AttributeElement>
     {
         /// <summary>
         /// Gets or sets the name.
@@ -27,7 +27,7 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(AttributeSelector other)
+        public Boolean Equals(AttributeElement other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -43,7 +43,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as AttributeSelector);
+            return Equals(obj as AttributeElement);
         }
 
         /// <summary>

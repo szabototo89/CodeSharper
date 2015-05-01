@@ -11,9 +11,12 @@ namespace CodeSharper.Core.Utilities
 {
     public static class NodeExtensions
     {
-        public static IEnumerable<Node> ToEnumerable(this Node root)
+        public static IEnumerable<Object> ToEnumerable(this IHasChildren<Object> root)
         {
-            return root.Children.Union(root.Children.SelectMany(ToEnumerable));
+            return root.Children.Union(
+                root.Children
+                    .OfType<IHasChildren<Object>>()
+                    .SelectMany(ToEnumerable));
         }
 
         public static void AttachChildren<TNode>(this Node node, IEnumerable<TNode> children)

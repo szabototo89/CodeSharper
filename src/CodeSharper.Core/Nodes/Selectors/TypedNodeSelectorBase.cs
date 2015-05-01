@@ -9,7 +9,7 @@ namespace CodeSharper.Core.Nodes.Selectors
         /// <summary>
         /// Filters the specified node. Returns true if specified node is in the selection otherwise false.
         /// </summary>
-        public override Boolean FilterNode(Node node)
+        public override Boolean FilterNode(Object node)
         {
             return node is TNode;
         }

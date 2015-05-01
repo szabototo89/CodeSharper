@@ -3,11 +3,14 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Selectors
 {
-    public abstract class NodeSelectorBase
+    public class UniversalSelector : NodeSelectorBase
     {
         /// <summary>
         /// Filters the specified node. Returns true if specified node is in the selection otherwise false.
         /// </summary>
-        public abstract Boolean FilterNode(Object node);
+        public override Boolean FilterNode(Object node)
+        {
+            return true;
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Modifiers
@@ -9,12 +11,14 @@ namespace CodeSharper.Core.Nodes.Modifiers
         /// <summary>
         /// Modifies the selection of node 
         /// </summary>
-        public override IEnumerable<Node> ModifySelection(Node node)
+        public override IEnumerable<Object> ModifySelection(Object node)
         {
-            if (node == null)
-                return Enumerable.Empty<Node>();
+            var hasParent = node as IHasParent<Object>;
 
-            return new[] { node.Parent };
+            if (hasParent == null)
+                return Enumerable.Empty<Object>();
+
+            return new[] { hasParent.Parent };
         }
     }
 }
