@@ -12,7 +12,7 @@ namespace CodeSharper.Tests.Interpreter.Stubs
         /// <summary>
         /// Gets or sets the increment.
         /// </summary>
-        [BindTo("value")]
+        [Parameter("value")]
         public Double Increment { get; set; }
 
         /// <summary>

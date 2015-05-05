@@ -27,7 +27,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.TypeOf<CommandCallControlFlowDescriptor>());
+            Assert.That(result, Is.TypeOf<CommandCallControlFlowElement>());
         }
 
         [Test(Description = "Parse should parse command when simple command call with one string parameter is passed")]
@@ -37,7 +37,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             var underTest = new CodeQueryCompiler();
 
             // When
-            var result = underTest.Parse("@test-command \"hello world!\"") as CommandCallControlFlowDescriptor;
+            var result = underTest.Parse("@test-command \"hello world!\"") as CommandCallControlFlowElement;
 
             // Then
             Assert.That(result, Is.Not.Null);
@@ -57,12 +57,12 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             var underTest = new CodeQueryCompiler();
 
             // When
-            var result = underTest.Parse("@test-command; @test-command-2") as SequenceControlFlowDescriptor;
+            var result = underTest.Parse("@test-command; @test-command-2") as SequenceControlFlowElement;
 
             // Then
             Assert.That(result, Is.Not.Null);
             var expectedChildren = result.Children
-                                         .Cast<CommandCallControlFlowDescriptor>()
+                                         .Cast<CommandCallControlFlowElement>()
                                          .Select(call => call.CommandCall.MethodName);
 
             Assert.That(expectedChildren, Is.EquivalentTo(new[] { "test-command", "test-command-2" }));

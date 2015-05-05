@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,21 +64,25 @@
     <Compile Include="Common\DefaultRunnableManager.cs" />
     <Compile Include="Common\IExecutor.cs" />
     <Compile Include="Common\IHasName.cs" />
+    <Compile Include="Common\IHasTextRange.cs" />
     <Compile Include="Common\IHasValue.cs" />
     <Compile Include="Common\ILinkedStyle.cs" />
     <Compile Include="Common\INameMatcher.cs" />
     <Compile Include="Common\IRunnableManager.cs" />
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />
-    <Compile Include="Common\Runnables\BindToAttribute.cs" />
+    <Compile Include="Common\Runnables\ConvertCaseRunnable.cs" />
+    <Compile Include="Common\Runnables\ParameterAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\FlattenValueProducer.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\ValueProducerBase.cs" />
     <Compile Include="Common\Runnables\Converters\IValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\IValueProducer.cs" />
     <Compile Include="Common\Runnables\Converters\ValueConsumerBase.cs" />
+    <Compile Include="Common\Runnables\ConvertToStringRunnable.cs" />
     <Compile Include="Common\Runnables\DefaultRunnableFactory.cs" />
     <Compile Include="Common\Runnables\ErrorMessage.cs" />
+    <Compile Include="Common\Runnables\FilterRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnableFactory.cs" />
     <Compile Include="Common\Runnables\JoinLinesTextRunnable.cs" />
@@ -91,6 +96,7 @@
     <Compile Include="Common\IHasParent.cs" />
     <Compile Include="Common\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="Nodes\Combinators\CombinatorDescriptor.cs" />
     <Compile Include="Nodes\Combinators\NodeSelectionCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
     <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
@@ -107,9 +113,13 @@
     <Compile Include="Nodes\Combinators\AbsoluteCombinator.cs" />
     <Compile Include="Nodes\Combinators\ParentCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeCombinator.cs" />
+    <Compile Include="Nodes\Selectors\SelectorDescriptor.cs" />
     <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
     <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
+    <Compile Include="Services\DefaultDescriptorRepository.cs" />
+    <Compile Include="Services\IDescriptorRepository.cs" />
+    <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="Texts\TextRange.cs" />
     <Compile Include="Trees\IHasSyntaxTree.cs" />
@@ -130,6 +140,7 @@
     <Compile Include="Utilities\OptionExtensions.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
     <Compile Include="Utilities\TextRangeExtensions.cs" />
+    <Compile Include="Utilities\TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

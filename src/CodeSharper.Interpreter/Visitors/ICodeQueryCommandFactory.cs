@@ -13,46 +13,46 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a boolean literal value
         /// </summary>
-        Constant CreateBoolean(Boolean value);
+        ConstantElement CreateBoolean(Boolean value);
 
         /// <summary>
         /// Creates a number literal value
         /// </summary>
-        Constant CreateNumber(Double value);
+        ConstantElement CreateNumber(Double value);
 
         /// <summary>
         /// Creates a string literal value
         /// </summary>
-        Constant CreateString(String value);
+        ConstantElement CreateString(String value);
 
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        ActualParameter CreateActualParameter(Constant value, String parameterName);
+        ActualParameterElement CreateActualParameter(ConstantElement value, String parameterName);
 
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        ActualParameter CreateActualParameter(Constant value, Int32 position);
+        ActualParameterElement CreateActualParameter(ConstantElement value, Int32 position);
 
         /// <summary>
         /// Creates a method call symbol node
         /// </summary>
-        CommandCall CreateMethodCall(String name, IEnumerable<ActualParameter> parameters);
+        CommandCall CreateMethodCall(String name, IEnumerable<ActualParameterElement> parameters);
 
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        ControlFlowDescriptorBase CreateControlFlow(ControlFlowDescriptorBase left, ControlFlowDescriptorBase right, String @operator);
+        ControlFlowElementBase CreateControlFlow(ControlFlowElementBase left, ControlFlowElementBase right, String @operator);
 
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        ControlFlowDescriptorBase CreateControlFlow(CommandCall methodCall);
+        ControlFlowElementBase CreateControlFlow(CommandCall methodCall);
 
         /// <summary>
         /// Creates a control flow for selection.
         /// </summary>
-        ControlFlowDescriptorBase CreateControlFlow(SelectorElementBase selectorElement);
+        ControlFlowElementBase CreateControlFlow(SelectorElementBase selectorElement);
     }
 }

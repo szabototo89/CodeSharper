@@ -8,6 +8,7 @@ using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlows;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Nodes.Selectors;
+using CodeSharper.Core.Services;
 using CodeSharper.Interpreter.Common;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -86,7 +87,7 @@ namespace CodeSharper.Tests.Interpreter.Common
             Executor = new DummyExecutor();
             CommandCallResolver = new DummyCommandCallResolver();
             SelectorFactory = new DefaultSelectorFactory(new[]{ typeof(UniversalSelector) }, Type.EmptyTypes);
-            SelectorResolver = new DefaultSelectorResolver(SelectorFactory);
+            SelectorResolver = new DefaultSelectorResolver(SelectorFactory, new DefaultDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json"));
             UnderTest = new DefaultControlFlowFactory(CommandCallResolver, SelectorResolver, Executor);
         }
 
@@ -94,11 +95,11 @@ namespace CodeSharper.Tests.Interpreter.Common
 
         #region Unit tests
 
-        [Test(Description = "Create should return a CommandCallControlFlow instance when a CommandCallControlFlowDescriptor instance is passed")]
+        [Test(Description = "Create should return a CommandCallControlFlow instance when a CommandCallControlFlowElement instance is passed")]
         public void Create_ShouldReturnCommandCallControlFlow_WhenCommandCallDescriptorIsPassed()
         {
             // Given in setup
-            var sequence = Fixture.Create<CommandCallControlFlowDescriptor>();
+            var sequence = Fixture.Create<CommandCallControlFlowElement>();
 
             // When
             var result = UnderTest.Create(sequence) as CommandCallControlFlow;
@@ -107,11 +108,11 @@ namespace CodeSharper.Tests.Interpreter.Common
             Assert.That(result, Is.Not.Null);
         }
 
-        [Test(Description = "Create should return PipelineControlFlow instance when a PipelineControlFlowDescriptor instance is passed")]
+        [Test(Description = "Create should return PipelineControlFlow instance when a PipelineControlFlowElement instance is passed")]
         public void Create_ShouldReturnPipelineOfDummyControlFlowDescriptors_WhenSequenceDescriptorIsPassed()
         {
             // Given in setup
-            var sequence = new PipelineControlFlowDescriptor(Fixture.CreateMany<CommandCallControlFlowDescriptor>(3));
+            var sequence = new PipelineControlFlowElement(Fixture.CreateMany<CommandCallControlFlowElement>(3));
 
             // When
             var result = UnderTest.Create(sequence) as PipelineControlFlow;
@@ -129,7 +130,7 @@ namespace CodeSharper.Tests.Interpreter.Common
         public void Create_ShouldReturnSequenceOfDummyControlFlowDescriptors_WhenSequenceDescriptorIsPassed()
         {
             // Given in setup
-            var sequence = new SequenceControlFlowDescriptor(Fixture.CreateMany<CommandCallControlFlowDescriptor>(3));
+            var sequence = new SequenceControlFlowElement(Fixture.CreateMany<CommandCallControlFlowElement>(3));
 
             // When
             var result = UnderTest.Create(sequence) as SequenceControlFlow;

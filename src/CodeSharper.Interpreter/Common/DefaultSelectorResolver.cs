@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
-using CodeSharper.Core.Nodes.Modifiers;
-using CodeSharper.Core.Nodes.Selectors;
+using CodeSharper.Core.Services;
 using CodeSharper.Core.Utilities;
 using CombinatorBase = CodeSharper.Core.Nodes.Combinators.CombinatorBase;
 
@@ -22,17 +20,24 @@ namespace CodeSharper.Interpreter.Common
         public ISelectorFactory SelectorFactory { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the descriptor repository.
+        /// </summary>
+        public IDescriptorRepository DescriptorRepository { get; protected set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSelectorResolver"/> class.
         /// </summary>
-        public DefaultSelectorResolver(ISelectorFactory selectorFactory)
+        public DefaultSelectorResolver(ISelectorFactory selectorFactory, IDescriptorRepository descriptorRepository)
         {
-            Assume.NotNull(selectorFactory, "SelectorFactory");
+            Assume.NotNull(selectorFactory, "selectorFactory");
+            Assume.NotNull(descriptorRepository, "descriptorRepository");
 
             _registeredCombinators = new Dictionary<Type, Func<CombinatorBase, CombinatorBase, BinaryCombinator>>();
             _registeredCombinators.Add(typeof(ChildCombinatorElement), (left, right) => new ChildrenCombinator(left, right));
             _registeredCombinators.Add(typeof(DescendantCombinatorElement), (left, right) => new RelativeNodeCombinator(left, right));
 
             SelectorFactory = selectorFactory;
+            DescriptorRepository = descriptorRepository;
         }
 
         /// <summary>
@@ -54,7 +59,7 @@ namespace CodeSharper.Interpreter.Common
                 return create(binarySelector);
             }
 
-            throw new NotSupportedException("selectorElement is not supported.");
+            throw new NotSupportedException(String.Format("Selector element is not supported: {0}.", selectorElement.GetType().FullName));
         }
 
         /// <summary>
@@ -64,8 +69,12 @@ namespace CodeSharper.Interpreter.Common
         {
             var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
 
-            var selector = SelectorFactory.CreateSelector(elementTypeSelector.Name);
-            var pseudoSelectors = elementTypeSelector.PseudoSelectors.Select(pseudo => SelectorFactory.CreatePseudoSelector(selector, pseudo));
+            var selectorDescriptor = DescriptorRepository.LoadSelectors().SingleOrDefault(s => s.Value == elementTypeSelector.Name);
+            if (selectorDescriptor == null)
+                throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
+
+            var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type);
+            var pseudoSelectors = elementTypeSelector.PseudoSelectors.Select(pseudo => SelectorFactory.CreatePseudoSelector(pseudo, selector));
 
             return new NodeSelectionCombinator(selector, pseudoSelectors);
         }
@@ -93,76 +102,6 @@ namespace CodeSharper.Interpreter.Common
 
             var factory = registeredCombinator.Value;
             return factory(left, right);
-        }
-    }
-
-    public interface ISelectorFactory
-    {
-        /// <summary>
-        /// Creates a selector by specified name.
-        /// </summary>
-        NodeSelectorBase CreateSelector(String name);
-
-        /// <summary>
-        /// Creates a pseudo selector.
-        /// </summary>
-        NodeModifierBase CreatePseudoSelector(NodeSelectorBase selector, PseudoSelectorElement pseudoSelector);
-    }
-
-    public class DefaultSelectorFactory : ISelectorFactory
-    {
-        /// <summary>
-        /// Gets or sets the selectors.
-        /// </summary>
-        public IEnumerable<Type> Selectors { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the pseudo selectors.
-        /// </summary>
-        public IEnumerable<Type> PseudoSelectors { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the name matcher.
-        /// </summary>
-        public INameMatcher NameMatcher { get; protected set; }
-
-        public DefaultSelectorFactory(IEnumerable<Type> selectors, IEnumerable<Type> pseudoSelectors, INameMatcher nameMatcher = null)
-        {
-            Assume.NotNull(selectors, "selectors");
-            Assume.NotNull(pseudoSelectors, "pseudoSelectors");
-
-            Selectors = selectors;
-            PseudoSelectors = pseudoSelectors;
-            NameMatcher = nameMatcher ?? new EqualityNameMatcher();
-        }
-
-        /// <summary>
-        /// Creates a selector by specified name.
-        /// </summary>
-        public virtual NodeSelectorBase CreateSelector(String name)
-        {
-            Assume.NotBlank(name, "name");
-            
-            // resolve selector by name
-            var selectorType = Selectors.FirstOrDefault(type => NameMatcher.Match(type.Name, name));
-            if (selectorType == null)
-                throw new Exception(String.Format("{0} selector is not found.", name));
-
-            // get default constructor
-            var constructors = selectorType.GetConstructors();
-            var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
-            if (defaultConstructor != null)
-                return defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as NodeSelectorBase;
-
-            throw new Exception(String.Format("Cannot find default constructor for selector: {0}", name));
-        }
-
-        /// <summary>
-        /// Creates a pseudo selector.
-        /// </summary>
-        public virtual NodeModifierBase CreatePseudoSelector(NodeSelectorBase selector, PseudoSelectorElement pseudoSelector)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -99,7 +99,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitMethodCallParameterValueWithConstant(CodeQuery.MethodCallParameterValueWithConstantContext context)
         {
-            var value = context.ActualParameterValue.Accept(this) as Constant;
+            var value = context.ActualParameterValue.Accept(this) as ConstantElement;
 
             if (context.ID() != null)
             {
@@ -122,15 +122,15 @@ namespace CodeSharper.Interpreter.Visitors
             var methodCallParameters = context.methodCallParameter()
                 .Select((parameter, index) => {
                     var param = parameter.Accept(this);
-                    if (param is ActualParameter) return param;
-                    if (param is Constant) return TreeFactory.CreateActualParameter((Constant)param, index);
+                    if (param is ActualParameterElement) return param;
+                    if (param is ConstantElement) return TreeFactory.CreateActualParameter((ConstantElement)param, index);
 
                     return param;
                 });
 
             var methodCall = new {
                 Name = context.MethodCallName.Text,
-                Parameters = methodCallParameters.OfType<ActualParameter>()
+                Parameters = methodCallParameters.OfType<ActualParameterElement>()
                                                  .ToArray()
             };
 
@@ -184,7 +184,7 @@ namespace CodeSharper.Interpreter.Visitors
                             var command = context.command().ToArray()[i];
 
                             var pipelineOperator = op.GetText();
-                            var rightExpression = command.Accept(this) as ControlFlowDescriptorBase;
+                            var rightExpression = command.Accept(this) as ControlFlowElementBase;
 
                             if (methodCall != null)
                             {
@@ -204,8 +204,8 @@ namespace CodeSharper.Interpreter.Visitors
 
         public override Object VisitCommandOperand(CodeQuery.CommandOperandContext context)
         {
-            var left = context.Left.Accept(this) as ControlFlowDescriptorBase;
-            var right = context.Right.Accept(this) as ControlFlowDescriptorBase;
+            var left = context.Left.Accept(this) as ControlFlowElementBase;
+            var right = context.Right.Accept(this) as ControlFlowElementBase;
             var pipelineOperator = context.Operator.Text;
             
             return TreeFactory.CreateControlFlow(left, right, pipelineOperator);
@@ -264,7 +264,7 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
         {
             var name = context.AttributeName.Text;
-            var value = context.AttributeValue.Accept(this) as Constant;
+            var value = context.AttributeValue.Accept(this) as ConstantElement;
 
             return NodeSelectorFactory.CreateAttributeSelector(name, value);
         }
@@ -282,7 +282,7 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
         {
             var name = context.Name.Text;
-            var value = context.Value.Accept(this) as Constant;
+            var value = context.Value.Accept(this) as ConstantElement;
 
             return NodeSelectorFactory.CreatePseudoSelector(name, value);
         }

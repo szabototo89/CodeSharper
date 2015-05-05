@@ -3,7 +3,7 @@ using System;
 namespace CodeSharper.Core.Common.Runnables
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-    public class BindToAttribute : Attribute
+    public class ParameterAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the property.
@@ -11,9 +11,9 @@ namespace CodeSharper.Core.Common.Runnables
         public String PropertyName { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BindToAttribute"/> class.
+        /// Initializes a new instance of the <see cref="ParameterAttribute"/> class.
         /// </summary>
-        public BindToAttribute(String propertyName)
+        public ParameterAttribute(String propertyName)
         {
             PropertyName = propertyName;
         }

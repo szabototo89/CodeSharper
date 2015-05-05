@@ -67,7 +67,7 @@ namespace CodeSharper.Core.Common.Runnables
                 .GetProperties()
                 .Select(prop => new {
                     Property = prop,
-                    BindTo = prop.GetCustomAttributes(typeof(BindToAttribute), true).SingleOrDefault() as BindToAttribute
+                    BindTo = prop.GetCustomAttributes(typeof(ParameterAttribute), true).SingleOrDefault() as ParameterAttribute
                 })
                 .Where(prop => prop.BindTo != null);
 

@@ -1,0 +1,44 @@
+[
+  // supported combinators
+  {
+    "name": "relative-child-selector",
+    "selector-type": "combinator",
+    "value": "",
+    "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
+  },
+  {
+    "name": "absolute-child-selector",
+    "selector-type": "combinator",
+    "value": ">",
+    "type": "CodeSharper.Core.Nodes.Combinators.AbsoluteCombinator"
+  },
+
+  // supported element type selectors
+  {
+    "name": "universal-selector",
+    "selector-type": "element-type-selector",
+    "value": "all",
+    "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
+  },
+  {
+    "name": "csv-field-selector",
+    "selector-type": "element-type-selector",
+    "value": "field",
+    "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldNodeSelector"
+  },
+  {
+    "name": "csv-row-selector",
+    "selector-type": "element-type-selector",
+    "value": "row",
+    "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowNodeSelector"
+  },
+
+  // supported pseudo selectors
+  {
+    "name": "text-pseudo-selector",
+    "selector-type": "pseudo-selector",
+    "value": "text",
+    "arguments": [],
+    "type": "???"
+  }
+]

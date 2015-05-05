@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
 
@@ -31,6 +34,11 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// </summary>
         public override Object Execute(Object parameter)
         {
+            if (parameter is IEnumerable)
+            {
+                return Combinator.Calculate(((IEnumerable)parameter).OfType<Object>());
+            }
+
             return Combinator.Calculate(new[] { parameter });
         }
     }

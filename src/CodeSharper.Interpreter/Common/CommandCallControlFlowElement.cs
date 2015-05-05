@@ -3,7 +3,7 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class CommandCallControlFlowDescriptor : ControlFlowDescriptorBase, IEquatable<CommandCallControlFlowDescriptor>
+    public class CommandCallControlFlowElement : ControlFlowElementBase, IEquatable<CommandCallControlFlowElement>
     {
         /// <summary>
         /// Gets or sets the method call
@@ -11,9 +11,9 @@ namespace CodeSharper.Interpreter.Common
         public CommandCall CommandCall { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandCallControlFlowDescriptor"/> class.
+        /// Initializes a new instance of the <see cref="CommandCallControlFlowElement"/> class.
         /// </summary>
-        public CommandCallControlFlowDescriptor(CommandCall commandCall) 
+        public CommandCallControlFlowElement(CommandCall commandCall) 
             : base(ControlFlowOperationType.CommandCall)
         {
             Assume.NotNull(commandCall, "CommandCall");
@@ -27,9 +27,9 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(CommandCallControlFlowDescriptor other)
+        public Boolean Equals(CommandCallControlFlowElement other)
         {
-            return Equals(other as ControlFlowDescriptorBase) &&
+            return Equals(other as ControlFlowElementBase) &&
                    CommandCall.Equals(other.CommandCall);
         }
     }

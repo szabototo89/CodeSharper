@@ -111,6 +111,7 @@
     </AntlrTokens>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Csv\Runnables\" />
     <Folder Include="Json\Compiler\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

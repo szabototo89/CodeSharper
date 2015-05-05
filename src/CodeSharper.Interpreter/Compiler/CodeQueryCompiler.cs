@@ -16,7 +16,7 @@ namespace CodeSharper.Interpreter.Compiler
         /// <summary>
         /// Parses the specified input.
         /// </summary>
-        public ControlFlowDescriptorBase Parse(String input)
+        public ControlFlowElementBase Parse(String input)
         {
             return Parse(input,new DefaultNodeSelectorFactory(), new DefaultCodeQueryCommandFactory());
         }
@@ -24,7 +24,7 @@ namespace CodeSharper.Interpreter.Compiler
         /// <summary>
         /// Parses the specified input.
         /// </summary>
-        public ControlFlowDescriptorBase Parse(String input, INodeSelectorFactory nodeSelectorFactory, ICodeQueryCommandFactory factory)
+        public ControlFlowElementBase Parse(String input, INodeSelectorFactory nodeSelectorFactory, ICodeQueryCommandFactory factory)
         {
             Assume.NotNull(input, "input");
             Assume.NotNull(factory, "factory");
@@ -38,7 +38,7 @@ namespace CodeSharper.Interpreter.Compiler
             var start = parser.command();
 
             var visitor = new CodeQuerySyntaxTreeBuilder(nodeSelectorFactory, factory);
-            return visitor.Visit(start) as ControlFlowDescriptorBase;
+            return visitor.Visit(start) as ControlFlowElementBase;
         }
     }
 }

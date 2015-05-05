@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B83CAE62-BB24-49F1-818E-F0BBBC114306}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{A3C4DE5C-38E8-444C-9963-349AF1080C70}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeSharper.Tests.Languages</RootNamespace>
-    <AssemblyName>CodeSharper.Tests.Languages</AssemblyName>
+    <RootNamespace>CodeSharper.Playground.CLI</RootNamespace>
+    <AssemblyName>CodeSharper.Playground.CLI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,13 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr4.Runtime, Version=4.5.0.0, Culture=neutral, PublicKeyToken=e78b2c5abd1fcb3f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\..\Downloads\Antlr4.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\solution\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,39 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Csv\Compiler\CodeQueryAndCsvCompilerIntegratedTests.cs" />
-    <Compile Include="Csv\Compiler\CsvCompilerTests.cs" />
-    <Compile Include="Csv\Fakes\CsvLanguageElements.cs" />
-    <Compile Include="Csv\Fakes\CsvTreeFactoryStub.cs" />
-    <Compile Include="Csv\Fakes\CsvTreeVisitorStub.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Csv\Nodes\NodeOperandTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="App.config" />
+    <None Include="descriptors.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\CodeSharper.Core\CodeSharper.Core.csproj">
-      <Project>{794268E8-3ECB-4D3A-99D8-9C310C8FD583}</Project>
+      <Project>{794268e8-3ecb-4d3a-99d8-9c310c8fd583}</Project>
       <Name>CodeSharper.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\CodeSharper.Interpreter\CodeSharper.Interpreter.csproj">
-      <Project>{35259875-D91E-4F40-95A3-879C80CF5F98}</Project>
+      <Project>{35259875-d91e-4f40-95a3-879c80cf5f98}</Project>
       <Name>CodeSharper.Interpreter</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\CodeSharper.Languages\CodeSharper.Languages.csproj">
-      <Project>{88782320-E761-4273-907A-21C2FA813150}</Project>
+      <Project>{88782320-e761-4273-907a-21c2fa813150}</Project>
       <Name>CodeSharper.Languages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CodeSharper.Tests\CodeSharper.Tests.csproj">
-      <Project>{27bc9728-db64-4d00-87fe-721afcff5701}</Project>
-      <Name>CodeSharper.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Csv\Nodes\Operands\" />
-    <Folder Include="Json\" />
-    <Folder Include="Utilities\" />
+    <Content Include="Examples\example-1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

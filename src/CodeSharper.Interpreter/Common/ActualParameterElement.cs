@@ -5,7 +5,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class ActualParameter : IHasValue<Constant>, IEquatable<ActualParameter>
+    public class ActualParameterElement : IHasValue<ConstantElement>, IEquatable<ActualParameterElement>
     {
         /// <summary>
         /// Gets or sets the name of the parameter
@@ -20,12 +20,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the value of actual parameter
         /// </summary>
-        public Constant Value { get; protected set; }
+        public ConstantElement Value { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActualParameter"/> class.
+        /// Initializes a new instance of the <see cref="ActualParameterElement"/> class.
         /// </summary>
-        public ActualParameter(Constant value, Int32 position)
+        public ActualParameterElement(ConstantElement value, Int32 position)
         {
             Assume.NotNull(value, "value");
 
@@ -35,11 +35,11 @@ namespace CodeSharper.Interpreter.Common
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActualParameter"/> class.
+        /// Initializes a new instance of the <see cref="ActualParameterElement"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="parameterName">Name of the parameter.</param>
-        public ActualParameter(Constant value, String parameterName)
+        public ActualParameterElement(ConstantElement value, String parameterName)
         {
             Assume.NotNull(value, "value");
             Assume.NotNull(parameterName, "parameterName");
@@ -58,7 +58,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(ActualParameter other)
+        public Boolean Equals(ActualParameterElement other)
         {
             return EqualityHelper.IsNullOrReferenceEqual(other, this) ??
                    ParameterName.Equals(other.ParameterName) &&
@@ -75,7 +75,7 @@ namespace CodeSharper.Interpreter.Common
         /// <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as ActualParameter);
+            return Equals(obj as ActualParameterElement);
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ using CodeSharper.Interpreter.Visitors;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class Constant : IHasValue<Object>, IEquatable<Constant>
+    public class ConstantElement : IHasValue<Object>, IEquatable<ConstantElement>
     {
         /// <summary>
         /// Gets or sets the value.
@@ -19,9 +19,9 @@ namespace CodeSharper.Interpreter.Common
         public Type Type { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Constant"/> class.
+        /// Initializes a new instance of the <see cref="ConstantElement"/> class.
         /// </summary>
-        public Constant(Object value, Type type)
+        public ConstantElement(Object value, Type type)
         {
             Assume.NotNull(type, "type");
 
@@ -38,7 +38,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(Constant other)
+        public Boolean Equals(ConstantElement other)
         {
            return EqualityHelper.IsNullOrReferenceEqual(other, this) ?? 
                   Equals(Value, other.Value) &&
@@ -54,7 +54,7 @@ namespace CodeSharper.Interpreter.Common
         /// <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as Constant);
+            return Equals(obj as ConstantElement);
         }
 
         /// <summary>

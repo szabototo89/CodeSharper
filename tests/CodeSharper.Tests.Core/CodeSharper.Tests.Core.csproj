@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifierTests.cs" />
     <Compile Include="Nodes\Modifiers\SiblingNodeModifierTests.cs" />
+    <Compile Include="Services\SerializerTests.cs" />
     <Compile Include="TestHelpers\Stubs\StubNode.cs" />
     <Compile Include="Texts\TextDocumentTests.cs" />
     <Compile Include="Utilities\OptionTests.cs" />

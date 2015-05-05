@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace CodeSharper.Core.ErrorHandling
 {
@@ -30,6 +31,12 @@ namespace CodeSharper.Core.ErrorHandling
         {
             if (String.IsNullOrEmpty(name))
                 throw new ArgumentException("{0} cannot be blank.");
+        }
+
+        public static void FileExists(String path, String message)
+        {
+            if (!File.Exists(path))
+                throw new FileNotFoundException("Missing specified file!", path);
         }
     }
 }

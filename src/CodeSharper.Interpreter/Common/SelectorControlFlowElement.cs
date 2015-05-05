@@ -2,17 +2,17 @@
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class SelectorControlFlowDescriptor : ControlFlowDescriptorBase
+    public class SelectorControlFlowElement : ControlFlowElementBase
     {
         /// <summary>
-        /// Gets or sets the selectorElement.
+        /// Gets or sets the selector element.
         /// </summary>
         public SelectorElementBase SelectorElement { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectorControlFlowDescriptor"/> class.
+        /// Initializes a new instance of the <see cref="SelectorControlFlowElement"/> class.
         /// </summary>
-        public SelectorControlFlowDescriptor(SelectorElementBase selectorElement) : base(ControlFlowOperationType.Selector)
+        public SelectorControlFlowElement(SelectorElementBase selectorElement) : base(ControlFlowOperationType.Selector)
         {
             Assume.NotNull(selectorElement, "selectorElement");
             SelectorElement = selectorElement;

@@ -18,13 +18,13 @@ namespace CodeSharper.Tests.Core.Common.Runnables
             /// <summary>
             /// String or sets the value.
             /// </summary>
-            [BindTo("value")]
+            [Parameter("value")]
             public Object Value { get; set; }
 
             /// <summary>
             /// String or sets the description.
             /// </summary>
-            [BindTo("description")]
+            [Parameter("description")]
             public String Description { get; set; }
 
             /// <summary>

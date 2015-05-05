@@ -24,12 +24,12 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selector element ElementTypeSelector
         /// </summary>
-        AttributeElement CreateAttributeSelector(String name, Constant value);
+        AttributeElement CreateAttributeSelector(String name, ConstantElement value);
 
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        PseudoSelectorElement CreatePseudoSelector(String name, Constant value);
+        PseudoSelectorElement CreatePseudoSelector(String name, ConstantElement value);
 
         /// <summary>
         /// Creates a selectable ElementTypeSelector

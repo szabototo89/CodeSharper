@@ -42,7 +42,7 @@ namespace CodeSharper.Interpreter.Common
 
         #region Members for creating control flows
 
-        private IEnumerable<ControlFlowBase> createChildren(IHasChildren<ControlFlowDescriptorBase> controlFlow)
+        private IEnumerable<ControlFlowBase> createChildren(IHasChildren<ControlFlowElementBase> controlFlow)
         {
             return controlFlow.Children.Select(Create).ToArray();
         }
@@ -57,7 +57,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified parameter.
         /// </summary>
-        private ICommandCallActualArgument Create(ActualParameter parameter)
+        private ICommandCallActualArgument Create(ActualParameterElement parameter)
         {
             if (parameter.ParameterName.HasValue)
                 return new NamedCommandCallActualArgument(parameter.ParameterName, parameter.Value.Value);
@@ -70,19 +70,19 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified control flow.
         /// </summary>
-        public ControlFlowBase Create(ControlFlowDescriptorBase controlFlow)
+        public ControlFlowBase Create(ControlFlowElementBase controlFlow)
         {
-            if (controlFlow is SequenceControlFlowDescriptor)
-                return Create((SequenceControlFlowDescriptor)controlFlow);
+            if (controlFlow is SequenceControlFlowElement)
+                return Create((SequenceControlFlowElement)controlFlow);
 
-            if (controlFlow is PipelineControlFlowDescriptor)
-                return Create((PipelineControlFlowDescriptor)controlFlow);
+            if (controlFlow is PipelineControlFlowElement)
+                return Create((PipelineControlFlowElement)controlFlow);
 
-            if (controlFlow is CommandCallControlFlowDescriptor)
-                return Create((CommandCallControlFlowDescriptor)controlFlow);
+            if (controlFlow is CommandCallControlFlowElement)
+                return Create((CommandCallControlFlowElement)controlFlow);
 
-            if (controlFlow is SelectorControlFlowDescriptor)
-                return Create((SelectorControlFlowDescriptor) controlFlow);
+            if (controlFlow is SelectorControlFlowElement)
+                return Create((SelectorControlFlowElement) controlFlow);
 
             throw new NotSupportedException("Not supported control flow descriptor!");
         }
@@ -90,7 +90,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified selectorElement.
         /// </summary>
-        public ControlFlowBase Create(SelectorControlFlowDescriptor selector)
+        public ControlFlowBase Create(SelectorControlFlowElement selector)
         {
             Assume.NotNull(selector, "selectorElement");
 
@@ -102,7 +102,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified sequence.
         /// </summary>
-        public ControlFlowBase Create(SequenceControlFlowDescriptor sequence)
+        public ControlFlowBase Create(SequenceControlFlowElement sequence)
         {
             Assume.NotNull(sequence, "sequence");
             var children = createChildren(sequence);
@@ -112,7 +112,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified pipeline.
         /// </summary>
-        public ControlFlowBase Create(PipelineControlFlowDescriptor pipeline)
+        public ControlFlowBase Create(PipelineControlFlowElement pipeline)
         {
             Assume.NotNull(pipeline, "pipeline");
 
@@ -123,7 +123,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified command call.
         /// </summary>
-        public ControlFlowBase Create(CommandCallControlFlowDescriptor commandCall)
+        public ControlFlowBase Create(CommandCallControlFlowElement commandCall)
         {
             Assume.NotNull(commandCall, "commandCall");
 

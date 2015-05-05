@@ -8,22 +8,22 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the specified control flow.
         /// </summary>
-        TControlFlow Create(ControlFlowDescriptorBase controlFlow);
+        TControlFlow Create(ControlFlowElementBase controlFlow);
 
         /// <summary>
         /// Creates the specified sequence.
         /// </summary>
-        TControlFlow Create(SequenceControlFlowDescriptor sequence);
+        TControlFlow Create(SequenceControlFlowElement sequence);
 
         /// <summary>
         /// Creates the specified pipeline.
         /// </summary>
-        TControlFlow Create(PipelineControlFlowDescriptor pipeline);
+        TControlFlow Create(PipelineControlFlowElement pipeline);
 
         /// <summary>
         /// Creates the specified command call.
         /// </summary>
-        TControlFlow Create(CommandCallControlFlowDescriptor commandCall);
+        TControlFlow Create(CommandCallControlFlowElement commandCall);
     }
 }
 

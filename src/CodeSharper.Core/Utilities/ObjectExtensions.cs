@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection.Emit;
 using System.Security;
 using System.Security.Policy;
+using CodeSharper.Core.Nodes.Selectors;
 
 namespace CodeSharper.Core.Utilities
 {

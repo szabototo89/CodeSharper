@@ -14,48 +14,48 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a boolean literal value
         /// </summary>
-        public Constant CreateBoolean(Boolean value)
+        public ConstantElement CreateBoolean(Boolean value)
         {
-            return new Constant(value, typeof(Boolean));
+            return new ConstantElement(value, typeof(Boolean));
         }
 
         /// <summary>
         /// Creates a number literal value
         /// </summary>
-        public Constant CreateNumber(Double value)
+        public ConstantElement CreateNumber(Double value)
         {
-            return new Constant(value, typeof(Double));
+            return new ConstantElement(value, typeof(Double));
         }
 
         /// <summary>
         /// Creates a string literal value
         /// </summary>
-        public Constant CreateString(String value)
+        public ConstantElement CreateString(String value)
         {
             Assume.NotNull(value, "value");
-            return new Constant(value, typeof(String));
+            return new ConstantElement(value, typeof(String));
         }
 
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        public ActualParameter CreateActualParameter(Constant value, String parameterName)
+        public ActualParameterElement CreateActualParameter(ConstantElement value, String parameterName)
         {
-            return new ActualParameter(value, parameterName);
+            return new ActualParameterElement(value, parameterName);
         }
 
         /// <summary>
         /// Creates a method call actual parameter node
         /// </summary>
-        public ActualParameter CreateActualParameter(Constant value, Int32 position)
+        public ActualParameterElement CreateActualParameter(ConstantElement value, Int32 position)
         {
-            return new ActualParameter(value, position);
+            return new ActualParameterElement(value, position);
         }
 
         /// <summary>
         /// Creates a method call symbol node
         /// </summary>
-        public CommandCall CreateMethodCall(String name, IEnumerable<ActualParameter> parameters)
+        public CommandCall CreateMethodCall(String name, IEnumerable<ActualParameterElement> parameters)
         {
             return new CommandCall(name, parameters);
         }
@@ -63,7 +63,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        public ControlFlowDescriptorBase CreateControlFlow(ControlFlowDescriptorBase left, ControlFlowDescriptorBase right, String @operator)
+        public ControlFlowElementBase CreateControlFlow(ControlFlowElementBase left, ControlFlowElementBase right, String @operator)
         {
             Assume.NotNull(left, "left");
             Assume.NotNull(right, "right");
@@ -74,11 +74,11 @@ namespace CodeSharper.Interpreter.Visitors
             switch (@operator)
             {
                 case PIPELINE_OPERATOR:
-                    return new PipelineControlFlowDescriptor(children);
+                    return new PipelineControlFlowElement(children);
                 case SEQUENCE_OPERATOR:
-                    return new SequenceControlFlowDescriptor(children);
+                    return new SequenceControlFlowElement(children);
                 case LAZY_AND_OPERATOR:
-                    return new LazyAndControlFlowDescriptor(children);
+                    return new LazyAndControlFlowElement(children);
                 default:
                     throw new NotSupportedException(String.Format("Not supported operator: {0}", @operator));
             }
@@ -87,19 +87,19 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        public ControlFlowDescriptorBase CreateControlFlow(CommandCall methodCall)
+        public ControlFlowElementBase CreateControlFlow(CommandCall methodCall)
         {
             Assume.NotNull(methodCall, "selectorElement");
-            return new CommandCallControlFlowDescriptor(methodCall);
+            return new CommandCallControlFlowElement(methodCall);
         }
 
         /// <summary>
         /// Creates a control flow for selection.
         /// </summary>
-        public ControlFlowDescriptorBase CreateControlFlow(SelectorElementBase selectorElement)
+        public ControlFlowElementBase CreateControlFlow(SelectorElementBase selectorElement)
         {
             Assume.NotNull(selectorElement, "selectorElement");
-            return new SelectorControlFlowDescriptor(selectorElement);
+            return new SelectorControlFlowElement(selectorElement);
         }
     }
 }

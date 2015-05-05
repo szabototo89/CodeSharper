@@ -13,7 +13,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Gets or sets the replaced text
         /// </summary>
-        [BindTo("replacedText")]
+        [Parameter("replacedText")]
         public String ReplacedText { get; set; }
 
         /// <summary>

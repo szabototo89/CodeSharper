@@ -43,24 +43,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DefaultSelectorFactory.cs" />
+    <Compile Include="Common\ISelectorFactory.cs" />
     <Compile Include="Common\SelectorElementBase.cs" />
     <Compile Include="Common\CombinatorElementBase.cs" />
     <Compile Include="Common\BinarySelectorElement.cs" />
-    <Compile Include="Common\CommandCallControlFlowDescriptor.cs" />
+    <Compile Include="Common\CommandCallControlFlowElement.cs" />
     <Compile Include="Common\ControlFlowOperationType.cs" />
     <Compile Include="Common\DefaultControlFlowFactory.cs" />
     <Compile Include="Common\ChildCombinatorElement.cs" />
     <Compile Include="Common\DefaultSelectorResolver.cs" />
     <Compile Include="Common\IControlFlowFactory.cs" />
     <Compile Include="Common\ISelectorResolver.cs" />
-    <Compile Include="Common\LazyAndControlFlowDescriptor.cs" />
-    <Compile Include="Common\PipelineControlFlowDescriptor.cs" />
+    <Compile Include="Common\LazyAndControlFlowElement.cs" />
+    <Compile Include="Common\PipelineControlFlowElement.cs" />
     <Compile Include="Common\PseudoSelectorElement.cs" />
     <Compile Include="Common\DescendantCombinatorElement.cs" />
     <Compile Include="Common\ElementTypeSelector.cs" />
-    <Compile Include="Common\SelectorControlFlowDescriptor.cs" />
+    <Compile Include="Common\SelectorControlFlowElement.cs" />
     <Compile Include="Common\AttributeElement.cs" />
-    <Compile Include="Common\SequenceControlFlowDescriptor.cs" />
+    <Compile Include="Common\SequenceControlFlowElement.cs" />
     <Compile Include="Common\UnarySelectorElement.cs" />
     <Compile Include="Compiler\CodeQueryCompiler.cs" />
     <Compile Include="Grammar\CodeQuery.cs" />
@@ -69,9 +71,9 @@
     <Compile Include="Grammar\CodeQueryLexer.cs" />
     <Compile Include="Grammar\CodeQueryListener.cs" />
     <Compile Include="Grammar\CodeQueryVisitor.cs" />
-    <Compile Include="Common\ActualParameter.cs" />
-    <Compile Include="Common\Constant.cs" />
-    <Compile Include="Common\ControlFlowDescriptorBase.cs" />
+    <Compile Include="Common\ActualParameterElement.cs" />
+    <Compile Include="Common\ConstantElement.cs" />
+    <Compile Include="Common\ControlFlowElementBase.cs" />
     <Compile Include="Common\CommandCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ParseTreeVisitorUtils.cs" />

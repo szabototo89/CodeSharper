@@ -6,22 +6,22 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class SequenceControlFlowDescriptor : ControlFlowDescriptorBase, IHasChildren<ControlFlowDescriptorBase>, IEquatable<SequenceControlFlowDescriptor>
+    public class PipelineControlFlowElement : ControlFlowElementBase, IHasChildren<ControlFlowElementBase>, IEquatable<PipelineControlFlowElement>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SequenceControlFlowDescriptor"/> class.
+        /// Gets or sets children of this type
         /// </summary>
-        public SequenceControlFlowDescriptor(IEnumerable<ControlFlowDescriptorBase> children) 
-            : base(ControlFlowOperationType.Sequence)
+        public IEnumerable<ControlFlowElementBase> Children { get; protected set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PipelineControlFlowElement"/> class.
+        /// </summary>
+        public PipelineControlFlowElement(IEnumerable<ControlFlowElementBase> children)
+            : base(ControlFlowOperationType.Pipeline)
         {
             Assume.NotNull(children, "children");
             Children = children;
         }
-
-        /// <summary>
-        /// Gets or sets children of this type
-        /// </summary>
-        public IEnumerable<ControlFlowDescriptorBase> Children { get; protected set; }
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
@@ -30,9 +30,9 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(SequenceControlFlowDescriptor other)
+        public Boolean Equals(PipelineControlFlowElement other)
         {
-            return Equals(other as ControlFlowDescriptorBase) &&
+            return Equals(other as ControlFlowElementBase) &&
                    Children.SequenceEqual(other.Children);
         }
     }

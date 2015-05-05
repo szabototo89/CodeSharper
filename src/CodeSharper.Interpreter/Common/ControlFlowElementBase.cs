@@ -2,7 +2,7 @@
 
 namespace CodeSharper.Interpreter.Common
 {
-    public abstract class ControlFlowDescriptorBase : IEquatable<ControlFlowDescriptorBase>
+    public abstract class ControlFlowElementBase : IEquatable<ControlFlowElementBase>
     {
         /// <summary>
         /// Gets or sets the type of the operation.
@@ -10,9 +10,9 @@ namespace CodeSharper.Interpreter.Common
         public ControlFlowOperationType OperationType { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ControlFlowDescriptorBase"/> class.
+        /// Initializes a new instance of the <see cref="ControlFlowElementBase"/> class.
         /// </summary>
-        protected ControlFlowDescriptorBase(ControlFlowOperationType operationType)
+        protected ControlFlowElementBase(ControlFlowOperationType operationType)
         {
             OperationType = operationType;
         }
@@ -26,7 +26,7 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(ControlFlowDescriptorBase other)
+        public Boolean Equals(ControlFlowElementBase other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -42,7 +42,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as ControlFlowDescriptorBase);
+            return Equals(obj as ControlFlowElementBase);
         }
 
         /// <summary>

@@ -4,7 +4,7 @@ using CodeSharper.Interpreter.Visitors;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public struct PseudoSelectorElement : IEquatable<PseudoSelectorElement>, IHasName, IHasValue<Constant>
+    public struct PseudoSelectorElement : IEquatable<PseudoSelectorElement>, IHasName, IHasValue<ConstantElement>
     {
         /// <summary>
         /// Gets or sets the name.
@@ -14,7 +14,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public Constant Value { get; set; }
+        public ConstantElement Value { get; set; }
 
         #region Equality members
 

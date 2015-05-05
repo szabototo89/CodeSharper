@@ -15,12 +15,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the actual parameters.
         /// </summary>
-        public IEnumerable<ActualParameter> ActualParameters { get; protected set; }
+        public IEnumerable<ActualParameterElement> ActualParameters { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandCall"/> class.
         /// </summary>
-        public CommandCall(String methodName, IEnumerable<ActualParameter> actualParameters)
+        public CommandCall(String methodName, IEnumerable<ActualParameterElement> actualParameters)
         {
             Assume.NotNull(methodName, "methodName");
             Assume.NotNull(actualParameters, "actualParameters");

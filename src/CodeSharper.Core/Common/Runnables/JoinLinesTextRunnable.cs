@@ -10,7 +10,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Gets or sets the join string.
         /// </summary>
-        [BindTo("separator")]
+        [Parameter("separator")]
         public String Separator { get; set; }
 
         /// <summary>

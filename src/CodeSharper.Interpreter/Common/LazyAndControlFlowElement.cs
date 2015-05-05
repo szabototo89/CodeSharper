@@ -6,12 +6,12 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class LazyAndControlFlowDescriptor : ControlFlowDescriptorBase, IHasChildren<ControlFlowDescriptorBase>, IEquatable<LazyAndControlFlowDescriptor>
+    public class LazyAndControlFlowElement : ControlFlowElementBase, IHasChildren<ControlFlowElementBase>, IEquatable<LazyAndControlFlowElement>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LazyAndControlFlowDescriptor"/> class.
+        /// Initializes a new instance of the <see cref="LazyAndControlFlowElement"/> class.
         /// </summary>
-        public LazyAndControlFlowDescriptor(IEnumerable<ControlFlowDescriptorBase> children) 
+        public LazyAndControlFlowElement(IEnumerable<ControlFlowElementBase> children) 
             : base(ControlFlowOperationType.LazyAnd)
         {
             Assume.NotNull(children, "children");   
@@ -21,7 +21,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets children of this type
         /// </summary>
-        public IEnumerable<ControlFlowDescriptorBase> Children { get; private set; }
+        public IEnumerable<ControlFlowElementBase> Children { get; private set; }
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
@@ -30,7 +30,7 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(LazyAndControlFlowDescriptor other)
+        public Boolean Equals(LazyAndControlFlowElement other)
         {
             return base.Equals(other) &&
                    Children.SequenceEqual(other.Children);

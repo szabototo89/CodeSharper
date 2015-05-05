@@ -44,7 +44,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selectorElement ElementTypeSelector
         /// </summary>
-        public AttributeElement CreateAttributeSelector(String name, Constant value)
+        public AttributeElement CreateAttributeSelector(String name, ConstantElement value)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(value, "value");
@@ -58,7 +58,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selectorElement
         /// </summary>
-        public PseudoSelectorElement CreatePseudoSelector(String name, Constant value)
+        public PseudoSelectorElement CreatePseudoSelector(String name, ConstantElement value)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(value, "value");

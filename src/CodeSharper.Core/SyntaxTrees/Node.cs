@@ -7,7 +7,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.SyntaxTrees
 {
-    public abstract class Node : IHasChildren<Node>, IHasParent<Node>
+    public abstract class Node : IHasChildren<Node>, IHasParent<Node>, IHasTextRange
     {
         private readonly List<Node> _children;
 
