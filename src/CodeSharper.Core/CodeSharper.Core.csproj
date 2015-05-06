@@ -117,7 +117,7 @@
     <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
     <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
-    <Compile Include="Services\DefaultDescriptorRepository.cs" />
+    <Compile Include="Services\FileDescriptorRepository.cs" />
     <Compile Include="Services\IDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />

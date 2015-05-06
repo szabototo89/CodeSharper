@@ -1,5 +1,4 @@
 [
-  // supported combinators
   {
     "name": "relative-child-selector",
     "selector-type": "combinator",
@@ -13,7 +12,6 @@
     "type": "CodeSharper.Core.Nodes.Combinators.AbsoluteCombinator"
   },
 
-  // supported element type selectors
   {
     "name": "universal-selector",
     "selector-type": "element-type-selector",
@@ -33,7 +31,6 @@
     "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowNodeSelector"
   },
 
-  // supported pseudo selectors
   {
     "name": "text-pseudo-selector",
     "selector-type": "pseudo-selector",

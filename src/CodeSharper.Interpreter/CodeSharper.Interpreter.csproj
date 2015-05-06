@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrappers\Bootstrapper.cs" />
     <Compile Include="Common\DefaultSelectorFactory.cs" />
     <Compile Include="Common\ISelectorFactory.cs" />
     <Compile Include="Common\SelectorElementBase.cs" />

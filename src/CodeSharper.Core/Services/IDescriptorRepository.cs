@@ -10,14 +10,14 @@ namespace CodeSharper.Core.Services
     public interface IDescriptorRepository
     {
         /// <summary>
-        /// Loads the combinators.
+        /// Gets the combinators.
         /// </summary>
-        IEnumerable<CombinatorDescriptor> LoadCombinators();
+        IEnumerable<CombinatorDescriptor> GetCombinators();
 
         /// <summary>
-        /// Loads the selectors.
+        /// Gets the selectors.
         /// </summary>
-        IEnumerable<SelectorDescriptor> LoadSelectors();
+        IEnumerable<SelectorDescriptor> GetSelectors();
     }
 }
 

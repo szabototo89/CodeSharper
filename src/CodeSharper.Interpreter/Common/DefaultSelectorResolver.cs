@@ -69,7 +69,7 @@ namespace CodeSharper.Interpreter.Common
         {
             var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
 
-            var selectorDescriptor = DescriptorRepository.LoadSelectors().SingleOrDefault(s => s.Value == elementTypeSelector.Name);
+            var selectorDescriptor = DescriptorRepository.GetSelectors().SingleOrDefault(s => s.Value == elementTypeSelector.Name);
             if (selectorDescriptor == null)
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
@@ -96,9 +96,16 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         private BinaryCombinator resolveCombinator(CombinatorElementBase combinatorElement, CombinatorBase left, CombinatorBase right)
         {
+            var combinators = DescriptorRepository.GetCombinators().Where(combinator => combinator.Value == combinatorElement.Value);
+
+            if (combinators.Count() > 1)
+                throw new Exception(String.Format("Ambiguity of combinator element: {0}", combinatorElement.Value));
+
+            throw new NotImplementedException("implement combinators section!");
+
             var registeredCombinator = _registeredCombinators.TryGetValue(combinatorElement.GetType());
             if (!registeredCombinator.HasValue)
-                throw new NotSupportedException(String.Format("Not supported CombinatorElement: {0}", combinatorElement.Value));
+                throw new NotSupportedException(String.Format("Not supported combinator element: {0}", combinatorElement.Value));
 
             var factory = registeredCombinator.Value;
             return factory(left, right);

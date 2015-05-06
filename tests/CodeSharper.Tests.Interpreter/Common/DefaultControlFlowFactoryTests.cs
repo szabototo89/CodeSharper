@@ -87,7 +87,7 @@ namespace CodeSharper.Tests.Interpreter.Common
             Executor = new DummyExecutor();
             CommandCallResolver = new DummyCommandCallResolver();
             SelectorFactory = new DefaultSelectorFactory(new[]{ typeof(UniversalSelector) }, Type.EmptyTypes);
-            SelectorResolver = new DefaultSelectorResolver(SelectorFactory, new DefaultDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json"));
+            SelectorResolver = new DefaultSelectorResolver(SelectorFactory, new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json"));
             UnderTest = new DefaultControlFlowFactory(CommandCallResolver, SelectorResolver, Executor);
         }
 

@@ -10,7 +10,7 @@ using CodeSharper.Core.Nodes.Selectors;
 
 namespace CodeSharper.Core.Services
 {
-    public class DefaultDescriptorRepository : IDescriptorRepository
+    public class FileDescriptorRepository : IDescriptorRepository
     {
         private readonly IEnumerable<Assembly> _assemblies;
         private readonly DataContractJsonSerializer _serializer;
@@ -21,9 +21,9 @@ namespace CodeSharper.Core.Services
         private enum DescriptorType { Selector, Combinator }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultDescriptorRepository"/> class.
+        /// Initializes a new instance of the <see cref="FileDescriptorRepository"/> class.
         /// </summary>
-        public DefaultDescriptorRepository(String fileName, IEnumerable<Assembly> assemblies = null)
+        public FileDescriptorRepository(String fileName, IEnumerable<Assembly> assemblies = null)
         {
             Assume.NotNull(fileName, "fileName");
             Assume.FileExists(fileName, "fileName");
@@ -64,7 +64,7 @@ namespace CodeSharper.Core.Services
                         break;
                     }
                     case "pseudo-selector":
-                        throw new NotImplementedException();
+                        // throw new NotImplementedException();
                         break;
                 }
             }
@@ -86,7 +86,7 @@ namespace CodeSharper.Core.Services
             }
 
             var assemblyTypes = _assemblies.SelectMany(assembly => assembly.GetTypes());
-            var descriptorTypes = assemblyTypes; //.Where(type => type.IsAssignableFrom(assignableFromType));
+            var descriptorTypes = assemblyTypes.Where(type => type != assignableFromType && assignableFromType.IsAssignableFrom(type));
             var matchedTypes = descriptorTypes.Where(type => type.FullName == typeName || type.Name == typeName);
 
             if (!matchedTypes.Any())
@@ -105,17 +105,17 @@ namespace CodeSharper.Core.Services
         }
 
         /// <summary>
-        /// Loads the combinators.
+        /// Gets the combinators.
         /// </summary>
-        public IEnumerable<CombinatorDescriptor> LoadCombinators()
+        public IEnumerable<CombinatorDescriptor> GetCombinators()
         {
             return _combinators.AsReadOnly();
         }
 
         /// <summary>
-        /// Loads the selectors.
+        /// Gets the selectors.
         /// </summary>
-        public IEnumerable<SelectorDescriptor> LoadSelectors()
+        public IEnumerable<SelectorDescriptor> GetSelectors()
         {
             return _selectors.AsReadOnly();
         }

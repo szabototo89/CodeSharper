@@ -98,7 +98,7 @@ namespace CodeSharper.Playground.CLI
             var commandCallResolver = new DefaultCommandCallResolver(commandDescriptorManager, runnableFactory);
             var selectorManager = new DefaultSelectorFactory(new[] { typeof(UniversalSelector), typeof(FieldNodeSelector), typeof(RowNodeSelector) }, Type.EmptyTypes);
             var assemblies = new[] { Assembly.Load("CodeSharper.Core"), Assembly.GetExecutingAssembly(), Assembly.Load("CodeSharper.Languages") };
-            var repository = new DefaultDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\demos\CodeSharper.App.CLI\descriptors.json", assemblies);
+            var repository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\demos\CodeSharper.App.CLI\descriptors.json", assemblies);
             var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, repository);
             var runnableManager = new DefaultRunnableManager();
             var executor = new StandardExecutor(runnableManager);
