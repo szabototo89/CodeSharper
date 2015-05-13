@@ -96,19 +96,26 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         private BinaryCombinator resolveCombinator(CombinatorElementBase combinatorElement, CombinatorBase left, CombinatorBase right)
         {
-            var combinators = DescriptorRepository.GetCombinators().Where(combinator => combinator.Value == combinatorElement.Value);
+            var combinators = DescriptorRepository.GetCombinators()
+                                                  .Where(combinator => combinator.Value == combinatorElement.Value)
+                                                  .ToArray();
 
             if (combinators.Count() > 1)
                 throw new Exception(String.Format("Ambiguity of combinator element: {0}", combinatorElement.Value));
 
-            throw new NotImplementedException("implement combinators section!");
+            if (!combinators.Any())
+                throw new Exception(String.Format("Combinator is not found: {0}", combinatorElement.Value));
+
+            return SelectorFactory.CreateCombinator(combinators[0].CombinatorType, left, right);
+
+            /*throw new NotImplementedException("implement combinators section!");
 
             var registeredCombinator = _registeredCombinators.TryGetValue(combinatorElement.GetType());
             if (!registeredCombinator.HasValue)
                 throw new NotSupportedException(String.Format("Not supported combinator element: {0}", combinatorElement.Value));
 
             var factory = registeredCombinator.Value;
-            return factory(left, right);
+            return factory(left, right);*/
         }
     }
 }

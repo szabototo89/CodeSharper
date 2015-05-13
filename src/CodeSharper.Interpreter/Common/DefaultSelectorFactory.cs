@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
 
@@ -44,7 +45,7 @@ namespace CodeSharper.Interpreter.Common
         public virtual NodeSelectorBase CreateSelector(Type selectorType)
         {
             Assume.NotNull(selectorType, "selectorType");
-            
+
             // get default constructor and instantiate it
             var constructors = selectorType.GetConstructors();
             var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
@@ -52,6 +53,28 @@ namespace CodeSharper.Interpreter.Common
                 return defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as NodeSelectorBase;
 
             throw new Exception(String.Format("Cannot find default constructor for selector: {0}", selectorType.Name));
+        }
+
+        public BinaryCombinator CreateCombinator(Type combinatorType, CombinatorBase left, CombinatorBase right)
+        {
+            Assume.NotNull(combinatorType, "combinatorType");
+            Assume.NotNull(left, "left");
+            Assume.NotNull(right, "right");
+
+            var constructors = combinatorType.GetConstructors();
+
+            // get constructor with two parameters to instantiate the object
+            var constructor = constructors.FirstOrDefault(ctor => {
+                var parameters = ctor.GetParameters();
+                return parameters.Length == 2 &&
+                       parameters.Select(param => param.ParameterType)
+                                 .All(type => typeof(CombinatorBase).IsAssignableFrom(type));
+            });
+
+            if (constructor == null)
+                throw new Exception(String.Format("Cannot find Combinator constructor with two CombinatorBase type: {0}", combinatorType.FullName));
+
+            return constructor.Invoke(new Object[] { left, right }) as BinaryCombinator;
         }
 
         /// <summary>
