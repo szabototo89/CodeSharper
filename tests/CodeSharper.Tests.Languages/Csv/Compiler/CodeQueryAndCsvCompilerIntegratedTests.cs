@@ -120,7 +120,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
 
             var runnableFactory = new DefaultRunnableFactory(new[] { typeof(ToUpperCaseRunnable), typeof(GetTextRunnable), typeof(ToStringRunnable) });
             var commandCallResolver = new DefaultCommandCallResolver(commandDescriptorManager, runnableFactory);
-            var selectorManager = new DefaultSelectorFactory(new[] { typeof(UniversalSelector), typeof(FieldNodeSelector), typeof(RowNodeSelector) }, Type.EmptyTypes);
+            var selectorManager = new DefaultSelectorFactory();
             var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json"));
             var runnableManager = new DefaultRunnableManager();
             var executor = new StandardExecutor(runnableManager);

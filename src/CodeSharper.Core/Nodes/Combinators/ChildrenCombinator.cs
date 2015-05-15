@@ -6,6 +6,7 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Combinators
 {
+
     public class ChildrenCombinator : BinaryCombinator
     {
         /// <summary>

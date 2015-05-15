@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.Common;
 using CodeSharper.Interpreter.Visitors;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public struct PseudoSelectorElement : IEquatable<PseudoSelectorElement>, IHasName, IHasValue<ConstantElement>
+    public struct PseudoSelectorElement : IEquatable<PseudoSelectorElement>, IHasName
     {
         /// <summary>
         /// Gets or sets the name.
@@ -14,7 +16,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public ConstantElement Value { get; set; }
+        public IEnumerable<ConstantElement> Arguments { get; set; }
 
         #region Equality members
 
@@ -27,7 +29,9 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public Boolean Equals(PseudoSelectorElement other)
         {
-            return String.Equals(Name, other.Name) && Equals(Value, other.Value);
+            return String.Equals(Name, other.Name) && 
+                   Arguments != null &&
+                   Enumerable.SequenceEqual(Arguments, other.Arguments);
         }
 
         /// <summary>
@@ -53,7 +57,7 @@ namespace CodeSharper.Interpreter.Common
         {
             unchecked
             {
-                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (Value != null ? Value.GetHashCode() : 0);
+                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (Arguments != null ? Arguments.GetHashCode() : 0);
             }
         }
 

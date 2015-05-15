@@ -10,5 +10,6 @@
     "selector-type": "combinator",
     "value": ">",
     "type": "CodeSharper.Core.Nodes.Combinators.AbsoluteCombinator"
-  }
+  },
+
 ]

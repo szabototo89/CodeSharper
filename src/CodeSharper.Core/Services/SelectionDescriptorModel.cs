@@ -36,6 +36,12 @@ namespace CodeSharper.Core.Services
         [DataMember(Name = "type", IsRequired = false)]
         public String Type { get; set; }
 
+        /// <summary>
+        /// Gets or sets the arguments.
+        /// </summary>
+        [DataMember(Name = "arguments", IsRequired = false)]
+        public IEnumerable<String> Arguments { get; set; }
+
         #region Equality members
 
         /// <summary>

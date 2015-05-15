@@ -29,7 +29,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        PseudoSelectorElement CreatePseudoSelector(String name, ConstantElement value);
+        PseudoSelectorElement CreatePseudoSelector(String name, IEnumerable<ConstantElement> value);
 
         /// <summary>
         /// Creates a selectable ElementTypeSelector

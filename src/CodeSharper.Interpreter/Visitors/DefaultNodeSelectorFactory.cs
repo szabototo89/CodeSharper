@@ -30,15 +30,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             Assume.NotNull(combinator, "CombinatorElement");
 
-            switch (combinator)
-            {
-                case ">":
-                    return new ChildCombinatorElement();
-                case "":
-                    return new DescendantCombinatorElement();
-                default:
-                    throw new NotSupportedException(String.Format("Not supported CombinatorElement: {0}.", combinator));
-            }
+            return new CombinatorElement(combinator);
         }
 
         /// <summary>
@@ -58,14 +50,13 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selectorElement
         /// </summary>
-        public PseudoSelectorElement CreatePseudoSelector(String name, ConstantElement value)
+        public PseudoSelectorElement CreatePseudoSelector(String name, IEnumerable<ConstantElement> values)
         {
             Assume.NotNull(name, "name");
-            Assume.NotNull(value, "value");
 
             return new PseudoSelectorElement {
                 Name = name,
-                Value = value
+                Arguments = values
             };
         }
 

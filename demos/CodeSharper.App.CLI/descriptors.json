@@ -1,41 +1,39 @@
 [
-  {
-    "name": "relative-child-selector",
-    "selector-type": "combinator",
-    "value": "",
-    "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
-  },
-  {
-    "name": "absolute-child-selector",
-    "selector-type": "combinator",
-    "value": ">",
-    "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
-  },
-
-  {
-    "name": "universal-selector",
-    "selector-type": "element-type-selector",
-    "value": "all",
-    "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
-  },
-  {
-    "name": "csv-field-selector",
-    "selector-type": "element-type-selector",
-    "value": "field",
-    "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldNodeSelector"
-  },
-  {
-    "name": "csv-row-selector",
-    "selector-type": "element-type-selector",
-    "value": "row",
-    "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowNodeSelector"
-  },
-
-  {
-    "name": "text-pseudo-selector",
-    "selector-type": "pseudo-selector",
-    "value": "text",
-    "arguments": [],
-    "type": "???"
-  }
+    {
+        "name": "relative-child-selector",
+        "selector-type": "combinator",
+        "value": "",
+        "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
+    },
+    {
+        "name": "absolute-child-selector",
+        "selector-type": "combinator",
+        "value": ">",
+        "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
+    },
+    {
+        "name": "universal-selector",
+        "selector-type": "element-type-selector",
+        "value": "all",
+        "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
+    },
+    {
+        "name": "csv-field-selector",
+        "selector-type": "element-type-selector",
+        "value": "field",
+        "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldNodeSelector"
+    },
+    {
+        "name": "csv-row-selector",
+        "selector-type": "element-type-selector",
+        "value": "row",
+        "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowNodeSelector"
+    },
+    {
+        "name": "text-pseudo-selector",
+        "selector-type": "pseudo-selector",
+        "value": "parent",
+        "arguments": [],
+        "type": "CodeSharper.Core.Nodes.Modifiers.ParentNodeModifier"
+    }
 ]

@@ -282,9 +282,12 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
         {
             var name = context.Name.Text;
-            var value = context.Value.Accept(this) as ConstantElement;
+            IEnumerable<ConstantElement> values = Enumerable.Empty<ConstantElement>();
 
-            return NodeSelectorFactory.CreatePseudoSelector(name, value);
+            if (context.Value != null)
+                values = context.constant().AcceptAll(this).OfType<ConstantElement>();
+
+            return NodeSelectorFactory.CreatePseudoSelector(name, values);
         }
 
         /// <summary>
@@ -300,9 +303,12 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitPseudoSelectorWithIdentifier(CodeQuery.PseudoSelectorWithIdentifierContext context)
         {
             var name = context.Name.Text;
-            var value = TreeFactory.CreateString(context.Value.Text);
+            var values = Enumerable.Empty<ConstantElement>();
 
-            return NodeSelectorFactory.CreatePseudoSelector(name, value);
+            if (context.ID() != null)
+                values = context.ID().Select(id => TreeFactory.CreateString(id.GetText()));
+
+            return NodeSelectorFactory.CreatePseudoSelector(name, values);
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a pseudo selector.
         /// </summary>
-        NodeModifierBase CreatePseudoSelector(PseudoSelectorElement pseudoSelector, NodeSelectorBase selector);
+        NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, NodeSelectorBase selector);
 
         /// <summary>
         /// Creates the combinator.

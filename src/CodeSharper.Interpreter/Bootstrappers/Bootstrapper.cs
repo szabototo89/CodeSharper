@@ -84,7 +84,7 @@ namespace CodeSharper.Interpreter.Bootstrappers
             RunnableFactory = runnableFactory;
             CommandDescriptorManager = commandDescriptorManager(this) ?? new DefaultCommandDescriptorManager();
             CommandCallResolver = commandResolver(this) ?? new DefaultCommandCallResolver(CommandDescriptorManager, RunnableFactory);
-            SelectorFactory = selectorFactory(this) ?? new DefaultSelectorFactory(new[] { typeof(UniversalSelector) }, Type.EmptyTypes);
+            SelectorFactory = selectorFactory(this) ?? new DefaultSelectorFactory();
             DescriptorRepository = descriptorRepository;
             SelectorResolver = selectorResolver(this) ?? new DefaultSelectorResolver(SelectorFactory, DescriptorRepository);
             RunnableManager = runnableManager(this) ?? new DefaultRunnableManager();

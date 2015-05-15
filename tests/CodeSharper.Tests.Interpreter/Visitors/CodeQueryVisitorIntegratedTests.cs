@@ -62,7 +62,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
 
             var runnableFactory = new DefaultRunnableFactory(new[] { typeof(IdentityRunnable), typeof(IncrementRunnable) });
             var commandCallResolver = new DefaultCommandCallResolver(commandDescriptorManager, runnableFactory);
-            var selectorManager = new DefaultSelectorFactory(new[] { typeof(UniversalSelector) }, Type.EmptyTypes);
+            var selectorManager = new DefaultSelectorFactory();
             var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json"));
             var runnableManager = new DefaultRunnableManager();
             var executor = new StandardExecutor(runnableManager);

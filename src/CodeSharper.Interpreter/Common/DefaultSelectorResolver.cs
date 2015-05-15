@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
+using CodeSharper.Core.Nodes.Modifiers;
+using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.Services;
 using CodeSharper.Core.Utilities;
 using CombinatorBase = CodeSharper.Core.Nodes.Combinators.CombinatorBase;
@@ -12,8 +14,6 @@ namespace CodeSharper.Interpreter.Common
 {
     public class DefaultSelectorResolver : ISelectorResolver
     {
-        private readonly Dictionary<Type, Func<CombinatorBase, CombinatorBase, BinaryCombinator>> _registeredCombinators;
-
         /// <summary>
         /// Gets or sets the selector manager.
         /// </summary>
@@ -31,10 +31,6 @@ namespace CodeSharper.Interpreter.Common
         {
             Assume.NotNull(selectorFactory, "selectorFactory");
             Assume.NotNull(descriptorRepository, "descriptorRepository");
-
-            _registeredCombinators = new Dictionary<Type, Func<CombinatorBase, CombinatorBase, BinaryCombinator>>();
-            _registeredCombinators.Add(typeof(ChildCombinatorElement), (left, right) => new ChildrenCombinator(left, right));
-            _registeredCombinators.Add(typeof(DescendantCombinatorElement), (left, right) => new RelativeNodeCombinator(left, right));
 
             SelectorFactory = selectorFactory;
             DescriptorRepository = descriptorRepository;
@@ -59,7 +55,7 @@ namespace CodeSharper.Interpreter.Common
                 return create(binarySelector);
             }
 
-            throw new NotSupportedException(String.Format("Selector element is not supported: {0}.", selectorElement.GetType().FullName));
+            throw new NotSupportedException(String.Format("Not supported selector element type: {0}.", selectorElement.GetType().FullName));
         }
 
         /// <summary>
@@ -74,9 +70,30 @@ namespace CodeSharper.Interpreter.Common
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
             var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type);
-            var pseudoSelectors = elementTypeSelector.PseudoSelectors.Select(pseudo => SelectorFactory.CreatePseudoSelector(pseudo, selector));
+            var pseudoSelectors = elementTypeSelector.PseudoSelectors
+                                                     .Select(element => resolvePseudoSelector(element, selector))
+                                                     .ToArray();
 
             return new NodeSelectionCombinator(selector, pseudoSelectors);
+        }
+
+        /// <summary>
+        /// Resolves the pseudo selector by element
+        /// </summary>
+        private NodeModifierBase resolvePseudoSelector(PseudoSelectorElement element, NodeSelectorBase selector)
+        {
+            var elements = DescriptorRepository.GetPseudoSelectors()
+                                               .Where(pseudo => pseudo.Value == element.Name)
+                                               .Where(pseudo => pseudo.Arguments.Count() == element.Arguments.Count())
+                                               .Select(pseudo => pseudo.Type)
+                                               .ToArray();
+
+            if (elements.Length > 1)
+                throw new Exception(String.Format("Ambiguity of pseudo selector: {0}", element.Name));
+            if (!elements.Any())
+                throw new Exception(String.Format("Not found pseudo selector: {0}", element.Name));
+
+            return SelectorFactory.CreatePseudoSelector(elements.Single(), selector);
         }
 
         /// <summary>
@@ -107,15 +124,6 @@ namespace CodeSharper.Interpreter.Common
                 throw new Exception(String.Format("Combinator is not found: {0}", combinatorElement.Value));
 
             return SelectorFactory.CreateCombinator(combinators[0].CombinatorType, left, right);
-
-            /*throw new NotImplementedException("implement combinators section!");
-
-            var registeredCombinator = _registeredCombinators.TryGetValue(combinatorElement.GetType());
-            if (!registeredCombinator.HasValue)
-                throw new NotSupportedException(String.Format("Not supported combinator element: {0}", combinatorElement.Value));
-
-            var factory = registeredCombinator.Value;
-            return factory(left, right);*/
         }
     }
 }

@@ -4,9 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
+using CodeSharper.Core.Commands.Selectors;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
+using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
+using CodeSharper.Core.Utilities;
+using SelectorDescriptor = CodeSharper.Core.Nodes.Selectors.SelectorDescriptor;
 
 namespace CodeSharper.Core.Services
 {
@@ -17,8 +21,11 @@ namespace CodeSharper.Core.Services
 
         private readonly List<CombinatorDescriptor> _combinators;
         private readonly List<SelectorDescriptor> _selectors;
+        private readonly List<ModifierDescriptor> _pseudoSelectors;
 
-        private enum DescriptorType { Selector, Combinator }
+        private enum DescriptorType { Selector, Combinator,
+            PseudoSelector
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileDescriptorRepository"/> class.
@@ -31,6 +38,7 @@ namespace CodeSharper.Core.Services
             _serializer = new DataContractJsonSerializer(typeof(SelectionDescriptorModel[]));
             _combinators = new List<CombinatorDescriptor>();
             _selectors = new List<SelectorDescriptor>();
+            _pseudoSelectors = new List<ModifierDescriptor>();
 
             _assemblies = assemblies ?? new[] { Assembly.GetExecutingAssembly() };
 
@@ -64,8 +72,12 @@ namespace CodeSharper.Core.Services
                         break;
                     }
                     case "pseudo-selector":
-                        // throw new NotImplementedException();
+                    {
+                        var type = findInAssemblies(descriptor.Type, DescriptorType.PseudoSelector);
+                        _pseudoSelectors.Add(new ModifierDescriptor(descriptor.Name, descriptor.Value,
+                            descriptor.Arguments, type));
                         break;
+                    }
                 }
             }
         }
@@ -80,6 +92,9 @@ namespace CodeSharper.Core.Services
                     break;
                 case DescriptorType.Selector:
                     assignableFromType = typeof(NodeSelectorBase);
+                    break;
+                case DescriptorType.PseudoSelector:
+                    assignableFromType = typeof (NodeModifierBase);
                     break;
                 default:
                     throw new NotSupportedException(String.Format("Not supported descriptor type: {0}", descriptorType));
@@ -110,6 +125,14 @@ namespace CodeSharper.Core.Services
         public IEnumerable<CombinatorDescriptor> GetCombinators()
         {
             return _combinators.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Gets the pseudo selectors.
+        /// </summary>
+        public IEnumerable<ModifierDescriptor> GetPseudoSelectors()
+        {
+            return _pseudoSelectors.AsReadOnly();
         }
 
         /// <summary>

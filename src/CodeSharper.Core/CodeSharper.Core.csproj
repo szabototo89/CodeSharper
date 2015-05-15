@@ -102,6 +102,7 @@
     <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
     <Compile Include="Nodes\Combinators\UniversalCombinator.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\ModifierDescriptor.cs" />
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
     <Compile Include="Nodes\Selectors\NodeSelectorBase.cs" />
