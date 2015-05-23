@@ -58,7 +58,7 @@ namespace CodeSharper.Playground.CLI
             }
         }
 
-        private static void initializeApplicationForCsv()
+        private static void initializeApplication()
         {
             var commandDescriptorManager = new DefaultCommandDescriptorManager();
             commandDescriptorManager.Register(new CommandDescriptor {
@@ -124,80 +124,13 @@ namespace CodeSharper.Playground.CLI
             ControlFlowFactory = new DefaultControlFlowFactory(commandCallResolver, nodeSelectorResolver, executor);
             Compiler = new CodeQueryCompiler();
             CsvCompiler = new CsvCompiler();
-        }
-
-        private static void initializeApplicationForJson()
-        {
-            var commandDescriptorManager = new DefaultCommandDescriptorManager();
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "repeat" },
-                Arguments = new[] {
-                    new ArgumentDescriptor {
-                        ArgumentType = typeof(Int32),
-                        ArgumentName = "count",
-                        DefaultValue = 1,
-                        IsOptional = false,
-                        Position = 0
-                    }
-                },
-                Name = "RepeatRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "convert-to-textrange" },
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "ConvertToTextRangeRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "convert-to-string" },
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "ConvertToStringRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "to-upper-case" },
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "ConvertCaseRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "filter" },
-                Arguments = new[] {
-                    new ArgumentDescriptor {
-                        ArgumentType = typeof(String),
-                        ArgumentName = "pattern",
-                        DefaultValue = 1,
-                        IsOptional = false,
-                        Position = 0
-                    }
-                },
-                Name = "FilterRunnable"
-            });
-
-            var runnableFactory = new DefaultRunnableFactory(new[]
-            {
-                typeof(RepeatRunnable), typeof(ConvertToStringRunnable), typeof(FilterRunnable), typeof(ConvertCaseRunnable),
-                typeof(ConvertToTextRangeRunnable)
-            });
-            var assemblies = new[] { Assembly.Load("CodeSharper.Core"), Assembly.GetExecutingAssembly(), Assembly.Load("CodeSharper.Languages") };
-            var repository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\demos\CodeSharper.App.CLI\descriptors.json", assemblies);
-            var commandCallResolver = new DefaultCommandCallResolver(repository, runnableFactory);
-            var selectorManager = new DefaultSelectorFactory();
-            var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, repository);
-            var runnableManager = new DefaultRunnableManager();
-            var executor = new StandardExecutor(runnableManager);
-
-            // initialize compiler and control flow factory
-            ControlFlowFactory = new DefaultControlFlowFactory(commandCallResolver, nodeSelectorResolver, executor);
-            Compiler = new CodeQueryCompiler();
             JsonCompiler = new JsonCompiler();
         }
 
+
         public static void Main(String[] args)
         {
-            // initializeApplicationForCsv();
-            initializeApplicationForJson();
+            initializeApplication();
 
             String response = String.Empty;
             Node root = null;
