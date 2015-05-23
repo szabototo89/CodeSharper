@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{794268E8-3ECB-4D3A-99D8-9C310C8FD583}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeSharper.Core</RootNamespace>
+    <AssemblyName>CodeSharper.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\CommandCallBase.cs" />
+    <Compile Include="Commands\CommandCallDescriptor.cs" />
+    <Compile Include="Commands\DefaultCommandCallResolver.cs" />
+    <Compile Include="Commands\DefaultCommandDescriptorManager.cs" />
+    <Compile Include="Commands\ICommandCall.cs" />
+    <Compile Include="Commands\ICommandCallActualArgument.cs" />
+    <Compile Include="Commands\ICommandCallResolver.cs" />
+    <Compile Include="Commands\ICommandDescriptorManager.cs" />
+    <Compile Include="Commands\NamedCommandCallActualArgument.cs" />
+    <Compile Include="Commands\PositionedCommandCallActualArgument.cs" />
+    <Compile Include="Commands\Selectors\PseudoSelectorDescriptor.cs" />
+    <Compile Include="Commands\Selectors\SelectorAttributeDescriptor.cs" />
+    <Compile Include="Commands\Selectors\SelectorDescriptor.cs" />
+    <Compile Include="Common\ArgumentDescriptor.cs" />
+    <Compile Include="Common\Command.cs" />
+    <Compile Include="Common\ControlFlows\CommandCallControlFlow.cs" />
+    <Compile Include="Common\CommandDescriptor.cs" />
+    <Compile Include="Common\ControlFlows\ComplexControlFlowBase.cs" />
+    <Compile Include="Common\ControlFlows\ControlFlowBase.cs" />
+    <Compile Include="Common\ControlFlows\PipelineControlFlow.cs" />
+    <Compile Include="Common\ControlFlows\SelectorControlFlow.cs" />
+    <Compile Include="Common\ControlFlows\SequenceControlFlow.cs" />
+    <Compile Include="Common\DefaultRunnableManager.cs" />
+    <Compile Include="Common\IExecutor.cs" />
+    <Compile Include="Common\IHasName.cs" />
+    <Compile Include="Common\IHasTextRange.cs" />
+    <Compile Include="Common\IHasValue.cs" />
+    <Compile Include="Common\ILinkedStyle.cs" />
+    <Compile Include="Common\INameMatcher.cs" />
+    <Compile Include="Common\IRunnableManager.cs" />
+    <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
+    <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />
+    <Compile Include="Common\Runnables\ConvertCaseRunnable.cs" />
+    <Compile Include="Common\Runnables\ParameterAttribute.cs" />
+    <Compile Include="Common\Runnables\Converters\FlattenValueProducer.cs" />
+    <Compile Include="Common\Runnables\Converters\MultiValueConsumer.cs" />
+    <Compile Include="Common\Runnables\Converters\ValueProducerBase.cs" />
+    <Compile Include="Common\Runnables\Converters\IValueConsumer.cs" />
+    <Compile Include="Common\Runnables\Converters\IValueProducer.cs" />
+    <Compile Include="Common\Runnables\Converters\ValueConsumerBase.cs" />
+    <Compile Include="Common\Runnables\ConvertToStringRunnable.cs" />
+    <Compile Include="Common\Runnables\DefaultRunnableFactory.cs" />
+    <Compile Include="Common\Runnables\ErrorMessage.cs" />
+    <Compile Include="Common\Runnables\FilterRunnable.cs" />
+    <Compile Include="Common\Runnables\IRunnable.cs" />
+    <Compile Include="Common\Runnables\IRunnableFactory.cs" />
+    <Compile Include="Common\Runnables\JoinLinesTextRunnable.cs" />
+    <Compile Include="Common\Runnables\RepeatRunnable.cs" />
+    <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
+    <Compile Include="Common\Runnables\RunnableBase.cs" />
+    <Compile Include="Common\StandardExecutor.cs" />
+    <Compile Include="ErrorHandling\Assume.cs" />
+    <Compile Include="Common\IHasChildren.cs" />
+    <Compile Include="Common\IHasNext.cs" />
+    <Compile Include="Common\IHasParent.cs" />
+    <Compile Include="Common\IHasPrevious.cs" />
+    <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="Nodes\Combinators\CombinatorDescriptor.cs" />
+    <Compile Include="Nodes\Combinators\NodeSelectionCombinator.cs" />
+    <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
+    <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
+    <Compile Include="Nodes\Combinators\UniversalCombinator.cs" />
+    <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\ModifierDescriptor.cs" />
+    <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
+    <Compile Include="Nodes\Modifiers\NthChildNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
+    <Compile Include="Nodes\Selectors\NodeSelectorBase.cs" />
+    <Compile Include="Nodes\Modifiers\ParentNodeModifier.cs" />
+    <Compile Include="Nodes\Combinators\BinaryCombinator.cs" />
+    <Compile Include="Nodes\Combinators\ConcatCombinator.cs" />
+    <Compile Include="Nodes\Combinators\CombinatorBase.cs" />
+    <Compile Include="Nodes\Combinators\ChildrenCombinator.cs" />
+    <Compile Include="Nodes\Combinators\AbsoluteCombinator.cs" />
+    <Compile Include="Nodes\Combinators\ParentCombinator.cs" />
+    <Compile Include="Nodes\Combinators\RelativeCombinator.cs" />
+    <Compile Include="Nodes\Selectors\SelectorDescriptor.cs" />
+    <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
+    <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
+    <Compile Include="SemanticTrees\SemanticNode.cs" />
+    <Compile Include="Services\ArgumentDescriptorModel.cs" />
+    <Compile Include="Services\CommandDescriptorModel.cs" />
+    <Compile Include="Services\DescriptorModel.cs" />
+    <Compile Include="Services\FileDescriptorRepository.cs" />
+    <Compile Include="Services\IDescriptorRepository.cs" />
+    <Compile Include="Services\SelectionDescriptorModel.cs" />
+    <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
+    <Compile Include="Texts\TextRange.cs" />
+    <Compile Include="Trees\IHasSyntaxTree.cs" />
+    <Compile Include="SyntaxTrees\ILeaf.cs" />
+    <Compile Include="SyntaxTrees\SyntaxToken.cs" />
+    <Compile Include="SyntaxTrees\Node.cs" />
+    <Compile Include="Texts\ITextDocument.cs" />
+    <Compile Include="Texts\TextPosition.cs" />
+    <Compile Include="Trees\SyntaxTree.cs" />
+    <Compile Include="Trees\Tree.cs" />
+    <Compile Include="Utilities\EnumerableExtensions.cs" />
+    <Compile Include="Utilities\EqualityHelper.cs" />
+    <Compile Include="Utilities\NodeExtensions.cs" />
+    <Compile Include="Utilities\ObjectExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Texts\TextDocument.cs" />
+    <Compile Include="Utilities\Option.cs" />
+    <Compile Include="Utilities\OptionExtensions.cs" />
+    <Compile Include="Utilities\StringExtensions.cs" />
+    <Compile Include="Utilities\TextRangeExtensions.cs" />
+    <Compile Include="Utilities\TypeExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

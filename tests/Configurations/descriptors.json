@@ -1,0 +1,17 @@
+{
+    "selections": [
+        {
+            "name": "relative-child-selector",
+            "selector-type": "combinator",
+            "value": "",
+            "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
+        },
+        {
+            "name": "absolute-child-selector",
+            "selector-type": "combinator",
+            "value": ">",
+            "type": "CodeSharper.Core.Nodes.Combinators.AbsoluteCombinator"
+        }
+    ],
+    "commands": [ ]
+}

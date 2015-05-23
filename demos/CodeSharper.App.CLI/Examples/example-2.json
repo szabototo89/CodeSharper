@@ -1,0 +1,9 @@
+[{
+	"hello": 10,
+	"world": false,
+    "persons":  [{
+        "name":  "John Doe",
+        "age":  19,
+        "languages": [ "HUN", "GB" ]
+    }]
+}]
