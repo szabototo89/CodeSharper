@@ -50,10 +50,8 @@ namespace CodeSharper.Interpreter.Visitors
             {
                 case "false":
                     return TreeFactory.CreateBoolean(false);
-                    break;
                 case "true":
                     return TreeFactory.CreateBoolean(true);
-                    break;
                 default:
                     throw new NotSupportedException("Not supported boolean value!");
             }
@@ -146,7 +144,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitExpressionMethodCall(CodeQuery.ExpressionMethodCallContext context)
         {
-            var methodCall = context.methodCall().Accept(this).As<CommandCall>();
+            var methodCall = context.methodCall().Accept(this).As<CommandCallElement>();
             return methodCall;
         }
 
@@ -168,14 +166,14 @@ namespace CodeSharper.Interpreter.Visitors
                 {
                     var expression = context.expression().Accept(this);
 
-                    if (expression is CommandCall)
+                    if (expression is CommandCallElement)
                     {
-                        var methodCall = (CommandCall)expression;
+                        var methodCallElement = (CommandCallElement)expression;
                         var operators = context.COMMAND_OPERATOR().ToArray();
 
                         if (!operators.Any())
                         {
-                            return TreeFactory.CreateControlFlow(methodCall);
+                            return TreeFactory.CreateControlFlow(methodCallElement);
                         }
 
                         for (var i = 0; i < operators.Length; i++)
@@ -186,9 +184,9 @@ namespace CodeSharper.Interpreter.Visitors
                             var pipelineOperator = op.GetText();
                             var rightExpression = command.Accept(this) as ControlFlowElementBase;
 
-                            if (methodCall != null)
+                            if (methodCallElement != null)
                             {
-                                return TreeFactory.CreateControlFlow(pipelineOperator, methodCall, rightExpression);
+                                return TreeFactory.CreateControlFlow(pipelineOperator, methodCallElement, rightExpression);
                             }
                         }
                     }
@@ -215,9 +213,9 @@ namespace CodeSharper.Interpreter.Visitors
         {
             var expression = context.Expression.Accept(this);
 
-            if (expression is CommandCall)
+            if (expression is CommandCallElement)
             {
-                var methodCall = (CommandCall)expression;
+                var methodCall = (CommandCallElement)expression;
                 return TreeFactory.CreateControlFlow(methodCall);
             }
             else if (expression is SelectorElementBase)
@@ -284,8 +282,8 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.Name.Text;
             IEnumerable<ConstantElement> values = Enumerable.Empty<ConstantElement>();
 
-            if (context.Value != null)
-                values = context.constant().AcceptAll(this).OfType<ConstantElement>();
+            if (context.constant() != null)
+                values = context.constant().AcceptAll(this).OfType<ConstantElement>().ToArray();
 
             return NodeSelectorFactory.CreatePseudoSelector(name, values);
         }

@@ -8,16 +8,16 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the method call
         /// </summary>
-        public CommandCall CommandCall { get; protected set; }
+        public CommandCallElement CommandCallElement { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandCallControlFlowElement"/> class.
         /// </summary>
-        public CommandCallControlFlowElement(CommandCall commandCall) 
+        public CommandCallControlFlowElement(CommandCallElement commandCallElement) 
             : base(ControlFlowOperationType.CommandCall)
         {
-            Assume.NotNull(commandCall, "CommandCall");
-            CommandCall = commandCall;
+            Assume.NotNull(commandCallElement, "CommandCallElement");
+            CommandCallElement = commandCallElement;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace CodeSharper.Interpreter.Common
         public Boolean Equals(CommandCallControlFlowElement other)
         {
             return Equals(other as ControlFlowElementBase) &&
-                   CommandCall.Equals(other.CommandCall);
+                   CommandCallElement.Equals(other.CommandCallElement);
         }
     }
 }

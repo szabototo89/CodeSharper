@@ -12,19 +12,6 @@ namespace CodeSharper.Interpreter.Common
     public class DefaultSelectorFactory : ISelectorFactory
     {
         /// <summary>
-        /// Gets or sets the name matcher.
-        /// </summary>
-        public INameMatcher NameMatcher { get; protected set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultSelectorFactory"/> class.
-        /// </summary>
-        public DefaultSelectorFactory(INameMatcher nameMatcher = null)
-        {
-            NameMatcher = nameMatcher ?? new EqualityNameMatcher();
-        }
-
-        /// <summary>
         /// Creates a selector by specified name.
         /// </summary>
         public virtual NodeSelectorBase CreateSelector(Type selectorType)
@@ -68,16 +55,19 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a pseudo selector.
         /// </summary>
-        public virtual NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, NodeSelectorBase selector)
+        public virtual NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, NodeSelectorBase selector)
         {
             Assume.NotNull(pseudoSelectorType, "pseudoSelectorType");
+            Assume.NotNull(arguments, "arguments");
             Assume.NotNull(selector, "selector");
+
+            var args = arguments.ToArray();
 
             // get default constructor and instantiate it
             var constructors = pseudoSelectorType.GetConstructors();
-            var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
+            var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == args.Length);
             if (defaultConstructor != null)
-                return defaultConstructor.Invoke(new Object[0]) as NodeModifierBase;
+                return defaultConstructor.Invoke(args) as NodeModifierBase;
 
             throw new Exception(String.Format("Cannot find default constructor for pseudo selector: {0}", pseudoSelectorType.FullName));
         }

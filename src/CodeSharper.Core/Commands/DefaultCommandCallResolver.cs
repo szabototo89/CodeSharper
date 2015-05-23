@@ -6,15 +6,16 @@ using System.Runtime.InteropServices;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Services;
 
 namespace CodeSharper.Core.Commands
 {
     public class DefaultCommandCallResolver : ICommandCallResolver
     {
         /// <summary>
-        /// Gets or sets the command descriptor manager.
+        /// Gets or sets the descriptor repository.
         /// </summary>
-        public ICommandDescriptorManager CommandDescriptorManager { get; protected set; }
+        public IDescriptorRepository DescriptorRepository { get; protected set; }
 
         /// <summary>
         /// Gets or sets the runnable factory.
@@ -24,12 +25,12 @@ namespace CodeSharper.Core.Commands
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultCommandCallResolver"/> class.
         /// </summary>
-        public DefaultCommandCallResolver(ICommandDescriptorManager commandDescriptorManager, IRunnableFactory runnableFactory)
+        public DefaultCommandCallResolver(IDescriptorRepository descriptorRepository, IRunnableFactory runnableFactory)
         {
-            Assume.NotNull(commandDescriptorManager, "commandDescriptorManager");
+            Assume.NotNull(descriptorRepository, "descriptorRepository");
             Assume.NotNull(runnableFactory, "runnableFactory");
 
-            CommandDescriptorManager = commandDescriptorManager;
+            DescriptorRepository = descriptorRepository;
             RunnableFactory = runnableFactory;
         }
 
@@ -122,7 +123,7 @@ namespace CodeSharper.Core.Commands
         private IEnumerable<CommandDescriptor> resolveCommandDescriptorsByName(CommandCallDescriptor descriptor)
         {
             // get all available command descriptors
-            var commandDescriptors = CommandDescriptorManager.GetCommandDescriptors();
+            var commandDescriptors = DescriptorRepository.GetCommandDescriptors();
 
             // filter command descriptors by their command name
             var filteredDescriptors = commandDescriptors.Where(commandDescriptor => commandDescriptor.CommandNames.Contains(descriptor.Name));

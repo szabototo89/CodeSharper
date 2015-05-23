@@ -47,6 +47,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="descriptors.json" />
+    <None Include="Examples\example-1.json" />
+    <None Include="Examples\example-2.json" />
+    <None Include="Examples\FL_insurance_sample.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\CodeSharper.Core\CodeSharper.Core.csproj">
@@ -63,7 +66,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Examples\example-2.txt" />
     <Content Include="Examples\example-1.txt" />
+    <Content Include="Examples\example-3.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

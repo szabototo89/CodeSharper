@@ -61,9 +61,10 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             });
 
             var runnableFactory = new DefaultRunnableFactory(new[] { typeof(IdentityRunnable), typeof(IncrementRunnable) });
-            var commandCallResolver = new DefaultCommandCallResolver(commandDescriptorManager, runnableFactory);
+            var repository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json");
+            var commandCallResolver = new DefaultCommandCallResolver(repository, runnableFactory);
             var selectorManager = new DefaultSelectorFactory();
-            var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json"));
+            var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, repository);
             var runnableManager = new DefaultRunnableManager();
             var executor = new StandardExecutor(runnableManager);
 

@@ -1,39 +1,127 @@
-[
-    {
-        "name": "relative-child-selector",
-        "selector-type": "combinator",
-        "value": "",
-        "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
-    },
-    {
-        "name": "absolute-child-selector",
-        "selector-type": "combinator",
-        "value": ">",
-        "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
-    },
-    {
-        "name": "universal-selector",
-        "selector-type": "element-type-selector",
-        "value": "all",
-        "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
-    },
-    {
-        "name": "csv-field-selector",
-        "selector-type": "element-type-selector",
-        "value": "field",
-        "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldNodeSelector"
-    },
-    {
-        "name": "csv-row-selector",
-        "selector-type": "element-type-selector",
-        "value": "row",
-        "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowNodeSelector"
-    },
-    {
-        "name": "text-pseudo-selector",
-        "selector-type": "pseudo-selector",
-        "value": "parent",
-        "arguments": [],
-        "type": "CodeSharper.Core.Nodes.Modifiers.ParentNodeModifier"
-    }
-]
+{
+    "selections": [
+        {
+            "name": "relative-child-selector",
+            "selector-type": "combinator",
+            "value": "",
+            "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
+        },
+        {
+            "name": "absolute-child-selector",
+            "selector-type": "combinator",
+            "value": ">",
+            "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
+        },
+        {
+            "name": "universal-selector",
+            "selector-type": "element-type-selector",
+            "value": "*",
+            "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
+        },
+        {
+            "name": "csv-field-selector",
+            "selector-type": "element-type-selector",
+            "value": "field",
+            "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldNodeSelector"
+        },
+        {
+            "name": "csv-row-selector",
+            "selector-type": "element-type-selector",
+            "value": "row",
+            "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowNodeSelector"
+        },
+        {
+            "name": "text-pseudo-selector",
+            "selector-type": "pseudo-selector",
+            "value": "parent",
+            "arguments": [ ],
+            "type": "CodeSharper.Core.Nodes.Modifiers.ParentNodeModifier"
+        },
+        {
+            "name": "nth-selector",
+            "selector-type": "pseudo-selector",
+            "value": "nth",
+            "arguments": [ "number" ],
+            "type": "CodeSharper.Core.Nodes.Modifiers.NthChildNodeModifier"
+        },
+        {
+            "name": "text-pseudo-selector",
+            "selector-type": "pseudo-selector",
+            "value": "siblings",
+            "arguments": [ ],
+            "type": "CodeSharper.Core.Nodes.Modifiers.SiblingsNodeModifier"
+        },
+
+        {
+            "name": "object-literal-selector",
+            "selector-type": "element-type-selector",
+            "value": "object",
+            "type": "CodeSharper.Languages.Json.Nodes.Selectors.ObjectLiteralSelector"
+        },
+        {
+            "name": "array-literal-selector",
+            "selector-type": "element-type-selector",
+            "value": "array",
+            "type": "CodeSharper.Languages.Json.Nodes.Selectors.ArrayLiteralSelector"
+        },
+        {
+            "name": "key-selector",
+            "selector-type": "element-type-selector",
+            "value": "key",
+            "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeySelector"
+        },
+        {
+            "name": "value-selector",
+            "selector-type": "element-type-selector",
+            "value": "value",
+            "type": "CodeSharper.Languages.Json.Nodes.Selectors.ValueSelector"
+        }
+    ],
+
+    "commands": [
+        {
+            "name": "RepeatRunnable",
+            "description": "Repeats count times",
+            "arguments": [
+                {
+                    "name": "count",
+                    "argument-type": "System.Double",
+                    "default-value": 1,
+                    "optional": false,
+                    "position": 0
+                }
+            ],
+            "type": "RepeatRunnable",
+            "command-names": [ "repeat" ]
+        },
+        {
+            "name": "ConvertToTextRangeRunnable",
+            "command-names": [ "convert-to-textrange" ],
+            "description": "Converts text range to raw text",
+            "type": "ConvertToTextRangeRunnable",
+            "arguments": [ ]
+        },
+        {
+            "name": "ConvertToStringRunnable",
+            "command-names": [ "convert-to-string" ],
+            "description": "Converts text range to raw text",
+            "type": "ConvertToStringRunnable",
+            "arguments": [ ]
+        },
+        {
+            "name": "FilterRunnable",
+            "command-names": [ "filter" ],
+            "description": "Converts text range to raw text",
+            "type": "FilterRunnable",
+            "arguments": [
+                {
+                    "name": "pattern",
+                    "argument-type": "System.String",
+                    "default-value": "",
+                    "optional": false,
+                    "position": 0
+                }
+            ]
+        }
+    ]
+}

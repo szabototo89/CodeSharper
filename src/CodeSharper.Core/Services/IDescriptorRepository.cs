@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Commands.Selectors;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
@@ -22,10 +23,15 @@ namespace CodeSharper.Core.Services
         /// </summary>
         IEnumerable<ModifierDescriptor> GetPseudoSelectors();
 
-            /// <summary>
+        /// <summary>
         /// Gets the selectors.
         /// </summary>
         IEnumerable<SelectorDescriptor> GetSelectors();
+
+        /// <summary>
+        /// Gets the command descriptors.
+        /// </summary>
+        IEnumerable<CommandDescriptor> GetCommandDescriptors();
     }
 }
 

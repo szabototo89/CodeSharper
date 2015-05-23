@@ -53,9 +53,9 @@ namespace CodeSharper.Core.Services
         /// </returns>
         public Boolean Equals(SelectionDescriptorModel other)
         {
-            return String.Equals(Name, other.Name) && 
-                   String.Equals(SelectorType, other.SelectorType) && 
-                   String.Equals(Value, other.Value) && 
+            return String.Equals(Name, other.Name) &&
+                   String.Equals(SelectorType, other.SelectorType) &&
+                   String.Equals(Value, other.Value) &&
                    String.Equals(Type, other.Type);
         }
 
@@ -85,9 +85,9 @@ namespace CodeSharper.Core.Services
             unchecked
             {
                 var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (SelectorType != null ? SelectorType.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Value != null ? Value.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Type != null ? Type.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SelectorType != null ? SelectorType.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Value != null ? Value.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Type != null ? Type.GetHashCode() : 0);
                 return hashCode;
             }
         }

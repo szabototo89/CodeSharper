@@ -60,6 +60,7 @@
     <Compile Include="Common\ControlFlows\ComplexControlFlowBase.cs" />
     <Compile Include="Common\ControlFlows\ControlFlowBase.cs" />
     <Compile Include="Common\ControlFlows\PipelineControlFlow.cs" />
+    <Compile Include="Common\ControlFlows\SelectorControlFlow.cs" />
     <Compile Include="Common\ControlFlows\SequenceControlFlow.cs" />
     <Compile Include="Common\DefaultRunnableManager.cs" />
     <Compile Include="Common\IExecutor.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\ModifierDescriptor.cs" />
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
+    <Compile Include="Nodes\Modifiers\NthChildNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
     <Compile Include="Nodes\Selectors\NodeSelectorBase.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifier.cs" />
@@ -118,6 +120,9 @@
     <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
     <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
+    <Compile Include="Services\ArgumentDescriptorModel.cs" />
+    <Compile Include="Services\CommandDescriptorModel.cs" />
+    <Compile Include="Services\DescriptorModel.cs" />
     <Compile Include="Services\FileDescriptorRepository.cs" />
     <Compile Include="Services\IDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />

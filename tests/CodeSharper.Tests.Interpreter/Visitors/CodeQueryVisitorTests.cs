@@ -42,7 +42,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             // Then
             Assert.That(result, Is.Not.Null);
 
-            var actualParameters = result.CommandCall.ActualParameters.ToArray();
+            var actualParameters = result.CommandCallElement.ActualParameters.ToArray();
             Assert.That(actualParameters.Length, Is.EqualTo(1));
             Assert.That(actualParameters.Select(parameter => new {
                 Position = parameter.Position,
@@ -63,7 +63,7 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             Assert.That(result, Is.Not.Null);
             var expectedChildren = result.Children
                                          .Cast<CommandCallControlFlowElement>()
-                                         .Select(call => call.CommandCall.MethodName);
+                                         .Select(call => call.CommandCallElement.MethodName);
 
             Assert.That(expectedChildren, Is.EquivalentTo(new[] { "test-command", "test-command-2" }));
         }

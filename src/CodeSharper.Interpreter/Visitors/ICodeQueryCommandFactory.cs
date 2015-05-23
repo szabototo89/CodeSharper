@@ -38,7 +38,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a method call symbol node
         /// </summary>
-        CommandCall CreateMethodCall(String name, IEnumerable<ActualParameterElement> parameters);
+        CommandCallElement CreateMethodCall(String name, IEnumerable<ActualParameterElement> parameters);
 
         /// <summary>
         /// Creates a control flow symbol node
@@ -48,7 +48,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        ControlFlowElementBase CreateControlFlow(CommandCall methodCall);
+        ControlFlowElementBase CreateControlFlow(CommandCallElement methodCallElement);
 
         /// <summary>
         /// Creates a control flow for selection.

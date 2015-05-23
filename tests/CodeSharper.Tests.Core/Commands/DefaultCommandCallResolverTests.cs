@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Nodes.Combinators;
+using CodeSharper.Core.Nodes.Modifiers;
+using CodeSharper.Core.Nodes.Selectors;
+using CodeSharper.Core.Services;
 using Moq;
 using NUnit.Framework;
 
@@ -16,12 +20,19 @@ namespace CodeSharper.Tests.Core.Commands
     {
         #region Stubs for initializing
 
-        internal class StubCommandDescriptorManager : ICommandDescriptorManager
+        internal class StubCommandDescriptorRepository : IDescriptorRepository
         {
-            /// <summary>
-            /// Registers the specified descriptor.
-            /// </summary>
-            void ICommandDescriptorManager.Register(CommandDescriptor descriptor)
+            public IEnumerable<CombinatorDescriptor> GetCombinators()
+            {
+                throw new NotImplementedException();
+            }
+
+            public IEnumerable<ModifierDescriptor> GetPseudoSelectors()
+            {
+                throw new NotImplementedException();
+            }
+
+            public IEnumerable<SelectorDescriptor> GetSelectors()
             {
                 throw new NotImplementedException();
             }
@@ -77,15 +88,15 @@ namespace CodeSharper.Tests.Core.Commands
         /// <summary>
         /// Gets or sets the descriptor manager.
         /// </summary>
-        protected ICommandDescriptorManager DescriptorManager { get; set; }
+        protected IDescriptorRepository DescriptorRepository { get; set; }
 
         public override void Setup()
         {
             base.Setup();
 
-            DescriptorManager = new StubCommandDescriptorManager();
+            DescriptorRepository = new StubCommandDescriptorRepository();
             RunnableFactory = new StubRunnableFactory();
-            UnderTest = new DefaultCommandCallResolver(DescriptorManager, RunnableFactory);
+            UnderTest = new DefaultCommandCallResolver(DescriptorRepository, RunnableFactory);
         }
 
         #endregion
@@ -110,7 +121,7 @@ namespace CodeSharper.Tests.Core.Commands
             };
             Assert.That(result.ActualArguments, Is.EquivalentTo(expectedArguments));
 
-            Assert.That(result.CommandDescriptor, Is.EqualTo(DescriptorManager.GetCommandDescriptors().First()));
+            Assert.That(result.CommandDescriptor, Is.EqualTo(DescriptorRepository.GetCommandDescriptors().First()));
         }
 
         [Test(Description = "CreateCommand should create command when valid command call is passed")]

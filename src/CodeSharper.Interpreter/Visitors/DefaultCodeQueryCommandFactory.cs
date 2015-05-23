@@ -55,9 +55,9 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a method call symbol node
         /// </summary>
-        public CommandCall CreateMethodCall(String name, IEnumerable<ActualParameterElement> parameters)
+        public CommandCallElement CreateMethodCall(String name, IEnumerable<ActualParameterElement> parameters)
         {
-            return new CommandCall(name, parameters);
+            return new CommandCallElement(name, parameters);
         }
 
         /// <summary>
@@ -87,10 +87,10 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a control flow symbol node
         /// </summary>
-        public ControlFlowElementBase CreateControlFlow(CommandCall methodCall)
+        public ControlFlowElementBase CreateControlFlow(CommandCallElement methodCallElement)
         {
-            Assume.NotNull(methodCall, "selectorElement");
-            return new CommandCallControlFlowElement(methodCall);
+            Assume.NotNull(methodCallElement, "selectorElement");
+            return new CommandCallControlFlowElement(methodCallElement);
         }
 
         /// <summary>

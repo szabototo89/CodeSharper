@@ -46,7 +46,7 @@ namespace CodeSharper.Core.Nodes.Combinators
                 if (Modifiers.Any())
                 {
                     foreach (var modifier in Modifiers)
-                    {
+                    {   
                         result.AddRange(modifier.ModifySelection(node));
                     }
                 }

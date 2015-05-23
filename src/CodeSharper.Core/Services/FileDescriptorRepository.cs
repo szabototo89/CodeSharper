@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using CodeSharper.Core.Commands.Selectors;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
@@ -16,14 +18,18 @@ namespace CodeSharper.Core.Services
 {
     public class FileDescriptorRepository : IDescriptorRepository
     {
+        private readonly IEnumerable<Assembly> _predefinedAssemblies;
         private readonly IEnumerable<Assembly> _assemblies;
         private readonly DataContractJsonSerializer _serializer;
 
         private readonly List<CombinatorDescriptor> _combinators;
         private readonly List<SelectorDescriptor> _selectors;
         private readonly List<ModifierDescriptor> _pseudoSelectors;
+        private readonly List<CommandDescriptor> _commandDescriptors;
 
-        private enum DescriptorType { Selector, Combinator,
+        private enum DescriptorType
+        {
+            Selector, Combinator,
             PseudoSelector
         }
 
@@ -35,10 +41,12 @@ namespace CodeSharper.Core.Services
             Assume.NotNull(fileName, "fileName");
             Assume.FileExists(fileName, "fileName");
 
-            _serializer = new DataContractJsonSerializer(typeof(SelectionDescriptorModel[]));
+            _serializer = new DataContractJsonSerializer(typeof(DescriptorModel));
             _combinators = new List<CombinatorDescriptor>();
             _selectors = new List<SelectorDescriptor>();
             _pseudoSelectors = new List<ModifierDescriptor>();
+            _commandDescriptors = new List<CommandDescriptor>();
+            _predefinedAssemblies = new[] { Assembly.Load("mscorlib") };
 
             _assemblies = assemblies ?? new[] { Assembly.GetExecutingAssembly() };
 
@@ -47,39 +55,80 @@ namespace CodeSharper.Core.Services
 
         private void loadFromFile(String fileName)
         {
-            var reader = File.OpenRead(fileName);
-            var descriptors = _serializer.ReadObject(reader) as SelectionDescriptorModel[];
-            if (descriptors == null)
-                throw new Exception(String.Format("Cannot parse specified file: {0}.", fileName));
-
-            _selectors.Clear();
-            _combinators.Clear();
-
-            foreach (var descriptor in descriptors)
+            try
             {
-                switch (descriptor.SelectorType)
+                var reader = File.OpenRead(fileName);
+                var descriptor = (DescriptorModel)_serializer.ReadObject(reader);
+
+                _selectors.Clear();
+                _combinators.Clear();
+                _pseudoSelectors.Clear();
+                _commandDescriptors.Clear();
+
+                foreach (var commandDescriptor in descriptor.CommandDescriptors)
                 {
-                    case "element-type-selector":
+                    var desc = new CommandDescriptor {
+                        Name = commandDescriptor.Name,
+                        Description = commandDescriptor.Description,
+                        CommandNames = new List<String>(commandDescriptor.CommandNames)
+                    };
+
+                    desc.Arguments = commandDescriptor.Arguments.Select((ArgumentDescriptorModel arg) => new ArgumentDescriptor {
+                        ArgumentName = arg.Name,
+                        DefaultValue = arg.DefaultValue,
+                        IsOptional = arg.IsOptional,
+                        Position = arg.Position,
+                        ArgumentType = findInAssemblies(arg.ArgumentType)
+                    });
+
+                    _commandDescriptors.Add(desc);
+                }
+
+                foreach (var selectionDescriptors in descriptor.SelectionDescriptors)
+                {
+                    switch (selectionDescriptors.SelectorType)
                     {
-                        var type = findInAssemblies(descriptor.Type, DescriptorType.Selector);
-                        _selectors.Add(new SelectorDescriptor(descriptor.Name, descriptor.Value, type));
-                        break;
-                    }
-                    case "combinator":
-                    {
-                        var type = findInAssemblies(descriptor.Type, DescriptorType.Combinator);
-                        _combinators.Add(new CombinatorDescriptor(descriptor.Name, descriptor.Value, type));
-                        break;
-                    }
-                    case "pseudo-selector":
-                    {
-                        var type = findInAssemblies(descriptor.Type, DescriptorType.PseudoSelector);
-                        _pseudoSelectors.Add(new ModifierDescriptor(descriptor.Name, descriptor.Value,
-                            descriptor.Arguments, type));
-                        break;
+                        case "element-type-selector":
+                            {
+                                var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.Selector);
+                                _selectors.Add(new SelectorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
+                                break;
+                            }
+                        case "combinator":
+                            {
+                                var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.Combinator);
+                                _combinators.Add(new CombinatorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
+                                break;
+                            }
+                        case "pseudo-selector":
+                            {
+                                var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.PseudoSelector);
+                                _pseudoSelectors.Add(new ModifierDescriptor(selectionDescriptors.Name, selectionDescriptors.Value,
+                                    selectionDescriptors.Arguments, type));
+                                break;
+                            }
                     }
                 }
             }
+            catch (Exception exception)
+            {
+                throw new Exception(String.Format("Cannot parse descriptor file: {0}", fileName), exception);
+            }
+        }
+
+        private Type findInAssemblies(String argumentType)
+        {
+            var assemblies = _assemblies.Union(_predefinedAssemblies);
+
+            var assemblyTypes = assemblies.SelectMany(assembly => assembly.GetTypes());
+            var matchedTypes = assemblyTypes.Where(type => type.FullName == argumentType || type.Name == argumentType).ToArray();
+
+            if (!matchedTypes.Any())
+                throw new Exception(String.Format("Not found argument type: {0}.", argumentType));
+            if (matchedTypes.Length > 1)
+                throw new Exception(String.Format("Ambiguation between found types: {0}", argumentType));
+
+            return matchedTypes.Single();
         }
 
         private Type findInAssemblies(String typeName, DescriptorType descriptorType)
@@ -94,7 +143,7 @@ namespace CodeSharper.Core.Services
                     assignableFromType = typeof(NodeSelectorBase);
                     break;
                 case DescriptorType.PseudoSelector:
-                    assignableFromType = typeof (NodeModifierBase);
+                    assignableFromType = typeof(NodeModifierBase);
                     break;
                 default:
                     throw new NotSupportedException(String.Format("Not supported descriptor type: {0}", descriptorType));
@@ -141,6 +190,14 @@ namespace CodeSharper.Core.Services
         public IEnumerable<SelectorDescriptor> GetSelectors()
         {
             return _selectors.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Gets the command descriptors.
+        /// </summary>
+        public IEnumerable<CommandDescriptor> GetCommandDescriptors()
+        {
+            return _commandDescriptors.AsReadOnly();
         }
     }
 }

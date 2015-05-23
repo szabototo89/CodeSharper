@@ -73,6 +73,14 @@ namespace CodeSharper.Core.SyntaxTrees
             Parent = null;
         }
 
+        protected void ReplaceChildWith(Node oldChild, Node newChild)
+        {
+            if (oldChild != null)
+                oldChild.Detach();
+            if (newChild != null)
+                newChild.Attach(this);
+        }
+
         protected void ReplaceChildrenWith(IEnumerable<Node> oldChildren, IEnumerable<Node> newChildren)
         {
             if (oldChildren == null) return;

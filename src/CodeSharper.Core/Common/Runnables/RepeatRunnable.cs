@@ -5,19 +5,23 @@ using CodeSharper.Core.Common.Runnables.Attributes;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    [Consumes(typeof(Object)), Produces(typeof(IEnumerable<Object>))]
     public class RepeatRunnable : RunnableBase<Object, Object>
     {
         /// <summary>
         /// Gets or sets the count of repeating
         /// </summary>
         [Parameter("count")]
-        public Int32 Count { get; set; }
+        public Double Count { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RepeatRunnable"/> class.
         /// </summary>
-        public RepeatRunnable(Int32 count)
+        public RepeatRunnable() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RepeatRunnable"/> class.
+        /// </summary>
+        public RepeatRunnable(Double count)
         {
             Count = count;
         }
@@ -27,7 +31,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// </summary>
         public override Object Run(Object parameter)
         {
-            return Enumerable.Repeat(parameter, Count);
+            return Enumerable.Repeat(parameter, (Int32)Count);
         }
     }
 }

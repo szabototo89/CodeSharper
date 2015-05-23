@@ -7,7 +7,7 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Combinators
 {
-    public class UniversalCombinator : NodeSelectionCombinator
+    public class UniversalCombinator : NodeSelectionCombinator  
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversalCombinator"/> class.

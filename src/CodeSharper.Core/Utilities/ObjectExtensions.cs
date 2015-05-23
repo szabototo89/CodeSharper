@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Reflection.Emit;
 using System.Security;
 using System.Security.Policy;
@@ -37,10 +38,29 @@ namespace CodeSharper.Core.Utilities
             return (TValue)value;
         }
 
+        public static Boolean Is<TType>(this Object value)
+        {
+            return value is TType;
+        }
+
+        public static Boolean Is<TType1, TType2>(this Object value)
+        {
+            return value is TType1 && value is TType2;
+        }
+
         public static TValue As<TValue>(this Object value)
             where TValue : class
         {
             return value as TValue;
+        }
+
+        public static Boolean IsNumeric(this Object expression)
+        {
+            if (expression == null)
+                return false;
+
+            Double number;
+            return Double.TryParse(Convert.ToString(expression, CultureInfo.InvariantCulture), System.Globalization.NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
         }
     }
 }

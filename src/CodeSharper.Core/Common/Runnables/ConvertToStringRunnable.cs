@@ -27,7 +27,7 @@ namespace CodeSharper.Core.Common.Runnables
                 var enumerable = parameter.Cast<IEnumerable>()
                                           .OfType<Object>()
                                           .Select((element, index) => Run(element));
-                return String.Format("[{0}]", String.Join(", ", enumerable));
+                return String.Format("{0}", String.Join(Environment.NewLine, enumerable));
             }
 
             if (parameter is TextRange)

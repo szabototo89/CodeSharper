@@ -56,23 +56,32 @@
     <Compile Include="Csv\SyntaxTrees\CsvTokens.cs" />
     <Compile Include="Csv\Factories\ICsvSyntaxTreeFactory.cs" />
     <Compile Include="Csv\Visitors\CsvStandardSyntaxTreeBuilder.cs" />
+    <Compile Include="Json\Compiler\JsonCompiler.cs" />
+    <Compile Include="Json\Factories\IJsonSyntaxTreeFactory.cs" />
     <Compile Include="Json\Grammar\JsonBaseVisitor.cs" />
     <Compile Include="Json\Grammar\JsonLexer.cs" />
     <Compile Include="Json\Grammar\JsonParser.cs" />
     <Compile Include="Json\Grammar\JsonVisitor.cs" />
+    <Compile Include="Json\Nodes\Selectors\ArrayLiteralSelector.cs" />
+    <Compile Include="Json\Nodes\Selectors\KeySelector.cs" />
+    <Compile Include="Json\Nodes\Selectors\ObjectLiteralSelector.cs" />
+    <Compile Include="Json\Nodes\Selectors\ValueSelector.cs" />
     <Compile Include="Json\SyntaxTrees\Literals\ArrayLiteralDeclaration.cs" />
     <Compile Include="Json\SyntaxTrees\Constants\BooleanConstant.cs" />
     <Compile Include="Json\SyntaxTrees\Constants\ConstantSyntax.cs" />
     <Compile Include="Json\SyntaxTrees\JsonNode.cs" />
+    <Compile Include="Json\SyntaxTrees\Literals\KeyDeclaration.cs" />
     <Compile Include="Json\SyntaxTrees\Literals\KeyValueDeclaration.cs" />
     <Compile Include="Json\SyntaxTrees\Literals\LiteralSyntax.cs" />
     <Compile Include="Json\SyntaxTrees\Constants\NumberConstant.cs" />
     <Compile Include="Json\SyntaxTrees\Literals\ObjectLiteralDeclaration.cs" />
     <Compile Include="Json\SyntaxTrees\Constants\StringConstant.cs" />
+    <Compile Include="Json\SyntaxTrees\Literals\ValueDeclaration.cs" />
     <Compile Include="Json\SyntaxTrees\Tokens\CommaToken.cs" />
     <Compile Include="Json\SyntaxTrees\Tokens\JsonSyntaxToken.cs" />
     <Compile Include="Json\SyntaxTrees\Tokens\ParenthesisToken.cs" />
     <Compile Include="Json\SyntaxTrees\Tokens\ParenthesisType.cs" />
+    <Compile Include="Json\Visitors\JsonSyntaxTreeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Csv\Nodes\Selectors\FieldNodeSelector.cs" />
     <Compile Include="Csv\Nodes\Selectors\RowNodeSelector.cs" />
@@ -112,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Csv\Runnables\" />
-    <Folder Include="Json\Compiler\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

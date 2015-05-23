@@ -5,7 +5,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class CommandCall : IEquatable<CommandCall>
+    public class CommandCallElement : IEquatable<CommandCallElement>
     {
         /// <summary>
         /// Gets or sets the name of the method.
@@ -18,9 +18,9 @@ namespace CodeSharper.Interpreter.Common
         public IEnumerable<ActualParameterElement> ActualParameters { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandCall"/> class.
+        /// Initializes a new instance of the <see cref="CommandCallElement"/> class.
         /// </summary>
-        public CommandCall(String methodName, IEnumerable<ActualParameterElement> actualParameters)
+        public CommandCallElement(String methodName, IEnumerable<ActualParameterElement> actualParameters)
         {
             Assume.NotNull(methodName, "methodName");
             Assume.NotNull(actualParameters, "actualParameters");
@@ -38,7 +38,7 @@ namespace CodeSharper.Interpreter.Common
         /// <returns>
         /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
         /// </returns>
-        public Boolean Equals(CommandCall other)
+        public Boolean Equals(CommandCallElement other)
         {
             return EqualityHelper.IsNullOrReferenceEqual(other, this) ??
                    String.Equals(MethodName, other.MethodName) && 
@@ -54,7 +54,7 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            return Equals(obj as CommandCall);
+            return Equals(obj as CommandCallElement);
         }
 
         /// <summary>

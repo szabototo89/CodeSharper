@@ -47,10 +47,10 @@ namespace CodeSharper.Interpreter.Common
             return controlFlow.Children.Select(Create).ToArray();
         }
 
-        private Command getCommand(CommandCall commandCall)
+        private Command getCommand(CommandCallElement commandCallElement)
         {
-            var actualParameters = commandCall.ActualParameters.Select(Create);
-            var descriptor = new CommandCallDescriptor(commandCall.MethodName, actualParameters);
+            var actualParameters = commandCallElement.ActualParameters.Select(Create);
+            var descriptor = new CommandCallDescriptor(commandCallElement.MethodName, actualParameters);
             return CommandCallResolver.CreateCommand(descriptor);
         }
 
@@ -96,7 +96,7 @@ namespace CodeSharper.Interpreter.Common
 
             var combinator = SelectorResolver.Create(selector.SelectorElement);
 
-            return new SelectorControlFlowBase(combinator);
+            return new SelectorControlFlow(combinator);
         }
 
         /// <summary>
@@ -125,10 +125,10 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ControlFlowBase Create(CommandCallControlFlowElement commandCall)
         {
-            Assume.NotNull(commandCall, "commandCall");
+            Assume.NotNull(commandCall, "CommandCallElement");
 
             // resolve command by call
-            var command = getCommand(commandCall.CommandCall);
+            var command = getCommand(commandCall.CommandCallElement);
             if (command == null) throw new Exception("Command is not available!");
 
             return new CommandCallControlFlow(command, Executor);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
@@ -25,15 +26,21 @@ namespace CodeSharper.Interpreter.Common
         public IDescriptorRepository DescriptorRepository { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the name matcher of resolvers
+        /// </summary>
+        public INameMatcher NameMatcher { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSelectorResolver"/> class.
         /// </summary>
-        public DefaultSelectorResolver(ISelectorFactory selectorFactory, IDescriptorRepository descriptorRepository)
+        public DefaultSelectorResolver(ISelectorFactory selectorFactory, IDescriptorRepository descriptorRepository, INameMatcher nameMatcher = null)
         {
             Assume.NotNull(selectorFactory, "selectorFactory");
             Assume.NotNull(descriptorRepository, "descriptorRepository");
 
             SelectorFactory = selectorFactory;
             DescriptorRepository = descriptorRepository;
+            NameMatcher = nameMatcher ?? new EqualityNameMatcher();
         }
 
         /// <summary>
@@ -65,7 +72,7 @@ namespace CodeSharper.Interpreter.Common
         {
             var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
 
-            var selectorDescriptor = DescriptorRepository.GetSelectors().SingleOrDefault(s => s.Value == elementTypeSelector.Name);
+            var selectorDescriptor = DescriptorRepository.GetSelectors().SingleOrDefault(s => NameMatcher.Match(s.Value, elementTypeSelector.Name));
             if (selectorDescriptor == null)
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
@@ -83,9 +90,9 @@ namespace CodeSharper.Interpreter.Common
         private NodeModifierBase resolvePseudoSelector(PseudoSelectorElement element, NodeSelectorBase selector)
         {
             var elements = DescriptorRepository.GetPseudoSelectors()
-                                               .Where(pseudo => pseudo.Value == element.Name)
+                                               .Where(pseudo => NameMatcher.Match(pseudo.Value, element.Name))
                                                .Where(pseudo => pseudo.Arguments.Count() == element.Arguments.Count())
-                                               .Select(pseudo => pseudo.Type)
+                                               .Select(pseudo => new { pseudo.Type, Arguments = element.Arguments.Select(arg => arg.Value) })
                                                .ToArray();
 
             if (elements.Length > 1)
@@ -93,7 +100,8 @@ namespace CodeSharper.Interpreter.Common
             if (!elements.Any())
                 throw new Exception(String.Format("Not found pseudo selector: {0}", element.Name));
 
-            return SelectorFactory.CreatePseudoSelector(elements.Single(), selector);
+            var pseudoSelector = elements.Single();
+            return SelectorFactory.CreatePseudoSelector(pseudoSelector.Type, pseudoSelector.Arguments, selector);
         }
 
         /// <summary>
@@ -114,7 +122,7 @@ namespace CodeSharper.Interpreter.Common
         private BinaryCombinator resolveCombinator(CombinatorElementBase combinatorElement, CombinatorBase left, CombinatorBase right)
         {
             var combinators = DescriptorRepository.GetCombinators()
-                                                  .Where(combinator => combinator.Value == combinatorElement.Value)
+                                                  .Where(combinator => NameMatcher.Match(combinator.Value, combinatorElement.Value))
                                                   .ToArray();
 
             if (combinators.Count() > 1)

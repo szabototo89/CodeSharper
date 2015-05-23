@@ -206,12 +206,16 @@ namespace CodeSharper.Core.Texts
                 next: current);
 
             if (current.Previous != null)
+            {
                 current.Previous.Next = textRange;
+            }
 
             current.Previous = textRange;
 
             if (ReferenceEquals(current, TextRange))
+            {
                 TextRange = textRange;
+            }
 
             return textRange;
         }
@@ -243,9 +247,7 @@ namespace CodeSharper.Core.Texts
 
             while (current != null)
             {
-                if (current.Start == start && current.Stop == stop)
-                    break;
-
+                if (current.Start == start && current.Stop == stop) break;
                 current = current.Next;
             }
 
