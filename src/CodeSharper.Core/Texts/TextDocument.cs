@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace CodeSharper.Core.Texts
     public class TextDocument : ITextDocument
     {
         private StringBuilder _text;
+
+        private TextRange _root;
 
         /// <summary>
         /// Gets or sets the text of document.
@@ -28,6 +31,18 @@ namespace CodeSharper.Core.Texts
         public TextRange TextRange { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the text ranges.
+        /// </summary>
+        public IEnumerable<TextRange> TextRanges
+        {
+            get
+            {
+                if (_root == null) return Enumerable.Empty<TextRange>();
+                return _root.AsEnumerable();
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TextDocument"/> class.
         /// </summary>
         public TextDocument(String text)
@@ -36,6 +51,7 @@ namespace CodeSharper.Core.Texts
 
             Text = text;
             TextRange = CreateOrGetTextRange(0, text.Length);
+            _root = TextRange;
         }
 
         /// <summary>
@@ -105,8 +121,8 @@ namespace CodeSharper.Core.Texts
             Assume.NotNull(updatableTextRange, "updatableTextRange");
             if (offset == 0) return;
 
-            foreach (var range in TextRange.AsEnumerable()
-                                           .Where(range => !ReferenceEquals(range, updatableTextRange)))
+            foreach (var range in _root.AsEnumerable()
+                                       .Where(range => !ReferenceEquals(range, updatableTextRange)))
             {
                 if (isNoConflictWith(range, updatableTextRange))
                 {
@@ -172,7 +188,7 @@ namespace CodeSharper.Core.Texts
 
         private TextRange createTextRange(Int32 start, Int32 stop)
         {
-            var current = TextRange;
+            var current = _root;
 
             while (current != null)
             {
@@ -212,9 +228,9 @@ namespace CodeSharper.Core.Texts
 
             current.Previous = textRange;
 
-            if (ReferenceEquals(current, TextRange))
+            if (ReferenceEquals(current, _root))
             {
-                TextRange = textRange;
+                _root = textRange;
             }
 
             return textRange;
@@ -231,10 +247,10 @@ namespace CodeSharper.Core.Texts
                 current.Next.Previous = textRange;
             }
 
-            if (current.Previous != null)
+            /*if (current.Previous != null)
             {
                 current.Previous.Next = textRange;
-            }
+            }*/
 
             current.Next = textRange;
 
@@ -243,7 +259,7 @@ namespace CodeSharper.Core.Texts
 
         private TextRange getExistingTextRange(Int32 start, Int32 stop)
         {
-            var current = TextRange;
+            var current = _root;
 
             while (current != null)
             {
@@ -270,9 +286,9 @@ namespace CodeSharper.Core.Texts
                 textRange.Next.Previous = textRange.Previous;
             }
 
-            if (TextRange.Equals(textRange))
+            if (_root.Equals(textRange))
             {
-                TextRange = textRange.Next;
+                _root = textRange.Next;
             }
         }
 

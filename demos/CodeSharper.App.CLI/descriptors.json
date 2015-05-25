@@ -51,7 +51,6 @@
             "arguments": [ ],
             "type": "CodeSharper.Core.Nodes.Modifiers.SiblingsNodeModifier"
         },
-
         {
             "name": "object-literal-selector",
             "selector-type": "element-type-selector",
@@ -77,7 +76,6 @@
             "type": "CodeSharper.Languages.Json.Nodes.Selectors.ValueSelector"
         }
     ],
-
     "commands": [
         {
             "name": "RepeatRunnable",
@@ -107,6 +105,21 @@
             "description": "Converts text range to raw text",
             "type": "ConvertToStringRunnable",
             "arguments": [ ]
+        },
+        {
+            "name": "ReplaceTextRunnable",
+            "command-names": [ "replace" ],
+            "description": "Replaces text with specified value. Use '$' to insert previous value of text range.",
+            "type": "ReplaceTextRunnable",
+            "arguments": [
+                {
+                    "name": "replacedText",
+                    "argument-type": "System.String",
+                    "default-value": "",
+                    "optional": false,  
+                    "position": 0
+                }
+            ]
         },
         {
             "name": "FilterRunnable",

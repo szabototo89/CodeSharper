@@ -3,6 +3,7 @@ using System.Linq;
 using Antlr4.Runtime.Tree;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Utilities;
 using CodeSharper.Languages.Json.Factories;
 using CodeSharper.Languages.Json.SyntaxTrees;
 using CodeSharper.Languages.Json.SyntaxTrees.Constants;

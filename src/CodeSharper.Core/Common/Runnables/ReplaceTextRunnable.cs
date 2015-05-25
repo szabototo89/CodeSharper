@@ -19,6 +19,11 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceTextRunnable"/> class.
         /// </summary>
+        public ReplaceTextRunnable() : this("$") { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReplaceTextRunnable"/> class.
+        /// </summary>
         public ReplaceTextRunnable(String replacedText)
         {
             Assume.NotNull(replacedText, "replacedText");

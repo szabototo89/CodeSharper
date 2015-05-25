@@ -68,7 +68,6 @@ namespace CodeSharper.Tests.Core.Texts
         public void CreateOrGetTextRange_ShouldReturnExistingSubTextRange_WhenSubTextRangeIsInitializedPreviously(Int32 start, Int32 stop)
         {
             // Given in setup
-
             var textRange = UnderTest.CreateOrGetTextRange(start, stop);
 
             // When
@@ -92,7 +91,7 @@ namespace CodeSharper.Tests.Core.Texts
             };
 
             // When
-            var result = UnderTest.TextRange
+            var result = UnderTest.TextRanges
                                   .Select(textRange => new {
                                       Start = textRange.Start,
                                       Stop = textRange.Stop
@@ -151,10 +150,12 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             UnderTest.ChangeText(words[0], "Hi");
-            var result = UnderTest.TextRange.Select(textRange => UnderTest.GetText(textRange)).ToArray();
+            var result = UnderTest.TextRanges
+                                  .Where(range => range != UnderTest.TextRange)
+                                  .Select(textRange => UnderTest.GetText(textRange)).ToArray();
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[]{ "Hi", "World!" }));
+            Assert.That(result, Is.EquivalentTo(new[] { "Hi", "World!" }));
         }
 
         [Test(Description = "ChangeText should update superset text ranges after it changed text")]
@@ -169,7 +170,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             UnderTest.ChangeText(words[0], "Me");
-            var result = UnderTest.TextRange.Select(textRange => UnderTest.GetText(textRange)).ToArray();
+            var result = UnderTest.TextRanges.Select(textRange => UnderTest.GetText(textRange)).ToArray();
 
             // Then
             Assert.That(UnderTest.Text, Is.EqualTo("Hello Me!"));
@@ -190,7 +191,9 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             underTest.ChangeText(words[0], "9");
-            var result = underTest.TextRange.Select(textRange => underTest.GetText(textRange)).ToArray();
+            var result = underTest.TextRanges
+                                  .Where(range => range != underTest.TextRange)
+                                  .Select(textRange => underTest.GetText(textRange)).ToArray();
 
             // Then
             Assert.That(result, Is.EquivalentTo(new[] { "9", "9456789" }));
@@ -210,7 +213,7 @@ namespace CodeSharper.Tests.Core.Texts
             // Then
             Assert.That(result, Is.EqualTo("Hi World!"));
 
-            var textRanges = UnderTest.TextRange.AsEnumerable();
+            var textRanges = UnderTest.TextRanges;
             Assert.That(new[] { textRange }, Is.SubsetOf(textRanges));
         }
 
@@ -265,7 +268,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             UnderTest.RemoveText(textRange);
-            var textRanges = UnderTest.TextRange.AsEnumerable().ToArray();
+            var textRanges = UnderTest.TextRanges.ToArray();
             var result = textRanges.FirstOrDefault(range => textRange.Equals(range));
 
             // Then
