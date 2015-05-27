@@ -1,5 +1,6 @@
 using System;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Utilities;
 

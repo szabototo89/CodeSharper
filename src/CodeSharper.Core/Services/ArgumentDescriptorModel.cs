@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Interfaces;
 
 namespace CodeSharper.Core.Services
 {

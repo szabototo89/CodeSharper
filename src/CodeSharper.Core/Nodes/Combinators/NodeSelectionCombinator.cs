@@ -39,24 +39,26 @@ namespace CodeSharper.Core.Nodes.Combinators
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
             var filteredNodes = values.GetOrEmpty().Where(NodeSelector.FilterNode);
-            var result = new List<Object>();
-
             foreach (var node in filteredNodes)
             {
                 if (Modifiers.Any())
                 {
                     foreach (var modifier in Modifiers)
-                    {   
-                        result.AddRange(modifier.ModifySelection(node));
+                    {
+                        foreach (var element in modifier.ModifySelection(node))
+                        {
+                            yield return element;
+                        }
+
+                        // result.AddRange(modifier.ModifySelection(node));
                     }
                 }
                 else
                 {
-                    result.Add(node);
+                    yield return node;
+                    // result.Add(node);
                 }
             }
-
-            return result;
         }
     }
 }

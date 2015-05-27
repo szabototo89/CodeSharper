@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Common.Runnables.Converters

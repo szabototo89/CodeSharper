@@ -1,4 +1,4 @@
-﻿namespace CodeSharper.Core.Common
+﻿namespace CodeSharper.Core.Common.Interfaces
 {
     /// <summary>
     /// Represents an object which has a parent

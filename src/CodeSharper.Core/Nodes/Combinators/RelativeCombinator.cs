@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.SyntaxTrees;

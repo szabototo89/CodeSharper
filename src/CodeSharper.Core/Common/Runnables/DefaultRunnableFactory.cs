@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CodeSharper.Core.Common.NameMatchers;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Common.Runnables

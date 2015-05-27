@@ -41,8 +41,6 @@ namespace CodeSharper.Core.Nodes.Combinators
         {
             var filteredNodes = values.Where(node => NodeSelector.FilterNode(node));
 
-            var results = new List<Object>();
-
             if (NodeModifiers.Any())
             {
                 foreach (var node in filteredNodes)
@@ -50,16 +48,20 @@ namespace CodeSharper.Core.Nodes.Combinators
                     foreach (var modifier in NodeModifiers)
                     {
                         var modifiedNodes = modifier.ModifySelection(node);
-                        results.AddRange(modifiedNodes);
+                        foreach (var modifiedNode in modifiedNodes)
+                        {
+                            yield return modifiedNode;
+                        }
                     }
                 }
             }
             else
             {
-                results.AddRange(filteredNodes);
+                foreach (var filteredNode in filteredNodes)
+                {
+                    yield return filteredNode;
+                }       
             }
-
-            return results.AsReadOnly();
         }
     }
 }

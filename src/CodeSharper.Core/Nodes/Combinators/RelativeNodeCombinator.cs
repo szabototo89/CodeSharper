@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 
@@ -22,14 +23,15 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
-            var result = new List<Object>();
             var leftExpression = Left.Calculate(values).OfType<IHasChildren<Object>>();
             foreach (var node in leftExpression)
             {
                 var children = node.ToEnumerable();
-                result.AddRange(Right.Calculate(children));
+                foreach (var result in Right.Calculate(children))
+                {
+                    yield return result;
+                }
             }
-            return result;
         }
     }
 }

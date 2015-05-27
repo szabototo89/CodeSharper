@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.SyntaxTrees
 {
-    public abstract class Node : IHasChildren<Node>, IHasParent<Node>, IHasTextRange
+    public abstract class   Node : IHasChildren<Node>, IHasParent<Node>, IHasTextRange
     {
         private readonly List<Node> _children;
 

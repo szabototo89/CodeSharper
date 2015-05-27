@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Common.NameMatchers
 {
-    public interface INameMatcher
-    {
-        /// <summary>
-        /// Matches the specified collection.
-        /// </summary>
-        Boolean Match(String expected, String actual);
-    }
-
     public class EqualityNameMatcher : INameMatcher
     {
         /// <summary>

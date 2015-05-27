@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Nodes.Modifiers

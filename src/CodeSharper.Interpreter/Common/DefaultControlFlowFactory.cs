@@ -4,6 +4,7 @@ using System.Linq;
 using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.ControlFlows;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes;
 

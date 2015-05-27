@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Common.Interfaces
 {
     /// <summary>
     /// Represents an Object which may have children

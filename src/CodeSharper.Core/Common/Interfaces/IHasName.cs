@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeSharper.Core.Common
+namespace CodeSharper.Core.Common.Interfaces
 {
     public interface IHasName
     {
