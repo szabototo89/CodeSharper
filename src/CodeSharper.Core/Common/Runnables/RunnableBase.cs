@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    public abstract class RunnableBase<TIn, TOut> : IRunnable, IRunnable<TIn, TOut>
+    public abstract class RunnableBase<TIn, TOut> : IRunnable<TIn, TOut>, IRunnable
     {
         /// <summary>
         /// Runs an algorithm with the specified parameter.

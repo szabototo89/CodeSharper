@@ -72,7 +72,10 @@
     <Compile Include="Common\IRunnableManager.cs" />
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />
+    <Compile Include="Common\Runnables\CastingHelper.cs" />
     <Compile Include="Common\Runnables\ConvertCaseRunnable.cs" />
+    <Compile Include="Common\Runnables\Converters\ContainsTextRangeMultiValueConsumer.cs" />
+    <Compile Include="Common\Runnables\Converters\ContainsTextRangeValueConsumer.cs" />
     <Compile Include="Common\Runnables\ParameterAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\FlattenValueProducer.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueConsumer.cs" />
@@ -88,8 +91,10 @@
     <Compile Include="Common\Runnables\IRunnableFactory.cs" />
     <Compile Include="Common\Runnables\JoinLinesTextRunnable.cs" />
     <Compile Include="Common\Runnables\RepeatRunnable.cs" />
+    <Compile Include="Common\Runnables\ReplaceTextInteractiveRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\RunnableBase.cs" />
+    <Compile Include="Common\Runnables\RunnableBaseWithCastingHelper.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\IHasChildren.cs" />

@@ -23,6 +23,6 @@ namespace CodeSharper.Core.Common.Runnables.Converters
         /// <summary>
         /// Converts the specified parameter to the proper value
         /// </summary>
-        public abstract Object Convert<TFunctionResult>(TValueIn parameter, Func<TValueOut, TFunctionResult> func);
+        public abstract Object Convert<TFunctionResult>(TValueIn parameter, Func<TValueOut, TFunctionResult> function);
     }
 }

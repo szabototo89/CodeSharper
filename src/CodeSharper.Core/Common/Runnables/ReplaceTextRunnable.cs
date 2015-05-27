@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.ErrorHandling;

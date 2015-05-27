@@ -110,7 +110,7 @@ namespace CodeSharper.Playground.CLI
             var runnableFactory = new DefaultRunnableFactory(new[]
             {
                 typeof(RepeatRunnable), typeof(ConvertToStringRunnable), typeof(FilterRunnable), typeof(ConvertCaseRunnable),
-                typeof(ConvertToTextRangeRunnable), typeof(ReplaceTextRunnable)
+                typeof(ConvertToTextRangeRunnable), typeof(ReplaceTextRunnable), typeof(ReplaceTextInteractiveRunnable)
             });
             var assemblies = new[] { Assembly.Load("CodeSharper.Core"), Assembly.GetExecutingAssembly(), Assembly.Load("CodeSharper.Languages") };
             var repository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master\demos\CodeSharper.App.CLI\descriptors.json", assemblies);
@@ -148,7 +148,7 @@ namespace CodeSharper.Playground.CLI
             {
                 try
                 {
-                    root = CsvCompiler.Parse(content);
+                    root = JsonCompiler.Parse(content);
                     Console.Write("> ");
                     response = Console.ReadLine();
                     response += " | @convert-to-string";

@@ -135,6 +135,13 @@
                     "position": 0
                 }
             ]
+        },
+        {
+            "name": "ReplaceTextInteractiveRunnable",
+            "command-names": [ "replace-interactive" ],
+            "description": "Replaces text",
+            "type": "ReplaceTextInteractiveRunnable",
+            "arguments": [ ]
         }
     ]
 }

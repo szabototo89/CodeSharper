@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Common.Runnables.Converters
 {
@@ -35,12 +36,12 @@ namespace CodeSharper.Core.Common.Runnables.Converters
         /// <summary>
         /// Converts the specified parameter to the proper value
         /// </summary>
-        public override Object Convert<TResult>(IEnumerable<TParameter> parameter, Func<TParameter, TResult> func)
+        public override Object Convert<TResult>(IEnumerable<TParameter> parameter, Func<TParameter, TResult> function)
         {
             var result = new List<TResult>();
             foreach (var value in parameter)
             {
-                result.Add(func(value));
+                result.Add(function(value));
             }
             return result;
         }

@@ -20,6 +20,6 @@ namespace CodeSharper.Core.Common.Runnables.Converters
         /// <summary>
         /// Converts the specified parameter to the proper value
         /// </summary>
-        Object Convert<TFunctionResult>(TArgument parameter, Func<TParameter, TFunctionResult> func);
+        Object Convert<TFunctionResult>(TArgument parameter, Func<TParameter, TFunctionResult> function);
     }
 }
