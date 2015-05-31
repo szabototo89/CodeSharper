@@ -77,6 +77,8 @@
     <Compile Include="Common\Runnables\ConvertCaseRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeMultiValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeValueConsumer.cs" />
+    <Compile Include="Common\Runnables\Converters\GreadyMultiValueConsumer.cs" />
+    <Compile Include="Common\Runnables\ElementAtRunnable.cs" />
     <Compile Include="Common\Runnables\ParameterAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\FlattenValueProducer.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueConsumer.cs" />
@@ -91,11 +93,14 @@
     <Compile Include="Common\Runnables\IRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnableFactory.cs" />
     <Compile Include="Common\Runnables\JoinLinesTextRunnable.cs" />
+    <Compile Include="Common\Runnables\RangeRunnable.cs" />
     <Compile Include="Common\Runnables\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextInteractiveRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\RunnableBase.cs" />
     <Compile Include="Common\Runnables\RunnableBaseWithCastingHelper.cs" />
+    <Compile Include="Common\Runnables\SkipRunnable.cs" />
+    <Compile Include="Common\Runnables\TakeRunnable.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\Interfaces\IHasChildren.cs" />
@@ -104,7 +109,7 @@
     <Compile Include="Common\Interfaces\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
     <Compile Include="Nodes\Combinators\CombinatorDescriptor.cs" />
-    <Compile Include="Nodes\Combinators\NodeSelectionCombinator.cs" />
+    <Compile Include="Nodes\Combinators\SelectionCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
     <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
     <Compile Include="Nodes\Combinators\UniversalCombinator.cs" />
@@ -113,7 +118,7 @@
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\NthChildNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
-    <Compile Include="Nodes\Selectors\NodeSelectorBase.cs" />
+    <Compile Include="Nodes\Selectors\SelectorBase.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifier.cs" />
     <Compile Include="Nodes\Combinators\BinaryCombinator.cs" />
     <Compile Include="Nodes\Combinators\ConcatCombinator.cs" />
@@ -123,7 +128,7 @@
     <Compile Include="Nodes\Combinators\ParentCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeCombinator.cs" />
     <Compile Include="Nodes\Selectors\SelectorDescriptor.cs" />
-    <Compile Include="Nodes\Selectors\TypedNodeSelectorBase.cs" />
+    <Compile Include="Nodes\Selectors\TypedSelectorBase.cs" />
     <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
     <Compile Include="Services\ArgumentDescriptorModel.cs" />

@@ -11,12 +11,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a selector by specified name.
         /// </summary>
-        NodeSelectorBase CreateSelector(Type selectorType);
+        SelectorBase CreateSelector(Type selectorType);
 
         /// <summary>
         /// Creates a pseudo selector.
         /// </summary>
-        NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, NodeSelectorBase selector);
+        NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, SelectorBase selector);
 
         /// <summary>
         /// Creates the combinator.

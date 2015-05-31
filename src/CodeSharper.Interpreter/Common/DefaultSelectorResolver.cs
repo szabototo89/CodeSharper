@@ -82,13 +82,13 @@ namespace CodeSharper.Interpreter.Common
                                                      .Select(element => resolvePseudoSelector(element, selector))
                                                      .ToArray();
 
-            return new NodeSelectionCombinator(selector, pseudoSelectors);
+            return new SelectionCombinator(selector, pseudoSelectors);
         }
 
         /// <summary>
         /// Resolves the pseudo selector by element
         /// </summary>
-        private NodeModifierBase resolvePseudoSelector(PseudoSelectorElement element, NodeSelectorBase selector)
+        private NodeModifierBase resolvePseudoSelector(PseudoSelectorElement element, SelectorBase selector)
         {
             var elements = DescriptorRepository.GetPseudoSelectors()
                                                .Where(pseudo => NameMatcher.Match(pseudo.Value, element.Name))

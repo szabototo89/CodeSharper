@@ -3,5 +3,5 @@ using CodeSharper.Languages.Json.SyntaxTrees.Literals;
 
 namespace CodeSharper.Languages.Json.Nodes.Selectors
 {
-    public class KeySelector : TypedNodeSelectorBase<KeyDeclaration> { }
+    public class KeySelector : TypedSelectorBase<KeyDeclaration> { }
 }

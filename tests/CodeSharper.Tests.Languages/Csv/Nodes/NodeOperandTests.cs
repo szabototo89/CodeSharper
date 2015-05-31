@@ -18,11 +18,11 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var compiler = new CsvCompiler();
             var input = "first,second,third";
             var documentNode = compiler.Parse(input).As<CsvCompilationUnit>();
-            var underTest = new RowNodeSelector();
+            var underTest = new RowSelector();
 
             // When
             var left = new AbsoluteCombinator(underTest);
-            var right = new AbsoluteCombinator(new FieldNodeSelector());
+            var right = new AbsoluteCombinator(new FieldSelector());
             var combinator = new ChildrenCombinator(left, right);
 
             var result = combinator.Calculate(documentNode.Children);
@@ -40,7 +40,7 @@ namespace CodeSharper.Tests.Languages.Csv.Nodes
             var documentNode = compiler.Parse(input).As<CsvCompilationUnit>();
 
             // When
-            var right = new NodeSelectionCombinator(new FieldNodeSelector());
+            var right = new SelectionCombinator(new FieldSelector());
             var combinator = new RelativeNodeCombinator(new UniversalCombinator(), right);
 
             var result = combinator.Calculate(new[] { documentNode });

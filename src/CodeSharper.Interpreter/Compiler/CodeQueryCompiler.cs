@@ -8,6 +8,8 @@ using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Interpreter.Common;
 using CodeSharper.Interpreter.Visitors;
+using DefaultSelectorFactory = CodeSharper.Interpreter.Visitors.DefaultSelectorFactory;
+using ISelectorFactory = CodeSharper.Interpreter.Visitors.ISelectorFactory;
 
 namespace CodeSharper.Interpreter.Compiler
 {
@@ -18,13 +20,13 @@ namespace CodeSharper.Interpreter.Compiler
         /// </summary>
         public ControlFlowElementBase Parse(String input)
         {
-            return Parse(input,new DefaultNodeSelectorFactory(), new DefaultCodeQueryCommandFactory());
+            return Parse(input,new DefaultSelectorFactory(), new DefaultCodeQueryCommandFactory());
         }
 
         /// <summary>
         /// Parses the specified input.
         /// </summary>
-        public ControlFlowElementBase Parse(String input, INodeSelectorFactory nodeSelectorFactory, ICodeQueryCommandFactory factory)
+        public ControlFlowElementBase Parse(String input, ISelectorFactory selectorFactory, ICodeQueryCommandFactory factory)
         {
             Assume.NotNull(input, "input");
             Assume.NotNull(factory, "factory");
@@ -37,7 +39,7 @@ namespace CodeSharper.Interpreter.Compiler
             };
             var start = parser.command();
 
-            var visitor = new CodeQuerySyntaxTreeBuilder(nodeSelectorFactory, factory);
+            var visitor = new CodeQuerySyntaxTreeBuilder(selectorFactory, factory);
             return visitor.Visit(start) as ControlFlowElementBase;
         }
     }

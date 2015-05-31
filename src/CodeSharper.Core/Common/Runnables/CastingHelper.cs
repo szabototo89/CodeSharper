@@ -30,7 +30,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Casts the specified element.
         /// </summary>
-        public IEnumerable<TCast> Cast(Object element)
+        public virtual IEnumerable<TCast> Cast(Object element)
         {
             if (element is IEnumerable<TCast>)
             {
@@ -44,6 +44,17 @@ namespace CodeSharper.Core.Common.Runnables
             }
 
             throw new Exception(String.Format("Cannot cast to enumerable of {0}", typeof(TCast).FullName));
+        }
+    }
+
+    public class GreadyEnumerableCastingHelper<TCast> : EnumerableCastingHelper<TCast>
+    {
+        /// <summary>
+        /// Casts the specified element.
+        /// </summary>
+        public override IEnumerable<TCast> Cast(Object element)
+        {
+            return base.Cast(element).ToArray();
         }
     }
 }

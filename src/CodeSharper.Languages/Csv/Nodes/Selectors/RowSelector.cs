@@ -3,5 +3,6 @@ using CodeSharper.Languages.Csv.SyntaxTrees;
 
 namespace CodeSharper.Languages.Csv.Nodes.Selectors
 {
-    public class FieldNodeSelector : TypedNodeSelectorBase<FieldDeclarationSyntax> { }
+    public class RowSelector : TypedSelectorBase<RowDeclarationSyntax> { }
+
 }

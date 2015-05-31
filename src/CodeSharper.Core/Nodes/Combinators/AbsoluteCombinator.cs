@@ -16,7 +16,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Gets or sets the node selector
         /// </summary>
-        public NodeSelectorBase NodeSelector { get; protected set; }
+        public SelectorBase Selector { get; protected set; }
 
         /// <summary>
         /// Gets the node modifiers.
@@ -26,11 +26,11 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Initializes a new instance of the <see cref="AbsoluteCombinator"/> class.
         /// </summary>
-        public AbsoluteCombinator(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> nodeModifiers = null)
+        public AbsoluteCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> nodeModifiers = null)
         {
-            Assume.NotNull(nodeSelector, "nodeSelector");
+            Assume.NotNull(selector, "Selector");
 
-            NodeSelector = nodeSelector;
+            Selector = selector;
             NodeModifiers = nodeModifiers.GetOrEmpty();
         }
 
@@ -39,7 +39,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
-            var filteredNodes = values.Where(node => NodeSelector.FilterNode(node));
+            var filteredNodes = values.SelectMany(node => Selector.SelectElement(node));
 
             if (NodeModifiers.Any())
             {

@@ -140,7 +140,7 @@ namespace CodeSharper.Core.Services
                     assignableFromType = typeof(CombinatorBase);
                     break;
                 case DescriptorType.Selector:
-                    assignableFromType = typeof(NodeSelectorBase);
+                    assignableFromType = typeof(SelectorBase);
                     break;
                 case DescriptorType.PseudoSelector:
                     assignableFromType = typeof(NodeModifierBase);

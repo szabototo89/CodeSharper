@@ -4,14 +4,11 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Selectors
 {
-    public class UniversalSelector : SelectorBase
+    public abstract class SelectorBase
     {
         /// <summary>
         /// Filters the specified element. Returns true if specified element is in the selection otherwise false.
         /// </summary>
-        public override IEnumerable<Object> SelectElement(Object element)
-        {
-            yield return element;
-        }
+        public abstract IEnumerable<Object> SelectElement(Object element);
     }
 }

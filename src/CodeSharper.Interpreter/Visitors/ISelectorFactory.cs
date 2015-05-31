@@ -4,7 +4,7 @@ using CodeSharper.Interpreter.Common;
 
 namespace CodeSharper.Interpreter.Visitors
 {
-    public interface INodeSelectorFactory
+    public interface ISelectorFactory
     {
         /// <summary>
         /// Creates the unary selector element.

@@ -24,12 +24,25 @@ namespace CodeSharper.Core.Nodes.Combinators
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
             var leftExpression = Left.Calculate(values).OfType<IHasChildren<Object>>();
-            foreach (var node in leftExpression)
+
+            if (leftExpression.Any())
             {
-                var children = node.ToEnumerable();
-                foreach (var result in Right.Calculate(children))
+                foreach (var node in leftExpression)
                 {
-                    yield return result;
+                    var children = node.ToEnumerable();
+                    foreach (var result in Right.Calculate(children))
+                    {
+                        yield return result;
+                    }
+                }
+            }
+            else
+            {
+                var elements = Right.Calculate(Left.Calculate(values));
+
+                foreach (var element in elements)
+                {
+                    yield return element;
                 }
             }
         }

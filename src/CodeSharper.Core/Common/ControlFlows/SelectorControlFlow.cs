@@ -26,7 +26,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// </summary>
         public override Object Execute(Object parameter)
         {
-            if (parameter is IEnumerable)
+            if (!(parameter is String) && parameter is IEnumerable)
             {
                 return Combinator.Calculate(((IEnumerable)parameter).OfType<Object>());
             }

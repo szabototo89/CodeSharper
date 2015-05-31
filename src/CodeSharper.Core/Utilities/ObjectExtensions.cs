@@ -62,5 +62,16 @@ namespace CodeSharper.Core.Utilities
             Double number;
             return Double.TryParse(Convert.ToString(expression, CultureInfo.InvariantCulture), System.Globalization.NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
         }
+
+        public static Boolean Is<T>(this Object value, Action<T> function)
+        {
+            if (value is T)
+            {
+                function((T)value);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

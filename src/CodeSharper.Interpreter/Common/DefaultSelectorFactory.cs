@@ -14,7 +14,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a selector by specified name.
         /// </summary>
-        public virtual NodeSelectorBase CreateSelector(Type selectorType)
+        public virtual SelectorBase CreateSelector(Type selectorType)
         {
             Assume.NotNull(selectorType, "selectorType");
 
@@ -22,7 +22,7 @@ namespace CodeSharper.Interpreter.Common
             var constructors = selectorType.GetConstructors();
             var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
             if (defaultConstructor != null)
-                return defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as NodeSelectorBase;
+                return defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as SelectorBase;
 
             throw new Exception(String.Format("Cannot find default constructor for selector: {0}", selectorType.FullName));
         }
@@ -55,7 +55,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a pseudo selector.
         /// </summary>
-        public virtual NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, NodeSelectorBase selector)
+        public virtual NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, SelectorBase selector)
         {
             Assume.NotNull(pseudoSelectorType, "pseudoSelectorType");
             Assume.NotNull(arguments, "arguments");

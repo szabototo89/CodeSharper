@@ -80,9 +80,9 @@
     <Compile Include="Visitors\CodeQuerySyntaxTreeBuilder.cs" />
     <Compile Include="Visitors\CodeQueryVisitor.cs" />
     <Compile Include="Visitors\DefaultCodeQueryCommandFactory.cs" />
-    <Compile Include="Visitors\DefaultNodeSelectorFactory.cs" />
+    <Compile Include="Visitors\DefaultSelectorFactory.cs" />
     <Compile Include="Visitors\ICodeQueryCommandFactory.cs" />
-    <Compile Include="Visitors\INodeSelectorFactory.cs" />
+    <Compile Include="Visitors\ISelectorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeSharper.Core\CodeSharper.Core.csproj">

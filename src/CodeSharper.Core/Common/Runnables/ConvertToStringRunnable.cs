@@ -22,6 +22,11 @@ namespace CodeSharper.Core.Common.Runnables
         {
             if (parameter == null) return "(null)";
 
+            if (parameter is String)
+            {
+                return (String) parameter;
+            }
+
             if (parameter is IEnumerable)
             {
                 var enumerable = parameter.Cast<IEnumerable>()

@@ -24,17 +24,17 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Gets or sets the node selectorElement factory.
         /// </summary>
-        public INodeSelectorFactory NodeSelectorFactory { get; protected set; }
+        public ISelectorFactory SelectorFactory { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CodeQuerySyntaxTreeBuilder"/> class.
         /// </summary>
-        public CodeQuerySyntaxTreeBuilder(INodeSelectorFactory nodeSelectorFactory, ICodeQueryCommandFactory treeFactory)
+        public CodeQuerySyntaxTreeBuilder(ISelectorFactory selectorFactory, ICodeQueryCommandFactory treeFactory)
         {
             Assume.NotNull(treeFactory, "treeFactory");
-            Assume.NotNull(nodeSelectorFactory, "nodeSelectorFactory");
+            Assume.NotNull(selectorFactory, "SelectorFactory");
             TreeFactory = treeFactory;
-            NodeSelectorFactory = nodeSelectorFactory;
+            SelectorFactory = selectorFactory;
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.AttributeName.Text;
             var value = context.AttributeValue.Accept(this) as ConstantElement;
 
-            return NodeSelectorFactory.CreateAttributeSelector(name, value);
+            return SelectorFactory.CreateAttributeSelector(name, value);
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace CodeSharper.Interpreter.Visitors
             if (context.constant() != null)
                 values = context.constant().AcceptAll(this).OfType<ConstantElement>().ToArray();
 
-            return NodeSelectorFactory.CreatePseudoSelector(name, values);
+            return SelectorFactory.CreatePseudoSelector(name, values);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace CodeSharper.Interpreter.Visitors
             if (context.ID() != null)
                 values = context.ID().Select(id => TreeFactory.CreateString(id.GetText()));
 
-            return NodeSelectorFactory.CreatePseudoSelector(name, values);
+            return SelectorFactory.CreatePseudoSelector(name, values);
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace CodeSharper.Interpreter.Visitors
             var attributes = context.selectorAttribute().AcceptAll(this).Cast<AttributeElement>();
             var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelectorElement>();
 
-            return NodeSelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors);
+            return SelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             var element = context.Value.Accept(this).Cast<ElementTypeSelector>();
 
-            return NodeSelectorFactory.CreateUnarySelector(element);
+            return SelectorFactory.CreateUnarySelector(element);
         }
 
         /// <summary>
@@ -373,9 +373,9 @@ namespace CodeSharper.Interpreter.Visitors
             var right = context.Right.Accept(this).As<SelectorElementBase>();
 
             var @operator = context.SelectorOperator.Safe(value => value.Text) ?? String.Empty;
-            var selectorOperator = NodeSelectorFactory.CreateCombinator(@operator);
+            var selectorOperator = SelectorFactory.CreateCombinator(@operator);
 
-            return NodeSelectorFactory.CreateBinarySelector(left, right, selectorOperator);
+            return SelectorFactory.CreateBinarySelector(left, right, selectorOperator);
         }
 
         #endregion

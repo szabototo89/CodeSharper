@@ -83,14 +83,15 @@
     <Compile Include="Json\SyntaxTrees\Tokens\ParenthesisType.cs" />
     <Compile Include="Json\Visitors\JsonSyntaxTreeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Csv\Nodes\Selectors\FieldNodeSelector.cs" />
-    <Compile Include="Csv\Nodes\Selectors\RowNodeSelector.cs" />
+    <Compile Include="Csv\Nodes\Selectors\FieldSelector.cs" />
+    <Compile Include="Csv\Nodes\Selectors\RowSelector.cs" />
     <Compile Include="Csv\SemanticTrees\ColumnSemanticNode.cs" />
     <Compile Include="Csv\SyntaxTrees\CommaToken.cs" />
     <Compile Include="Csv\SyntaxTrees\CsvCompilationUnit.cs" />
     <Compile Include="Csv\SyntaxTrees\FieldDeclarationSyntax.cs" />
     <Compile Include="Csv\SyntaxTrees\RowDeclarationSyntax.cs" />
     <Compile Include="Csv\Visitors\CsvSyntaxTreeBuilder.cs" />
+    <Compile Include="Text\Nodes\Selectors\CharacterSelector.cs" />
     <Compile Include="Utilities\ParseTreeVisitorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

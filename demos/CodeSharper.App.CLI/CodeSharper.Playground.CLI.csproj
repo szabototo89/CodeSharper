@@ -69,6 +69,7 @@
     <Content Include="Examples\example-2.txt" />
     <Content Include="Examples\example-1.txt" />
     <Content Include="Examples\example-3.txt" />
+    <Content Include="Examples\lorem.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

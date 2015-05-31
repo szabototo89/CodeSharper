@@ -9,26 +9,26 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Nodes.Combinators
 {
-    public class NodeSelectionCombinator : UnaryCombinator
+    public class SelectionCombinator : UnaryCombinator
     {
         /// <summary>
         /// Gets or sets the node selector.
         /// </summary>
-        public NodeSelectorBase NodeSelector { get; protected set; }
-
+        public SelectorBase Selector { get; protected set; }
+        
         /// <summary>
         /// Gets or sets the modifiers.
         /// </summary>
         public IEnumerable<NodeModifierBase> Modifiers { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NodeSelectionCombinator"/> class.
+        /// Initializes a new instance of the <see cref="SelectionCombinator"/> class.
         /// </summary>
-        public NodeSelectionCombinator(NodeSelectorBase nodeSelector, IEnumerable<NodeModifierBase> modifiers = null)
+        public SelectionCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> modifiers = null)
         {
-            Assume.NotNull(nodeSelector, "nodeSelector");
+            Assume.NotNull(selector, "selector");
 
-            NodeSelector = nodeSelector;
+            Selector = selector;
             Modifiers = modifiers.GetOrEmpty();
         }
 
@@ -38,25 +38,22 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <param name="values">The values.</param>
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
-            var filteredNodes = values.GetOrEmpty().Where(NodeSelector.FilterNode);
-            foreach (var node in filteredNodes)
+            var filteredElements = values.GetOrEmpty().SelectMany(node => Selector.SelectElement(node));
+            foreach (var filteredElement in filteredElements)
             {
                 if (Modifiers.Any())
                 {
                     foreach (var modifier in Modifiers)
                     {
-                        foreach (var element in modifier.ModifySelection(node))
+                        foreach (var element in modifier.ModifySelection(filteredElement))
                         {
                             yield return element;
                         }
-
-                        // result.AddRange(modifier.ModifySelection(node));
                     }
                 }
                 else
                 {
-                    yield return node;
-                    // result.Add(node);
+                    yield return filteredElement;
                 }
             }
         }

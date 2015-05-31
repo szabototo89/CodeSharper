@@ -13,7 +13,8 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Initializes a new instance of the <see cref="ChildrenCombinator"/> class.
         /// </summary>
-        public ChildrenCombinator(CombinatorBase left, CombinatorBase right) : base(left, right)
+        public ChildrenCombinator(CombinatorBase left, CombinatorBase right)
+            : base(left, right)
         {
         }
 

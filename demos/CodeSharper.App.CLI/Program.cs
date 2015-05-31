@@ -110,7 +110,8 @@ namespace CodeSharper.Playground.CLI
             var runnableFactory = new DefaultRunnableFactory(new[]
             {
                 typeof(RepeatRunnable), typeof(ConvertToStringRunnable), typeof(FilterRunnable), typeof(ConvertCaseRunnable),
-                typeof(ConvertToTextRangeRunnable), typeof(ReplaceTextRunnable), typeof(ReplaceTextInteractiveRunnable)
+                typeof(ConvertToTextRangeRunnable), typeof(ReplaceTextRunnable), typeof(ReplaceTextInteractiveRunnable),
+                typeof(TakeRunnable), typeof(SkipRunnable), typeof(ElementAtRunnable), typeof(RangeRunnable), typeof(LengthRunnable)
             });
             var assemblies = new[] { Assembly.Load("CodeSharper.Core"), Assembly.GetExecutingAssembly(), Assembly.Load("CodeSharper.Languages") };
             var repository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master\demos\CodeSharper.App.CLI\descriptors.json", assemblies);
@@ -148,14 +149,16 @@ namespace CodeSharper.Playground.CLI
             {
                 try
                 {
-                    root = JsonCompiler.Parse(content);
+                    var textDocument = new TextDocument(content);
+                    // root = CsvCompiler.Parse(content);
                     Console.Write("> ");
                     response = Console.ReadLine();
                     response += " | @convert-to-string";
                     var controlFlowDescriptor = Compiler.Parse(response);
                     var controlFlow = ControlFlowFactory.Create(controlFlowDescriptor);
-                    var result = controlFlow.Execute(root) as String;
-                    content = root.TextRange.GetText();
+                    var result = controlFlow.Execute(new[] { textDocument.TextRange }) as String;
+                    // content = root.TextRange.GetText();
+                    content = textDocument.Text;
 
                     Console.WriteLine("{0}", result);
                 }

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
+using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.SyntaxTrees;
+using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables
@@ -18,11 +19,27 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        public override IEnumerable<Object> Run(IEnumerable<Object> nodes)
+        public override IEnumerable<Object> Run(IEnumerable<Object> elements)
         {
-            foreach (var element in nodes.OfType<Node>())
+            foreach (var element in elements)
             {
-                if (Regex.IsMatch(element.TextRange.GetText(), Pattern))
+                String input = null;
+
+                if (element is IHasTextRange)
+                {
+                    var node = (IHasTextRange)element;
+                    input = node.TextRange.GetText();
+                }
+                else if (element is TextRange)
+                {
+                    input = ((TextRange)element).GetText();
+                }
+                else if (element is String)
+                {
+                    input = (String)element;
+                }
+
+                if (input != null && Regex.IsMatch(input, Pattern))
                 {
                     yield return element;
                 }

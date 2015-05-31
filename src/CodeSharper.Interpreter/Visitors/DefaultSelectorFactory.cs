@@ -5,7 +5,7 @@ using CodeSharper.Interpreter.Common;
 
 namespace CodeSharper.Interpreter.Visitors
 {
-    public class DefaultNodeSelectorFactory : INodeSelectorFactory
+    public class DefaultSelectorFactory : ISelectorFactory
     {
         /// <summary>
         /// Creates the unary selectorElement.
