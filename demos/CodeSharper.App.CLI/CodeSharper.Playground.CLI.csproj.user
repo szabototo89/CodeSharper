@@ -6,4 +6,7 @@
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <StartArguments>D:\Development\Projects\C#\CodeSharper\master\demos\CodeSharper.App.CLI\Examples\lorem.txt</StartArguments>
+  </PropertyGroup>
 </Project>
