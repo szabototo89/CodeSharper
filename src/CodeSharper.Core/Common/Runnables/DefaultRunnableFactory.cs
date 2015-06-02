@@ -63,7 +63,7 @@ namespace CodeSharper.Core.Common.Runnables
                 throw new Exception("Cannot find default constructor of Runnable instance!");
             }
 
-            // update properties via [BindTo] attribute
+            // update properties via [Parameter] attribute
             var properties = runnableType
                 .GetProperties()
                 .Select(prop => new {

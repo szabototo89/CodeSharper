@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
 {
     public class ElementAtRunnable : RunnableBase<IEnumerable<Object>, IEnumerable<Object>>
     {

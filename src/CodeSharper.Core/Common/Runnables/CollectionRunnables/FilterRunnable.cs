@@ -4,11 +4,10 @@ using System.Text.RegularExpressions;
 using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
-using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
 {
     [Consumes(typeof(MultiValueConsumer<IEnumerable<Object>>))]
     public class FilterRunnable : RunnableBase<IEnumerable<Object>, IEnumerable<Object>>

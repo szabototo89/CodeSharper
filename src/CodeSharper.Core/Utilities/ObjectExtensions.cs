@@ -73,5 +73,13 @@ namespace CodeSharper.Core.Utilities
 
             return false;
         }
+
+        public static TResult SafeInvoke<TParameter, TResult>(this Func<TParameter, TResult> function, TParameter parameter)
+        {
+            if (function != null)
+                return function(parameter);
+            return default(TResult);
+        }
+
     }
 }

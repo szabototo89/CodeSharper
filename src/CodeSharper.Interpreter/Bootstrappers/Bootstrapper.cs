@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.Services;
+using CodeSharper.Core.Utilities;
 using CodeSharper.Interpreter.Common;
 using CodeSharper.Interpreter.Compiler;
 
@@ -70,28 +72,23 @@ namespace CodeSharper.Interpreter.Bootstrappers
         /// <summary>
         /// Initializes a new instance of the <see cref="Bootstrapper"/> class.
         /// </summary>
-        protected Bootstrapper(IRunnableFactory runnableFactory, IDescriptorRepository descriptorRepository = null, Func<Bootstrapper, ICommandDescriptorManager> commandDescriptorManager = null, Func<Bootstrapper, ICommandCallResolver> commandResolver = null, Func<Bootstrapper, ISelectorFactory> selectorFactory = null, Func<Bootstrapper, ISelectorResolver> selectorResolver = null, Func<Bootstrapper, IRunnableManager> runnableManager = null, Func<Bootstrapper, IExecutor> executor = null, Func<Bootstrapper, IControlFlowFactory<ControlFlowBase>> controlFlowFactory = null)
+        public Bootstrapper(IRunnableFactory runnableFactory, IDescriptorRepository descriptorRepository, Func<Bootstrapper, ICommandDescriptorManager> commandDescriptorManager = null, Func<Bootstrapper, ICommandCallResolver> commandResolver = null, Func<Bootstrapper, ISelectorFactory> selectorFactory = null, Func<Bootstrapper, ISelectorResolver> selectorResolver = null, Func<Bootstrapper, IRunnableManager> runnableManager = null, Func<Bootstrapper, IExecutor> executor = null, Func<Bootstrapper, IControlFlowFactory<ControlFlowBase>> controlFlowFactory = null)
         {
+            Assume.NotNull(runnableFactory, "runnableFactory");
             Assume.NotNull(descriptorRepository, "descriptorRepository");
-            Assume.NotNull(commandDescriptorManager, "commandDescriptorManager");
-            Assume.NotNull(commandResolver, "commandResolver");
-            Assume.NotNull(selectorFactory, "selectorFactory");
-            Assume.NotNull(selectorResolver, "selectorResolver");
-            Assume.NotNull(runnableManager, "runnableManager");
-            Assume.NotNull(executor, "executor");
-            Assume.NotNull(controlFlowFactory, "controlFlowFactory");
 
             RunnableFactory = runnableFactory;
-            CommandDescriptorManager = commandDescriptorManager(this) ?? new DefaultCommandDescriptorManager();
-            CommandCallResolver = commandResolver(this) ?? new DefaultCommandCallResolver(descriptorRepository, RunnableFactory);
-            SelectorFactory = selectorFactory(this) ?? new DefaultSelectorFactory();
             DescriptorRepository = descriptorRepository;
-            SelectorResolver = selectorResolver(this) ?? new DefaultSelectorResolver(SelectorFactory, DescriptorRepository);
-            RunnableManager = runnableManager(this) ?? new DefaultRunnableManager();
-            Executor = executor(this) ?? new StandardExecutor(RunnableManager);
+            CommandDescriptorManager = commandDescriptorManager.SafeInvoke(this) ?? new DefaultCommandDescriptorManager();
+            CommandCallResolver = commandResolver.SafeInvoke(this) ?? new DefaultCommandCallResolver(descriptorRepository, RunnableFactory);
+            SelectorFactory = selectorFactory.SafeInvoke(this) ?? new DefaultSelectorFactory();
+            SelectorResolver = selectorResolver.SafeInvoke(this) ?? new DefaultSelectorResolver(SelectorFactory, DescriptorRepository);
+            RunnableManager = runnableManager.SafeInvoke(this) ?? new DefaultRunnableManager();
+            Executor = executor.SafeInvoke(this) ?? new StandardExecutor(RunnableManager);
 
-            ControlFlowFactory = controlFlowFactory(this) ?? new DefaultControlFlowFactory(CommandCallResolver, SelectorResolver, Executor);
+            ControlFlowFactory = controlFlowFactory.SafeInvoke(this) ?? new DefaultControlFlowFactory(CommandCallResolver, SelectorResolver, Executor);
             Compiler = new CodeQueryCompiler();
         }
     }
+
 }

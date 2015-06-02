@@ -29,6 +29,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,12 +91,14 @@
     <Compile Include="Common\IRunnableManager.cs" />
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />
+    <Compile Include="Common\Runnables\AutoRunnableResolver.cs" />
     <Compile Include="Common\Runnables\CastingHelper.cs" />
     <Compile Include="Common\Runnables\ConvertCaseRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeMultiValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\GreadyMultiValueConsumer.cs" />
-    <Compile Include="Common\Runnables\ElementAtRunnable.cs" />
+    <Compile Include="Common\Runnables\CollectionRunnables\ElementAtRunnable.cs" />
+    <Compile Include="Common\Runnables\CollectionRunnables\LengthRunnable.cs" />
     <Compile Include="Common\Runnables\ParameterAttribute.cs" />
     <Compile Include="Common\Runnables\Converters\FlattenValueProducer.cs" />
     <Compile Include="Common\Runnables\Converters\MultiValueConsumer.cs" />
@@ -89,18 +109,18 @@
     <Compile Include="Common\Runnables\ConvertToStringRunnable.cs" />
     <Compile Include="Common\Runnables\DefaultRunnableFactory.cs" />
     <Compile Include="Common\Runnables\ErrorMessage.cs" />
-    <Compile Include="Common\Runnables\FilterRunnable.cs" />
+    <Compile Include="Common\Runnables\CollectionRunnables\FilterRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnable.cs" />
     <Compile Include="Common\Runnables\IRunnableFactory.cs" />
     <Compile Include="Common\Runnables\JoinLinesTextRunnable.cs" />
-    <Compile Include="Common\Runnables\RangeRunnable.cs" />
+    <Compile Include="Common\Runnables\CollectionRunnables\RangeRunnable.cs" />
     <Compile Include="Common\Runnables\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextInteractiveRunnable.cs" />
     <Compile Include="Common\Runnables\ReplaceTextRunnable.cs" />
     <Compile Include="Common\Runnables\RunnableBase.cs" />
     <Compile Include="Common\Runnables\RunnableBaseWithCastingHelper.cs" />
-    <Compile Include="Common\Runnables\SkipRunnable.cs" />
-    <Compile Include="Common\Runnables\TakeRunnable.cs" />
+    <Compile Include="Common\Runnables\CollectionRunnables\SkipRunnable.cs" />
+    <Compile Include="Common\Runnables\CollectionRunnables\TakeRunnable.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\Interfaces\IHasChildren.cs" />
