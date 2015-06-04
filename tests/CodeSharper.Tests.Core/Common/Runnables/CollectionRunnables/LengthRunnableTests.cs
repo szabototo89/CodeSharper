@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables.CollectionRunnables;
 using CodeSharper.Core.Texts;
 using NUnit.Framework;
@@ -35,20 +36,20 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
             var result = underTest.Run(parameter);
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] { 8 }));
+            Assert.That(result, Is.EquivalentTo(new[] {8}));
         }
 
         [Test(Description = "Run should return enumerable length when not empty enumerable is passed")]
         public void Run_ShouldReturnEnumerableLength_WhenNotEmptyEnumerableIsPassed()
         {
             // Given in setup
-            var parameter = new[] { 1, 2, 3 };
+            var parameter = new[] {1, 2, 3};
 
             // When
             var result = underTest.Run(parameter);
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] { 3 }));
+            Assert.That(result, Is.EquivalentTo(new[] {3}));
         }
 
         [Test(Description = "Run should return an empty array when null is passed")]
@@ -74,7 +75,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
             var result = underTest.Run(textRange);
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] { 5 }));
+            Assert.That(result, Is.EquivalentTo(new[] {5}));
         }
 
         #endregion

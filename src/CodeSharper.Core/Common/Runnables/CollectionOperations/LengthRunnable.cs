@@ -14,25 +14,23 @@ namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
         /// </summary>
         public override IEnumerable<Object> Run(Object parameter)
         {
+            if (parameter is String)
+            {
+                var text = (String)parameter;
+                return new Object[] { text.Length };
+            }
             if (parameter is IEnumerable)
             {
                 var enumerable = ((IEnumerable)parameter).Cast<Object>();
-                yield return enumerable.Count();
+                return new Object[] { enumerable.Count() };
             }
-
             if (parameter is TextRange)
             {
-                var textRange = (TextRange) parameter;
-                yield return textRange.Length;
+                var textRange = (TextRange)parameter;
+                return new Object[] {textRange.Length};
             }
 
-            if (parameter is String)
-            {
-                var text = (String) parameter;
-                yield return text.Length;
-            }
-
-            yield break;
+            return Enumerable.Empty<Object>();
         }
     }
 }

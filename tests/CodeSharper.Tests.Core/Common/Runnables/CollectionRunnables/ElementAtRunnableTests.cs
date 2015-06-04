@@ -48,5 +48,19 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
             // Then
             Assert.That(result, Is.EquivalentTo(new[] { "c" }));
         }
+
+        [Test(Description = "Run should return nth element starting from end of enumerable after setting position to negative value")]
+        public void Run_ShouldReturnNthElementStartingFromEndOfEnumerable_AfterSettingPositionToNegativeValue()
+        {
+            // Given
+            underTest.Position = -2;
+            var parameter = new[] {"a", "b", "c", "d"};
+
+            // When
+            var result = underTest.Run(parameter);
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(new[] { "c" }));
+        }
     }
 }

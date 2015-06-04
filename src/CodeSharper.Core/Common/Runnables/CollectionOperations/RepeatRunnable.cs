@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeSharper.Core.Common.Runnables.Attributes;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.CollectionOperations
 {
-    public class RepeatRunnable : RunnableBase<Object, Object>
+    public class RepeatRunnable : RunnableBase<Object, IEnumerable<Object>>
     {
         /// <summary>
         /// Gets or sets the count of repeating
@@ -29,7 +28,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        public override Object Run(Object parameter)
+        public override IEnumerable<Object> Run(Object parameter)
         {
             return Enumerable.Repeat(parameter, (Int32)Count);
         }

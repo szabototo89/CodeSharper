@@ -64,13 +64,13 @@ namespace CodeSharper.Core.Common.Runnables
             }
 
             // update properties via [Parameter] attribute
-            var properties = runnableType
-                .GetProperties()
-                .Select(prop => new {
-                    Property = prop,
-                    BindTo = prop.GetCustomAttributes(typeof(ParameterAttribute), true).SingleOrDefault() as ParameterAttribute
-                })
-                .Where(prop => prop.BindTo != null);
+            var properties = runnableType.GetProperties()
+                                         .Select(property => new {
+                                             Property = property,
+                                             BindTo = property.GetCustomAttributes(typeof(ParameterAttribute), true)
+                                                              .SingleOrDefault() as ParameterAttribute
+                                         })
+                                         .Where(prop => prop.BindTo != null);
 
             foreach (var property in properties)
             {

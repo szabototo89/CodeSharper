@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.CollectionOperations;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 using NUnit.Framework;

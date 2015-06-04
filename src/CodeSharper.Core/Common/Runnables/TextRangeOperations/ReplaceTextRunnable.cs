@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Common.Runnables
+namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
 {
     [Consumes(typeof(GreadyMultiValueConsumer<TextRange>))]
     public class ReplaceTextRunnable : RunnableBase<TextRange, TextRange>

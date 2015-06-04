@@ -9,7 +9,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
 {
-    [Consumes(typeof(MultiValueConsumer<IEnumerable<Object>>))]
+    [Consumes(typeof (MultiValueConsumer<IEnumerable<Object>>))]
     public class FilterRunnable : RunnableBase<IEnumerable<Object>, IEnumerable<Object>>
     {
         [Parameter("pattern")]
@@ -26,16 +26,16 @@ namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
 
                 if (element is IHasTextRange)
                 {
-                    var node = (IHasTextRange)element;
+                    var node = (IHasTextRange) element;
                     input = node.TextRange.GetText();
                 }
                 else if (element is TextRange)
                 {
-                    input = ((TextRange)element).GetText();
+                    input = ((TextRange) element).GetText();
                 }
                 else if (element is String)
                 {
-                    input = (String)element;
+                    input = (String) element;
                 }
 
                 if (input != null && Regex.IsMatch(input, Pattern))

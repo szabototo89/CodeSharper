@@ -19,10 +19,10 @@ namespace CodeSharper.Core.Common
             var type = runnable.GetType();
 
             var attributes = type.GetCustomAttributes(inherit: true)
-                .OfType<ConsumesAttribute>();
+                                 .OfType<ConsumesAttribute>();
 
             var consumers = attributes.Select(attribute => attribute.ConsumerType)
-                .Select(consumeType => (IValueConsumer)Activator.CreateInstance(consumeType));
+                                      .Select(consumeType => (IValueConsumer) Activator.CreateInstance(consumeType));
 
             return consumers;
         }
@@ -36,10 +36,10 @@ namespace CodeSharper.Core.Common
             var type = runnable.GetType();
 
             var attributes = type.GetCustomAttributes(inherit: true)
-                .OfType<ProducesAttribute>();
+                                 .OfType<ProducesAttribute>();
 
             var producers = attributes.Select(attribute => attribute.ProducerType)
-                .Select(producerType => (IValueProducer)Activator.CreateInstance(producerType));
+                                      .Select(producerType => (IValueProducer) Activator.CreateInstance(producerType));
 
             return producers;
         }

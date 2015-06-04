@@ -73,6 +73,7 @@
     <Compile Include="Common\Runnables\DefaultRunnableFactoryTests.cs" />
     <Compile Include="Common\Runnables\CollectionRunnables\LengthRunnableTests.cs" />
     <Compile Include="Common\Runnables\RunnableTests.cs" />
+    <Compile Include="Common\Runnables\TakeRunnableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifierTests.cs" />

@@ -24,8 +24,10 @@ namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
         public override IEnumerable<Object> Run(IEnumerable<Object> parameter)
         {
             if (parameter == null)
+            {
                 return Enumerable.Empty<Object>();
-            return parameter.Skip((Int32)Start).Take((Int32)(End - Start));
+            }
+            return parameter.Skip((Int32) Start).Take((Int32) (End - Start));
         }
     }
 }
