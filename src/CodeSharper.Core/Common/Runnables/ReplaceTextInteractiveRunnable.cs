@@ -9,8 +9,9 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables
 {
-    [Consumes(typeof(ContainsTextRangeMultiValueConsumer))]
-    public class ReplaceTextInteractiveRunnable : RunnableBase<IEnumerable<TextRange>, IEnumerable<TextRange>, GreadyEnumerableCastingHelper<TextRange>>
+    [Consumes(typeof (ContainsTextRangeMultiValueConsumer))]
+    public class ReplaceTextInteractiveRunnable :
+        RunnableBase<IEnumerable<TextRange>, IEnumerable<TextRange>, GreadyEnumerableCastingHelper<TextRange>>
     {
         /// <summary>
         /// Runs an algorithm with the specified parameter.

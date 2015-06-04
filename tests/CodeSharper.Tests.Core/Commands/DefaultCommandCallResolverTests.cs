@@ -10,7 +10,7 @@ using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.Services;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Commands
@@ -42,16 +42,19 @@ namespace CodeSharper.Tests.Core.Commands
             /// </summary>
             public IEnumerable<CommandDescriptor> GetCommandDescriptors()
             {
-                yield return new CommandDescriptor {
+                yield return new CommandDescriptor
+                {
                     Name = "test-command",
-                    CommandNames = new[] { "test-command" },
-                    Arguments = new[] { 
-                                    new ArgumentDescriptor {
-                                        ArgumentName = "parameter",
-                                        ArgumentType = typeof (Boolean),
-                                        Position = 0
-                                    }
-                                }
+                    CommandNames = new[] {"test-command"},
+                    Arguments = new[]
+                    {
+                        new ArgumentDescriptor
+                        {
+                            ArgumentName = "parameter",
+                            ArgumentType = typeof (Boolean),
+                            Position = 0
+                        }
+                    }
                 };
             }
         }
@@ -63,11 +66,11 @@ namespace CodeSharper.Tests.Core.Commands
             /// </summary>
             public IRunnable Create(String runnableName, IEnumerable<KeyValuePair<String, Object>> actualArguments)
             {
-                var runnable = new Mock<IRunnable>();
-                runnable.Setup(r => r.Run(It.IsAny<Object>()))
-                        .Returns<Object>(parameter => parameter);
+                var runnable = Substitute.For<IRunnable>();
+                runnable.Run(Arg.Any<Object>())
+                        .Returns(context => context[0]);
 
-                return runnable.Object;
+                return runnable;
             }
         }
 
@@ -110,13 +113,14 @@ namespace CodeSharper.Tests.Core.Commands
 
             // When
             var result = UnderTest.CreateCommand(
-                            new CommandCallDescriptor("test-command",
-                            new[] { new PositionedCommandCallActualArgument(0, false) }));
+                new CommandCallDescriptor("test-command",
+                                          new[] {new PositionedCommandCallActualArgument(0, false)}));
 
             // Then
             Assert.That(result, Is.Not.Null);
 
-            var expectedArguments = new Dictionary<String, Object> {
+            var expectedArguments = new Dictionary<String, Object>
+            {
                 {"parameter", false}
             };
             Assert.That(result.ActualArguments, Is.EquivalentTo(expectedArguments));
@@ -128,7 +132,8 @@ namespace CodeSharper.Tests.Core.Commands
         public void CreateCommand_ShouldCreateCommand_WhenCommandIsNotFound()
         {
             // Given in setup
-            var arguments = new[] {
+            var arguments = new[]
+            {
                 new PositionedCommandCallActualArgument(0, false),
                 new PositionedCommandCallActualArgument(1, "Hello World")
             };

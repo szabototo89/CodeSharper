@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
 {
     [TestFixture]
-    internal class LengthRunnableTests : TestFixtureBase
+    internal class LengthRunnableTests : RunnableTestFixtureBase
     {
         #region Test initialization
 

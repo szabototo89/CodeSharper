@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
 {
     [TestFixture]
-    internal class ElementAtRunnableTests : TestFixtureBase
+    internal class ElementAtRunnableTests : RunnableTestFixtureBase
     {
         private ElementAtRunnable underTest;
 

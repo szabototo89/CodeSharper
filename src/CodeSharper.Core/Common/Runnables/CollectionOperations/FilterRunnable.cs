@@ -7,7 +7,7 @@ using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Common.Runnables.CollectionRunnables
+namespace CodeSharper.Core.Common.Runnables.CollectionOperations
 {
     [Consumes(typeof (MultiValueConsumer<IEnumerable<Object>>))]
     public class FilterRunnable : RunnableBase<IEnumerable<Object>, IEnumerable<Object>>

@@ -27,7 +27,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
     {
         #region Stubs for testing
 
-        [Consumes(typeof(MultiValueConsumer<Node>))]
+        [Consumes(typeof (MultiValueConsumer<Node>))]
         public class GetTextRunnable : RunnableBase<Node, TextRange>
         {
             /// <summary>
@@ -35,13 +35,16 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             /// </summary>
             public override TextRange Run(Node parameter)
             {
-                if (parameter == null) return null;
+                if (parameter == null)
+                {
+                    return null;
+                }
 
                 return parameter.TextRange;
             }
         }
 
-        [Consumes(typeof(MultiValueConsumer<TextRange>))]
+        [Consumes(typeof (MultiValueConsumer<TextRange>))]
         public class ToUpperCaseRunnable : RunnableBase<TextRange, TextRange>
         {
             /// <summary>
@@ -49,12 +52,15 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             /// </summary>
             public override TextRange Run(TextRange parameter)
             {
-                if (parameter == null) return null;
+                if (parameter == null)
+                {
+                    return null;
+                }
                 return parameter.ChangeText(parameter.GetText().ToUpper());
             }
         }
 
-        [Consumes(typeof(MultiValueConsumer<TextRange>))]
+        [Consumes(typeof (MultiValueConsumer<TextRange>))]
         public class ToStringRunnable : RunnableBase<TextRange, String>
         {
             /// <summary>
@@ -67,7 +73,6 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         }
 
         #endregion
-
 
         #region Initializing test fixture
 
@@ -86,20 +91,23 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             base.Setup();
 
             var commandDescriptorManager = new DefaultCommandDescriptorManager();
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "to-upper-case" },
+            commandDescriptorManager.Register(new CommandDescriptor
+            {
+                CommandNames = new[] {"to-upper-case"},
                 Arguments = Enumerable.Empty<ArgumentDescriptor>(),
                 Name = "ToUpperCaseRunnable"
             });
 
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "get-text" },
+            commandDescriptorManager.Register(new CommandDescriptor
+            {
+                CommandNames = new[] {"get-text"},
                 Arguments = Enumerable.Empty<ArgumentDescriptor>(),
                 Name = "GetTextRunnable"
             });
 
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "to-string" },
+            commandDescriptorManager.Register(new CommandDescriptor
+            {
+                CommandNames = new[] {"to-string"},
                 Arguments = Enumerable.Empty<ArgumentDescriptor>(),
                 Name = "ToStringRunnable"
             });
@@ -118,7 +126,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
                 Name = "IncrementRunnable"
             });*/
 
-            var runnableFactory = new DefaultRunnableFactory(new[] { typeof(ToUpperCaseRunnable), typeof(GetTextRunnable), typeof(ToStringRunnable) });
+            var runnableFactory = new DefaultRunnableFactory(new[] {typeof (ToUpperCaseRunnable), typeof (GetTextRunnable), typeof (ToStringRunnable)});
             var descriptorRepository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json");
             var commandCallResolver = new DefaultCommandCallResolver(descriptorRepository, runnableFactory);
             var selectorManager = new DefaultSelectorFactory();
@@ -132,6 +140,8 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         }
 
         #endregion
+
+        #region Tests
 
         [Test(Description = "Compilation should compile and execute CSV input when proper query is passed")]
         public void Compilation_ShouldCompileAndExecuteCsvInput_WhenProperQueryIsPassed()
@@ -150,7 +160,9 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
 
             // Then
             Assert.That(result, Is.Not.Null);
-            Assert.That(result, Is.EquivalentTo(new[] { "FIRST", "SECOND", "THIRD", "FOURTH" }));
+            Assert.That(result, Is.EquivalentTo(new[] {"FIRST", "SECOND", "THIRD", "FOURTH"}));
         }
+
+        #endregion
     }
 }

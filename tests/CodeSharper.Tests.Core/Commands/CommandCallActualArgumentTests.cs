@@ -8,7 +8,6 @@ using CodeSharper.Core.Commands;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Texts;
-using Moq;
 using NUnit.Framework;
 
 namespace CodeSharper.Tests.Core.Commands

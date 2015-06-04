@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core.Common.Runnables;
-using CodeSharper.Core.Common.Runnables.CollectionOperations;
+using System;
+using CodeSharper.Core.Common.Runnables.TextRangeOperations;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Common.Runnables
+namespace CodeSharper.Tests.Core.Common.Runnables.TextRangeOperations
 {
     [TestFixture]
-    internal class RunnableTests : TestFixtureBase
+    internal class JoinLinesTextRunnableTests : RunnableTestFixtureBase<JoinLinesTextRunnable>
     {
         private TextRange createTextRange(String text)
         {

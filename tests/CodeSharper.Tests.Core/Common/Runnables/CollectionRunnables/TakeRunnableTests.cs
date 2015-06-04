@@ -3,10 +3,10 @@ using System.Linq;
 using CodeSharper.Core.Common.Runnables.CollectionRunnables;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Common.Runnables
+namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
 {
     [TestFixture]
-    public class TakeRunnableTests : TestFixtureBase
+    public class TakeRunnableTests : RunnableTestFixtureBase
     {
         private TakeRunnable underTest;
 
@@ -16,6 +16,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables
         [SetUp]
         public void Setup()
         {
+            base.Setup();
             underTest = new TakeRunnable();
         }
 

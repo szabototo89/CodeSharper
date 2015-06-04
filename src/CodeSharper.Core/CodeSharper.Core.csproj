@@ -92,7 +92,6 @@
     <Compile Include="Common\Runnables\Attributes\ConsumesAttribute.cs" />
     <Compile Include="Common\Runnables\Attributes\ProducesAttribute.cs" />
     <Compile Include="Common\Runnables\AutoRunnableResolver.cs" />
-    <Compile Include="Common\Runnables\CollectionOperations\JoinLinesTextRunnable.cs" />
     <Compile Include="Common\Runnables\CollectionOperations\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ConversionOperations\ConvertToStringRunnable.cs" />
     <Compile Include="Common\Runnables\SimpleCastingHelper.cs" />
@@ -123,7 +122,11 @@
     <Compile Include="Common\Runnables\CollectionOperations\SkipRunnable.cs" />
     <Compile Include="Common\Runnables\CollectionOperations\TakeRunnable.cs" />
     <Compile Include="Common\Runnables\TextRangeOperations\ConvertCaseRunnable.cs" />
+    <Compile Include="Common\Runnables\TextRangeOperations\JoinLinesTextRunnable.cs" />
     <Compile Include="Common\Runnables\TextRangeOperations\ReplaceTextRunnable.cs" />
+    <Compile Include="Common\Runnables\ValueConverters\EmptyValueConverter.cs" />
+    <Compile Include="Common\Runnables\ValueConverters\IntegerValueConverter.cs" />
+    <Compile Include="Common\Runnables\ValueConverters\IValueConverter.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\Interfaces\IHasChildren.cs" />

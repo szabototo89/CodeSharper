@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CodeSharper.Core.Common.NameMatchers;
+using CodeSharper.Core.Common.Runnables.ValueConverters;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Common.Runnables
 {
     public class DefaultRunnableFactory : IRunnableFactory
     {
+        public IValueConverter ValueConverter { get; set; }
+
         /// <summary>
         /// Gets or sets the available runnables.
         /// </summary>
@@ -27,11 +30,12 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultRunnableFactory"/> class.
         /// </summary>
-        public DefaultRunnableFactory(IEnumerable<Type> availableRunnables, INameMatcher runnableNameMatcher = null, INameMatcher parameterNameMatcher = null)
+        public DefaultRunnableFactory(IEnumerable<Type> availableRunnables, IValueConverter valueConverter = null, INameMatcher runnableNameMatcher = null, INameMatcher parameterNameMatcher = null)
         {
             AvailableRunnables = availableRunnables ?? Enumerable.Empty<Type>();
             RunnableNameMatcher = runnableNameMatcher ?? new EqualityNameMatcher();
             ParameterNameMatcher = parameterNameMatcher ?? new EqualityNameMatcher();
+            ValueConverter = valueConverter ?? new EmptyValueConverter();
         }
 
         /// <summary>
@@ -75,7 +79,13 @@ namespace CodeSharper.Core.Common.Runnables
             foreach (var property in properties)
             {
                 var argument = actualArguments.FirstOrDefault(arg => ParameterNameMatcher.Match(arg.Key, property.BindTo.PropertyName));
-                property.Property.SetValue(runnable, argument.Value);
+
+                var value = argument.Value;
+                if (ValueConverter.CanConvert(value))
+                {
+                    value = ValueConverter.Convert(value);
+                }
+                property.Property.SetValue(runnable, value);
             }
 
             return runnable;

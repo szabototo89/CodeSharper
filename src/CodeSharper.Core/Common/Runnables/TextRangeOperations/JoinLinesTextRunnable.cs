@@ -3,7 +3,7 @@ using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
-namespace CodeSharper.Core.Common.Runnables.CollectionOperations
+namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
 {
     public class JoinLinesTextRunnable : RunnableBase<TextRange, TextRange>
     {
