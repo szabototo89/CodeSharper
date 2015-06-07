@@ -7,7 +7,7 @@ namespace CodeSharper.Core.Utilities
         /// <summary>
         /// Replaces the format item in a specified String with the String representation of a corresponding Object in a specified array.
         /// </summary>
-        public static String Format(this String format, params Object[] parameters)
+        public static String FormatString(this String format, params Object[] parameters)
         {
             return String.Format(format, parameters);
         }

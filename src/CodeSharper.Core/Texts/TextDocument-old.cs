@@ -6,23 +6,23 @@ using System.Linq;
 using System.Text;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
-using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Texts
 {
     public class TextDocument : ITextDocument
     {
-        private StringBuilder text;
-        private readonly SortedList<TextRange, TextRange> textRanges;
+        private StringBuilder _text;
+
+        private TextRange _root;
 
         /// <summary>
         /// Gets or sets the text of document.
         /// </summary>
         public String Text
         {
-            get { return text.ToString(); }
-            protected set { text = new StringBuilder(value); }
+            get { return _text.ToString(); }
+            protected set { _text = new StringBuilder(value); }
         }
 
         /// <summary>
@@ -35,7 +35,11 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public IEnumerable<TextRange> TextRanges
         {
-            get { return textRanges.Values.ToList().AsReadOnly(); }
+            get
+            {
+                if (_root == null) return Enumerable.Empty<TextRange>();
+                return _root.AsEnumerable();
+            }
         }
 
         /// <summary>
@@ -46,8 +50,8 @@ namespace CodeSharper.Core.Texts
             Assume.NotNull("text", text);
 
             Text = text;
-            textRanges = new SortedList<TextRange, TextRange>(TextRange.PositionComparer);
             TextRange = CreateOrGetTextRange(0, text.Length);
+            _root = TextRange;
         }
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace CodeSharper.Core.Texts
         public String GetText(TextRange textRange)
         {
             Assume.NotNull(textRange, "textRange");
-            return text.ToString(textRange.Start, textRange.Stop - textRange.Start);
+            return _text.ToString(textRange.Start, textRange.Stop - textRange.Start);
         }
 
         /// <summary>
@@ -84,11 +88,13 @@ namespace CodeSharper.Core.Texts
             Assume.IsTrue(start >= 0, "start must be positive or zero!");
             Assume.IsTrue(start <= stop, "start must be lesser than stop!");
 
-            var indexOfTextRange = textRanges.IndexOfKey(new TextRange(start, stop));
-            if (indexOfTextRange != -1)
-                return textRanges.Values[indexOfTextRange];
+            var textRange = getExistingTextRange(start, stop);
+            var isFoundExistingTextRange = (textRange != null);
 
-            return createTextRange(start, stop);
+            if (!isFoundExistingTextRange)
+                textRange = createTextRange(start, stop);
+
+            return textRange;
         }
 
         /// <summary>
@@ -115,16 +121,21 @@ namespace CodeSharper.Core.Texts
             Assume.NotNull(updatableTextRange, "updatableTextRange");
             if (offset == 0) return;
 
-            var indexOfTextRange = textRanges.IndexOfValue(updatableTextRange);
-
-            foreach (var range in textRanges.Values.Skip(indexOfTextRange + 1))
+            foreach (var range in _root.AsEnumerable()
+                                       .Where(range => !ReferenceEquals(range, updatableTextRange)))
             {
                 if (isNoConflictWith(range, updatableTextRange))
+                {
                     range.OffsetBy(offset);
+                }
                 else if (isSubRangeOf(range, updatableTextRange))
+                {
                     throw new NotImplementedException();
+                }
                 else if (isSuperRangeOf(range, updatableTextRange))
+                {
                     range.Stop += offset;
+                }
                 else if (isOverlapping(range, updatableTextRange))
                 {
                     range.OffsetBy(offset);
@@ -167,8 +178,8 @@ namespace CodeSharper.Core.Texts
             Assume.NotNull(textRange, "updatableTextRange");
             Assume.NotNull(replacedText, "replacedText");
 
-            text.Remove(textRange.Start, textRange.Stop - textRange.Start)
-                .Insert(textRange.Start, replacedText);
+            _text.Remove(textRange.Start, textRange.Stop - textRange.Start)
+                 .Insert(textRange.Start, replacedText);
 
             return this;
         }
@@ -177,10 +188,86 @@ namespace CodeSharper.Core.Texts
 
         private TextRange createTextRange(Int32 start, Int32 stop)
         {
-            var textRange = new TextRange(start, stop, this);
-            textRanges.Add(textRange, textRange);
+            var current = _root;
+
+            while (current != null)
+            {
+                if (current.Start > start)
+                    return insertTextRangeBeforeTo(current, start, stop);
+
+                if (current.Start == start && current.Stop > stop)
+                    return insertTextRangeBeforeTo(current, start, stop);
+
+                if (current.Next == null)
+                    return insertTextRangeAfterTo(current, start, stop);
+
+                current = current.Next;
+            }
+
+            if (TextRange == null)
+                return initializeTextRangeRoot(start, stop);
+
+            throw new NotImplementedException();
+        }
+
+        private TextRange initializeTextRangeRoot(Int32 start, Int32 stop)
+        {
+            return new TextRange(start, stop, this);
+        }
+
+        private TextRange insertTextRangeBeforeTo(TextRange current, Int32 start, Int32 stop)
+        {
+            var textRange = new TextRange(start, stop, this,
+                previous: current.Previous,
+                next: current);
+
+            if (current.Previous != null)
+            {
+                current.Previous.Next = textRange;
+            }
+
+            current.Previous = textRange;
+
+            if (ReferenceEquals(current, _root))
+            {
+                _root = textRange;
+            }
 
             return textRange;
+        }
+
+        private TextRange insertTextRangeAfterTo(TextRange current, Int32 start, Int32 stop)
+        {
+            var textRange = new TextRange(start, stop, this,
+                previous: current,
+                next: current.Next);
+
+            if (current.Next != null)
+            {
+                current.Next.Previous = textRange;
+            }
+
+            /*if (current.Previous != null)
+            {
+                current.Previous.Next = textRange;
+            }*/
+
+            current.Next = textRange;
+
+            return textRange;
+        }
+
+        private TextRange getExistingTextRange(Int32 start, Int32 stop)
+        {
+            var current = _root;
+
+            while (current != null)
+            {
+                if (current.Start == start && current.Stop == stop) break;
+                current = current.Next;
+            }
+
+            return current;
         }
 
         #endregion
@@ -189,7 +276,36 @@ namespace CodeSharper.Core.Texts
 
         private void removeTextRange(TextRange textRange)
         {
-            textRanges.Remove(textRange);
+            if (textRange.Previous != null)
+            {
+                textRange.Previous.Next = textRange.Next;
+            }
+
+            if (textRange.Next != null)
+            {
+                textRange.Next.Previous = textRange.Previous;
+            }
+
+            if (_root.Equals(textRange))
+            {
+                _root = textRange.Next;
+            }
+        }
+
+        #endregion
+
+        #region Helper methods for changing text ranges in TextDocument
+
+        private void changeToUpdatedTextRange(TextRange oldTextRange, TextRange newTextRange)
+        {
+            if (ReferenceEquals(oldTextRange, TextRange))
+                TextRange = newTextRange;
+
+            if (oldTextRange.Previous != null)
+                oldTextRange.Previous.Next = newTextRange;
+
+            if (oldTextRange.Next != null)
+                oldTextRange.Next.Previous = newTextRange;
         }
 
         #endregion

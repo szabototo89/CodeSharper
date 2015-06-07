@@ -43,10 +43,13 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public Boolean Equals(ElementTypeSelector other)
         {
+            var attributesEquality = Attributes != null && Attributes.SequenceEqual(other.Attributes);
+            var pseudoSelectorsEquality = PseudoSelectors != null && PseudoSelectors.SequenceEqual(other.PseudoSelectors);
+
             return String.Equals(Name, other.Name) &&
                    IsClassElement == other.IsClassElement &&
-                   Attributes.SequenceEqual(other.Attributes) &&
-                   PseudoSelectors.SequenceEqual(other.PseudoSelectors);
+                   (Attributes == other.Attributes || attributesEquality) &&
+                   (PseudoSelectors == other.PseudoSelectors || pseudoSelectorsEquality);
         }
 
         /// <summary>
@@ -58,8 +61,11 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Boolean Equals(Object obj)
         {
-            if (!(obj is ElementTypeSelector)) return false;
-            return Equals((ElementTypeSelector)obj);
+            if (!(obj is ElementTypeSelector))
+            {
+                return false;
+            }
+            return Equals((ElementTypeSelector) obj);
         }
 
         /// <summary>

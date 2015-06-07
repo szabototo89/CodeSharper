@@ -28,14 +28,16 @@ namespace CodeSharper.Core.Utilities
             where TValue : class
         {
             if (value != null)
+            {
                 return function(value);
+            }
 
             return default(TResult);
         }
 
         public static TValue Cast<TValue>(this Object value)
         {
-            return (TValue)value;
+            return (TValue) value;
         }
 
         public static Boolean Is<TType>(this Object value)
@@ -57,17 +59,19 @@ namespace CodeSharper.Core.Utilities
         public static Boolean IsNumeric(this Object expression)
         {
             if (expression == null)
+            {
                 return false;
+            }
 
             Double number;
-            return Double.TryParse(Convert.ToString(expression, CultureInfo.InvariantCulture), System.Globalization.NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
+            return Double.TryParse(Convert.ToString(expression, CultureInfo.InvariantCulture), NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
         }
 
         public static Boolean Is<T>(this Object value, Action<T> function)
         {
             if (value is T)
             {
-                function((T)value);
+                function((T) value);
                 return true;
             }
 
@@ -77,9 +81,38 @@ namespace CodeSharper.Core.Utilities
         public static TResult SafeInvoke<TParameter, TResult>(this Func<TParameter, TResult> function, TParameter parameter)
         {
             if (function != null)
+            {
                 return function(parameter);
+            }
             return default(TResult);
         }
 
+        public static Boolean IsNumber(this Object value)
+        {
+            return IsFloating(value) ||
+                   IsInteger(value) ||
+                   IsUnsignedInteger(value);
+        }
+
+        public static Boolean IsFloating(this Object value)
+        {
+            return value is Single ||
+                   value is Double ||
+                   value is Decimal;
+        }
+
+        public static Boolean IsInteger(this Object value)
+        {
+            return value is Int16 ||
+                   value is Int32 ||
+                   value is Int64;
+        }
+
+        public static Boolean IsUnsignedInteger(this Object value)
+        {
+            return value is UInt16 ||
+                   value is UInt32 ||
+                   value is UInt64;
+        }
     }
 }

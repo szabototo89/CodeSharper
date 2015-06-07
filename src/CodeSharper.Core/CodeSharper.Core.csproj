@@ -94,6 +94,8 @@
     <Compile Include="Common\Runnables\AutoRunnableResolver.cs" />
     <Compile Include="Common\Runnables\CollectionOperations\RepeatRunnable.cs" />
     <Compile Include="Common\Runnables\ConversionOperations\ConvertToStringRunnable.cs" />
+    <Compile Include="Common\Runnables\Converters\GreadyEnumerableValueProducer.cs" />
+    <Compile Include="Common\Runnables\ConvertToTextRangeRunnable.cs" />
     <Compile Include="Common\Runnables\SimpleCastingHelper.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeMultiValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeValueConsumer.cs" />
@@ -164,7 +166,12 @@
     <Compile Include="Services\IDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
-    <Compile Include="Texts\TextRange.cs" />
+    <Compile Include="Texts\TextDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Texts\TextRange.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Trees\IHasSyntaxTree.cs" />
     <Compile Include="SyntaxTrees\ILeaf.cs" />
     <Compile Include="SyntaxTrees\SyntaxToken.cs" />
@@ -178,7 +185,6 @@
     <Compile Include="Utilities\NodeExtensions.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Texts\TextDocument.cs" />
     <Compile Include="Utilities\Option.cs" />
     <Compile Include="Utilities\OptionExtensions.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />

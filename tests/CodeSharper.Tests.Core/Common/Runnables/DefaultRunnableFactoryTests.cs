@@ -87,7 +87,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables
 
             // Then
             Assert.That(result.Number, Is.EqualTo(10));
-            valueConverter.Received(1).CanConvert(10.0);
+            valueConverter.Received(1).CanConvert(10.0, typeof(Int32));
             valueConverter.Received(1).Convert(10.0);
         }
     }

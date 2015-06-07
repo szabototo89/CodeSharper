@@ -7,7 +7,7 @@ namespace CodeSharper.Core.Common.Runnables.ValueConverters
         /// <summary>
         /// Determines whether this instance can convert the specified value.
         /// </summary>
-        public Boolean CanConvert(Object value)
+        public Boolean CanConvert(Object value, Type conversionType)
         {
             return false;
         }

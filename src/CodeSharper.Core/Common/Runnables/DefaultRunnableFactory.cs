@@ -5,6 +5,7 @@ using System.Reflection;
 using CodeSharper.Core.Common.NameMatchers;
 using CodeSharper.Core.Common.Runnables.ValueConverters;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables
 {
@@ -81,7 +82,7 @@ namespace CodeSharper.Core.Common.Runnables
                 var argument = actualArguments.FirstOrDefault(arg => ParameterNameMatcher.Match(arg.Key, property.BindTo.PropertyName));
 
                 var value = argument.Value;
-                if (ValueConverter.CanConvert(value))
+                if (ValueConverter.CanConvert(value, property.Property.PropertyType))
                 {
                     value = ValueConverter.Convert(value);
                 }

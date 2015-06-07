@@ -67,6 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\CompilerModuleBase.cs" />
+    <Compile Include="Modules\CsvCompilerModule.cs" />
+    <Compile Include="Modules\JsonCompilerModule.cs" />
+    <Compile Include="Modules\TextCompilerModule.cs" />
+    <Compile Include="Modules\DocumentResults.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

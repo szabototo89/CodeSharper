@@ -48,20 +48,6 @@ namespace CodeSharper.Playground.CLI
         /// </summary>
         public static JsonCompiler JsonCompiler { get; protected set; }
 
-
-        [Consumes(typeof(MultiValueConsumer<Node>))]
-        public class ConvertToTextRangeRunnable : RunnableBase<Node, TextRange>
-        {
-            /// <summary>
-            /// Runs an algorithm with the specified parameter.
-            /// </summary>
-            public override TextRange Run(Node parameter)
-            {
-                if (parameter == null) return null;
-                return parameter.TextRange;
-            }
-        }
-
         private static void initializeApplication()
         {
             var commandDescriptorManager = new DefaultCommandDescriptorManager();
@@ -153,16 +139,16 @@ namespace CodeSharper.Playground.CLI
             {
                 try
                 {
-                    var textDocument = new TextDocument(content);
-                    // root = CsvCompiler.Parse(content);
+                    // var textDocument = new TextDocument(content);
+                    root = CsvCompiler.Parse(content);
                     Console.Write("> ");
                     response = Console.ReadLine();
                     response += " | @convert-to-string";
                     var controlFlowDescriptor = Compiler.Parse(response);
                     var controlFlow = ControlFlowFactory.Create(controlFlowDescriptor);
-                    var result = controlFlow.Execute(new[] { textDocument.TextRange }) as String;
-                    // content = root.TextRange.GetText();
-                    content = textDocument.Text;
+                    var result = controlFlow.Execute(new[] { root }) as String;
+                    content = root.TextRange.GetText();
+                    // content = textDocument.Text;
 
                     Console.WriteLine("{0}", result);
                 }

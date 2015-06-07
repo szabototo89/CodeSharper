@@ -15,7 +15,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.ValueConverters
             var underTest = new EmptyValueConverter();
 
             // When
-            var result = underTest.CanConvert(value);
+            var result = underTest.CanConvert(value, typeof(Object));
 
             // Then
             Assert.That(result, Is.False);

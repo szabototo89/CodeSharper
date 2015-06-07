@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.CompilerServices;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables.ValueConverters
 {
@@ -7,9 +9,9 @@ namespace CodeSharper.Core.Common.Runnables.ValueConverters
         /// <summary>
         /// Determines whether this instance can convert the specified value.
         /// </summary>
-        public Boolean CanConvert(Object value)
+        public Boolean CanConvert(Object value, Type conversionType)
         {
-            return value is Single || value is Double;
+            return value.IsNumber();
         }
 
         /// <summary>
@@ -17,6 +19,11 @@ namespace CodeSharper.Core.Common.Runnables.ValueConverters
         /// </summary>
         public Object Convert(Object value)
         {
+            if (value is Int32)
+            {
+                return value;
+            }
+
             return System.Convert.ToInt32(value);
         }
     }
