@@ -128,6 +128,9 @@ namespace CodeSharper.Core.Utilities
         /// </returns>
         public Boolean Equals(Option<TValue> other)
         {
+            if (HasValue == false && other.HasValue == false)
+                return true;
+
             return HasValue.Equals(other.HasValue) && EqualityComparer<TValue>.Default.Equals(Value, other.Value);
         }
 
@@ -141,7 +144,7 @@ namespace CodeSharper.Core.Utilities
         public override Boolean Equals(Object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is Option<TValue> && Equals((Option<TValue>)obj);
+            return obj is Option<TValue> && Equals((Option<TValue>) obj);
         }
 
         /// <summary>
@@ -154,7 +157,8 @@ namespace CodeSharper.Core.Utilities
         {
             unchecked
             {
-                return (HasValue.GetHashCode() * 397) ^ EqualityComparer<TValue>.Default.GetHashCode(Value);
+                if (HasValue == false) return HasValue.GetHashCode() * 397;
+                return EqualityComparer<TValue>.Default.GetHashCode(Value);
             }
         }
 
@@ -185,6 +189,8 @@ namespace CodeSharper.Core.Utilities
         /// <summary>
         /// Prevents a default instance of the <see cref="None"/> class from being created.
         /// </summary>
-        private None() { }
+        private None()
+        {
+        }
     }
 }

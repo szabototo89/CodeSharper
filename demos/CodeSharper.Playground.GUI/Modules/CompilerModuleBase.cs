@@ -21,6 +21,6 @@ namespace CodeSharper.Playground.GUI.Modules
         /// <summary>
         /// Executes the query.
         /// </summary>
-        public abstract DocumentResults ExecuteQuery(String input, String text);
+        public abstract DocumentResults? ExecuteQuery(String input, String text);
     }
 }

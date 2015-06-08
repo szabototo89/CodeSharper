@@ -19,10 +19,6 @@ namespace CodeSharper.Tests.Interpreter.Visitors
     [TestFixture]
     internal class CodeQueryVisitorIntegratedTests : TestFixtureBase
     {
-        #region Stubs for initializing
-
-        #endregion
-
         #region Initializing test fixture
 
         /// <summary>
@@ -39,29 +35,35 @@ namespace CodeSharper.Tests.Interpreter.Visitors
         {
             base.Setup();
 
-            var commandDescriptorManager = new DefaultCommandDescriptorManager();
-            commandDescriptorManager.Register(new CommandDescriptor {
-                CommandNames = new[] { "IdentityRunnable" },
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "IdentityRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor() {
-                CommandNames = new[] { "IncrementRunnable", "increment", "inc" },
-                Arguments = new[] {  
-                    new ArgumentDescriptor {
-                        ArgumentType = typeof(Double),
-                        ArgumentName = "value",
-                        DefaultValue = 0,
-                        IsOptional = false,
-                        Position = 0
-                    }  
+            var commands = new[]
+            {
+                new CommandDescriptor
+                {
+                    CommandNames = new[] {"IdentityRunnable"},
+                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
+                    Name = "IdentityRunnable"
                 },
-                Name = "IncrementRunnable"
-            });
+                new CommandDescriptor()
+                {
+                    CommandNames = new[] {"IncrementRunnable", "increment", "inc"},
+                    Arguments = new[]
+                    {
+                        new ArgumentDescriptor
+                        {
+                            ArgumentType = typeof (Double),
+                            ArgumentName = "value",
+                            DefaultValue = 0,
+                            IsOptional = false,
+                            Position = 0
+                        }
+                    },
+                    Name = "IncrementRunnable"
+                }
+            };
 
-            var runnableFactory = new DefaultRunnableFactory(new[] { typeof(IdentityRunnable), typeof(IncrementRunnable) });
-            var repository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json");
+            var runnableFactory = new DefaultRunnableFactory(new[] {typeof (IdentityRunnable), typeof (IncrementRunnable)});
+
+            var repository = new MemoryDescriptorRepository(commandDescriptors: commands);
             var commandCallResolver = new DefaultCommandCallResolver(repository, runnableFactory);
             var selectorManager = new DefaultSelectorFactory();
             var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, repository);
@@ -91,7 +93,6 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             // Then
             Assert.That(result, Is.EqualTo(10));
         }
-
 
         [Test(Description = "IncrementRunnable should increment its value by one when proper value is passed")]
         public void IncrementRunnable_ShouldIncrementValueByOne_WhenProperValueIsPassed()
@@ -126,7 +127,6 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             Assert.That(result, Is.EqualTo(12));
         }
 
-
         [Test(Description = "IncrementRunnable should increment its value by one when proper value is passed")]
         public void IncrementRunnable_ShouldIncrementValueByThree_WhenProperValueIsPassed()
         {
@@ -151,10 +151,10 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             // When
             var commandCall = Compiler.Parse(input);
             var controlFlow = ControlFlowFactory.Create(commandCall);
-            var result = controlFlow.Execute(new[] { 10.0, 1.0 });
+            var result = controlFlow.Execute(new[] {10.0, 1.0});
 
             // Then
-            Assert.That(result, Is.EqualTo(new[] { 13.0, 4.0 }));
+            Assert.That(result, Is.EqualTo(new[] {13.0, 4.0}));
         }
 
         #endregion

@@ -61,7 +61,7 @@ namespace CodeSharper.Tests.Core.Services
 
             // Then
             Assert.That(result, Is.Not.Null.And.Not.Empty);
-            Assert.That(result, Is.EqualTo("{\"name\":\"relative-child-selector\",\"selector-type\":\"combinator\",\"type\":\"CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator\",\"value\":\"\"}"));
+            Assert.That(result, Is.EqualTo("{\"arguments\":null,\"name\":\"relative-child-selector\",\"selector-type\":\"combinator\",\"type\":\"CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator\",\"value\":\"\"}"));
         }
 
     }

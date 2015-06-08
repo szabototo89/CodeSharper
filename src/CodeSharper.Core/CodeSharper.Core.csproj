@@ -164,6 +164,7 @@
     <Compile Include="Services\DescriptorModel.cs" />
     <Compile Include="Services\FileDescriptorRepository.cs" />
     <Compile Include="Services\IDescriptorRepository.cs" />
+    <Compile Include="Services\MemoryDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="Texts\TextDocument.cs">

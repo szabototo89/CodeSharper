@@ -78,6 +78,7 @@
     <Compile Include="Common\Runnables\RunnableTestFixtureBase.cs" />
     <Compile Include="Common\Runnables\TextRangeOperations\JoinLinesTextRunnableTests.cs" />
     <Compile Include="Common\Runnables\ValueConverters\EmptyValueConverterTests.cs" />
+    <Compile Include="Services\MemoryDescriptorRepositoryTests.cs" />
     <Compile Include="Texts\TextRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />

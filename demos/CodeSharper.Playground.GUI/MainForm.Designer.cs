@@ -45,6 +45,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.queryEditor = new System.Windows.Forms.RichTextBox();
             this.refactorButton = new System.Windows.Forms.Button();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.runTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.runTimeValueLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,12 +59,14 @@
             this.splitContainer2.SuspendLayout();
             this.mainMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -72,8 +78,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(718, 406);
-            this.splitContainer1.SplitterDistance = 303;
+            this.splitContainer1.Size = new System.Drawing.Size(712, 378);
+            this.splitContainer1.SplitterDistance = 282;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -89,8 +95,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.resultEditor);
-            this.splitContainer2.Size = new System.Drawing.Size(718, 279);
-            this.splitContainer2.SplitterDistance = 239;
+            this.splitContainer2.Size = new System.Drawing.Size(532, 152);
+            this.splitContainer2.SplitterDistance = 177;
             this.splitContainer2.TabIndex = 2;
             // 
             // sourceEditor
@@ -100,7 +106,7 @@
             this.sourceEditor.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.sourceEditor.Location = new System.Drawing.Point(0, 0);
             this.sourceEditor.Name = "sourceEditor";
-            this.sourceEditor.Size = new System.Drawing.Size(239, 279);
+            this.sourceEditor.Size = new System.Drawing.Size(177, 152);
             this.sourceEditor.TabIndex = 0;
             this.sourceEditor.Text = "";
             // 
@@ -113,7 +119,7 @@
             this.resultEditor.Location = new System.Drawing.Point(0, 0);
             this.resultEditor.Name = "resultEditor";
             this.resultEditor.ReadOnly = true;
-            this.resultEditor.Size = new System.Drawing.Size(475, 279);
+            this.resultEditor.Size = new System.Drawing.Size(351, 152);
             this.resultEditor.TabIndex = 1;
             this.resultEditor.Text = "";
             // 
@@ -124,7 +130,7 @@
             this.compilerToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(718, 24);
+            this.mainMenu.Size = new System.Drawing.Size(532, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -183,7 +189,7 @@
             this.csvToolStripMenuItem.CheckOnClick = true;
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
             this.csvToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.csvToolStripMenuItem.Text = "Csv";
             this.csvToolStripMenuItem.CheckedChanged += new System.EventHandler(this.languageSelectionChanged);
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.csvToolStripMenuItem_Click);
@@ -193,7 +199,7 @@
             this.jsonToolStripMenuItem.CheckOnClick = true;
             this.jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
             this.jsonToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.jsonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.jsonToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.jsonToolStripMenuItem.Text = "Json";
             this.jsonToolStripMenuItem.CheckedChanged += new System.EventHandler(this.languageSelectionChanged);
             this.jsonToolStripMenuItem.Click += new System.EventHandler(this.jsonToolStripMenuItem_Click);
@@ -203,7 +209,7 @@
             this.textToolStripMenuItem.CheckOnClick = true;
             this.textToolStripMenuItem.Name = "textToolStripMenuItem";
             this.textToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.textToolStripMenuItem.Text = "Text";
             this.textToolStripMenuItem.CheckedChanged += new System.EventHandler(this.languageSelectionChanged);
             this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
@@ -220,7 +226,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(718, 99);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 57);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // queryEditor
@@ -229,27 +235,65 @@
             this.queryEditor.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.queryEditor.Location = new System.Drawing.Point(3, 3);
             this.queryEditor.Name = "queryEditor";
-            this.queryEditor.Size = new System.Drawing.Size(623, 93);
+            this.queryEditor.Size = new System.Drawing.Size(460, 51);
             this.queryEditor.TabIndex = 0;
             this.queryEditor.Text = "";
             // 
             // refactorButton
             // 
             this.refactorButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.refactorButton.Location = new System.Drawing.Point(632, 3);
+            this.refactorButton.Location = new System.Drawing.Point(469, 3);
             this.refactorButton.Name = "refactorButton";
-            this.refactorButton.Size = new System.Drawing.Size(83, 93);
+            this.refactorButton.Size = new System.Drawing.Size(60, 51);
             this.refactorButton.TabIndex = 1;
             this.refactorButton.Text = "Refactor!";
             this.refactorButton.UseVisualStyleBackColor = true;
             this.refactorButton.Click += new System.EventHandler(this.refactorButton_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runTimeLabel,
+            this.runTimeValueLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 384);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(718, 22);
+            this.statusStrip.TabIndex = 3;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // runTimeLabel
+            // 
+            this.runTimeLabel.Name = "runTimeLabel";
+            this.runTimeLabel.Size = new System.Drawing.Size(58, 17);
+            this.runTimeLabel.Text = "Runtime: ";
+            // 
+            // runTimeValueLabel
+            // 
+            this.runTimeValueLabel.Name = "runTimeValueLabel";
+            this.runTimeValueLabel.Size = new System.Drawing.Size(25, 17);
+            this.runTimeValueLabel.Text = "n/a";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.splitContainer1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.statusStrip, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(718, 406);
+            this.tableLayoutPanel2.TabIndex = 4;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 406);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.tableLayoutPanel2);
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "CodeSharper IDE";
@@ -265,6 +309,10 @@
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -288,5 +336,9 @@
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.RichTextBox resultEditor;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel runTimeLabel;
+        private System.Windows.Forms.ToolStripStatusLabel runTimeValueLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }

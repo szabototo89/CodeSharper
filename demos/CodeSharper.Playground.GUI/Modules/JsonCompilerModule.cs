@@ -18,7 +18,7 @@ namespace CodeSharper.Playground.GUI.Modules
             jsonCompiler = new JsonCompiler();
         }
 
-        public override DocumentResults ExecuteQuery(String input, String text)
+        public override DocumentResults? ExecuteQuery(String input, String text)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace CodeSharper.Playground.GUI.Modules
                 Console.WriteLine("Stacktrace: ");
                 Console.WriteLine(exception.StackTrace);
 
-                return new DocumentResults();
+                return null;
             }
 
         }

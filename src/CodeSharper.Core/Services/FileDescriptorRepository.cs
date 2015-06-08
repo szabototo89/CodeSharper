@@ -18,18 +18,23 @@ namespace CodeSharper.Core.Services
 {
     public class FileDescriptorRepository : IDescriptorRepository
     {
-        private readonly IEnumerable<Assembly> _predefinedAssemblies;
-        private readonly IEnumerable<Assembly> _assemblies;
-        private readonly DataContractJsonSerializer _serializer;
+        private const String ELEMENT_TYPE_SELECTOR = "element-type-selector";
+        private const String COMBINATOR_SELECTOR = "combinator";
+        private const String PSEUDO_SELECTOR = "pseudo-selector";
 
-        private readonly List<CombinatorDescriptor> _combinators;
-        private readonly List<SelectorDescriptor> _selectors;
-        private readonly List<ModifierDescriptor> _pseudoSelectors;
-        private readonly List<CommandDescriptor> _commandDescriptors;
+        private readonly IEnumerable<Assembly> predefinedAssemblies;
+        private readonly IEnumerable<Assembly> assemblies;
+        private readonly DataContractJsonSerializer serializer;
+
+        private readonly List<CombinatorDescriptor> combinators;
+        private readonly List<SelectorDescriptor> selectors;
+        private readonly List<ModifierDescriptor> pseudoSelectors;
+        private readonly List<CommandDescriptor> commandDescriptors;
 
         private enum DescriptorType
         {
-            Selector, Combinator,
+            Selector,
+            Combinator,
             PseudoSelector
         }
 
@@ -41,14 +46,14 @@ namespace CodeSharper.Core.Services
             Assume.NotNull(fileName, "fileName");
             Assume.FileExists(fileName, "fileName");
 
-            _serializer = new DataContractJsonSerializer(typeof(DescriptorModel));
-            _combinators = new List<CombinatorDescriptor>();
-            _selectors = new List<SelectorDescriptor>();
-            _pseudoSelectors = new List<ModifierDescriptor>();
-            _commandDescriptors = new List<CommandDescriptor>();
-            _predefinedAssemblies = new[] { Assembly.Load("mscorlib") };
+            serializer = new DataContractJsonSerializer(typeof (DescriptorModel));
+            combinators = new List<CombinatorDescriptor>();
+            selectors = new List<SelectorDescriptor>();
+            pseudoSelectors = new List<ModifierDescriptor>();
+            commandDescriptors = new List<CommandDescriptor>();
+            predefinedAssemblies = new[] {Assembly.Load("mscorlib")};
 
-            _assemblies = assemblies ?? new[] { Assembly.GetExecutingAssembly() };
+            this.assemblies = assemblies ?? new[] {Assembly.GetExecutingAssembly()};
 
             loadFromFile(fileName);
         }
@@ -58,22 +63,24 @@ namespace CodeSharper.Core.Services
             try
             {
                 var reader = File.OpenRead(fileName);
-                var descriptor = (DescriptorModel)_serializer.ReadObject(reader);
+                var descriptor = (DescriptorModel) serializer.ReadObject(reader);
 
-                _selectors.Clear();
-                _combinators.Clear();
-                _pseudoSelectors.Clear();
-                _commandDescriptors.Clear();
+                selectors.Clear();
+                combinators.Clear();
+                pseudoSelectors.Clear();
+                commandDescriptors.Clear();
 
                 foreach (var commandDescriptor in descriptor.CommandDescriptors)
                 {
-                    var desc = new CommandDescriptor {
+                    var desc = new CommandDescriptor
+                    {
                         Name = commandDescriptor.Name,
                         Description = commandDescriptor.Description,
                         CommandNames = new List<String>(commandDescriptor.CommandNames)
                     };
 
-                    desc.Arguments = commandDescriptor.Arguments.Select((ArgumentDescriptorModel arg) => new ArgumentDescriptor {
+                    desc.Arguments = commandDescriptor.Arguments.Select((ArgumentDescriptorModel arg) => new ArgumentDescriptor
+                    {
                         ArgumentName = arg.Name,
                         DefaultValue = arg.DefaultValue,
                         IsOptional = arg.IsOptional,
@@ -81,32 +88,32 @@ namespace CodeSharper.Core.Services
                         ArgumentType = findInAssemblies(arg.ArgumentType)
                     });
 
-                    _commandDescriptors.Add(desc);
+                    commandDescriptors.Add(desc);
                 }
 
                 foreach (var selectionDescriptors in descriptor.SelectionDescriptors)
                 {
                     switch (selectionDescriptors.SelectorType)
                     {
-                        case "element-type-selector":
-                            {
-                                var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.Selector);
-                                _selectors.Add(new SelectorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
-                                break;
-                            }
-                        case "combinator":
-                            {
-                                var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.Combinator);
-                                _combinators.Add(new CombinatorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
-                                break;
-                            }
-                        case "pseudo-selector":
-                            {
-                                var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.PseudoSelector);
-                                _pseudoSelectors.Add(new ModifierDescriptor(selectionDescriptors.Name, selectionDescriptors.Value,
-                                    selectionDescriptors.Arguments, type));
-                                break;
-                            }
+                        case ELEMENT_TYPE_SELECTOR:
+                        {
+                            var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.Selector);
+                            selectors.Add(new SelectorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
+                            break;
+                        }
+                        case COMBINATOR_SELECTOR:
+                        {
+                            var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.Combinator);
+                            combinators.Add(new CombinatorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
+                            break;
+                        }
+                        case PSEUDO_SELECTOR:
+                        {
+                            var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.PseudoSelector);
+                            pseudoSelectors.Add(new ModifierDescriptor(selectionDescriptors.Name, selectionDescriptors.Value,
+                                                                       selectionDescriptors.Arguments, type));
+                            break;
+                        }
                     }
                 }
             }
@@ -118,9 +125,9 @@ namespace CodeSharper.Core.Services
 
         private Type findInAssemblies(String argumentType)
         {
-            var assemblies = _assemblies.Union(_predefinedAssemblies);
+            var definedAssemblies = assemblies.Union(predefinedAssemblies);
 
-            var assemblyTypes = assemblies.SelectMany(assembly => assembly.GetTypes());
+            var assemblyTypes = definedAssemblies.SelectMany(assembly => assembly.GetTypes());
             var matchedTypes = assemblyTypes.Where(type => type.FullName == argumentType || type.Name == argumentType).ToArray();
 
             if (!matchedTypes.Any())
@@ -137,33 +144,29 @@ namespace CodeSharper.Core.Services
             switch (descriptorType)
             {
                 case DescriptorType.Combinator:
-                    assignableFromType = typeof(CombinatorBase);
+                    assignableFromType = typeof (CombinatorBase);
                     break;
                 case DescriptorType.Selector:
-                    assignableFromType = typeof(SelectorBase);
+                    assignableFromType = typeof (SelectorBase);
                     break;
                 case DescriptorType.PseudoSelector:
-                    assignableFromType = typeof(NodeModifierBase);
+                    assignableFromType = typeof (NodeModifierBase);
                     break;
                 default:
                     throw new NotSupportedException(String.Format("Not supported descriptor type: {0}", descriptorType));
             }
 
-            var assemblyTypes = _assemblies.SelectMany(assembly => assembly.GetTypes());
+            var assemblyTypes = assemblies.SelectMany(assembly => assembly.GetTypes());
             var descriptorTypes = assemblyTypes.Where(type => type != assignableFromType && assignableFromType.IsAssignableFrom(type));
             var matchedTypes = descriptorTypes.Where(type => type.FullName == typeName || type.Name == typeName);
 
             if (!matchedTypes.Any())
-            {
                 throw new Exception(String.Format("Not found descriptor type: {0}.", typeName));
-            }
 
             var result = matchedTypes.SingleOrDefault();
 
             if (result == null)
-            {
                 throw new Exception("Ambiguation between descriptor types.");
-            }
 
             return result;
         }
@@ -171,25 +174,25 @@ namespace CodeSharper.Core.Services
         /// <summary>
         /// Gets the combinators.
         /// </summary>
-        public IEnumerable<CombinatorDescriptor> GetCombinators()
+        public IEnumerable<CombinatorDescriptor> GetCombinatorDescriptors()
         {
-            return _combinators.AsReadOnly();
+            return combinators.AsReadOnly();
         }
 
         /// <summary>
         /// Gets the pseudo selectors.
         /// </summary>
-        public IEnumerable<ModifierDescriptor> GetPseudoSelectors()
+        public IEnumerable<ModifierDescriptor> GetModifierDescriptors()
         {
-            return _pseudoSelectors.AsReadOnly();
+            return pseudoSelectors.AsReadOnly();
         }
 
         /// <summary>
         /// Gets the selectors.
         /// </summary>
-        public IEnumerable<SelectorDescriptor> GetSelectors()
+        public IEnumerable<SelectorDescriptor> GetSelectorDescriptors()
         {
-            return _selectors.AsReadOnly();
+            return selectors.AsReadOnly();
         }
 
         /// <summary>
@@ -197,7 +200,7 @@ namespace CodeSharper.Core.Services
         /// </summary>
         public IEnumerable<CommandDescriptor> GetCommandDescriptors()
         {
-            return _commandDescriptors.AsReadOnly();
+            return commandDescriptors.AsReadOnly();
         }
     }
 }

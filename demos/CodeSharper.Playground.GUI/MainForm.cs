@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace CodeSharper.Playground.GUI
     public partial class MainForm : Form
     {
         private CompilerModuleBase compilerModule;
+        private readonly Stopwatch stopwatch;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
@@ -28,6 +30,8 @@ namespace CodeSharper.Playground.GUI
         public MainForm()
         {
             InitializeComponent();
+
+            stopwatch = new Stopwatch();
 
             var assemblies = new[] {Assembly.Load("CodeSharper.Core"), Assembly.Load("CodeSharper.Languages"), Assembly.GetExecutingAssembly()};
             var runnableTypeResolver = new AutoRunnableResolver();
@@ -91,9 +95,18 @@ namespace CodeSharper.Playground.GUI
 
         private void refactorButton_Click(Object sender, EventArgs e)
         {
+            stopwatch.Restart();
+            stopwatch.Start();
             var result = CompilerModule.ExecuteQuery(queryEditor.Text, sourceEditor.Text);
-            sourceEditor.Text = result.Source;
-            resultEditor.Text = result.Results;
+            stopwatch.Stop();
+
+            if (result.HasValue)
+            {
+                sourceEditor.Text = result.Value.Source;
+                resultEditor.Text = result.Value.Results;
+            }
+
+            runTimeValueLabel.Text = stopwatch.Elapsed.ToString();
         }
 
         private void csvToolStripMenuItem_Click(object sender, EventArgs e)

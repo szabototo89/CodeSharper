@@ -73,7 +73,7 @@ namespace CodeSharper.Interpreter.Common
         {
             var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
 
-            var selectorDescriptor = DescriptorRepository.GetSelectors().SingleOrDefault(s => NameMatcher.Match(s.Value, elementTypeSelector.Name));
+            var selectorDescriptor = DescriptorRepository.GetSelectorDescriptors().SingleOrDefault(s => NameMatcher.Match(s.Value, elementTypeSelector.Name));
             if (selectorDescriptor == null)
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
@@ -90,7 +90,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         private NodeModifierBase resolvePseudoSelector(PseudoSelectorElement element, SelectorBase selector)
         {
-            var elements = DescriptorRepository.GetPseudoSelectors()
+            var elements = DescriptorRepository.GetModifierDescriptors()
                                                .Where(pseudo => NameMatcher.Match(pseudo.Value, element.Name))
                                                .Where(pseudo => pseudo.Arguments.Count() == element.Arguments.Count())
                                                .Select(pseudo => new { pseudo.Type, Arguments = element.Arguments.Select(arg => arg.Value) })
@@ -122,7 +122,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         private BinaryCombinator resolveCombinator(CombinatorElementBase combinatorElement, CombinatorBase left, CombinatorBase right)
         {
-            var combinators = DescriptorRepository.GetCombinators()
+            var combinators = DescriptorRepository.GetCombinatorDescriptors()
                                                   .Where(combinator => NameMatcher.Match(combinator.Value, combinatorElement.Value))
                                                   .ToArray();
 

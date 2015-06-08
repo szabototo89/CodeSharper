@@ -22,17 +22,17 @@ namespace CodeSharper.Tests.Core.Commands
 
         internal class StubCommandDescriptorRepository : IDescriptorRepository
         {
-            public IEnumerable<CombinatorDescriptor> GetCombinators()
+            public IEnumerable<CombinatorDescriptor> GetCombinatorDescriptors()
             {
                 throw new NotImplementedException();
             }
 
-            public IEnumerable<ModifierDescriptor> GetPseudoSelectors()
+            public IEnumerable<ModifierDescriptor> GetModifierDescriptors()
             {
                 throw new NotImplementedException();
             }
 
-            public IEnumerable<SelectorDescriptor> GetSelectors()
+            public IEnumerable<SelectorDescriptor> GetSelectorDescriptors()
             {
                 throw new NotImplementedException();
             }

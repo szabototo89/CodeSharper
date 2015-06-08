@@ -16,17 +16,17 @@ namespace CodeSharper.Core.Services
         /// <summary>
         /// Gets the combinators.
         /// </summary>
-        IEnumerable<CombinatorDescriptor> GetCombinators();
+        IEnumerable<CombinatorDescriptor> GetCombinatorDescriptors();
 
         /// <summary>
         /// Gets the pseudo selectors.
         /// </summary>
-        IEnumerable<ModifierDescriptor> GetPseudoSelectors();
+        IEnumerable<ModifierDescriptor> GetModifierDescriptors();
 
         /// <summary>
         /// Gets the selectors.
         /// </summary>
-        IEnumerable<SelectorDescriptor> GetSelectors();
+        IEnumerable<SelectorDescriptor> GetSelectorDescriptors();
 
         /// <summary>
         /// Gets the command descriptors.

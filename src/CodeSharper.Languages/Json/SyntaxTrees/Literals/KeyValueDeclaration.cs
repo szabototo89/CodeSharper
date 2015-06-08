@@ -8,19 +8,23 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
 {
     public class KeyValueDeclaration : JsonNode, IEquatable<KeyValueDeclaration>
     {
-        private KeyDeclaration _key;
-        private ValueDeclaration _value;
+        private readonly Node[] children;
+
+        private KeyDeclaration key;
+        private ValueDeclaration value;
 
         /// <summary>
         /// Gets or sets the key.
         /// </summary>
         public KeyDeclaration Key
         {
-            get { return _key; }
+            get { return key; }
             protected set
             {
-                ReplaceChildWith(_key, value);
-                _key = value;
+                ReplaceChildWith(key, value);
+                key = value;
+
+                updateChildren(key, this.value);
             }
         }
 
@@ -29,18 +33,20 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         /// </summary>
         public ValueDeclaration Value
         {
-            get { return _value; }
+            get { return value; }
             protected set
             {
-                ReplaceChildWith(_value, value);
-                _value = value;
+                ReplaceChildWith(this.value, value);
+                this.value = value;
+
+                updateChildren(key, this.value);
             }
         }
 
         /// <summary>
         /// Gets or sets children of this type
         /// </summary>
-        public override IEnumerable<Node> Children { get { return new Node[] { Key, Value }; } }
+        public override IEnumerable<Node> Children { get { return children; } }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyValueDeclaration"/> class.
@@ -51,8 +57,17 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
             Assume.NotNull(key, "key");
             Assume.NotNull(value, "value");
 
-            Key = key;
-            Value = value;
+            this.key = key;
+            this.value = value;
+
+            children = new Node[2];
+            updateChildren(key, value);
+        }
+
+        private void updateChildren(KeyDeclaration keyDeclaration, ValueDeclaration valueDeclaration)
+        {
+            children[0] = keyDeclaration;
+            children[1] = valueDeclaration;
         }
 
         #region Equality members

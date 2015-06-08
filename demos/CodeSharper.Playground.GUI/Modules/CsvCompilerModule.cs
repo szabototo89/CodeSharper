@@ -20,7 +20,7 @@ namespace CodeSharper.Playground.GUI.Modules
         /// <summary>
         /// Executes the query.
         /// </summary>
-        public override DocumentResults ExecuteQuery(String input, String text)
+        public override DocumentResults? ExecuteQuery(String input, String text)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace CodeSharper.Playground.GUI.Modules
                 Console.WriteLine("Stacktrace: ");
                 Console.WriteLine(exception.StackTrace);
 
-                return new DocumentResults();
+                return null;
             }
         }
     }

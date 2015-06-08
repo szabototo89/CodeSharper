@@ -9,6 +9,7 @@ using CodeSharper.Core.Common.ControlFlows;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
+using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.Services;
 using CodeSharper.Core.SyntaxTrees;
@@ -36,9 +37,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             public override TextRange Run(Node parameter)
             {
                 if (parameter == null)
-                {
                     return null;
-                }
 
                 return parameter.TextRange;
             }
@@ -53,9 +52,7 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
             public override TextRange Run(TextRange parameter)
             {
                 if (parameter == null)
-                {
                     return null;
-                }
                 return parameter.ChangeText(parameter.GetText().ToUpper());
             }
         }
@@ -90,44 +87,43 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         {
             base.Setup();
 
-            var commandDescriptorManager = new DefaultCommandDescriptorManager();
-            commandDescriptorManager.Register(new CommandDescriptor
+            var commands = new[]
             {
-                CommandNames = new[] {"to-upper-case"},
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "ToUpperCaseRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor
-            {
-                CommandNames = new[] {"get-text"},
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "GetTextRunnable"
-            });
-
-            commandDescriptorManager.Register(new CommandDescriptor
-            {
-                CommandNames = new[] {"to-string"},
-                Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                Name = "ToStringRunnable"
-            });
-
-            /*commandDescriptorManager.Register(new CommandDescriptor() {
-                CommandNames = new[] { "IncrementRunnable", "increment", "inc" },
-                Arguments = new[] {  
-                    new ArgumentDescriptor {
-                        ArgumentType = typeof(Double),
-                        ArgumentName = "value",
-                        DefaultValue = 0,
-                        IsOptional = false,
-                        Position = 0
-                    }  
+                new CommandDescriptor
+                {
+                    CommandNames = new[] {"to-upper-case"},
+                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
+                    Name = "ToUpperCaseRunnable"
                 },
-                Name = "IncrementRunnable"
-            });*/
+                new CommandDescriptor
+                {
+                    CommandNames = new[] {"get-text"},
+                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
+                    Name = "GetTextRunnable"
+                },
+                new CommandDescriptor
+                {
+                    CommandNames = new[] {"to-string"},
+                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
+                    Name = "ToStringRunnable"
+                }
+            };
 
             var runnableFactory = new DefaultRunnableFactory(new[] {typeof (ToUpperCaseRunnable), typeof (GetTextRunnable), typeof (ToStringRunnable)});
-            var descriptorRepository = new FileDescriptorRepository(@"D:\Development\Projects\C#\CodeSharper\master-refactoring\CodeSharper\tests\Configurations\descriptors.json");
+
+            var selectors = new[]
+            {
+                new SelectorDescriptor("UniversalSelector", "UniversalSelector", typeof (UniversalSelector)),
+                new SelectorDescriptor("FieldNodeSelector", "FieldNodeSelector", typeof (FieldSelector)),
+            };
+
+            var combinators = new[]
+            {
+                new CombinatorDescriptor("RelativeNodeCombinator", "", typeof (RelativeNodeCombinator)),
+            };
+
+            var descriptorRepository = new MemoryDescriptorRepository(selectors, combinators, commandDescriptors: commands);
+
             var commandCallResolver = new DefaultCommandCallResolver(descriptorRepository, runnableFactory);
             var selectorManager = new DefaultSelectorFactory();
             var nodeSelectorResolver = new DefaultSelectorResolver(selectorManager, descriptorRepository);
