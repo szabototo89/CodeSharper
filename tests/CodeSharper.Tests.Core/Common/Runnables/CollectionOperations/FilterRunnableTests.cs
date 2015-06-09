@@ -4,7 +4,7 @@ using CodeSharper.Core.Common.Runnables.CollectionOperations;
 using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
+namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
 {
     [TestFixture]
     public class FilterRunnableTests : RunnableTestFixtureBase<FilterRunnable>

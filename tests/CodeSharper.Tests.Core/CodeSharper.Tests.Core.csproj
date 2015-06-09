@@ -70,11 +70,12 @@
     <Compile Include="Commands\CommandCallActualArgumentTests.cs" />
     <Compile Include="Commands\CommandCallDescriptorTests.cs" />
     <Compile Include="Common\FlattenValueProducerTests.cs" />
-    <Compile Include="Common\Runnables\CollectionRunnables\ElementAtRunnableTests.cs" />
-    <Compile Include="Common\Runnables\CollectionRunnables\FilterRunnableTests.cs" />
-    <Compile Include="Common\Runnables\CollectionRunnables\TakeRunnableTests.cs" />
+    <Compile Include="Common\Runnables\CollectionOperations\ElementAtRunnableTests.cs" />
+    <Compile Include="Common\Runnables\CollectionOperations\FilterRunnableTests.cs" />
+    <Compile Include="Common\Runnables\CollectionOperations\RepeatRunnableTests.cs" />
+    <Compile Include="Common\Runnables\CollectionOperations\TakeRunnableTests.cs" />
     <Compile Include="Common\Runnables\DefaultRunnableFactoryTests.cs" />
-    <Compile Include="Common\Runnables\CollectionRunnables\LengthRunnableTests.cs" />
+    <Compile Include="Common\Runnables\CollectionOperations\LengthRunnableTests.cs" />
     <Compile Include="Common\Runnables\RunnableTestFixtureBase.cs" />
     <Compile Include="Common\Runnables\TextRangeOperations\JoinLinesTextRunnableTests.cs" />
     <Compile Include="Common\Runnables\ValueConverters\EmptyValueConverterTests.cs" />

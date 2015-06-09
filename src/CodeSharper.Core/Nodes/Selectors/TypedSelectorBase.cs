@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Selectors
@@ -14,8 +15,10 @@ namespace CodeSharper.Core.Nodes.Selectors
         {
             if (element is TNode)
             {
-                yield return element;
+                return new[] { element };
             }
+
+            return Enumerable.Empty<Object>();
         }
     }
 }

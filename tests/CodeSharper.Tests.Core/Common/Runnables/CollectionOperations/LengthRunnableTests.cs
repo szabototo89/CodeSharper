@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables.CollectionRunnables;
 using CodeSharper.Core.Texts;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
+namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
 {
     [TestFixture]
     internal class LengthRunnableTests : RunnableTestFixtureBase

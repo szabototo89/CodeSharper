@@ -83,11 +83,26 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         /// </summary>
         public IControlFlowFactory<ControlFlowBase> ControlFlowFactory { get; set; }
 
-        public override void Setup()
+        private CombinatorDescriptor[] getCombinatorDescriptors()
         {
-            base.Setup();
+            return new[]
+            {
+                new CombinatorDescriptor("RelativeNodeCombinator", "", typeof (RelativeNodeCombinator)),
+            };
+        }
 
-            var commands = new[]
+        private SelectorDescriptor[] getSelectorDescriptors()
+        {
+            return new[]
+            {
+                new SelectorDescriptor("UniversalSelector", "UniversalSelector", typeof (UniversalSelector)),
+                new SelectorDescriptor("FieldNodeSelector", "FieldNodeSelector", typeof (FieldSelector)),
+            };
+        }
+
+        private CommandDescriptor[] getCommandDescriptors()
+        {
+            return new[]
             {
                 new CommandDescriptor
                 {
@@ -108,19 +123,21 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
                     Name = "ToStringRunnable"
                 }
             };
+        }
+
+        /// <summary>
+        /// Setups this instance.
+        /// </summary>
+        [SetUp]
+        public override void Setup()
+        {
+            base.Setup();
 
             var runnableFactory = new DefaultRunnableFactory(new[] {typeof (ToUpperCaseRunnable), typeof (GetTextRunnable), typeof (ToStringRunnable)});
 
-            var selectors = new[]
-            {
-                new SelectorDescriptor("UniversalSelector", "UniversalSelector", typeof (UniversalSelector)),
-                new SelectorDescriptor("FieldNodeSelector", "FieldNodeSelector", typeof (FieldSelector)),
-            };
-
-            var combinators = new[]
-            {
-                new CombinatorDescriptor("RelativeNodeCombinator", "", typeof (RelativeNodeCombinator)),
-            };
+            var commands = getCommandDescriptors();
+            var selectors = getSelectorDescriptors();
+            var combinators = getCombinatorDescriptors();
 
             var descriptorRepository = new MemoryDescriptorRepository(selectors, combinators, commandDescriptors: commands);
 

@@ -14,7 +14,7 @@ namespace CodeSharper.Core.Utilities
     {
         public static IEnumerable<Object> ToEnumerable(this IHasChildren<Object> root)
         {
-            return root.Children.Union(
+            return root.Children.Concat(
                 root.Children
                     .OfType<IHasChildren<Object>>()
                     .SelectMany(ToEnumerable));

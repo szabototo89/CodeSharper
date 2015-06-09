@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
@@ -15,21 +16,27 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// Gets or sets the node selector.
         /// </summary>
         public SelectorBase Selector { get; protected set; }
-        
+
         /// <summary>
         /// Gets or sets the modifiers.
         /// </summary>
         public IEnumerable<NodeModifierBase> Modifiers { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the attributes.
+        /// </summary>
+        public IEnumerable<SelectorAttribute> Attributes { get; protected set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SelectionCombinator"/> class.
         /// </summary>
-        public SelectionCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> modifiers = null)
+        public SelectionCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> modifiers = null, IEnumerable<SelectorAttribute> attributes = null)
         {
             Assume.NotNull(selector, "selector");
 
             Selector = selector;
             Modifiers = modifiers.GetOrEmpty();
+            Attributes = attributes.GetOrEmpty();
         }
 
         /// <summary>
@@ -38,6 +45,8 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <param name="values">The values.</param>
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
+            Selector.ApplyAttributes(Attributes);
+
             var filteredElements = values.GetOrEmpty().SelectMany(node => Selector.SelectElement(node));
             foreach (var filteredElement in filteredElements)
             {
@@ -52,9 +61,7 @@ namespace CodeSharper.Core.Nodes.Combinators
                     }
                 }
                 else
-                {
                     yield return filteredElement;
-                }
             }
         }
     }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core.Common.Runnables.CollectionRunnables;
+﻿using CodeSharper.Core.Common.Runnables.CollectionRunnables;
 using NUnit.Framework;
 
-namespace CodeSharper.Tests.Core.Common.Runnables.CollectionRunnables
+namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
 {
     [TestFixture]
     internal class ElementAtRunnableTests : RunnableTestFixtureBase

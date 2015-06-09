@@ -82,9 +82,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             Double value;
             if (!Double.TryParse(context.NUMBER().GetText(), out value))
-            {
                 throw new Exception("Invalid number!");
-            }
             return TreeFactory.CreateNumber(value);
         }
 
@@ -118,15 +116,16 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitMethodCall(CodeQuery.MethodCallContext context)
         {
             var methodCallParameters = context.methodCallParameter()
-                .Select((parameter, index) => {
-                    var param = parameter.Accept(this);
-                    if (param is ActualParameterElement) return param;
-                    if (param is ConstantElement) return TreeFactory.CreateActualParameter((ConstantElement)param, index);
+                                              .Select((parameter, index) => {
+                                                  var param = parameter.Accept(this);
+                                                  if (param is ActualParameterElement) return param;
+                                                  if (param is ConstantElement) return TreeFactory.CreateActualParameter((ConstantElement) param, index);
 
-                    return param;
-                });
+                                                  return param;
+                                              });
 
-            var methodCall = new {
+            var methodCall = new
+            {
                 Name = context.MethodCallName.Text,
                 Parameters = methodCallParameters.OfType<ActualParameterElement>()
                                                  .ToArray()
@@ -159,7 +158,6 @@ namespace CodeSharper.Interpreter.Visitors
         {
             return context.command().Accept(this);
         }
-
 
         /*
                 public override Object VisitCommand(CodeQuery.CommandContext context)
@@ -205,7 +203,7 @@ namespace CodeSharper.Interpreter.Visitors
             var left = context.Left.Accept(this) as ControlFlowElementBase;
             var right = context.Right.Accept(this) as ControlFlowElementBase;
             var pipelineOperator = context.Operator.Text;
-            
+
             return TreeFactory.CreateControlFlow(left, right, pipelineOperator);
         }
 
@@ -215,12 +213,12 @@ namespace CodeSharper.Interpreter.Visitors
 
             if (expression is CommandCallElement)
             {
-                var methodCall = (CommandCallElement)expression;
+                var methodCall = (CommandCallElement) expression;
                 return TreeFactory.CreateControlFlow(methodCall);
             }
             else if (expression is SelectorElementBase)
             {
-                var selector = (SelectorElementBase)expression;
+                var selector = (SelectorElementBase) expression;
                 return TreeFactory.CreateControlFlow(selector);
             }
 
@@ -262,7 +260,8 @@ namespace CodeSharper.Interpreter.Visitors
         public override Object VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
         {
             var name = context.AttributeName.Text;
-            var value = context.AttributeValue.Accept(this) as ConstantElement;
+            var value = context.AttributeValue
+                               .Safe(attributeValue => attributeValue.Accept(this) as ConstantElement);
 
             return SelectorFactory.CreateAttributeSelector(name, value);
         }
@@ -324,9 +323,7 @@ namespace CodeSharper.Interpreter.Visitors
             var isClassElement = context.DOT() != null;
             var name = context.ElementName.Text;
             if (isClassElement)
-            {
                 name = "." + name;
-            }
 
             var attributes = context.selectorAttribute().AcceptAll(this).Cast<AttributeElement>();
             var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelectorElement>();
@@ -379,6 +376,5 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         #endregion
-
     }
 }

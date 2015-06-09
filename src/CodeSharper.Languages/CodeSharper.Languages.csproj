@@ -110,6 +110,11 @@
     <Compile Include="Csv\SyntaxTrees\RowDeclarationSyntax.cs" />
     <Compile Include="Csv\Visitors\CsvSyntaxTreeBuilder.cs" />
     <Compile Include="Text\Nodes\Selectors\CharacterSelector.cs" />
+    <Compile Include="Text\Nodes\Selectors\LineSelector.cs" />
+    <Compile Include="Text\Nodes\Selectors\ParagraphSelector.cs" />
+    <Compile Include="Text\Nodes\Selectors\TextSelectorBase.cs" />
+    <Compile Include="Text\Nodes\Selectors\TextSeparatorSelector.cs" />
+    <Compile Include="Text\Nodes\Selectors\WordSelector.cs" />
     <Compile Include="Utilities\ParseTreeVisitorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

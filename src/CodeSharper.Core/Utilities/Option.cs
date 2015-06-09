@@ -27,7 +27,7 @@ namespace CodeSharper.Core.Utilities
 
     public struct Option<TValue> : IEquatable<Option<TValue>>
     {
-        private TValue _value;
+        private TValue value;
 
         /// <summary>
         /// Gets a value indicating whether this instance has value.
@@ -47,9 +47,9 @@ namespace CodeSharper.Core.Utilities
                 if (!HasValue)
                     throw new InvalidOperationException();
 
-                return _value;
+                return value;
             }
-            private set { _value = value; }
+            private set { this.value = value; }
         }
 
         /// <summary>

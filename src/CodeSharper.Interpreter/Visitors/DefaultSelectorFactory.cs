@@ -39,11 +39,10 @@ namespace CodeSharper.Interpreter.Visitors
         public AttributeElement CreateAttributeSelector(String name, ConstantElement value)
         {
             Assume.NotNull(name, "name");
-            Assume.NotNull(value, "value");
 
             return new AttributeElement {
                 Name = name,
-                Value = value
+                Value = value ?? new ConstantElement(null, typeof(Object))
             };
         }
 

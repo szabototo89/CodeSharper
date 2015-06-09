@@ -146,6 +146,7 @@
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\NthChildNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
+    <Compile Include="Nodes\SelectorAttribute.cs" />
     <Compile Include="Nodes\Selectors\SelectorBase.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifier.cs" />
     <Compile Include="Nodes\Combinators\BinaryCombinator.cs" />

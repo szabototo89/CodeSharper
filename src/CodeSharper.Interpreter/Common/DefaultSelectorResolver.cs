@@ -5,6 +5,7 @@ using System.Reflection;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.NameMatchers;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Nodes;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
@@ -78,11 +79,12 @@ namespace CodeSharper.Interpreter.Common
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
             var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type);
+            var attributes = elementTypeSelector.Attributes.Select(attribute => new SelectorAttribute(attribute.Name, attribute.Value.Value));
             var pseudoSelectors = elementTypeSelector.PseudoSelectors
                                                      .Select(element => resolvePseudoSelector(element, selector))
                                                      .ToArray();
 
-            return new SelectionCombinator(selector, pseudoSelectors);
+            return new SelectionCombinator(selector, pseudoSelectors, attributes);
         }
 
         /// <summary>
