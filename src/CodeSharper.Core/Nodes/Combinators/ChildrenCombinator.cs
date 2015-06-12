@@ -7,7 +7,6 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Combinators
 {
-
     public class ChildrenCombinator : BinaryCombinator
     {
         /// <summary>
@@ -24,10 +23,14 @@ namespace CodeSharper.Core.Nodes.Combinators
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
             var leftExpression = Left.Calculate(values);
-            leftExpression = leftExpression.OfType<IHasChildren<Object>>()
-                                           .SelectMany(node => node.Children);
 
-            return Right.Calculate(leftExpression);
+            var textRanges = leftExpression.OfType<IHasTextRange>()
+                                           .Select(expression => expression.TextRange);
+
+            var children = leftExpression.OfType<IHasChildren<Object>>()
+                                         .SelectMany(expression => expression.Children);
+
+            return Right.Calculate(children.Concat(textRanges));
         }
     }
 }

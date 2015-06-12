@@ -4,6 +4,7 @@ using System.Linq;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.SyntaxTrees;
+using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Nodes.Combinators

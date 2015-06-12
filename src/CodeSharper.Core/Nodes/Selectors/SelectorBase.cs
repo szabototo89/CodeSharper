@@ -37,9 +37,18 @@ namespace CodeSharper.Core.Nodes.Selectors
         protected Object GetAttributeValue(String attributeName)
         {
             Option<Object> result = attributes.TryGetValue(attributeName);
-
             if (result == Option.None) return null;
             return result.Value;
+        }
+
+        /// <summary>
+        /// Gets the attribute value or default.
+        /// </summary>
+        protected TResult GetAttributeValueOrDefault<TResult>(String attributeName, TResult defaultValue)
+        {
+            Option<Object> result = attributes.TryGetValue(attributeName);
+            if (result == Option.None) return defaultValue;
+            return (TResult) result.Value;
         }
 
         /// <summary>
@@ -53,11 +62,11 @@ namespace CodeSharper.Core.Nodes.Selectors
         }
 
         /// <summary>
-        /// Applys the attributes.
+        /// Applys the attributes to specified selector
         /// </summary>
         public virtual void ApplyAttributes(IEnumerable<SelectorAttribute> attributes)
         {
-            this.attributes = attributes.ToDictionary(key => key.Name, value => value.Value);
+            this.attributes = attributes.GetOrEmpty().ToDictionary(key => key.Name, value => value.Value);
         }
     }
 }

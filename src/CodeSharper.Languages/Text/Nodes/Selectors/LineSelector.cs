@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
+using CodeSharper.Core.Nodes;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 
@@ -12,28 +14,33 @@ namespace CodeSharper.Languages.Text.Nodes.Selectors
         private readonly String INCLUDE_EMPTY_LINE = "include-empty-lines";
 
         /// <summary>
+        /// Applys the attributes to specified selector
+        /// </summary>
+        public override void ApplyAttributes(IEnumerable<SelectorAttribute> attributes)
+        {
+            base.ApplyAttributes(attributes);
+
+            IsEmptyLineIncluded = GetAttributeBooleanValue(INCLUDE_EMPTY_LINE);
+            IsSeparatorOverriden = IsAttributeDefined(SEPARATOR_ATTRIBUTE);
+
+            if (IsSeparatorOverriden)
+                OverridenSeparator = GetAttributeValueOrDefault(SEPARATOR_ATTRIBUTE, String.Empty);
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this instance is empty line included.
         /// </summary>
-        public Boolean IsEmptyLineIncluded
-        {
-            get { return GetAttributeBooleanValue(INCLUDE_EMPTY_LINE); }
-        }
+        public Boolean IsEmptyLineIncluded { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is separator overriden.
         /// </summary>
-        protected Boolean IsSeparatorOverriden
-        {
-            get { return IsAttributeDefined(SEPARATOR_ATTRIBUTE); }
-        }
+        protected Boolean IsSeparatorOverriden { get; private set; }
 
         /// <summary>
         /// Gets the overriden separator.
         /// </summary>
-        protected String OverridenSeparator
-        {
-            get { return GetAttributeValue(SEPARATOR_ATTRIBUTE).Safe(value => value.ToString()); }
-        }
+        protected String OverridenSeparator { get; private set; }
 
         /// <summary>
         /// Gets the pattern.

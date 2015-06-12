@@ -71,6 +71,7 @@
     <Compile Include="Csv\Fakes\CsvTreeVisitorStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Csv\Nodes\NodeOperandTests.cs" />
+    <Compile Include="Text\Nodes\Selectors\WordSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
