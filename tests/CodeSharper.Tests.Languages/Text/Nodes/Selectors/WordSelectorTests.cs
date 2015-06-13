@@ -48,5 +48,21 @@ namespace CodeSharper.Tests.Languages.Text.Nodes.Selectors
             // Then
             Assert.That(result, Is.EquivalentTo(new[] {"10", "55"}));
         }
+
+        [Test(Description = "SelectElement should return only alphabetic values when IsFilteringAlphabetic attribute is true and the others are set to false")]
+        public void SelectElement_ShouldReturnOnlyAlphabeticValues_WhenIsFilteringAlphabeticIsTrueAndOthersAreSetToFalse()
+        {
+            // Given
+            var textRange = createTextRange("hello 10! how are you? I am 55 years old.");
+            var underTest = new WordSelector();
+            underTest.ApplyAttributes(new[] { new SelectorAttribute("alphabetic", true) });
+
+            // When
+            var result = underTest.SelectElement(textRange).Select(range => range.GetText());
+
+            // Then
+            Assert.That(result, Is.EquivalentTo(new[] { "hello", "how", "are", "you", "I", "am", "years", "old" }));
+        }
+
     }
 }

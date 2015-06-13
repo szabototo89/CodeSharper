@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using CodeSharper.Core.Common;
@@ -95,7 +96,7 @@ namespace CodeSharper.Interpreter.Common
             var elements = DescriptorRepository.GetModifierDescriptors()
                                                .Where(pseudo => NameMatcher.Match(pseudo.Value, element.Name))
                                                .Where(pseudo => pseudo.Arguments.Count() == element.Arguments.Count())
-                                               .Select(pseudo => new { pseudo.Type, Arguments = element.Arguments.Select(arg => arg.Value) })
+                                               .Select(pseudo => new { pseudo.Type, Arguments = element.Arguments.Select(createPseudoSelectorArgument).ToArray() })
                                                .ToArray();
 
             if (elements.Length > 1)
@@ -105,6 +106,16 @@ namespace CodeSharper.Interpreter.Common
 
             var pseudoSelector = elements.Single();
             return SelectorFactory.CreatePseudoSelector(pseudoSelector.Type, pseudoSelector.Arguments, selector);
+        }
+
+        private Object createPseudoSelectorArgument(ConstantElement argument)
+        {
+            if (argument.Type == typeof (SelectorElementBase))
+            {
+                return Create(argument.Value as SelectorElementBase);
+            }
+
+            return argument.Value;
         }
 
         /// <summary>

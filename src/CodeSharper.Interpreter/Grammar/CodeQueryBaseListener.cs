@@ -225,6 +225,18 @@ public partial class CodeQueryBaseListener : ICodeQueryListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

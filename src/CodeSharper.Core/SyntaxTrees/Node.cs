@@ -8,7 +8,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.SyntaxTrees
 {
-    public abstract class   Node : IHasChildren<Node>, IHasParent<Node>, IHasTextRange
+    public abstract class Node : IHasChildren<Node>, IHasParent<Node>, IHasTextRange
     {
         private readonly List<Node> _children;
 
@@ -86,11 +86,15 @@ namespace CodeSharper.Core.SyntaxTrees
         {
             if (oldChildren == null) return;
             foreach (var child in oldChildren.WhereNotNull())
+            {
                 child.Detach();
+            }
 
             if (newChildren == null) return;
             foreach (var child in newChildren.WhereNotNull())
+            {
                 child.Attach(this);
+            }
         }
 
         /// <summary>

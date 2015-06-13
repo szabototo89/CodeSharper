@@ -24,7 +24,17 @@ namespace CodeSharper.Languages.Text.Nodes.Selectors
             IsLowerCase = GetAttributeBooleanValue(LOWERCASE_ATTRIBUTE);
             IsPunctuation = GetAttributeBooleanValue(PUNCTUATION_ATTRIBUTE);
             IsDigit = GetAttributeBooleanValue(DIGIT_ATTRIBUTE);
+
+            IsAttributeSpecified = IsAttributeDefined(UPPERCASE_ATTRIBUTE) ||
+                                   IsAttributeDefined(LOWERCASE_ATTRIBUTE) ||
+                                   IsAttributeDefined(PUNCTUATION_ATTRIBUTE) ||
+                                   IsAttributeDefined(DIGIT_ATTRIBUTE);
         }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is attribute specified.
+        /// </summary>
+        public Boolean IsAttributeSpecified { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is digit.
@@ -65,7 +75,7 @@ namespace CodeSharper.Languages.Text.Nodes.Selectors
                 var isPunctuationAllowed = (IsPunctuation && Char.IsPunctuation(character));
                 var isDigitAllowed = (IsDigit && Char.IsDigit(character));
 
-                if (isLowerCaseAllowed || isUpperCaseAllowed ||
+                if (!IsAttributeSpecified || isLowerCaseAllowed || isUpperCaseAllowed ||
                     isDigitAllowed || isPunctuationAllowed)
                     yield return textDocument.CreateOrGetTextRange(start, start + 1);
             }

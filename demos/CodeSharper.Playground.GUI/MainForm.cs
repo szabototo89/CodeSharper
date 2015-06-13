@@ -16,6 +16,7 @@ using CodeSharper.Core.Services;
 using CodeSharper.Core.Texts;
 using CodeSharper.Interpreter.Bootstrappers;
 using CodeSharper.Playground.GUI.Modules;
+using CodeSharper.Playground.GUI.Services;
 
 namespace CodeSharper.Playground.GUI
 {
@@ -36,7 +37,8 @@ namespace CodeSharper.Playground.GUI
             var assemblies = new[] {Assembly.Load("CodeSharper.Core"), Assembly.Load("CodeSharper.Languages"), Assembly.GetExecutingAssembly()};
             var runnableTypeResolver = new AutoRunnableResolver();
             var valueConverter = new IntegerValueConverter();
-            var runnableFactory = new DefaultRunnableFactory(runnableTypeResolver.ResolveRunnableTypes(assemblies), valueConverter);
+            var interactiveService = new ReplaceTextInteractiveService(this);
+            var runnableFactory = new DefaultRunnableFactory(runnableTypeResolver.ResolveRunnableTypes(assemblies), valueConverter, interactiveService: interactiveService);
             var descriptorRepository = new FileDescriptorRepository("descriptors.json", assemblies);
             Bootstrapper = new Bootstrapper(runnableFactory, descriptorRepository);
             compilerModule = new TextCompilerModule(Bootstrapper);
@@ -53,9 +55,7 @@ namespace CodeSharper.Playground.GUI
         {
             var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() != DialogResult.OK)
-            {
                 return;
-            }
 
             var stream = fileDialog.OpenFile();
             var streamReader = new StreamReader(stream);
@@ -68,9 +68,7 @@ namespace CodeSharper.Playground.GUI
         {
             var fileDialog = new SaveFileDialog();
             if (fileDialog.ShowDialog() != DialogResult.OK)
-            {
                 return;
-            }
 
             using (var file = File.CreateText(fileDialog.FileName))
             {
@@ -87,18 +85,15 @@ namespace CodeSharper.Playground.GUI
         {
             var menuItem = sender as ToolStripMenuItem;
             if (menuItem == null)
-            {
                 return;
-            }
             var tag = menuItem.Tag as String;
         }
 
-        private void refactorButton_Click(Object sender, EventArgs e)
+        private async void refactorButton_Click(Object sender, EventArgs e)
         {
-            stopwatch.Restart();
-            stopwatch.Start();
-            var result = CompilerModule.ExecuteQuery(queryEditor.Text, sourceEditor.Text);
-            stopwatch.Stop();
+            runTimeValueLabel.Text += " (running ...)";
+
+            var result = await executeQuery(queryEditor.Text, sourceEditor.Text);
 
             if (result.HasValue)
             {
@@ -107,6 +102,15 @@ namespace CodeSharper.Playground.GUI
             }
 
             runTimeValueLabel.Text = stopwatch.Elapsed.ToString();
+        }
+
+        private async Task<DocumentResults?> executeQuery(String query, String source)
+        {
+            stopwatch.Restart();
+            stopwatch.Start();
+            var result = await Task.Run(() => CompilerModule.ExecuteQuery(query, source));
+            stopwatch.Stop();
+            return result;
         }
 
         private void csvToolStripMenuItem_Click(object sender, EventArgs e)

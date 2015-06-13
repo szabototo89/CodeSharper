@@ -76,6 +76,12 @@
             "type": "CodeSharper.Languages.Json.Nodes.Selectors.ValueSelector"
         },
         {
+            "name": "key-value-selector",
+            "selector-type": "element-type-selector",
+            "value": "key-value",
+            "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeyValueSelector"
+        },
+        {
             "name": "character-selector",
             "selector-type": "element-type-selector",
             "value": "character",

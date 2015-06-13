@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Interpreter.Common;
 
@@ -56,6 +57,19 @@ namespace CodeSharper.Interpreter.Visitors
             return new PseudoSelectorElement {
                 Name = name,
                 Arguments = values
+            };
+        }
+
+        /// <summary>
+        /// Creates a pseudo selector element
+        /// </summary>
+        public PseudoSelectorElement CreatePseudoSelector(String name, IEnumerable<SelectorElementBase> selectors)
+        {
+            Assume.NotNull(name, "name");
+
+            return new PseudoSelectorElement {
+                Name = name,
+                Arguments = selectors.Select(selector => new ConstantElement(selector, typeof(SelectorElementBase)))
             };
         }
 

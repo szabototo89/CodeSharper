@@ -24,13 +24,10 @@ namespace CodeSharper.Core.Nodes.Combinators
         {
             var leftExpression = Left.Calculate(values);
 
-            var textRanges = leftExpression.OfType<IHasTextRange>()
-                                           .Select(expression => expression.TextRange);
-
             var children = leftExpression.OfType<IHasChildren<Object>>()
                                          .SelectMany(expression => expression.Children);
 
-            return Right.Calculate(children.Concat(textRanges));
+            return Right.Calculate(children);
         }
     }
 }

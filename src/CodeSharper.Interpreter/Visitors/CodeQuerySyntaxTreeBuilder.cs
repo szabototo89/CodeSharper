@@ -309,6 +309,23 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public override Object VisitPseudoSelectorWithSelector(CodeQuery.PseudoSelectorWithSelectorContext context)
+        {
+            var name = context.Name.Text;
+            var selector = context.Value.Accept(this) as SelectorElementBase;
+
+            return SelectorFactory.CreatePseudoSelector(name, new[] {selector});
+        }
+
+        /// <summary>
         /// Visit a parse tree produced by <see cref="CodeQuery.selectableElement" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />

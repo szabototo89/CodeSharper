@@ -916,6 +916,31 @@ public partial class CodeQuery : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
+	public partial class PseudoSelectorWithSelectorContext : PseudoSelectorContext {
+		public IToken Name;
+		public SelectorContext Value;
+		public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
+		public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
+		public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
+		public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
+		public SelectorContext selector() {
+			return GetRuleContext<SelectorContext>(0);
+		}
+		public PseudoSelectorWithSelectorContext(PseudoSelectorContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.EnterPseudoSelectorWithSelector(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			ICodeQueryListener typedListener = listener as ICodeQueryListener;
+			if (typedListener != null) typedListener.ExitPseudoSelectorWithSelector(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICodeQueryVisitor<TResult> typedVisitor = visitor as ICodeQueryVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPseudoSelectorWithSelector(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 
 	[RuleVersion(0)]
 	public PseudoSelectorContext pseudoSelector() {
@@ -923,37 +948,32 @@ public partial class CodeQuery : Parser {
 		EnterRule(_localctx, 12, RULE_pseudoSelector);
 		int _la;
 		try {
-			State = 130;
-			switch ( Interpreter.AdaptivePredict(TokenStream,18,Context) ) {
+			State = 132;
+			switch ( Interpreter.AdaptivePredict(TokenStream,16,Context) ) {
 			case 1:
 				_localctx = new PseudoSelectorWithConstantContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 101; Match(COLON);
 				State = 102; ((PseudoSelectorWithConstantContext)_localctx).Name = Match(ID);
-				State = 114;
-				switch ( Interpreter.AdaptivePredict(TokenStream,15,Context) ) {
-				case 1:
+				{
+				State = 103; Match(LEFT_BRACKET);
+				State = 104; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
+				State = 109;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.La(1);
+				while (_la==COMMA) {
 					{
-					State = 103; Match(LEFT_BRACKET);
-					State = 104; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
-					State = 109;
+					{
+					State = 105; Match(COMMA);
+					State = 106; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
+					}
+					}
+					State = 111;
 					ErrorHandler.Sync(this);
 					_la = TokenStream.La(1);
-					while (_la==COMMA) {
-						{
-						{
-						State = 105; Match(COMMA);
-						State = 106; ((PseudoSelectorWithConstantContext)_localctx).Value = constant();
-						}
-						}
-						State = 111;
-						ErrorHandler.Sync(this);
-						_la = TokenStream.La(1);
-					}
-					State = 112; Match(RIGHT_BRACKET);
-					}
-					break;
+				}
+				State = 112; Match(RIGHT_BRACKET);
 				}
 				}
 				break;
@@ -961,31 +981,39 @@ public partial class CodeQuery : Parser {
 				_localctx = new PseudoSelectorWithIdentifierContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 116; Match(COLON);
-				State = 117; ((PseudoSelectorWithIdentifierContext)_localctx).Name = Match(ID);
-				State = 128;
-				switch ( Interpreter.AdaptivePredict(TokenStream,17,Context) ) {
-				case 1:
+				State = 114; Match(COLON);
+				State = 115; ((PseudoSelectorWithIdentifierContext)_localctx).Name = Match(ID);
+				{
+				State = 116; Match(LEFT_BRACKET);
+				State = 117; ((PseudoSelectorWithIdentifierContext)_localctx).Value = Match(ID);
+				State = 122;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.La(1);
+				while (_la==COMMA) {
 					{
-					State = 118; Match(LEFT_BRACKET);
+					{
+					State = 118; Match(COMMA);
 					State = 119; ((PseudoSelectorWithIdentifierContext)_localctx).Value = Match(ID);
+					}
+					}
 					State = 124;
 					ErrorHandler.Sync(this);
 					_la = TokenStream.La(1);
-					while (_la==COMMA) {
-						{
-						{
-						State = 120; Match(COMMA);
-						State = 121; ((PseudoSelectorWithIdentifierContext)_localctx).Value = Match(ID);
-						}
-						}
-						State = 126;
-						ErrorHandler.Sync(this);
-						_la = TokenStream.La(1);
-					}
-					State = 127; Match(RIGHT_BRACKET);
-					}
-					break;
+				}
+				State = 125; Match(RIGHT_BRACKET);
+				}
+				}
+				break;
+			case 3:
+				_localctx = new PseudoSelectorWithSelectorContext(_localctx);
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 126; Match(COLON);
+				State = 127; ((PseudoSelectorWithSelectorContext)_localctx).Name = Match(ID);
+				{
+				State = 128; Match(LEFT_BRACKET);
+				State = 129; ((PseudoSelectorWithSelectorContext)_localctx).Value = selector(0);
+				State = 130; Match(RIGHT_BRACKET);
 				}
 				}
 				break;
@@ -1040,18 +1068,18 @@ public partial class CodeQuery : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 132; Match(LEFT_SQUARE_BRACKET);
-			State = 133; _localctx.AttributeName = Match(ID);
-			State = 136;
+			State = 134; Match(LEFT_SQUARE_BRACKET);
+			State = 135; _localctx.AttributeName = Match(ID);
+			State = 138;
 			_la = TokenStream.La(1);
 			if (_la==ASSIGNMENT_OPERATOR) {
 				{
-				State = 134; Match(ASSIGNMENT_OPERATOR);
-				State = 135; _localctx.AttributeValue = constant();
+				State = 136; Match(ASSIGNMENT_OPERATOR);
+				State = 137; _localctx.AttributeValue = constant();
 				}
 			}
 
-			State = 138; Match(RIGHT_SQUARE_BRACKET);
+			State = 140; Match(RIGHT_SQUARE_BRACKET);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1134,27 +1162,27 @@ public partial class CodeQuery : Parser {
 		ConstantContext _localctx = new ConstantContext(Context, State);
 		EnterRule(_localctx, 16, RULE_constant);
 		try {
-			State = 143;
+			State = 145;
 			switch (TokenStream.La(1)) {
 			case STRING:
 				_localctx = new ConstantStringContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 140; Match(STRING);
+				State = 142; Match(STRING);
 				}
 				break;
 			case NUMBER:
 				_localctx = new ConstantNumberContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 141; Match(NUMBER);
+				State = 143; Match(NUMBER);
 				}
 				break;
 			case BOOLEAN:
 				_localctx = new ConstantBooleanContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 142; Match(BOOLEAN);
+				State = 144; Match(BOOLEAN);
 				}
 				break;
 			default:
@@ -1193,7 +1221,7 @@ public partial class CodeQuery : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x13\x94\x4\x2\t"+
+		"\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x13\x96\x4\x2\t"+
 		"\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t"+
 		"\t\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x5\x2\x1B\n\x2\x3\x2"+
 		"\x3\x2\x3\x2\a\x2 \n\x2\f\x2\xE\x2#\v\x2\x3\x3\x3\x3\x3\x3\x3\x3\x3\x3"+
@@ -1203,20 +1231,20 @@ public partial class CodeQuery : Parser {
 		"\x6\x3\x6\x5\x6L\n\x6\x3\x6\x3\x6\x5\x6P\n\x6\x3\x6\a\x6S\n\x6\f\x6\xE"+
 		"\x6V\v\x6\x3\a\x5\aY\n\a\x3\a\x3\a\a\a]\n\a\f\a\xE\a`\v\a\x3\a\a\a\x63"+
 		"\n\a\f\a\xE\a\x66\v\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\a\bn\n\b\f\b\xE\b"+
-		"q\v\b\x3\b\x3\b\x5\bu\n\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\a\b}\n\b\f\b\xE"+
-		"\b\x80\v\b\x3\b\x5\b\x83\n\b\x5\b\x85\n\b\x3\t\x3\t\x3\t\x3\t\x5\t\x8B"+
-		"\n\t\x3\t\x3\t\x3\n\x3\n\x3\n\x5\n\x92\n\n\x3\n\x2\x4\x2\n\v\x2\x4\x6"+
-		"\b\n\f\xE\x10\x12\x2\x3\x4\x2\n\n\f\f\xA2\x2\x1A\x3\x2\x2\x2\x4*\x3\x2"+
-		"\x2\x2\x6,\x3\x2\x2\x2\b\x43\x3\x2\x2\x2\nK\x3\x2\x2\x2\fX\x3\x2\x2\x2"+
-		"\xE\x84\x3\x2\x2\x2\x10\x86\x3\x2\x2\x2\x12\x91\x3\x2\x2\x2\x14\x15\b"+
-		"\x2\x1\x2\x15\x16\a\x3\x2\x2\x16\x17\x5\x2\x2\x2\x17\x18\a\x4\x2\x2\x18"+
-		"\x1B\x3\x2\x2\x2\x19\x1B\x5\x4\x3\x2\x1A\x14\x3\x2\x2\x2\x1A\x19\x3\x2"+
-		"\x2\x2\x1B!\x3\x2\x2\x2\x1C\x1D\f\x5\x2\x2\x1D\x1E\a\x12\x2\x2\x1E \x5"+
-		"\x2\x2\x6\x1F\x1C\x3\x2\x2\x2 #\x3\x2\x2\x2!\x1F\x3\x2\x2\x2!\"\x3\x2"+
-		"\x2\x2\"\x3\x3\x2\x2\x2#!\x3\x2\x2\x2$+\x5\x6\x4\x2%+\x5\n\x6\x2&\'\a"+
-		"\x3\x2\x2\'(\x5\x2\x2\x2()\a\x4\x2\x2)+\x3\x2\x2\x2*$\x3\x2\x2\x2*%\x3"+
-		"\x2\x2\x2*&\x3\x2\x2\x2+\x5\x3\x2\x2\x2,-\a\x10\x2\x2-\x31\a\n\x2\x2."+
-		"\x30\x5\b\x5\x2/.\x3\x2\x2\x2\x30\x33\x3\x2\x2\x2\x31/\x3\x2\x2\x2\x31"+
+		"q\v\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\a\b{\n\b\f\b\xE\b~\v\b\x3"+
+		"\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\b\x87\n\b\x3\t\x3\t\x3\t\x3\t\x5\t"+
+		"\x8D\n\t\x3\t\x3\t\x3\n\x3\n\x3\n\x5\n\x94\n\n\x3\n\x2\x4\x2\n\v\x2\x4"+
+		"\x6\b\n\f\xE\x10\x12\x2\x3\x4\x2\n\n\f\f\xA3\x2\x1A\x3\x2\x2\x2\x4*\x3"+
+		"\x2\x2\x2\x6,\x3\x2\x2\x2\b\x43\x3\x2\x2\x2\nK\x3\x2\x2\x2\fX\x3\x2\x2"+
+		"\x2\xE\x86\x3\x2\x2\x2\x10\x88\x3\x2\x2\x2\x12\x93\x3\x2\x2\x2\x14\x15"+
+		"\b\x2\x1\x2\x15\x16\a\x3\x2\x2\x16\x17\x5\x2\x2\x2\x17\x18\a\x4\x2\x2"+
+		"\x18\x1B\x3\x2\x2\x2\x19\x1B\x5\x4\x3\x2\x1A\x14\x3\x2\x2\x2\x1A\x19\x3"+
+		"\x2\x2\x2\x1B!\x3\x2\x2\x2\x1C\x1D\f\x5\x2\x2\x1D\x1E\a\x12\x2\x2\x1E"+
+		" \x5\x2\x2\x6\x1F\x1C\x3\x2\x2\x2 #\x3\x2\x2\x2!\x1F\x3\x2\x2\x2!\"\x3"+
+		"\x2\x2\x2\"\x3\x3\x2\x2\x2#!\x3\x2\x2\x2$+\x5\x6\x4\x2%+\x5\n\x6\x2&\'"+
+		"\a\x3\x2\x2\'(\x5\x2\x2\x2()\a\x4\x2\x2)+\x3\x2\x2\x2*$\x3\x2\x2\x2*%"+
+		"\x3\x2\x2\x2*&\x3\x2\x2\x2+\x5\x3\x2\x2\x2,-\a\x10\x2\x2-\x31\a\n\x2\x2"+
+		".\x30\x5\b\x5\x2/.\x3\x2\x2\x2\x30\x33\x3\x2\x2\x2\x31/\x3\x2\x2\x2\x31"+
 		"\x32\x3\x2\x2\x2\x32\a\x3\x2\x2\x2\x33\x31\x3\x2\x2\x2\x34\x35\a\n\x2"+
 		"\x2\x35\x37\a\x11\x2\x2\x36\x34\x3\x2\x2\x2\x36\x37\x3\x2\x2\x2\x37\x38"+
 		"\x3\x2\x2\x2\x38\x44\x5\x4\x3\x2\x39:\a\n\x2\x2:<\a\x11\x2\x2;\x39\x3"+
@@ -1232,19 +1260,19 @@ public partial class CodeQuery : Parser {
 		"\x2^\\\x3\x2\x2\x2^_\x3\x2\x2\x2_\x64\x3\x2\x2\x2`^\x3\x2\x2\x2\x61\x63"+
 		"\x5\xE\b\x2\x62\x61\x3\x2\x2\x2\x63\x66\x3\x2\x2\x2\x64\x62\x3\x2\x2\x2"+
 		"\x64\x65\x3\x2\x2\x2\x65\r\x3\x2\x2\x2\x66\x64\x3\x2\x2\x2gh\a\xE\x2\x2"+
-		"ht\a\n\x2\x2ij\a\x3\x2\x2jo\x5\x12\n\x2kl\a\xF\x2\x2ln\x5\x12\n\x2mk\x3"+
+		"hi\a\n\x2\x2ij\a\x3\x2\x2jo\x5\x12\n\x2kl\a\xF\x2\x2ln\x5\x12\n\x2mk\x3"+
 		"\x2\x2\x2nq\x3\x2\x2\x2om\x3\x2\x2\x2op\x3\x2\x2\x2pr\x3\x2\x2\x2qo\x3"+
-		"\x2\x2\x2rs\a\x4\x2\x2su\x3\x2\x2\x2ti\x3\x2\x2\x2tu\x3\x2\x2\x2u\x85"+
-		"\x3\x2\x2\x2vw\a\xE\x2\x2w\x82\a\n\x2\x2xy\a\x3\x2\x2y~\a\n\x2\x2z{\a"+
-		"\xF\x2\x2{}\a\n\x2\x2|z\x3\x2\x2\x2}\x80\x3\x2\x2\x2~|\x3\x2\x2\x2~\x7F"+
-		"\x3\x2\x2\x2\x7F\x81\x3\x2\x2\x2\x80~\x3\x2\x2\x2\x81\x83\a\x4\x2\x2\x82"+
-		"x\x3\x2\x2\x2\x82\x83\x3\x2\x2\x2\x83\x85\x3\x2\x2\x2\x84g\x3\x2\x2\x2"+
-		"\x84v\x3\x2\x2\x2\x85\xF\x3\x2\x2\x2\x86\x87\a\x5\x2\x2\x87\x8A\a\n\x2"+
-		"\x2\x88\x89\a\x11\x2\x2\x89\x8B\x5\x12\n\x2\x8A\x88\x3\x2\x2\x2\x8A\x8B"+
-		"\x3\x2\x2\x2\x8B\x8C\x3\x2\x2\x2\x8C\x8D\a\x6\x2\x2\x8D\x11\x3\x2\x2\x2"+
-		"\x8E\x92\a\t\x2\x2\x8F\x92\a\a\x2\x2\x90\x92\a\b\x2\x2\x91\x8E\x3\x2\x2"+
-		"\x2\x91\x8F\x3\x2\x2\x2\x91\x90\x3\x2\x2\x2\x92\x13\x3\x2\x2\x2\x17\x1A"+
-		"!*\x31\x36;@\x43KOTX^\x64ot~\x82\x84\x8A\x91";
+		"\x2\x2\x2rs\a\x4\x2\x2s\x87\x3\x2\x2\x2tu\a\xE\x2\x2uv\a\n\x2\x2vw\a\x3"+
+		"\x2\x2w|\a\n\x2\x2xy\a\xF\x2\x2y{\a\n\x2\x2zx\x3\x2\x2\x2{~\x3\x2\x2\x2"+
+		"|z\x3\x2\x2\x2|}\x3\x2\x2\x2}\x7F\x3\x2\x2\x2~|\x3\x2\x2\x2\x7F\x87\a"+
+		"\x4\x2\x2\x80\x81\a\xE\x2\x2\x81\x82\a\n\x2\x2\x82\x83\a\x3\x2\x2\x83"+
+		"\x84\x5\n\x6\x2\x84\x85\a\x4\x2\x2\x85\x87\x3\x2\x2\x2\x86g\x3\x2\x2\x2"+
+		"\x86t\x3\x2\x2\x2\x86\x80\x3\x2\x2\x2\x87\xF\x3\x2\x2\x2\x88\x89\a\x5"+
+		"\x2\x2\x89\x8C\a\n\x2\x2\x8A\x8B\a\x11\x2\x2\x8B\x8D\x5\x12\n\x2\x8C\x8A"+
+		"\x3\x2\x2\x2\x8C\x8D\x3\x2\x2\x2\x8D\x8E\x3\x2\x2\x2\x8E\x8F\a\x6\x2\x2"+
+		"\x8F\x11\x3\x2\x2\x2\x90\x94\a\t\x2\x2\x91\x94\a\a\x2\x2\x92\x94\a\b\x2"+
+		"\x2\x93\x90\x3\x2\x2\x2\x93\x91\x3\x2\x2\x2\x93\x92\x3\x2\x2\x2\x94\x13"+
+		"\x3\x2\x2\x2\x15\x1A!*\x31\x36;@\x43KOTX^\x64o|\x86\x8C\x93";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

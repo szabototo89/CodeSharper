@@ -24,9 +24,9 @@ namespace CodeSharper.Languages.Utilities
             return textDocument.CreateOrGetTextRange(comma.Symbol.StartIndex, comma.Symbol.StopIndex + 1);
         }
 
-        public static TextRange CreateTextRange(this ParserRuleContext context, TextDocument textDocument)
+        public static TextRange CreateTextRange(this ParserRuleContext context, TextDocument textDocument, Int32 startOffset = 0, Int32 stopOffset = 0)
         {
-            TextRange textRange = textDocument.CreateOrGetTextRange(context.Start.StartIndex, context.Stop.StopIndex + 1);
+            TextRange textRange = textDocument.CreateOrGetTextRange(context.Start.StartIndex + startOffset, context.Stop.StopIndex + 1 + stopOffset);
             return textRange;
         }
     }

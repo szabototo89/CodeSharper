@@ -5,13 +5,22 @@ using System.Reflection;
 using CodeSharper.Core.Common.NameMatchers;
 using CodeSharper.Core.Common.Runnables.ValueConverters;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Services;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables
 {
     public class DefaultRunnableFactory : IRunnableFactory
     {
-        public IValueConverter ValueConverter { get; set; }
+        /// <summary>
+        /// Gets or sets the value converter.
+        /// </summary>
+        public IValueConverter ValueConverter { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the interactive service.
+        /// </summary>
+        public IInteractiveService InteractiveService { get; protected set; }
 
         /// <summary>
         /// Gets or sets the available runnables.
@@ -26,17 +35,19 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Gets or sets the parameter name matcher.
         /// </summary>
-        public INameMatcher ParameterNameMatcher { get; set; }
+        public INameMatcher ParameterNameMatcher { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultRunnableFactory"/> class.
         /// </summary>
-        public DefaultRunnableFactory(IEnumerable<Type> availableRunnables, IValueConverter valueConverter = null, INameMatcher runnableNameMatcher = null, INameMatcher parameterNameMatcher = null)
+        public DefaultRunnableFactory(IEnumerable<Type> availableRunnables, IValueConverter valueConverter = null, INameMatcher runnableNameMatcher = null, INameMatcher parameterNameMatcher = null,
+                                      IInteractiveService interactiveService = null)
         {
             AvailableRunnables = availableRunnables ?? Enumerable.Empty<Type>();
             RunnableNameMatcher = runnableNameMatcher ?? new EqualityNameMatcher();
             ParameterNameMatcher = parameterNameMatcher ?? new EqualityNameMatcher();
             ValueConverter = valueConverter ?? new EmptyValueConverter();
+            InteractiveService = interactiveService;
         }
 
         /// <summary>
@@ -50,9 +61,7 @@ namespace CodeSharper.Core.Common.Runnables
             // instantiate runnable
             var runnableType = AvailableRunnables.FirstOrDefault(type => RunnableNameMatcher.Match(type.Name, runnableName));
             if (runnableType == null)
-            {
                 throw new Exception(String.Format("Runnable ({0}) is not available!", runnableName));
-            }
 
             IRunnable runnable = null;
 
@@ -60,19 +69,33 @@ namespace CodeSharper.Core.Common.Runnables
             var constructors = runnableType.GetConstructors();
             var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
             if (defaultConstructor != null)
-            {
                 runnable = defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as IRunnable;
-            }
-            else
+            if (InteractiveService != null)
             {
-                throw new Exception("Cannot find default constructor of Runnable instance!");
+                // instantiate with interactive service
+                var constructorWithService = constructors.FirstOrDefault(constructor => {
+                    var parameters = constructor.GetParameters();
+                    if (parameters.Length != 1)
+                        return false;
+
+                    var isInteractiveService = typeof (IInteractiveService).IsAssignableFrom(parameters[0].ParameterType);
+
+                    return isInteractiveService;
+                });
+
+                if (constructorWithService != null)
+                    runnable = constructorWithService.Invoke(new[] {InteractiveService}) as IRunnable;
             }
+
+            if (runnable == null)
+                throw new Exception("Cannot find proper constructor of Runnable instance!");
 
             // update properties via [Parameter] attribute
             var properties = runnableType.GetProperties()
-                                         .Select(property => new {
+                                         .Select(property => new
+                                         {
                                              Property = property,
-                                             BindTo = property.GetCustomAttributes(typeof(ParameterAttribute), true)
+                                             BindTo = property.GetCustomAttributes(typeof (ParameterAttribute), true)
                                                               .SingleOrDefault() as ParameterAttribute
                                          })
                                          .Where(prop => prop.BindTo != null);
@@ -83,9 +106,7 @@ namespace CodeSharper.Core.Common.Runnables
 
                 var value = argument.Value;
                 if (ValueConverter.CanConvert(value, property.Property.PropertyType))
-                {
                     value = ValueConverter.Convert(value);
-                }
                 property.Property.SetValue(runnable, value);
             }
 

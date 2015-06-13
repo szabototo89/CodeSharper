@@ -73,7 +73,7 @@ namespace CodeSharper.Languages.Text.Nodes.Selectors
         public Boolean IsAnyAttributeSpecified { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is filter numeric.
+        /// Gets a value indicating whether this instance is filtering numeric.
         /// </summary>
         public Boolean IsFilteringNumeric { get; private set; }
 
@@ -97,17 +97,23 @@ namespace CodeSharper.Languages.Text.Nodes.Selectors
                 firstWhitespacePosition = text.IndexOfAny(separators, index);
                 if (firstWhitespacePosition == -1) break;
                 var result = text.Substring(index, firstWhitespacePosition - index);
-                if ((!IsAnyAttributeSpecified && !String.IsNullOrWhiteSpace(result)) ||
-                    isAlphabetic(result) || isNumber(result) || isCamelCase(result) || isTitleCase(result))
+                if (isWord(result))
                     yield return textDocument.CreateOrGetTextRange(textRange.Start + index, textRange.Start + firstWhitespacePosition);
                 index = firstWhitespacePosition + 1;
             } while (firstWhitespacePosition != -1);
 
             var startLastWord = textRange.Start + index;
             var stopLastWord = textRange.Start + text.Length;
+            var lastWord = text.Substring(index, text.Length - index);
 
-            if (Math.Abs(stopLastWord - startLastWord) != 0)
+            if (Math.Abs(stopLastWord - startLastWord) != 0 && isWord(lastWord))
                 yield return textDocument.CreateOrGetTextRange(startLastWord, stopLastWord);
+        }
+
+        private Boolean isWord(String text)
+        {
+            return (!IsAnyAttributeSpecified && !String.IsNullOrWhiteSpace(text)) ||
+                   isAlphabetic(text) || isNumber(text) || isCamelCase(text) || isTitleCase(text);
         }
 
         private Boolean isTitleCase(String text)

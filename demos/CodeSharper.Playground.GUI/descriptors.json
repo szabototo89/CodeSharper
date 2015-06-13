@@ -13,6 +13,18 @@
             "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
         },
         {
+            "name": "text-selector",
+            "selector-type": "combinator",
+            "value": ">>",
+            "type": "CodeSharper.Core.Nodes.Combinators.TextCombinator"
+        },
+        {
+            "name": "concat-selector",
+            "selector-type": "combinator",
+            "value": ",",
+            "type": "CodeSharper.Core.Nodes.Combinators.ConcatCombinator"
+        },
+        {
             "name": "universal-selector",
             "selector-type": "element-type-selector",
             "value": "*",
@@ -43,6 +55,13 @@
             "value": "nth",
             "arguments": [ "number" ],
             "type": "CodeSharper.Core.Nodes.Modifiers.NthChildNodeModifier"
+        },
+        {
+            "name": "has-selector",
+            "selector-type": "pseudo-selector",
+            "value": "has",
+            "arguments": [ "selector" ],
+            "type": "CodeSharper.Core.Nodes.Modifiers.HasNodeModifier"
         },
         {
             "name": "text-pseudo-selector",
@@ -76,6 +95,12 @@
             "type": "CodeSharper.Languages.Json.Nodes.Selectors.ValueSelector"
         },
         {
+            "name": "key-value-selector",
+            "selector-type": "element-type-selector",
+            "value": "key-value",
+            "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeyValueSelector"
+        },
+        {
             "name": "character-selector",
             "selector-type": "element-type-selector",
             "value": "character",
@@ -103,7 +128,7 @@
     "commands": [
         {
             "name": "RepeatRunnable",
-            "description": "Repeats count times",
+            "description": "It repeats specified elements with several times",
             "arguments": [
                 {
                     "name": "count",
@@ -119,7 +144,7 @@
         {
             "name": "ConvertToTextRangeRunnable",
             "command-names": [ "convert-to-textrange" ],
-            "description": "Converts text range to raw text",
+            "description": "Selects any object (which has text range) text range.",
             "type": "ConvertToTextRangeRunnable",
             "arguments": [ ]
         },
@@ -149,7 +174,7 @@
         {
             "name": "FilterRunnable",
             "command-names": [ "filter" ],
-            "description": "Converts text range to raw text",
+            "description": "Filters specified parameters by regular expression",
             "type": "FilterRunnable",
             "arguments": [
                 {

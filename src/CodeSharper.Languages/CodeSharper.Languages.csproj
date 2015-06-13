@@ -82,6 +82,7 @@
     <Compile Include="Json\Grammar\JsonVisitor.cs" />
     <Compile Include="Json\Nodes\Selectors\ArrayLiteralSelector.cs" />
     <Compile Include="Json\Nodes\Selectors\KeySelector.cs" />
+    <Compile Include="Json\Nodes\Selectors\KeyValueSelector.cs" />
     <Compile Include="Json\Nodes\Selectors\ObjectLiteralSelector.cs" />
     <Compile Include="Json\Nodes\Selectors\ValueSelector.cs" />
     <Compile Include="Json\SyntaxTrees\Literals\ArrayLiteralDeclaration.cs" />

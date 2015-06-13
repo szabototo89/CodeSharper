@@ -217,6 +217,18 @@ public interface ICodeQueryListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context);
 	/// <summary>
+	/// Enter a parse tree produced by the <c>PseudoSelectorWithSelector</c>
+	/// labeled alternative in <see cref="CodeQuery.pseudoSelector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>PseudoSelectorWithSelector</c>
+	/// labeled alternative in <see cref="CodeQuery.pseudoSelector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

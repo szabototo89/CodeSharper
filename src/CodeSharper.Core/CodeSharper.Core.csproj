@@ -139,9 +139,11 @@
     <Compile Include="Nodes\Combinators\CombinatorDescriptor.cs" />
     <Compile Include="Nodes\Combinators\SelectionCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
+    <Compile Include="Nodes\Combinators\TextCombinator.cs" />
     <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
     <Compile Include="Nodes\Combinators\UniversalCombinator.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\HasNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\ModifierDescriptor.cs" />
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\NthChildNodeModifier.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Services\DescriptorModel.cs" />
     <Compile Include="Services\FileDescriptorRepository.cs" />
     <Compile Include="Services\IDescriptorRepository.cs" />
+    <Compile Include="Services\IInteractiveService.cs" />
     <Compile Include="Services\MemoryDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />

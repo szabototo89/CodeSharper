@@ -37,7 +37,7 @@ namespace CodeSharper.Languages.Json.Visitors
         {
             Assume.NotNull(input, "input");
             Assume.NotNull(parseTree, "parseTree");
-            
+
             _textDocument = new TextDocument(input);
             return base.Visit(parseTree);
         }
@@ -86,7 +86,7 @@ namespace CodeSharper.Languages.Json.Visitors
         /// <return>The visitor result.</return>
         public override JsonNode VisitStringConstant(JsonParser.StringConstantContext context)
         {
-            var textRange = context.CreateTextRange(_textDocument);
+            var textRange = context.CreateTextRange(_textDocument, 1, -1);
             return TreeFactory.CreateStringConstant(textRange);
         }
 

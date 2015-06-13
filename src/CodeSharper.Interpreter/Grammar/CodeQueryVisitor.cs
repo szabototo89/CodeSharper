@@ -140,6 +140,13 @@ public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>PseudoSelectorWithSelector</c>
+	/// labeled alternative in <see cref="CodeQuery.pseudoSelector"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
