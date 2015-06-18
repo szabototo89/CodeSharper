@@ -9,18 +9,18 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
 {
     public class CsvCompilationUnit : CsvNode
     {
-        private IEnumerable<RowDeclarationSyntax> _rows;
+        private IEnumerable<RowDeclarationSyntax> rows;
 
         /// <summary>
         /// Gets or sets the rows.
         /// </summary>
         public IEnumerable<RowDeclarationSyntax> Rows
         {
-            get { return _rows.Concat(Children.OfType<RowDeclarationSyntax>()); }
+            get { return rows.Concat(Children.OfType<RowDeclarationSyntax>()); }
             internal set
             {
-                ReplaceChildrenWith(_rows, value);
-                _rows = value;
+                ReplaceChildrenWith(rows, value);
+                rows = value;
             }
         }
 

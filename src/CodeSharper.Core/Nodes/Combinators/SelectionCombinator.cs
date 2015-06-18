@@ -46,8 +46,8 @@ namespace CodeSharper.Core.Nodes.Combinators
         public override IEnumerable<Object> Calculate(IEnumerable<Object> values)
         {
             Selector.ApplyAttributes(Attributes);
-
             var filteredElements = values.GetOrEmpty().SelectMany(node => Selector.SelectElement(node));
+
             foreach (var filteredElement in filteredElements)
             {
                 if (Modifiers.Any())
@@ -61,7 +61,9 @@ namespace CodeSharper.Core.Nodes.Combinators
                     }
                 }
                 else
+                {
                     yield return filteredElement;
+                }
             }
         }
     }

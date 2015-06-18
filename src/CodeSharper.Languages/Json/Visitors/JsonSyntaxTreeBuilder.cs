@@ -119,7 +119,7 @@ namespace CodeSharper.Languages.Json.Visitors
         /// <return>The visitor result.</return>
         public override JsonNode VisitStringKey(JsonParser.StringKeyContext context)
         {
-            var textRange = context.CreateTextRange(_textDocument);
+            var textRange = context.CreateTextRange(_textDocument, 1, -1);
             var value = context.Key.Text;
             return TreeFactory.CreateKey(value, textRange);
         }

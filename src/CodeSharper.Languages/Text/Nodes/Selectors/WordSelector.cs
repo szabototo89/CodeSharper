@@ -60,12 +60,12 @@ namespace CodeSharper.Languages.Text.Nodes.Selectors
         /// <summary>
         /// Gets or sets a value indicating whether this instance filters lower case alphabetic text ranges.
         /// </summary>
-        public Boolean IsLowerCase { get; set; }
+        public Boolean IsLowerCase { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance filters upper case alphabetic text ranges.
         /// </summary>
-        public Boolean IsUpperCase { get; set; }
+        public Boolean IsUpperCase { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is attribute specified.

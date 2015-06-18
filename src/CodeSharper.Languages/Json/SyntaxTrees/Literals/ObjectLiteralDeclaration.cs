@@ -10,18 +10,18 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
 {
     public class ObjectLiteralDeclaration : LiteralSyntax, IEquatable<ObjectLiteralDeclaration>
     {
-        private IEnumerable<KeyValueDeclaration> _elements;
+        private IEnumerable<KeyValueDeclaration> elements;
 
         /// <summary>
         /// Gets or sets the elements.
         /// </summary>
         public IEnumerable<KeyValueDeclaration> Elements
         {
-            get { return _elements; }
-            protected set
+            get { return elements; }
+            internal set
             {
-                ReplaceChildrenWith(_elements, value);
-                _elements = value;
+                ReplaceChildrenWith(elements, value);
+                elements = value;
             }
         }
 

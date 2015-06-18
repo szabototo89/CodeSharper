@@ -10,7 +10,7 @@ namespace CodeSharper.Core.SyntaxTrees
 {
     public abstract class Node : IHasChildren<Node>, IHasParent<Node>, IHasTextRange
     {
-        private readonly List<Node> _children;
+        private readonly List<Node> children;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -19,7 +19,7 @@ namespace CodeSharper.Core.SyntaxTrees
         {
             Assume.NotNull(textRange, "textRange");
 
-            _children = new List<Node>();
+            children = new List<Node>();
             TextRange = textRange;
             TextDocument = TextRange.TextDocument;
         }
@@ -39,7 +39,7 @@ namespace CodeSharper.Core.SyntaxTrees
         /// </summary>
         public virtual IEnumerable<Node> Children
         {
-            get { return _children.AsReadOnly(); }
+            get { return children.AsReadOnly(); }
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace CodeSharper.Core.SyntaxTrees
         public virtual void AppendChild(Node child)
         {
             Assume.NotNull(child, "child");
-            _children.Add(child);
+            children.Add(child);
             child.Parent = this;
         }
 
@@ -59,7 +59,7 @@ namespace CodeSharper.Core.SyntaxTrees
         {
             Assume.NotNull(node, "node");
 
-            node._children.Add(this);
+            node.children.Add(this);
             Parent = node;
         }
 
@@ -69,7 +69,7 @@ namespace CodeSharper.Core.SyntaxTrees
         public virtual void Detach()
         {
             if (Parent != null)
-                Parent._children.Remove(this);
+                Parent.children.Remove(this);
 
             Parent = null;
         }

@@ -96,6 +96,7 @@
     <Compile Include="Common\Runnables\ConversionOperations\ConvertToStringRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\GreadyEnumerableValueProducer.cs" />
     <Compile Include="Common\Runnables\ConvertToTextRangeRunnable.cs" />
+    <Compile Include="Common\Runnables\RemoveRunnable.cs" />
     <Compile Include="Common\Runnables\SimpleCastingHelper.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeMultiValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeValueConsumer.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Common\Interfaces\IHasParent.cs" />
     <Compile Include="Common\Interfaces\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="Experimental\TextPosition.cs" />
     <Compile Include="Nodes\Combinators\CombinatorDescriptor.cs" />
     <Compile Include="Nodes\Combinators\SelectionCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
@@ -143,11 +145,13 @@
     <Compile Include="Nodes\Combinators\UnaryCombinator.cs" />
     <Compile Include="Nodes\Combinators\UniversalCombinator.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\ContainsNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\HasNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\ModifierDescriptor.cs" />
     <Compile Include="Nodes\Modifiers\NodeModifierBase.cs" />
     <Compile Include="Nodes\Modifiers\NthChildNodeModifier.cs" />
     <Compile Include="Nodes\Modifiers\SiblingsNodeModifier.cs" />
+    <Compile Include="Nodes\Modifiers\ValueNodeModifier.cs" />
     <Compile Include="Nodes\SelectorAttribute.cs" />
     <Compile Include="Nodes\Selectors\SelectorBase.cs" />
     <Compile Include="Nodes\Modifiers\ParentNodeModifier.cs" />
@@ -177,6 +181,8 @@
     <Compile Include="Texts\TextRange.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Transformation\ISupportAppending.cs" />
+    <Compile Include="Transformation\ISupportRemoving.cs" />
     <Compile Include="Trees\IHasSyntaxTree.cs" />
     <Compile Include="SyntaxTrees\ILeaf.cs" />
     <Compile Include="SyntaxTrees\SyntaxToken.cs" />

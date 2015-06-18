@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Transformation;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
 {
-    public class KeyValueDeclaration : JsonNode, IEquatable<KeyValueDeclaration>
+    public class KeyValueDeclaration : JsonNode, IEquatable<KeyValueDeclaration>, ICanRemove
     {
         private readonly Node[] children;
 
@@ -46,7 +49,10 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         /// <summary>
         /// Gets or sets children of this type
         /// </summary>
-        public override IEnumerable<Node> Children { get { return children; } }
+        public override IEnumerable<Node> Children
+        {
+            get { return children; }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyValueDeclaration"/> class.
@@ -98,7 +104,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((KeyValueDeclaration)obj);
+            return Equals((KeyValueDeclaration) obj);
         }
 
         /// <summary>
@@ -115,7 +121,22 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Removes this instance.
+        /// </summary>
+        public Boolean Remove()
+        {
+            var objectLiteral = Parent as ObjectLiteralDeclaration;
+            if (objectLiteral == null) return false;
 
+            var declarations = objectLiteral.Elements.ToArray();
+            objectLiteral.Elements = declarations.Where(declaration => !ReferenceEquals(declaration, this));
+
+            TextRange.ChangeText("");
+
+            return true;
+        }
+
+        #endregion
     }
 }

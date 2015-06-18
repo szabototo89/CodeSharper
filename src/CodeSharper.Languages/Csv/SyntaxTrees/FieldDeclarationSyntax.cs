@@ -2,10 +2,12 @@
 using System.Text.RegularExpressions;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Texts;
+using CodeSharper.Core.Transformation;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Languages.Csv.SyntaxTrees
 {
-    public class FieldDeclarationSyntax : CsvNode
+    public class FieldDeclarationSyntax : CsvNode, ICanRemove
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FieldDeclarationSyntax"/> class.
@@ -58,6 +60,15 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
             {
                 return !IsStringField && Regex.IsMatch(Text, @"^[^,\n\r]+$");
             }
+        }
+
+        /// <summary>
+        /// Removes this instance.
+        /// </summary>
+        public Boolean Remove()
+        {
+            TextRange.ChangeText("");
+            return true;
         }
     }
 }

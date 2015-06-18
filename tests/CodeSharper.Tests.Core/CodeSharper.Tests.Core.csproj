@@ -56,6 +56,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\solution\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.30.7.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\..\solution\packages\AutoFixture.3.30.7\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -79,6 +83,7 @@
     <Compile Include="Common\Runnables\RunnableTestFixtureBase.cs" />
     <Compile Include="Common\Runnables\TextRangeOperations\JoinLinesTextRunnableTests.cs" />
     <Compile Include="Common\Runnables\ValueConverters\EmptyValueConverterTests.cs" />
+    <Compile Include="Experimental\TextPositionTests.cs" />
     <Compile Include="Services\MemoryDescriptorRepositoryTests.cs" />
     <Compile Include="Texts\TextRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

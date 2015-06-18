@@ -116,15 +116,17 @@ namespace CodeSharper.Core.Texts
             if (offset == 0) return;
 
             var indexOfTextRange = textRanges.IndexOfValue(updatableTextRange);
+            var removableTextRanges = new List<TextRange>();
 
             foreach (var range in textRanges.Values.Skip(indexOfTextRange + 1))
             {
-                if (isNoConflictWith(range, updatableTextRange))
-                    range.OffsetBy(offset);
+                if (isNoConflictWith(range, updatableTextRange)) range.OffsetBy(offset);
                 else if (isSubRangeOf(range, updatableTextRange))
-                    throw new NotImplementedException();
-                else if (isSuperRangeOf(range, updatableTextRange))
-                    range.Stop += offset;
+                {
+                    removableTextRanges.Add(range);
+                    // throw new NotImplementedException(); 
+                }
+                else if (isSuperRangeOf(range, updatableTextRange)) range.Stop += offset;
                 else if (isOverlapping(range, updatableTextRange))
                 {
                     range.OffsetBy(offset);
@@ -136,6 +138,11 @@ namespace CodeSharper.Core.Texts
                         range.Start = Math.Max(range.Start + difference, 0);
                     }
                 }
+            }
+
+            foreach (var range in removableTextRanges)
+            {
+                textRanges.Remove(range);
             }
         }
 
