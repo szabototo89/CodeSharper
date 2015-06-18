@@ -1,3 +1,3 @@
 # CodeSharper
 
-New generation refactoring tool, written in C# and Test-Oriented Development. 
+New generation refactoring tool, written in C# andusing Test-Oriented Development. 
