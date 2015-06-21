@@ -137,7 +137,10 @@
     <Compile Include="Common\Interfaces\IHasParent.cs" />
     <Compile Include="Common\Interfaces\IHasPrevious.cs" />
     <Compile Include="ErrorHandling\ThrowHelper.cs" />
+    <Compile Include="Experimental\DefaultTextManager.cs" />
+    <Compile Include="Experimental\ITextManager.cs" />
     <Compile Include="Experimental\TextPosition.cs" />
+    <Compile Include="Experimental\TextSpan.cs" />
     <Compile Include="Nodes\Combinators\CombinatorDescriptor.cs" />
     <Compile Include="Nodes\Combinators\SelectionCombinator.cs" />
     <Compile Include="Nodes\Combinators\RelativeNodeCombinator.cs" />
