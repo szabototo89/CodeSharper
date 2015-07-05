@@ -17,6 +17,6 @@ namespace CodeSharper.Core.Experimental
         /// <summary>
         /// Creates the or get text span.
         /// </summary>
-        TextSpan CreateOrGetTextSpan(TextPosition inclusiveStart, TextPosition inclusiveStop);
+        TextSpan CreateOrGetTextSpan(TextPosition inclusiveStart, TextPosition exclusiveStop);
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 using NUnit.Framework;
@@ -53,7 +55,6 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given in setup
 
-
             // When
             var result = UnderTest.CreateOrGetTextRange(0, 12);
 
@@ -82,7 +83,8 @@ namespace CodeSharper.Tests.Core.Texts
         {
             // Given in setup
 
-            var textRanges = new[] {
+            var textRanges = new[]
+            {
                 UnderTest.CreateOrGetTextRange(3, 5),
                 UnderTest.CreateOrGetTextRange(1, 5),
                 UnderTest.CreateOrGetTextRange(3, 4),
@@ -92,7 +94,8 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             var result = UnderTest.TextRanges
-                                  .Select(textRange => new {
+                                  .Select(textRange => new
+                                  {
                                       Start = textRange.Start,
                                       Stop = textRange.Stop
                                   })
@@ -114,7 +117,6 @@ namespace CodeSharper.Tests.Core.Texts
         public void ChangeText_ShouldRemoveExistingSubstringAndInsertNewValue_WhenThereIsNoConflictBetweenTextRanges()
         {
             // Given in setup
-
 
             // When
             UnderTest.ChangeText(UnderTest.TextRange, "Hi World!");
@@ -155,7 +157,7 @@ namespace CodeSharper.Tests.Core.Texts
                                   .Select(textRange => UnderTest.GetText(textRange)).ToArray();
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] { "Hi", "World!" }));
+            Assert.That(result, Is.EquivalentTo(new[] {"Hi", "World!"}));
         }
 
         [Test(Description = "ChangeText should update superset text ranges after it changed text")]
@@ -174,7 +176,7 @@ namespace CodeSharper.Tests.Core.Texts
 
             // Then
             Assert.That(UnderTest.Text, Is.EqualTo("Hello Me!"));
-            Assert.That(result, Is.EquivalentTo(new[] { "Me", "Hello Me!" }));
+            Assert.That(result, Is.EquivalentTo(new[] {"Me", "Hello Me!"}));
         }
 
         [Test(Description = "ChangeText should update overlapping text ranges after it changed text")]
@@ -196,9 +198,8 @@ namespace CodeSharper.Tests.Core.Texts
                                   .Select(textRange => underTest.GetText(textRange)).ToArray();
 
             // Then
-            Assert.That(result, Is.EquivalentTo(new[] { "9", "9456789" }));
+            Assert.That(result, Is.EquivalentTo(new[] {"9", "9456789"}));
         }
-
 
         [Test(Description = "ChangeRawText should update text but it does not update any text ranges when it is called")]
         public void ChangeRawText_ShouldUpdateTextButItDoesNotUpdateAnyTextRanges_WhenItIsCalled()
@@ -207,14 +208,14 @@ namespace CodeSharper.Tests.Core.Texts
             var textRange = UnderTest.CreateOrGetTextRange(0, 5);
 
             // When
-            UnderTest.ChangeRawText(textRange, "Hi");
+            UnderTest.changeRawText(textRange, "Hi");
             var result = UnderTest.Text;
 
             // Then
             Assert.That(result, Is.EqualTo("Hi World!"));
 
             var textRanges = UnderTest.TextRanges;
-            Assert.That(new[] { textRange }, Is.SubsetOf(textRanges));
+            Assert.That(new[] {textRange}, Is.SubsetOf(textRanges));
         }
 
         [Test(Description = "GetText should return positioned text when proper TextRange is passed")]
@@ -274,5 +275,151 @@ namespace CodeSharper.Tests.Core.Texts
             // Then
             Assert.That(result, Is.Null);
         }
+
+        [Test(Description = "BeginChangeText should set a flag to change several TextRanges when it is called once")]
+        public void BeginChangeText_ShouldSetFlagToChangeSeveralTextRange_WhenItIsCalledOnce()
+        {
+            // Given
+            Assume.That(UnderTest.isBatchModeActive, Is.False);
+            UnderTest.BeginChangeText();
+
+            // When
+            var result = UnderTest.isBatchModeActive;
+
+            // Then
+            Assert.That(result, Is.True);
+        }
+
+        [Test(Description = "EndChangeText should unset a flag to change several TextRanges when it is called once")]
+        public void EndChangeText_ShouldSetFlagToChangeSeveralTextRange_WhenItIsCalledOnce()
+        {
+            // Given
+            UnderTest.BeginChangeText();
+            Assume.That(UnderTest.isBatchModeActive, Is.True);
+
+            // When
+            UnderTest.EndChangeText();
+            var result = UnderTest.isBatchModeActive;
+
+            // Then
+            Assert.That(result, Is.False);
+        }
+
+        [Test(Description = "EndChangeText should update one TextRange when it is in batch mode")]
+        public void ChangeText_ShouldUpdateOneTextRange_WhenItIsInBatchMode()
+        {
+            // Given
+            var textRange = UnderTest.CreateOrGetTextRange(0, 5);
+
+            // When
+            UnderTest.BeginChangeText();
+            UnderTest.ChangeText(textRange, "Hi");
+            UnderTest.EndChangeText();
+
+            // Then
+            Assert.That(textRange.GetText(), Is.EqualTo("Hi"));
+            Assert.That(UnderTest.TextRange.GetText(), Is.EqualTo("Hi World!"));
+            Assert.That(UnderTest.Text, Is.EqualTo("Hi World!"));
+        }
+
+        [Test(Description = "EndChangeText should update two TextRange when it is in batch mode")]
+        public void ChangeText_ShouldUpdateTwoTextRange_WhenItIsInBatchMode()
+        {
+            // Given
+            var firstWord = UnderTest.CreateOrGetTextRange(0, 5);
+            var secondWord = UnderTest.CreateOrGetTextRange(6, 11);
+
+            // When
+            UnderTest.BeginChangeText();
+            UnderTest.ChangeText(firstWord, "Hi");
+            UnderTest.ChangeText(secondWord, "WOOORLD");
+            UnderTest.EndChangeText();
+
+            // Then
+            Assert.That(UnderTest.Text, Is.EqualTo("Hi WOOORLD!"));
+            Assert.That(UnderTest.TextRange.GetText(), Is.EqualTo("Hi WOOORLD!"));
+            Assert.That(firstWord.GetText(), Is.EqualTo("Hi"));
+            Assert.That(secondWord.GetText(), Is.EqualTo("WOOORLD"));
+        }
+
+
+        [TestCase(100)]
+        [TestCase(5000)]
+        [TestCase(10000)]
+        [TestCase(20000)]
+        [Test(Description = "ChangeText should handle huge amount text spans")]
+        public void ChangeText_ShouldHandleHugeAmountTextSpans_WhenBatchModeIsInactive(Int32 lines)
+        {
+            // Given
+            var textBuilder = new StringBuilder();
+            var line = "one,two,three,four";
+            for (var i = 0; i < lines; i++)
+            {
+                textBuilder.AppendLine(line);
+            }
+
+            var underTest = new TextDocument(textBuilder.ToString());
+            var ranges = new List<TextRange>();
+
+            for (var i = 0; i < lines; i++)
+            {
+                var offset = (line.Length + Environment.NewLine.Length) * i;
+                ranges.Add(underTest.CreateOrGetTextRange(offset + 0, offset + 3));
+                underTest.CreateOrGetTextRange(offset + 4, offset + 7);
+            }
+
+            // When
+            var watch = Stopwatch.StartNew();
+            foreach (var range in ranges)
+            {
+                underTest.ChangeText(range, "onetwo");
+            }
+            watch.Stop();
+
+            // Then
+            Console.WriteLine(watch.Elapsed);
+        }
+
+        [TestCase(10)]
+        [TestCase(100)]
+        [TestCase(5000)]
+        [TestCase(10000)]
+        [TestCase(20000)]
+        [TestCase(100000)]
+        [Test(Description = "ChangeText should handle huge amount text spans")]
+        public void ChangeText_ShouldHandleHugeAmountTextSpans_WhenBatchModeIsActive(Int32 lines)
+        {
+            // Given
+            var textBuilder = new StringBuilder();
+            var line = "one,two,three,four";
+            for (var i = 0; i < lines; i++)
+            {
+                textBuilder.AppendLine(line);
+            }
+
+            var underTest = new TextDocument(textBuilder.ToString());
+            var ranges = new List<TextRange>();
+
+            for (var i = 0; i < lines; i++)
+            {
+                var offset = (line.Length + Environment.NewLine.Length) * i;
+                ranges.Add(underTest.CreateOrGetTextRange(offset + 0, offset + 3));
+                underTest.CreateOrGetTextRange(offset + 4, offset + 7);
+            }
+
+            // When
+            var watch = Stopwatch.StartNew();
+            underTest.BeginChangeText();
+            foreach (var range in ranges)
+            {
+                underTest.ChangeText(range, "onetwo");
+            }
+            underTest.EndChangeText();
+            watch.Stop();
+
+            // Then
+            Console.WriteLine(watch.Elapsed);
+        }
+
     }
 }

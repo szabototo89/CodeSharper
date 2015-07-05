@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,16 +14,17 @@ using CodeSharper.Core.Common.Runnables.CollectionRunnables;
 using CodeSharper.Core.Common.Runnables.ConversionOperations;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.Common.Runnables.TextRangeOperations;
+using CodeSharper.Core.Experimental;
 using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Core.Services;
 using CodeSharper.Core.SyntaxTrees;
-using CodeSharper.Core.Texts;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Interpreter.Common;
 using CodeSharper.Interpreter.Compiler;
 using CodeSharper.Languages.Csv.Compiler;
 using CodeSharper.Languages.Csv.Nodes.Selectors;
 using CodeSharper.Languages.Json.Compiler;
+using TextPosition = CodeSharper.Core.Texts.TextPosition;
 
 namespace CodeSharper.Playground.CLI
 {
@@ -121,7 +123,9 @@ namespace CodeSharper.Playground.CLI
 
         public static void Main(String[] args)
         {
-            initializeApplication();
+            runTest(1000);
+
+            /*initializeApplication();
 
             String response = String.Empty;
             Node root = null;
@@ -160,6 +164,38 @@ namespace CodeSharper.Playground.CLI
                 }
 
             } while (response != "exit");
+             */
+        }
+
+        private static void runTest(Int32 lines)
+        {
+            // Given
+            var textBuilder = new StringBuilder();
+            for (var i = 0; i < lines; i++)
+            {
+                textBuilder.AppendLine("one,two,three,four");
+            }
+
+            var underTest = new DefaultTextManager(textBuilder.ToString());
+            var spans = new List<TextSpan>();
+
+            for (var i = 0; i < lines; i++)
+            {
+                spans.Add(underTest.CreateOrGetTextSpan(new Core.Experimental.TextPosition(i, 0), new Core.Experimental.TextPosition(i, 3)));
+                underTest.CreateOrGetTextSpan(new Core.Experimental.TextPosition(i, 4), new Core.Experimental.TextPosition(i, 7));
+            }
+
+            // When
+            var watch = Stopwatch.StartNew();
+            foreach (var span in spans)
+            {
+                underTest.SetValue("onetwo", span);
+            }
+            watch.Stop();
+
+            // Then
+            Console.WriteLine(watch.Elapsed);
+
         }
     }
 }

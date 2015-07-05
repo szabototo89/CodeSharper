@@ -4,7 +4,7 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Texts
 {
-    public class TextRange : IEquatable<TextRange>
+    public class TextRange : IEquatable<TextRange>, ICloneable
     {
         /// <summary>
         /// Gets or sets the start.
@@ -105,6 +105,29 @@ namespace CodeSharper.Core.Texts
 
         #endregion
 
+        #region Cloning and copying
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>
+        /// A new object that is a copy of this instance.
+        /// </returns>
+        public Object Clone()
+        {
+            return Copy();
+        }
+
+        public TextRange Copy(Int32? start = null, Int32? stop = null, TextDocument textDocument = null)
+        {
+            return new TextRange(
+                start ?? Start,
+                stop ?? Stop,
+                textDocument ?? TextDocument);
+        }
+
+        #endregion
+
         #region Position comparer
 
         /// <summary>
@@ -146,5 +169,16 @@ namespace CodeSharper.Core.Texts
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override String ToString()
+        {
+            return String.Format("TextRange({0}, {1})", Start, Stop);
+        }
     }
 }

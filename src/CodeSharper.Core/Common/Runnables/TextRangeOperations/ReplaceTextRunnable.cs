@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.ErrorHandling;
@@ -7,8 +10,8 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
 {
-    [Consumes(typeof(GreadyMultiValueConsumer<TextRange>))]
-    public class ReplaceTextRunnable : RunnableBase<TextRange, TextRange>
+    [Consumes(typeof(MultiValueConsumer<IEnumerable<TextRange>>))]
+    public class ReplaceTextRunnable : RunnableBase<IEnumerable<Object>, IEnumerable<TextRange>>
     {
         /// <summary>
         /// Gets or sets the replaced text
@@ -19,7 +22,9 @@ namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceTextRunnable"/> class.
         /// </summary>
-        public ReplaceTextRunnable() : this("$") { }
+        public ReplaceTextRunnable() : this("$")
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceTextRunnable"/> class.
@@ -33,12 +38,22 @@ namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        public override TextRange Run(TextRange parameter)
+        public override IEnumerable<TextRange> Run(IEnumerable<Object> parameters)
         {
-            Assume.NotNull(parameter, "parameter");
+            Assume.NotNull(parameters, "parameters");
 
-            parameter.ChangeText(ReplacedText.Replace("$", parameter.GetText()));
-            return parameter;
+            var textRanges = parameters.OfType<TextRange>().ToArray();
+            if (!textRanges.Any()) return Enumerable.Empty<TextRange>();
+            var textDocument = textRanges.First().TextDocument;
+
+            textDocument.BeginChangeText();
+            foreach (var range in textRanges)
+            {
+                range.ChangeText(ReplacedText.Replace("$", range.GetText()));
+            }
+            textDocument.EndChangeText();
+
+            return textRanges;
         }
     }
 }

@@ -1,36 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using CodeSharper.Core.Texts;
 
 namespace CodeSharper.Core.Experimental
 {
-    public class TextSpan : TextSpan<TextPosition>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextSpan"/> class.
-        /// </summary>
-        public TextSpan(TextPosition start, TextPosition stop) : base(start, stop)
-        {
-        }
-    }
-
-    public class TextSpan<TPosition> : IEquatable<TextSpan<TPosition>>
-        where TPosition : IComparable<TPosition>
+    public class TextSpan
     {
         /// <summary>
         /// Gets or sets the start.
         /// </summary>
-        public TPosition Start { get; internal protected set; }
+        public TextPosition Start { get; internal set; }
 
         /// <summary>
         /// Gets or sets the stop.
         /// </summary>
-        public TPosition Stop { get; internal protected set; }
+        public TextPosition Stop { get; internal set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextSpan"/> class.
         /// </summary>
-        public TextSpan(TPosition start, TPosition stop)
+        public TextSpan(TextPosition start, TextPosition stop)
         {
             if (start.CompareTo(stop) > 0)
                 throw new ArgumentException("Start should be lesser than stop.");
@@ -44,9 +34,9 @@ namespace CodeSharper.Core.Experimental
         /// <summary>
         /// The position comparer
         /// </summary>
-        public static readonly IComparer<TextSpan> PositionComparer = new TextRangePositionComparer();
+        public static readonly IComparer<TextSpan> PositionComparer = new TextSpanPositionComparer();
 
-        private class TextRangePositionComparer : IComparer<TextSpan>
+        private class TextSpanPositionComparer : IComparer<TextSpan>
         {
             /// <summary>
             /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
@@ -82,10 +72,11 @@ namespace CodeSharper.Core.Experimental
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(TextSpan<TPosition> other)
+        public Boolean Equals(TextSpan other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
+
             return Start.Equals(other.Start) && Stop.Equals(other.Stop);
         }
 
@@ -101,7 +92,7 @@ namespace CodeSharper.Core.Experimental
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((TextSpan<TPosition>) obj);
+            return Equals((TextSpan) obj);
         }
 
         /// <summary>
@@ -118,7 +109,7 @@ namespace CodeSharper.Core.Experimental
             }
         }
 
-        public Boolean IsOverlapping(TextSpan<TPosition> other)
+        public Boolean IsOverlapping(TextSpan other)
         {
             if (this.Equals(other)) return true;
 
@@ -129,7 +120,7 @@ namespace CodeSharper.Core.Experimental
                 ;
         }
 
-        public Boolean IsSubRangeOf(TextSpan<TPosition> other)
+        public Boolean IsSubRangeOf(TextSpan other)
         {
             if (this.Equals(other)) return true;
 
@@ -137,12 +128,23 @@ namespace CodeSharper.Core.Experimental
                    other.Stop.CompareTo(Stop) >= 0;
         }
 
-        public Boolean IsSuperRangeOf(TextSpan<TPosition> other)
+        public Boolean IsSuperRangeOf(TextSpan other)
         {
             if (this.Equals(other)) return true;
 
             return Start.CompareTo(other.Start) <= 0 &&
                    Stop.CompareTo(other.Stop) >= 0;
+        }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override String ToString()
+        {
+            return String.Format("Span(start: {0}, stop: {1})", Start, Stop);
         }
     }
 }

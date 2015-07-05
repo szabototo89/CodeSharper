@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using CodeSharper.Core.Experimental;
 using NUnit.Framework;
+using Ploeh.AutoFixture;
 
 namespace CodeSharper.Tests.Core.Experimental
 {
@@ -91,7 +96,7 @@ namespace CodeSharper.Tests.Core.Experimental
 
             var underTest = new DefaultTextManager(text);
             var start = new TextPosition(0, 0);
-            var stop = new TextPosition(0, 4);
+            var stop = new TextPosition(0, 5);
             var textSpan = underTest.CreateOrGetTextSpan(start, stop);
 
             // When
@@ -113,7 +118,10 @@ namespace CodeSharper.Tests.Core.Experimental
             }));
         }
 
-        [Test(Description = "SetValue should set selected text by span to given value when span Start and Stop are in the different lines and start column starts from zero and there is no conflict between spans.")]
+        [Test(
+            Description =
+                "SetValue should set selected text by span to given value when span Start and Stop are in the different lines and start column starts from zero and there is no conflict between spans."
+            )]
         public void SetValue_ShouldSetSelectedTextBySpanToGivenValue_WhenSpanStartAndStopAreInDifferentLinesAndStartColumnStartsFromZeroAndThereIsNoConflictBetweenSpans()
         {
             // Given
@@ -124,7 +132,7 @@ namespace CodeSharper.Tests.Core.Experimental
 
             var underTest = new DefaultTextManager(text);
             var start = new TextPosition(0, 0);
-            var stop = new TextPosition(2, 5);
+            var stop = new TextPosition(2, 6);
             var textSpan = underTest.CreateOrGetTextSpan(start, stop);
 
             // When
@@ -155,7 +163,7 @@ namespace CodeSharper.Tests.Core.Experimental
 
             var underTest = new DefaultTextManager(text);
             var start = new TextPosition(0, 6);
-            var stop = new TextPosition(2, 5);
+            var stop = new TextPosition(2, 6);
             var textSpan = underTest.CreateOrGetTextSpan(start, stop);
 
             // When
@@ -173,6 +181,142 @@ namespace CodeSharper.Tests.Core.Experimental
                 Text = multiLineText("Hello We are working on a very exciting project.",
                                      "Come and join us!")
             }));
+        }
+
+        [Test(Description = "SetValue should set selected text by span to given value when span Start and Stop are in the same lines and columns and there are multiple spans without conflict.")]
+        public void SetValue_ShouldSetSelectedTextBySpanToGivenValue_WhenSpanStartAndStopAreInSameLinesAndColumnsAndThereAreMultipleSpansWithoutConflict()
+        {
+            // Given
+            var text = multiLineText("Hello World!",
+                                     "How is it going?",
+                                     "We are working on a very exciting project.",
+                                     "Come and join us!");
+
+            var underTest = new DefaultTextManager(text);
+
+            var helloSpan = underTest.CreateOrGetTextSpan(new TextPosition(0, 0), new TextPosition(0, 5));
+            var worldSpan = underTest.CreateOrGetTextSpan(new TextPosition(0, 6), new TextPosition(0, 11));
+
+            // When
+            underTest.SetValue("WORLD", worldSpan);
+            var result = new
+            {
+                Spans = new[] {underTest.GetValue(helloSpan), underTest.GetValue(worldSpan)},
+                Text = underTest.GetText()
+            };
+
+            // Then
+            Assert.That(result.Spans, Is.EquivalentTo(new[] {"Hello", "WORLD"}));
+
+            var expectedText = multiLineText("Hello WORLD!",
+                                             "How is it going?",
+                                             "We are working on a very exciting project.",
+                                             "Come and join us!");
+
+            Assert.That(result.Text, Is.EqualTo(expectedText));
+        }
+
+
+        [Test(Description = "SetValue should set selected text by span to given value and update text ranges in the same line when span Start and Stop are in the same lines and columns and there are multiple spans without conflict.")]
+        public void SetValue_ShouldSetSelectedTextBySpanToGivenValueAndUpdateTextRangesInTheSameLine_WhenSpanStartAndStopAreInSameLinesAndColumnsAndThereAreMultipleSpansWithoutConflict()
+        {
+            // Given
+            var text = multiLineText("Hello World!",
+                                     "How is it going?",
+                                     "We are working on a very exciting project.",
+                                     "Come and join us!");
+
+            var underTest = new DefaultTextManager(text);
+
+            var firstSpan = underTest.CreateOrGetTextSpan(new TextPosition(1, 0), new TextPosition(1, 3));
+            var secondSpan = underTest.CreateOrGetTextSpan(new TextPosition(1, 4), new TextPosition(1, 6));
+
+            // When
+            underTest.SetValue("Where", firstSpan);
+            var result = new {
+                Spans = new[] { underTest.GetValue(firstSpan), underTest.GetValue(secondSpan) },
+                Text = underTest.GetText()
+            };
+
+            // Then
+            Assert.That(result.Spans, Is.EquivalentTo(new[] { "Where", "is" }));
+
+            var expectedText = multiLineText("Hello World!",
+                                             "Where is it going?",
+                                             "We are working on a very exciting project.",
+                                             "Come and join us!");
+
+            Assert.That(result.Text, Is.EqualTo(expectedText));
+        }
+
+        [Test(Description = "SetValue should set selected text by span to given value and update text ranges in the same line when span Start and Stop are in the different lines and columns and there are multiple spans without conflict.")]
+        public void SetValue_ShouldSetSelectedTextBySpanToGivenValueAndUpdateTextRangesInTheSameLine_WhenSpanStartAndStopAreInDifferentLinesAndColumnsAndThereAreMultipleSpansWithoutConflict()
+        {
+            // Given
+            var text = multiLineText("Hello World!",
+                                     "How is it going?",
+                                     "We are working on a very exciting project.",
+                                     "Come and join us!");
+
+            var underTest = new DefaultTextManager(text);
+
+            var firstSpan = underTest.CreateOrGetTextSpan(new TextPosition(0, 0), new TextPosition(1, 3));
+            var secondSpan = underTest.CreateOrGetTextSpan(new TextPosition(1, 4), new TextPosition(1, 6));
+
+            // When
+            underTest.SetValue("Where", firstSpan);
+            var result = new {
+                Spans = new[] { underTest.GetValue(firstSpan), underTest.GetValue(secondSpan) },
+                Text = underTest.GetText()
+            };
+
+            // Then
+            Assert.That(result.Spans, Is.EquivalentTo(new[] { "Where", "is" }));
+
+            var expectedText = multiLineText("Where is it going?",
+                                             "We are working on a very exciting project.",
+                                             "Come and join us!");
+
+            Assert.That(result.Text, Is.EqualTo(expectedText));
+        }
+
+        /// <summary>
+        /// Sets the value_ should handle huge amount text spans.
+        /// </summary>
+        /// <param name="lines"></param>
+        [TestCase(100)]
+        [TestCase(5000)]
+        [TestCase(10000)]
+        [TestCase(20000)]
+        [Test(Description = "SetValue should handle huge amount text spans")]
+        [Ignore("Run these manually")]
+        public void SetValue_ShouldHandleHugeAmountTextSpans(Int32 lines)
+        {
+            // Given
+            var textBuilder = new StringBuilder();
+            for (var i = 0; i < lines; i++)
+            {
+                textBuilder.AppendLine("one,two,three,four");
+            }
+
+            var underTest = new DefaultTextManager(textBuilder.ToString());
+            var spans = new List<TextSpan>();
+            for (var i = 0; i < lines; i++)
+            {
+                spans.Add(underTest.CreateOrGetTextSpan(new TextPosition(i, 0), new TextPosition(i, 3)));
+                underTest.CreateOrGetTextSpan(new TextPosition(i, 4), new TextPosition(i, 7));
+            }
+
+            // When
+            var watch = Stopwatch.StartNew();
+            foreach (var span in spans)
+            {
+                underTest.SetValue("onetwo", span);
+            }
+            watch.Stop();
+
+            // Then
+            Console.WriteLine(watch.Elapsed);
         }
     }
 }
