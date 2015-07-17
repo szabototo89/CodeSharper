@@ -178,9 +178,8 @@
     <Compile Include="Services\MemoryDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
-    <Compile Include="TextManagers\DefaultTextManager.cs" />
     <Compile Include="TextManagers\ITextManager.cs" />
-    <Compile Include="TextManagers\TextMarker.cs" />
+    <Compile Include="TextManagers\TextMarkerBase.cs" />
     <Compile Include="Texts\TextDocument.cs">
       <SubType>Code</SubType>
     </Compile>
