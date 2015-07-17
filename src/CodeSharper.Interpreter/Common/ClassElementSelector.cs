@@ -7,7 +7,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public String Name { get; }
+        public String Name { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClassElementSelector"/> class.

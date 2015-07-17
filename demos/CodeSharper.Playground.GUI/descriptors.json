@@ -311,6 +311,21 @@
             "arguments": [],
             "type": "CodeSharper.Languages.CSharp.Runnables.RemoveNodeRunnable",
             "command-names": [ "rm" ]
+        },
+        {
+            "name": "CreateRunnable",
+            "description": "It creates a new runnable",
+            "arguments": [
+                 {
+                    "name": "source",
+                    "argument-type": "System.String",
+                    "default-value": "",
+                    "optional": false,  
+                    "position": 0
+                }
+            ],
+            "type": "CodeSharper.Languages.CSharp.Runnables.CreateRunnable",
+            "command-names": [ "create" ]
         }
     ]
 }

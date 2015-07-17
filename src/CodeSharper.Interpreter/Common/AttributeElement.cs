@@ -11,12 +11,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public String Name { get; }
+        public String Name { get; set; }
 
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public ConstantElement Value { get; }
+        public ConstantElement Value { get; set; }
 
         #region Equality members
 
