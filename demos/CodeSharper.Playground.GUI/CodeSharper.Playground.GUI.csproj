@@ -55,8 +55,20 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeAnalysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\solution\packages\Microsoft.CodeAnalysis.Common.1.0.0\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\solution\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Reflection.Metadata, Version=1.0.21.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\solution\packages\System.Reflection.Metadata.1.0.21\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\CompilerModuleBase.cs" />
+    <Compile Include="Modules\CSharpCompilerModule.cs" />
     <Compile Include="Modules\CsvCompilerModule.cs" />
     <Compile Include="Modules\JsonCompilerModule.cs" />
     <Compile Include="Modules\TextCompilerModule.cs" />
@@ -105,6 +118,7 @@
     <None Include="descriptors.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -126,6 +140,10 @@
     <ProjectReference Include="..\..\src\CodeSharper.Interpreter\CodeSharper.Interpreter.csproj">
       <Project>{35259875-D91E-4F40-95A3-879C80CF5F98}</Project>
       <Name>CodeSharper.Interpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\CodeSharper.Languages.CSharp\CodeSharper.Languages.CSharp.csproj">
+      <Project>{C9D3D43D-FE4C-41E4-9F8B-99FD404D00B7}</Project>
+      <Name>CodeSharper.Languages.CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\CodeSharper.Languages\CodeSharper.Languages.csproj">
       <Project>{88782320-e761-4273-907a-21c2fa813150}</Project>

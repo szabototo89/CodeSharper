@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrappers\Bootstrapper.cs" />
+    <Compile Include="Common\ClassElementSelector.cs" />
     <Compile Include="Common\CombinatorElement.cs" />
     <Compile Include="Common\DefaultSelectorFactory.cs" />
     <Compile Include="Common\ISelectorFactory.cs" />

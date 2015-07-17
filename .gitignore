@@ -3,3 +3,4 @@ obj
 /docs/~$task-list.xlsx
 /solution/packages
 *.vsp
+/docs/language-design.md

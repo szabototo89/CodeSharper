@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Interpreter.Common;
 
@@ -87,6 +88,15 @@ namespace CodeSharper.Interpreter.Visitors
                 Attributes = attributes,
                 PseudoSelectors = pseudoSelectors
             };
+        }
+
+        /// <summary>
+        /// Creates a class element selector.
+        /// </summary>
+        public ClassElementSelector CreateClassElementSelector(String name)
+        {
+            Assume.NotNull(name, "name");
+            return new ClassElementSelector(name);
         }
     }
 }

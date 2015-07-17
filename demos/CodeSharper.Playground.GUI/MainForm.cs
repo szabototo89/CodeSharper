@@ -34,7 +34,7 @@ namespace CodeSharper.Playground.GUI
 
             stopwatch = new Stopwatch();
 
-            var assemblies = new[] {Assembly.Load("CodeSharper.Core"), Assembly.Load("CodeSharper.Languages"), Assembly.GetExecutingAssembly()};
+            var assemblies = new[] {Assembly.Load("CodeSharper.Core"), Assembly.Load("CodeSharper.Languages"),  Assembly.Load("CodeSharper.Languages.CSharp"), Assembly.GetExecutingAssembly()};
             var runnableTypeResolver = new AutoRunnableResolver();
             var valueConverter = new IntegerValueConverter();
             var interactiveService = new ReplaceTextInteractiveService(this);
@@ -126,6 +126,11 @@ namespace CodeSharper.Playground.GUI
         private void textToolStripMenuItem_Click(object sender, EventArgs e)
         {
             compilerModule = new TextCompilerModule(Bootstrapper);
+        }
+
+        private void cToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            compilerModule = new CSharpCompilerModule(Bootstrapper);
         }
     }
 }

@@ -4,7 +4,7 @@
             "name": "relative-child-selector",
             "selector-type": "combinator",
             "value": "",
-            "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
+            "type": "CodeSharper.Languages.CSharp.Nodes.Combinators.RelativeSyntaxNodeCombinator"
         },
         {
             "name": "absolute-child-selector",
@@ -137,6 +137,20 @@
             "selector-type": "element-type-selector",
             "value": "paragraph",
             "type": "CodeSharper.Languages.Text.Nodes.Selectors.ParagraphSelector"
+        },
+
+
+        {
+            "name": "class-selector",
+            "selector-type": "element-type-selector",
+            "value": "class",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.ClassDeclarationSelector"
+        },
+        {
+            "name": "struct-selector",
+            "selector-type": "element-type-selector",
+            "value": "struct",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.StructDeclarationSelector"
         }
     ],
     "commands": [
@@ -288,7 +302,15 @@
             "description": "Takes specified amount of element from result.",
             "type": "CodeSharper.Core.Common.Runnables.Length",
             "arguments": [ ]
-        }
+        },
 
+
+        {
+            "name": "RemoveNodeRunnable",
+            "description": "It removes specified elements from root",
+            "arguments": [],
+            "type": "CodeSharper.Languages.CSharp.Runnables.RemoveNodeRunnable",
+            "command-names": [ "rm" ]
+        }
     ]
 }

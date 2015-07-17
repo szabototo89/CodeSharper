@@ -37,8 +37,13 @@ namespace CodeSharper.Interpreter.Visitors
         PseudoSelectorElement CreatePseudoSelector(String name, IEnumerable<SelectorElementBase> selectors);
 
         /// <summary>
-        /// Creates a selectable ElementTypeSelector
+        /// Creates a selectable element type selector
         /// </summary>
         ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<PseudoSelectorElement> pseudoSelectors);
+
+        /// <summary>
+        /// Creates a class element selector.
+        /// </summary>
+        ClassElementSelector CreateClassElementSelector(String name);
     }
 }

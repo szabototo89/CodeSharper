@@ -49,6 +49,7 @@
             this.runTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.runTimeValueLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.cToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,8 +96,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.resultEditor);
-            this.splitContainer2.Size = new System.Drawing.Size(532, 152);
-            this.splitContainer2.SplitterDistance = 177;
+            this.splitContainer2.Size = new System.Drawing.Size(712, 258);
+            this.splitContainer2.SplitterDistance = 236;
             this.splitContainer2.TabIndex = 2;
             // 
             // sourceEditor
@@ -106,7 +107,7 @@
             this.sourceEditor.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.sourceEditor.Location = new System.Drawing.Point(0, 0);
             this.sourceEditor.Name = "sourceEditor";
-            this.sourceEditor.Size = new System.Drawing.Size(177, 152);
+            this.sourceEditor.Size = new System.Drawing.Size(236, 258);
             this.sourceEditor.TabIndex = 0;
             this.sourceEditor.Text = "";
             // 
@@ -119,7 +120,7 @@
             this.resultEditor.Location = new System.Drawing.Point(0, 0);
             this.resultEditor.Name = "resultEditor";
             this.resultEditor.ReadOnly = true;
-            this.resultEditor.Size = new System.Drawing.Size(351, 152);
+            this.resultEditor.Size = new System.Drawing.Size(472, 258);
             this.resultEditor.TabIndex = 1;
             this.resultEditor.Text = "";
             // 
@@ -130,7 +131,7 @@
             this.compilerToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(532, 24);
+            this.mainMenu.Size = new System.Drawing.Size(712, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -179,7 +180,8 @@
             this.compilerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.csvToolStripMenuItem,
             this.jsonToolStripMenuItem,
-            this.textToolStripMenuItem});
+            this.textToolStripMenuItem,
+            this.cToolStripMenuItem});
             this.compilerToolStripMenuItem.Name = "compilerToolStripMenuItem";
             this.compilerToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.compilerToolStripMenuItem.Text = "Compiler";
@@ -189,7 +191,7 @@
             this.csvToolStripMenuItem.CheckOnClick = true;
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
             this.csvToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.csvToolStripMenuItem.Text = "Csv";
             this.csvToolStripMenuItem.CheckedChanged += new System.EventHandler(this.languageSelectionChanged);
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.csvToolStripMenuItem_Click);
@@ -199,7 +201,7 @@
             this.jsonToolStripMenuItem.CheckOnClick = true;
             this.jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
             this.jsonToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.jsonToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.jsonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.jsonToolStripMenuItem.Text = "Json";
             this.jsonToolStripMenuItem.CheckedChanged += new System.EventHandler(this.languageSelectionChanged);
             this.jsonToolStripMenuItem.Click += new System.EventHandler(this.jsonToolStripMenuItem_Click);
@@ -209,7 +211,7 @@
             this.textToolStripMenuItem.CheckOnClick = true;
             this.textToolStripMenuItem.Name = "textToolStripMenuItem";
             this.textToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.textToolStripMenuItem.Text = "Text";
             this.textToolStripMenuItem.CheckedChanged += new System.EventHandler(this.languageSelectionChanged);
             this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
@@ -226,7 +228,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 57);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(712, 92);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // queryEditor
@@ -235,16 +237,16 @@
             this.queryEditor.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.queryEditor.Location = new System.Drawing.Point(3, 3);
             this.queryEditor.Name = "queryEditor";
-            this.queryEditor.Size = new System.Drawing.Size(460, 51);
+            this.queryEditor.Size = new System.Drawing.Size(617, 86);
             this.queryEditor.TabIndex = 0;
             this.queryEditor.Text = "";
             // 
             // refactorButton
             // 
             this.refactorButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.refactorButton.Location = new System.Drawing.Point(469, 3);
+            this.refactorButton.Location = new System.Drawing.Point(626, 3);
             this.refactorButton.Name = "refactorButton";
-            this.refactorButton.Size = new System.Drawing.Size(60, 51);
+            this.refactorButton.Size = new System.Drawing.Size(83, 86);
             this.refactorButton.TabIndex = 1;
             this.refactorButton.Text = "Refactor!";
             this.refactorButton.UseVisualStyleBackColor = true;
@@ -287,6 +289,13 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.Size = new System.Drawing.Size(718, 406);
             this.tableLayoutPanel2.TabIndex = 4;
+            // 
+            // cToolStripMenuItem
+            // 
+            this.cToolStripMenuItem.Name = "cToolStripMenuItem";
+            this.cToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cToolStripMenuItem.Text = "C#";
+            this.cToolStripMenuItem.Click += new System.EventHandler(this.cToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -340,5 +349,6 @@
         private System.Windows.Forms.ToolStripStatusLabel runTimeLabel;
         private System.Windows.Forms.ToolStripStatusLabel runTimeValueLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ToolStripMenuItem cToolStripMenuItem;
     }
 }
