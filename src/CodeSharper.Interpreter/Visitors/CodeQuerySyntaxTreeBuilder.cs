@@ -10,6 +10,7 @@ using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 using CodeSharper.Interpreter.Common;
+using CodeSharper.Interpreter.Grammar;
 using CodeSharper.Interpreter.Utils;
 
 namespace CodeSharper.Interpreter.Visitors
@@ -38,13 +39,13 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.ConstantBoolean" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ConstantBoolean" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitConstantBoolean(CodeQuery.ConstantBooleanContext context)
+        public override Object VisitConstantBoolean(CodeQueryParser.ConstantBooleanContext context)
         {
             switch (context.BOOLEAN().GetText())
             {
@@ -58,27 +59,27 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.ConstantString" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ConstantString" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitConstantString(CodeQuery.ConstantStringContext context)
+        public override Object VisitConstantString(CodeQueryParser.ConstantStringContext context)
         {
             var value = context.STRING().GetText().Trim('"');
             return TreeFactory.CreateString(value);
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.ConstantNumber" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ConstantNumber" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public override Object VisitConstantNumber(CodeQuery.ConstantNumberContext context)
+        public override Object VisitConstantNumber(CodeQueryParser.ConstantNumberContext context)
         {
             Double value;
             if (!Double.TryParse(context.NUMBER().GetText(), out value))
@@ -87,13 +88,13 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithConstant" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithConstant" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitMethodCallParameterValueWithConstant(CodeQuery.MethodCallParameterValueWithConstantContext context)
+        public override Object VisitMethodCallParameterValueWithConstant(CodeQueryParser.MethodCallParameterValueWithConstantContext context)
         {
             var value = context.ActualParameterValue.Accept(this) as ConstantElement;
 
@@ -107,13 +108,13 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.methodCall" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.methodCall" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitMethodCall(CodeQuery.MethodCallContext context)
+        public override Object VisitMethodCall(CodeQueryParser.MethodCallContext context)
         {
             var methodCallParameters = context.methodCallParameter()
                                               .Select((parameter, index) => {
@@ -135,28 +136,16 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.ExpressionMethodCall" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ExpressionMethodCall" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitExpressionMethodCall(CodeQuery.ExpressionMethodCallContext context)
+        public override Object VisitExpressionMethodCall(CodeQueryParser.ExpressionMethodCallContext context)
         {
             var methodCall = context.methodCall().Accept(this).As<CommandCallElement>();
             return methodCall;
-        }
-
-        /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.ExpressionInner" />.
-        /// <para>
-        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
-        /// on <paramref name="context" />.
-        /// </para>
-        /// </summary>
-        public override Object VisitExpressionInner(CodeQuery.ExpressionInnerContext context)
-        {
-            return context.command().Accept(this);
         }
 
         /*
@@ -198,7 +187,7 @@ namespace CodeSharper.Interpreter.Visitors
                 }
         */
 
-        public override Object VisitCommandOperand(CodeQuery.CommandOperandContext context)
+        public override Object VisitCommandOperand(CodeQueryParser.CommandOperandContext context)
         {
             var left = context.Left.Accept(this) as ControlFlowElementBase;
             var right = context.Right.Accept(this) as ControlFlowElementBase;
@@ -207,7 +196,7 @@ namespace CodeSharper.Interpreter.Visitors
             return TreeFactory.CreateControlFlow(left, right, pipelineOperator);
         }
 
-        public override Object VisitCommandExpression(CodeQuery.CommandExpressionContext context)
+        public override Object VisitCommandExpression(CodeQueryParser.CommandExpressionContext context)
         {
             var expression = context.Expression.Accept(this);
 
@@ -225,7 +214,7 @@ namespace CodeSharper.Interpreter.Visitors
             return base.VisitCommandExpression(context);
         }
 
-        public override Object VisitCommandInner(CodeQuery.CommandInnerContext context)
+        public override Object VisitCommandInner(CodeQueryParser.CommandInnerContext context)
         {
             return context.Command.Accept(this);
         }
@@ -233,7 +222,7 @@ namespace CodeSharper.Interpreter.Visitors
         #region Code selection language feature
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.ExpressionSelector"/>.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ExpressionSelector"/>.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
         /// on <paramref name="context"/>.
@@ -241,14 +230,14 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         /// <param name="context">The parse tree.</param>
         /// <return>The visitor result.</return>
-        public override Object VisitExpressionSelector(CodeQuery.ExpressionSelectorContext context)
+        public override Object VisitExpressionSelector(CodeQueryParser.ExpressionSelectorContext context)
         {
             var expression = context.selector().Accept(this).As<SelectorElementBase>();
             return expression;
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.selectorAttribute" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
@@ -257,7 +246,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <param name="context">The parse tree.</param>
         /// <returns></returns>
         /// <return>The visitor result.</return>
-        public override Object VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
+        public override Object VisitSelectorAttribute(CodeQueryParser.SelectorAttributeContext context)
         {
             var name = context.AttributeName.Text;
             var value = context.AttributeValue
@@ -267,7 +256,7 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithConstant" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithConstant" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
@@ -276,7 +265,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <param name="context">The parse tree.</param>
         /// <returns></returns>
         /// <return>The visitor result.</return>
-        public override Object VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
+        public override Object VisitPseudoSelectorWithConstant(CodeQueryParser.PseudoSelectorWithConstantContext context)
         {
             var name = context.Name.Text;
             IEnumerable<ConstantElement> values = Enumerable.Empty<ConstantElement>();
@@ -288,7 +277,7 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithIdentifier" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithIdentifier" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
@@ -297,7 +286,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <param name="context">The parse tree.</param>
         /// <returns></returns>
         /// <return>The visitor result.</return>
-        public override Object VisitPseudoSelectorWithIdentifier(CodeQuery.PseudoSelectorWithIdentifierContext context)
+        public override Object VisitPseudoSelectorWithIdentifier(CodeQueryParser.PseudoSelectorWithIdentifierContext context)
         {
             var name = context.Name.Text;
             var values = Enumerable.Empty<ConstantElement>();
@@ -309,7 +298,7 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithSelector"/>.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
         /// on <paramref name="context"/>.
@@ -317,7 +306,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         /// <param name="context">The parse tree.</param>
         /// <return>The visitor result.</return>
-        public override Object VisitPseudoSelectorWithSelector(CodeQuery.PseudoSelectorWithSelectorContext context)
+        public override Object VisitPseudoSelectorWithSelector(CodeQueryParser.PseudoSelectorWithSelectorContext context)
         {
             var name = context.Name.Text;
             var selector = context.Value.Accept(this) as SelectorElementBase;
@@ -326,7 +315,7 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.selectableElement" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.selectableElement" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
@@ -335,7 +324,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <param name="context">The parse tree.</param>
         /// <returns></returns>
         /// <return>The visitor result.</return>
-        public override Object VisitSelectableElement(CodeQuery.SelectableElementContext context)
+        public override Object VisitSelectableElement(CodeQueryParser.SelectableElementContext context)
         {
             var isClassElement = context.DOT() != null;
             var name = context.ElementName.Text;
@@ -349,13 +338,13 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.UnarySelection" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.UnarySelection" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitUnarySelection(CodeQuery.UnarySelectionContext context)
+        public override Object VisitUnarySelection(CodeQueryParser.UnarySelectionContext context)
         {
             var element = context.Value.Accept(this).Cast<ElementTypeSelector>();
 
@@ -363,25 +352,25 @@ namespace CodeSharper.Interpreter.Visitors
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.SelectionWithParenthesis" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitSelectionWithParenthesis(CodeQuery.SelectionWithParenthesisContext context)
+        public override Object VisitSelectionWithParenthesis(CodeQueryParser.SelectionWithParenthesisContext context)
         {
             return context.Selector.Accept(this);
         }
 
         /// <summary>
-        /// Visit a parse tree produced by <see cref="CodeQuery.BinarySelection" />.
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.BinarySelection" />.
         /// <para>
         /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)" />
         /// on <paramref name="context" />.
         /// </para>
         /// </summary>
-        public override Object VisitBinarySelection(CodeQuery.BinarySelectionContext context)
+        public override Object VisitBinarySelection(CodeQueryParser.BinarySelectionContext context)
         {
             var left = context.Left.Accept(this).As<SelectorElementBase>();
             var right = context.Right.Accept(this).As<SelectorElementBase>();

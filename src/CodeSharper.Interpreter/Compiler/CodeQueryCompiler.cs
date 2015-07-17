@@ -7,6 +7,7 @@ using Antlr4.Runtime;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Interpreter.Common;
+using CodeSharper.Interpreter.Grammar;
 using CodeSharper.Interpreter.Visitors;
 using DefaultSelectorFactory = CodeSharper.Interpreter.Visitors.DefaultSelectorFactory;
 using ISelectorFactory = CodeSharper.Interpreter.Visitors.ISelectorFactory;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Interpreter.Grammar;
 
 namespace CodeSharper.Interpreter.Visitors
 {
@@ -25,7 +26,7 @@ namespace CodeSharper.Interpreter.Visitors
             get { return this; }
         }
 
-        public override CodeQueryVisitor VisitPseudoSelectorWithConstant(CodeQuery.PseudoSelectorWithConstantContext context)
+        public override CodeQueryVisitor VisitPseudoSelectorWithConstant(CodeQueryParser.PseudoSelectorWithConstantContext context)
         {
             var name = context.ID().GetText();
             var value = _constants.Pop();
@@ -35,7 +36,7 @@ namespace CodeSharper.Interpreter.Visitors
             return base.VisitPseudoSelectorWithConstant(context);
         }
 
-        public override CodeQueryVisitor VisitSelectorAttribute(CodeQuery.SelectorAttributeContext context)
+        public override CodeQueryVisitor VisitSelectorAttribute(CodeQueryParser.SelectorAttributeContext context)
         {
             context.AttributeValue.Accept(this);
             if (!_constants.Any())
@@ -46,19 +47,14 @@ namespace CodeSharper.Interpreter.Visitors
             return base.VisitSelectorAttribute(context);
         }
 
-        public override CodeQueryVisitor VisitExpressionInner(CodeQuery.ExpressionInnerContext context)
-        {
-            return context.Accept(this);
-        }
-
-        public override CodeQueryVisitor VisitMethodCall(CodeQuery.MethodCallContext context)
+        public override CodeQueryVisitor VisitMethodCall(CodeQueryParser.MethodCallContext context)
         {
             var methodName = context.MethodCallName.Text;
 
             return base.VisitMethodCall(context);
         }
 
-        public override CodeQueryVisitor VisitConstantNumber(CodeQuery.ConstantNumberContext context)
+        public override CodeQueryVisitor VisitConstantNumber(CodeQueryParser.ConstantNumberContext context)
         {
             Double value;
             if (!Double.TryParse(context.NUMBER().GetText(), out value))
@@ -70,14 +66,14 @@ namespace CodeSharper.Interpreter.Visitors
             return base.VisitConstantNumber(context);
         }
 
-        public override CodeQueryVisitor VisitConstantString(CodeQuery.ConstantStringContext context)
+        public override CodeQueryVisitor VisitConstantString(CodeQueryParser.ConstantStringContext context)
         {
             var stringValue = context.STRING().GetText().Trim('"');
             _constants.Push(stringValue);
             return base.VisitConstantString(context);
         }
 
-        public override CodeQueryVisitor VisitConstantBoolean(CodeQuery.ConstantBooleanContext context)
+        public override CodeQueryVisitor VisitConstantBoolean(CodeQueryParser.ConstantBooleanContext context)
         {
             switch (context.BOOLEAN().GetText())
             {

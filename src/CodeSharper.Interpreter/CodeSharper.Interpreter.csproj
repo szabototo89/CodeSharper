@@ -85,11 +85,11 @@
     <Compile Include="Common\SequenceControlFlowElement.cs" />
     <Compile Include="Common\UnarySelectorElement.cs" />
     <Compile Include="Compiler\CodeQueryCompiler.cs" />
-    <Compile Include="Grammar\CodeQuery.cs" />
     <Compile Include="Grammar\CodeQueryBaseListener.cs" />
     <Compile Include="Grammar\CodeQueryBaseVisitor.cs" />
     <Compile Include="Grammar\CodeQueryLexer.cs" />
     <Compile Include="Grammar\CodeQueryListener.cs" />
+    <Compile Include="Grammar\CodeQueryParser.cs" />
     <Compile Include="Grammar\CodeQueryVisitor.cs" />
     <Compile Include="Common\ActualParameterElement.cs" />
     <Compile Include="Common\ConstantElement.cs" />

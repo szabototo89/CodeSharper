@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from D:/Development/Projects/antlr/CodeSharper-grammars/src/CodeQuery/v1_1\CodeQuery.g4 by ANTLR 4.5
+// Generated from D:/Development/Projects/antlr/CodeSharper-grammars/src/CodeQuery/v2\CodeQuery.g4 by ANTLR 4.5
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,158 +19,166 @@
 
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
-using IToken = Antlr4.Runtime.IToken;
 
-/// <summary>
-/// This interface defines a complete generic visitor for a parse tree produced
-/// by <see cref="CodeQuery"/>.
-/// </summary>
-/// <typeparam name="Result">The return type of the visit operation.</typeparam>
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
-[System.CLSCompliant(false)]
-public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
-	/// <summary>
-	/// Visit a parse tree produced by the <c>CommandOperand</c>
-	/// labeled alternative in <see cref="CodeQuery.command"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCommandOperand([NotNull] CodeQuery.CommandOperandContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>CommandInner</c>
-	/// labeled alternative in <see cref="CodeQuery.command"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCommandInner([NotNull] CodeQuery.CommandInnerContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>CommandExpression</c>
-	/// labeled alternative in <see cref="CodeQuery.command"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCommandExpression([NotNull] CodeQuery.CommandExpressionContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ExpressionMethodCall</c>
-	/// labeled alternative in <see cref="CodeQuery.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitExpressionMethodCall([NotNull] CodeQuery.ExpressionMethodCallContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ExpressionSelector</c>
-	/// labeled alternative in <see cref="CodeQuery.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ExpressionInner</c>
-	/// labeled alternative in <see cref="CodeQuery.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitExpressionInner([NotNull] CodeQuery.ExpressionInnerContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.methodCall"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMethodCall([NotNull] CodeQuery.MethodCallContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>MethodCallParameterValueWithExpression</c>
-	/// labeled alternative in <see cref="CodeQuery.methodCallParameter"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMethodCallParameterValueWithExpression([NotNull] CodeQuery.MethodCallParameterValueWithExpressionContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>MethodCallParameterValueWithConstant</c>
-	/// labeled alternative in <see cref="CodeQuery.methodCallParameter"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMethodCallParameterValueWithConstant([NotNull] CodeQuery.MethodCallParameterValueWithConstantContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>MethodCallParameterValueWithIdentifier</c>
-	/// labeled alternative in <see cref="CodeQuery.methodCallParameter"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>UnarySelection</c>
-	/// labeled alternative in <see cref="CodeQuery.selector"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitUnarySelection([NotNull] CodeQuery.UnarySelectionContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>BinarySelection</c>
-	/// labeled alternative in <see cref="CodeQuery.selector"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitBinarySelection([NotNull] CodeQuery.BinarySelectionContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>SelectionWithParenthesis</c>
-	/// labeled alternative in <see cref="CodeQuery.selector"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitSelectableElement([NotNull] CodeQuery.SelectableElementContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>PseudoSelectorWithConstant</c>
-	/// labeled alternative in <see cref="CodeQuery.pseudoSelector"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPseudoSelectorWithConstant([NotNull] CodeQuery.PseudoSelectorWithConstantContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>PseudoSelectorWithIdentifier</c>
-	/// labeled alternative in <see cref="CodeQuery.pseudoSelector"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>PseudoSelectorWithSelector</c>
-	/// labeled alternative in <see cref="CodeQuery.pseudoSelector"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ConstantString</c>
-	/// labeled alternative in <see cref="CodeQuery.constant"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitConstantString([NotNull] CodeQuery.ConstantStringContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ConstantNumber</c>
-	/// labeled alternative in <see cref="CodeQuery.constant"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitConstantNumber([NotNull] CodeQuery.ConstantNumberContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>ConstantBoolean</c>
-	/// labeled alternative in <see cref="CodeQuery.constant"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context);
+namespace CodeSharper.Interpreter.Grammar
+{
+    /// <summary>
+    /// This interface defines a complete generic visitor for a parse tree produced
+    /// by <see cref="CodeQueryParser"/>.
+    /// </summary>
+    /// <typeparam name="Result">The return type of the visit operation.</typeparam>
+    [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
+    [System.CLSCompliant(false)]
+    public interface ICodeQueryVisitor<Result> : IParseTreeVisitor<Result> {
+        /// <summary>
+        /// Visit a parse tree produced by the <c>CommandOperand</c>
+        /// labeled alternative in <see cref="CodeQueryParser.command"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitCommandOperand([NotNull] CodeQueryParser.CommandOperandContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>CommandInner</c>
+        /// labeled alternative in <see cref="CodeQueryParser.command"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitCommandInner([NotNull] CodeQueryParser.CommandInnerContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>CommandExpression</c>
+        /// labeled alternative in <see cref="CodeQueryParser.command"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitCommandExpression([NotNull] CodeQueryParser.CommandExpressionContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>ExpressionMethodCall</c>
+        /// labeled alternative in <see cref="CodeQueryParser.expression"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitExpressionMethodCall([NotNull] CodeQueryParser.ExpressionMethodCallContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>ExpressionSelector</c>
+        /// labeled alternative in <see cref="CodeQueryParser.expression"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitExpressionSelector([NotNull] CodeQueryParser.ExpressionSelectorContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.methodCall"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitMethodCall([NotNull] CodeQueryParser.MethodCallContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>MethodCallParameterValueWithExpression</c>
+        /// labeled alternative in <see cref="CodeQueryParser.methodCallParameter"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitMethodCallParameterValueWithExpression([NotNull] CodeQueryParser.MethodCallParameterValueWithExpressionContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>MethodCallParameterValueWithConstant</c>
+        /// labeled alternative in <see cref="CodeQueryParser.methodCallParameter"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitMethodCallParameterValueWithConstant([NotNull] CodeQueryParser.MethodCallParameterValueWithConstantContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>MethodCallParameterValueWithIdentifier</c>
+        /// labeled alternative in <see cref="CodeQueryParser.methodCallParameter"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitMethodCallParameterValueWithIdentifier([NotNull] CodeQueryParser.MethodCallParameterValueWithIdentifierContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>UnarySelection</c>
+        /// labeled alternative in <see cref="CodeQueryParser.selector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitUnarySelection([NotNull] CodeQueryParser.UnarySelectionContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>BinarySelection</c>
+        /// labeled alternative in <see cref="CodeQueryParser.selector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitBinarySelection([NotNull] CodeQueryParser.BinarySelectionContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>SelectionWithParenthesis</c>
+        /// labeled alternative in <see cref="CodeQueryParser.selector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitSelectionWithParenthesis([NotNull] CodeQueryParser.SelectionWithParenthesisContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.selectableElement"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitSelectableElement([NotNull] CodeQueryParser.SelectableElementContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.className"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitClassName([NotNull] CodeQueryParser.ClassNameContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>PseudoSelectorSimple</c>
+        /// labeled alternative in <see cref="CodeQueryParser.pseudoSelector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitPseudoSelectorSimple([NotNull] CodeQueryParser.PseudoSelectorSimpleContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>PseudoSelectorWithConstant</c>
+        /// labeled alternative in <see cref="CodeQueryParser.pseudoSelector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitPseudoSelectorWithConstant([NotNull] CodeQueryParser.PseudoSelectorWithConstantContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>PseudoSelectorWithIdentifier</c>
+        /// labeled alternative in <see cref="CodeQueryParser.pseudoSelector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitPseudoSelectorWithIdentifier([NotNull] CodeQueryParser.PseudoSelectorWithIdentifierContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>PseudoSelectorWithSelector</c>
+        /// labeled alternative in <see cref="CodeQueryParser.pseudoSelector"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitPseudoSelectorWithSelector([NotNull] CodeQueryParser.PseudoSelectorWithSelectorContext context);
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.selectorAttribute"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitSelectorAttribute([NotNull] CodeQueryParser.SelectorAttributeContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>ConstantString</c>
+        /// labeled alternative in <see cref="CodeQueryParser.constant"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitConstantString([NotNull] CodeQueryParser.ConstantStringContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>ConstantNumber</c>
+        /// labeled alternative in <see cref="CodeQueryParser.constant"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitConstantNumber([NotNull] CodeQueryParser.ConstantNumberContext context);
+        /// <summary>
+        /// Visit a parse tree produced by the <c>ConstantBoolean</c>
+        /// labeled alternative in <see cref="CodeQueryParser.constant"/>.
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        Result VisitConstantBoolean([NotNull] CodeQueryParser.ConstantBooleanContext context);
+    }
 }

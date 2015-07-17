@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from D:/Development/Projects/antlr/CodeSharper-grammars/src/CodeQuery/v1_1\CodeQuery.g4 by ANTLR 4.5
+// Generated from D:/Development/Projects/antlr/CodeSharper-grammars/src/CodeQuery/v2\CodeQuery.g4 by ANTLR 4.5
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,226 +19,237 @@
 
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
-using IToken = Antlr4.Runtime.IToken;
-using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
-/// <summary>
-/// This class provides an empty implementation of <see cref="ICodeQueryVisitor{Result}"/>,
-/// which can be extended to create a visitor which only needs to handle a subset
-/// of the available methods.
-/// </summary>
-/// <typeparam name="Result">The return type of the visit operation.</typeparam>
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
-[System.CLSCompliant(false)]
-public partial class CodeQueryBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, ICodeQueryVisitor<Result> {
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.CommandOperand"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitCommandOperand([NotNull] CodeQuery.CommandOperandContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.CommandInner"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitCommandInner([NotNull] CodeQuery.CommandInnerContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.CommandExpression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitCommandExpression([NotNull] CodeQuery.CommandExpressionContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ExpressionMethodCall"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitExpressionMethodCall([NotNull] CodeQuery.ExpressionMethodCallContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ExpressionSelector"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ExpressionInner"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitExpressionInner([NotNull] CodeQuery.ExpressionInnerContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.methodCall"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitMethodCall([NotNull] CodeQuery.MethodCallContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithExpression"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitMethodCallParameterValueWithExpression([NotNull] CodeQuery.MethodCallParameterValueWithExpressionContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithConstant"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitMethodCallParameterValueWithConstant([NotNull] CodeQuery.MethodCallParameterValueWithConstantContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithIdentifier"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.UnarySelection"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitUnarySelection([NotNull] CodeQuery.UnarySelectionContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.BinarySelection"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitBinarySelection([NotNull] CodeQuery.BinarySelectionContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitSelectableElement([NotNull] CodeQuery.SelectableElementContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithConstant"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitPseudoSelectorWithConstant([NotNull] CodeQuery.PseudoSelectorWithConstantContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithIdentifier"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ConstantString"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitConstantString([NotNull] CodeQuery.ConstantStringContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ConstantNumber"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitConstantNumber([NotNull] CodeQuery.ConstantNumberContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="CodeQuery.ConstantBoolean"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context) { return VisitChildren(context); }
+namespace CodeSharper.Interpreter.Grammar
+{
+    /// <summary>
+    /// This class provides an empty implementation of <see cref="ICodeQueryVisitor{Result}"/>,
+    /// which can be extended to create a visitor which only needs to handle a subset
+    /// of the available methods.
+    /// </summary>
+    /// <typeparam name="Result">The return type of the visit operation.</typeparam>
+    [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
+    [System.CLSCompliant(false)]
+    public partial class CodeQueryBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, ICodeQueryVisitor<Result> {
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.CommandOperand"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitCommandOperand([NotNull] CodeQueryParser.CommandOperandContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.CommandInner"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitCommandInner([NotNull] CodeQueryParser.CommandInnerContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.CommandExpression"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitCommandExpression([NotNull] CodeQueryParser.CommandExpressionContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ExpressionMethodCall"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitExpressionMethodCall([NotNull] CodeQueryParser.ExpressionMethodCallContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ExpressionSelector"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitExpressionSelector([NotNull] CodeQueryParser.ExpressionSelectorContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.methodCall"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitMethodCall([NotNull] CodeQueryParser.MethodCallContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithExpression"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitMethodCallParameterValueWithExpression([NotNull] CodeQueryParser.MethodCallParameterValueWithExpressionContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithConstant"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitMethodCallParameterValueWithConstant([NotNull] CodeQueryParser.MethodCallParameterValueWithConstantContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithIdentifier"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitMethodCallParameterValueWithIdentifier([NotNull] CodeQueryParser.MethodCallParameterValueWithIdentifierContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.UnarySelection"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitUnarySelection([NotNull] CodeQueryParser.UnarySelectionContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.BinarySelection"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitBinarySelection([NotNull] CodeQueryParser.BinarySelectionContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.SelectionWithParenthesis"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitSelectionWithParenthesis([NotNull] CodeQueryParser.SelectionWithParenthesisContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.selectableElement"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitSelectableElement([NotNull] CodeQueryParser.SelectableElementContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.className"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitClassName([NotNull] CodeQueryParser.ClassNameContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorSimple"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitPseudoSelectorSimple([NotNull] CodeQueryParser.PseudoSelectorSimpleContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithConstant"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitPseudoSelectorWithConstant([NotNull] CodeQueryParser.PseudoSelectorWithConstantContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithIdentifier"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitPseudoSelectorWithIdentifier([NotNull] CodeQueryParser.PseudoSelectorWithIdentifierContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithSelector"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitPseudoSelectorWithSelector([NotNull] CodeQueryParser.PseudoSelectorWithSelectorContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.selectorAttribute"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitSelectorAttribute([NotNull] CodeQueryParser.SelectorAttributeContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ConstantString"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitConstantString([NotNull] CodeQueryParser.ConstantStringContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ConstantNumber"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitConstantNumber([NotNull] CodeQueryParser.ConstantNumberContext context) { return VisitChildren(context); }
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.ConstantBoolean"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public virtual Result VisitConstantBoolean([NotNull] CodeQueryParser.ConstantBooleanContext context) { return VisitChildren(context); }
+    }
 }
