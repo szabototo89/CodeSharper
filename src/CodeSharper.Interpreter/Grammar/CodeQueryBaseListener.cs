@@ -33,269 +33,269 @@ namespace CodeSharper.Interpreter.Grammar
     [System.CLSCompliant(false)]
     public partial class CodeQueryBaseListener : ICodeQueryListener {
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.CommandOperand"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.CommandOperand"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterCommandOperand([NotNull] CodeQuery.CommandOperandContext context) { }
+        public virtual void EnterCommandOperand([NotNull] CodeQueryParser.CommandOperandContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.CommandOperand"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.CommandOperand"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitCommandOperand([NotNull] CodeQuery.CommandOperandContext context) { }
+        public virtual void ExitCommandOperand([NotNull] CodeQueryParser.CommandOperandContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.CommandInner"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.CommandInner"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterCommandInner([NotNull] CodeQuery.CommandInnerContext context) { }
+        public virtual void EnterCommandInner([NotNull] CodeQueryParser.CommandInnerContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.CommandInner"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.CommandInner"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitCommandInner([NotNull] CodeQuery.CommandInnerContext context) { }
+        public virtual void ExitCommandInner([NotNull] CodeQueryParser.CommandInnerContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.CommandExpression"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.CommandExpression"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterCommandExpression([NotNull] CodeQuery.CommandExpressionContext context) { }
+        public virtual void EnterCommandExpression([NotNull] CodeQueryParser.CommandExpressionContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.CommandExpression"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.CommandExpression"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitCommandExpression([NotNull] CodeQuery.CommandExpressionContext context) { }
+        public virtual void ExitCommandExpression([NotNull] CodeQueryParser.CommandExpressionContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.ExpressionMethodCall"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.ExpressionMethodCall"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterExpressionMethodCall([NotNull] CodeQuery.ExpressionMethodCallContext context) { }
+        public virtual void EnterExpressionMethodCall([NotNull] CodeQueryParser.ExpressionMethodCallContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.ExpressionMethodCall"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.ExpressionMethodCall"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitExpressionMethodCall([NotNull] CodeQuery.ExpressionMethodCallContext context) { }
+        public virtual void ExitExpressionMethodCall([NotNull] CodeQueryParser.ExpressionMethodCallContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.ExpressionSelector"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.ExpressionSelector"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context) { }
+        public virtual void EnterExpressionSelector([NotNull] CodeQueryParser.ExpressionSelectorContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.ExpressionSelector"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.ExpressionSelector"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitExpressionSelector([NotNull] CodeQuery.ExpressionSelectorContext context) { }
+        public virtual void ExitExpressionSelector([NotNull] CodeQueryParser.ExpressionSelectorContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.methodCall"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.methodCall"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterMethodCall([NotNull] CodeQuery.MethodCallContext context) { }
+        public virtual void EnterMethodCall([NotNull] CodeQueryParser.MethodCallContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.methodCall"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.methodCall"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitMethodCall([NotNull] CodeQuery.MethodCallContext context) { }
+        public virtual void ExitMethodCall([NotNull] CodeQueryParser.MethodCallContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithExpression"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithExpression"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterMethodCallParameterValueWithExpression([NotNull] CodeQuery.MethodCallParameterValueWithExpressionContext context) { }
+        public virtual void EnterMethodCallParameterValueWithExpression([NotNull] CodeQueryParser.MethodCallParameterValueWithExpressionContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithExpression"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithExpression"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitMethodCallParameterValueWithExpression([NotNull] CodeQuery.MethodCallParameterValueWithExpressionContext context) { }
+        public virtual void ExitMethodCallParameterValueWithExpression([NotNull] CodeQueryParser.MethodCallParameterValueWithExpressionContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithConstant"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithConstant"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterMethodCallParameterValueWithConstant([NotNull] CodeQuery.MethodCallParameterValueWithConstantContext context) { }
+        public virtual void EnterMethodCallParameterValueWithConstant([NotNull] CodeQueryParser.MethodCallParameterValueWithConstantContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithConstant"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithConstant"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitMethodCallParameterValueWithConstant([NotNull] CodeQuery.MethodCallParameterValueWithConstantContext context) { }
+        public virtual void ExitMethodCallParameterValueWithConstant([NotNull] CodeQueryParser.MethodCallParameterValueWithConstantContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithIdentifier"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithIdentifier"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context) { }
+        public virtual void EnterMethodCallParameterValueWithIdentifier([NotNull] CodeQueryParser.MethodCallParameterValueWithIdentifierContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.MethodCallParameterValueWithIdentifier"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.MethodCallParameterValueWithIdentifier"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitMethodCallParameterValueWithIdentifier([NotNull] CodeQuery.MethodCallParameterValueWithIdentifierContext context) { }
+        public virtual void ExitMethodCallParameterValueWithIdentifier([NotNull] CodeQueryParser.MethodCallParameterValueWithIdentifierContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.UnarySelection"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.UnarySelection"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterUnarySelection([NotNull] CodeQuery.UnarySelectionContext context) { }
+        public virtual void EnterUnarySelection([NotNull] CodeQueryParser.UnarySelectionContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.UnarySelection"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.UnarySelection"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitUnarySelection([NotNull] CodeQuery.UnarySelectionContext context) { }
+        public virtual void ExitUnarySelection([NotNull] CodeQueryParser.UnarySelectionContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.BinarySelection"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.BinarySelection"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterBinarySelection([NotNull] CodeQuery.BinarySelectionContext context) { }
+        public virtual void EnterBinarySelection([NotNull] CodeQueryParser.BinarySelectionContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.BinarySelection"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.BinarySelection"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitBinarySelection([NotNull] CodeQuery.BinarySelectionContext context) { }
+        public virtual void ExitBinarySelection([NotNull] CodeQueryParser.BinarySelectionContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.SelectionWithParenthesis"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context) { }
+        public virtual void EnterSelectionWithParenthesis([NotNull] CodeQueryParser.SelectionWithParenthesisContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.SelectionWithParenthesis"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.SelectionWithParenthesis"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitSelectionWithParenthesis([NotNull] CodeQuery.SelectionWithParenthesisContext context) { }
+        public virtual void ExitSelectionWithParenthesis([NotNull] CodeQueryParser.SelectionWithParenthesisContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.selectableElement"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterSelectableElement([NotNull] CodeQuery.SelectableElementContext context) { }
+        public virtual void EnterSelectableElement([NotNull] CodeQueryParser.SelectableElementContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.selectableElement"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.selectableElement"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitSelectableElement([NotNull] CodeQuery.SelectableElementContext context) { }
+        public virtual void ExitSelectableElement([NotNull] CodeQueryParser.SelectableElementContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.className"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.className"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterClassName([NotNull] CodeQuery.ClassNameContext context) { }
+        public virtual void EnterClassName([NotNull] CodeQueryParser.ClassNameContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.className"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.className"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitClassName([NotNull] CodeQuery.ClassNameContext context) { }
+        public virtual void ExitClassName([NotNull] CodeQueryParser.ClassNameContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.PseudoSelectorSimple"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorSimple"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterPseudoSelectorSimple([NotNull] CodeQuery.PseudoSelectorSimpleContext context) { }
+        public virtual void EnterPseudoSelectorSimple([NotNull] CodeQueryParser.PseudoSelectorSimpleContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.PseudoSelectorSimple"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorSimple"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitPseudoSelectorSimple([NotNull] CodeQuery.PseudoSelectorSimpleContext context) { }
+        public virtual void ExitPseudoSelectorSimple([NotNull] CodeQueryParser.PseudoSelectorSimpleContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithConstant"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithConstant"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterPseudoSelectorWithConstant([NotNull] CodeQuery.PseudoSelectorWithConstantContext context) { }
+        public virtual void EnterPseudoSelectorWithConstant([NotNull] CodeQueryParser.PseudoSelectorWithConstantContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithConstant"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithConstant"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitPseudoSelectorWithConstant([NotNull] CodeQuery.PseudoSelectorWithConstantContext context) { }
+        public virtual void ExitPseudoSelectorWithConstant([NotNull] CodeQueryParser.PseudoSelectorWithConstantContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithIdentifier"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithIdentifier"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context) { }
+        public virtual void EnterPseudoSelectorWithIdentifier([NotNull] CodeQueryParser.PseudoSelectorWithIdentifierContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithIdentifier"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithIdentifier"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitPseudoSelectorWithIdentifier([NotNull] CodeQuery.PseudoSelectorWithIdentifierContext context) { }
+        public virtual void ExitPseudoSelectorWithIdentifier([NotNull] CodeQueryParser.PseudoSelectorWithIdentifierContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithSelector"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context) { }
+        public virtual void EnterPseudoSelectorWithSelector([NotNull] CodeQueryParser.PseudoSelectorWithSelectorContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.PseudoSelectorWithSelector"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.PseudoSelectorWithSelector"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitPseudoSelectorWithSelector([NotNull] CodeQuery.PseudoSelectorWithSelectorContext context) { }
+        public virtual void ExitPseudoSelectorWithSelector([NotNull] CodeQueryParser.PseudoSelectorWithSelectorContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.selectorAttribute"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context) { }
+        public virtual void EnterSelectorAttribute([NotNull] CodeQueryParser.SelectorAttributeContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.selectorAttribute"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.selectorAttribute"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitSelectorAttribute([NotNull] CodeQuery.SelectorAttributeContext context) { }
+        public virtual void ExitSelectorAttribute([NotNull] CodeQueryParser.SelectorAttributeContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.ConstantString"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.ConstantString"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterConstantString([NotNull] CodeQuery.ConstantStringContext context) { }
+        public virtual void EnterConstantString([NotNull] CodeQueryParser.ConstantStringContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.ConstantString"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.ConstantString"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitConstantString([NotNull] CodeQuery.ConstantStringContext context) { }
+        public virtual void ExitConstantString([NotNull] CodeQueryParser.ConstantStringContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.ConstantNumber"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.ConstantNumber"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterConstantNumber([NotNull] CodeQuery.ConstantNumberContext context) { }
+        public virtual void EnterConstantNumber([NotNull] CodeQueryParser.ConstantNumberContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.ConstantNumber"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.ConstantNumber"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitConstantNumber([NotNull] CodeQuery.ConstantNumberContext context) { }
+        public virtual void ExitConstantNumber([NotNull] CodeQueryParser.ConstantNumberContext context) { }
         /// <summary>
-        /// Enter a parse tree produced by <see cref="CodeQuery.ConstantBoolean"/>.
+        /// Enter a parse tree produced by <see cref="CodeQueryParser.ConstantBoolean"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void EnterConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context) { }
+        public virtual void EnterConstantBoolean([NotNull] CodeQueryParser.ConstantBooleanContext context) { }
         /// <summary>
-        /// Exit a parse tree produced by <see cref="CodeQuery.ConstantBoolean"/>.
+        /// Exit a parse tree produced by <see cref="CodeQueryParser.ConstantBoolean"/>.
         /// <para>The default implementation does nothing.</para>
         /// </summary>
         /// <param name="context">The parse tree.</param>
-        public virtual void ExitConstantBoolean([NotNull] CodeQuery.ConstantBooleanContext context) { }
+        public virtual void ExitConstantBoolean([NotNull] CodeQueryParser.ConstantBooleanContext context) { }
 
         /// <inheritdoc/>
         /// <remarks>The default implementation does nothing.</remarks>

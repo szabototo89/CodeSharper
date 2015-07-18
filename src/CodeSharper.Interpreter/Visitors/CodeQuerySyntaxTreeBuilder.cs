@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Antlr4.Runtime;
@@ -120,7 +121,8 @@ namespace CodeSharper.Interpreter.Visitors
                                               .Select((parameter, index) => {
                                                   var param = parameter.Accept(this);
                                                   if (param is ActualParameterElement) return param;
-                                                  if (param is ConstantElement) return TreeFactory.CreateActualParameter((ConstantElement) param, index);
+                                                  if (param is ConstantElement) 
+                                                      return TreeFactory.CreateActualParameter((ConstantElement) param, index);
 
                                                   return param;
                                               });
@@ -335,6 +337,42 @@ namespace CodeSharper.Interpreter.Visitors
             var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelectorElement>();
 
             return SelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors);
+        }
+
+        /// <summary>
+        /// Visit a parse tree produced by <see cref="CodeQueryParser.className"/>.
+        /// <para>
+        /// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+        /// on <paramref name="context"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="context">The parse tree.</param>
+        /// <return>The visitor result.</return>
+        public override Object VisitClassName(CodeQueryParser.ClassNameContext context)
+        {
+            var id = context.ID();
+            if (id != null)
+            {
+                return SelectorFactory.CreateClassElementSelector(id.GetText(), false);
+            }
+
+            var stringId = context.STRING();
+            if (stringId != null)
+            {
+                var regularExpression = stringId.GetText()
+                                                .Replace("?", ".")
+                                                .Replace("*", ".?");
+
+                return SelectorFactory.CreateClassElementSelector(regularExpression, true);
+            }
+
+            var regularExpressionId = context.REGULAR_EXPRESSION();
+            if (regularExpressionId != null)
+            {
+                return SelectorFactory.CreateClassElementSelector(regularExpressionId.GetText(), true);
+            }
+
+            throw new NotSupportedException("Not supported class name format.");
         }
 
         /// <summary>

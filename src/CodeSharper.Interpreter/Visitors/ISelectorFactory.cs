@@ -44,6 +44,6 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a class element selector.
         /// </summary>
-        ClassElementSelector CreateClassElementSelector(String name);
+        ClassElementSelector CreateClassElementSelector(String name, Boolean isRegularExpression);
     }
 }

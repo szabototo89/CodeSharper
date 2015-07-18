@@ -26,7 +26,7 @@ namespace CodeSharper.Interpreter.Grammar
 {
     [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.5")]
     [System.CLSCompliant(false)]
-    public partial class CodeQuery : Parser {
+    public partial class CodeQueryParser : Parser {
         public const int
             LEFT_BRACKET=1, RIGHT_BRACKET=2, LEFT_SQUARE_BRACKET=3, RIGHT_SQUARE_BRACKET=4, 
             NUMBER=5, BOOLEAN=6, STRING=7, ID=8, SELECTOR_OPERATOR=9, UNIVERSAL_SELECTOR=10, 
@@ -69,7 +69,7 @@ namespace CodeSharper.Interpreter.Grammar
 
         public override string SerializedAtn { get { return _serializedATN; } }
 
-        public CodeQuery(ITokenStream input)
+        public CodeQueryParser(ITokenStream input)
             : base(input)
         {
             Interpreter = new ParserATNSimulator(this,_ATN);
@@ -96,7 +96,7 @@ namespace CodeSharper.Interpreter.Grammar
             public CommandContext command(int i) {
                 return GetRuleContext<CommandContext>(i);
             }
-            public ITerminalNode COMMAND_OPERATOR() { return GetToken(CodeQuery.COMMAND_OPERATOR, 0); }
+            public ITerminalNode COMMAND_OPERATOR() { return GetToken(CodeQueryParser.COMMAND_OPERATOR, 0); }
             public CommandOperandContext(CommandContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -114,8 +114,8 @@ namespace CodeSharper.Interpreter.Grammar
         }
         public partial class CommandInnerContext : CommandContext {
             public CommandContext Command;
-            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
-            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
+            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQueryParser.LEFT_BRACKET, 0); }
+            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQueryParser.RIGHT_BRACKET, 0); }
             public CommandContext command() {
                 return GetRuleContext<CommandContext>(0);
             }
@@ -247,11 +247,11 @@ namespace CodeSharper.Interpreter.Grammar
             }
         }
         public partial class ExpressionSelectorContext : ExpressionContext {
-            public ITerminalNode LEFT_SQUARE_BRACKET() { return GetToken(CodeQuery.LEFT_SQUARE_BRACKET, 0); }
+            public ITerminalNode LEFT_SQUARE_BRACKET() { return GetToken(CodeQueryParser.LEFT_SQUARE_BRACKET, 0); }
             public SelectorContext selector() {
                 return GetRuleContext<SelectorContext>(0);
             }
-            public ITerminalNode RIGHT_SQUARE_BRACKET() { return GetToken(CodeQuery.RIGHT_SQUARE_BRACKET, 0); }
+            public ITerminalNode RIGHT_SQUARE_BRACKET() { return GetToken(CodeQueryParser.RIGHT_SQUARE_BRACKET, 0); }
             public ExpressionSelectorContext(ExpressionContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -328,7 +328,7 @@ namespace CodeSharper.Interpreter.Grammar
         public partial class MethodCallContext : ParserRuleContext {
             public IToken MethodCallName;
             public MethodCallParameterContext MethodCallParameter;
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
             public MethodCallParameterContext[] methodCallParameter() {
                 return GetRuleContexts<MethodCallParameterContext>();
             }
@@ -410,8 +410,8 @@ namespace CodeSharper.Interpreter.Grammar
             public ExpressionContext expression() {
                 return GetRuleContext<ExpressionContext>(0);
             }
-            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
+            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQueryParser.ASSIGNMENT_OPERATOR, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
             public MethodCallParameterValueWithExpressionContext(MethodCallParameterContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -430,11 +430,11 @@ namespace CodeSharper.Interpreter.Grammar
         public partial class MethodCallParameterValueWithIdentifierContext : MethodCallParameterContext {
             public IToken ParameterName;
             public IToken ActualParameterValue;
-            public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
+            public ITerminalNode[] ID() { return GetTokens(CodeQueryParser.ID); }
             public ITerminalNode ID(int i) {
-                return GetToken(CodeQuery.ID, i);
+                return GetToken(CodeQueryParser.ID, i);
             }
-            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
+            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQueryParser.ASSIGNMENT_OPERATOR, 0); }
             public MethodCallParameterValueWithIdentifierContext(MethodCallParameterContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -456,8 +456,8 @@ namespace CodeSharper.Interpreter.Grammar
             public ConstantContext constant() {
                 return GetRuleContext<ConstantContext>(0);
             }
-            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
+            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQueryParser.ASSIGNMENT_OPERATOR, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
             public MethodCallParameterValueWithConstantContext(MethodCallParameterContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -585,7 +585,7 @@ namespace CodeSharper.Interpreter.Grammar
             public SelectorContext selector(int i) {
                 return GetRuleContext<SelectorContext>(i);
             }
-            public ITerminalNode SELECTOR_OPERATOR() { return GetToken(CodeQuery.SELECTOR_OPERATOR, 0); }
+            public ITerminalNode SELECTOR_OPERATOR() { return GetToken(CodeQueryParser.SELECTOR_OPERATOR, 0); }
             public BinarySelectionContext(SelectorContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -603,8 +603,8 @@ namespace CodeSharper.Interpreter.Grammar
         }
         public partial class SelectionWithParenthesisContext : SelectorContext {
             public SelectorContext Selector;
-            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
-            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
+            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQueryParser.LEFT_BRACKET, 0); }
+            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQueryParser.RIGHT_BRACKET, 0); }
             public SelectorContext selector() {
                 return GetRuleContext<SelectorContext>(0);
             }
@@ -717,9 +717,9 @@ namespace CodeSharper.Interpreter.Grammar
             public ClassNameContext ClassNames;
             public SelectorAttributeContext SelectorAttributes;
             public PseudoSelectorContext PseudoSelectors;
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
-            public ITerminalNode UNIVERSAL_SELECTOR() { return GetToken(CodeQuery.UNIVERSAL_SELECTOR, 0); }
-            public ITerminalNode DOT() { return GetToken(CodeQuery.DOT, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
+            public ITerminalNode UNIVERSAL_SELECTOR() { return GetToken(CodeQueryParser.UNIVERSAL_SELECTOR, 0); }
+            public ITerminalNode DOT() { return GetToken(CodeQueryParser.DOT, 0); }
             public ClassNameContext[] className() {
                 return GetRuleContexts<ClassNameContext>();
             }
@@ -841,10 +841,10 @@ namespace CodeSharper.Interpreter.Grammar
         }
 
         public partial class ClassNameContext : ParserRuleContext {
-            public ITerminalNode DOT() { return GetToken(CodeQuery.DOT, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
-            public ITerminalNode STRING() { return GetToken(CodeQuery.STRING, 0); }
-            public ITerminalNode REGULAR_EXPRESSION() { return GetToken(CodeQuery.REGULAR_EXPRESSION, 0); }
+            public ITerminalNode DOT() { return GetToken(CodeQueryParser.DOT, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
+            public ITerminalNode STRING() { return GetToken(CodeQueryParser.STRING, 0); }
+            public ITerminalNode REGULAR_EXPRESSION() { return GetToken(CodeQueryParser.REGULAR_EXPRESSION, 0); }
             public ClassNameContext(ParserRuleContext parent, int invokingState)
                 : base(parent, invokingState)
             {
@@ -921,19 +921,19 @@ namespace CodeSharper.Interpreter.Grammar
         public partial class PseudoSelectorWithConstantContext : PseudoSelectorContext {
             public IToken Name;
             public ConstantContext Value;
-            public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
-            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
-            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
+            public ITerminalNode COLON() { return GetToken(CodeQueryParser.COLON, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
+            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQueryParser.LEFT_BRACKET, 0); }
+            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQueryParser.RIGHT_BRACKET, 0); }
             public ConstantContext[] constant() {
                 return GetRuleContexts<ConstantContext>();
             }
             public ConstantContext constant(int i) {
                 return GetRuleContext<ConstantContext>(i);
             }
-            public ITerminalNode[] COMMA() { return GetTokens(CodeQuery.COMMA); }
+            public ITerminalNode[] COMMA() { return GetTokens(CodeQueryParser.COMMA); }
             public ITerminalNode COMMA(int i) {
-                return GetToken(CodeQuery.COMMA, i);
+                return GetToken(CodeQueryParser.COMMA, i);
             }
             public PseudoSelectorWithConstantContext(PseudoSelectorContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
@@ -953,16 +953,16 @@ namespace CodeSharper.Interpreter.Grammar
         public partial class PseudoSelectorWithIdentifierContext : PseudoSelectorContext {
             public IToken Name;
             public IToken Value;
-            public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
-            public ITerminalNode[] ID() { return GetTokens(CodeQuery.ID); }
+            public ITerminalNode COLON() { return GetToken(CodeQueryParser.COLON, 0); }
+            public ITerminalNode[] ID() { return GetTokens(CodeQueryParser.ID); }
             public ITerminalNode ID(int i) {
-                return GetToken(CodeQuery.ID, i);
+                return GetToken(CodeQueryParser.ID, i);
             }
-            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
-            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
-            public ITerminalNode[] COMMA() { return GetTokens(CodeQuery.COMMA); }
+            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQueryParser.LEFT_BRACKET, 0); }
+            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQueryParser.RIGHT_BRACKET, 0); }
+            public ITerminalNode[] COMMA() { return GetTokens(CodeQueryParser.COMMA); }
             public ITerminalNode COMMA(int i) {
-                return GetToken(CodeQuery.COMMA, i);
+                return GetToken(CodeQueryParser.COMMA, i);
             }
             public PseudoSelectorWithIdentifierContext(PseudoSelectorContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
@@ -982,10 +982,10 @@ namespace CodeSharper.Interpreter.Grammar
         public partial class PseudoSelectorWithSelectorContext : PseudoSelectorContext {
             public IToken Name;
             public SelectorContext Value;
-            public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
-            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQuery.LEFT_BRACKET, 0); }
-            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQuery.RIGHT_BRACKET, 0); }
+            public ITerminalNode COLON() { return GetToken(CodeQueryParser.COLON, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
+            public ITerminalNode LEFT_BRACKET() { return GetToken(CodeQueryParser.LEFT_BRACKET, 0); }
+            public ITerminalNode RIGHT_BRACKET() { return GetToken(CodeQueryParser.RIGHT_BRACKET, 0); }
             public SelectorContext selector() {
                 return GetRuleContext<SelectorContext>(0);
             }
@@ -1006,8 +1006,8 @@ namespace CodeSharper.Interpreter.Grammar
         }
         public partial class PseudoSelectorSimpleContext : PseudoSelectorContext {
             public IToken Name;
-            public ITerminalNode COLON() { return GetToken(CodeQuery.COLON, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
+            public ITerminalNode COLON() { return GetToken(CodeQueryParser.COLON, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
             public PseudoSelectorSimpleContext(PseudoSelectorContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -1123,10 +1123,10 @@ namespace CodeSharper.Interpreter.Grammar
         public partial class SelectorAttributeContext : ParserRuleContext {
             public IToken AttributeName;
             public ConstantContext AttributeValue;
-            public ITerminalNode LEFT_SQUARE_BRACKET() { return GetToken(CodeQuery.LEFT_SQUARE_BRACKET, 0); }
-            public ITerminalNode RIGHT_SQUARE_BRACKET() { return GetToken(CodeQuery.RIGHT_SQUARE_BRACKET, 0); }
-            public ITerminalNode ID() { return GetToken(CodeQuery.ID, 0); }
-            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQuery.ASSIGNMENT_OPERATOR, 0); }
+            public ITerminalNode LEFT_SQUARE_BRACKET() { return GetToken(CodeQueryParser.LEFT_SQUARE_BRACKET, 0); }
+            public ITerminalNode RIGHT_SQUARE_BRACKET() { return GetToken(CodeQueryParser.RIGHT_SQUARE_BRACKET, 0); }
+            public ITerminalNode ID() { return GetToken(CodeQueryParser.ID, 0); }
+            public ITerminalNode ASSIGNMENT_OPERATOR() { return GetToken(CodeQueryParser.ASSIGNMENT_OPERATOR, 0); }
             public ConstantContext constant() {
                 return GetRuleContext<ConstantContext>(0);
             }
@@ -1196,7 +1196,7 @@ namespace CodeSharper.Interpreter.Grammar
             }
         }
         public partial class ConstantStringContext : ConstantContext {
-            public ITerminalNode STRING() { return GetToken(CodeQuery.STRING, 0); }
+            public ITerminalNode STRING() { return GetToken(CodeQueryParser.STRING, 0); }
             public ConstantStringContext(ConstantContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -1213,7 +1213,7 @@ namespace CodeSharper.Interpreter.Grammar
             }
         }
         public partial class ConstantNumberContext : ConstantContext {
-            public ITerminalNode NUMBER() { return GetToken(CodeQuery.NUMBER, 0); }
+            public ITerminalNode NUMBER() { return GetToken(CodeQueryParser.NUMBER, 0); }
             public ConstantNumberContext(ConstantContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;
@@ -1230,7 +1230,7 @@ namespace CodeSharper.Interpreter.Grammar
             }
         }
         public partial class ConstantBooleanContext : ConstantContext {
-            public ITerminalNode BOOLEAN() { return GetToken(CodeQuery.BOOLEAN, 0); }
+            public ITerminalNode BOOLEAN() { return GetToken(CodeQueryParser.BOOLEAN, 0); }
             public ConstantBooleanContext(ConstantContext context) { CopyFrom(context); }
             public override void EnterRule(IParseTreeListener listener) {
                 ICodeQueryListener typedListener = listener as ICodeQueryListener;

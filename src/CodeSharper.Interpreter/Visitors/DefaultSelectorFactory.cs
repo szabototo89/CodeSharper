@@ -93,9 +93,11 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a class element selector.
         /// </summary>
-        public ClassElementSelector CreateClassElementSelector(String name)
+        public ClassElementSelector CreateClassElementSelector(String name, Boolean isRegularExpression)
         {
             Assume.NotNull(name, "name");
+
+
             return new ClassElementSelector(name);
         }
     }

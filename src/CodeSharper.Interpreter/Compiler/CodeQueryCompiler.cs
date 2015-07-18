@@ -35,7 +35,7 @@ namespace CodeSharper.Interpreter.Compiler
             var stream = new AntlrInputStream(input);
             ITokenSource lexer = new CodeQueryLexer(stream);
             ITokenStream tokens = new CommonTokenStream(lexer);
-            var parser = new CodeQuery(tokens) {
+            var parser = new CodeQueryParser(tokens) {
                 BuildParseTree = true
             };
             var start = parser.command();
