@@ -55,13 +55,13 @@ namespace CodeSharper.Interpreter.Common
 
             if (selectorElement is UnarySelectorElement)
             {
-                var unarySelector = (UnarySelectorElement)selectorElement;
+                var unarySelector = (UnarySelectorElement) selectorElement;
                 return create(unarySelector);
             }
 
             if (selectorElement is BinarySelectorElement)
             {
-                var binarySelector = (BinarySelectorElement)selectorElement;
+                var binarySelector = (BinarySelectorElement) selectorElement;
                 return create(binarySelector);
             }
 
@@ -75,45 +75,75 @@ namespace CodeSharper.Interpreter.Common
         {
             var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
 
-            var selectorDescriptor = DescriptorRepository.GetSelectorDescriptors().SingleOrDefault(s => NameMatcher.Match(s.Value, elementTypeSelector.Name));
+            var selectorDescriptor = ResolveSelectorDescriptor(elementTypeSelector);
             if (selectorDescriptor == null)
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
             var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type);
-            var attributes = elementTypeSelector.Attributes.Select(attribute => new SelectorAttribute(attribute.Name, attribute.Value.Value));
-            var pseudoSelectors = elementTypeSelector.PseudoSelectors
-                                                     .Select(element => resolvePseudoSelector(element, selector))
-                                                     .ToArray();
+            var attributes = ResolverAttributes(elementTypeSelector);
+            var modifiers = ResolveModifiers(elementTypeSelector);
+            var classSelectors = ResolveClassSelectors(elementTypeSelector);
 
-            return new SelectionCombinator(selector, pseudoSelectors, attributes);
+            return new SelectionCombinator(selector, classSelectors.Concat(modifiers), attributes);
+        }
+
+        protected SelectorDescriptor ResolveSelectorDescriptor(ElementTypeSelector elementTypeSelector)
+        {
+            return DescriptorRepository.GetSelectorDescriptors()
+                                       .SingleOrDefault(s => NameMatcher.Match(s.Value, elementTypeSelector.Name));
+        }
+
+        protected IEnumerable<SelectorAttribute> ResolverAttributes(ElementTypeSelector elementTypeSelector)
+        {
+            return elementTypeSelector.Attributes
+                                      .Select(attribute => new SelectorAttribute(attribute.Name, attribute.Value.Value));
+        }
+
+        protected IEnumerable<ModifierBase> ResolveModifiers(ElementTypeSelector elementTypeSelector)
+        {
+            return elementTypeSelector.Modifiers
+                                      .Select(resolveModifier);
+        }
+
+        /// <summary>
+        /// Resolves the class selectors.
+        /// </summary>
+        protected virtual IEnumerable<ModifierBase> ResolveClassSelectors(ElementTypeSelector selector)
+        {
+            var 
+
+            return selector.ClassSelectors
+                           .Select(classSelector => SelectorFactory.CreateClassSelector(classSelector.Name));
         }
 
         /// <summary>
         /// Resolves the pseudo selector by element
         /// </summary>
-        private NodeModifierBase resolvePseudoSelector(PseudoSelectorElement element, SelectorBase selector)
+        private ModifierBase resolveModifier(ModifierElement element)
         {
-            var elements = DescriptorRepository.GetModifierDescriptors()
-                                               .Where(pseudo => NameMatcher.Match(pseudo.Value, element.Name))
-                                               .Where(pseudo => pseudo.Arguments.Count() == element.Arguments.Count())
-                                               .Select(pseudo => new { pseudo.Type, Arguments = element.Arguments.Select(createPseudoSelectorArgument).ToArray() })
-                                               .ToArray();
+            var descriptors = DescriptorRepository.GetModifierDescriptors();
+            var elements = descriptors.Where(descriptor => NameMatcher.Match(descriptor.Value, element.Name))
+                                      .Where(descriptor => descriptor.Arguments.Count() == element.Arguments.Count())
+                                      .Select(pseudo => new
+                                      {
+                                          pseudo.Type,
+                                          Arguments = element.Arguments.Select(createPseudoSelectorArgument)
+                                      })
+                                      .ToArray();
 
             if (elements.Length > 1)
                 throw new Exception(String.Format("Ambiguity of pseudo selector: {0}", element.Name));
             if (!elements.Any())
                 throw new Exception(String.Format("Not found pseudo selector: {0}", element.Name));
 
-            var pseudoSelector = elements.Single();
-            return SelectorFactory.CreatePseudoSelector(pseudoSelector.Type, pseudoSelector.Arguments, selector);
+            var modifier = elements.Single();
+            return SelectorFactory.CreateModifier(modifier.Type, modifier.Arguments);
         }
 
         private Object createPseudoSelectorArgument(ConstantElement argument)
         {
             if (argument.Type == typeof (SelectorElementBase))
-            {
                 return Create(argument.Value as SelectorElementBase);
-            }
 
             return argument.Value;
         }

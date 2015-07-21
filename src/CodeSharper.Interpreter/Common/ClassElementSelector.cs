@@ -2,17 +2,17 @@ using System;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class ClassElementSelector : IEquatable<ClassElementSelector>
+    public abstract class ClassSelectorElement : IEquatable<ClassSelectorElement>
     {
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public String Name { get; }
+        public String Name { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClassElementSelector"/> class.
+        /// Initializes a new instance of the <see cref="ClassSelectorElement"/> class.
         /// </summary>
-        public ClassElementSelector(String name)
+        protected ClassSelectorElement(String name)
         {
             Name = name;
         }
@@ -26,7 +26,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(ClassElementSelector other)
+        public Boolean Equals(ClassSelectorElement other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -45,7 +45,7 @@ namespace CodeSharper.Interpreter.Common
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((ClassElementSelector) obj);
+            return Equals((ClassSelectorElement) obj);
         }
 
         /// <summary>

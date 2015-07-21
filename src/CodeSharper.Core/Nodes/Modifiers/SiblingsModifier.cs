@@ -8,7 +8,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Nodes.Modifiers
 {
-    public class SiblingsNodeModifier : NodeModifierBase
+    public class SiblingsModifier : ModifierBase
     {
         /// <summary>
         /// Modifies the selection of node

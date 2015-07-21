@@ -5,13 +5,13 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Nodes.Modifiers
 {
     [TestFixture]
-    internal class SiblingNodeModifierTests : TestFixtureBase
+    internal class SiblingModifierTests : TestFixtureBase
     {
         [Test(Description = "ModifySelection should return siblings of specified node when passed node has parent")]
         public void ModifySelection_ShouldReturnSiblingsOfSpecifiedNode_WhenPassedNodeHasParent()
         {
             // Given
-            var underTest = new SiblingsNodeModifier();
+            var underTest = new SiblingsModifier();
             var parent = new StubNode("A");
             var child = new StubNode("C");
             

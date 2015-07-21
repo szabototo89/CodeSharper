@@ -2,6 +2,7 @@ using System;
 using CodeSharper.Core.Texts;
 using CodeSharper.Interpreter.Bootstrappers;
 using CodeSharper.Languages.Csv.Compiler;
+using Microsoft.CodeAnalysis;
 
 namespace CodeSharper.Playground.GUI.Modules
 {
@@ -26,15 +27,14 @@ namespace CodeSharper.Playground.GUI.Modules
             {
                 var textDocument = new TextDocument(text);
                 var root = csvCompiler.Parse(textDocument.Text);
-                var response = input + " | @convert-to-string";
-                var controlFlowDescriptor = bootstrapper.Compiler.Parse(response);
+                var controlFlowDescriptor = bootstrapper.Compiler.Parse(input);
                 var controlFlow = bootstrapper.ControlFlowFactory.Create(controlFlowDescriptor);
-                var result = controlFlow.Execute(new[] {root}) as String;
+                var result = controlFlow.Execute(new[] {root}) as SyntaxNode;
 
                 var documentResults = new DocumentResults()
                 {
                     Source = root.TextDocument.Text,
-                    Results = result
+                    Results = result.SyntaxTree.GetRoot().ToFullString()
                 };
 
                 return documentResults;

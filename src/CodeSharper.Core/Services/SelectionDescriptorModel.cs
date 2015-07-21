@@ -25,6 +25,12 @@ namespace CodeSharper.Core.Services
         public String SelectorType { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is class selector.
+        /// </summary>
+        [DataMember(Name = "is-class", IsRequired =  false)]
+        public Boolean IsClassSelector { get; set; }
+
+        /// <summary>
         /// Gets or sets the value.
         /// </summary>
         [DataMember(Name = "value", IsRequired = false)]

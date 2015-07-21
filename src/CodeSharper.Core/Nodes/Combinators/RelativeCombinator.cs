@@ -17,7 +17,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Initializes a new instance of the <see cref="RelativeCombinator"/> class.
         /// </summary>
-        public RelativeCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> nodeModifiers = null)
+        public RelativeCombinator(SelectorBase selector, IEnumerable<ModifierBase> nodeModifiers = null)
             : base(selector, nodeModifiers)
         {
 

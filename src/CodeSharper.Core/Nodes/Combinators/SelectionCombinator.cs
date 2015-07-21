@@ -20,7 +20,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Gets or sets the modifiers.
         /// </summary>
-        public IEnumerable<NodeModifierBase> Modifiers { get; protected set; }
+        public IEnumerable<ModifierBase> Modifiers { get; protected set; }
 
         /// <summary>
         /// Gets or sets the attributes.
@@ -30,7 +30,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectionCombinator"/> class.
         /// </summary>
-        public SelectionCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> modifiers = null, IEnumerable<SelectorAttribute> attributes = null)
+        public SelectionCombinator(SelectorBase selector, IEnumerable<ModifierBase> modifiers = null, IEnumerable<SelectorAttribute> attributes = null)
         {
             Assume.NotNull(selector, "selector");
 

@@ -29,21 +29,21 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        PseudoSelectorElement CreatePseudoSelector(String name, IEnumerable<ConstantElement> values);
+        ModifierElement CreatePseudoSelector(String name, IEnumerable<ConstantElement> values);
 
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        PseudoSelectorElement CreatePseudoSelector(String name, IEnumerable<SelectorElementBase> selectors);
+        ModifierElement CreatePseudoSelector(String name, IEnumerable<SelectorElementBase> selectors);
 
         /// <summary>
         /// Creates a selectable element type selector
         /// </summary>
-        ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<PseudoSelectorElement> pseudoSelectors);
+        ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors);
 
         /// <summary>
         /// Creates a class element selector.
         /// </summary>
-        ClassElementSelector CreateClassElementSelector(String name, Boolean isRegularExpression);
+        ClassSelectorElement CreateClassElementSelector(String name, Boolean isRegularExpression);
     }
 }

@@ -20,7 +20,7 @@ namespace CodeSharper.Core.Services
     {
         private const String ELEMENT_TYPE_SELECTOR = "element-type-selector";
         private const String COMBINATOR_SELECTOR = "combinator";
-        private const String PSEUDO_SELECTOR = "pseudo-selector";
+        private const String MODIFIER_SELECTOR = "pseudo-selector";
 
         private readonly IEnumerable<Assembly> predefinedAssemblies;
         private readonly IEnumerable<Assembly> assemblies;
@@ -35,7 +35,7 @@ namespace CodeSharper.Core.Services
         {
             Selector,
             Combinator,
-            PseudoSelector
+            ModifierSelector
         }
 
         /// <summary>
@@ -107,11 +107,16 @@ namespace CodeSharper.Core.Services
                             combinators.Add(new CombinatorDescriptor(selectionDescriptors.Name, selectionDescriptors.Value, type));
                             break;
                         }
-                        case PSEUDO_SELECTOR:
+                        case MODIFIER_SELECTOR:
                         {
-                            var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.PseudoSelector);
-                            pseudoSelectors.Add(new ModifierDescriptor(selectionDescriptors.Name, selectionDescriptors.Value,
-                                                                       selectionDescriptors.Arguments, type));
+                            var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.ModifierSelector);
+
+                            pseudoSelectors.Add(
+                                new ModifierDescriptor(selectionDescriptors.Name,
+                                                       selectionDescriptors.Value,
+                                                       selectionDescriptors.Arguments, 
+                                                       type,
+                                                       selectionDescriptors.IsClassSelector));
                             break;
                         }
                     }
@@ -149,8 +154,8 @@ namespace CodeSharper.Core.Services
                 case DescriptorType.Selector:
                     assignableFromType = typeof (SelectorBase);
                     break;
-                case DescriptorType.PseudoSelector:
-                    assignableFromType = typeof (NodeModifierBase);
+                case DescriptorType.ModifierSelector:
+                    assignableFromType = typeof (ModifierBase);
                     break;
                 default:
                     throw new NotSupportedException(String.Format("Not supported descriptor type: {0}", descriptorType));

@@ -7,7 +7,7 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Modifiers
 {
-    public class ChildrenNodeModifier : NodeModifierBase
+    public class ChildrenModifier : ModifierBase
     {
         /// <summary>
         /// Modifies the selection of node 

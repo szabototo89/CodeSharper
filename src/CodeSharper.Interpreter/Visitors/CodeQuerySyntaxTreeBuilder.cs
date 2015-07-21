@@ -117,15 +117,15 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitMethodCall(CodeQueryParser.MethodCallContext context)
         {
-            var methodCallParameters = context.methodCallParameter()
-                                              .Select((parameter, index) => {
-                                                  var param = parameter.Accept(this);
-                                                  if (param is ActualParameterElement) return param;
-                                                  if (param is ConstantElement) 
-                                                      return TreeFactory.CreateActualParameter((ConstantElement) param, index);
+            var parameters = context.methodCallParameter();
+            var methodCallParameters = parameters.Select((parameter, index) => {
+                var param = parameter.Accept(this);
+                if (param is ActualParameterElement) return param;
+                if (param is ConstantElement)
+                    return TreeFactory.CreateActualParameter((ConstantElement) param, index);
 
-                                                  return param;
-                                              });
+                return param;
+            });
 
             var methodCall = new
             {
@@ -334,9 +334,10 @@ namespace CodeSharper.Interpreter.Visitors
                 name = "." + name;
 
             var attributes = context.selectorAttribute().AcceptAll(this).Cast<AttributeElement>();
-            var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<PseudoSelectorElement>();
+            var pseudoSelectors = context.pseudoSelector().AcceptAll(this).Cast<ModifierElement>();
+            var classSelectors = context.className().AcceptAll(this).Cast<ClassSelectorElement>();
 
-            return SelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors);
+            return SelectorFactory.CreateElementTypeSelector(name, attributes, pseudoSelectors, classSelectors);
         }
 
         /// <summary>
@@ -352,9 +353,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             var id = context.ID();
             if (id != null)
-            {
                 return SelectorFactory.CreateClassElementSelector(id.GetText(), false);
-            }
 
             var stringId = context.STRING();
             if (stringId != null)
@@ -368,9 +367,7 @@ namespace CodeSharper.Interpreter.Visitors
 
             var regularExpressionId = context.REGULAR_EXPRESSION();
             if (regularExpressionId != null)
-            {
                 return SelectorFactory.CreateClassElementSelector(regularExpressionId.GetText(), true);
-            }
 
             throw new NotSupportedException("Not supported class name format.");
         }

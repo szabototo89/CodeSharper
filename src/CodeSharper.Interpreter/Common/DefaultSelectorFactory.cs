@@ -30,7 +30,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates the combinator.
         /// </summary>
-        public BinaryCombinator CreateCombinator(Type combinatorType, CombinatorBase left, CombinatorBase right)
+        public virtual BinaryCombinator CreateCombinator(Type combinatorType, CombinatorBase left, CombinatorBase right)
         {
             Assume.NotNull(combinatorType, "combinatorType");
             Assume.NotNull(left, "left");
@@ -43,33 +43,53 @@ namespace CodeSharper.Interpreter.Common
                 var parameters = ctor.GetParameters();
                 return parameters.Length == 2 &&
                        parameters.Select(param => param.ParameterType)
-                                 .All(type => typeof(CombinatorBase).IsAssignableFrom(type));
+                                 .All(type => typeof (CombinatorBase).IsAssignableFrom(type));
             });
 
             if (constructor == null)
                 throw new Exception(String.Format("Cannot find Combinator constructor with two CombinatorBase type: {0}", combinatorType.FullName));
 
-            return constructor.Invoke(new Object[] { left, right }) as BinaryCombinator;
+            return constructor.Invoke(new Object[] {left, right}) as BinaryCombinator;
         }
 
         /// <summary>
-        /// Creates a pseudo selector.
+        /// Creates a modifier.
         /// </summary>
-        public virtual NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, SelectorBase selector)
+        public virtual ModifierBase CreateModifier(Type modifierType, IEnumerable<Object> arguments)
         {
-            Assume.NotNull(pseudoSelectorType, "pseudoSelectorType");
+            Assume.NotNull(modifierType, "pseudoSelectorType");
             Assume.NotNull(arguments, "arguments");
-            Assume.NotNull(selector, "selector");
 
             var args = arguments.ToArray();
 
             // get default constructor and instantiate it
-            var constructors = pseudoSelectorType.GetConstructors();
+            var constructors = modifierType.GetConstructors();
             var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == args.Length);
             if (defaultConstructor != null)
-                return defaultConstructor.Invoke(args) as NodeModifierBase;
+                return defaultConstructor.Invoke(args) as ModifierBase;
 
-            throw new Exception(String.Format("Cannot find default constructor for pseudo selector: {0}", pseudoSelectorType.FullName));
+            throw new Exception(String.Format("Cannot find default constructor for pseudo selector: {0}", modifierType.FullName));
+        }
+
+        /// <summary>
+        /// Creates a class selector.
+        /// </summary>
+        public virtual ModifierBase CreateClassSelector(Type classSelectorType, String className)
+        {
+            Assume.NotNull(classSelectorType, "classSelectorType");
+            Assume.NotBlank(className, "className");
+
+            var constructors = classSelectorType.GetConstructors();
+            var defaultConstructor = constructors.FirstOrDefault(
+                constructor => {
+                    var args = constructor.GetParameters().ToArray();
+                    return args.Length == 1 && args.First().ParameterType == typeof (String);
+                });
+
+            if (defaultConstructor == null)
+                throw new Exception("ClassSelector type needs to have one-parameter constructor.");
+
+            return defaultConstructor.Invoke(new[] {className}) as ModifierBase;
         }
     }
 }

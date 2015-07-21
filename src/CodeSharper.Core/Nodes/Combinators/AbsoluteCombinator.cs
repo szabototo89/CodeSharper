@@ -22,12 +22,12 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Gets the node modifiers.
         /// </summary>
-        public IEnumerable<NodeModifierBase> NodeModifiers { get; protected set; }
+        public IEnumerable<ModifierBase> NodeModifiers { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbsoluteCombinator"/> class.
         /// </summary>
-        public AbsoluteCombinator(SelectorBase selector, IEnumerable<NodeModifierBase> nodeModifiers = null)
+        public AbsoluteCombinator(SelectorBase selector, IEnumerable<ModifierBase> nodeModifiers = null)
         {
             Assume.NotNull(selector, "Selector");
 

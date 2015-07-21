@@ -7,14 +7,14 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Nodes.Modifiers
 {
-    public class ValueNodeModifier : NodeModifierBase
+    public class ValueModifier : ModifierBase
     {
         private readonly String value;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValueNodeModifier"/> class.
+        /// Initializes a new instance of the <see cref="ValueModifier"/> class.
         /// </summary>
-        public ValueNodeModifier(Object value)
+        public ValueModifier(Object value)
         {
             this.value = (value ?? String.Empty).ToString();
         }

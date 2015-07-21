@@ -22,7 +22,7 @@ namespace CodeSharper.Playground.GUI.Modules
             {
                 var textDocument = new TextDocument(text);
                 // root = CsvCompiler.Parse(content);
-                var response = input + " | @convert-to-string";
+                var response = input + " | convert-to-string";
                 var controlFlowDescriptor = bootstrapper.Compiler.Parse(response);
                 var controlFlow = bootstrapper.ControlFlowFactory.Create(controlFlowDescriptor);
                 var result = controlFlow.Execute(new[] {textDocument.TextRange}) as String;

@@ -42,7 +42,7 @@ namespace CodeSharper.Tests.Core.Services
             // Given in setup
             var pseudoSelectors = new[]
             {
-                new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object)),
+                new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object), false),
             };
             underTest = new MemoryDescriptorRepository(modifierDescriptors: pseudoSelectors);
 
@@ -52,7 +52,7 @@ namespace CodeSharper.Tests.Core.Services
             // Then
             Assert.That(result, Is.EquivalentTo(new[]
             {
-                new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object))
+                new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object), false)
             }));
         }
 

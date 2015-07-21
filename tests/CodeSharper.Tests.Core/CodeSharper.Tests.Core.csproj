@@ -89,9 +89,9 @@
     <Compile Include="Services\MemoryDescriptorRepositoryTests.cs" />
     <Compile Include="Texts\TextRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Nodes\Modifiers\ChildrenNodeModifierTests.cs" />
-    <Compile Include="Nodes\Modifiers\ParentNodeModifierTests.cs" />
-    <Compile Include="Nodes\Modifiers\SiblingNodeModifierTests.cs" />
+    <Compile Include="Nodes\Modifiers\ChildrenModifierTests.cs" />
+    <Compile Include="Nodes\Modifiers\ParentModifierTests.cs" />
+    <Compile Include="Nodes\Modifiers\SiblingModifierTests.cs" />
     <Compile Include="Services\SerializerTests.cs" />
     <Compile Include="TestHelpers\Stubs\StubNode.cs" />
     <Compile Include="Texts\TextDocumentTests.cs" />

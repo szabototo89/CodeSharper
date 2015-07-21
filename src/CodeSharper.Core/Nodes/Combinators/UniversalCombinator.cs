@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversalCombinator"/> class.
         /// </summary>
-        public UniversalCombinator(IEnumerable<NodeModifierBase> modifiers = null)
+        public UniversalCombinator(IEnumerable<ModifierBase> modifiers = null)
             : base(new UniversalSelector(), modifiers)
         {
         }

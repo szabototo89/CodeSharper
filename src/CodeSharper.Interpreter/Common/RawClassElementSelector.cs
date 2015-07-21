@@ -2,12 +2,12 @@ using System;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class RawClassElementSelector : ClassElementSelector, IEquatable<RawClassElementSelector>
+    public class RawClassSelectorElement : ClassSelectorElement, IEquatable<RawClassSelectorElement>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClassElementSelector"/> class.
+        /// Initializes a new instance of the <see cref="ClassSelectorElement"/> class.
         /// </summary>
-        public RawClassElementSelector(String name) : base(name)
+        public RawClassSelectorElement(String name) : base(name)
         {
         }
 
@@ -20,7 +20,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(RawClassElementSelector other)
+        public Boolean Equals(RawClassSelectorElement other)
         {
             return this.Name == other.Name;
         }
@@ -37,7 +37,7 @@ namespace CodeSharper.Interpreter.Common
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((RawClassElementSelector) obj);
+            return Equals((RawClassSelectorElement) obj);
         }
 
         /// <summary>

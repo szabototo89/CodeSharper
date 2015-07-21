@@ -5,13 +5,13 @@ using NUnit.Framework;
 namespace CodeSharper.Tests.Core.Nodes.Modifiers
 {
     [TestFixture]
-    internal class ChildrenNodeModifierTests : TestFixtureBase
+    internal class ChildrenModifierTests : TestFixtureBase
     {
         [Test(Description = "ModifySelection should return all children of specified node when passed node has children")]
         public void ModifySelection_ShouldReturnsAllChildrenOfSpecifiedNode_WhenPassedNodeHasChildren()
         {
             // Given
-            var underTest = new ChildrenNodeModifier();
+            var underTest = new ChildrenModifier();
             var node = new StubNode("Hello World");
             node.AppendChild(new StubNode("Hello"));
             node.AppendChild(new StubNode("World"));

@@ -24,7 +24,7 @@ namespace CodeSharper.Playground.GUI.Modules
             {
                 var textDocument = new TextDocument(text);
                 var root = jsonCompiler.Parse(textDocument.Text);
-                var response = input + " | @convert-to-string";
+                var response = input + " | convert-to-string";
                 var controlFlowDescriptor = bootstrapper.Compiler.Parse(response);
                 var controlFlow = bootstrapper.ControlFlowFactory.Create(controlFlowDescriptor);
                 var result = controlFlow.Execute(new[] { root }) as String;

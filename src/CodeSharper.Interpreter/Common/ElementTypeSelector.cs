@@ -10,14 +10,6 @@ namespace CodeSharper.Interpreter.Common
     public struct ElementTypeSelector : IEquatable<ElementTypeSelector>, IHasName
     {
         /// <summary>
-        /// Gets a value indicating whether this instance is class element.
-        /// </summary>
-        public Boolean IsClassElement
-        {
-            get { return Name != null && Name.StartsWith("."); }
-        }
-
-        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         public String Name { get; set; }
@@ -30,49 +22,45 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the pseudo selectors.
         /// </summary>
-        public IEnumerable<PseudoSelectorElement> PseudoSelectors { get; set; }
+        public IEnumerable<ModifierElement> Modifiers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the class selectors.
+        /// </summary>
+        public IEnumerable<ClassSelectorElement> ClassSelectors { get; set; }
 
         #region Equality members
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        /// <param name="other">An object to compare with this object.</param>
         /// <returns>
-        /// true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.
+        /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
         public Boolean Equals(ElementTypeSelector other)
         {
-            var attributesEquality = Attributes != null && Attributes.SequenceEqual(other.Attributes);
-            var pseudoSelectorsEquality = PseudoSelectors != null && PseudoSelectors.SequenceEqual(other.PseudoSelectors);
-
-            return String.Equals(Name, other.Name) &&
-                   IsClassElement == other.IsClassElement &&
-                   (Attributes == other.Attributes || attributesEquality) &&
-                   (PseudoSelectors == other.PseudoSelectors || pseudoSelectorsEquality);
+            return String.Equals(Name, other.Name) && Equals(Attributes, other.Attributes) && Equals(Modifiers, other.Modifiers) && Equals(ClassSelectors, other.ClassSelectors);
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
+        /// Indicates whether this instance and a specified object are equal.
         /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
         /// <returns>
-        /// true if the specified object  is equal to the current object; otherwise, false.
+        /// true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
         /// </returns>
+        /// <param name="obj">Another object to compare to. </param>
         public override Boolean Equals(Object obj)
         {
-            if (!(obj is ElementTypeSelector))
-            {
-                return false;
-            }
-            return Equals((ElementTypeSelector) obj);
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is ElementTypeSelector && Equals((ElementTypeSelector) obj);
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type.
+        /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for the current <see cref="T:System.Object" />.
+        /// A 32-bit signed integer that is the hash code for this instance.
         /// </returns>
         public override Int32 GetHashCode()
         {
@@ -80,8 +68,8 @@ namespace CodeSharper.Interpreter.Common
             {
                 var hashCode = (Name != null ? Name.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Attributes != null ? Attributes.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (PseudoSelectors != null ? PseudoSelectors.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ IsClassElement.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Modifiers != null ? Modifiers.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ClassSelectors != null ? ClassSelectors.GetHashCode() : 0);
                 return hashCode;
             }
         }

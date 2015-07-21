@@ -14,13 +14,18 @@ namespace CodeSharper.Interpreter.Common
         SelectorBase CreateSelector(Type selectorType);
 
         /// <summary>
-        /// Creates a pseudo selector.
+        /// Creates a modifier.
         /// </summary>
-        NodeModifierBase CreatePseudoSelector(Type pseudoSelectorType, IEnumerable<Object> arguments, SelectorBase selector);
+        ModifierBase CreateModifier(Type modifierType, IEnumerable<Object> arguments);
 
         /// <summary>
         /// Creates the combinator.
         /// </summary>
         BinaryCombinator CreateCombinator(Type combinatorType, CombinatorBase left, CombinatorBase right);
+
+        /// <summary>
+        /// Creates a class selector.
+        /// </summary>
+        ModifierBase CreateClassSelector(Type classSelectorType, String className);
     }
 }

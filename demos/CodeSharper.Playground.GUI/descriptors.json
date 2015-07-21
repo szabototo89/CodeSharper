@@ -47,42 +47,42 @@
             "selector-type": "pseudo-selector",
             "value": "parent",
             "arguments": [ ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.ParentNodeModifier"
+            "type": "CodeSharper.Core.Nodes.Modifiers.ParentModifier"
         },
         {
             "name": "nth-selector",
             "selector-type": "pseudo-selector",
             "value": "nth",
             "arguments": [ "number" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.NthChildNodeModifier"
+            "type": "CodeSharper.Core.Nodes.Modifiers.NthChildModifier"
         },
         {
             "name": "has-selector",
             "selector-type": "pseudo-selector",
             "value": "has",
             "arguments": [ "selector" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.HasNodeModifier"
+            "type": "CodeSharper.Core.Nodes.Modifiers.HasModifier"
         },
         {
             "name": "contains-selector",
             "selector-type": "pseudo-selector",
             "value": "contains",
             "arguments": [ "selector" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.ContainsNodeModifier"
+            "type": "CodeSharper.Core.Nodes.Modifiers.ContainsModifier"
         },
         {
             "name": "value-selector",
             "selector-type": "pseudo-selector",
             "value": "val",
             "arguments": [ "value" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.ValueNodeModifier"
+            "type": "CodeSharper.Core.Nodes.Modifiers.ValueModifier"
         },
         {
             "name": "text-pseudo-selector",
             "selector-type": "pseudo-selector",
             "value": "siblings",
             "arguments": [ ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.SiblingsNodeModifier"
+            "type": "CodeSharper.Core.Nodes.Modifiers.SiblingsModifier"
         },
         {
             "name": "object-literal-selector",

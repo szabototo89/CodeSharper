@@ -8,7 +8,7 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Nodes.Modifiers
 {
-    public class NthChildNodeModifier : NodeModifierBase
+    public class NthChildModifier : ModifierBase
     {
         private enum NthType
         {
@@ -26,9 +26,9 @@ namespace CodeSharper.Core.Nodes.Modifiers
         public Int32 Index { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NthChildNodeModifier"/> class.
+        /// Initializes a new instance of the <see cref="NthChildModifier"/> class.
         /// </summary>
-        public NthChildNodeModifier(Object parameter)
+        public NthChildModifier(Object parameter)
         {
             if (parameter.IsNumeric())
             {

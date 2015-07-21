@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class RegularExpressionClassElementSelector : ClassElementSelector, IEquatable<RegularExpressionClassElementSelector>
+    public class RegularExpressionClassSelectorElement : ClassSelectorElement, IEquatable<RegularExpressionClassSelectorElement>
     {
         private readonly Regex regex;
 
@@ -16,9 +16,9 @@ namespace CodeSharper.Interpreter.Common
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClassElementSelector"/> class.
+        /// Initializes a new instance of the <see cref="ClassSelectorElement"/> class.
         /// </summary>
-        public RegularExpressionClassElementSelector(String name) : base(name)
+        public RegularExpressionClassSelectorElement(String name) : base(name)
         {
             regex = new Regex(name);
         }
@@ -32,7 +32,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(RegularExpressionClassElementSelector other)
+        public Boolean Equals(RegularExpressionClassSelectorElement other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -51,7 +51,7 @@ namespace CodeSharper.Interpreter.Common
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((RegularExpressionClassElementSelector) obj);
+            return Equals((RegularExpressionClassSelectorElement) obj);
         }
 
         /// <summary>

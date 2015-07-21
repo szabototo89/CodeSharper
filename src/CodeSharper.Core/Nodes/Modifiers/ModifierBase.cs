@@ -5,7 +5,7 @@ using CodeSharper.Core.SyntaxTrees;
 
 namespace CodeSharper.Core.Nodes.Modifiers
 {
-    public abstract class NodeModifierBase
+    public abstract class ModifierBase
     {
         /// <summary>
         /// Modifies the selection of node 

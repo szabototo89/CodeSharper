@@ -9,6 +9,9 @@ namespace CodeSharper.Core.Common.ControlFlows
 {
     public class SelectorControlFlow : ControlFlowBase
     {
+        /// <summary>
+        /// Gets or sets the combinator.
+        /// </summary>
         public CombinatorBase Combinator { get; protected set; }
 
         /// <summary>
