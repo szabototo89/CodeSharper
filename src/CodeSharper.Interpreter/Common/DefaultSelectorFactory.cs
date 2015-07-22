@@ -36,7 +36,6 @@ namespace CodeSharper.Interpreter.Common
                 throw new Exception(String.Format("Cannot instantiate specified selector: {0}", selectorType.FullName));
 
             selector.AddClassSelectors(classSelectors);
-
             return selector;
         }
 
@@ -93,6 +92,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a class selector.
         /// </summary>
+        [Obsolete]
         public virtual ModifierBase CreateClassSelector(Type classSelectorType, String className)
         {
             Assume.NotNull(classSelectorType, "classSelectorType");

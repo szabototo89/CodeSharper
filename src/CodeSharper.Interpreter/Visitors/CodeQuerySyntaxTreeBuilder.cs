@@ -367,7 +367,11 @@ namespace CodeSharper.Interpreter.Visitors
 
             var regularExpressionId = context.REGULAR_EXPRESSION();
             if (regularExpressionId != null)
-                return SelectorFactory.CreateClassSelectorElement(regularExpressionId.GetText(), true);
+            {
+                var regularExpression = regularExpressionId.GetText();
+                regularExpression = regularExpression.Substring(1, regularExpression.Length - 2);
+                return SelectorFactory.CreateClassSelectorElement(regularExpression, true);
+            }
 
             throw new NotSupportedException("Not supported class name format.");
         }

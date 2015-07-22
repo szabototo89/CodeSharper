@@ -58,7 +58,16 @@
     <Compile Include="Compiler\CSharpCompiler.cs" />
     <Compile Include="Nodes\Combinators\RelativeSyntaxNodeCombinator.cs" />
     <Compile Include="Nodes\Selectors\ClassDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\ClassSelectors\IClassSelector.cs" />
+    <Compile Include="Nodes\Selectors\ClassSelectors\IdentifierMatchingClassSelector.cs" />
+    <Compile Include="Nodes\Selectors\CSharpTypeDeclarationSelectorBase.cs" />
+    <Compile Include="Nodes\Selectors\CSharpTypedSelectorBase.cs" />
+    <Compile Include="Nodes\Selectors\EnumDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\InterfaceDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\MethodDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\PropertyDeclarationSelector.cs" />
     <Compile Include="Nodes\Selectors\StructDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\VariableDeclarationSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runnables\CreateRunnable.cs" />
     <Compile Include="Runnables\RemoveRunnable.cs" />

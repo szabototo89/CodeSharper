@@ -21,6 +21,16 @@ namespace CodeSharper.Core.Nodes.Selectors
             classSelectors = Enumerable.Empty<Regex>();
         }
 
+        #region Class Selectors
+
+        /// <summary>
+        /// Gets the class selectors.
+        /// </summary>
+        protected IEnumerable<Regex> ClassSelectors
+        {
+            get { return classSelectors; }
+        }
+
         /// <summary>
         /// Adds the class selectors.
         /// </summary>
@@ -36,6 +46,9 @@ namespace CodeSharper.Core.Nodes.Selectors
         {
             classSelectors = Enumerable.Empty<Regex>();
         }
+
+        #endregion
+
 
         /// <summary>
         /// Filters the specified element. Returns true if specified element is in the selection otherwise false.

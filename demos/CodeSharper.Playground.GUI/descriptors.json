@@ -4,7 +4,7 @@
             "name": "relative-child-selector",
             "selector-type": "combinator",
             "value": "",
-            "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
+            "type": "CodeSharper.Languages.CSharp.Nodes.Combinators.RelativeSyntaxNodeCombinator"
         },
         {
             "name": "absolute-child-selector",
@@ -151,6 +151,36 @@
             "selector-type": "element-type-selector",
             "value": "struct",
             "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.StructDeclarationSelector"
+        },
+        {
+            "name": "interface-selector",
+            "selector-type": "element-type-selector",
+            "value": "interface",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.InterfaceDeclarationSelector"
+        },
+        {
+            "name": "enum-selector",
+            "selector-type": "element-type-selector",
+            "value": "enum",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.EnumDeclarationSelector"
+        },
+        {
+            "name": "variable-selector",
+            "selector-type": "element-type-selector",
+            "value": "var",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.VariableDeclarationSelector"
+        },
+        {
+            "name": "property-selector",
+            "selector-type": "element-type-selector",
+            "value": "prop",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.PropertyDeclarationSelector"
+        },
+        {
+            "name": "method-selector",
+            "selector-type": "element-type-selector",
+            "value": "method",
+            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.MethodDeclarationSelector"
         }
     ],
     "commands": [

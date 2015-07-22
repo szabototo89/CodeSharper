@@ -2,7 +2,7 @@
 
 namespace CodeSharper.Languages.CSharp.Nodes.Selectors
 {
-    public class ClassDeclarationSelector : CSharpTypeDeclarationSelectorBase<ClassDeclarationSyntax>
+    public class EnumDeclarationSelector : CSharpTypeDeclarationSelectorBase<EnumDeclarationSyntax>
     {
     }
 }
