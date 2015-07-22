@@ -1,30 +1,43 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
+using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Interpreter.Common
 {
     public class DefaultSelectorFactory : ISelectorFactory
     {
+        private readonly ObjectCreator objectCreator;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DefaultSelectorFactory"/> class.
+        /// </summary>
+        public DefaultSelectorFactory()
+        {
+            objectCreator = new ObjectCreator();
+        }
+
         /// <summary>
         /// Creates a selector by specified name.
         /// </summary>
-        public virtual SelectorBase CreateSelector(Type selectorType)
+        public virtual SelectorBase CreateSelector(Type selectorType, IEnumerable<Regex> classSelectors)
         {
             Assume.NotNull(selectorType, "selectorType");
 
-            // get default constructor and instantiate it
-            var constructors = selectorType.GetConstructors();
-            var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
-            if (defaultConstructor != null)
-                return defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as SelectorBase;
+            var selector = (SelectorBase)objectCreator.Create(selectorType);
+            if (selector == null)
+                throw new Exception(String.Format("Cannot instantiate specified selector: {0}", selectorType.FullName));
 
-            throw new Exception(String.Format("Cannot find default constructor for selector: {0}", selectorType.FullName));
+            selector.AddClassSelectors(classSelectors);
+
+            return selector;
         }
 
         /// <summary>
@@ -36,7 +49,7 @@ namespace CodeSharper.Interpreter.Common
             Assume.NotNull(left, "left");
             Assume.NotNull(right, "right");
 
-            var constructors = combinatorType.GetConstructors();
+            /*var constructors = combinatorType.GetConstructors();
 
             // get constructor with two CombinatorBase parameters to instantiate the object
             var constructor = constructors.FirstOrDefault(ctor => {
@@ -49,7 +62,13 @@ namespace CodeSharper.Interpreter.Common
             if (constructor == null)
                 throw new Exception(String.Format("Cannot find Combinator constructor with two CombinatorBase type: {0}", combinatorType.FullName));
 
-            return constructor.Invoke(new Object[] {left, right}) as BinaryCombinator;
+            return constructor.Invoke(new Object[] {left, right}) as BinaryCombinator;*/
+            
+            var combinator = (BinaryCombinator)objectCreator.Create(combinatorType, left, right);
+            if (combinator == null)
+                throw new Exception(String.Format("Cannot find Combinator constructor with two CombinatorBase type: {0}", combinatorType.FullName));
+
+            return combinator;
         }
 
         /// <summary>

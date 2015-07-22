@@ -4,7 +4,7 @@
             "name": "relative-child-selector",
             "selector-type": "combinator",
             "value": "",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Combinators.RelativeSyntaxNodeCombinator"
+            "type": "CodeSharper.Core.Nodes.Combinators.RelativeNodeCombinator"
         },
         {
             "name": "absolute-child-selector",

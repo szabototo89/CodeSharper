@@ -81,7 +81,7 @@
     <Compile Include="Common\LazyAndControlFlowElement.cs" />
     <Compile Include="Common\PipelineControlFlowElement.cs" />
     <Compile Include="Common\PseudoSelectorElement.cs" />
-    <Compile Include="Common\ElementTypeSelector.cs" />
+    <Compile Include="Common\TypeSelectorElement.cs" />
     <Compile Include="Common\SelectorControlFlowElement.cs" />
     <Compile Include="Common\AttributeElement.cs" />
     <Compile Include="Common\SequenceControlFlowElement.cs" />

@@ -9,7 +9,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates the unary selector element.
         /// </summary>
-        UnarySelectorElement CreateUnarySelector(ElementTypeSelector elementTypeSelector);
+        UnarySelectorElement CreateUnarySelector(TypeSelectorElement typeSelectorElement);
 
         /// <summary>
         /// Creates the binary selector element.
@@ -29,21 +29,21 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        ModifierElement CreatePseudoSelector(String name, IEnumerable<ConstantElement> values);
+        ModifierElement CreateModifier(String name, IEnumerable<ConstantElement> values);
 
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        ModifierElement CreatePseudoSelector(String name, IEnumerable<SelectorElementBase> selectors);
+        ModifierElement CreateModifier(String name, IEnumerable<SelectorElementBase> selectors);
 
         /// <summary>
         /// Creates a selectable element type selector
         /// </summary>
-        ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors);
+        TypeSelectorElement CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors);
 
         /// <summary>
         /// Creates a class element selector.
         /// </summary>
-        ClassSelectorElement CreateClassElementSelector(String name, Boolean isRegularExpression);
+        ClassSelectorElement CreateClassSelectorElement(String name, Boolean isRegularExpression);
     }
 }

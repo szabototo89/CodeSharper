@@ -40,11 +40,11 @@ namespace CodeSharper.Tests.Core.Services
         public void GetPseudoSelectors_ShouldReturnDefinedPseudoSelectorDescriptors_AfterCallingIt()
         {
             // Given in setup
-            var pseudoSelectors = new[]
+            var modifierDescriptors = new[]
             {
                 new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object), false),
             };
-            underTest = new MemoryDescriptorRepository(modifierDescriptors: pseudoSelectors);
+            underTest = new MemoryDescriptorRepository(modifierDescriptors: modifierDescriptors);
 
             // When
             var result = underTest.GetModifierDescriptors();
@@ -92,6 +92,7 @@ namespace CodeSharper.Tests.Core.Services
                 }
             };
             underTest = new MemoryDescriptorRepository(commandDescriptors: commandDescriptors);
+
             // When
             var result = underTest.GetCommandDescriptors();
 

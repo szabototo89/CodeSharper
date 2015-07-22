@@ -7,7 +7,7 @@ using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public struct ElementTypeSelector : IEquatable<ElementTypeSelector>, IHasName
+    public struct TypeSelectorElement : IEquatable<TypeSelectorElement>, IHasName
     {
         /// <summary>
         /// Gets or sets the name.
@@ -38,7 +38,7 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(ElementTypeSelector other)
+        public Boolean Equals(TypeSelectorElement other)
         {
             return String.Equals(Name, other.Name) && Equals(Attributes, other.Attributes) && Equals(Modifiers, other.Modifiers) && Equals(ClassSelectors, other.ClassSelectors);
         }
@@ -53,7 +53,7 @@ namespace CodeSharper.Interpreter.Common
         public override Boolean Equals(Object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is ElementTypeSelector && Equals((ElementTypeSelector) obj);
+            return obj is TypeSelectorElement && Equals((TypeSelectorElement) obj);
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.NameMatchers;
 using CodeSharper.Core.ErrorHandling;
@@ -73,47 +74,54 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         private CombinatorBase create(UnarySelectorElement unarySelectorElement)
         {
-            var elementTypeSelector = unarySelectorElement.ElementTypeSelector;
+            var elementTypeSelector = unarySelectorElement.TypeSelectorElement;
 
             var selectorDescriptor = ResolveSelectorDescriptor(elementTypeSelector);
             if (selectorDescriptor == null)
                 throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
 
-            var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type);
+            var classSelectors = ResolveClassSelectors(elementTypeSelector);
+            var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type, classSelectors);
             var attributes = ResolverAttributes(elementTypeSelector);
             var modifiers = ResolveModifiers(elementTypeSelector);
-            var classSelectors = ResolveClassSelectors(elementTypeSelector);
 
-            return new SelectionCombinator(selector, classSelectors.Concat(modifiers), attributes);
+            return new SelectionCombinator(selector, modifiers, attributes);
         }
 
-        protected SelectorDescriptor ResolveSelectorDescriptor(ElementTypeSelector elementTypeSelector)
+        protected SelectorDescriptor ResolveSelectorDescriptor(TypeSelectorElement typeSelectorElement)
         {
             return DescriptorRepository.GetSelectorDescriptors()
-                                       .SingleOrDefault(s => NameMatcher.Match(s.Value, elementTypeSelector.Name));
+                                       .SingleOrDefault(s => NameMatcher.Match(s.Value, typeSelectorElement.Name));
         }
 
-        protected IEnumerable<SelectorAttribute> ResolverAttributes(ElementTypeSelector elementTypeSelector)
+        protected IEnumerable<SelectorAttribute> ResolverAttributes(TypeSelectorElement typeSelectorElement)
         {
-            return elementTypeSelector.Attributes
+            return typeSelectorElement.Attributes
                                       .Select(attribute => new SelectorAttribute(attribute.Name, attribute.Value.Value));
         }
 
-        protected IEnumerable<ModifierBase> ResolveModifiers(ElementTypeSelector elementTypeSelector)
+        protected IEnumerable<ModifierBase> ResolveModifiers(TypeSelectorElement typeSelectorElement)
         {
-            return elementTypeSelector.Modifiers
+            return typeSelectorElement.Modifiers
                                       .Select(resolveModifier);
         }
 
         /// <summary>
         /// Resolves the class selectors.
         /// </summary>
-        protected virtual IEnumerable<ModifierBase> ResolveClassSelectors(ElementTypeSelector selector)
+        protected virtual IEnumerable<Regex> ResolveClassSelectors(TypeSelectorElement selector)
         {
-            var 
+            return selector.ClassSelectors.Select<ClassSelectorElement, Regex>(classSelector => {
+                var regularClassSelector = classSelector as RegularExpressionClassSelectorElement;
+                if (regularClassSelector != null)
+                    return regularClassSelector.Regex;
 
-            return selector.ClassSelectors
-                           .Select(classSelector => SelectorFactory.CreateClassSelector(classSelector.Name));
+                var rawClassSelector = classSelector as RawClassSelectorElement;
+                if (rawClassSelector != null)
+                    return new Regex(rawClassSelector.Name);
+
+                throw new NotSupportedException(String.Format("Not supported class selector element: {0}.", classSelector.GetType().FullName));
+            });
         }
 
         /// <summary>
@@ -127,7 +135,7 @@ namespace CodeSharper.Interpreter.Common
                                       .Select(pseudo => new
                                       {
                                           pseudo.Type,
-                                          Arguments = element.Arguments.Select(createPseudoSelectorArgument)
+                                          Arguments = element.Arguments.Select(createModifierSelectorArgument)
                                       })
                                       .ToArray();
 
@@ -140,7 +148,7 @@ namespace CodeSharper.Interpreter.Common
             return SelectorFactory.CreateModifier(modifier.Type, modifier.Arguments);
         }
 
-        private Object createPseudoSelectorArgument(ConstantElement argument)
+        private Object createModifierSelectorArgument(ConstantElement argument)
         {
             if (argument.Type == typeof (SelectorElementBase))
                 return Create(argument.Value as SelectorElementBase);

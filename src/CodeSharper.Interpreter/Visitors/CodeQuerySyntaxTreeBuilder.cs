@@ -275,7 +275,7 @@ namespace CodeSharper.Interpreter.Visitors
             if (context.constant() != null)
                 values = context.constant().AcceptAll(this).OfType<ConstantElement>().ToArray();
 
-            return SelectorFactory.CreatePseudoSelector(name, values);
+            return SelectorFactory.CreateModifier(name, values);
         }
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace CodeSharper.Interpreter.Visitors
             if (context.ID() != null)
                 values = context.ID().Select(id => TreeFactory.CreateString(id.GetText()));
 
-            return SelectorFactory.CreatePseudoSelector(name, values);
+            return SelectorFactory.CreateModifier(name, values);
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace CodeSharper.Interpreter.Visitors
             var name = context.Name.Text;
             var selector = context.Value.Accept(this) as SelectorElementBase;
 
-            return SelectorFactory.CreatePseudoSelector(name, new[] {selector});
+            return SelectorFactory.CreateModifier(name, new[] {selector});
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace CodeSharper.Interpreter.Visitors
         {
             var id = context.ID();
             if (id != null)
-                return SelectorFactory.CreateClassElementSelector(id.GetText(), false);
+                return SelectorFactory.CreateClassSelectorElement(id.GetText(), false);
 
             var stringId = context.STRING();
             if (stringId != null)
@@ -362,12 +362,12 @@ namespace CodeSharper.Interpreter.Visitors
                                                 .Replace("?", ".")
                                                 .Replace("*", ".?");
 
-                return SelectorFactory.CreateClassElementSelector(regularExpression, true);
+                return SelectorFactory.CreateClassSelectorElement(regularExpression, true);
             }
 
             var regularExpressionId = context.REGULAR_EXPRESSION();
             if (regularExpressionId != null)
-                return SelectorFactory.CreateClassElementSelector(regularExpressionId.GetText(), true);
+                return SelectorFactory.CreateClassSelectorElement(regularExpressionId.GetText(), true);
 
             throw new NotSupportedException("Not supported class name format.");
         }
@@ -381,7 +381,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public override Object VisitUnarySelection(CodeQueryParser.UnarySelectionContext context)
         {
-            var element = context.Value.Accept(this).Cast<ElementTypeSelector>();
+            var element = context.Value.Accept(this).Cast<TypeSelectorElement>();
 
             return SelectorFactory.CreateUnarySelector(element);
         }

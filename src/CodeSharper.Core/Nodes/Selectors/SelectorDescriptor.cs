@@ -38,6 +38,7 @@ namespace CodeSharper.Core.Nodes.Selectors
         /// </summary>
         public Type Type { get; protected set; }
 
+
         #region Equality members
 
         /// <summary>

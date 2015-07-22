@@ -27,14 +27,14 @@ namespace CodeSharper.Playground.GUI.Modules
             {
                 var textDocument = new TextDocument(text);
                 var root = csvCompiler.Parse(textDocument.Text);
-                var controlFlowDescriptor = bootstrapper.Compiler.Parse(input);
+                var response = input + " | convert-to-string";
+                var controlFlowDescriptor = bootstrapper.Compiler.Parse(response);
                 var controlFlow = bootstrapper.ControlFlowFactory.Create(controlFlowDescriptor);
-                var result = controlFlow.Execute(new[] {root}) as SyntaxNode;
+                var result = controlFlow.Execute(new[] { root }) as String;
 
-                var documentResults = new DocumentResults()
-                {
+                var documentResults = new DocumentResults() {
                     Source = root.TextDocument.Text,
-                    Results = result.SyntaxTree.GetRoot().ToFullString()
+                    Results = result
                 };
 
                 return documentResults;

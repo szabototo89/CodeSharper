@@ -199,6 +199,7 @@
     <Compile Include="Utilities\EnumerableExtensions.cs" />
     <Compile Include="Utilities\EqualityHelper.cs" />
     <Compile Include="Utilities\NodeExtensions.cs" />
+    <Compile Include="Utilities\ObjectCreator.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Option.cs" />

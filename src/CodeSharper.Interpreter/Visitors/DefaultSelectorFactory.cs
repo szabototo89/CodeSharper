@@ -12,9 +12,9 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates the unary selectorElement.
         /// </summary>
-        public UnarySelectorElement CreateUnarySelector(ElementTypeSelector elementTypeSelector)
+        public UnarySelectorElement CreateUnarySelector(TypeSelectorElement typeSelectorElement)
         {
-            return new UnarySelectorElement(elementTypeSelector);
+            return new UnarySelectorElement(typeSelectorElement);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selectorElement
         /// </summary>
-        public ModifierElement CreatePseudoSelector(String name, IEnumerable<ConstantElement> values)
+        public ModifierElement CreateModifier(String name, IEnumerable<ConstantElement> values)
         {
             Assume.NotNull(name, "name");
 
@@ -64,7 +64,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a pseudo selector element
         /// </summary>
-        public ModifierElement CreatePseudoSelector(String name, IEnumerable<SelectorElementBase> selectors)
+        public ModifierElement CreateModifier(String name, IEnumerable<SelectorElementBase> selectors)
         {
             Assume.NotNull(name, "name");
 
@@ -77,14 +77,14 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selectable ElementTypeSelector
         /// </summary>
-        public ElementTypeSelector CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors)
+        public TypeSelectorElement CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors)
         {
             Assume.NotNull(name, "name");
             Assume.NotNull(attributes, "attributes");
             Assume.NotNull(pseudoSelectors, "pseudoSelectors");
             Assume.NotNull(classSelectors, "classSelectors");
 
-            return new ElementTypeSelector {
+            return new TypeSelectorElement {
                 Name = name,
                 Attributes = attributes,
                 Modifiers = pseudoSelectors,
@@ -95,7 +95,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a class element selector.
         /// </summary>
-        public ClassSelectorElement CreateClassElementSelector(String name, Boolean isRegularExpression)
+        public ClassSelectorElement CreateClassSelectorElement(String name, Boolean isRegularExpression)
         {
             Assume.NotNull(name, "name");
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CodeSharper.Core.SyntaxTrees;
 using CodeSharper.Core.Utilities;
 
@@ -9,6 +10,7 @@ namespace CodeSharper.Core.Nodes.Selectors
     public abstract class SelectorBase
     {
         private Dictionary<String, Object> attributes;
+        private IEnumerable<Regex> classSelectors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase"/> class.
@@ -16,6 +18,23 @@ namespace CodeSharper.Core.Nodes.Selectors
         protected SelectorBase()
         {
             attributes = new Dictionary<String, Object>();
+            classSelectors = Enumerable.Empty<Regex>();
+        }
+
+        /// <summary>
+        /// Adds the class selectors.
+        /// </summary>
+        public virtual void AddClassSelectors(IEnumerable<Regex> classSelectors)
+        {
+            this.classSelectors = classSelectors ?? Enumerable.Empty<Regex>();
+        }
+
+        /// <summary>
+        /// Clears the class selectors.
+        /// </summary>
+        public virtual void ClearClassSelectors()
+        {
+            classSelectors = Enumerable.Empty<Regex>();
         }
 
         /// <summary>

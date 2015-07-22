@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Nodes.Selectors;
@@ -11,7 +12,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Creates a selector by specified name.
         /// </summary>
-        SelectorBase CreateSelector(Type selectorType);
+        SelectorBase CreateSelector(Type selectorType, IEnumerable<Regex> classSelectors);
 
         /// <summary>
         /// Creates a modifier.

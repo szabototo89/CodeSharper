@@ -27,22 +27,22 @@ namespace CodeSharper.Tests.Interpreter.Common
         public void ElementTypeSelector_ShouldBeValueObject()
         {
             // Given
-            var underTest = new ElementTypeSelector
+            var underTest = new TypeSelectorElement
             {
                 Name = "test",
                 Attributes = Enumerable.Empty<AttributeElement>(),
-                PseudoSelectors = Enumerable.Empty<PseudoSelectorElement>()
+                Modifiers = Enumerable.Empty<ModifierElement>()
             };
 
             // Then
-            AssertHelper.AreEqualByValue(underTest, new ElementTypeSelector
+            AssertHelper.AreEqualByValue(underTest, new TypeSelectorElement
             {
                 Name = "test",
                 Attributes = Enumerable.Empty<AttributeElement>(),
-                PseudoSelectors = Enumerable.Empty<PseudoSelectorElement>()
+                Modifiers = Enumerable.Empty<ModifierElement>()
             });
-            AssertHelper.AreEqualByValue(new ElementTypeSelector(), new ElementTypeSelector());
-            AssertHelper.AreNotEqualByValue(underTest, new ElementTypeSelector());
+            AssertHelper.AreEqualByValue(new TypeSelectorElement(), new TypeSelectorElement());
+            AssertHelper.AreNotEqualByValue(underTest, new TypeSelectorElement());
         }
 
         [Test(Description = "ActualParameterElement should be value object")]
