@@ -343,6 +343,13 @@
             "command-names": [ "rm" ]
         },
         {
+            "name": "CreateCommentRunnable",
+            "description": "It removes specified elements from root",
+            "arguments": [],
+            "type": "CodeSharper.Languages.CSharp.Runnables.CreateCommentRunnable",
+            "command-names": [ "comment" ]
+        },
+        {
             "name": "CreateRunnable",
             "description": "It creates a new runnable",
             "arguments": [
