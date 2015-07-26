@@ -3,6 +3,7 @@ using CodeSharper.Core.Texts;
 using CodeSharper.Interpreter.Bootstrappers;
 using CodeSharper.Languages.Csv.Compiler;
 using Microsoft.CodeAnalysis;
+using TextDocument = CodeSharper.Core.Texts.TextDocument;
 
 namespace CodeSharper.Playground.GUI.Modules
 {
