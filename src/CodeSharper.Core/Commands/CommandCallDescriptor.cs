@@ -32,8 +32,8 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public CommandCallDescriptor(String name, IEnumerable<ICommandCallActualArgument> actualParameters)
         {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(actualParameters, "actualParameters");
+            Assume.NotNull(name, nameof(name));
+            Assume.NotNull(actualParameters, nameof(actualParameters));
 
             Name = name;
             ActualParameters = actualParameters;

@@ -27,8 +27,8 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public DefaultCommandCallResolver(IDescriptorRepository descriptorRepository, IRunnableFactory runnableFactory)
         {
-            Assume.NotNull(descriptorRepository, "descriptorRepository");
-            Assume.NotNull(runnableFactory, "runnableFactory");
+            Assume.NotNull(descriptorRepository, nameof(descriptorRepository));
+            Assume.NotNull(runnableFactory, nameof(runnableFactory));
 
             DescriptorRepository = descriptorRepository;
             RunnableFactory = runnableFactory;
@@ -41,7 +41,7 @@ namespace CodeSharper.Core.Commands
         /// <returns>Returns created command or null</returns>
         public Command CreateCommand(CommandCallDescriptor descriptor)
         {
-            Assume.NotNull(descriptor, "descriptor");
+            Assume.NotNull(descriptor, nameof(descriptor));
 
             // get command descriptor from manager
             var commandDescriptors = resolveCommandDescriptorsByName(descriptor);
