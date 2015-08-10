@@ -66,7 +66,8 @@ namespace CodeSharper.Interpreter.Common
                 return create(binarySelector);
             }
 
-            throw new NotSupportedException(String.Format("Not supported selector element type: {0}.", selectorElement.GetType().FullName));
+            throw new NotSupportedException(
+                $"Not supported selector element type: {selectorElement.GetType().FullName}.");
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace CodeSharper.Interpreter.Common
 
             var selectorDescriptor = ResolveSelectorDescriptor(elementTypeSelector);
             if (selectorDescriptor == null)
-                throw new NotSupportedException(String.Format("Not supported element type selector: {0}.", elementTypeSelector.Name));
+                throw new NotSupportedException($"Not supported element type selector: {elementTypeSelector.Name}.");
 
             var classSelectors = ResolveClassSelectors(elementTypeSelector);
             var selector = SelectorFactory.CreateSelector(selectorDescriptor.Type, classSelectors);
