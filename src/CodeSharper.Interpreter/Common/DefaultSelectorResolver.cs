@@ -39,8 +39,8 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public DefaultSelectorResolver(ISelectorFactory selectorFactory, IDescriptorRepository descriptorRepository, INameMatcher nameMatcher = null)
         {
-            Assume.NotNull(selectorFactory, "selectorFactory");
-            Assume.NotNull(descriptorRepository, "descriptorRepository");
+            Assume.NotNull(selectorFactory, nameof(selectorFactory));
+            Assume.NotNull(descriptorRepository, nameof(descriptorRepository));
 
             SelectorFactory = selectorFactory;
             DescriptorRepository = descriptorRepository;
@@ -52,7 +52,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public CombinatorBase Create(SelectorElementBase selectorElement)
         {
-            Assume.NotNull(selectorElement, "selectorElement");
+            Assume.NotNull(selectorElement, nameof(selectorElement));
 
             if (selectorElement is UnarySelectorElement)
             {

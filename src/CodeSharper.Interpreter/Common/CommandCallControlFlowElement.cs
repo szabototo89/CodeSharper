@@ -16,7 +16,7 @@ namespace CodeSharper.Interpreter.Common
         public CommandCallControlFlowElement(CommandCallElement commandCallElement) 
             : base(ControlFlowOperationType.CommandCall)
         {
-            Assume.NotNull(commandCallElement, "CommandCallElement");
+            Assume.NotNull(commandCallElement, nameof(commandCallElement));
             CommandCallElement = commandCallElement;
         }
 

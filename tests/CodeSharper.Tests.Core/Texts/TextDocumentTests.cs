@@ -276,12 +276,12 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.Null);
         }
 
-        [Test(Description = "BeginChangeText should set a flag to change several TextRanges when it is called once")]
+        [Test(Description = "BeginTransaction should set a flag to change several TextRanges when it is called once")]
         public void BeginChangeText_ShouldSetFlagToChangeSeveralTextRange_WhenItIsCalledOnce()
         {
             // Given
             Assume.That(UnderTest.isBatchModeActive, Is.False);
-            UnderTest.BeginChangeText();
+            UnderTest.BeginTransaction();
 
             // When
             var result = UnderTest.isBatchModeActive;
@@ -290,31 +290,31 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(result, Is.True);
         }
 
-        [Test(Description = "EndChangeText should unset a flag to change several TextRanges when it is called once")]
+        [Test(Description = "EndTransaction should unset a flag to change several TextRanges when it is called once")]
         public void EndChangeText_ShouldSetFlagToChangeSeveralTextRange_WhenItIsCalledOnce()
         {
             // Given
-            UnderTest.BeginChangeText();
+            UnderTest.BeginTransaction();
             Assume.That(UnderTest.isBatchModeActive, Is.True);
 
             // When
-            UnderTest.EndChangeText();
+            UnderTest.EndTransaction();
             var result = UnderTest.isBatchModeActive;
 
             // Then
             Assert.That(result, Is.False);
         }
 
-        [Test(Description = "EndChangeText should update one TextRange when it is in batch mode")]
+        [Test(Description = "EndTransaction should update one TextRange when it is in batch mode")]
         public void ChangeText_ShouldUpdateOneTextRange_WhenItIsInBatchMode()
         {
             // Given
             var textRange = UnderTest.CreateOrGetTextRange(0, 5);
 
             // When
-            UnderTest.BeginChangeText();
+            UnderTest.BeginTransaction();
             UnderTest.ChangeText(textRange, "Hi");
-            UnderTest.EndChangeText();
+            UnderTest.EndTransaction();
 
             // Then
             Assert.That(textRange.GetText(), Is.EqualTo("Hi"));
@@ -322,7 +322,7 @@ namespace CodeSharper.Tests.Core.Texts
             Assert.That(UnderTest.Text, Is.EqualTo("Hi World!"));
         }
 
-        [Test(Description = "EndChangeText should update two TextRange when it is in batch mode")]
+        [Test(Description = "EndTransaction should update two TextRange when it is in batch mode")]
         public void ChangeText_ShouldUpdateTwoTextRange_WhenItIsInBatchMode()
         {
             // Given
@@ -330,10 +330,10 @@ namespace CodeSharper.Tests.Core.Texts
             var secondWord = UnderTest.CreateOrGetTextRange(6, 11);
 
             // When
-            UnderTest.BeginChangeText();
+            UnderTest.BeginTransaction();
             UnderTest.ChangeText(firstWord, "Hi");
             UnderTest.ChangeText(secondWord, "WOOORLD");
-            UnderTest.EndChangeText();
+            UnderTest.EndTransaction();
 
             // Then
             Assert.That(UnderTest.Text, Is.EqualTo("Hi WOOORLD!"));
@@ -409,12 +409,12 @@ namespace CodeSharper.Tests.Core.Texts
 
             // When
             var watch = Stopwatch.StartNew();
-            underTest.BeginChangeText();
+            underTest.BeginTransaction();
             foreach (var range in ranges)
             {
                 underTest.ChangeText(range, "onetwo");
             }
-            underTest.EndChangeText();
+            underTest.EndTransaction();
             watch.Stop();
 
             // Then

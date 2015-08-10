@@ -1,4 +1,5 @@
 using System;
+using CodeSharper.Core.Common.Runnables.TextRangeOperations;
 
 namespace CodeSharper.Interpreter.Common
 {
@@ -40,15 +41,9 @@ namespace CodeSharper.Interpreter.Common
             return Equals((RawClassSelectorElement) obj);
         }
 
-        /// <summary>
-        /// Serves as a hash function for a particular type. 
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current <see cref="T:System.Object"/>.
-        /// </returns>
         public override Int32 GetHashCode()
         {
-            throw new NotImplementedException();
+            return base.GetHashCode();
         }
 
         #endregion

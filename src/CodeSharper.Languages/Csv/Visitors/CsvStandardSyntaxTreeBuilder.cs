@@ -27,15 +27,15 @@ namespace CodeSharper.Languages.Csv.Visitors
 
         public CsvStandardSyntaxTreeBuilder(ICsvSyntaxTreeFactory treeFactory)
         {
-            Assume.NotNull(treeFactory, "treeFactory");
+            Assume.NotNull(treeFactory, nameof(treeFactory));
 
             TreeFactory = treeFactory;
         }
 
         public virtual CsvNode Visit(String input, IParseTree tree)
         {
-            Assume.NotNull(input, "input");
-            Assume.NotNull(tree, "tree");
+            Assume.NotNull(input, nameof(input));
+            Assume.NotNull(tree, nameof(tree));
 
             _textDocument = new TextDocument(input);
 

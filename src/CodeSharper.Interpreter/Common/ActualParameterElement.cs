@@ -28,7 +28,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ActualParameterElement(ConstantElement value, Int32 position)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
 
             Value = value;
             Position = Option.Some(position);
@@ -42,8 +42,8 @@ namespace CodeSharper.Interpreter.Common
         /// <param name="parameterName">Name of the parameter.</param>
         public ActualParameterElement(ConstantElement value, String parameterName)
         {
-            Assume.NotNull(value, "value");
-            Assume.NotNull(parameterName, "parameterName");
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(parameterName, nameof(parameterName));
 
             Value = value;
             ParameterName = Option.Some(parameterName);

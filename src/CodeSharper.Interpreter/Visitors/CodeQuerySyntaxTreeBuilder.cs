@@ -33,8 +33,8 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public CodeQuerySyntaxTreeBuilder(ISelectorFactory selectorFactory, ICodeQueryCommandFactory treeFactory)
         {
-            Assume.NotNull(treeFactory, "treeFactory");
-            Assume.NotNull(selectorFactory, "SelectorFactory");
+            Assume.NotNull(treeFactory, nameof(treeFactory));
+            Assume.NotNull(selectorFactory, nameof(selectorFactory));
             TreeFactory = treeFactory;
             SelectorFactory = selectorFactory;
         }

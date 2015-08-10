@@ -15,7 +15,7 @@ namespace CodeSharper.Interpreter.Visitors
 
         public CodeQueryVisitor(ISelectorBuilder selectorBuilder)
         {
-            Assume.NotNull(selectorBuilder, "selectorBuilder");
+            Assume.NotNull(selectorBuilder, nameof(selectorBuilder));
 
             _constants = new Stack<Object>();
             _selectorBuilder = selectorBuilder;

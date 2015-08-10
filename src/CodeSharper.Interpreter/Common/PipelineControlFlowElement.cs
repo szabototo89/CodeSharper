@@ -20,7 +20,7 @@ namespace CodeSharper.Interpreter.Common
         public PipelineControlFlowElement(IEnumerable<ControlFlowElementBase> children)
             : base(ControlFlowOperationType.Pipeline)
         {
-            Assume.NotNull(children, "children");
+            Assume.NotNull(children, nameof(children));
             Children = children;
         }
 

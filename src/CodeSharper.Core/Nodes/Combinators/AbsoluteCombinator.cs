@@ -29,7 +29,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         public AbsoluteCombinator(SelectorBase selector, IEnumerable<ModifierBase> nodeModifiers = null)
         {
-            Assume.NotNull(selector, "Selector");
+            Assume.NotNull(selector, nameof(selector));
 
             Selector = selector;
             NodeModifiers = nodeModifiers.GetOrEmpty();

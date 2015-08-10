@@ -32,9 +32,9 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public DefaultControlFlowFactory(ICommandCallResolver commandCallResolver, ISelectorResolver selectorResolver, IExecutor executor)
         {
-            Assume.NotNull(commandCallResolver, "commandCallResolver");
-            Assume.NotNull(selectorResolver, "SelectorResolver");
-            Assume.NotNull(executor, "executor");
+            Assume.NotNull(commandCallResolver, nameof(commandCallResolver));
+            Assume.NotNull(selectorResolver, nameof(selectorResolver));
+            Assume.NotNull(executor, nameof(executor));
 
             CommandCallResolver = commandCallResolver;
             SelectorResolver = selectorResolver;
@@ -93,7 +93,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ControlFlowBase Create(SelectorControlFlowElement selector)
         {
-            Assume.NotNull(selector, "selectorElement");
+            Assume.NotNull(selector, nameof(selector));
 
             var combinator = SelectorResolver.Create(selector.SelectorElement);
 
@@ -105,7 +105,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ControlFlowBase Create(SequenceControlFlowElement sequence)
         {
-            Assume.NotNull(sequence, "sequence");
+            Assume.NotNull(sequence, nameof(sequence));
             var children = createChildren(sequence);
             return new SequenceControlFlow(children);
         }
@@ -115,7 +115,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ControlFlowBase Create(PipelineControlFlowElement pipeline)
         {
-            Assume.NotNull(pipeline, "pipeline");
+            Assume.NotNull(pipeline, nameof(pipeline));
 
             var children = createChildren(pipeline);
             return new PipelineControlFlow(children);
@@ -126,7 +126,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ControlFlowBase Create(CommandCallControlFlowElement commandCall)
         {
-            Assume.NotNull(commandCall, "CommandCallElement");
+            Assume.NotNull(commandCall, nameof(commandCall));
 
             // resolve command by call
             var command = getCommand(commandCall.CommandCallElement);

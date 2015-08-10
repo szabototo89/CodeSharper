@@ -15,7 +15,7 @@ namespace CodeSharper.Interpreter.Common
         public SequenceControlFlowElement(IEnumerable<ControlFlowElementBase> children) 
             : base(ControlFlowOperationType.Sequence)
         {
-            Assume.NotNull(children, "children");
+            Assume.NotNull(children, nameof(children));
             Children = children;
         }
 

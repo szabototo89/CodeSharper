@@ -30,7 +30,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public CombinatorElementBase CreateCombinator(String combinator)
         {
-            Assume.NotNull(combinator, "CombinatorElement");
+            Assume.NotNull(combinator, nameof(combinator));
 
             return new CombinatorElement(combinator);
         }
@@ -40,7 +40,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public AttributeElement CreateAttributeSelector(String name, ConstantElement value)
         {
-            Assume.NotNull(name, "name");
+            Assume.NotNull(name, nameof(name));
 
             return new AttributeElement {
                 Name = name,
@@ -53,7 +53,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ModifierElement CreateModifier(String name, IEnumerable<ConstantElement> values)
         {
-            Assume.NotNull(name, "name");
+            Assume.NotNull(name, nameof(name));
 
             return new ModifierElement {
                 Name = name,
@@ -66,7 +66,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ModifierElement CreateModifier(String name, IEnumerable<SelectorElementBase> selectors)
         {
-            Assume.NotNull(name, "name");
+            Assume.NotNull(name, nameof(name));
 
             return new ModifierElement {
                 Name = name,
@@ -77,17 +77,17 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selectable ElementTypeSelector
         /// </summary>
-        public TypeSelectorElement CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors)
+        public TypeSelectorElement CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> modifierSelectors, IEnumerable<ClassSelectorElement> classSelectors)
         {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(attributes, "attributes");
-            Assume.NotNull(pseudoSelectors, "pseudoSelectors");
-            Assume.NotNull(classSelectors, "classSelectors");
+            Assume.NotNull(name, nameof(name));
+            Assume.NotNull(attributes, nameof(attributes));
+            Assume.NotNull(modifierSelectors, nameof(modifierSelectors));
+            Assume.NotNull(classSelectors, nameof(classSelectors));
 
             return new TypeSelectorElement {
                 Name = name,
                 Attributes = attributes,
-                Modifiers = pseudoSelectors,
+                Modifiers = modifierSelectors,
                 ClassSelectors = classSelectors
             };
         }
@@ -97,7 +97,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ClassSelectorElement CreateClassSelectorElement(String name, Boolean isRegularExpression)
         {
-            Assume.NotNull(name, "name");
+            Assume.NotNull(name, nameof(name));
 
             if (isRegularExpression)
                 return new RegularExpressionClassSelectorElement(name);

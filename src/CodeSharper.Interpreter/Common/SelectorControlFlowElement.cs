@@ -14,7 +14,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public SelectorControlFlowElement(SelectorElementBase selectorElement) : base(ControlFlowOperationType.Selector)
         {
-            Assume.NotNull(selectorElement, "selectorElement");
+            Assume.NotNull(selectorElement, nameof(selectorElement));
             SelectorElement = selectorElement;
         }
     }

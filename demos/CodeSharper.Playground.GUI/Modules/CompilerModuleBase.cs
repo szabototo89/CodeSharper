@@ -13,7 +13,7 @@ namespace CodeSharper.Playground.GUI.Modules
         /// </summary>
         protected CompilerModuleBase(Bootstrapper bootstrapper)
         {
-            Assume.NotNull(bootstrapper, "bootstrapper");
+            Assume.NotNull(bootstrapper, nameof(bootstrapper));
 
             this.bootstrapper = bootstrapper;
         }

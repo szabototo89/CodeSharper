@@ -18,7 +18,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Constants
         /// </summary>
         public StringConstant(String value, TextRange textRange) : base(textRange)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
 
             Value = value;
         }

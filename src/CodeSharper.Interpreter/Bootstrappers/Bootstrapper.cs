@@ -74,8 +74,8 @@ namespace CodeSharper.Interpreter.Bootstrappers
         /// </summary>
         public Bootstrapper(IRunnableFactory runnableFactory, IDescriptorRepository descriptorRepository, Func<Bootstrapper, ICommandDescriptorManager> commandDescriptorManager = null, Func<Bootstrapper, ICommandCallResolver> commandResolver = null, Func<Bootstrapper, ISelectorFactory> selectorFactory = null, Func<Bootstrapper, ISelectorResolver> selectorResolver = null, Func<Bootstrapper, IRunnableManager> runnableManager = null, Func<Bootstrapper, IExecutor> executor = null, Func<Bootstrapper, IControlFlowFactory<ControlFlowBase>> controlFlowFactory = null)
         {
-            Assume.NotNull(runnableFactory, "runnableFactory");
-            Assume.NotNull(descriptorRepository, "descriptorRepository");
+            Assume.NotNull(runnableFactory, nameof(runnableFactory));
+            Assume.NotNull(descriptorRepository, nameof(descriptorRepository));
 
             RunnableFactory = runnableFactory;
             DescriptorRepository = descriptorRepository;

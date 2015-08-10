@@ -7,7 +7,7 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
     {
         public static CommaToken Comma(TextRange range)
         {
-            Assume.NotNull(range, "range");
+            Assume.NotNull(range, nameof(range));
             return new CommaToken(range);
         }
     }

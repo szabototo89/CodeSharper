@@ -39,7 +39,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// <summary>
         /// Creates a selectable element type selector
         /// </summary>
-        TypeSelectorElement CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> pseudoSelectors, IEnumerable<ClassSelectorElement> classSelectors);
+        TypeSelectorElement CreateElementTypeSelector(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> modifierSelectors, IEnumerable<ClassSelectorElement> classSelectors);
 
         /// <summary>
         /// Creates a class element selector.
