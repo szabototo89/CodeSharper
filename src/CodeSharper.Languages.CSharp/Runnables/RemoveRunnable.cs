@@ -1,51 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Windows;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Common.Runnables.Attributes;
+using CodeSharper.Core.Common.Runnables.Converters;
+using CodeSharper.Core.Utilities;
+using CodeSharper.Languages.CSharp.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace CodeSharper.Languages.CSharp.Runnables
 {
-    public class RemoveNodeRunnable : RunnableBase<IEnumerable<Object>, IEnumerable<Object>>
+    [Consumes(typeof(MultiValueConsumer<SyntaxNode>))]
+    public class RemoveNodeRunnable : RunnableWithContextBase<SyntaxNode, SyntaxNode>
     {
-        private class RemovalSyntaxRewriter : CSharpSyntaxRewriter
-        {
-            private readonly List<SyntaxNode> removableNodes;
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="RemovalSyntaxRewriter"/> class.
-            /// </summary>
-            public RemovalSyntaxRewriter(IEnumerable<SyntaxNode> removableNodes)
-            {
-                this.removableNodes = new List<SyntaxNode>(removableNodes);
-            }
-
-            /// <summary>
-            /// Visits the specified node.
-            /// </summary>
-            public override SyntaxNode Visit(SyntaxNode node)
-            {
-                if (node == null) return base.Visit(node);
-
-                var children = node.ChildNodes();
-                var intersection = children.Intersect(removableNodes).ToArray();
-                if (intersection.Any())
-                    return node.RemoveNodes(intersection, SyntaxRemoveOptions.KeepNoTrivia);
-
-                return base.Visit(node);
-            }
-        }
-
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        public override IEnumerable<Object> Run(IEnumerable<Object> parameter)
+        public override SyntaxNode Run(SyntaxNode parameter, Object context)
         {
-            var nodes = parameter.OfType<SyntaxNode>();
-            var rewriter = new RemovalSyntaxRewriter(nodes);
-            var newRoot = rewriter.Visit(nodes.First().SyntaxTree.GetRoot());
-            return new[] {newRoot};
+            if (parameter == null) return null;
+            var documentContext = context as DocumentContext;
+            if (documentContext == null)
+                throw new Exception("document context is not available.");
+
+            documentContext.DocumentEditor.RemoveNode(parameter);
+            return null;
+        }
+    }
+
+    public class CopyToClipboardRunnable : RunnableWithContextBase<IEnumerable<Object>, IEnumerable<SyntaxNode>>
+    {
+        /// <summary>
+        /// Runs an algorithm with the specified parameter and context
+        /// </summary>
+        public override IEnumerable<SyntaxNode> Run(IEnumerable<Object> nodes, Object context)
+        {
+            var documentContext = context.As<DocumentContext>();
+            if (documentContext == null)
+                throw new Exception("DocumentContext is not available.");
+
+            var syntaxNodes = nodes.OfType<SyntaxNode>();
+            var sourceTexts = syntaxNodes.GetOrEmpty().Select(node => node.NormalizeWhitespace().ToFullString());
+            var textToClipboard = String.Join(Environment.NewLine, sourceTexts);
+
+            var thread = new Thread(new ThreadStart(() => {
+                Clipboard.SetText(textToClipboard);    
+            }));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+
+            return syntaxNodes;
         }
     }
 }

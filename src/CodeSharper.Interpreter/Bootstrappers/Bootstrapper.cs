@@ -72,7 +72,10 @@ namespace CodeSharper.Interpreter.Bootstrappers
         /// <summary>
         /// Initializes a new instance of the <see cref="Bootstrapper"/> class.
         /// </summary>
-        public Bootstrapper(IRunnableFactory runnableFactory, IDescriptorRepository descriptorRepository, Func<Bootstrapper, ICommandDescriptorManager> commandDescriptorManager = null, Func<Bootstrapper, ICommandCallResolver> commandResolver = null, Func<Bootstrapper, ISelectorFactory> selectorFactory = null, Func<Bootstrapper, ISelectorResolver> selectorResolver = null, Func<Bootstrapper, IRunnableManager> runnableManager = null, Func<Bootstrapper, IExecutor> executor = null, Func<Bootstrapper, IControlFlowFactory<ControlFlowBase>> controlFlowFactory = null)
+        public Bootstrapper(IRunnableFactory runnableFactory, IDescriptorRepository descriptorRepository, Func<Bootstrapper, ICommandDescriptorManager> commandDescriptorManager = null,
+                            Func<Bootstrapper, ICommandCallResolver> commandResolver = null, Func<Bootstrapper, ISelectorFactory> selectorFactory = null,
+                            Func<Bootstrapper, ISelectorResolver> selectorResolver = null, Func<Bootstrapper, IRunnableManager> runnableManager = null, Func<Bootstrapper, IExecutor> executor = null,
+                            Func<Bootstrapper, IControlFlowFactory<ControlFlowBase>> controlFlowFactory = null)
         {
             Assume.NotNull(runnableFactory, "runnableFactory");
             Assume.NotNull(descriptorRepository, "descriptorRepository");
@@ -91,4 +94,39 @@ namespace CodeSharper.Interpreter.Bootstrappers
         }
     }
 
+    public class BootstrapperBuilder
+    {
+        private readonly Bootstrapper bootstrapper;
+        private IExecutor executor;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BootstrapperBuilder"/> class.
+        /// </summary>
+        private BootstrapperBuilder(Bootstrapper bootstrapper)
+        {
+            this.bootstrapper = bootstrapper;
+        }
+
+        /// <summary>
+        /// Creates the specified bootstrapper.
+        /// </summary>
+        public static BootstrapperBuilder Create(Bootstrapper bootstrapper)
+        {
+            return new BootstrapperBuilder(bootstrapper);
+        }
+
+        public BootstrapperBuilder WithExecutor(IExecutor executor)
+        {
+            this.executor = executor;
+            return this;
+        }
+
+        /// <summary>
+        /// Builds a new bootstrapper instance
+        /// </summary>
+        public Bootstrapper Build()
+        {
+            return new Bootstrapper(bootstrapper.RunnableFactory, bootstrapper.DescriptorRepository, executor: _ => executor);
+        }
+    }
 }
