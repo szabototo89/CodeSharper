@@ -58,7 +58,7 @@ namespace CodeSharper.Interpreter.Common
         {
             unchecked
             {
-                return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (Arguments != null ? Arguments.GetHashCode() : 0);
+                return ((Name?.GetHashCode() ?? 0) * 397) ^ (Arguments?.GetHashCode() ?? 0);
             }
         }
 

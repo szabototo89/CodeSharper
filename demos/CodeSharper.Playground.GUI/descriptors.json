@@ -349,20 +349,35 @@
             "type": "CodeSharper.Languages.CSharp.Runnables.CreateCommentRunnable",
             "command-names": [ "comment" ]
         },
-        {
-            "name": "CreateRunnable",
-            "description": "It creates a new runnable",
+      {
+        "name": "CreateRunnable",
+        "description": "It creates a new runnable",
+        "arguments": [
+          {
+            "name": "source",
+            "argument-type": "System.String",
+            "default-value": "",
+            "optional": false,
+            "position": 0
+          }
+        ],
+        "type": "CodeSharper.Languages.CSharp.Runnables.CreateRunnable",
+        "command-names": [ "create" ]
+      },
+      {
+            "name": "ChangeMemberVisibilityRunnable",
+            "description": "It changes member visibility",
             "arguments": [
                  {
-                    "name": "source",
+                    "name": "visibility",
                     "argument-type": "System.String",
                     "default-value": "",
                     "optional": false,  
                     "position": 0
                 }
             ],
-            "type": "CodeSharper.Languages.CSharp.Runnables.CreateRunnable",
-            "command-names": [ "create" ]
+            "type": "CodeSharper.Languages.CSharp.Runnables.ChangeMemberVisibilityRunnable",
+            "command-names": [ "change-visibility" ]
         },
         {
             "name": "CopyToClipboardRunnable",

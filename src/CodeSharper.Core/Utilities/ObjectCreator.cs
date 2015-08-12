@@ -21,7 +21,7 @@ namespace CodeSharper.Core.Utilities
             Assume.NotNull(objectType, nameof(objectType));
 
             if (objectType.IsValueType)
-                throw new NotSupportedException(string.Format("Value types are not supported: {0}.", objectType.FullName));
+                throw new NotSupportedException($"Value types are not supported: {objectType.FullName}.");
 
             var constructors = objectType.GetConstructors();
             var constructor = constructors.FirstOrDefault(ctor => MatchConstructorWithArguments(ctor, constructorArguments));
@@ -42,7 +42,7 @@ namespace CodeSharper.Core.Utilities
             for (var i = 0; i < arguments.Length; i++)
             {
                 var constructorArgument = constructorArguments[i];
-                var constructorArgumentType = constructorArgument != null ? constructorArgument.GetType() : typeof (Object);
+                var constructorArgumentType = constructorArgument?.GetType() ?? typeof (Object);
                 var parameterType = arguments[i].ParameterType;
 
                 if (parameterType != constructorArgumentType &&

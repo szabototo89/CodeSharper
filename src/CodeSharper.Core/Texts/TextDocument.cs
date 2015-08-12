@@ -72,8 +72,8 @@ namespace CodeSharper.Core.Texts
         /// <param name="stop">The stop position of text range</param>
         public TextRange CreateOrGetTextRange(Int32 start, Int32 stop)
         {
-            Assume.IsTrue(start >= 0, "start must be positive or zero!");
-            Assume.IsTrue(start <= stop, "start must be lesser than stop!");
+            Assume.IsRequired(start >= 0, "start must be positive or zero!");
+            Assume.IsRequired(start <= stop, "start must be lesser than stop!");
 
             var indexOfTextRange = textRanges.IndexOfKey(new TextRange(start, stop));
             if (indexOfTextRange != -1)

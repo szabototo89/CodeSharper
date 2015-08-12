@@ -27,4 +27,16 @@ namespace CodeSharper.Core.Common.Runnables
             return (TOut) Run((TIn) parameter, context);
         }
     }
+
+    public abstract class RunnableWithContextBase<TIn, TOut, TContextObject> : RunnableWithContextBase<TIn, TOut> 
+        where TContextObject : class
+    {
+        public abstract TOut Run(TIn parameter, TContextObject context);
+
+        public override TOut Run(TIn parameter, Object context)
+        {
+            var contextObject = context as TContextObject;
+            return Run(parameter, contextObject);
+        }
+    }
 }

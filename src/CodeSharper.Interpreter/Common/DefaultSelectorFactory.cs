@@ -33,7 +33,7 @@ namespace CodeSharper.Interpreter.Common
 
             var selector = (SelectorBase)objectCreator.Create(selectorType);
             if (selector == null)
-                throw new Exception(String.Format("Cannot instantiate specified selector: {0}", selectorType.FullName));
+                throw new Exception($"Cannot instantiate specified selector: {selectorType.FullName}");
 
             selector.AddClassSelectors(classSelectors);
             return selector;

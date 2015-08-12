@@ -141,9 +141,9 @@ namespace CodeSharper.Interpreter.Common
                                       .ToArray();
 
             if (elements.Length > 1)
-                throw new Exception(String.Format("Ambiguity of pseudo selector: {0}", element.Name));
+                throw new Exception($"Ambiguity of modifier selector: {element.Name}");
             if (!elements.Any())
-                throw new Exception(String.Format("Not found pseudo selector: {0}", element.Name));
+                throw new Exception($"Not found modifier selector: {element.Name}");
 
             var modifier = elements.Single();
             return SelectorFactory.CreateModifier(modifier.Type, modifier.Arguments);
@@ -179,10 +179,10 @@ namespace CodeSharper.Interpreter.Common
                                                   .ToArray();
 
             if (combinators.Count() > 1)
-                throw new Exception(String.Format("Ambiguity of combinator element: {0}", combinatorElement.Value));
+                throw new Exception($"Ambiguity of combinator element: {combinatorElement.Value}");
 
             if (!combinators.Any())
-                throw new Exception(String.Format("Combinator is not found: {0}", combinatorElement.Value));
+                throw new Exception($"Combinator is not found: {combinatorElement.Value}");
 
             return SelectorFactory.CreateCombinator(combinators[0].CombinatorType, left, right);
         }

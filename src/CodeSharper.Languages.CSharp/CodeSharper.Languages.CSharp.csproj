@@ -76,6 +76,9 @@
     <Compile Include="Nodes\Selectors\StructDeclarationSelector.cs" />
     <Compile Include="Nodes\Selectors\VariableDeclarationSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runnables\ChangeMemberVisibilityRunnable.cs" />
+    <Compile Include="Runnables\CopyToClipboardRunnable.cs" />
+    <Compile Include="Runnables\CreateCommentRunnable.cs" />
     <Compile Include="Runnables\CreateRunnable.cs" />
     <Compile Include="Runnables\RemoveRunnable.cs" />
   </ItemGroup>

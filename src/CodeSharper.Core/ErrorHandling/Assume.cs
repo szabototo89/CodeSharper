@@ -7,21 +7,30 @@ namespace CodeSharper.Core.ErrorHandling
     public static class Assume
     {
         [DebuggerStepThrough]
-        public static void NotNull<TValue>(TValue value, String parameter) where TValue : class
+        public static void NotNull<TValue>(TValue value, String parameterName)
+            where TValue : class
         {
             if (value == null)
-                throw new ArgumentNullException(parameter, $"{parameter} cannot be null.");
+                throw new ArgumentNullException(parameterName, $"{parameterName} cannot be null.");
         }
 
         [DebuggerStepThrough]
-        public static void IsTrue(Boolean condition, String message)
+        public static void IsRequired<TValue>(TValue value, String parameterName = null)
+            where TValue : class
+        {
+            if (value == null)
+                throw new ArgumentNullException(parameterName, $"{parameterName} is required.");
+        }
+
+        [DebuggerStepThrough]
+        public static void IsRequired(Boolean condition, String parameterName)
         {
             if (!condition)
-                throw new Exception(message);
+                throw new ArgumentException($"{parameterName} is required.");
         }
 
         [DebuggerStepThrough]
-        public static void IsTrue(Boolean condition, Func<Exception> exception)
+        public static void IsRequired(Boolean condition, Func<Exception> exception)
         {
             if (!condition)
                 throw exception();

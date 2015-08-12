@@ -20,7 +20,7 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public PositionedCommandCallActualArgument(Int32 position, Object value)
         {
-            Assume.IsTrue(position >= 0, "position must be positive or zero!");
+            Assume.IsRequired(position >= 0, "position must be positive or zero!");
 
             Position = position;
             Value = value;
