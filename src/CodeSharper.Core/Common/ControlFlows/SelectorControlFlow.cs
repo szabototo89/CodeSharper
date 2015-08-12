@@ -19,7 +19,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// </summary>
         public SelectorControlFlow(CombinatorBase combinator)
         {
-            Assume.NotNull(combinator, "combinator");
+            Assume.NotNull(combinator, nameof(combinator));
 
             Combinator = new RelativeNodeCombinator(new UniversalCombinator(), combinator);
         }

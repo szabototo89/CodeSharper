@@ -17,7 +17,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// </summary>
         protected ComplexControlFlowBase(IEnumerable<ControlFlowBase> children)
         {
-            Assume.NotNull(children, "children");
+            Assume.NotNull(children, nameof(children));
             Children = children;
         }
     }

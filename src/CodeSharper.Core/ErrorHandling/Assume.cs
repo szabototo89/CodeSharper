@@ -10,7 +10,7 @@ namespace CodeSharper.Core.ErrorHandling
         public static void NotNull<TValue>(TValue value, String parameter) where TValue : class
         {
             if (value == null)
-                throw new ArgumentNullException(parameter, String.Format("{0} cannot be null.", parameter));
+                throw new ArgumentNullException(parameter, $"{parameter} cannot be null.");
         }
 
         [DebuggerStepThrough]
@@ -30,7 +30,7 @@ namespace CodeSharper.Core.ErrorHandling
         public static void NotBlank(String name, String message)
         {
             if (String.IsNullOrEmpty(name))
-                throw new ArgumentException("{0} cannot be blank.");
+                throw new ArgumentException($"{name} cannot be blank.");
         }
 
         public static void FileExists(String path, String message)

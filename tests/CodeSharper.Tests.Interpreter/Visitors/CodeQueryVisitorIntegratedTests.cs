@@ -109,10 +109,10 @@ namespace CodeSharper.Tests.Interpreter.Visitors
             Assert.That(result, Is.EqualTo(11));
         }
 
-        [TestCase("@increment 2")]
-        [TestCase("@increment 1; @increment 2")]
-        [TestCase("@increment 1 | @inc 1")]
-        [TestCase("@increment 2 | @IdentityRunnable")]
+        [TestCase("increment 2")]
+        [TestCase("increment 1; increment 2")]
+        [TestCase("increment 1 | inc 1")]
+        [TestCase("increment 2 | IdentityRunnable")]
         [Test(Description = "IncrementRunnable should increment its value by one when proper value is passed")]
         public void IncrementRunnable_ShouldIncrementValueByTwo_WhenProperValueIsPassed(String input)
         {

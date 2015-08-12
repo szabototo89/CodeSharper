@@ -66,10 +66,10 @@ namespace CodeSharper.Interpreter.Common
         {
             unchecked
             {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Attributes != null ? Attributes.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Modifiers != null ? Modifiers.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ClassSelectors != null ? ClassSelectors.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Attributes?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Modifiers?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ClassSelectors?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

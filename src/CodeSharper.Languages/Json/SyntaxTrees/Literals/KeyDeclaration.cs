@@ -19,7 +19,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         public KeyDeclaration(String value, TextRange textRange)
             : base(textRange)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
             Value = value;
         }
 

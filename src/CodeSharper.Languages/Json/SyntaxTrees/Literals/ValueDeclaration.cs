@@ -51,7 +51,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         public ValueDeclaration(ConstantSyntax value, TextRange textRange)
             : base(textRange)
         {
-            Assume.NotNull(value, "Value");
+            Assume.NotNull(value, nameof(value));
             Value = value;
         }
 
@@ -61,7 +61,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         public ValueDeclaration(LiteralSyntax value, TextRange textRange)
             : base(textRange)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
 
             Value = value;
         }

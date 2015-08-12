@@ -24,7 +24,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public ConstantElement(Object value, Type type)
         {
-            Assume.NotNull(type, "type");
+            Assume.NotNull(type, nameof(type));
 
             Value = value;
             Type = type;

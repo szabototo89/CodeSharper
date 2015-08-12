@@ -15,7 +15,7 @@ namespace CodeSharper.Interpreter.Common
         public LazyAndControlFlowElement(IEnumerable<ControlFlowElementBase> children) 
             : base(ControlFlowOperationType.LazyAnd)
         {
-            Assume.NotNull(children, "children");   
+            Assume.NotNull(children, nameof(children));   
             Children = children;
         }
 

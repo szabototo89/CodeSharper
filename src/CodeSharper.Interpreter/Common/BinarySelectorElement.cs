@@ -25,9 +25,9 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public BinarySelectorElement(SelectorElementBase left, SelectorElementBase right, CombinatorElementBase combinatorElement)
         {
-            Assume.NotNull(left, "left");
-            Assume.NotNull(right, "right");
-            Assume.NotNull(combinatorElement, "CombinatorElement");
+            Assume.NotNull(left, nameof(left));
+            Assume.NotNull(right, nameof(right));
+            Assume.NotNull(combinatorElement, nameof(combinatorElement));
 
             Left = left;
             Right = right;

@@ -46,12 +46,12 @@ namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
             if (!textRanges.Any()) return Enumerable.Empty<TextRange>();
             var textDocument = textRanges.First().TextDocument;
 
-            textDocument.BeginChangeText();
+            textDocument.BeginTransaction();
             foreach (var range in textRanges)
             {
                 range.ChangeText(ReplacedText.Replace("$", range.GetText()));
             }
-            textDocument.EndChangeText();
+            textDocument.EndTransaction();
 
             return textRanges;
         }

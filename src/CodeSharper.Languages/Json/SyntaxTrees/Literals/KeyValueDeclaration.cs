@@ -60,8 +60,8 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         public KeyValueDeclaration(KeyDeclaration key, ValueDeclaration value, TextRange textRange)
             : base(textRange)
         {
-            Assume.NotNull(key, "key");
-            Assume.NotNull(value, "value");
+            Assume.NotNull(key, nameof(key));
+            Assume.NotNull(value, nameof(value));
 
             this.key = key;
             this.value = value;

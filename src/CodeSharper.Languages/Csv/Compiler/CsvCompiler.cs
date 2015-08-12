@@ -20,9 +20,9 @@ namespace CodeSharper.Languages.Csv.Compiler
     {
         public Node Parse<TResult>(String input, ISyntaxTreeVisitor<TResult, IParseTree> treeVisitor, IHasSyntaxTree treeFactory)
         {
-            Assume.NotNull(input, "input");
-            Assume.NotNull(treeVisitor, "treeVisitor");
-            Assume.NotNull(treeFactory, "treeFactory");
+            Assume.NotNull(input, nameof(input));
+            Assume.NotNull(treeVisitor, nameof(treeVisitor));
+            Assume.NotNull(treeFactory, nameof(treeFactory));
 
             var stream = new AntlrInputStream(input);
             ITokenSource lexer = new CsvLexer(stream);
@@ -40,8 +40,8 @@ namespace CodeSharper.Languages.Csv.Compiler
 
         public CsvNode Parse(String input, ISyntaxTreeVisitor<CsvNode, IParseTree> treeVisitor)
         {
-            Assume.NotNull(input, "input");
-            Assume.NotNull(treeVisitor, "treeVisitor");
+            Assume.NotNull(input, nameof(input));
+            Assume.NotNull(treeVisitor, nameof(treeVisitor));
 
             var stream = new AntlrInputStream(input);
             ITokenSource lexer = new CsvLexer(stream);
@@ -57,7 +57,7 @@ namespace CodeSharper.Languages.Csv.Compiler
 
         public Node Parse(String input)
         {
-            Assume.NotNull(input, "input");
+            Assume.NotNull(input, nameof(input));
 
             var factory = new CsvStandardTreeFactory();
             return Parse(input, new CsvSyntaxTreeBuilder(factory), factory);

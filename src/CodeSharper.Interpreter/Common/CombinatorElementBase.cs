@@ -17,7 +17,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         protected CombinatorElementBase(String value)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
             Value = value;
         }
 

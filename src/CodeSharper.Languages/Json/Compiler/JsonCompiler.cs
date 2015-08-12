@@ -22,7 +22,7 @@ namespace CodeSharper.Languages.Json.Compiler
         /// </summary>
         public Node Parse(String input)
         {
-            Assume.NotNull(input, "input");
+            Assume.NotNull(input, nameof(input));
 
             var stream = new AntlrInputStream(input);
             ITokenSource lexer = new JsonLexer(stream);

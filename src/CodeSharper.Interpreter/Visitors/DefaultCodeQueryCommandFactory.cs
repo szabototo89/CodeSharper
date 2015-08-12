@@ -32,7 +32,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ConstantElement CreateString(String value)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
             return new ConstantElement(value, typeof(String));
         }
 
@@ -65,9 +65,9 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ControlFlowElementBase CreateControlFlow(ControlFlowElementBase left, ControlFlowElementBase right, String @operator)
         {
-            Assume.NotNull(left, "left");
-            Assume.NotNull(right, "right");
-            Assume.NotNull(@operator, "operator");
+            Assume.NotNull(left, nameof(left));
+            Assume.NotNull(right, nameof(right));
+            Assume.NotNull(@operator, nameof(@operator));
 
             var children = new[] { left, right };
 
@@ -89,7 +89,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ControlFlowElementBase CreateControlFlow(CommandCallElement methodCallElement)
         {
-            Assume.NotNull(methodCallElement, "selectorElement");
+            Assume.NotNull(methodCallElement, nameof(methodCallElement));
             return new CommandCallControlFlowElement(methodCallElement);
         }
 
@@ -98,7 +98,7 @@ namespace CodeSharper.Interpreter.Visitors
         /// </summary>
         public ControlFlowElementBase CreateControlFlow(SelectorElementBase selectorElement)
         {
-            Assume.NotNull(selectorElement, "selectorElement");
+            Assume.NotNull(selectorElement, nameof(selectorElement));
             return new SelectorControlFlowElement(selectorElement);
         }
     }

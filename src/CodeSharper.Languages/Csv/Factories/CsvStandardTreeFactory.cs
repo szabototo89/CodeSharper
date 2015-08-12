@@ -28,7 +28,7 @@ namespace CodeSharper.Languages.Csv.Factories
         /// </summary>
         public ICsvTreeFactory CreateRow(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             checkIsDocumentDefined();
             _actualRowDeclaration = new RowDeclarationSyntax(textRange);
             _csvCompilationUnits.Peek().AppendChild(_actualRowDeclaration);
@@ -40,7 +40,7 @@ namespace CodeSharper.Languages.Csv.Factories
         /// </summary>
         public ICsvTreeFactory CreateField(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             checkIsRowAdded();
 
             var field = new FieldDeclarationSyntax(textRange);
@@ -55,7 +55,7 @@ namespace CodeSharper.Languages.Csv.Factories
         /// <param name="textRange">The text range.</param>
         public ICsvTreeFactory CreateComma(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             checkIsRowAdded();
 
             var comma = new CommaToken(textRange);
@@ -69,7 +69,7 @@ namespace CodeSharper.Languages.Csv.Factories
         /// </summary>
         public ICsvTreeFactory CreateDocument(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             var csvCompilationUnit = new CsvCompilationUnit(textRange);
 
             _csvCompilationUnits.Push(csvCompilationUnit);

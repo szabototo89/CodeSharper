@@ -26,7 +26,7 @@ namespace CodeSharper.Languages.Json.Visitors
         /// </summary>
         public StandardJsonSyntaxTreeBuilder(IJsonSyntaxTreeFactory treeFactory)
         {
-            Assume.NotNull(treeFactory, "treeFactory");
+            Assume.NotNull(treeFactory, nameof(treeFactory));
             TreeFactory = treeFactory;
         }
 
@@ -35,8 +35,8 @@ namespace CodeSharper.Languages.Json.Visitors
         /// </summary>
         public virtual JsonNode Visit(String input, IParseTree parseTree)
         {
-            Assume.NotNull(input, "input");
-            Assume.NotNull(parseTree, "parseTree");
+            Assume.NotNull(input, nameof(input));
+            Assume.NotNull(parseTree, nameof(parseTree));
 
             _textDocument = new TextDocument(input);
             return base.Visit(parseTree);

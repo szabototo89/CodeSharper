@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using CodeSharper.Core.ErrorHandling;
 
 namespace CodeSharper.Core.Commands
@@ -20,8 +21,8 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public NamedCommandCallActualArgument(String argumentName, Object value)
         {
-            Assume.NotNull(argumentName, "argumentName");
-
+            Assume.NotNull(argumentName, nameof(argumentName));
+            
             ArgumentName = argumentName;
             Value = value;
         }

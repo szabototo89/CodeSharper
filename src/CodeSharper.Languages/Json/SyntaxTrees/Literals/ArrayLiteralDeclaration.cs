@@ -34,7 +34,7 @@ namespace CodeSharper.Languages.Json.SyntaxTrees.Literals
         /// </summary>
         public ArrayLiteralDeclaration(IEnumerable<JsonNode> elements, TextRange textRange) : base(textRange)
         {
-            Assume.NotNull(elements, "elements");
+            Assume.NotNull(elements, nameof(elements));
 
             Elements = elements.ToArray();
         }

@@ -67,7 +67,7 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateBooleanConstant(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             var text = textRange.GetText();
             Boolean value;
             if (text == "false") value = false;
@@ -82,7 +82,7 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateNumberConstant(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             var text = textRange.GetText();
             Decimal value;
 
@@ -97,7 +97,7 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateStringConstant(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             var value = textRange.GetText();
             return new StringConstant(value, textRange);
         }
@@ -107,8 +107,8 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateKey(String value, TextRange textRange)
         {
-            Assume.NotNull(value, "value");
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(textRange, nameof(textRange));
             value = value.Trim('\"');
             return new KeyDeclaration(value, textRange);
         }
@@ -118,8 +118,8 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateValue(ConstantSyntax value, TextRange textRange)
         {
-            Assume.NotNull(value, "value");
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(textRange, nameof(textRange));
 
             return new ValueDeclaration(value, textRange);
         }
@@ -129,17 +129,17 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateValue(LiteralSyntax value, TextRange textRange)
         {
-            Assume.NotNull(value, "value");
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(textRange, nameof(textRange));
 
             return new ValueDeclaration(value, textRange);
         }
 
         public JsonNode CreateKeyValuePair(TextRange textRange, KeyDeclaration key, ValueDeclaration value)
         {
-            Assume.NotNull(textRange, "textRange");
-            Assume.NotNull(key, "key");
-            Assume.NotNull(value, "value");
+            Assume.NotNull(textRange, nameof(textRange));
+            Assume.NotNull(key, nameof(key));
+            Assume.NotNull(value, nameof(value));
 
             return new KeyValueDeclaration(key, value, textRange);
         }
@@ -149,8 +149,8 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateArrayLiteral(IEnumerable<ValueDeclaration> values, TextRange textRange)
         {
-            Assume.NotNull(values, "values");        
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(values, nameof(values));        
+            Assume.NotNull(textRange, nameof(textRange));
     
             return new ArrayLiteralDeclaration(values.Select(value => value.Value).ToArray(), textRange);
         }
@@ -160,8 +160,8 @@ namespace CodeSharper.Languages.Json.Factories
         /// </summary>
         public JsonNode CreateObjectLiteral(IEnumerable<KeyValueDeclaration> keyValuePairs, TextRange textRange)
         {
-            Assume.NotNull(keyValuePairs, "keyValuePairs");
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(keyValuePairs, nameof(keyValuePairs));
+            Assume.NotNull(textRange, nameof(textRange));
 
             return new ObjectLiteralDeclaration(keyValuePairs, textRange);
         }

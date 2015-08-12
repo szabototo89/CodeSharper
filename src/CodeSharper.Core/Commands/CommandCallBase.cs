@@ -10,7 +10,7 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         protected CommandCallBase(IEnumerable<ICommandCall> commands)
         {
-            Assume.NotNull(commands, "commands");
+            Assume.NotNull(commands, nameof(commands));
 
             Children = commands;
         }

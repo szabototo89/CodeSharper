@@ -91,7 +91,7 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public TextDocument(String text)
         {
-            Assume.NotNull("text", text);
+            Assume.NotNull(text, nameof(text));
 
             Text = text;
             textRanges = new SortedList<TextRange, TextRange>(TextRange.PositionComparer);
@@ -111,7 +111,7 @@ namespace CodeSharper.Core.Texts
         /// <summary>
         /// Activates changing text in batch mode.
         /// </summary>
-        public void BeginChangeText()
+        public void BeginTransaction()
         {
             if (isBatchModeActive)
                 throw new Exception("Batch mode has been already activated.");
@@ -119,7 +119,7 @@ namespace CodeSharper.Core.Texts
             isBatchModeActive = true;
         }
 
-        public void EndChangeText()
+        public void EndTransaction()
         {
             if (!isBatchModeActive)
                 throw new Exception("Batch mode has not been activated.");

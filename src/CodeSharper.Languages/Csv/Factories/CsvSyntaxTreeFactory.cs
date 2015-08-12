@@ -24,14 +24,14 @@ namespace CodeSharper.Languages.Csv.Factories
 
         public FieldDeclarationSyntax Field(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             return new FieldDeclarationSyntax(textRange);
         }
 
         public RowDeclarationSyntax Row(TextRange textRange, IEnumerable<CommaToken> commas, IEnumerable<FieldDeclarationSyntax> fields)
         {
-            Assume.NotNull(commas, "commas");
-            Assume.NotNull(fields, "fields");
+            Assume.NotNull(commas, nameof(commas));
+            Assume.NotNull(fields, nameof(fields));
 
             return new RowDeclarationSyntax(textRange) {
                 Commas = commas,
@@ -41,8 +41,8 @@ namespace CodeSharper.Languages.Csv.Factories
 
         public CsvCompilationUnit CompilationUnit(TextRange textRange, IEnumerable<RowDeclarationSyntax> rows)
         {
-            Assume.NotNull(textRange, "textRange");
-            Assume.NotNull(rows, "rows");
+            Assume.NotNull(textRange, nameof(textRange));
+            Assume.NotNull(rows, nameof(rows));
 
             return new CsvCompilationUnit(textRange, rows);
         }

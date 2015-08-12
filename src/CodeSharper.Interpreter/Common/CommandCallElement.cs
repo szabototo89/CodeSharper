@@ -22,8 +22,8 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public CommandCallElement(String methodName, IEnumerable<ActualParameterElement> actualParameters)
         {
-            Assume.NotNull(methodName, "methodName");
-            Assume.NotNull(actualParameters, "actualParameters");
+            Assume.NotNull(methodName, nameof(methodName));
+            Assume.NotNull(actualParameters, nameof(actualParameters));
 
             MethodName = methodName;
             ActualParameters = actualParameters;

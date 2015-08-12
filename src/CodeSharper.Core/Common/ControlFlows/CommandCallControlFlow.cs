@@ -20,8 +20,8 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// </summary>
         public CommandCallControlFlow(Command command, IExecutor executor)
         {
-            Assume.NotNull(command, "command");
-            Assume.NotNull(executor, "executor");
+            Assume.NotNull(command, nameof(command));
+            Assume.NotNull(executor, nameof(executor));
             Command = command;
             Executor = executor;
         }

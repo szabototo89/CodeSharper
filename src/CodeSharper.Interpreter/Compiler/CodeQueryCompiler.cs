@@ -29,8 +29,8 @@ namespace CodeSharper.Interpreter.Compiler
         /// </summary>
         public ControlFlowElementBase Parse(String input, ISelectorFactory selectorFactory, ICodeQueryCommandFactory factory)
         {
-            Assume.NotNull(input, "input");
-            Assume.NotNull(factory, "factory");
+            Assume.NotNull(input, nameof(input));
+            Assume.NotNull(factory, nameof(factory));
 
             var stream = new AntlrInputStream(input);
             ITokenSource lexer = new CodeQueryLexer(stream);

@@ -35,7 +35,7 @@ namespace CodeSharper.Languages.Csv.SyntaxTrees
         public CsvCompilationUnit(TextRange textRange, IEnumerable<RowDeclarationSyntax> rows)
             : base(textRange)
         {
-            Assume.NotNull(rows, "rows");
+            Assume.NotNull(rows, nameof(rows));
 
             Rows = rows;
             this.AttachChildren(rows);

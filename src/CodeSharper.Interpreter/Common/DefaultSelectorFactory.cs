@@ -29,7 +29,7 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public virtual SelectorBase CreateSelector(Type selectorType, IEnumerable<Regex> classSelectors)
         {
-            Assume.NotNull(selectorType, "selectorType");
+            Assume.NotNull(selectorType, nameof(selectorType));
 
             var selector = (SelectorBase)objectCreator.Create(selectorType);
             if (selector == null)
@@ -44,9 +44,9 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public virtual BinaryCombinator CreateCombinator(Type combinatorType, CombinatorBase left, CombinatorBase right)
         {
-            Assume.NotNull(combinatorType, "combinatorType");
-            Assume.NotNull(left, "left");
-            Assume.NotNull(right, "right");
+            Assume.NotNull(combinatorType, nameof(combinatorType));
+            Assume.NotNull(left, nameof(left));
+            Assume.NotNull(right, nameof(right));
 
             /*var constructors = combinatorType.GetConstructors();
 
@@ -75,8 +75,8 @@ namespace CodeSharper.Interpreter.Common
         /// </summary>
         public virtual ModifierBase CreateModifier(Type modifierType, IEnumerable<Object> arguments)
         {
-            Assume.NotNull(modifierType, "pseudoSelectorType");
-            Assume.NotNull(arguments, "arguments");
+            Assume.NotNull(modifierType, nameof(modifierType));
+            Assume.NotNull(arguments, nameof(arguments));
 
             var args = arguments.ToArray();
 
@@ -95,8 +95,8 @@ namespace CodeSharper.Interpreter.Common
         [Obsolete]
         public virtual ModifierBase CreateClassSelector(Type classSelectorType, String className)
         {
-            Assume.NotNull(classSelectorType, "classSelectorType");
-            Assume.NotBlank(className, "className");
+            Assume.NotNull(classSelectorType, nameof(classSelectorType));
+            Assume.NotBlank(className, nameof(className));
 
             var constructors = classSelectorType.GetConstructors();
             var defaultConstructor = constructors.FirstOrDefault(
