@@ -16,7 +16,7 @@ namespace CodeSharper.Core.Common.Runnables.Attributes
         /// </summary>
         public ProducesAttribute(Type producerType)
         {
-            Assume.NotNull(producerType, "ProducerType");
+            Assume.NotNull(producerType, nameof(producerType));
 
             ProducerType = producerType;
         }

@@ -30,7 +30,7 @@ namespace CodeSharper.Core.Utilities
         public static IEnumerable<TResult> Select<TElement, TResult>(this TElement element, Func<TElement, TResult> func)
             where TElement : IHasNext<TElement>
         {
-            Assume.NotNull(func, "func");
+            Assume.NotNull(func, nameof(func));
 
             var current = element;
 

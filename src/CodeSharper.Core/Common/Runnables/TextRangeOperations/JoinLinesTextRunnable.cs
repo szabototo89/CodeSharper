@@ -26,7 +26,7 @@ namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
         /// </summary>
         public override TextRange Run(TextRange parameter)
         {
-            Assume.NotNull(parameter, "parameter");
+            Assume.NotNull(parameter, nameof(parameter));
             var text = parameter.GetText().Replace(Environment.NewLine, Separator);
             return parameter.ChangeText(text);
         }

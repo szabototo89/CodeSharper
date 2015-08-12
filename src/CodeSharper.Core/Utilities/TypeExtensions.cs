@@ -9,7 +9,7 @@ namespace CodeSharper.Core.Utilities
     {
         public static ConstructorInfo GetDefaultConstructor(this Type type)
         {
-            Assume.NotNull(type, "type");
+            Assume.NotNull(type, nameof(type));
 
             var constructors = type.GetConstructors();
             return constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
@@ -17,7 +17,7 @@ namespace CodeSharper.Core.Utilities
 
         public static TObject InstantiateWithDefaultConstructor<TObject>(this Type value)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
 
             var defaultConstructor = value.GetDefaultConstructor();
             if (defaultConstructor != null)

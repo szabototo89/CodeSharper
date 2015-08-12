@@ -23,7 +23,7 @@ namespace CodeSharper.Core.Commands.Selectors
         /// </summary>
         public SelectorAttributeDescriptor(String name, String value)
         {
-            Assume.NotNull(name, "name");
+            Assume.NotNull(name, nameof(name));
 
             Name = name;
             Value = value;

@@ -17,7 +17,7 @@ namespace CodeSharper.Core.SyntaxTrees
         /// </summary>
         protected Node(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
 
             children = new List<Node>();
             TextRange = textRange;
@@ -47,7 +47,7 @@ namespace CodeSharper.Core.SyntaxTrees
         /// </summary>
         public virtual void AppendChild(Node child)
         {
-            Assume.NotNull(child, "child");
+            Assume.NotNull(child, nameof(child));
             children.Add(child);
             child.Parent = this;
         }
@@ -57,7 +57,7 @@ namespace CodeSharper.Core.SyntaxTrees
         /// </summary>
         public virtual void Attach(Node node)
         {
-            Assume.NotNull(node, "node");
+            Assume.NotNull(node, nameof(node));
 
             node.children.Add(this);
             Parent = node;

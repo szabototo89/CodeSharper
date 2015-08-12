@@ -43,8 +43,8 @@ namespace CodeSharper.Core.Services
         /// </summary>
         public FileDescriptorRepository(String fileName, IEnumerable<Assembly> assemblies = null)
         {
-            Assume.NotNull(fileName, "fileName");
-            Assume.FileExists(fileName, "fileName");
+            Assume.NotNull(fileName, nameof(fileName));
+            Assume.FileExists(fileName, nameof(fileName));
 
             serializer = new DataContractJsonSerializer(typeof (DescriptorModel));
             combinators = new List<CombinatorDescriptor>();

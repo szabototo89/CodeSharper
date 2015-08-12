@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.SyntaxTrees;
+using static CodeSharper.Core.Utilities.ConstructsHelper;
 
 namespace CodeSharper.Core.Nodes.Selectors
 {
@@ -14,10 +15,10 @@ namespace CodeSharper.Core.Nodes.Selectors
         {
             if (element is TElement)
             {
-                return new[] { element };
+                return Array(element);
             }
 
-            return Enumerable.Empty<Object>();
+            return Array<Object>();
         }
     }
 }

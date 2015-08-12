@@ -18,7 +18,7 @@ namespace CodeSharper.Core.Utilities
         /// </summary>
         public Object Create(Type objectType, params Object[] constructorArguments)
         {
-            Assume.NotNull(objectType, "objectType");
+            Assume.NotNull(objectType, nameof(objectType));
 
             if (objectType.IsValueType)
                 throw new NotSupportedException(string.Format("Value types are not supported: {0}.", objectType.FullName));

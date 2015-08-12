@@ -46,7 +46,7 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public String GetText(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
             return text.ToString(textRange.Start, textRange.Stop - textRange.Start);
         }
 
@@ -57,7 +57,7 @@ namespace CodeSharper.Core.Texts
         /// <returns></returns>
         public TextDocument RemoveText(TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
+            Assume.NotNull(textRange, nameof(textRange));
 
             ChangeText(textRange, String.Empty);
             removeTextRange(textRange);
@@ -219,8 +219,8 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         public TextDocument ChangeText(TextRange textRange, String replacedText)
         {
-            Assume.NotNull(textRange, "textRange");
-            Assume.NotNull(replacedText, "replacedText");
+            Assume.NotNull(textRange, nameof(textRange));
+            Assume.NotNull(replacedText, nameof(replacedText));
 
             if (!isBatchModeActive)
             {
@@ -247,7 +247,7 @@ namespace CodeSharper.Core.Texts
 
         private void updateTextRanges(TextRange updatableTextRange, Int32 offset)
         {
-            Assume.NotNull(updatableTextRange, "updatableTextRange");
+            Assume.NotNull(updatableTextRange, nameof(updatableTextRange));
             if (offset == 0) return;
 
             var indexOfTextRange = textRanges.IndexOfValue(updatableTextRange);
@@ -306,8 +306,8 @@ namespace CodeSharper.Core.Texts
         /// </summary>
         protected internal TextDocument changeRawText(TextRange textRange, String replacedText)
         {
-            Assume.NotNull(textRange, "updatableTextRange");
-            Assume.NotNull(replacedText, "replacedText");
+            Assume.NotNull(textRange, nameof(textRange));
+            Assume.NotNull(replacedText, nameof(replacedText));
 
             text.Remove(textRange.Start, textRange.Stop - textRange.Start)
                 .Insert(textRange.Start, replacedText);

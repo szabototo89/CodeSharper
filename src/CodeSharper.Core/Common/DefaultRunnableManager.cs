@@ -15,7 +15,7 @@ namespace CodeSharper.Core.Common
         /// </summary>
         public IEnumerable<IValueConsumer> GetConsumers(IRunnable runnable)
         {
-            Assume.NotNull(runnable, "runnable");
+            Assume.NotNull(runnable, nameof(runnable));
             var type = runnable.GetType();
 
             var attributes = type.GetCustomAttributes(inherit: true)
@@ -32,7 +32,7 @@ namespace CodeSharper.Core.Common
         /// </summary>
         public IEnumerable<IValueProducer> GetProducers(IRunnable runnable)
         {
-            Assume.NotNull(runnable, "runnable");
+            Assume.NotNull(runnable, nameof(runnable));
             var type = runnable.GetType();
 
             var attributes = type.GetCustomAttributes(inherit: true)

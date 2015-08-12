@@ -33,7 +33,7 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         public SelectionCombinator(SelectorBase selector, IEnumerable<ModifierBase> modifiers = null, IEnumerable<SelectorAttribute> attributes = null)
         {
-            Assume.NotNull(selector, "selector");
+            Assume.NotNull(selector, nameof(selector));
 
             Selector = selector;
             Modifiers = modifiers.GetOrEmpty();

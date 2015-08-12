@@ -6,25 +6,25 @@ using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Commands.Selectors
 {
-    public class PseudoSelectorDescriptor : IHasName, IHasValue<Option<Object>>, 
-                                            IEquatable<PseudoSelectorDescriptor>
+    public class ModifierSelectorDescriptor : IHasName, IHasValue<Option<Object>>, 
+                                            IEquatable<ModifierSelectorDescriptor>
     {
         /// <summary>
-        /// Gets or sets the name of <see cref="PseudoSelectorDescriptor"/> class
+        /// Gets or sets the name of <see cref="ModifierSelectorDescriptor"/> class
         /// </summary>
         public String Name { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the value of <see cref="PseudoSelectorDescriptor"/> class
+        /// Gets or sets the value of <see cref="ModifierSelectorDescriptor"/> class
         /// </summary>
         public Option<Object> Value { get; protected set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PseudoSelectorDescriptor"/> class.
+        /// Initializes a new instance of the <see cref="ModifierSelectorDescriptor"/> class.
         /// </summary>
-        public PseudoSelectorDescriptor(String name, Option<Object> value)
+        public ModifierSelectorDescriptor(String name, Option<Object> value)
         {
-            Assume.NotNull(name, "name");
+            Assume.NotNull(name, nameof(name));
 
             Name = name;
             Value = value;
@@ -54,7 +54,7 @@ namespace CodeSharper.Core.Commands.Selectors
         /// <param name="other">The Object to compare with the current Object. </param><filterpriority>2</filterpriority>
         public override Boolean Equals(Object other)
         {
-            return Equals(other as PseudoSelectorDescriptor);
+            return Equals(other as ModifierSelectorDescriptor);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace CodeSharper.Core.Commands.Selectors
         /// true if the current Object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An Object to compare with this Object.</param>
-        public Boolean Equals(PseudoSelectorDescriptor other)
+        public Boolean Equals(ModifierSelectorDescriptor other)
         {
             return EqualityHelper.IsNullOrReferenceEqual(other, this) ??
                    String.Equals(Name, other.Name) &&

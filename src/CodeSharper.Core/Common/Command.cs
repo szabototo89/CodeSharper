@@ -38,9 +38,9 @@ namespace CodeSharper.Core.Common
         /// </summary>
         public Command(IRunnable runnable, CommandDescriptor commandDescriptor, IDictionary<String, Object> actualArguments)
         {
-            Assume.NotNull(runnable, "runnable");
-            Assume.NotNull(commandDescriptor, "commandDescriptor");
-            Assume.NotNull(actualArguments, "actualArguments");
+            Assume.NotNull(runnable, nameof(runnable));
+            Assume.NotNull(commandDescriptor, nameof(commandDescriptor));
+            Assume.NotNull(actualArguments, nameof(actualArguments));
 
             Runnable = runnable;
             CommandDescriptor = commandDescriptor;

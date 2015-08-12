@@ -15,8 +15,8 @@ namespace CodeSharper.Core.Utilities
         /// </summary>
         public static TextRange ChangeText(this TextRange textRange, String replacedText)
         {
-            Assume.NotNull(textRange,"textRange");
-            Assume.NotNull(textRange.TextDocument, "textRange.TextDocument");
+            Assume.NotNull(textRange,nameof(textRange));
+            Assume.NotNull(textRange.TextDocument, $"{nameof(textRange)}.{nameof(textRange.TextDocument)}");
 
             textRange.TextDocument.ChangeText(textRange, replacedText);
             return textRange;
@@ -27,8 +27,8 @@ namespace CodeSharper.Core.Utilities
         /// </summary>
         public static String GetText(this TextRange textRange)
         {
-            Assume.NotNull(textRange, "textRange");
-            Assume.NotNull(textRange.TextDocument, "textRange.TextDocument");
+            Assume.NotNull(textRange, nameof(textRange));
+            Assume.NotNull(textRange.TextDocument, $"{nameof(textRange)}.{nameof(textRange.TextDocument)}");
          
             return textRange.TextDocument.GetText(textRange);
         }

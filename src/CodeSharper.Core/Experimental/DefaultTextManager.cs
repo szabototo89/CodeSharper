@@ -22,7 +22,7 @@ namespace CodeSharper.Core.Experimental
         /// </summary>
         public DefaultTextManager(String text)
         {
-            Assume.NotNull(text, "text");
+            Assume.NotNull(text, nameof(text));
 
             textBuilder = new StringBuilder(text);
             lines = calculateLines(text);
@@ -34,7 +34,7 @@ namespace CodeSharper.Core.Experimental
         /// </summary>
         public String GetValue(TextSpan span)
         {
-            Assume.NotNull(span, "span");
+            Assume.NotNull(span, nameof(span));
             if (lines.Count <= span.Start.Line || lines.Count <= span.Stop.Line)
                 throw new IndexOutOfRangeException();
 
@@ -61,8 +61,8 @@ namespace CodeSharper.Core.Experimental
         /// </summary>
         public void SetValue(String value, TextSpan span)
         {
-            Assume.NotNull(value, "value");
-            Assume.NotNull(span, "span");
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(span, nameof(span));
 
             // update index
             // updateText(span, value);

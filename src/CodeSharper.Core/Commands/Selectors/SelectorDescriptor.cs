@@ -26,14 +26,14 @@ namespace CodeSharper.Core.Commands.Selectors
         /// <summary>
         /// Gets or sets the pseudo selector descriptors
         /// </summary>
-        public IEnumerable<PseudoSelectorDescriptor> PseudoSelectorDescriptors { get; protected set; }
+        public IEnumerable<ModifierSelectorDescriptor> PseudoSelectorDescriptors { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorDescriptor"/> class.
         /// </summary>
-        public SelectorDescriptor(String value, IEnumerable<SelectorAttributeDescriptor> selectorAttributes, IEnumerable<PseudoSelectorDescriptor> pseudoSelectorDescriptors)
+        public SelectorDescriptor(String value, IEnumerable<SelectorAttributeDescriptor> selectorAttributes, IEnumerable<ModifierSelectorDescriptor> pseudoSelectorDescriptors)
         {
-            Assume.NotNull(value, "value");
+            Assume.NotNull(value, nameof(value));
 
             Value = value;
             SelectorAttributes = selectorAttributes.GetOrEmpty();

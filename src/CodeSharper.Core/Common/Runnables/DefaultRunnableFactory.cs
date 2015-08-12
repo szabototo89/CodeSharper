@@ -55,8 +55,8 @@ namespace CodeSharper.Core.Common.Runnables
         /// </summary>
         public virtual IRunnable Create(String runnableName, IEnumerable<KeyValuePair<String, Object>> actualArguments)
         {
-            Assume.NotNull(runnableName, "runnableName");
-            Assume.NotNull(actualArguments, "actualArguments");
+            Assume.NotNull(runnableName, nameof(runnableName));
+            Assume.NotNull(actualArguments, nameof(actualArguments));
 
             // instantiate runnable
             var runnableType = AvailableRunnables.FirstOrDefault(type => RunnableNameMatcher.Match(type.Name, runnableName));

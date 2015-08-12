@@ -96,6 +96,7 @@
     <Compile Include="Services\SerializerTests.cs" />
     <Compile Include="TestHelpers\Stubs\StubNode.cs" />
     <Compile Include="Texts\TextDocumentTests.cs" />
+    <Compile Include="Utilities\ConstructsHelperTests.cs" />
     <Compile Include="Utilities\EnumerableExtensionsTests.cs" />
     <Compile Include="Utilities\ObjectCreatorTests.cs" />
     <Compile Include="Utilities\OptionTests.cs" />

@@ -19,8 +19,8 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         protected BinaryCombinator(CombinatorBase left, CombinatorBase right)
         {
-            Assume.NotNull(left, "left");
-            Assume.NotNull(right, "right");
+            Assume.NotNull(left, nameof(left));
+            Assume.NotNull(right, nameof(right));
 
             Left = left;
             Right = right;

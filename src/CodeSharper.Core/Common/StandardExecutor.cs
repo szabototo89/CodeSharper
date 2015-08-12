@@ -16,7 +16,7 @@ namespace CodeSharper.Core.Common
         /// </summary>
         public StandardExecutor(IRunnableManager runnableManager)
         {
-            Assume.NotNull(runnableManager, "runnableManager");
+            Assume.NotNull(runnableManager, nameof(runnableManager));
             this.runnableManager = runnableManager;
         }
 
@@ -25,7 +25,7 @@ namespace CodeSharper.Core.Common
         /// </summary>
         public Object Execute(IRunnable runnable, Object parameter)
         {
-            Assume.NotNull(runnable, "runnable");
+            Assume.NotNull(runnable, nameof(runnable));
             var actualParameter = consume(runnable, parameter);
             return produce(runnable, actualParameter);
         }

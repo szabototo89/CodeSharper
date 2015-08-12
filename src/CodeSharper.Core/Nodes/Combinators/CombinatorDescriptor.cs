@@ -14,9 +14,9 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// </summary>
         public CombinatorDescriptor(String name, String value, Type combinatorType)
         {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(value, "value");
-            Assume.NotNull(combinatorType, "combinatorType");
+            Assume.NotNull(name, nameof(name));
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(combinatorType, nameof(combinatorType));
 
             Name = name;
             Value = value;

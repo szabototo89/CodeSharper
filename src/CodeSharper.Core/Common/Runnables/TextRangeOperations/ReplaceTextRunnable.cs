@@ -31,7 +31,7 @@ namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
         /// </summary>
         public ReplaceTextRunnable(String replacedText)
         {
-            Assume.NotNull(replacedText, "replacedText");
+            Assume.NotNull(replacedText, nameof(replacedText));
             ReplacedText = replacedText;
         }
 
@@ -40,7 +40,7 @@ namespace CodeSharper.Core.Common.Runnables.TextRangeOperations
         /// </summary>
         public override IEnumerable<TextRange> Run(IEnumerable<Object> parameters)
         {
-            Assume.NotNull(parameters, "parameters");
+            Assume.NotNull(parameters, nameof(parameters));
 
             var textRanges = parameters.OfType<TextRange>().ToArray();
             if (!textRanges.Any()) return Enumerable.Empty<TextRange>();

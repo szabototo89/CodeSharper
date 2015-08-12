@@ -14,9 +14,9 @@ namespace CodeSharper.Core.Nodes.Selectors
         /// </summary>
         public SelectorDescriptor(String name, String value, Type type)
         {
-            Assume.NotNull(value, "value");
-            Assume.NotNull(name, "name");
-            Assume.NotNull(type, "type");
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(name, nameof(name));
+            Assume.NotNull(type, nameof(type));
 
             Value = value;
             Name = name;

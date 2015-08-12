@@ -16,7 +16,7 @@ namespace CodeSharper.Core.Common.Runnables.Attributes
         /// </summary>
         public ConsumesAttribute(Type consumerType)
         {
-            Assume.NotNull(consumerType, "ConsumerType");
+            Assume.NotNull(consumerType, nameof(consumerType));
 
             ConsumerType = consumerType;
         }

@@ -69,7 +69,7 @@
     <Compile Include="Commands\ICommandDescriptorManager.cs" />
     <Compile Include="Commands\NamedCommandCallActualArgument.cs" />
     <Compile Include="Commands\PositionedCommandCallActualArgument.cs" />
-    <Compile Include="Commands\Selectors\PseudoSelectorDescriptor.cs" />
+    <Compile Include="Commands\Selectors\ModifierSelectorDescriptor.cs" />
     <Compile Include="Commands\Selectors\SelectorAttributeDescriptor.cs" />
     <Compile Include="Commands\Selectors\SelectorDescriptor.cs" />
     <Compile Include="Common\ArgumentDescriptor.cs" />
@@ -200,6 +200,7 @@
     <Compile Include="Texts\TextPosition.cs" />
     <Compile Include="Trees\SyntaxTree.cs" />
     <Compile Include="Trees\Tree.cs" />
+    <Compile Include="Utilities\ConstructsHelper.cs" />
     <Compile Include="Utilities\EnumerableExtensions.cs" />
     <Compile Include="Utilities\EqualityHelper.cs" />
     <Compile Include="Utilities\NodeExtensions.cs" />

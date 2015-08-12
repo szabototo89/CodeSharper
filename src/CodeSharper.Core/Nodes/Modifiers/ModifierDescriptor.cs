@@ -13,10 +13,10 @@ namespace CodeSharper.Core.Nodes.Modifiers
         /// </summary>
         public ModifierDescriptor(String name, String value, IEnumerable<String> arguments, Type type, Boolean isClassSelector)
         {
-            Assume.NotNull(name, "name");
-            Assume.NotNull(value, "value");
-            Assume.NotNull(arguments, "arguments");
-            Assume.NotNull(type, "type");
+            Assume.NotNull(name, nameof(name));
+            Assume.NotNull(value, nameof(value));
+            Assume.NotNull(arguments, nameof(arguments));
+            Assume.NotNull(type, nameof(type));
 
             Name = name;
             Value = value;
