@@ -42,8 +42,16 @@ namespace CodeSharper.Core.Common
         {
             var consumers = runnableManager.GetConsumers(runnable);
             var converter = consumers.FirstOrDefault(c => c.IsConvertable(parameter));
-            if (converter == null) return runnable.Run(parameter);
-            return converter.Convert(parameter, runnable.Run);
+            if (converter == null) return ExecuteRunnable(runnable, parameter);
+            return converter.Convert(parameter, param => ExecuteRunnable(runnable, param));
+        }
+
+        /// <summary>
+        /// Executes the runnable with specified parameter.
+        /// </summary>
+        protected virtual Object ExecuteRunnable(IRunnable runnable, Object parameter)
+        {
+            return runnable.Run(parameter);
         }
     }
 }

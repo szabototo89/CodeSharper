@@ -96,7 +96,9 @@
     <Compile Include="Common\Runnables\ConversionOperations\ConvertToStringRunnable.cs" />
     <Compile Include="Common\Runnables\Converters\GreadyEnumerableValueProducer.cs" />
     <Compile Include="Common\Runnables\ConvertToTextRangeRunnable.cs" />
+    <Compile Include="Common\Runnables\IRunnableWithContext.cs" />
     <Compile Include="Common\Runnables\RemoveRunnable.cs" />
+    <Compile Include="Common\Runnables\RunnableWithContextBase.cs" />
     <Compile Include="Common\Runnables\SimpleCastingHelper.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeMultiValueConsumer.cs" />
     <Compile Include="Common\Runnables\Converters\ContainsTextRangeValueConsumer.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Common\Runnables\ValueConverters\IntegerValueConverter.cs" />
     <Compile Include="Common\Runnables\ValueConverters\IValueConverter.cs" />
     <Compile Include="Common\StandardExecutor.cs" />
+    <Compile Include="Common\StandardExecutorWithContext.cs" />
     <Compile Include="ErrorHandling\Assume.cs" />
     <Compile Include="Common\Interfaces\IHasChildren.cs" />
     <Compile Include="Common\Interfaces\IHasNext.cs" />

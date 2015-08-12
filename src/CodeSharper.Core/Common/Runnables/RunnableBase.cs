@@ -15,7 +15,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// </summary>
         Object IRunnable.Run(Object parameter)
         {
-            return (TOut)Run((TIn)parameter);
+            return (TOut) Run((TIn) parameter);
         }
     }
 }

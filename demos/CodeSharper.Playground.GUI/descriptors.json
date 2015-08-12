@@ -363,6 +363,13 @@
             ],
             "type": "CodeSharper.Languages.CSharp.Runnables.CreateRunnable",
             "command-names": [ "create" ]
+        },
+        {
+            "name": "CopyToClipboardRunnable",
+            "description": "It creates a new runnable",
+            "arguments": [ ],
+            "type": "CodeSharper.Languages.CSharp.Runnables.CopyToClipboardRunnable",
+            "command-names": [ "copy-to-clipboard" ]
         }
     ]
 }

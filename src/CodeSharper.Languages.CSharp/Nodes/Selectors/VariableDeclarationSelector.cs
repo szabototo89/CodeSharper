@@ -4,14 +4,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CodeSharper.Languages.CSharp.Nodes.Selectors
 {
-    public class VariableDeclarationSelector : CSharpTypedSelectorBase<VariableDeclaratorSyntax, IdentifierMatchingClassSelector>
+    public class VariableDeclarationSelector : CSharpTypedSelectorBase<VariableDeclarationSyntax, IdentifierMatchingClassSelector>
     {
         /// <summary>
         /// Selects the syntax token.
         /// </summary>
-        protected override SyntaxToken SelectSyntaxToken(VariableDeclaratorSyntax element)
+        protected override SyntaxToken SelectSyntaxToken(VariableDeclarationSyntax element)
         {
-            return element.Identifier;
+            return element.Variables.First().Identifier;
         }
     }
 }

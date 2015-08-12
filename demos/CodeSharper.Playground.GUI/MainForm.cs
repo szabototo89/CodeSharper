@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.ValueConverters;
 using CodeSharper.Core.Services;
@@ -17,6 +18,7 @@ using CodeSharper.Core.Texts;
 using CodeSharper.Interpreter.Bootstrappers;
 using CodeSharper.Playground.GUI.Modules;
 using CodeSharper.Playground.GUI.Services;
+using Microsoft.CodeAnalysis;
 
 namespace CodeSharper.Playground.GUI
 {
@@ -34,7 +36,7 @@ namespace CodeSharper.Playground.GUI
 
             stopwatch = new Stopwatch();
 
-            var assemblies = new[] {Assembly.Load("CodeSharper.Core"), Assembly.Load("CodeSharper.Languages"),  Assembly.Load("CodeSharper.Languages.CSharp"), Assembly.GetExecutingAssembly()};
+            var assemblies = new[] {Assembly.Load("CodeSharper.Core"), Assembly.Load("CodeSharper.Languages"), Assembly.Load("CodeSharper.Languages.CSharp"), Assembly.GetExecutingAssembly()};
             var runnableTypeResolver = new AutoRunnableResolver();
             var valueConverter = new IntegerValueConverter();
             var interactiveService = new ReplaceTextInteractiveService(this);
