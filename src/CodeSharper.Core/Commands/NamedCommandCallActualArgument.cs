@@ -9,12 +9,12 @@ namespace CodeSharper.Core.Commands
         /// <summary>
         /// Gets the value of command call actual parameter
         /// </summary>
-        public Object Value { get; protected set; }
+        public Object Value { get; }
 
         /// <summary>
         /// Gets or sets the name of the actual argument
         /// </summary>
-        public String ArgumentName { get; protected set; }
+        public String ArgumentName { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedCommandCallActualArgument"/> class.

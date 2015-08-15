@@ -8,7 +8,7 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Gets the name of the property.
         /// </summary>
-        public String PropertyName { get; private set; }
+        public String PropertyName { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterAttribute"/> class.

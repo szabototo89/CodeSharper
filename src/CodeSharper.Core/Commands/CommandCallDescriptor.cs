@@ -16,12 +16,12 @@ namespace CodeSharper.Core.Commands
         /// <summary>
         /// Gets or sets the name of <see cref="CommandCallDescriptor"/>
         /// </summary>
-        public String Name { get; protected set; }
+        public String Name { get; }
 
         /// <summary>
         /// Gets or sets the command call actual parameters of <see cref="CommandCallDescriptor"/>
         /// </summary>
-        public IEnumerable<ICommandCallActualArgument> ActualParameters { get; protected set; }
+        public IEnumerable<ICommandCallActualArgument> ActualParameters { get; }
 
         #endregion
 

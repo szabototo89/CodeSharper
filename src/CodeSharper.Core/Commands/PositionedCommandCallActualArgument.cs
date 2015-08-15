@@ -8,12 +8,12 @@ namespace CodeSharper.Core.Commands
         /// <summary>
         /// Gets the value of command call actual parameter
         /// </summary>
-        public Object Value { get; protected set; }
+        public Object Value { get; }
 
         /// <summary>
         /// Gets or sets the position of actual argument
         /// </summary>
-        public Int32 Position { get; protected set; }
+        public Int32 Position { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PositionedCommandCallActualArgument"/> class.
