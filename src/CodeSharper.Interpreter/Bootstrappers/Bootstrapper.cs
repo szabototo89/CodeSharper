@@ -98,6 +98,7 @@ namespace CodeSharper.Interpreter.Bootstrappers
     {
         private readonly Bootstrapper bootstrapper;
         private IExecutor executor;
+        private IDescriptorRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BootstrapperBuilder"/> class.
@@ -117,7 +118,17 @@ namespace CodeSharper.Interpreter.Bootstrappers
 
         public BootstrapperBuilder WithExecutor(IExecutor executor)
         {
+            Assume.IsRequired(executor, nameof(executor));
+
             this.executor = executor;
+            return this;
+        }
+
+        public BootstrapperBuilder WithRepository(IDescriptorRepository repository)
+        {
+            Assume.IsRequired(repository, nameof(repository));
+
+            this.repository = repository;
             return this;
         }
 
@@ -126,7 +137,9 @@ namespace CodeSharper.Interpreter.Bootstrappers
         /// </summary>
         public Bootstrapper Build()
         {
-            return new Bootstrapper(bootstrapper.RunnableFactory, bootstrapper.DescriptorRepository, executor: _ => executor);
+            return new Bootstrapper(bootstrapper.RunnableFactory, 
+                                    repository ?? bootstrapper.DescriptorRepository, 
+                                    executor: _ => executor);
         }
     }
 }

@@ -37,28 +37,18 @@ namespace CodeSharper.Tests.Interpreter.Visitors
 
             var commands = new[]
             {
-                new CommandDescriptor
+                new CommandDescriptor("IdentityRunnable", String.Empty, Enumerable.Empty<ArgumentDescriptor>(), new[] {"IdentityRunnable"}),
+                new CommandDescriptor("IncrementRunnable", String.Empty, new[]
                 {
-                    CommandNames = new[] {"IdentityRunnable"},
-                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                    Name = "IdentityRunnable"
-                },
-                new CommandDescriptor()
-                {
-                    CommandNames = new[] {"IncrementRunnable", "increment", "inc"},
-                    Arguments = new[]
+                    new ArgumentDescriptor
                     {
-                        new ArgumentDescriptor
-                        {
-                            ArgumentType = typeof (Double),
-                            ArgumentName = "value",
-                            DefaultValue = 0,
-                            IsOptional = false,
-                            Position = 0
-                        }
-                    },
-                    Name = "IncrementRunnable"
-                }
+                        ArgumentType = typeof (Double),
+                        ArgumentName = "value",
+                        DefaultValue = 0,
+                        IsOptional = false,
+                        Position = 0
+                    }
+                }, new[] {"IncrementRunnable", "increment", "inc"})
             };
 
             var runnableFactory = new DefaultRunnableFactory(new[] {typeof (IdentityRunnable), typeof (IncrementRunnable)});

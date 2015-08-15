@@ -104,24 +104,9 @@ namespace CodeSharper.Tests.Languages.Csv.Compiler
         {
             return new[]
             {
-                new CommandDescriptor
-                {
-                    CommandNames = new[] {"to-upper-case"},
-                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                    Name = "ToUpperCaseRunnable"
-                },
-                new CommandDescriptor
-                {
-                    CommandNames = new[] {"get-text"},
-                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                    Name = "GetTextRunnable"
-                },
-                new CommandDescriptor
-                {
-                    CommandNames = new[] {"to-string"},
-                    Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                    Name = "ToStringRunnable"
-                }
+                new CommandDescriptor("ToUpperCaseRunnable", "", Enumerable.Empty<ArgumentDescriptor>(), new[] {"to-upper-case"}),
+                new CommandDescriptor("GetTextRunnable", String.Empty, Enumerable.Empty<ArgumentDescriptor>(), new[] {"get-text"}),
+                new CommandDescriptor("ToStringRunnable", String.Empty, Enumerable.Empty<ArgumentDescriptor>(), new[] {"to-string"})
             };
         }
 

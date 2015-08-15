@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.Services;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -7,6 +8,7 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace CodeSharper.Languages.CSharp.Runnables
 {
+    [CommandDescriptor("create-source")]
     public class CreateRunnable : RunnableBase<Object, SyntaxNode>
     {
         [Parameter("source")]

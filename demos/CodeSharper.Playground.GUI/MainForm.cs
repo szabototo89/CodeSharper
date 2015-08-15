@@ -19,6 +19,7 @@ using CodeSharper.Interpreter.Bootstrappers;
 using CodeSharper.Playground.GUI.Modules;
 using CodeSharper.Playground.GUI.Services;
 using Microsoft.CodeAnalysis;
+using static CodeSharper.Core.Utilities.ConstructsHelper;
 
 namespace CodeSharper.Playground.GUI
 {
@@ -41,7 +42,12 @@ namespace CodeSharper.Playground.GUI
             var valueConverter = new IntegerValueConverter();
             var interactiveService = new ReplaceTextInteractiveService(this);
             var runnableFactory = new DefaultRunnableFactory(runnableTypeResolver.ResolveRunnableTypes(assemblies), valueConverter, interactiveService: interactiveService);
-            var descriptorRepository = new FileDescriptorRepository("descriptors.json", assemblies);
+            var fileDescriptorRepository = new FileDescriptorRepository("descriptors.json", assemblies);
+            var autoDescriptorRepository = new AutoCommandDescriptorRepository(assemblies.SelectMany(assembly => assembly.GetTypes()));
+            var descriptorRepository = new MultiDescriptorRepository(
+                Array<IDescriptorRepository>(fileDescriptorRepository, autoDescriptorRepository)
+            );
+
             Bootstrapper = new Bootstrapper(runnableFactory, descriptorRepository);
             compilerModule = new TextCompilerModule(Bootstrapper);
         }

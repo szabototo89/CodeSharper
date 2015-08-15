@@ -45,7 +45,9 @@ namespace CodeSharper.Core.Services
 
         private IEnumerable<CommandDescriptor> RetrieveCommandDescriptors(IEnumerable<Type> runnableTypes)
         {
-            foreach (var type in runnableTypes)
+            var runnables = runnableTypes.Where(runnableType => typeof (IRunnable).IsAssignableFrom(runnableType));
+
+            foreach (var type in runnables)
             {
                 var attributes = type.GetCustomAttributes<CommandDescriptorAttribute>(true).ToArray();
 
@@ -55,7 +57,7 @@ namespace CodeSharper.Core.Services
 
                 var attribute = attributes.Single();
                 var commandArguments = RetrieveCommandArguments(type);
-                var descriptor = new CommandDescriptor(type.Name, attribute.Description, commandArguments, Array(attribute.CommandName));
+                var descriptor = new CommandDescriptor(type.Name, attribute.Description ?? String.Empty, commandArguments, Array(attribute.CommandName));
                 yield return descriptor;
             }
         }

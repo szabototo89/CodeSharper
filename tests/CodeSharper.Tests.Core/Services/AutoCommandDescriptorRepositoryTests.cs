@@ -28,6 +28,16 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
+        public sealed class Specifications
+        {
+            public interface IOtherDescriptorsAreNotSupported
+            {
+                [Test(Description = "should return an empty array")]
+                void ShouldReturnEmptyArray();
+            }
+
+        }
+
         public class InitializeWithTestRunnable : TestFixtureBase
         {
             protected AutoCommandDescriptorRepository underTest;
@@ -131,14 +141,8 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
-        public interface IOtherDescriptorsAreNotSupportedSpecification
-        {
-            [Test(Description = "should return an empty array")]
-            void ShouldReturnEmptyArray();
-        }
-
-        public class GetSelectorDescriptorsMethod : InitializeAsInterfaceWithTestRunnable, 
-                                                    IOtherDescriptorsAreNotSupportedSpecification
+        public class GetSelectorDescriptorsMethod : InitializeAsInterfaceWithTestRunnable,
+                                                    Specifications.IOtherDescriptorsAreNotSupported
         {
             [Test(Description = "should return an empty array")]
             public void ShouldReturnEmptyArray()
@@ -152,7 +156,7 @@ namespace CodeSharper.Tests.Core.Services
         }
 
         public class GetModifierDescriptorsMethod : InitializeAsInterfaceWithTestRunnable,
-                                                    IOtherDescriptorsAreNotSupportedSpecification
+                                                    Specifications.IOtherDescriptorsAreNotSupported
         {
             [Test(Description = "should return an empty array")]
             public void ShouldReturnEmptyArray()
@@ -166,7 +170,7 @@ namespace CodeSharper.Tests.Core.Services
         }
 
         public class GetCombinatorDescriptorsMethod : InitializeAsInterfaceWithTestRunnable,
-                                                      IOtherDescriptorsAreNotSupportedSpecification
+                                                      Specifications.IOtherDescriptorsAreNotSupported
         {
             [Test(Description = "should return an empty array")]
             public void ShouldReturnEmptyArray()

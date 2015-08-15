@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
+using CodeSharper.Core.Common;
 using CodeSharper.Core.Common.Runnables;
 using CodeSharper.Core.Common.Runnables.Attributes;
 using CodeSharper.Core.Common.Runnables.Converters;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Services;
 using CodeSharper.Languages.CSharp.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -13,6 +15,7 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace CodeSharper.Languages.CSharp.Runnables
 {
+    [CommandDescriptor("change-member-visibility")]
     [Consumes(typeof (MultiValueConsumer<SyntaxNode>))]
     public class ChangeMemberVisibilityRunnable : RunnableWithContextBase<SyntaxNode, SyntaxNode, DocumentContext>
     {
