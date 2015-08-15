@@ -28,15 +28,34 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
-        public class ConstructorMethod
+        public class InitializeWithTestRunnable : TestFixtureBase
+        {
+            protected AutoCommandDescriptorRepository underTest;
+
+            public override void Setup()
+            {
+                base.Setup();
+                underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
+            }
+        }
+
+        public class InitializeAsInterfaceWithTestRunnable : TestFixtureBase
+        {
+            protected IDescriptorRepository underTest;
+
+            public override void Setup()
+            {
+                base.Setup();
+                underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
+            }
+        }
+
+        public class ConstructorMethod : InitializeWithTestRunnable
         {
             [Test(Description = "should create one-element-length array when one runnable is passed")]
             public void ShouldCreateOneElementLengthArray_WhenOneRunnableIsPassed()
             {
-                // Act
-                var underTest = new AutoCommandDescriptorRepository(Array(typeof (TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetCommandDescriptors()?.Count();
 
                 // Assert
@@ -44,15 +63,12 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
-        public class GetCommandDescriptorsMethod
+        public class GetCommandDescriptorsMethod : InitializeWithTestRunnable
         {
             [Test(Description = "should return short type name of runnable when one runnable is passed")]
             public void ShouldReturnShortTypeNameOfRunnable_WhenOneRunnableIsPassed()
             {
-                // Act
-                var underTest = new AutoCommandDescriptorRepository(Array(typeof (TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetCommandDescriptors().SingleOrDefault();
 
                 // Assert
@@ -63,10 +79,7 @@ namespace CodeSharper.Tests.Core.Services
             [Test(Description = "should return specified description in CommandDescriptorAttribute when one runnable is passed")]
             public void ShouldReturnSpecifiedDescriptionInRunnableDescriptorAttribute_WhenOneRunnableIsPassed()
             {
-                // Act
-                var underTest = new AutoCommandDescriptorRepository(Array(typeof (TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetCommandDescriptors().SingleOrDefault();
 
                 // Assert
@@ -77,10 +90,7 @@ namespace CodeSharper.Tests.Core.Services
             [Test(Description = "should return specified command name in CommandDescriptorAttribute when one runnable is passed")]
             public void ShouldReturnSpecifiedCommandNameInRunnableDescriptorAttribute_WhenOneRunnableIsPassed()
             {
-                // Act
-                var underTest = new AutoCommandDescriptorRepository(Array(typeof (TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetCommandDescriptors().SingleOrDefault();
 
                 // Assert
@@ -91,10 +101,7 @@ namespace CodeSharper.Tests.Core.Services
             [Test(Description = "should return return specified description in CommandDescriptorAttribute when one runnable is passed")]
             public void ShouldReturnSpecifiedArgumentsInRunnableDescriptorAttribute_WhenOneRunnableIsPassed()
             {
-                // Act
-                var underTest = new AutoCommandDescriptorRepository(Array(typeof (TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetCommandDescriptors().SingleOrDefault();
 
                 // Assert
@@ -124,15 +131,19 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
-        public class GetSelectorDescriptorsMethod
+        public interface IOtherDescriptorsAreNotSupportedSpecification
+        {
+            [Test(Description = "should return an empty array")]
+            void ShouldReturnEmptyArray();
+        }
+
+        public class GetSelectorDescriptorsMethod : InitializeAsInterfaceWithTestRunnable, 
+                                                    IOtherDescriptorsAreNotSupportedSpecification
         {
             [Test(Description = "should return an empty array")]
             public void ShouldReturnEmptyArray()
             {
-                // Act
-                IDescriptorRepository underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetSelectorDescriptors();
 
                 // Assert
@@ -140,15 +151,13 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
-        public class GetModifierDescriptorsMethod
+        public class GetModifierDescriptorsMethod : InitializeAsInterfaceWithTestRunnable,
+                                                    IOtherDescriptorsAreNotSupportedSpecification
         {
             [Test(Description = "should return an empty array")]
             public void ShouldReturnEmptyArray()
             {
-                // Act
-                IDescriptorRepository underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetModifierDescriptors();
 
                 // Assert
@@ -156,15 +165,13 @@ namespace CodeSharper.Tests.Core.Services
             }
         }
 
-        public class GetCombinatorDescriptorsMethod
+        public class GetCombinatorDescriptorsMethod : InitializeAsInterfaceWithTestRunnable,
+                                                      IOtherDescriptorsAreNotSupportedSpecification
         {
             [Test(Description = "should return an empty array")]
             public void ShouldReturnEmptyArray()
             {
-                // Act
-                IDescriptorRepository underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
-
-                // Arrange
+                // Act + Arrange
                 var result = underTest.GetCombinatorDescriptors();
 
                 // Assert
