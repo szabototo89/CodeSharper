@@ -42,11 +42,11 @@ namespace CodeSharper.Tests.Core.Commands
             /// </summary>
             public IEnumerable<CommandDescriptor> GetCommandDescriptors()
             {
-                yield return new CommandDescriptor
-                {
-                    Name = "test-command",
-                    CommandNames = new[] {"test-command"},
-                    Arguments = new[]
+                yield return new CommandDescriptor(
+                    name: "test-command",
+                    description: "",
+                    commandNames: new[] {"test-command"},
+                    arguments: new[]
                     {
                         new ArgumentDescriptor
                         {
@@ -55,7 +55,7 @@ namespace CodeSharper.Tests.Core.Commands
                             Position = 0
                         }
                     }
-                };
+                );
             }
         }
 

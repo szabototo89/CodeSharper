@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeSharper.Core.ErrorHandling;
 using CodeSharper.Core.Utilities;
 
 namespace CodeSharper.Core.Common
@@ -8,6 +9,26 @@ namespace CodeSharper.Core.Common
     public class CommandDescriptor : IEquatable<CommandDescriptor>
     {
         public static readonly CommandDescriptor Empty;
+
+        /// <summary>
+        /// Gets or sets the name of command
+        /// </summary>
+        public String Name { get; }
+
+        /// <summary>
+        /// Gets or sets the formal arguments of command
+        /// </summary>
+        public IEnumerable<ArgumentDescriptor> Arguments { get; }
+
+        /// <summary>
+        /// Gets or sets the alias names of command
+        /// </summary>
+        public IEnumerable<String> CommandNames { get; }
+
+        /// <summary>
+        /// Gets or sets the description of command
+        /// </summary>
+        public String Description { get; }
 
         /// <summary>
         /// Initializes the <see cref="CommandDescriptor"/> class.
@@ -26,25 +47,16 @@ namespace CodeSharper.Core.Common
             CommandNames = Enumerable.Empty<String>();
         }
 
-        /// <summary>
-        /// Gets or sets the name of command
-        /// </summary>
-        public String Name { get; set; }
+        public CommandDescriptor(String name, String description, IEnumerable<ArgumentDescriptor> arguments, IEnumerable<String> commandNames)
+        {
+            Assume.NotNull(name, nameof(name));
+            Assume.NotNull(description, nameof(description));
 
-        /// <summary>
-        /// Gets or sets the formal arguments of command
-        /// </summary>
-        public IEnumerable<ArgumentDescriptor> Arguments { get; set; }
-
-        /// <summary>
-        /// Gets or sets the alias names of command
-        /// </summary>
-        public IEnumerable<String> CommandNames { get; set; }
-
-        /// <summary>
-        /// Gets or sets the description of command
-        /// </summary>
-        public String Description { get; set; }
+            Name = name;
+            Description = description;
+            Arguments = arguments ?? Enumerable.Empty<ArgumentDescriptor>();
+            CommandNames = commandNames ?? Enumerable.Empty<String>();
+        }
 
         #region Equality members
 
@@ -93,10 +105,8 @@ namespace CodeSharper.Core.Common
                    String.Equals(Description, other.Description) &&
                    Enumerable.SequenceEqual(Arguments, other.Arguments) &&
                    Enumerable.SequenceEqual(CommandNames, other.CommandNames);
-
         }
 
         #endregion
-
     }
 }

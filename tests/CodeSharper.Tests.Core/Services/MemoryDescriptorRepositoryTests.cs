@@ -17,8 +17,8 @@ namespace CodeSharper.Tests.Core.Services
     {
         public class GetCombinatorDescriptorsMethod
         {
-            [MethodTest(nameof(GetCombinatorDescriptorsMethod), 
-                        Description = "should return defined combinator descriptors after calling it")]
+            [MethodTest(nameof(GetCombinatorDescriptorsMethod),
+                Description = "should return defined combinator descriptors after calling it")]
             public void ShouldReturnDefinedCombinatorDescriptors_AfterCallingIt()
             {
                 // Given in setup
@@ -41,8 +41,8 @@ namespace CodeSharper.Tests.Core.Services
 
         public class GetModifierDescriptorsMethod
         {
-            [MethodTest(nameof(GetModifierDescriptorsMethod), 
-                        Description = "should return defined pseudo-selector descriptors after calling it")]
+            [MethodTest(nameof(GetModifierDescriptorsMethod),
+                Description = "should return defined pseudo-selector descriptors after calling it")]
             public void ShouldReturnDefinedPseudoSelectorDescriptors_AfterCallingIt()
             {
                 // Given in setup
@@ -68,7 +68,7 @@ namespace CodeSharper.Tests.Core.Services
         public class GetSelectorDescriptorsMethod
         {
             [MethodTest(nameof(GetSelectorDescriptorsMethod),
-                        Description = "should return defined selector descriptors after calling it")]
+                Description = "should return defined selector descriptors after calling it")]
             public void ShouldReturnDefinedSelectorDescriptors_AfterCallingIt()
             {
                 // Given
@@ -93,19 +93,17 @@ namespace CodeSharper.Tests.Core.Services
         public class GetCommandDescriptorsMethod
         {
             [MethodTest(nameof(GetCommandDescriptorsMethod),
-                        Description = "should return defined command descriptors after calling it")]
+                Description = "should return defined command descriptors after calling it")]
             public void ShouldReturnDefinedCommandDescriptors_AfterCallingIt()
             {
                 // Given
                 var commandDescriptors = new[]
                 {
-                    new CommandDescriptor()
-                    {
-                        CommandNames = new[] {"test"},
-                        Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                        Description = "test description",
-                        Name = "test-command"
-                    }
+                    new CommandDescriptor(
+                        commandNames: new[] {"test"},
+                        arguments: Enumerable.Empty<ArgumentDescriptor>(),
+                        description: "test description",
+                        name: "test-command")
                 };
                 var underTest = new MemoryDescriptorRepository(commandDescriptors: commandDescriptors);
 
@@ -115,13 +113,11 @@ namespace CodeSharper.Tests.Core.Services
                 // Then
                 Assert.That(result, Is.EquivalentTo(new[]
                 {
-                    new CommandDescriptor()
-                    {
-                        CommandNames = new[] {"test"},
-                        Arguments = Enumerable.Empty<ArgumentDescriptor>(),
-                        Description = "test description",
-                        Name = "test-command"
-                    }
+                    new CommandDescriptor(
+                        commandNames: new[] {"test"},
+                        arguments: Enumerable.Empty<ArgumentDescriptor>(),
+                        description: "test description",
+                        name: "test-command")
                 }));
             }
         }

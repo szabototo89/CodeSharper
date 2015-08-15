@@ -123,5 +123,53 @@ namespace CodeSharper.Tests.Core.Services
                 Assert.That(result.Arguments, Is.EquivalentTo(parameters));
             }
         }
+
+        public class GetSelectorDescriptorsMethod
+        {
+            [Test(Description = "should return an empty array")]
+            public void ShouldReturnEmptyArray()
+            {
+                // Act
+                IDescriptorRepository underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
+
+                // Arrange
+                var result = underTest.GetSelectorDescriptors();
+
+                // Assert
+                Assert.That(result, Is.Empty);
+            }
+        }
+
+        public class GetModifierDescriptorsMethod
+        {
+            [Test(Description = "should return an empty array")]
+            public void ShouldReturnEmptyArray()
+            {
+                // Act
+                IDescriptorRepository underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
+
+                // Arrange
+                var result = underTest.GetModifierDescriptors();
+
+                // Assert
+                Assert.That(result, Is.Empty);
+            }
+        }
+
+        public class GetCombinatorDescriptorsMethod
+        {
+            [Test(Description = "should return an empty array")]
+            public void ShouldReturnEmptyArray()
+            {
+                // Act
+                IDescriptorRepository underTest = new AutoCommandDescriptorRepository(Array(typeof(TestRunnable)));
+
+                // Arrange
+                var result = underTest.GetCombinatorDescriptors();
+
+                // Assert
+                Assert.That(result, Is.Empty);
+            }
+        }
     }
 }

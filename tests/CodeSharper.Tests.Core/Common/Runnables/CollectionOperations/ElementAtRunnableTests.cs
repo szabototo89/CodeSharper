@@ -6,7 +6,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
     [TestFixture]
     internal class ElementAtRunnableTests : RunnableTestFixtureBase
     {
-        internal class TestInitializer : RunnableTestFixtureBase
+        internal class InitializeRunnableWithDefaultConstructor : RunnableTestFixtureBase
         {
             protected ElementAtRunnable underTest;
 
@@ -19,7 +19,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
             }
         }
 
-        public class RunMethod : TestInitializer
+        public class RunMethod : InitializeRunnableWithDefaultConstructor
         {
             [Test(Description = "Run should return the first element of enumerable after setting position property to zero")]
             public void ShouldReturnTheFirstElementOfEnumerable_AfterSettingPositionToZero()

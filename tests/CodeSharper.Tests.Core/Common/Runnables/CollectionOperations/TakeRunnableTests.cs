@@ -8,7 +8,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
     [TestFixture]
     public class TakeRunnableTests : RunnableTestFixtureBase
     {
-        public class TestInitializer : RunnableTestFixtureBase
+        public class InitializeRunnableWithDefaultConstructor : RunnableTestFixtureBase
         {
             protected TakeRunnable underTest;
 
@@ -23,7 +23,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
             }
         }
 
-        public class RunMethod : TestInitializer
+        public class RunMethod : InitializeRunnableWithDefaultConstructor
         {
             [Test(Description = "Run should return empty array when count is zero")]
             public void ShouldReturnEmptyArray_WhenCountIsZero()

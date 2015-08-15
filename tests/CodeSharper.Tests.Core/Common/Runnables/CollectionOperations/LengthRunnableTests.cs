@@ -9,7 +9,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
     [TestFixture]
     internal class LengthRunnableTests : RunnableTestFixtureBase
     {
-        public class TestInitializer : RunnableTestFixtureBase
+        public class InitializeRunnableWithDefaultConstructor : RunnableTestFixtureBase
         {
             protected LengthRunnable underTest;
 
@@ -22,7 +22,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
             }
         }
 
-        public class RunMethod : TestInitializer
+        public class RunMethod : InitializeRunnableWithDefaultConstructor
         {
             [Test(Description = "Run should return length of text when string is passed")]
             public void ShouldReturnLengthOfText_WhenStringIsPassed()

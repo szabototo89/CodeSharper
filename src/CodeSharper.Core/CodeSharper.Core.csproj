@@ -182,6 +182,7 @@
     <Compile Include="Services\IInteractiveService.cs" />
     <Compile Include="Services\MemoryDescriptorRepository.cs" />
     <Compile Include="Services\CommandDescriptorAttribute.cs" />
+    <Compile Include="Services\MultiDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="TextManagers\ITextManager.cs" />

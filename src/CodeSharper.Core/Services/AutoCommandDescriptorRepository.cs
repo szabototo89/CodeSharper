@@ -20,7 +20,6 @@ namespace CodeSharper.Core.Services
         public AutoCommandDescriptorRepository(IEnumerable<Type> runnableTypes)
         {
             Assume.IsRequired(runnableTypes, nameof(runnableTypes));
-
             commandDescriptors = RetrieveCommandDescriptors(runnableTypes);
         }
 
@@ -39,7 +38,7 @@ namespace CodeSharper.Core.Services
             yield break;
         }
 
-        IEnumerable<CommandDescriptor> IDescriptorRepository.GetCommandDescriptors()
+        public IEnumerable<CommandDescriptor> GetCommandDescriptors()
         {
             return commandDescriptors;
         }
@@ -55,14 +54,8 @@ namespace CodeSharper.Core.Services
                     throw new Exception($"Only one {nameof(CommandDescriptorAttribute)} is allowed to define in {type.FullName} runnable.");
 
                 var attribute = attributes.Single();
-                var descriptor = new CommandDescriptor()
-                {
-                    Name = type.Name,
-                    Arguments = RetrieveCommandArguments(type),
-                    CommandNames = Array(attribute.CommandName),
-                    Description = attribute.Description
-                };
-
+                var commandArguments = RetrieveCommandArguments(type);
+                var descriptor = new CommandDescriptor(type.Name, attribute.Description, commandArguments, Array(attribute.CommandName));
                 yield return descriptor;
             }
         }

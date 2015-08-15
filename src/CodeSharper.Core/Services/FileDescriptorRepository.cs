@@ -72,21 +72,21 @@ namespace CodeSharper.Core.Services
 
                 foreach (var commandDescriptor in descriptor.CommandDescriptors)
                 {
-                    var desc = new CommandDescriptor
+                    var arguments = commandDescriptor.Arguments.Select(argument => new ArgumentDescriptor
                     {
-                        Name = commandDescriptor.Name,
-                        Description = commandDescriptor.Description,
-                        CommandNames = new List<String>(commandDescriptor.CommandNames)
-                    };
-
-                    desc.Arguments = commandDescriptor.Arguments.Select((ArgumentDescriptorModel arg) => new ArgumentDescriptor
-                    {
-                        ArgumentName = arg.Name,
-                        DefaultValue = arg.DefaultValue,
-                        IsOptional = arg.IsOptional,
-                        Position = arg.Position,
-                        ArgumentType = findInAssemblies(arg.ArgumentType)
+                        ArgumentName = argument.Name,
+                        DefaultValue = argument.DefaultValue,
+                        IsOptional = argument.IsOptional,
+                        Position = argument.Position,
+                        ArgumentType = findInAssemblies(argument.ArgumentType)
                     });
+
+                    var desc = new CommandDescriptor(
+                        commandDescriptor.Name,
+                        commandDescriptor.Description,
+                        arguments,
+                        commandDescriptor.CommandNames
+                    );
 
                     commandDescriptors.Add(desc);
                 }

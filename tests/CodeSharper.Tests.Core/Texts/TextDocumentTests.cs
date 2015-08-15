@@ -14,7 +14,7 @@ namespace CodeSharper.Tests.Core.Texts
     [TestFixture]
     internal class TextDocumentTests : TestFixtureBase
     {
-        internal class TestInitializer : TestFixtureBase
+        internal class InitializeTextDocumentWithHelloWorldText : TestFixtureBase
         {
             protected TextDocument UnderTest { get; set; }
 
@@ -25,7 +25,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class CreateOrGetTextRangeMethod : TestInitializer
+        public class CreateOrGetTextRangeMethod : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "CreateOrGetTextRange should return an existing TextRange when it is called")]
             public void ShouldReturnAnExistingTextRange_WhenItIsCalled()
@@ -107,7 +107,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class TextRangeProperty : TestInitializer
+        public class TextRangeProperty : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "TextRange should return root element of TextDocument when TextDocument is initialized")]
             public void ShouldReturnRootElementOfTextDocument_WhenTextDocumentIsInitialized()
@@ -122,7 +122,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class ChangeTextMethod : TestInitializer
+        public class ChangeTextMethod : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "ChangeText should remove existing substring when insert new value when there is no conflict between text ranges")]
             public void ShouldRemoveExistingSubstringAndInsertNewValue_WhenThereIsNoConflictBetweenTextRanges
@@ -330,7 +330,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class ChangeRawTextMehod : TestInitializer
+        public class ChangeRawTextMehod : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "ChangeRawText should update text but it does not update any text ranges when it is called")]
             public void ShouldUpdateTextButItDoesNotUpdateAnyTextRanges_WhenItIsCalled()
@@ -350,7 +350,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class GetTextMethod : TestInitializer
+        public class GetTextMethod : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "GetText should return positioned text when proper TextRange is passed")]
             public void ShouldReturnPositionedText_WhenProperTextRangeIsPassed()
@@ -365,7 +365,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class RemoveTextMethod : TestInitializer
+        public class RemoveTextMethod : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "RemoveText should remove selected text when proper text range is passed")]
             public void ShouldRemoveSelectedText_WhenProperTextRangeIsPassed()
@@ -414,7 +414,7 @@ namespace CodeSharper.Tests.Core.Texts
             }
         }
 
-        public class TransactionMode : TestInitializer
+        public class TransactionMode : InitializeTextDocumentWithHelloWorldText
         {
             [Test(Description = "BeginTransaction should set a flag to change several TextRanges when it is called once")]
             public void BeginTransaction_ShouldSetFlagToChangeSeveralTextRange_WhenItIsCalledOnce()
