@@ -7,20 +7,23 @@ namespace CodeSharper.Tests.Core.Nodes.Modifiers
     [TestFixture]
     internal class ChildrenModifierTests : TestFixtureBase
     {
-        [Test(Description = "ModifySelection should return all children of specified node when passed node has children")]
-        public void ModifySelection_ShouldReturnsAllChildrenOfSpecifiedNode_WhenPassedNodeHasChildren()
+        public class ModifySelectionMethod
         {
-            // Given
-            var underTest = new ChildrenModifier();
-            var node = new StubNode("Hello World");
-            node.AppendChild(new StubNode("Hello"));
-            node.AppendChild(new StubNode("World"));
+            [Test(Description = "ModifySelection should return all children of specified node when passed node has children")]
+            public void ShouldReturnAllChildrenOfSpecifiedNode_WhenPassedNodeHasChildren()
+            {
+                // Given
+                var underTest = new ChildrenModifier();
+                var node = new StubNode("Hello World");
+                node.AppendChild(new StubNode("Hello"));
+                node.AppendChild(new StubNode("World"));
 
-            // When
-            var result = underTest.ModifySelection(node);
+                // When
+                var result = underTest.ModifySelection(node);
 
-            // Then
-            Assert.That(result, Is.EquivalentTo(new[] { new StubNode("Hello"), new StubNode("World") }));
+                // Then
+                Assert.That(result, Is.EquivalentTo(new[] {new StubNode("Hello"), new StubNode("World")}));
+            }
         }
     }
 }

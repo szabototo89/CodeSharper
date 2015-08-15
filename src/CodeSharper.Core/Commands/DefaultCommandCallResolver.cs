@@ -117,13 +117,25 @@ namespace CodeSharper.Core.Commands
                 var result = commandDescriptor.Arguments.Zip(positionedArguments, (argument, actualArgument) => {
                     if (actualArgument.Value == null)
                     {
-                        return Tuple.Create(argument.ArgumentType, typeof (Object));
+                        return new
+                        {
+                            FormalArgumentType = argument.ArgumentType,
+                            ActualArgumentType = typeof (Object)
+                        };
+
+                        // return Tuple.Create(argument.ArgumentType, typeof (Object));
                     }
-                    return Tuple.Create(argument.ArgumentType, actualArgument.Value.GetType());
+                    return new
+                    {
+                        FormalArgumentType = argument.ArgumentType,
+                        ActualArgumentType = actualArgument.Value.GetType()
+                    };
+
+                    // return Tuple.Create(argument.ArgumentType, actualArgument.Value.GetType());
                 });
 
                 // if there is a match then return with the result
-                if (result.All(tuple => tuple.Item1 == tuple.Item2))
+                if (result.All(tuple => tuple.ActualArgumentType == tuple.FormalArgumentType))
                 {
                     return commandDescriptor;
                 }
