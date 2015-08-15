@@ -6,6 +6,7 @@ using CodeSharper.Core.Nodes.Combinators;
 using CodeSharper.Core.Nodes.Modifiers;
 using CodeSharper.Core.Services;
 using CodeSharper.Core.Utilities;
+using CodeSharper.Tests.TestAttributes;
 using NUnit.Framework;
 using SelectorDescriptor = CodeSharper.Core.Nodes.Selectors.SelectorDescriptor;
 
@@ -16,7 +17,8 @@ namespace CodeSharper.Tests.Core.Services
     {
         public class GetCombinatorDescriptorsMethod
         {
-            [Test(Description = "GetCombinator should return defined combinator descriptors after calling it")]
+            [MethodTest(nameof(GetCombinatorDescriptorsMethod), 
+                        Description = "should return defined combinator descriptors after calling it")]
             public void ShouldReturnDefinedCombinatorDescriptors_AfterCallingIt()
             {
                 // Given in setup
@@ -39,7 +41,8 @@ namespace CodeSharper.Tests.Core.Services
 
         public class GetModifierDescriptorsMethod
         {
-            [Test(Description = "GetModifierDescriptors should return defined pseudo-selector descriptors after calling it")]
+            [MethodTest(nameof(GetModifierDescriptorsMethod), 
+                        Description = "should return defined pseudo-selector descriptors after calling it")]
             public void ShouldReturnDefinedPseudoSelectorDescriptors_AfterCallingIt()
             {
                 // Given in setup
@@ -64,7 +67,8 @@ namespace CodeSharper.Tests.Core.Services
 
         public class GetSelectorDescriptorsMethod
         {
-            [Test(Description = "GetSelectorDescriptors should return defined selector descriptors after calling it")]
+            [MethodTest(nameof(GetSelectorDescriptorsMethod),
+                        Description = "should return defined selector descriptors after calling it")]
             public void ShouldReturnDefinedSelectorDescriptors_AfterCallingIt()
             {
                 // Given
@@ -88,7 +92,8 @@ namespace CodeSharper.Tests.Core.Services
 
         public class GetCommandDescriptorsMethod
         {
-            [Test(Description = "GetCommandDescriptors should return defined command descriptors after calling it")]
+            [MethodTest(nameof(GetCommandDescriptorsMethod),
+                        Description = "should return defined command descriptors after calling it")]
             public void ShouldReturnDefinedCommandDescriptors_AfterCallingIt()
             {
                 // Given
