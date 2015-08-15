@@ -75,9 +75,9 @@ namespace CodeSharper.Core.Services
         {
             unchecked
             {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DefaultValue != null ? DefaultValue.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ArgumentType != null ? ArgumentType.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (DefaultValue?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ArgumentType?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ IsOptional.GetHashCode();
                 hashCode = (hashCode * 397) ^ Position.GetHashCode();
                 return hashCode;

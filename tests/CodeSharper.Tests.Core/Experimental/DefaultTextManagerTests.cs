@@ -280,10 +280,6 @@ namespace CodeSharper.Tests.Core.Experimental
             Assert.That(result.Text, Is.EqualTo(expectedText));
         }
 
-        /// <summary>
-        /// Sets the value_ should handle huge amount text spans.
-        /// </summary>
-        /// <param name="lines"></param>
         [TestCase(100)]
         [TestCase(5000)]
         [TestCase(10000)]

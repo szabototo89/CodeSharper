@@ -51,7 +51,7 @@ namespace CodeSharper.Core.Services
 
                 if (!attributes.Any()) continue;
                 if (attributes.Length > 1)
-                    throw new Exception($"Only one {nameof(CommandDescriptorAttribute)} is allowed to define in {type.FullName} runnable.");
+                    throw new Exception($"Only one {nameof(CommandDescriptorAttribute)} is allowed to be defined in {type.FullName} runnable.");
 
                 var attribute = attributes.Single();
                 var commandArguments = RetrieveCommandArguments(type);
