@@ -9,17 +9,17 @@ namespace CodeSharper.Languages.CSharp.Common
         /// <summary>
         /// Gets or sets the workspace.
         /// </summary>
-        public Workspace Workspace { get; protected set; }
+        public Workspace Workspace { get; }
 
         /// <summary>
         /// Gets or sets the current document.
         /// </summary>
-        public Document CurrentDocument { get; protected set; }
+        public Document CurrentDocument { get; }
 
         /// <summary>
         /// Gets or sets the document editor.
         /// </summary>
-        public DocumentEditor DocumentEditor { get; protected set; }
+        public DocumentEditor DocumentEditor { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentContext"/> class.

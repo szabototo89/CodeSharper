@@ -6,6 +6,11 @@ namespace CodeSharper.Core.Commands
     public abstract class CommandCallBase : ICommandCall
     {
         /// <summary>
+        /// Gets or sets children of command call
+        /// </summary>
+        public IEnumerable<ICommandCall> Children { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CommandCallBase"/> class.
         /// </summary>
         protected CommandCallBase(IEnumerable<ICommandCall> commands)
@@ -14,11 +19,6 @@ namespace CodeSharper.Core.Commands
 
             Children = commands;
         }
-
-        /// <summary>
-        /// Gets or sets children of command call
-        /// </summary>
-        public IEnumerable<ICommandCall> Children { get; protected set; }
     }
 
     public class PipelineCommandCall : CommandCallBase

@@ -40,6 +40,7 @@ namespace CodeSharper.Tests.Interpreter.Common
                 Enumerable.Empty<ModifierElement>(),
                 Enumerable.Empty<ClassSelectorElement>()
             ));
+
             AssertHelper.AreEqualByValue(new TypeSelectorElement(), new TypeSelectorElement());
             AssertHelper.AreNotEqualByValue(underTest, new TypeSelectorElement());
         }

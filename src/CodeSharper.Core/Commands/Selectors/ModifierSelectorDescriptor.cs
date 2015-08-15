@@ -12,12 +12,12 @@ namespace CodeSharper.Core.Commands.Selectors
         /// <summary>
         /// Gets or sets the name of <see cref="ModifierSelectorDescriptor"/> class
         /// </summary>
-        public String Name { get; protected set; }
+        public String Name { get; }
 
         /// <summary>
         /// Gets or sets the value of <see cref="ModifierSelectorDescriptor"/> class
         /// </summary>
-        public Option<Object> Value { get; protected set; }
+        public Option<Object> Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModifierSelectorDescriptor"/> class.

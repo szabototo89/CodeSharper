@@ -11,12 +11,12 @@ namespace CodeSharper.Core.Commands.Selectors
         /// <summary>
         /// Gets or sets the name of selector attribute descriptor
         /// </summary>
-        public String Name { get; protected set; }
+        public String Name { get; }
 
         /// <summary>
         /// Gets or sets the value of selector attribute descriptor
         /// </summary>
-        public String Value { get; protected set; }
+        public String Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorAttributeDescriptor"/> class.

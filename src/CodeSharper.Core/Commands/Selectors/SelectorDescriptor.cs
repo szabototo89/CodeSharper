@@ -16,17 +16,17 @@ namespace CodeSharper.Core.Commands.Selectors
         /// <summary>
         /// Gets or sets the value of selector
         /// </summary>
-        public String Value { get; protected set; }
+        public String Value { get; }
 
         /// <summary>
         /// Gets or sets the attributes of selector
         /// </summary>
-        public IEnumerable<SelectorAttributeDescriptor> SelectorAttributes { get; protected set; }
+        public IEnumerable<SelectorAttributeDescriptor> SelectorAttributes { get; }
 
         /// <summary>
         /// Gets or sets the pseudo selector descriptors
         /// </summary>
-        public IEnumerable<ModifierSelectorDescriptor> PseudoSelectorDescriptors { get; protected set; }
+        public IEnumerable<ModifierSelectorDescriptor> PseudoSelectorDescriptors { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorDescriptor"/> class.
@@ -51,9 +51,9 @@ namespace CodeSharper.Core.Commands.Selectors
         {
             unchecked
             {
-                var hashCode = (Value != null ? Value.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SelectorAttributes != null ? SelectorAttributes.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (PseudoSelectorDescriptors != null ? PseudoSelectorDescriptors.GetHashCode() : 0);
+                var hashCode = Value?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (SelectorAttributes?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (PseudoSelectorDescriptors?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }
