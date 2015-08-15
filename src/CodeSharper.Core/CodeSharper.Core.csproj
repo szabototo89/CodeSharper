@@ -174,12 +174,14 @@
     <Compile Include="Nodes\Selectors\UniversalSelector.cs" />
     <Compile Include="SemanticTrees\SemanticNode.cs" />
     <Compile Include="Services\ArgumentDescriptorModel.cs" />
+    <Compile Include="Services\AutoCommandDescriptorRepository.cs" />
     <Compile Include="Services\CommandDescriptorModel.cs" />
     <Compile Include="Services\DescriptorModel.cs" />
     <Compile Include="Services\FileDescriptorRepository.cs" />
     <Compile Include="Services\IDescriptorRepository.cs" />
     <Compile Include="Services\IInteractiveService.cs" />
     <Compile Include="Services\MemoryDescriptorRepository.cs" />
+    <Compile Include="Services\CommandDescriptorAttribute.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="TextManagers\ITextManager.cs" />

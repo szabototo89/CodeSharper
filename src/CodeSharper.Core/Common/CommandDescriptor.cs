@@ -59,10 +59,10 @@ namespace CodeSharper.Core.Common
         {
             unchecked
             {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Arguments != null ? Arguments.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (CommandNames != null ? CommandNames.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (Description != null ? Description.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode*397) ^ (Arguments?.GetHashCode() ?? 0);
+                hashCode = (hashCode*397) ^ (CommandNames?.GetHashCode() ?? 0);
+                hashCode = (hashCode*397) ^ (Description?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

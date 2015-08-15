@@ -15,27 +15,27 @@ namespace CodeSharper.Core.Common.Runnables
         /// <summary>
         /// Gets or sets the value converter.
         /// </summary>
-        public IValueConverter ValueConverter { get; protected set; }
+        public IValueConverter ValueConverter { get; }
 
         /// <summary>
         /// Gets or sets the interactive service.
         /// </summary>
-        public IInteractiveService InteractiveService { get; protected set; }
+        public IInteractiveService InteractiveService { get; }
 
         /// <summary>
         /// Gets or sets the available runnables.
         /// </summary>
-        public IEnumerable<Type> AvailableRunnables { get; protected set; }
+        public IEnumerable<Type> AvailableRunnables { get; }
 
         /// <summary>
         /// Gets or sets the name matcher.
         /// </summary>
-        public INameMatcher RunnableNameMatcher { get; protected set; }
+        public INameMatcher RunnableNameMatcher { get; }
 
         /// <summary>
         /// Gets or sets the parameter name matcher.
         /// </summary>
-        public INameMatcher ParameterNameMatcher { get; protected set; }
+        public INameMatcher ParameterNameMatcher { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultRunnableFactory"/> class.
@@ -61,7 +61,7 @@ namespace CodeSharper.Core.Common.Runnables
             // instantiate runnable
             var runnableType = AvailableRunnables.FirstOrDefault(type => RunnableNameMatcher.Match(type.Name, runnableName));
             if (runnableType == null)
-                throw new Exception(String.Format("Runnable ({0}) is not available!", runnableName));
+                throw new Exception($"Runnable ({runnableName}) is not available!");
 
             IRunnable runnable = null;
 

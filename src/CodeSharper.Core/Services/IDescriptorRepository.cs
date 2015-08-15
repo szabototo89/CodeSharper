@@ -19,7 +19,7 @@ namespace CodeSharper.Core.Services
         IEnumerable<CombinatorDescriptor> GetCombinatorDescriptors();
 
         /// <summary>
-        /// Gets the pseudo selectors.
+        /// Gets the modifier selectors.
         /// </summary>
         IEnumerable<ModifierDescriptor> GetModifierDescriptors();
 

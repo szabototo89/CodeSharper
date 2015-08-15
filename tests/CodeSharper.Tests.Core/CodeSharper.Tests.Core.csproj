@@ -87,6 +87,7 @@
     <Compile Include="Experimental\DefaultTextManagerTests.cs" />
     <Compile Include="Experimental\TextPositionTests.cs" />
     <Compile Include="Experimental\TextSpanTests.cs" />
+    <Compile Include="Services\AutoCommandDescriptorRepositoryTests.cs" />
     <Compile Include="Services\MemoryDescriptorRepositoryTests.cs" />
     <Compile Include="Texts\TextRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

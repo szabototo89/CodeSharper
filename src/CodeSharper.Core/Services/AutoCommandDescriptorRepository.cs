@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using CodeSharper.Core.Common;
+using CodeSharper.Core.Common.Runnables;
+using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Nodes.Combinators;
+using CodeSharper.Core.Nodes.Modifiers;
+using CodeSharper.Core.Nodes.Selectors;
+using CodeSharper.Core.Utilities;
+using static CodeSharper.Core.Utilities.ConstructsHelper;
+
+namespace CodeSharper.Core.Services
+{
+    public class AutoCommandDescriptorRepository : IDescriptorRepository
+    {
+        private readonly IEnumerable<CommandDescriptor> commandDescriptors;
+
+        public AutoCommandDescriptorRepository(IEnumerable<Type> runnableTypes)
+        {
+            Assume.IsRequired(runnableTypes, nameof(runnableTypes));
+
+            commandDescriptors = RetrieveCommandDescriptors(runnableTypes);
+        }
+
+        IEnumerable<CombinatorDescriptor> IDescriptorRepository.GetCombinatorDescriptors()
+        {
+            yield break;
+        }
+
+        IEnumerable<ModifierDescriptor> IDescriptorRepository.GetModifierDescriptors()
+        {
+            yield break;
+        }
+
+        IEnumerable<SelectorDescriptor> IDescriptorRepository.GetSelectorDescriptors()
+        {
+            yield break;
+        }
+
+        IEnumerable<CommandDescriptor> IDescriptorRepository.GetCommandDescriptors()
+        {
+            return commandDescriptors;
+        }
+
+        private IEnumerable<CommandDescriptor> RetrieveCommandDescriptors(IEnumerable<Type> runnableTypes)
+        {
+            foreach (var type in runnableTypes)
+            {
+                var attributes = type.GetCustomAttributes<CommandDescriptorAttribute>(true).ToArray();
+
+                if (!attributes.Any()) continue;
+                if (attributes.Length > 1)
+                    throw new Exception($"Only one {nameof(CommandDescriptorAttribute)} is allowed to define in {type.FullName} runnable.");
+
+                var attribute = attributes.Single();
+                var descriptor = new CommandDescriptor()
+                {
+                    Name = type.Name,
+                    Arguments = RetrieveCommandArguments(type),
+                    CommandNames = Array(attribute.CommandName),
+                    Description = attribute.Description
+                };
+
+                yield return descriptor;
+            }
+        }
+
+        private IEnumerable<ArgumentDescriptor> RetrieveCommandArguments(Type runnableType)
+        {
+            var runnableProperties = runnableType.GetProperties();
+            var runnablePropertiesWithAttribute = runnableProperties.Select(property => new
+            {
+                PropertyInformation = property,
+                Attribute = property.GetCustomAttributes(typeof (ParameterAttribute), true)
+                                    .OfType<ParameterAttribute>()
+                                    .SingleOrDefault()
+            });
+            var properties = runnablePropertiesWithAttribute.Where(property => property.Attribute != null);
+
+            var position = 0;
+            foreach (var property in properties)
+            {
+                var descriptor = new ArgumentDescriptor
+                {
+                    ArgumentName = property.Attribute.PropertyName,
+                    ArgumentType = property.PropertyInformation.PropertyType,
+                    DefaultValue = null,
+                    IsOptional = true,
+                    Position = position
+                };
+
+                yield return descriptor;
+
+                position++;
+            }
+        }
+    }
+}
