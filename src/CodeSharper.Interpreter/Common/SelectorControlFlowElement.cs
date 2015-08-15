@@ -7,7 +7,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the selector element.
         /// </summary>
-        public SelectorElementBase SelectorElement { get; protected set; }
+        public SelectorElementBase SelectorElement { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorControlFlowElement"/> class.

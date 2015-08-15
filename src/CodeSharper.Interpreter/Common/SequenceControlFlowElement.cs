@@ -10,6 +10,11 @@ namespace CodeSharper.Interpreter.Common
     public class SequenceControlFlowElement : ControlFlowElementBase, IHasChildren<ControlFlowElementBase>, IEquatable<SequenceControlFlowElement>
     {
         /// <summary>
+        /// Gets or sets children of this type
+        /// </summary>
+        public IEnumerable<ControlFlowElementBase> Children { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SequenceControlFlowElement"/> class.
         /// </summary>
         public SequenceControlFlowElement(IEnumerable<ControlFlowElementBase> children) 
@@ -18,11 +23,6 @@ namespace CodeSharper.Interpreter.Common
             Assume.NotNull(children, nameof(children));
             Children = children;
         }
-
-        /// <summary>
-        /// Gets or sets children of this type
-        /// </summary>
-        public IEnumerable<ControlFlowElementBase> Children { get; protected set; }
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.

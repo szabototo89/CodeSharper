@@ -10,7 +10,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public String Value { get; protected set; }
+        public String Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CombinatorElementBase"/> class.

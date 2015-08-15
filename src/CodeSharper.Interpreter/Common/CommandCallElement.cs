@@ -10,12 +10,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name of the method.
         /// </summary>
-        public String MethodName { get; protected set; }
+        public String MethodName { get; }
 
         /// <summary>
         /// Gets or sets the actual parameters.
         /// </summary>
-        public IEnumerable<ActualParameterElement> ActualParameters { get; protected set; }
+        public IEnumerable<ActualParameterElement> ActualParameters { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandCallElement"/> class.

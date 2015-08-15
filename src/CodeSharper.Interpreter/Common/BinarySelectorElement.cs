@@ -8,17 +8,17 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the left.
         /// </summary>
-        public SelectorElementBase Left { get; protected set; }
+        public SelectorElementBase Left { get; }
 
         /// <summary>
         /// Gets or sets the right.
         /// </summary>
-        public SelectorElementBase Right { get; protected set; }
+        public SelectorElementBase Right { get; }
 
         /// <summary>
         /// Gets or sets the CombinatorElement.
         /// </summary>
-        public CombinatorElementBase CombinatorElement { get; protected set; }
+        public CombinatorElementBase CombinatorElement { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinarySelectorElement"/> class.

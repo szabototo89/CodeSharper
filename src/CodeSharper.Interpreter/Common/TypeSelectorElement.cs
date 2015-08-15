@@ -12,22 +12,30 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; }
 
         /// <summary>
         /// Gets or sets the attributes.
         /// </summary>
-        public IEnumerable<AttributeElement> Attributes { get; set; }
+        public IEnumerable<AttributeElement> Attributes { get; }
 
         /// <summary>
         /// Gets or sets the pseudo selectors.
         /// </summary>
-        public IEnumerable<ModifierElement> Modifiers { get; set; }
+        public IEnumerable<ModifierElement> Modifiers { get; }
 
         /// <summary>
         /// Gets or sets the class selectors.
         /// </summary>
-        public IEnumerable<ClassSelectorElement> ClassSelectors { get; set; }
+        public IEnumerable<ClassSelectorElement> ClassSelectors { get; }
+
+        public TypeSelectorElement(String name, IEnumerable<AttributeElement> attributes, IEnumerable<ModifierElement> modifiers, IEnumerable<ClassSelectorElement> classSelectors)
+        {
+            Name = name;
+            Attributes = attributes;
+            Modifiers = modifiers;
+            ClassSelectors = classSelectors;
+        }
 
         #region Equality members
 

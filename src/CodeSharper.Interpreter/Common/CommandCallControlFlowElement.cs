@@ -8,7 +8,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the method call
         /// </summary>
-        public CommandCallElement CommandCallElement { get; protected set; }
+        public CommandCallElement CommandCallElement { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandCallControlFlowElement"/> class.

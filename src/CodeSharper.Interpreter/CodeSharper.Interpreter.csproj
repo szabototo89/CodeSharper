@@ -64,12 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrappers\Bootstrapper.cs" />
-    <Compile Include="Common\ClassElementSelector.cs" />
+    <Compile Include="Common\ClassSelectorElement.cs" />
     <Compile Include="Common\CombinatorElement.cs" />
     <Compile Include="Common\DefaultSelectorFactory.cs" />
     <Compile Include="Common\ISelectorFactory.cs" />
-    <Compile Include="Common\RawClassElementSelector.cs" />
-    <Compile Include="Common\RegularExpressionClassElementSelector.cs" />
+    <Compile Include="Common\RawClassSelectorElement.cs" />
+    <Compile Include="Common\RegularExpressionClassSelectorElement.cs" />
     <Compile Include="Common\SelectorElementBase.cs" />
     <Compile Include="Common\CombinatorElementBase.cs" />
     <Compile Include="Common\BinarySelectorElement.cs" />

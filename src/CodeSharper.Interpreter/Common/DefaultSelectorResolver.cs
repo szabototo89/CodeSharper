@@ -22,17 +22,17 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the selector manager.
         /// </summary>
-        public ISelectorFactory SelectorFactory { get; protected set; }
+        public ISelectorFactory SelectorFactory { get; }
 
         /// <summary>
         /// Gets or sets the descriptor repository.
         /// </summary>
-        public IDescriptorRepository DescriptorRepository { get; protected set; }
+        public IDescriptorRepository DescriptorRepository { get; }
 
         /// <summary>
         /// Gets or sets the name matcher of resolvers
         /// </summary>
-        public INameMatcher NameMatcher { get; set; }
+        public INameMatcher NameMatcher { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSelectorResolver"/> class.

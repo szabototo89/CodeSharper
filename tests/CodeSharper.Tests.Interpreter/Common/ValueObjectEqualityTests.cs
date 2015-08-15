@@ -27,20 +27,19 @@ namespace CodeSharper.Tests.Interpreter.Common
         public void ElementTypeSelector_ShouldBeValueObject()
         {
             // Given
-            var underTest = new TypeSelectorElement
-            {
-                Name = "test",
-                Attributes = Enumerable.Empty<AttributeElement>(),
-                Modifiers = Enumerable.Empty<ModifierElement>()
-            };
+            var underTest = new TypeSelectorElement(
+                name: "test",
+                attributes: Enumerable.Empty<AttributeElement>(),
+                modifiers: Enumerable.Empty<ModifierElement>(),
+                classSelectors: Enumerable.Empty<ClassSelectorElement>());
 
             // Then
-            AssertHelper.AreEqualByValue(underTest, new TypeSelectorElement
-            {
-                Name = "test",
-                Attributes = Enumerable.Empty<AttributeElement>(),
-                Modifiers = Enumerable.Empty<ModifierElement>()
-            });
+            AssertHelper.AreEqualByValue(underTest, new TypeSelectorElement(
+                "test",
+                Enumerable.Empty<AttributeElement>(),
+                Enumerable.Empty<ModifierElement>(),
+                Enumerable.Empty<ClassSelectorElement>()
+            ));
             AssertHelper.AreEqualByValue(new TypeSelectorElement(), new TypeSelectorElement());
             AssertHelper.AreNotEqualByValue(underTest, new TypeSelectorElement());
         }

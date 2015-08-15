@@ -54,11 +54,7 @@ namespace CodeSharper.Interpreter.Visitors
         public ModifierElement CreateModifier(String name, IEnumerable<ConstantElement> values)
         {
             Assume.NotNull(name, nameof(name));
-
-            return new ModifierElement {
-                Name = name,
-                Arguments = values
-            };
+            return new ModifierElement(name, values);
         }
 
         /// <summary>
@@ -68,10 +64,8 @@ namespace CodeSharper.Interpreter.Visitors
         {
             Assume.NotNull(name, nameof(name));
 
-            return new ModifierElement {
-                Name = name,
-                Arguments = selectors.Select(selector => new ConstantElement(selector, typeof(SelectorElementBase)))
-            };
+            var arguments = selectors.Select(selector => new ConstantElement(selector, typeof (SelectorElementBase)));
+            return new ModifierElement(name, arguments);
         }
 
         /// <summary>
@@ -84,12 +78,7 @@ namespace CodeSharper.Interpreter.Visitors
             Assume.NotNull(modifierSelectors, nameof(modifierSelectors));
             Assume.NotNull(classSelectors, nameof(classSelectors));
 
-            return new TypeSelectorElement {
-                Name = name,
-                Attributes = attributes,
-                Modifiers = modifierSelectors,
-                ClassSelectors = classSelectors
-            };
+            return new TypeSelectorElement(name, attributes, modifierSelectors, classSelectors);
         }
 
         /// <summary>

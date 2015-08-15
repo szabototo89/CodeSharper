@@ -12,12 +12,12 @@ namespace CodeSharper.Core.Nodes
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public String Name { get; protected set; }
+        public String Name { get; }
 
         /// <summary>
         /// Gets the value.
         /// </summary>
-        public Object Value { get; protected set; }
+        public Object Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorAttribute"/> class.

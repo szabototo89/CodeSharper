@@ -8,7 +8,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the element.
         /// </summary>
-        public TypeSelectorElement TypeSelectorElement { get; protected set; }
+        public TypeSelectorElement TypeSelectorElement { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnarySelectorElement"/> class.

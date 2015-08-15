@@ -15,17 +15,17 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the command resolver.
         /// </summary>
-        public ICommandCallResolver CommandCallResolver { get; protected set; }
+        public ICommandCallResolver CommandCallResolver { get; }
 
         /// <summary>
         /// Gets or sets the node selectorElement resolver.
         /// </summary>
-        public ISelectorResolver SelectorResolver { get; protected set; }
+        public ISelectorResolver SelectorResolver { get; }
 
         /// <summary>
         /// Gets or sets the executor.
         /// </summary>
-        public IExecutor Executor { get; protected set; }
+        public IExecutor Executor { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultControlFlowFactory"/> class.

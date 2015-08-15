@@ -11,17 +11,17 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name of the parameter
         /// </summary>
-        public Option<String> ParameterName { get; protected set; }
+        public Option<String> ParameterName { get; }
 
         /// <summary>
         /// Gets or sets the position of actual parameter
         /// </summary>
-        public Option<Int32> Position { get; protected set; }
+        public Option<Int32> Position { get; }
 
         /// <summary>
         /// Gets or sets the value of actual parameter
         /// </summary>
-        public ConstantElement Value { get; protected set; }
+        public ConstantElement Value { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ActualParameterElement"/> class.

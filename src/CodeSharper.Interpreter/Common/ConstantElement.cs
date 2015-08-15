@@ -12,12 +12,12 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public Object Value { get; set; }
+        public Object Value { get; }
 
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
-        public Type Type { get; set; }
+        public Type Type { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstantElement"/> class.

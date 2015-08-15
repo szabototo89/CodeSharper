@@ -12,7 +12,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets children of this type
         /// </summary>
-        public IEnumerable<ControlFlowElementBase> Children { get; protected set; }
+        public IEnumerable<ControlFlowElementBase> Children { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PipelineControlFlowElement"/> class.

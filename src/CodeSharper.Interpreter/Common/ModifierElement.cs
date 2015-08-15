@@ -12,12 +12,18 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; }
 
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        public IEnumerable<ConstantElement> Arguments { get; set; }
+        public IEnumerable<ConstantElement> Arguments { get; }
+
+        public ModifierElement(String name, IEnumerable<ConstantElement> arguments)
+        {
+            Name = name;
+            Arguments = arguments;
+        }
 
         #region Equality members
 

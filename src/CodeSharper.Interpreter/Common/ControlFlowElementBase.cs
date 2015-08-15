@@ -7,7 +7,7 @@ namespace CodeSharper.Interpreter.Common
         /// <summary>
         /// Gets or sets the type of the operation.
         /// </summary>
-        public ControlFlowOperationType OperationType { get; protected set; }
+        public ControlFlowOperationType OperationType { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ControlFlowElementBase"/> class.

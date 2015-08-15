@@ -1,26 +1,20 @@
 using System;
-using System.Text.RegularExpressions;
 
 namespace CodeSharper.Interpreter.Common
 {
-    public class RegularExpressionClassSelectorElement : ClassSelectorElement, IEquatable<RegularExpressionClassSelectorElement>
+    public abstract class ClassSelectorElement : IEquatable<ClassSelectorElement>
     {
-        private readonly Regex regex;
-
         /// <summary>
-        /// Gets the regex.
+        /// Gets or sets the name.
         /// </summary>
-        public Regex Regex
-        {
-            get { return regex; }
-        }
+        public String Name { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClassSelectorElement"/> class.
         /// </summary>
-        public RegularExpressionClassSelectorElement(String name) : base(name)
+        protected ClassSelectorElement(String name)
         {
-            regex = new Regex(name);
+            Name = name;
         }
 
         #region Equality members
@@ -32,18 +26,18 @@ namespace CodeSharper.Interpreter.Common
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public Boolean Equals(RegularExpressionClassSelectorElement other)
+        public Boolean Equals(ClassSelectorElement other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return base.Equals(other) && Equals(regex, other.regex);
+            return String.Equals(Name, other.Name);
         }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
-        /// true if the specified object  is equal to the current object; otherwise, false.
+        /// true if the specified object is equal to the current object; otherwise, false.
         /// </returns>
         /// <param name="obj">The object to compare with the current object. </param>
         public override Boolean Equals(Object obj)
@@ -51,7 +45,7 @@ namespace CodeSharper.Interpreter.Common
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((RegularExpressionClassSelectorElement) obj);
+            return Equals((ClassSelectorElement) obj);
         }
 
         /// <summary>
@@ -62,13 +56,9 @@ namespace CodeSharper.Interpreter.Common
         /// </returns>
         public override Int32 GetHashCode()
         {
-            unchecked
-            {
-                return (base.GetHashCode() * 397) ^ (regex != null ? regex.GetHashCode() : 0);
-            }
+            return (Name != null ? Name.GetHashCode() : 0);
         }
 
         #endregion
-
     }
 }
