@@ -8,22 +8,25 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
     [TestFixture]
     public class TakeRunnableTests : RunnableTestFixtureBase
     {
-        public class InitializeRunnableWithDefaultConstructor : RunnableTestFixtureBase
+        public class Initialize
         {
-            protected TakeRunnable underTest;
-
-            /// <summary>
-            /// Setups this instance.
-            /// </summary>
-            [SetUp]
-            public void Setup()
+            public class WithDefaultConstructor : RunnableTestFixtureBase
             {
-                base.Setup();
-                underTest = new TakeRunnable();
-            }
-        }
+                protected TakeRunnable underTest;
 
-        public class RunMethod : InitializeRunnableWithDefaultConstructor
+                /// <summary>
+                /// Setups this instance.
+                /// </summary>
+                [SetUp]
+                public override void Setup()
+                {
+                    base.Setup();
+                    underTest = new TakeRunnable();
+                }
+            }
+
+        }
+        public class RunMethod : Initialize.WithDefaultConstructor
         {
             [Test(Description = "Run should return empty array when count is zero")]
             public void ShouldReturnEmptyArray_WhenCountIsZero()

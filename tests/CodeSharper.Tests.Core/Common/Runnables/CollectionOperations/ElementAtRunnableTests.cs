@@ -6,20 +6,23 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
     [TestFixture]
     internal class ElementAtRunnableTests : RunnableTestFixtureBase
     {
-        internal class InitializeRunnableWithDefaultConstructor : RunnableTestFixtureBase
+        public class Initialize
         {
-            protected ElementAtRunnable underTest;
-
-            /// <summary>
-            /// Setups this instance.
-            /// </summary>
-            public override void Setup()
+            public class WithDefaultConstructor : RunnableTestFixtureBase
             {
-                underTest = new ElementAtRunnable();
-            }
-        }
+                protected ElementAtRunnable underTest;
 
-        public class RunMethod : InitializeRunnableWithDefaultConstructor
+                /// <summary>
+                /// Setups this instance.
+                /// </summary>
+                public override void Setup()
+                {
+                    underTest = new ElementAtRunnable();
+                }
+            }
+
+        }
+        public class RunMethod : Initialize.WithDefaultConstructor
         {
             [Test(Description = "Run should return the first element of enumerable after setting position property to zero")]
             public void ShouldReturnTheFirstElementOfEnumerable_AfterSettingPositionToZero()
@@ -52,7 +55,7 @@ namespace CodeSharper.Tests.Core.Common.Runnables.CollectionOperations
             [Test(Description = "Run should return nth element starting from end of enumerable after setting position to negative value")]
             public void ShouldReturnNthElementStartingFromEndOfEnumerable_AfterSettingPositionToNegativeValue()
             {
-                // Given
+                // Given in setup
                 underTest.Position = -2;
                 var parameter = new[] {"a", "b", "c", "d"};
 
