@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using System.Runtime.Serialization;
 using CodeSharper.Languages.CSharp.Common;
 using CodeSharper.Languages.CSharp.Runnables;
-using CodeSharper.Languages.Text.Nodes.Selectors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Text;
 using NUnit.Framework;
+using Formatter = Microsoft.CodeAnalysis.Formatting.Formatter;
 
 namespace CodeSharper.Tests.Languages.CSharp.Runnables
 {
