@@ -42,13 +42,13 @@ namespace CodeSharper.Tests.Core.Services
         public class GetModifierDescriptorsMethod
         {
             [MethodTest(nameof(GetModifierDescriptorsMethod),
-                Description = "should return defined pseudo-selector descriptors after calling it")]
-            public void ShouldReturnDefinedPseudoSelectorDescriptors_AfterCallingIt()
+                Description = "should return defined modifier-selector descriptors after calling it")]
+            public void ShouldReturnDefinedModifierSelectorDescriptors_AfterCallingIt()
             {
                 // Given in setup
                 var modifierDescriptors = new[]
                 {
-                    new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object),
+                    new ModifierDescriptor("test-modifier", "test-modifier", Enumerable.Empty<String>(), typeof (Object),
                         false),
                 };
                 var underTest = new MemoryDescriptorRepository(modifierDescriptors: modifierDescriptors);
@@ -59,7 +59,7 @@ namespace CodeSharper.Tests.Core.Services
                 // Then
                 Assert.That(result, Is.EquivalentTo(new[]
                 {
-                    new ModifierDescriptor("test-pseudo", "test-pseudo", Enumerable.Empty<String>(), typeof (Object),
+                    new ModifierDescriptor("test-modifier", "test-modifier", Enumerable.Empty<String>(), typeof (Object),
                         false)
                 }));
             }
