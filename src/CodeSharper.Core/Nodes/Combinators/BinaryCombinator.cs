@@ -7,12 +7,12 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Gets or sets the left expression of operand
         /// </summary>
-        public CombinatorBase Left { get; protected set; }
+        public CombinatorBase Left { get; }
 
         /// <summary>
         /// Gets or sets the right expression of operand
         /// </summary>
-        public CombinatorBase Right { get; protected set; }
+        public CombinatorBase Right { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryCombinator"/> class.

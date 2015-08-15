@@ -157,7 +157,7 @@ namespace CodeSharper.Core.Utilities
         {
             unchecked
             {
-                if (HasValue == false) return HasValue.GetHashCode() * 397;
+                if (HasValue == false) return HasValue.GetHashCode()*397;
                 return EqualityComparer<TValue>.Default.GetHashCode(Value);
             }
         }

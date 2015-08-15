@@ -16,17 +16,17 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Gets or sets the node selector.
         /// </summary>
-        public SelectorBase Selector { get; protected set; }
+        public SelectorBase Selector { get; }
 
         /// <summary>
         /// Gets or sets the modifiers.
         /// </summary>
-        public IEnumerable<ModifierBase> Modifiers { get; protected set; }
+        public IEnumerable<ModifierBase> Modifiers { get; }
 
         /// <summary>
         /// Gets or sets the attributes.
         /// </summary>
-        public IEnumerable<SelectorAttribute> Attributes { get; protected set; }
+        public IEnumerable<SelectorAttribute> Attributes { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectionCombinator"/> class.

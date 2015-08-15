@@ -23,9 +23,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             return formattedResult;
         }
 
-        [Test(
-            Description =
-                "CreateCommentRunnable should remove node from tree and insert a comment when getting syntax node")]
+        [Test(Description = "CreateCommentRunnable should remove node from tree and insert a comment when getting syntax node")]
         public void CreateCommentRunnable_ShouldRemoveNodeFromTreeAndInsertAComment_WhenGettingSyntaxNode()
         {
             // Given
@@ -44,9 +42,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             Assert.That(result, Is.Not.Null);
         }
 
-        [Test(
-            Description =
-                "CreateCommentRunnable should remove node from tree and insert a comment when getting syntax node")]
+        [Test(Description = "CreateCommentRunnable should remove node from tree and insert a comment when getting syntax node")]
         public void CreateCommentRunnable_ShouldRemoveNodeFromTreeAndInsertAComment_WhenTransformingMethodBody()
         {
             // Given
@@ -87,7 +83,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Visibility = "private"
             };
 
-            var workspace  = new AdhocWorkspace();
+            var workspace = new AdhocWorkspace();
             var project = workspace.AddProject("test", "C#");
             var document = workspace.AddDocument(project.Id, "test", SourceText.From(source));
             var documentContext = new DocumentContext(workspace, document);

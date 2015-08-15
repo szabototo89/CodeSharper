@@ -5,14 +5,14 @@ namespace CodeSharper.Core.Commands
 {
     public class DefaultCommandDescriptorManager : ICommandDescriptorManager
     {
-        private readonly List<CommandDescriptor> _commandDescriptors;
+        private readonly List<CommandDescriptor> commandDescriptors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultCommandDescriptorManager"/> class.
         /// </summary>
         public DefaultCommandDescriptorManager()
         {
-            _commandDescriptors = new List<CommandDescriptor>();
+            commandDescriptors = new List<CommandDescriptor>();
         }
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public void Register(CommandDescriptor descriptor)
         {
-            _commandDescriptors.Add(descriptor);
+            commandDescriptors.Add(descriptor);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace CodeSharper.Core.Commands
         /// </summary>
         public IEnumerable<CommandDescriptor> GetCommandDescriptors()
         {
-            return _commandDescriptors.AsReadOnly();
+            return commandDescriptors.AsReadOnly();
         }
     }
 }

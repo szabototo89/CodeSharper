@@ -13,17 +13,17 @@ namespace CodeSharper.Core.Common
         /// <summary>
         /// Gets or sets the runnable.
         /// </summary>
-        public IRunnable Runnable { get; protected set; }
+        public IRunnable Runnable { get; }
 
         /// <summary>
         /// Gets or sets the command descriptor.
         /// </summary>
-        public CommandDescriptor CommandDescriptor { get; protected set; }
+        public CommandDescriptor CommandDescriptor { get; }
 
         /// <summary>
         /// Gets or sets the actual arguments.
         /// </summary>
-        public ReadOnlyDictionary<String, Object> ActualArguments { get; protected set; }
+        public ReadOnlyDictionary<String, Object> ActualArguments { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Command"/> class.

@@ -12,7 +12,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// <summary>
         /// Gets or sets the combinator.
         /// </summary>
-        public CombinatorBase Combinator { get; protected set; }
+        public CombinatorBase Combinator { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorControlFlow"/> class.

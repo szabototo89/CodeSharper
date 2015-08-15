@@ -10,6 +10,21 @@ namespace CodeSharper.Core.Nodes.Selectors
     public class SelectorDescriptor : IEquatable<SelectorDescriptor>
     {
         /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        public String Value { get; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public String Name { get; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        public Type Type { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SelectorDescriptor"/> class.
         /// </summary>
         public SelectorDescriptor(String name, String value, Type type)
@@ -22,22 +37,6 @@ namespace CodeSharper.Core.Nodes.Selectors
             Name = name;
             Type = type;
         }
-
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        public String Value { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        public String Name { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        public Type Type { get; protected set; }
-
 
         #region Equality members
 

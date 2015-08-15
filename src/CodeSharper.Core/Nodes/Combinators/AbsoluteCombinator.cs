@@ -17,12 +17,12 @@ namespace CodeSharper.Core.Nodes.Combinators
         /// <summary>
         /// Gets or sets the node selector
         /// </summary>
-        public SelectorBase Selector { get; protected set; }
+        public SelectorBase Selector { get; }
 
         /// <summary>
         /// Gets the node modifiers.
         /// </summary>
-        public IEnumerable<ModifierBase> NodeModifiers { get; protected set; }
+        public IEnumerable<ModifierBase> NodeModifiers { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbsoluteCombinator"/> class.

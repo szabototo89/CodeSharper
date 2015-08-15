@@ -10,7 +10,7 @@ namespace CodeSharper.Core.Common.ControlFlows
         /// <summary>
         /// Gets or sets children of this type
         /// </summary>
-        public IEnumerable<ControlFlowBase> Children { get; protected set; }
+        public IEnumerable<ControlFlowBase> Children { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PipelineControlFlow"/> class.

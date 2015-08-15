@@ -9,6 +9,31 @@ namespace CodeSharper.Core.Nodes.Modifiers
     public class ModifierDescriptor : IHasName, IHasValue<String>, IEquatable<ModifierDescriptor>
     {
         /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public String Name { get; }
+
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        public String Value { get; }
+
+        /// <summary>
+        /// Gets or sets the arguments.
+        /// </summary>
+        public IEnumerable<String> Arguments { get; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is class selector.
+        /// </summary>
+        public Boolean IsClassSelector { get; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        public Type Type { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ModifierDescriptor"/> class.
         /// </summary>
         public ModifierDescriptor(String name, String value, IEnumerable<String> arguments, Type type, Boolean isClassSelector)
@@ -24,31 +49,6 @@ namespace CodeSharper.Core.Nodes.Modifiers
             Type = type;
             IsClassSelector = isClassSelector;
         }
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        public String Name { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        public String Value { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        public IEnumerable<String> Arguments { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is class selector.
-        /// </summary>
-        public Boolean IsClassSelector { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        public Type Type { get; protected set; }
 
         #region Equality members
 

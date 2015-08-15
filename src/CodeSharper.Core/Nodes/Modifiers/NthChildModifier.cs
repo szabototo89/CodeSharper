@@ -18,12 +18,12 @@ namespace CodeSharper.Core.Nodes.Modifiers
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
-        private NthType Type { get; set; }
+        private NthType Type { get; }
 
         /// <summary>
         /// Gets or sets the children count.
         /// </summary>
-        public Int32 Index { get; protected set; }
+        public Int32 Index { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NthChildModifier"/> class.

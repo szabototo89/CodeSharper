@@ -28,7 +28,7 @@ namespace CodeSharper.Core.Services
 
         private readonly List<CombinatorDescriptor> combinators;
         private readonly List<SelectorDescriptor> selectors;
-        private readonly List<ModifierDescriptor> pseudoSelectors;
+        private readonly List<ModifierDescriptor> modifiers;
         private readonly List<CommandDescriptor> commandDescriptors;
 
         private enum DescriptorType
@@ -49,7 +49,7 @@ namespace CodeSharper.Core.Services
             serializer = new DataContractJsonSerializer(typeof (DescriptorModel));
             combinators = new List<CombinatorDescriptor>();
             selectors = new List<SelectorDescriptor>();
-            pseudoSelectors = new List<ModifierDescriptor>();
+            modifiers = new List<ModifierDescriptor>();
             commandDescriptors = new List<CommandDescriptor>();
             predefinedAssemblies = new[] {Assembly.Load("mscorlib")};
 
@@ -67,7 +67,7 @@ namespace CodeSharper.Core.Services
 
                 selectors.Clear();
                 combinators.Clear();
-                pseudoSelectors.Clear();
+                modifiers.Clear();
                 commandDescriptors.Clear();
 
                 foreach (var commandDescriptor in descriptor.CommandDescriptors)
@@ -111,7 +111,7 @@ namespace CodeSharper.Core.Services
                         {
                             var type = findInAssemblies(selectionDescriptors.Type, DescriptorType.ModifierSelector);
 
-                            pseudoSelectors.Add(
+                            modifiers.Add(
                                 new ModifierDescriptor(selectionDescriptors.Name,
                                                        selectionDescriptors.Value,
                                                        selectionDescriptors.Arguments, 
@@ -189,7 +189,7 @@ namespace CodeSharper.Core.Services
         /// </summary>
         public IEnumerable<ModifierDescriptor> GetModifierDescriptors()
         {
-            return pseudoSelectors.AsReadOnly();
+            return modifiers.AsReadOnly();
         }
 
         /// <summary>

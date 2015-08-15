@@ -15,12 +15,12 @@ namespace CodeSharper.Core.Commands
         /// <summary>
         /// Gets or sets the descriptor repository.
         /// </summary>
-        public IDescriptorRepository DescriptorRepository { get; protected set; }
+        public IDescriptorRepository DescriptorRepository { get; }
 
         /// <summary>
         /// Gets or sets the runnable factory.
         /// </summary>
-        public IRunnableFactory RunnableFactory { get; protected set; }
+        public IRunnableFactory RunnableFactory { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultCommandCallResolver"/> class.

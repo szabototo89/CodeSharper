@@ -10,6 +10,21 @@ namespace CodeSharper.Core.Nodes.Combinators
     public class CombinatorDescriptor : IEquatable<CombinatorDescriptor>
     {
         /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        public String Name { get; }
+
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        public String Value { get; }
+
+        /// <summary>
+        /// Gets or sets the type of the combinator.
+        /// </summary>
+        public Type CombinatorType { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CombinatorDescriptor"/> class.
         /// </summary>
         public CombinatorDescriptor(String name, String value, Type combinatorType)
@@ -22,21 +37,6 @@ namespace CodeSharper.Core.Nodes.Combinators
             Value = value;
             CombinatorType = combinatorType;
         }
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        public String Name { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        public String Value { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the type of the combinator.
-        /// </summary>
-        public Type CombinatorType { get; protected set; }
 
         #region Equality members
 
