@@ -51,44 +51,47 @@ namespace CodeSharper.Tests.Core.Common.Runnables
             }
         }
 
-        [Test(Description = "Create should instantiate runnable when default constructor is available")]
-        public void Create_ShouldInstantiateRunnable_WhenDefaultConstructorIsAvailable()
+        public class CreateMethod
         {
-            // Given
-            var actualArguments = new Dictionary<String, Object>
+            [Test(Description = "Create should instantiate runnable when default constructor is available")]
+            public void ShouldInstantiateRunnable_WhenDefaultConstructorIsAvailable()
             {
-                {"value", "test"},
-                {"description", "some description"}
-            };
-            var underTest = new DefaultRunnableFactory(new[] {typeof (TestRunnable)});
+                // Given
+                var actualArguments = new Dictionary<String, Object>
+                {
+                    {"value", "test"},
+                    {"description", "some description"}
+                };
+                var underTest = new DefaultRunnableFactory(new[] {typeof (TestRunnable)});
 
-            // When
-            var result = underTest.Create("TestRunnable", actualArguments) as TestRunnable;
+                // When
+                var result = underTest.Create("TestRunnable", actualArguments) as TestRunnable;
 
-            // Then
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Value, Is.EqualTo("test"));
-            Assert.That(result.Description, Is.EqualTo("some description"));
-        }
+                // Then
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Value, Is.EqualTo("test"));
+                Assert.That(result.Description, Is.EqualTo("some description"));
+            }
 
-        [Test(Description = "Create should convert double to integer value when parameter type is Int32")]
-        public void Create_ShouldConvertDoubleToIntegerValue_WhenParameterTypeIsInt32AndIntegerValueConverterIsPassed()
-        {
-            // Given
-            var actualArguments = new Dictionary<String, Object>()
+            [Test(Description = "Create should convert double to integer value when parameter type is Int32")]
+            public void ShouldConvertDoubleToIntegerValue_WhenParameterTypeIsInt32AndIntegerValueConverterIsPassed()
             {
-                {"number", 10.0}
-            };
-            var valueConverter = Substitute.For<IntegerValueConverter>();
-            var underTest = new DefaultRunnableFactory(new[] {typeof (TestRunnable)}, valueConverter);
+                // Given
+                var actualArguments = new Dictionary<String, Object>()
+                {
+                    {"number", 10.0}
+                };
+                var valueConverter = Substitute.For<IntegerValueConverter>();
+                var underTest = new DefaultRunnableFactory(new[] {typeof (TestRunnable)}, valueConverter);
 
-            // When
-            var result = underTest.Create("TestRunnable", actualArguments) as TestRunnable;
+                // When
+                var result = underTest.Create("TestRunnable", actualArguments) as TestRunnable;
 
-            // Then
-            Assert.That(result.Number, Is.EqualTo(10));
-            valueConverter.Received(1).CanConvert(10.0, typeof(Int32));
-            valueConverter.Received(1).Convert(10.0);
+                // Then
+                Assert.That(result.Number, Is.EqualTo(10));
+                valueConverter.Received(1).CanConvert(10.0, typeof (Int32));
+                valueConverter.Received(1).Convert(10.0);
+            }
         }
     }
 }
