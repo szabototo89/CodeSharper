@@ -336,5 +336,22 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             }
         }
 
+        public class AssignmentExpressionSelectorType : Initialize<AssignmentExpressionSelector>
+        {
+            [Test(Description = "should select any assignment expression in specified code")]
+            public void ShouldSelectAnyAssignmentExpressionInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseExpression("a = 10");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as AssignmentExpressionSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
     }
 }

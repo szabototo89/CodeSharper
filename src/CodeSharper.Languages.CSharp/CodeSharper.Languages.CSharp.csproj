@@ -70,6 +70,7 @@
     <Compile Include="Selectors\CSharpTypeDeclarationSelectorBase.cs" />
     <Compile Include="Selectors\CSharpTypedSelectorBase.cs" />
     <Compile Include="Selectors\DeclarationSelectors\EnumDeclarationSelector.cs" />
+    <Compile Include="Selectors\ExpressionSelectors\AssignmentExpressionSelector.cs" />
     <Compile Include="Selectors\ExpressionSelectors\ExpressionSelector.cs" />
     <Compile Include="Selectors\ExpressionSelectors\ExpressionSelectorBase.cs" />
     <Compile Include="Selectors\ExpressionSelectors\TypeOfExpressionSelector.cs" />
