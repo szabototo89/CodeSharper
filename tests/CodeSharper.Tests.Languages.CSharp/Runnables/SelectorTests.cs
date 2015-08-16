@@ -24,10 +24,16 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             }
         }
 
-        private static SyntaxNode ParseSyntaxElement(String sourceText)
+        private static SyntaxNode ParseDeclarationElement(String sourceText)
         {
             var tree = SyntaxFactory.ParseSyntaxTree(sourceText);
             return tree.GetRoot().ChildNodes().SingleOrDefault();
+        }
+
+        private static SyntaxNode ParseStatementElement(String sourceText)
+        {
+            var tree = SyntaxFactory.ParseStatement(sourceText);
+            return tree;
         }
 
         public class ClassDeclarationSelectorType : Initialize<ClassDeclarationSelector>
@@ -36,12 +42,13 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooClassInCSharpCode()
             {
                 // Arrange
-                var tree = ParseSyntaxElement(@"
+                var tree = ParseDeclarationElement(@"
                     public class Foo { }
                 ");
 
                 // Act
-                var result = underTest.SelectElement(tree).SingleOrDefault() as ClassDeclarationSyntax;
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as ClassDeclarationSyntax;
 
                 // Assert
                 Assert.That(result, Is.Not.Null);
@@ -55,7 +62,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooStructInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseSyntaxElement(@"
+                var tree = ParseDeclarationElement(@"
                     public struct Foo { }
                 ");
 
@@ -72,10 +79,10 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
         public class InterfaceDeclarationSelectorType : Initialize<InterfaceDeclarationSelector>
         {
             [Test(Description = "should select Foo interface in specified code")]
-            public void ShouldSelectFooStructInSpecifiedCode()
+            public void ShouldSelectFooInterfaceInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseSyntaxElement(@"
+                var tree = ParseDeclarationElement(@"
                     public interface Foo { }
                 ");
 
@@ -92,10 +99,10 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
         public class EnumDeclarationSelectorType : Initialize<EnumDeclarationSelector>
         {
             [Test(Description = "should select Foo enum in specified code")]
-            public void ShouldSelectFooStructInSpecifiedCode()
+            public void ShouldSelectFooEnumInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseSyntaxElement(@"
+                var tree = ParseDeclarationElement(@"
                     public enum Foo { }
                 ");
 
@@ -108,5 +115,162 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result.Identifier.Text, Is.EqualTo("Foo"));
             }
         }
+
+        public class PropertyDeclarationSelectorType : Initialize<PropertyDeclarationSelector>
+        {
+            [Test(Description = "should select Foo property in specified code")]
+            public void ShouldSelectFooPropertyInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseDeclarationElement(@"
+                    public string Foo { get; set; }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as PropertyDeclarationSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Foo"));
+            }
+        }
+
+        public class MethodDeclarationSelectorType : Initialize<MethodDeclarationSelector>
+        {
+            [Test(Description = "should select Foo method in specified code")]
+            public void ShouldSelectFooMethodInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseDeclarationElement(@"
+                    public void Foo() { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as MethodDeclarationSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Foo"));
+            }
+        }
+
+        public class VariableDeclarationSelectorType : Initialize<LocalVariableDeclarationSelector>
+        {
+            [Test(Description = "should select foo variable in specified code")]
+            public void ShouldSelectFooVariableInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatementElement(@"
+                    int foo = 10;
+                ");
+                Assume.That(tree, Is.Not.Null);
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as LocalDeclarationStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Declaration.Variables.FirstOrDefault()?.Identifier.Text, Is.EqualTo("foo"));
+            }
+        }
+
+        public class ForeachStatementSelectorType : Initialize<ForeachStatementSelector>
+        {
+            [Test(Description = "should select foreach statement in specified code")]
+            public void ShouldSelectForeachStatementInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatementElement(@"
+                    foreach (var i in new[] { 1, 2, 3 }) { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as ForEachStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        public class ForStatementSelectorType : Initialize<ForStatementSelector>
+        {
+            [Test(Description = "should select for statement in specified code")]
+            public void ShouldSelectForStatementInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatementElement(@"
+                    for (int i = 0; i < 10; i++) { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as ForStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        public class WhileStatementSelectorType : Initialize<WhileStatementSelector>
+        {
+            [Test(Description = "should select while statement in specified code")]
+            public void ShouldSelectWhileStatementInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatementElement(@"
+                    while (true) { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as WhileStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        public class IfStatementSelectorType : Initialize<IfStatementSelector>
+        {
+            [Test(Description = "should select if statement in specified code")]
+            public void ShouldSelectIfStatementInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatementElement(@"
+                    if (true) { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as IfStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        public class UsingStatementSelectorType : Initialize<UsingStatementSelector>
+        {
+            [Test(Description = "should select if statement in specified code")]
+            public void ShouldSelectUsingStatementInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatementElement(@"
+                    using (null) { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as UsingStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
     }
 }

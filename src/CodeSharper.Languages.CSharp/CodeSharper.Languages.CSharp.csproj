@@ -70,11 +70,16 @@
     <Compile Include="Nodes\Selectors\CSharpTypeDeclarationSelectorBase.cs" />
     <Compile Include="Nodes\Selectors\CSharpTypedSelectorBase.cs" />
     <Compile Include="Nodes\Selectors\EnumDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\ForeachStatementSelector.cs" />
+    <Compile Include="Nodes\Selectors\ForStatementSelector.cs" />
+    <Compile Include="Nodes\Selectors\IfStatementSelector.cs" />
     <Compile Include="Nodes\Selectors\InterfaceDeclarationSelector.cs" />
     <Compile Include="Nodes\Selectors\MethodDeclarationSelector.cs" />
     <Compile Include="Nodes\Selectors\PropertyDeclarationSelector.cs" />
     <Compile Include="Nodes\Selectors\StructDeclarationSelector.cs" />
-    <Compile Include="Nodes\Selectors\VariableDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\UsingStatementSelector.cs" />
+    <Compile Include="Nodes\Selectors\LocalVariableDeclarationSelector.cs" />
+    <Compile Include="Nodes\Selectors\WhileStatementSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runnables\ChangeMemberVisibilityRunnable.cs" />
     <Compile Include="Runnables\CopyToClipboardRunnable.cs" />
