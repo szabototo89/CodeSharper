@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Runnables\SelectorTests.cs" />
     <Compile Include="Runnables\RunnableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +101,10 @@
     <ProjectReference Include="..\..\src\CodeSharper.Languages.CSharp\CodeSharper.Languages.CSharp.csproj">
       <Project>{c9d3d43d-fe4c-41e4-9f8b-99fd404d00b7}</Project>
       <Name>CodeSharper.Languages.CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeSharper.Tests\CodeSharper.Tests.csproj">
+      <Project>{27bc9728-db64-4d00-87fe-721afcff5701}</Project>
+      <Name>CodeSharper.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

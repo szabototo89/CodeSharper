@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace CodeSharper.Languages.CSharp.Runnables
 {
-    [CommandDescriptor("create-source")]
     public class CreateRunnable : RunnableBase<Object, SyntaxNode>
     {
         [Parameter("source")]
