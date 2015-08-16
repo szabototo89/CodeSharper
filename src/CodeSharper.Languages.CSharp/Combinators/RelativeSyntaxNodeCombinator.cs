@@ -9,7 +9,7 @@ namespace CodeSharper.Languages.CSharp.Combinators
     public class RelativeSyntaxNodeCombinator : BinaryCombinator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Core.Nodes.Combinators.RelativeNodeCombinator"/> class.
+        /// Initializes a new instance of the <see cref="RelativeSyntaxNodeCombinator"/> class.
         /// </summary>
         public RelativeSyntaxNodeCombinator(CombinatorBase left, CombinatorBase right)
             : base(left, right)

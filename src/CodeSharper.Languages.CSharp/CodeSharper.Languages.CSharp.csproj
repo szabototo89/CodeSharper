@@ -71,6 +71,8 @@
     <Compile Include="Selectors\CSharpTypedSelectorBase.cs" />
     <Compile Include="Selectors\DeclarationSelectors\EnumDeclarationSelector.cs" />
     <Compile Include="Selectors\ExpressionSelectors\ExpressionSelector.cs" />
+    <Compile Include="Selectors\ExpressionSelectors\ExpressionSelectorBase.cs" />
+    <Compile Include="Selectors\ExpressionSelectors\TypeOfExpressionSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\ExpressionStatementSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\ForeachStatementSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\ForStatementSelector.cs" />

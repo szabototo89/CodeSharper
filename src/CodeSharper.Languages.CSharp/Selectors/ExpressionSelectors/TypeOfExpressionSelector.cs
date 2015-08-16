@@ -2,7 +2,8 @@
 
 namespace CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors
 {
-    public class ExpressionSelector : ExpressionSelectorBase<ExpressionSyntax>
+    public class TypeOfExpressionSelector : ExpressionSelectorBase<TypeOfExpressionSyntax>
     {
+         
     }
 }

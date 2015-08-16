@@ -318,5 +318,23 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result, Is.Not.Null);
             }
         }
+
+        public class TypeOfSelectorType : Initialize<TypeOfExpressionSelector>
+        {
+            [Test(Description = "should select any typeof() expression in specified code")]
+            public void ShouldSelectAnyTypeOfExpressionInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseExpression("typeof(object)");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as TypeOfExpressionSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
     }
 }
