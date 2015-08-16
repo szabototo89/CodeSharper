@@ -353,5 +353,40 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             }
         }
 
+        public class IsExpressionSelectorType : Initialize<IsExpressionSelector>
+        {
+            [Test(Description = "should select any `is` expression in specified code")]
+            public void ShouldSelectAnyIsExpressionInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseExpression("null is object");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as BinaryExpressionSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Kind(), Is.EqualTo(SyntaxKind.IsExpression));
+            }
+        }
+
+        public class AsExpressionSelectorType : Initialize<AsExpressionSelector>
+        {
+            [Test(Description = "should select any `as` expression in specified code")]
+            public void ShouldSelectAnyAsExpressionInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseExpression("null as object");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as BinaryExpressionSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Kind(), Is.EqualTo(SyntaxKind.AsExpression));
+            }
+        }
     }
 }

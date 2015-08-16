@@ -73,6 +73,7 @@
     <Compile Include="Selectors\ExpressionSelectors\AssignmentExpressionSelector.cs" />
     <Compile Include="Selectors\ExpressionSelectors\ExpressionSelector.cs" />
     <Compile Include="Selectors\ExpressionSelectors\ExpressionSelectorBase.cs" />
+    <Compile Include="Selectors\ExpressionSelectors\IsExpressionSelector.cs" />
     <Compile Include="Selectors\ExpressionSelectors\TypeOfExpressionSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\ExpressionStatementSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\ForeachStatementSelector.cs" />
