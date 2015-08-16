@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace CodeSharper.Languages.CSharp.Common
 {
-    public class DocumentContext
+    public class CompilationContext
     {
         /// <summary>
         /// Gets or sets the workspace.
@@ -17,14 +17,19 @@ namespace CodeSharper.Languages.CSharp.Common
         public Document CurrentDocument { get; }
 
         /// <summary>
+        /// Gets semantic model from current document 
+        /// </summary>
+        public SemanticModel SemanticModel => CurrentDocument?.GetSemanticModelAsync().Result;
+
+        /// <summary>
         /// Gets or sets the document editor.
         /// </summary>
         public DocumentEditor DocumentEditor { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentContext"/> class.
+        /// Initializes a new instance of the <see cref="CompilationContext"/> class.
         /// </summary>
-        public DocumentContext(Workspace workspace, Document currentDocument)
+        public CompilationContext(Workspace workspace, Document currentDocument)
         {
             Workspace = workspace;
             CurrentDocument = currentDocument;

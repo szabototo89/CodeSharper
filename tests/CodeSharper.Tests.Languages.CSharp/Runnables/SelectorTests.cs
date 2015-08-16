@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CodeSharper.Core.Nodes;
 using CodeSharper.Core.Nodes.Selectors;
 using CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors;
 using CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors;
@@ -8,6 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NUnit.Framework;
+using static CodeSharper.Core.Utilities.ConstructsHelper;
 
 namespace CodeSharper.Tests.Languages.CSharp.Runnables
 {
@@ -369,6 +371,43 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Kind(), Is.EqualTo(SyntaxKind.IsExpression));
             }
+
+            [TestCase("String")]
+            [TestCase("System.String")]
+            [TestCase("System.String.String.String")]
+            [TestCase("string")]
+            [TestCase("int")]
+            [Test(Description = "should select specific `is` expression when type name is specified as attribute")]
+            public void ShouldSelectSpecificIsExpression_WhenTypeNameIsSpecifiedAsAttribute(String typeName)
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute("type", typeName)));
+                var tree = ParseExpression($"null is {typeName}");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as BinaryExpressionSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Kind(), Is.EqualTo(SyntaxKind.IsExpression));
+            }
+
+            [Test(Description = "should not select specific `is` expression when type name doesn't match with specified type")]
+            public void ShouldNotSelectSpecificIsExpression_WhenTypeNameDoesNotMatchWithSpecifiedType()
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute("type", "string")));
+                var tree = ParseExpression("null is object");
+
+                // Act
+                var result = underTest.SelectElement(tree);
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result, Is.Empty);
+            }
+
         }
 
         public class AsExpressionSelectorType : Initialize<AsExpressionSelector>

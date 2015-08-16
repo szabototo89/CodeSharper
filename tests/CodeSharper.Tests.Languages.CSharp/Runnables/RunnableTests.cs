@@ -87,7 +87,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             var workspace = new AdhocWorkspace();
             var project = workspace.AddProject("test", "C#");
             var document = workspace.AddDocument(project.Id, "test", SourceText.From(source));
-            var documentContext = new DocumentContext(workspace, document);
+            var documentContext = new CompilationContext(workspace, document);
             var compilationUnit = document.GetSyntaxRootAsync().Result as CompilationUnitSyntax;
             var memberDeclaration = compilationUnit.DescendantNodes()
                                                    .OfType<MethodDeclarationSyntax>()

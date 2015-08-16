@@ -11,12 +11,12 @@ using Microsoft.CodeAnalysis.Text;
 namespace CodeSharper.Languages.CSharp.Runnables
 {
     [Consumes(typeof (MultiValueConsumer<SyntaxNode>))]
-    public class CreateCommentRunnable : RunnableWithContextBase<SyntaxNode, SyntaxNode, DocumentContext>
+    public class CreateCommentRunnable : RunnableWithContextBase<SyntaxNode, SyntaxNode, CompilationContext>
     {
         /// <summary>
         /// Runs an algorithm with the specified parameter.
         /// </summary>
-        public override SyntaxNode Run(SyntaxNode parameter, DocumentContext context)
+        public override SyntaxNode Run(SyntaxNode parameter, CompilationContext context)
         {
             if (parameter == null) return null;
             Assume.IsRequired(context);

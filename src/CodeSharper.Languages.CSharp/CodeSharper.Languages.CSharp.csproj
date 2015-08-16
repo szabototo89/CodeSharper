@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DocumentContext.cs" />
+    <Compile Include="Common\CompilationContext.cs" />
     <Compile Include="Compiler\CSharpCompiler.cs" />
     <Compile Include="Combinators\RelativeSyntaxNodeCombinator.cs" />
     <Compile Include="Selectors\DeclarationSelectors\ClassDeclarationSelector.cs" />

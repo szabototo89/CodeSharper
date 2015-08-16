@@ -17,9 +17,9 @@ namespace CodeSharper.Languages.CSharp.Runnables
         /// </summary>
         public override IEnumerable<SyntaxNode> Run(IEnumerable<Object> nodes, Object context)
         {
-            var documentContext = context.As<DocumentContext>();
+            var documentContext = context.As<CompilationContext>();
             if (documentContext == null)
-                throw new Exception($"{nameof(DocumentContext)} is not available.");
+                throw new Exception($"{nameof(CompilationContext)} is not available.");
 
             var syntaxNodes = nodes.OfType<SyntaxNode>();
             var sourceTexts = syntaxNodes.GetOrEmpty().Select(node => node.NormalizeWhitespace().ToFullString());

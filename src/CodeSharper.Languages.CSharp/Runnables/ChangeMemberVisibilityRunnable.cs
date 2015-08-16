@@ -17,7 +17,7 @@ namespace CodeSharper.Languages.CSharp.Runnables
 {
     [CommandDescriptor("change-member-visibility")]
     [Consumes(typeof (MultiValueConsumer<SyntaxNode>))]
-    public class ChangeMemberVisibilityRunnable : RunnableWithContextBase<SyntaxNode, SyntaxNode, DocumentContext>
+    public class ChangeMemberVisibilityRunnable : RunnableWithContextBase<SyntaxNode, SyntaxNode, CompilationContext>
     {
         private MemberVisibility visibility;
 
@@ -50,7 +50,7 @@ namespace CodeSharper.Languages.CSharp.Runnables
             }
         }
 
-        public override SyntaxNode Run(SyntaxNode parameter, DocumentContext context)
+        public override SyntaxNode Run(SyntaxNode parameter, CompilationContext context)
         {
             if (parameter == null) return null;
             Assume.IsRequired(context, nameof(context));
