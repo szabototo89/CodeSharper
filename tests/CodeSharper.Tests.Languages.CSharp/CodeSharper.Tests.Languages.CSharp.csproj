@@ -89,6 +89,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Runnables\CombinatorBuilder.cs" />
+    <Compile Include="Runnables\ComplexSelectorTests.cs" />
     <Compile Include="Runnables\SelectorTests.cs" />
     <Compile Include="Runnables\RunnableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
