@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 
-namespace CodeSharper.Languages.CSharp.Nodes.Selectors.ClassSelectors
+namespace CodeSharper.Languages.CSharp.Selectors.ClassSelectors
 {
     public interface IClassSelector
     {

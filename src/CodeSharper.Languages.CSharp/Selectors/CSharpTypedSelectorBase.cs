@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Nodes.Selectors;
-using CodeSharper.Languages.CSharp.Nodes.Selectors.ClassSelectors;
+using CodeSharper.Languages.CSharp.Selectors.ClassSelectors;
 using Microsoft.CodeAnalysis;
 
-namespace CodeSharper.Languages.CSharp.Nodes.Selectors
+namespace CodeSharper.Languages.CSharp.Selectors
 {
     public abstract class CSharpTypedSelectorBase<TElement, TClassSelector> : TypedSelectorBase<TElement>
         where TElement : SyntaxNode

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeSharper.Core.Common.Interfaces;
 using CodeSharper.Core.Nodes.Combinators;
-using CodeSharper.Core.Utilities;
 using Microsoft.CodeAnalysis;
 
-namespace CodeSharper.Languages.CSharp.Nodes.Combinators
+namespace CodeSharper.Languages.CSharp.Combinators
 {
     public class RelativeSyntaxNodeCombinator : BinaryCombinator
     {

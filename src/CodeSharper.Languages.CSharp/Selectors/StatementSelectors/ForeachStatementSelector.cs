@@ -1,9 +1,7 @@
 ﻿using CodeSharper.Core.Nodes.Selectors;
-using CodeSharper.Languages.CSharp.Nodes.Selectors.ClassSelectors;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace CodeSharper.Languages.CSharp.Nodes.Selectors
+namespace CodeSharper.Languages.CSharp.Selectors.StatementSelectors
 {
     public class ForeachStatementSelector : TypedSelectorBase<ForEachStatementSyntax>
     {

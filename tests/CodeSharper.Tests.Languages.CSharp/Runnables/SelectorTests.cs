@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using CodeSharper.Core.Nodes.Selectors;
-using CodeSharper.Languages.CSharp.Nodes.Selectors;
+using CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors;
+using CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors;
+using CodeSharper.Languages.CSharp.Selectors.StatementSelectors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -30,7 +32,13 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             return tree.GetRoot().ChildNodes().SingleOrDefault();
         }
 
-        private static SyntaxNode ParseStatementElement(String sourceText)
+        private static SyntaxNode ParseExpression(String sourceText)
+        {
+            var tree = SyntaxFactory.ParseExpression(sourceText);
+            return tree;
+        }
+
+        private static SyntaxNode ParseStatement(String sourceText)
         {
             var tree = SyntaxFactory.ParseStatement(sourceText);
             return tree;
@@ -162,7 +170,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooVariableInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseStatementElement(@"
+                var tree = ParseStatement(@"
                     int foo = 10;
                 ");
                 Assume.That(tree, Is.Not.Null);
@@ -183,7 +191,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectForeachStatementInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseStatementElement(@"
+                var tree = ParseStatement(@"
                     foreach (var i in new[] { 1, 2, 3 }) { }
                 ");
 
@@ -202,7 +210,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectForStatementInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseStatementElement(@"
+                var tree = ParseStatement(@"
                     for (int i = 0; i < 10; i++) { }
                 ");
 
@@ -221,7 +229,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectWhileStatementInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseStatementElement(@"
+                var tree = ParseStatement(@"
                     while (true) { }
                 ");
 
@@ -240,7 +248,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectIfStatementInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseStatementElement(@"
+                var tree = ParseStatement(@"
                     if (true) { }
                 ");
 
@@ -255,11 +263,11 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
 
         public class UsingStatementSelectorType : Initialize<UsingStatementSelector>
         {
-            [Test(Description = "should select if statement in specified code")]
+            [Test(Description = "should select using statement in specified code")]
             public void ShouldSelectUsingStatementInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseStatementElement(@"
+                var tree = ParseStatement(@"
                     using (null) { }
                 ");
 
@@ -272,5 +280,43 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             }
         }
 
+        public class ExpressionStatementSelectorType : Initialize<ExpressionStatementSelector>
+        {
+            [Test(Description = "should select any kind of expression statement in specified code")]
+            public void ShouldSelectAnyKindOfExpressionStatementInSpecifiedCode()
+            {
+                // Arrange
+                var tree = ParseStatement(@"
+                    (5 + 5).ToString();
+                ");
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as ExpressionStatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
+
+        public class ExpressionSelectorType : Initialize<ExpressionSelector>
+        {
+            [TestCase("5 + 5")]
+            [TestCase("false")]
+            [TestCase("(5 + 5).ToString().ToLowerCase()")]
+            [Test(Description = "should select any kind of expression in specified code")]
+            public void ShouldSelectAnyKindOfExpressionInSpecifiedCode(String expression)
+            {
+                // Arrange
+                var tree = ParseExpression(expression);
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as ExpressionSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+            }
+        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using CodeSharper.Languages.CSharp.Nodes.Selectors.ClassSelectors;
+using CodeSharper.Languages.CSharp.Selectors.ClassSelectors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace CodeSharper.Languages.CSharp.Nodes.Selectors
+namespace CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors
 {
     public class LocalVariableDeclarationSelector : CSharpTypedSelectorBase<LocalDeclarationStatementSyntax, IdentifierMatchingClassSelector>
     {
