@@ -14,7 +14,7 @@ namespace CodeSharper.Playground.GUI.Modules
     {
         private readonly CSharpCompiler compiler;
         private readonly AdhocWorkspace workspace;
-        private DocumentContext context;
+        private CompilationContext context;
         private Project project;
         private Document document;
 
@@ -28,14 +28,14 @@ namespace CodeSharper.Playground.GUI.Modules
             workspace = new AdhocWorkspace();
             project = workspace.AddProject("CSharpProject", LanguageNames.CSharp);
             document = project.AddDocument("current", "");
-            context = new DocumentContext(workspace, document);
+            context = new CompilationContext(workspace, document);
         }
 
         public override DocumentResults? ExecuteQuery(String input, String text)
         {
             try
             {
-                context = new DocumentContext(workspace, document.WithText(SourceText.From(text)));
+                context = new CompilationContext(workspace, document.WithText(SourceText.From(text)));
 
                 var csharpBootStrapper = BootstrapperBuilder.Create(bootstrapper)
                     .WithExecutor(new StandardExecutorWithContext(bootstrapper.RunnableManager, context))
@@ -58,7 +58,7 @@ namespace CodeSharper.Playground.GUI.Modules
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Error message: {0}", exception.Message);
+                Console.WriteLine($"Error message: {exception.Message}");
                 Console.WriteLine("Stacktrace: ");
                 Console.WriteLine(exception.StackTrace);
 

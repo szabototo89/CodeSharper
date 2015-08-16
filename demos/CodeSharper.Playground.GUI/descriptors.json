@@ -1,390 +1,396 @@
 {
-    "selections": [
-        {
-            "name": "relative-child-selector",
-            "selector-type": "combinator",
-            "value": "",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Combinators.RelativeSyntaxNodeCombinator"
-        },
-        {
-            "name": "absolute-child-selector",
-            "selector-type": "combinator",
-            "value": ">",
-            "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
-        },
-        {
-            "name": "text-selector",
-            "selector-type": "combinator",
-            "value": ">>",
-            "type": "CodeSharper.Core.Nodes.Combinators.TextCombinator"
-        },
-        {
-            "name": "concat-selector",
-            "selector-type": "combinator",
-            "value": ",",
-            "type": "CodeSharper.Core.Nodes.Combinators.ConcatCombinator"
-        },
-        {
-            "name": "universal-selector",
-            "selector-type": "element-type-selector",
-            "value": "*",
-            "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
-        },
-        {
-            "name": "csv-field-selector",
-            "selector-type": "element-type-selector",
-            "value": "field",
-            "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldSelector"
-        },
-        {
-            "name": "csv-row-selector",
-            "selector-type": "element-type-selector",
-            "value": "row",
-            "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowSelector"
-        },
-        {
-            "name": "text-pseudo-selector",
-            "selector-type": "pseudo-selector",
-            "value": "parent",
-            "arguments": [ ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.ParentModifier"
-        },
-        {
-            "name": "nth-selector",
-            "selector-type": "pseudo-selector",
-            "value": "nth",
-            "arguments": [ "number" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.NthChildModifier"
-        },
-        {
-            "name": "has-selector",
-            "selector-type": "pseudo-selector",
-            "value": "has",
-            "arguments": [ "selector" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.HasModifier"
-        },
-        {
-            "name": "contains-selector",
-            "selector-type": "pseudo-selector",
-            "value": "contains",
-            "arguments": [ "selector" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.ContainsModifier"
-        },
-        {
-            "name": "value-selector",
-            "selector-type": "pseudo-selector",
-            "value": "val",
-            "arguments": [ "value" ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.ValueModifier"
-        },
-        {
-            "name": "text-pseudo-selector",
-            "selector-type": "pseudo-selector",
-            "value": "siblings",
-            "arguments": [ ],
-            "type": "CodeSharper.Core.Nodes.Modifiers.SiblingsModifier"
-        },
-        {
-            "name": "object-literal-selector",
-            "selector-type": "element-type-selector",
-            "value": "object",
-            "type": "CodeSharper.Languages.Json.Nodes.Selectors.ObjectLiteralSelector"
-        },
-        {
-            "name": "array-literal-selector",
-            "selector-type": "element-type-selector",
-            "value": "array",
-            "type": "CodeSharper.Languages.Json.Nodes.Selectors.ArrayLiteralSelector"
-        },
-        {
-            "name": "key-selector",
-            "selector-type": "element-type-selector",
-            "value": "key",
-            "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeySelector"
-        },
-        {
-            "name": "value-selector",
-            "selector-type": "element-type-selector",
-            "value": "value",
-            "type": "CodeSharper.Languages.Json.Nodes.Selectors.ValueSelector"
-        },
-        {
-            "name": "key-value-selector",
-            "selector-type": "element-type-selector",
-            "value": "key-value",
-            "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeyValueSelector"
-        },
-        {
-            "name": "character-selector",
-            "selector-type": "element-type-selector",
-            "value": "character",
-            "type": "CodeSharper.Languages.Text.Nodes.Selectors.CharacterSelector"
-        },
-        {
-            "name": "word-selector",
-            "selector-type": "element-type-selector",
-            "value": "word",
-            "type": "CodeSharper.Languages.Text.Nodes.Selectors.WordSelector"
-        },
-        {
-            "name": "line-selector",
-            "selector-type": "element-type-selector",
-            "value": "line",
-            "type": "CodeSharper.Languages.Text.Nodes.Selectors.LineSelector"
-        },
-        {
-            "name": "paragraph-selector",
-            "selector-type": "element-type-selector",
-            "value": "paragraph",
-            "type": "CodeSharper.Languages.Text.Nodes.Selectors.ParagraphSelector"
-        },
+  "selections": [
+    {
+      "name": "relative-child-selector",
+      "selector-type": "combinator",
+      "value": "",
+      "type": "CodeSharper.Languages.CSharp.Combinators.RelativeSyntaxNodeCombinator"
+    },
+    {
+      "name": "absolute-child-selector",
+      "selector-type": "combinator",
+      "value": ">",
+      "type": "CodeSharper.Core.Nodes.Combinators.ChildrenCombinator"
+    },
+    {
+      "name": "text-selector",
+      "selector-type": "combinator",
+      "value": ">>",
+      "type": "CodeSharper.Core.Nodes.Combinators.TextCombinator"
+    },
+    {
+      "name": "concat-selector",
+      "selector-type": "combinator",
+      "value": ",",
+      "type": "CodeSharper.Core.Nodes.Combinators.ConcatCombinator"
+    },
+    {
+      "name": "universal-selector",
+      "selector-type": "element-type-selector",
+      "value": "*",
+      "type": "CodeSharper.Core.Nodes.Selectors.UniversalSelector"
+    },
+    {
+      "name": "csv-field-selector",
+      "selector-type": "element-type-selector",
+      "value": "field",
+      "type": "CodeSharper.Languages.Csv.Nodes.Selectors.FieldSelector"
+    },
+    {
+      "name": "csv-row-selector",
+      "selector-type": "element-type-selector",
+      "value": "row",
+      "type": "CodeSharper.Languages.Csv.Nodes.Selectors.RowSelector"
+    },
+    {
+      "name": "text-pseudo-selector",
+      "selector-type": "pseudo-selector",
+      "value": "parent",
+      "arguments": [ ],
+      "type": "CodeSharper.Core.Nodes.Modifiers.ParentModifier"
+    },
+    {
+      "name": "nth-selector",
+      "selector-type": "pseudo-selector",
+      "value": "nth",
+      "arguments": [ "number" ],
+      "type": "CodeSharper.Core.Nodes.Modifiers.NthChildModifier"
+    },
+    {
+      "name": "has-selector",
+      "selector-type": "pseudo-selector",
+      "value": "has",
+      "arguments": [ "selector" ],
+      "type": "CodeSharper.Core.Nodes.Modifiers.HasModifier"
+    },
+    {
+      "name": "contains-selector",
+      "selector-type": "pseudo-selector",
+      "value": "contains",
+      "arguments": [ "selector" ],
+      "type": "CodeSharper.Core.Nodes.Modifiers.ContainsModifier"
+    },
+    {
+      "name": "value-selector",
+      "selector-type": "pseudo-selector",
+      "value": "val",
+      "arguments": [ "value" ],
+      "type": "CodeSharper.Core.Nodes.Modifiers.ValueModifier"
+    },
+    {
+      "name": "text-pseudo-selector",
+      "selector-type": "pseudo-selector",
+      "value": "siblings",
+      "arguments": [ ],
+      "type": "CodeSharper.Core.Nodes.Modifiers.SiblingsModifier"
+    },
+    {
+      "name": "object-literal-selector",
+      "selector-type": "element-type-selector",
+      "value": "object",
+      "type": "CodeSharper.Languages.Json.Nodes.Selectors.ObjectLiteralSelector"
+    },
+    {
+      "name": "array-literal-selector",
+      "selector-type": "element-type-selector",
+      "value": "array",
+      "type": "CodeSharper.Languages.Json.Nodes.Selectors.ArrayLiteralSelector"
+    },
+    {
+      "name": "key-selector",
+      "selector-type": "element-type-selector",
+      "value": "key",
+      "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeySelector"
+    },
+    {
+      "name": "value-selector",
+      "selector-type": "element-type-selector",
+      "value": "value",
+      "type": "CodeSharper.Languages.Json.Nodes.Selectors.ValueSelector"
+    },
+    {
+      "name": "key-value-selector",
+      "selector-type": "element-type-selector",
+      "value": "key-value",
+      "type": "CodeSharper.Languages.Json.Nodes.Selectors.KeyValueSelector"
+    },
+    {
+      "name": "character-selector",
+      "selector-type": "element-type-selector",
+      "value": "character",
+      "type": "CodeSharper.Languages.Text.Nodes.Selectors.CharacterSelector"
+    },
+    {
+      "name": "word-selector",
+      "selector-type": "element-type-selector",
+      "value": "word",
+      "type": "CodeSharper.Languages.Text.Nodes.Selectors.WordSelector"
+    },
+    {
+      "name": "line-selector",
+      "selector-type": "element-type-selector",
+      "value": "line",
+      "type": "CodeSharper.Languages.Text.Nodes.Selectors.LineSelector"
+    },
+    {
+      "name": "paragraph-selector",
+      "selector-type": "element-type-selector",
+      "value": "paragraph",
+      "type": "CodeSharper.Languages.Text.Nodes.Selectors.ParagraphSelector"
+    },
 
 
+    {
+      "name": "class-selector",
+      "selector-type": "element-type-selector",
+      "value": "class",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.ClassDeclarationSelector"
+    },
+    {
+      "name": "struct-selector",
+      "selector-type": "element-type-selector",
+      "value": "struct",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.StructDeclarationSelector"
+    },
+    {
+      "name": "interface-selector",
+      "selector-type": "element-type-selector",
+      "value": "interface",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.InterfaceDeclarationSelector"
+    },
+    {
+      "name": "enum-selector",
+      "selector-type": "element-type-selector",
+      "value": "enum",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.EnumDeclarationSelector"
+    },
+    {
+      "name": "variable-selector",
+      "selector-type": "element-type-selector",
+      "value": "var",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.LocalVariableDeclarationSelector"
+    },
+    {
+      "name": "property-selector",
+      "selector-type": "element-type-selector",
+      "value": "prop",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.PropertyDeclarationSelector"
+    },
+    {
+      "name": "method-selector",
+      "selector-type": "element-type-selector",
+      "value": "method",
+      "type": "CodeSharper.Languages.CSharp.Selectors.DeclarationSelectors.MethodDeclarationSelector"
+    },
+    {
+      "name": "is-selector",
+      "selector-type": "element-type-selector",
+      "value": "is",
+      "type": "CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors.IsExpressionSelector"
+    }
+  ],
+  "commands": [
+    {
+      "name": "RepeatRunnable",
+      "description": "It repeats specified elements with several times",
+      "arguments": [
         {
-            "name": "class-selector",
-            "selector-type": "element-type-selector",
-            "value": "class",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.ClassDeclarationSelector"
-        },
-        {
-            "name": "struct-selector",
-            "selector-type": "element-type-selector",
-            "value": "struct",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.StructDeclarationSelector"
-        },
-        {
-            "name": "interface-selector",
-            "selector-type": "element-type-selector",
-            "value": "interface",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.InterfaceDeclarationSelector"
-        },
-        {
-            "name": "enum-selector",
-            "selector-type": "element-type-selector",
-            "value": "enum",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.EnumDeclarationSelector"
-        },
-        {
-            "name": "variable-selector",
-            "selector-type": "element-type-selector",
-            "value": "var",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.VariableDeclarationSelector"
-        },
-        {
-            "name": "property-selector",
-            "selector-type": "element-type-selector",
-            "value": "prop",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.PropertyDeclarationSelector"
-        },
-        {
-            "name": "method-selector",
-            "selector-type": "element-type-selector",
-            "value": "method",
-            "type": "CodeSharper.Languages.CSharp.Nodes.Selectors.MethodDeclarationSelector"
+          "name": "count",
+          "argument-type": "System.Double",
+          "default-value": 1,
+          "optional": false,
+          "position": 0
         }
-    ],
-    "commands": [
-        {
-            "name": "RepeatRunnable",
-            "description": "It repeats specified elements with several times",
-            "arguments": [
-                {
-                    "name": "count",
-                    "argument-type": "System.Double",
-                    "default-value": 1,
-                    "optional": false,
-                    "position": 0
-                }
-            ],
-            "type": "RepeatRunnable",
-            "command-names": [ "repeat" ]
-        },
-        {
-            "name": "RemoveRunnable",
-            "description": "It repeats specified elements with several times",
-            "arguments": [ ],
-            "type": "RemoveRunnable",
-            "command-names": [ "remove" ]
-        },
-        
-        {
-            "name": "ConvertToTextRangeRunnable",
-            "command-names": [ "convert-to-textrange" ],
-            "description": "Selects any object (which has text range) text range.",
-            "type": "ConvertToTextRangeRunnable",
-            "arguments": [ ]
-        },
-        {
-            "name": "ConvertToStringRunnable",
-            "command-names": [ "convert-to-string" ],
-            "description": "Converts text range to raw text",
-            "type": "ConvertToStringRunnable",
-            "arguments": [ ]
-        },
-        {
-            "name": "ReplaceTextRunnable",
-            "command-names": [ "replace" ],
-            "description": "Replaces text with specified value. Use '$' to insert previous value of text range.",
-            "type": "ReplaceTextRunnable",
-            "arguments": [
-                {
-                    "name": "replacedText",
-                    "argument-type": "System.String",
-                    "default-value": "",
-                    "optional": false,  
-                    "position": 0
-                }
-            ]
-        },
+      ],
+      "type": "RepeatRunnable",
+      "command-names": [ "repeat" ]
+    },
+    {
+      "name": "RemoveRunnable",
+      "description": "It repeats specified elements with several times",
+      "arguments": [ ],
+      "type": "RemoveRunnable",
+      "command-names": [ "remove" ]
+    },
 
+    {
+      "name": "ConvertToTextRangeRunnable",
+      "command-names": [ "convert-to-textrange" ],
+      "description": "Selects any object (which has text range) text range.",
+      "type": "ConvertToTextRangeRunnable",
+      "arguments": [ ]
+    },
+    {
+      "name": "ConvertToStringRunnable",
+      "command-names": [ "convert-to-string" ],
+      "description": "Converts text range to raw text",
+      "type": "ConvertToStringRunnable",
+      "arguments": [ ]
+    },
+    {
+      "name": "ReplaceTextRunnable",
+      "command-names": [ "replace" ],
+      "description": "Replaces text with specified value. Use '$' to insert previous value of text range.",
+      "type": "ReplaceTextRunnable",
+      "arguments": [
         {
-            "name": "FilterRunnable",
-            "command-names": [ "filter" ],
-            "description": "Filters specified parameters by regular expression",
-            "type": "FilterRunnable",
-            "arguments": [
-                {
-                    "name": "pattern",
-                    "argument-type": "System.String",
-                    "default-value": "",
-                    "optional": false,
-                    "position": 0
-                }
-            ]
-        },
-        {
-            "name": "ReplaceTextInteractiveRunnable",
-            "command-names": [ "replace-interactive" ],
-            "description": "Replaces text",
-            "type": "ReplaceTextInteractiveRunnable",
-            "arguments": [ ]
-        },
-        {
-            "name": "TakeRunnable",
-            "command-names": [ "take" ],
-            "description": "Takes specified amount of element from result.",
-            "type": "CodeSharper.Core.Common.Runnables.TakeRunnable",
-            "arguments": [
-                {
-                    "name": "count",
-                    "argument-type": "System.Double",
-                    "default-value": "",    
-                    "optional": false,  
-                    "position": 0
-                }
-            ]
-        },
-        {
-            "name": "SkipRunnable",
-            "command-names": [ "skip" ],
-            "description": "Takes specified amount of element from result.",
-            "type": "CodeSharper.Core.Common.Runnables.SkipRunnable",
-            "arguments": [
-                {
-                    "name": "count",
-                    "argument-type": "System.Double",
-                    "default-value": "",
-                    "optional": false,  
-                    "position": 0
-                }
-            ]
-        },
-        {
-            "name": "RangeRunnable",
-            "command-names": [ "range" ],
-            "description": "Takes specified amount of element from result.",
-            "type": "CodeSharper.Core.Common.Runnables.RangeRunnable",
-            "arguments": [
-                {
-                    "name": "start",
-                    "argument-type": "System.Double",
-                    "default-value": "",
-                    "optional": false,  
-                    "position": 0
-                },
-                {
-                    "name": "end",
-                    "argument-type": "System.Double",
-                    "default-value": "",
-                    "optional": false,  
-                    "position": 1
-                }
-            ]
-        },
-        {
-            "name": "ElementAtRunnable",
-            "command-names": [ "at" ],
-            "description": "Takes specified amount of element from result.",
-            "type": "CodeSharper.Core.Common.Runnables.ElementAtRunnable",
-            "arguments": [
-                {
-                    "name": "position",
-                    "argument-type": "System.Double",
-                    "default-value": "",
-                    "optional": false,  
-                    "position": 0
-                }
-            ]
-        },
-        {
-            "name": "LengthRunnable",
-            "command-names": [ "length" ],
-            "description": "Takes specified amount of element from result.",
-            "type": "CodeSharper.Core.Common.Runnables.Length",
-            "arguments": [ ]
-        },
-
-
-        {
-            "name": "RemoveNodeRunnable",
-            "description": "It removes specified elements from root",
-            "arguments": [],
-            "type": "CodeSharper.Languages.CSharp.Runnables.RemoveNodeRunnable",
-            "command-names": [ "rm" ]
-        },
-        {
-            "name": "CreateCommentRunnable",
-            "description": "It removes specified elements from root",
-            "arguments": [],
-            "type": "CodeSharper.Languages.CSharp.Runnables.CreateCommentRunnable",
-            "command-names": [ "comment" ]
-        },
-      {
-        "name": "CreateRunnable",
-        "description": "It creates a new runnable",
-        "arguments": [
-          {
-            "name": "source",
-            "argument-type": "System.String",
-            "default-value": "",
-            "optional": false,
-            "position": 0
-          }
-        ],
-        "type": "CodeSharper.Languages.CSharp.Runnables.CreateRunnable",
-        "command-names": [ "create" ]
-      },
-      {
-            "name": "ChangeMemberVisibilityRunnable",
-            "description": "It changes member visibility",
-            "arguments": [
-                 {
-                    "name": "visibility",
-                    "argument-type": "System.String",
-                    "default-value": "",
-                    "optional": false,  
-                    "position": 0
-                }
-            ],
-            "type": "CodeSharper.Languages.CSharp.Runnables.ChangeMemberVisibilityRunnable",
-            "command-names": [ "change-visibility" ]
-        },
-        {
-            "name": "CopyToClipboardRunnable",
-            "description": "It creates a new runnable",
-            "arguments": [ ],
-            "type": "CodeSharper.Languages.CSharp.Runnables.CopyToClipboardRunnable",
-            "command-names": [ "copy-to-clipboard" ]
+          "name": "replacedText",
+          "argument-type": "System.String",
+          "default-value": "",
+          "optional": false,
+          "position": 0
         }
-    ]
+      ]
+    },
+
+    {
+      "name": "FilterRunnable",
+      "command-names": [ "filter" ],
+      "description": "Filters specified parameters by regular expression",
+      "type": "FilterRunnable",
+      "arguments": [
+        {
+          "name": "pattern",
+          "argument-type": "System.String",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "ReplaceTextInteractiveRunnable",
+      "command-names": [ "replace-interactive" ],
+      "description": "Replaces text",
+      "type": "ReplaceTextInteractiveRunnable",
+      "arguments": [ ]
+    },
+    {
+      "name": "TakeRunnable",
+      "command-names": [ "take" ],
+      "description": "Takes specified amount of element from result.",
+      "type": "CodeSharper.Core.Common.Runnables.TakeRunnable",
+      "arguments": [
+        {
+          "name": "count",
+          "argument-type": "System.Double",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "SkipRunnable",
+      "command-names": [ "skip" ],
+      "description": "Takes specified amount of element from result.",
+      "type": "CodeSharper.Core.Common.Runnables.SkipRunnable",
+      "arguments": [
+        {
+          "name": "count",
+          "argument-type": "System.Double",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "RangeRunnable",
+      "command-names": [ "range" ],
+      "description": "Takes specified amount of element from result.",
+      "type": "CodeSharper.Core.Common.Runnables.RangeRunnable",
+      "arguments": [
+        {
+          "name": "start",
+          "argument-type": "System.Double",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        },
+        {
+          "name": "end",
+          "argument-type": "System.Double",
+          "default-value": "",
+          "optional": false,
+          "position": 1
+        }
+      ]
+    },
+    {
+      "name": "ElementAtRunnable",
+      "command-names": [ "at" ],
+      "description": "Takes specified amount of element from result.",
+      "type": "CodeSharper.Core.Common.Runnables.ElementAtRunnable",
+      "arguments": [
+        {
+          "name": "position",
+          "argument-type": "System.Double",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "LengthRunnable",
+      "command-names": [ "length" ],
+      "description": "Takes specified amount of element from result.",
+      "type": "CodeSharper.Core.Common.Runnables.Length",
+      "arguments": [ ]
+    },
+
+
+    {
+      "name": "RemoveNodeRunnable",
+      "description": "It removes specified elements from root",
+      "arguments": [ ],
+      "type": "CodeSharper.Languages.CSharp.Runnables.RemoveNodeRunnable",
+      "command-names": [ "rm" ]
+    },
+    {
+      "name": "CreateCommentRunnable",
+      "description": "It removes specified elements from root",
+      "arguments": [ ],
+      "type": "CodeSharper.Languages.CSharp.Runnables.CreateCommentRunnable",
+      "command-names": [ "comment" ]
+    },
+    {
+      "name": "CreateRunnable",
+      "description": "It creates a new runnable",
+      "arguments": [
+        {
+          "name": "source",
+          "argument-type": "System.String",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        }
+      ],
+      "type": "CodeSharper.Languages.CSharp.Runnables.CreateRunnable",
+      "command-names": [ "create" ]
+    },
+    {
+      "name": "ChangeMemberVisibilityRunnable",
+      "description": "It changes member visibility",
+      "arguments": [
+        {
+          "name": "visibility",
+          "argument-type": "System.String",
+          "default-value": "",
+          "optional": false,
+          "position": 0
+        }
+      ],
+      "type": "CodeSharper.Languages.CSharp.Runnables.ChangeMemberVisibilityRunnable",
+      "command-names": [ "change-visibility" ]
+    },
+    {
+      "name": "CopyToClipboardRunnable",
+      "description": "It creates a new runnable",
+      "arguments": [ ],
+      "type": "CodeSharper.Languages.CSharp.Runnables.CopyToClipboardRunnable",
+      "command-names": [ "copy-to-clipboard" ]
+    }
+  ]
 }
