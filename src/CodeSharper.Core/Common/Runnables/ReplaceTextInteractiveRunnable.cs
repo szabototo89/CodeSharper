@@ -15,14 +15,18 @@ namespace CodeSharper.Core.Common.Runnables
     public class ReplaceTextInteractiveRunnable :
         RunnableBase<IEnumerable<TextRange>, IEnumerable<TextRange>, GreadyEnumerableCastingHelper<TextRange>>
     {
+        private readonly IServiceFactory serviceFactory;
         private readonly IInteractiveService interactiveService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceTextInteractiveRunnable"/> class.
         /// </summary>
-        public ReplaceTextInteractiveRunnable(IInteractiveService interactiveService)
+        public ReplaceTextInteractiveRunnable(IServiceFactory serviceFactory)
         {
-            this.interactiveService = interactiveService;
+            Assume.IsRequired(serviceFactory, nameof(serviceFactory));
+
+            this.serviceFactory = serviceFactory;
+            this.interactiveService = serviceFactory.GetService<IInteractiveService>();
         }
 
         /// <summary>

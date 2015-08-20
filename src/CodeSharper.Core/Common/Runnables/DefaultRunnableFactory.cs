@@ -18,9 +18,9 @@ namespace CodeSharper.Core.Common.Runnables
         public IValueConverter ValueConverter { get; }
 
         /// <summary>
-        /// Gets or sets the interactive service.
+        /// Gets or sets the service factory.
         /// </summary>
-        public IInteractiveService InteractiveService { get; }
+        public IServiceFactory ServiceFactory { get; }
 
         /// <summary>
         /// Gets or sets the available runnables.
@@ -41,13 +41,13 @@ namespace CodeSharper.Core.Common.Runnables
         /// Initializes a new instance of the <see cref="DefaultRunnableFactory"/> class.
         /// </summary>
         public DefaultRunnableFactory(IEnumerable<Type> availableRunnables, IValueConverter valueConverter = null, INameMatcher runnableNameMatcher = null, INameMatcher parameterNameMatcher = null,
-                                      IInteractiveService interactiveService = null)
+                                      IServiceFactory serviceFactory = null)
         {
             AvailableRunnables = availableRunnables ?? Enumerable.Empty<Type>();
             RunnableNameMatcher = runnableNameMatcher ?? new EqualityNameMatcher();
             ParameterNameMatcher = parameterNameMatcher ?? new EqualityNameMatcher();
             ValueConverter = valueConverter ?? new EmptyValueConverter();
-            InteractiveService = interactiveService;
+            ServiceFactory = serviceFactory;
         }
 
         /// <summary>
@@ -70,21 +70,21 @@ namespace CodeSharper.Core.Common.Runnables
             var defaultConstructor = constructors.FirstOrDefault(constructor => constructor.GetParameters().Length == 0);
             if (defaultConstructor != null)
                 runnable = defaultConstructor.Invoke(Enumerable.Empty<Object>().ToArray()) as IRunnable;
-            if (InteractiveService != null)
+            if (ServiceFactory != null)
             {
-                // instantiate with interactive service
+                // instantiate with service factory
                 var constructorWithService = constructors.FirstOrDefault(constructor => {
                     var parameters = constructor.GetParameters();
                     if (parameters.Length != 1)
                         return false;
 
-                    var isInteractiveService = typeof (IInteractiveService).IsAssignableFrom(parameters[0].ParameterType);
+                    var isServiceFactory = typeof (IServiceFactory).IsAssignableFrom(parameters[0].ParameterType);
 
-                    return isInteractiveService;
+                    return isServiceFactory;
                 });
 
                 if (constructorWithService != null)
-                    runnable = constructorWithService.Invoke(new[] {InteractiveService}) as IRunnable;
+                    runnable = constructorWithService.Invoke(new[] {ServiceFactory}) as IRunnable;
             }
 
             if (runnable == null)

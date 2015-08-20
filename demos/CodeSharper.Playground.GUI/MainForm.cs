@@ -41,7 +41,11 @@ namespace CodeSharper.Playground.GUI
             var runnableTypeResolver = new AutoRunnableResolver();
             var valueConverter = new IntegerValueConverter();
             var interactiveService = new ReplaceTextInteractiveService(this);
-            var runnableFactory = new DefaultRunnableFactory(runnableTypeResolver.ResolveRunnableTypes(assemblies), valueConverter, interactiveService: interactiveService);
+
+            var serviceFactory = new SimpleServiceFactory();
+            serviceFactory.RegisterInteractiveService(interactiveService);
+
+            var runnableFactory = new DefaultRunnableFactory(runnableTypeResolver.ResolveRunnableTypes(assemblies), valueConverter, serviceFactory: serviceFactory);
             var fileDescriptorRepository = new FileDescriptorRepository("descriptors.json", assemblies);
             var autoDescriptorRepository = new AutoCommandDescriptorRepository(assemblies.SelectMany(assembly => assembly.GetTypes()));
             var descriptorRepository = new MultiDescriptorRepository(

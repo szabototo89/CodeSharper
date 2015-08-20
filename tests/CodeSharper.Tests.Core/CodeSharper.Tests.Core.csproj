@@ -90,6 +90,7 @@
     <Compile Include="Services\AutoCommandDescriptorRepositoryTests.cs" />
     <Compile Include="Services\MemoryDescriptorRepositoryTests.cs" />
     <Compile Include="Services\MultiDescriptorRepositoryTests.cs" />
+    <Compile Include="Services\SimpleServiceFactoryTests.cs" />
     <Compile Include="Texts\TextRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Nodes\Modifiers\ChildrenModifierTests.cs" />
