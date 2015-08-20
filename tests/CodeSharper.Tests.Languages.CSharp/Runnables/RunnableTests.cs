@@ -85,8 +85,8 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             };
 
             var workspace = new AdhocWorkspace();
-            var project = workspace.AddProject("test", "C#");
-            var document = workspace.AddDocument(project.Id, "test", SourceText.From(source));
+            var project = workspace.AddProject(ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Default, "test", "test-asm", LanguageNames.CSharp));
+            var document = workspace.AddDocument(project.Id, "test-document", SourceText.From(source));
             var documentContext = new CompilationContext(workspace, document);
             var compilationUnit = document.GetSyntaxRootAsync().Result as CompilationUnitSyntax;
             var memberDeclaration = compilationUnit.DescendantNodes()

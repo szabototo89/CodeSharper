@@ -19,7 +19,7 @@ namespace CodeSharper.Languages.CSharp.Runnables
         public override SyntaxNode Run(SyntaxNode parameter, CompilationContext context)
         {
             if (parameter == null) return null;
-            Assume.IsRequired(context);
+            Assume.IsRequired(context, nameof(context));
 
             var sourceText = parameter.WithoutTrivia().ToFullString();
             var commentedSourceText = $"/* {sourceText} */";

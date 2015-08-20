@@ -56,8 +56,8 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
 
         public class ClassDeclarationSelectorType : Initialize<ClassDeclarationSelector>
         {
-            [Test(Description = "should select Foo class in C# code")]
-            public void ShouldSelectFooClassInCSharpCode()
+            [Test(Description = "should select Foo class in C# code when no attribute is defined")]
+            public void ShouldSelectFooClassInCSharpCode_WhenNoAttributeIsDefined()
             {
                 // Arrange
                 var tree = ParseDeclaration(@"
@@ -73,8 +73,8 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result.Identifier.Text, Is.EqualTo("Foo"));
             }
 
-            [Test(Description = "should select abstract Bar class in C# code")]
-            public void ShouldSelectAbstractBarClassInCSharpCode()
+            [Test(Description = "should select abstract Bar class in C# code when abstract attribute is defined")]
+            public void ShouldSelectAbstractBarClassInCSharpCode_WhenAbstractAttributeIsDefined()
             {
                 // Arrange
                 underTest.ApplyAttributes(Array(new SelectorAttribute("abstract", true)));
@@ -95,8 +95,8 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
             }
 
-            [Test(Description = "should select sealed Bar class in C# code")]
-            public void ShouldSelectSealedBarClassInCSharpCode()
+            [Test(Description = "should select sealed Bar class in C# code when `sealed` attribute is defined")]
+            public void ShouldSelectSealedBarClassInCSharpCode_WhenSealedAttributeIsDefined()
             {
                 // Arrange
                 underTest.ApplyAttributes(Array(new SelectorAttribute("sealed", true)));
@@ -107,6 +107,58 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
 
                 // Act
                 var result = underTest.SelectElement(node).SingleOrDefault() as ClassDeclarationSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
+            }
+
+            [TestCase("public")]
+            [TestCase("private")]
+            [TestCase("protected")]
+            [TestCase("internal")]
+            [Test(Description = "should select abstract Bar class in C# code when visibility attribute is defined")]
+            public void ShouldSelectBarClassInCSharpCodeByVisibility_WhenVisibilityAttributeIsDefined(String visibility)
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute("visibility", visibility)));
+
+                var nodes = ParseDeclarations($@"
+                    class Foo {{ }}
+                    {visibility} class Bar {{ }}
+                ");
+
+                // Act
+                var result = nodes.SelectMany(node => underTest.SelectElement(node))
+                                  .ToArray()
+                                  .OfType<ClassDeclarationSyntax>()
+                                  .SingleOrDefault();
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
+            }
+
+            [TestCase("public")]
+            [TestCase("private")]
+            [TestCase("protected")]
+            [TestCase("internal")]
+            [Test(Description = "should select Bar class in C# code by visibility when its visibility value is defined as attribute")]
+            public void ShouldSelectBarClassInCSharpCodeByVisibility_WhenItsVisibilityValueIsDefinedAsAttribute(String visibility)
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute(visibility, true)));
+
+                var nodes = ParseDeclarations($@"
+                    class Foo {{ }}
+                    {visibility} class Bar {{ }}
+                ");
+
+                // Act
+                var result = nodes.SelectMany(node => underTest.SelectElement(node))
+                                  .ToArray()
+                                  .OfType<ClassDeclarationSyntax>()
+                                  .SingleOrDefault();
 
                 // Assert
                 Assert.That(result, Is.Not.Null);
@@ -455,7 +507,6 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result, Is.Empty);
             }
-
         }
 
         public class AsExpressionSelectorType : Initialize<AsExpressionSelector>
@@ -509,6 +560,27 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 // Assert
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result, Is.Empty);
+            }
+        }
+
+        public class StatementSelectorType : Initialize<StatementSelector>
+        {
+            [TestCase(";")]
+            [TestCase("a = 10;")]
+            [TestCase("if (true) { }")]
+            [TestCase("while (true) { }")]
+            [Test(Description = "should select any kind of statement when specified node is matching with it")]
+            public void ShouldSelectAnyKindOfStatement_WhenSpecifiedNodeIsMatchingWithIt(String statement)
+            {
+                // Arrange
+                var tree = ParseStatement(statement);
+
+                // Act
+                var result = underTest.SelectElement(tree)
+                                      .SingleOrDefault() as StatementSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
             }
         }
     }

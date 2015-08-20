@@ -85,6 +85,7 @@
     <Compile Include="Selectors\DeclarationSelectors\MethodDeclarationSelector.cs" />
     <Compile Include="Selectors\DeclarationSelectors\PropertyDeclarationSelector.cs" />
     <Compile Include="Selectors\DeclarationSelectors\StructDeclarationSelector.cs" />
+    <Compile Include="Selectors\StatementSelectors\StatementSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\UsingStatementSelector.cs" />
     <Compile Include="Selectors\DeclarationSelectors\LocalVariableDeclarationSelector.cs" />
     <Compile Include="Selectors\StatementSelectors\WhileStatementSelector.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Runnables\CreateCommentRunnable.cs" />
     <Compile Include="Runnables\CreateRunnable.cs" />
     <Compile Include="Runnables\RemoveRunnable.cs" />
+    <Compile Include="Utilities\SyntaxNodeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
