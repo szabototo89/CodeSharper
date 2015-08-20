@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.Nodes;
 using CodeSharper.Core.Nodes.Selectors;
@@ -28,11 +29,18 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             }
         }
 
-        private static SyntaxNode ParseDeclarationElement(String sourceText)
+        private static SyntaxNode ParseDeclaration(String sourceText)
         {
             var tree = SyntaxFactory.ParseSyntaxTree(sourceText);
             return tree.GetRoot().ChildNodes().SingleOrDefault();
         }
+
+        private static IEnumerable<SyntaxNode> ParseDeclarations(String sourceText)
+        {
+            var tree = SyntaxFactory.ParseSyntaxTree(sourceText);
+            return tree.GetRoot().ChildNodes();
+        }
+
 
         private static SyntaxNode ParseExpression(String sourceText)
         {
@@ -52,7 +60,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooClassInCSharpCode()
             {
                 // Arrange
-                var tree = ParseDeclarationElement(@"
+                var tree = ParseDeclaration(@"
                     public class Foo { }
                 ");
 
@@ -64,6 +72,46 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Identifier.Text, Is.EqualTo("Foo"));
             }
+
+            [Test(Description = "should select abstract Bar class in C# code")]
+            public void ShouldSelectAbstractBarClassInCSharpCode()
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute("abstract", true)));
+
+                var nodes = ParseDeclarations(@"
+                    public class Foo { }
+                    public abstract class Bar { }
+                ");
+
+                // Act
+                var result = nodes.SelectMany(node => underTest.SelectElement(node))
+                                  .ToArray()
+                                  .OfType<ClassDeclarationSyntax>()
+                                  .SingleOrDefault();
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
+            }
+
+            [Test(Description = "should select sealed Bar class in C# code")]
+            public void ShouldSelectSealedBarClassInCSharpCode()
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute("sealed", true)));
+
+                var node = ParseDeclaration(@"
+                    public sealed class Bar { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(node).SingleOrDefault() as ClassDeclarationSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
+            }
         }
 
         public class StructDeclarationSelectorType : Initialize<StructDeclarationSelector>
@@ -72,7 +120,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooStructInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseDeclarationElement(@"
+                var tree = ParseDeclaration(@"
                     public struct Foo { }
                 ");
 
@@ -92,7 +140,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooInterfaceInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseDeclarationElement(@"
+                var tree = ParseDeclaration(@"
                     public interface Foo { }
                 ");
 
@@ -112,7 +160,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooEnumInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseDeclarationElement(@"
+                var tree = ParseDeclaration(@"
                     public enum Foo { }
                 ");
 
@@ -132,7 +180,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooPropertyInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseDeclarationElement(@"
+                var tree = ParseDeclaration(@"
                     public string Foo { get; set; }
                 ");
 
@@ -152,7 +200,7 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
             public void ShouldSelectFooMethodInSpecifiedCode()
             {
                 // Arrange
-                var tree = ParseDeclarationElement(@"
+                var tree = ParseDeclaration(@"
                     public void Foo() { }
                 ");
 

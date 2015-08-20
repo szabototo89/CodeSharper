@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeSharper.Core.ErrorHandling;
+using CodeSharper.Core.Nodes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -9,18 +10,29 @@ namespace CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors
 {
     public abstract class TypeCastingLikeExpressionSelector : ExpressionSelectorBase<BinaryExpressionSyntax>
     {
-        private String ATTRIBUTE_TYPE = "type";
+        private String CASTING_TYPE = "type";
 
         protected TypeCastingLikeExpressionSelector(SyntaxKind? kind) : base(kind)
         {
-            
+        }
+
+        protected String CastingType { get; private set; }
+
+        public override void ApplyAttributes(IEnumerable<SelectorAttribute> attributes)
+        {
+            base.ApplyAttributes(attributes);
+
+            if (IsAttributeDefined(CASTING_TYPE))
+            {
+                CastingType = GetAttributeValue(CASTING_TYPE).ToString();
+            }
         }
 
         public override IEnumerable<Object> SelectElement(Object element)
         {
             var selectedElements = base.SelectElement(element);
-            if (!IsAttributeDefined(ATTRIBUTE_TYPE)) return selectedElements;
-            return SelectElementByType(selectedElements.OfType<BinaryExpressionSyntax>(), GetAttributeValue(ATTRIBUTE_TYPE).ToString());
+            if (!IsAttributeDefined()) return selectedElements;
+            return SelectElementByType(selectedElements.OfType<BinaryExpressionSyntax>(), CastingType);
         }
 
         private IEnumerable<Object> SelectElementByType(IEnumerable<BinaryExpressionSyntax> elements, String typeValue)
@@ -30,7 +42,7 @@ namespace CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors
                 var right = element.Right;
                 if (right is IdentifierNameSyntax)
                 {
-                    var identifier = (IdentifierNameSyntax)right;
+                    var identifier = (IdentifierNameSyntax) right;
                     if (identifier.Identifier.Text == typeValue)
                     {
                         yield return element;
@@ -38,7 +50,7 @@ namespace CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors
                 }
                 else if (right is PredefinedTypeSyntax)
                 {
-                    var predefinedType = (PredefinedTypeSyntax)right;
+                    var predefinedType = (PredefinedTypeSyntax) right;
                     if (predefinedType.Keyword.Text == typeValue)
                     {
                         yield return element;
@@ -46,7 +58,7 @@ namespace CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors
                 }
                 else if (right is QualifiedNameSyntax)
                 {
-                    var qualifiedNameNode = (QualifiedNameSyntax)right;
+                    var qualifiedNameNode = (QualifiedNameSyntax) right;
                     var qualifiedName = RetrieveQualifiedName(qualifiedNameNode);
 
                     if (qualifiedName.EndsWith(typeValue))
@@ -73,7 +85,7 @@ namespace CodeSharper.Languages.CSharp.Selectors.ExpressionSelectors
 
                 if (current.Left is IdentifierNameSyntax)
                 {
-                    identifier = ((IdentifierNameSyntax)current.Left).Identifier;
+                    identifier = ((IdentifierNameSyntax) current.Left).Identifier;
                     name = $"{identifier.Text}.{name}";
                 }
 

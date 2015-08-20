@@ -56,7 +56,16 @@ namespace CodeSharper.Core.Nodes.Selectors
         public abstract IEnumerable<Object> SelectElement(Object element);
 
         /// <summary>
-        /// Determines whether [is attribute defined] [the specified name].
+        /// Deternmines whether is any attribute defined
+        /// </summary>
+        /// <returns></returns>
+        protected virtual Boolean IsAttributeDefined()
+        {
+            return attributes.Any();
+        }
+
+        /// <summary>
+        /// Deternmines whether is any attribute defined
         /// </summary>
         protected virtual Boolean IsAttributeDefined(String attributeName)
         {
