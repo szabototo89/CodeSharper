@@ -184,6 +184,8 @@
     <Compile Include="Services\CommandDescriptorAttribute.cs" />
     <Compile Include="Services\MultiDescriptorRepository.cs" />
     <Compile Include="Services\SelectionDescriptorModel.cs" />
+    <Compile Include="Services\IServiceFactory.cs" />
+    <Compile Include="Services\SimpleServiceFactory.cs" />
     <Compile Include="SyntaxTrees\ISyntaxTreeVisitor.cs" />
     <Compile Include="TextManagers\ITextManager.cs" />
     <Compile Include="TextManagers\TextMarkerBase.cs" />
