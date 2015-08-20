@@ -55,7 +55,7 @@ namespace CodeSharper.Languages.CSharp.Runnables
             if (parameter == null) return null;
             Assume.IsRequired(context, nameof(context));
 
-            var declaration = parameter as MethodDeclarationSyntax;
+            var declaration = parameter as ClassDeclarationSyntax;
             if (declaration == null) return parameter;
 
             var visibilityModifiers = Array(SyntaxKind.PublicKeyword, SyntaxKind.PrivateKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.InternalKeyword);
