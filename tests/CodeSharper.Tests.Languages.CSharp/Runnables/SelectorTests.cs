@@ -113,6 +113,24 @@ namespace CodeSharper.Tests.Languages.CSharp.Runnables
                 Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
             }
 
+            [Test(Description = "should select partial Bar class in C# code when `partial` attribute is defined")]
+            public void ShouldSelectPartialBarClassInCSharpCode_WhenPartialAttributeIsDefined()
+            {
+                // Arrange
+                underTest.ApplyAttributes(Array(new SelectorAttribute("partial", true)));
+
+                var node = ParseDeclaration(@"
+                    public partial class Bar { }
+                ");
+
+                // Act
+                var result = underTest.SelectElement(node).SingleOrDefault() as ClassDeclarationSyntax;
+
+                // Assert
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Identifier.Text, Is.EqualTo("Bar"));
+            }
+
             [TestCase("public")]
             [TestCase("private")]
             [TestCase("protected")]
